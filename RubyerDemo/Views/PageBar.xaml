@@ -17,7 +17,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <GroupBox Header="页码条-PageBar" Margin="0 0 0 10">
-                <StackPanel>
+                <StackPanel Width="650">
                     <TextBlock Text="{Binding PageBarMessage}" HorizontalAlignment="Center" Margin="10"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}"
                                 PageIndexChangedCommand="{Binding PageIndexChanged}"
