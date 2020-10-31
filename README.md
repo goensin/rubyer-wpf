@@ -52,10 +52,10 @@
 <img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/DataBar_20201031223146.png" height="500"/><br/> 
 
 ##### 图标
-![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Icon_20201031223207.png)  
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Icon_20201031223207.png" height="500"/><br/> 
 
 ##### 分组框
-![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/GroupBox_20201031223224.png)  
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/GroupBox_20201031223224.png" height="500"/><br/> 
 
 ##### 列表与树
 <img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/ListsTree_20201031223244.png" height="500"/><br/> 
