@@ -40,7 +40,7 @@
 #### Demo 截图
 
 ##### 按钮
-<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Button_20201031223036.png" width="700" height="400"/><br/> 
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Button_20201031223036.png" height="500"/><br/> 
 
 ##### 输入框
 ![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/InputBox_20201031223103.png)  
