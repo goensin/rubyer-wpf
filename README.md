@@ -14,6 +14,7 @@
 
 在 WPF 项目的 App.Xaml 中引用:
 
+```
 <Application.Resources>
       <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -34,11 +35,12 @@
             <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
       </ResourceDictionary>
 </Application.Resources>
+```
 
 #### Demo 截图
 
 ##### 按钮
-![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Button_20201031223036.png)  
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Button_20201031223036.png" width="200" height="200"/><br/> 
 
 ##### 输入框
 ![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/InputBox_20201031223103.png)  
