@@ -1,37 +1,43 @@
 # Rubyer-WPF
 
 #### 介绍
-一款自用的 WPF 主题框架，开发中...
+一款自用的 WPF 主题框架，免费开源，欢迎下载点 ⭐，基本重写了系统默认控件，正在添加新控件，开发中...
 
 #### 软件架构
-软件架构说明
-
+基于 .Net Framework 4.5 和 .Net Core 3.1 的 WPF
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+在 WPF 项目的 App.Xaml 中引用:
 
-#### 参与贡献
+<Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+            <Color x:Key="LightForegroundColor">#252526</Color>
+            <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
+            <Color x:Key="DarkBackgroundColor">#252526</Color>
 
+            <SolidColorBrush x:Key="Light" Color="#6EC6FF"/>
+            <SolidColorBrush x:Key="LightForeground" Color="#000000"/>
+            <SolidColorBrush x:Key="Primary" Color="#2196F3"/>
+            <SolidColorBrush x:Key="PrimaryForeground" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="Dark" Color="#0069C0"/>
+            <SolidColorBrush x:Key="DarkForeground" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="Accent" Color="#F50057"/>
+            <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
 
-#### 特技
+        </ResourceDictionary>
+    </Application.Resources>
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+#### Demo 截图
+##### Button
+![](https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/Button_20201031223036.png)  
+
