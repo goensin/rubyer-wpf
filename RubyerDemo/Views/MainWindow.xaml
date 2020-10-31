@@ -7,16 +7,15 @@
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="600" Width="950"
-        Background="{DynamicResource DefaultBackground}" 
+        Background="{DynamicResource Light}" 
         Foreground="{DynamicResource DefaultForeground}"
-        WindowStartupLocation="CenterScreen" Style="{StaticResource ZoomDelayStyle}">
+        WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="170"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid>
-            <Border BorderThickness="0 0 1 0" BorderBrush="{DynamicResource BorderGray}">
+            <rubyer:Card Margin="3 3 0 3" Padding="0 10">
                 <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
                          SelectionChanged="ListBox_SelectionChanged" rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
                          rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}">
@@ -29,18 +28,20 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-            </Border>
-        </Grid>
-        <Grid Grid.Column="1">
-            <TabControl x:Name="Tab" Style="{StaticResource CardTabControl}">
-                <TabItem Header="{Binding CurrentMenuItem.Name}">
-                    <ContentControl Content="{Binding CurrentMenuItem.Content}" Margin="3"/>
-                </TabItem>
+            </rubyer:Card>
+        <rubyer:Card Grid.Column="1">
+            <TabControl x:Name="Tab" Padding="5 10 5 5" >
                 <TabItem>
                     <TabItem.Header>
+                        <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
+                    </TabItem.Header>
+                    <ContentControl Content="{Binding CurrentMenuItem.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header >
                         <StackPanel Orientation="Horizontal" Margin="0">
-                            <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0"/>
-                            <TextBlock Text="Xaml"/>
+                            <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0" FontSize="14"/>
+                            <TextBlock Text="Xaml" FontSize="14"/>
                         </StackPanel>
                     </TabItem.Header>
                     <Grid Style="{StaticResource FadeRightStyle}">
@@ -51,6 +52,6 @@
                 </TabItem>
             </TabControl>
             
-        </Grid>
+        </rubyer:Card>
     </Grid>
 </Window>

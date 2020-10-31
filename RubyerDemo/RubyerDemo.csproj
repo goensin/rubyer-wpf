@@ -7,12 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AvalonEdit" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <Compile Remove="Style\**" />
+    <EmbeddedResource Remove="Style\**" />
+    <None Remove="Style\**" />
+    <Page Remove="Style\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Style\" />
+    <PackageReference Include="AvalonEdit" Version="6.0.1" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
   </ItemGroup>
 
   <ItemGroup>

@@ -20,8 +20,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
-                    <Grid Margin="{TemplateBinding Padding}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <DockPanel Margin="{TemplateBinding Padding}">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" DockPanel.Dock="Left">
                             <TextBlock VerticalAlignment="Center" Text="总" Margin="5 0" 
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}"/>
@@ -40,7 +40,8 @@
                                        Foreground="{DynamicResource DefaultForeground}" Text="条/页"/>
                             
                         </StackPanel>
-                        <ItemsControl x:Name="PART_ItemsControl" ItemsSource="{TemplateBinding PageInfos}" HorizontalAlignment="Right" >
+                        <ItemsControl SnapsToDevicePixels="True" x:Name="PART_ItemsControl" DockPanel.Dock="Right"
+                                      ItemsSource="{TemplateBinding PageInfos}" HorizontalAlignment="Right" >
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel Orientation="Horizontal"/>
@@ -55,7 +56,7 @@
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
-                    </Grid>
+                    </DockPanel>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

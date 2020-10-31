@@ -6,49 +6,36 @@
              xmlns:rubyer ="clr-namespace:Rubyer;assembly=Rubyer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" x:Name="IconView">
+    <GroupBox Header="图标-Icon" Grid.Row="1">
     <Grid Style="{StaticResource FadeLeftStyle}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Border Grid.Row="0" Padding="0 5">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBox Width="250" Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" rubyer:TextBoxHelper.IsClearable="True"
-                         rubyer:TextBoxHelper.Placeholder="搜索图标">
-                    <rubyer:TextBoxHelper.PreContent>
-                        <Viewbox>
-                             <Button Style="{DynamicResource TextMidButton}" IsDefault="True" Command="{Binding Search}">
-                            <rubyer:Icon Type="SearchLine"/>
-                        </Button>
-                        </Viewbox>
-                    </rubyer:TextBoxHelper.PreContent>
-                </TextBox>
-                <TextBox Width="170" Text="{Binding CurrentIcon}" Margin="30 0" rubyer:TextBoxHelper.PreContent="选中"/>
-                <TextBlock Foreground="{DynamicResource DefaultForeground}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" Padding="0 5">
+            <StackPanel Margin="5 20">
+                <TextBlock Foreground="{DynamicResource DefaultForeground}" Margin="10 10 30 10">
                     原图标地址:  
                     <Hyperlink NavigateUri="https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&amp;cid=25353"
                                Click="Hyperlink_Click">
                         REMIX ICON
                     </Hyperlink>
                 </TextBlock>
+                <TextBox Text="{Binding SearchText,UpdateSourceTrigger=PropertyChanged}" rubyer:TextBoxHelper.IsClearable="True"
+                         rubyer:TextBoxHelper.Placeholder="搜索图标" Margin="10">
+                    <rubyer:TextBoxHelper.PreContent>
+                        <Viewbox>
+                            <Button Style="{DynamicResource TextMidButton}" IsDefault="True" Command="{Binding Search}">
+                                <rubyer:Icon Type="SearchLine"/>
+                            </Button>
+                        </Viewbox>
+                    </rubyer:TextBoxHelper.PreContent>
+                </TextBox>
+                <TextBox Text="{Binding CurrentIcon}" Margin="10" rubyer:TextBoxHelper.PreContent="选中"/>
             </StackPanel>
         </Border>
-
-        <GroupBox Header="图标-Icon" Grid.Row="1">
-            <ListBox ItemsSource="{Binding IconTypes}" SelectedItem="{Binding CurrentIcon}"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                     VirtualizingPanel.ScrollUnit="Pixel" 
-                     VirtualizingPanel.IsVirtualizing="True"
-                     VirtualizingPanel.CacheLength="100" 
-                     VirtualizingPanel.CacheLengthUnit="Item"
-                     VirtualizingPanel.IsVirtualizingWhenGrouping="True">
-                <!--<ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel Orientation="Horizontal">
-                        </VirtualizingStackPanel>
-                        --><!--<WrapPanel Orientation="Horizontal" />--><!--
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>-->
+        <ListBox ItemsSource="{Binding IconTypes}" SelectedItem="{Binding CurrentIcon}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled" Width="300">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <!--<ScrollViewer HorizontalScrollBarVisibility="Disabled">-->
@@ -60,6 +47,6 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </GroupBox>
     </Grid>
+    </GroupBox>
 </UserControl>
