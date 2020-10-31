@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="RubyerDemo.Views.PageBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                  Style="{StaticResource RubyerSmallScrollViewer}">
+        <Grid Style="{StaticResource FadeLeftStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="页码条-PageBar" Margin="0 0 0 10">
+                <StackPanel>
+                    <TextBlock Text="{Binding PageBarMessage}" HorizontalAlignment="Center" Margin="10"/>
+                    <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}"
+                                PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10"/>
+                    <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="3"
+                                PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True"
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{StaticResource Accent}"/>
+                    <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="5"
+                                PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowTotal="True"
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" />
+                    <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="7"
+                                PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True" IsShowTotal="True"
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{StaticResource Accent}"/>
+                    <rubyer:PageBar Style="{StaticResource TextPageBar}" Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="7"
+                                PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True" IsShowTotal="True"
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10"/>
+                </StackPanel>
+               
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

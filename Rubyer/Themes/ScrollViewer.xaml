@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollBar.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="RubyerScrollViewer" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="Corner" Grid.Column="1" Grid.Row="1"
+                                   Fill="{DynamicResource DefaultBackground}" />
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                                CanHorizontallyScroll="False" CanVerticallyScroll="False" 
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                Content="{TemplateBinding Content}" 
+                                                Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+                        <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" 
+                                   Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" 
+                                   Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportHeight}" Style="{StaticResource RubyerScrollBar}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar"
+                                   Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" 
+                                   Minimum="0" Orientation="Horizontal" Grid.Row="1" 
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"  Style="{StaticResource RubyerScrollBar}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--小滚动条-->
+    <Style x:Key="RubyerSmallScrollViewer" TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource RubyerScrollViewer}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle x:Name="Corner" Grid.Column="1" Grid.Row="1"
+                                   Fill="{DynamicResource DefaultBackground}" />
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" 
+                                                CanHorizontallyScroll="False" CanVerticallyScroll="False" 
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                Content="{TemplateBinding Content}" 
+                                                Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
+                        <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" 
+                                   Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" 
+                                   Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                   ViewportSize="{TemplateBinding ViewportHeight}" Style="{StaticResource RubyerSmallScrollBar}"/>
+                        <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar"
+                                   Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" 
+                                   Minimum="0" Orientation="Horizontal" Grid.Row="1" 
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"  Style="{StaticResource RubyerSmallScrollBar}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

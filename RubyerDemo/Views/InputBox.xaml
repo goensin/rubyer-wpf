@@ -1,0 +1,163 @@
+﻿<UserControl x:Class="RubyerDemo.Views.InputBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:RubyerDemo.Views"
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Style="{StaticResource FadeLeftStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <GroupBox Header="基础文本框-TextBox" Margin="0 0 0 10" Grid.Row="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5">
+                    <TextBox Width="150"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="带清除按钮文本框-TextBox" Margin="0 0 0 10" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5">
+                    <TextBox Style="{DynamicResource AccentTextBox}" Width="150" rubyer:TextBoxHelper.IsClearable="True"
+                         rubyer:TextBoxHelper.Placeholder="可清除"/>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="大文本框-TextBox" Grid.Column="1" Grid.RowSpan="2" Margin="10 0 0 10">
+                <TextBox Width="Auto" Height="150" Style="{StaticResource BigTextBox}"
+                         rubyer:TextBoxHelper.Placeholder="大文本框" />
+            </GroupBox>
+            <GroupBox Header="验证错误文本框-TextBox" Grid.Column="0" Grid.Row="2" Margin="0 0 10 10">
+                <TextBox Text="{Binding Number,UpdateSourceTrigger=PropertyChanged}" Width="150" 
+                     rubyer:TextBoxHelper.Placeholder="绑定了 int 类型" HorizontalAlignment="Left" Margin="5 10"/>
+            </GroupBox>
+            <GroupBox Header="带提示文本框-TextBox-PasswordBox" Margin="0 0 0 10" Grid.Row="2" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5">
+                    <TextBox Width="150" rubyer:TextBoxHelper.Placeholder="账号">
+                        <rubyer:TextBoxHelper.PreContent>
+                            <rubyer:Icon Type="UserFill"/>
+                        </rubyer:TextBoxHelper.PreContent>
+                    </TextBox>
+                    <PasswordBox Width="150" rubyer:TextBoxHelper.Placeholder="密码" Margin="10 0"
+                             rubyer:PasswordHelper.ShowSwitchButton="True">
+                        <rubyer:TextBoxHelper.PreContent>
+                            <rubyer:Icon Type="LockPasswordFill"/>
+                        </rubyer:TextBoxHelper.PreContent>
+                    </PasswordBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="前置后置内容文本框-TextBox" Margin="0 0 0 10" Grid.Row="3" Grid.ColumnSpan="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" Margin="5">
+                    <TextBox Width="150">
+                        <rubyer:TextBoxHelper.PreContent>
+                            <rubyer:Icon Type="QqFill"/>
+                        </rubyer:TextBoxHelper.PreContent>
+                    </TextBox>
+                    <TextBox Width="200" Margin="10 0" rubyer:TextBoxHelper.PreContent="http://" rubyer:TextBoxHelper.PostContent=".com"/>
+                    <TextBox Width="150">
+                        <rubyer:TextBoxHelper.PostContent>
+                            <Button Style="{StaticResource TextMidButton}">
+                                <rubyer:Icon Type="RefreshLine"/>
+                            </Button>
+                        </rubyer:TextBoxHelper.PostContent>
+                    </TextBox>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="下拉框-ComboBox" Margin="0 0 0 10" Grid.Row="4" Grid.ColumnSpan="2">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Label Content="不可编辑" Margin="0 0 10 0"/>
+                        <ComboBox Width="100" Margin="0 0 10 0">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+                        <ComboBox Width="100" Margin="0 0 10 0" rubyer:ComboBoxHelper.Placeholder="提示" 
+                              rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+                        <ComboBox Width="110" Margin="0 0 10 0" rubyer:ComboBoxHelper.Placeholder="可清除"
+                              rubyer:ComboBoxHelper.IsClearable="True"
+                              rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Dark}">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+                        <ComboBox x:Name="heightCombo" Width="120" IsEditable="False" Margin="0 0 10 0"
+                              rubyer:ComboBoxHelper.PreContent="身高" rubyer:ComboBoxHelper.PostContent="cm"
+                              rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Accent}" >
+                        </ComboBox>
+
+                        <ComboBox Width="150" Margin="0 0 10 0" 
+                              rubyer:ComboBoxHelper.Placeholder="运动" 
+                              rubyer:ComboBoxHelper.IsClearable="True"
+                              rubyer:ComboBoxHelper.FocusedBrush="Green">
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <rubyer:Icon Type="RunLine"/>
+                                    <TextBlock Text="跑步"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <rubyer:Icon Type="PingPongFill"/>
+                                    <TextBlock Text="乒乓球"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+                            <ComboBoxItem>
+                                <StackPanel Orientation="Horizontal">
+                                    <rubyer:Icon Type="BasketballFill"/>
+                                    <TextBlock Text="篮球"/>
+                                </StackPanel>
+                            </ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <Label Content="可编辑" Margin=" 0 0 10 0"/>
+                        <ComboBox Width="100" IsEditable="True" Margin="0 0 10 0">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+
+                        <ComboBox Width="150" IsEditable="True" Margin="0 0 10 0"
+                              rubyer:ComboBoxHelper.IsClearable="True"
+                              rubyer:ComboBoxHelper.Placeholder="可清除"
+                              rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+
+                        <ComboBox Width="120" IsEditable="True" Margin="0 0 10 0"
+                              rubyer:ComboBoxHelper.PreContent="酱料"
+                              rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Dark}">
+                            <ComboBoxItem Content="沙茶酱"/>
+                            <ComboBoxItem Content="鱼露"/>
+                            <ComboBoxItem Content="豆酱"/>
+                        </ComboBox>
+
+                        <ComboBox Width="120" IsEditable="True" Margin="0 0 10 0" 
+                          rubyer:ComboBoxHelper.PreContent="体重" 
+                          rubyer:ComboBoxHelper.PostContent="kg"
+                          rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Accent}">
+                            <ComboBoxItem Content="50"/>
+                            <ComboBoxItem Content="60"/>
+                            <ComboBoxItem Content="70"/>
+                        </ComboBox>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

@@ -1,0 +1,56 @@
+﻿<Window x:Class="RubyerDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        mc:Ignorable="d"
+        Title="{Binding Title}" Height="600" Width="950"
+        Background="{DynamicResource DefaultBackground}" 
+        Foreground="{DynamicResource DefaultForeground}"
+        WindowStartupLocation="CenterScreen" Style="{StaticResource ZoomDelayStyle}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Border BorderThickness="0 0 1 0" BorderBrush="{DynamicResource BorderGray}">
+                <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
+                         SelectionChanged="ListBox_SelectionChanged" rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
+                         rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Margin="8 5" ToolTip="{Binding Name}"
+                                           TextTrimming="CharacterEllipsis" Width="130"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+        <Grid Grid.Column="1">
+            <TabControl x:Name="Tab" Style="{StaticResource CardTabControl}">
+                <TabItem Header="{Binding CurrentMenuItem.Name}">
+                    <ContentControl Content="{Binding CurrentMenuItem.Content}" Margin="3"/>
+                </TabItem>
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel Orientation="Horizontal" Margin="0">
+                            <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0"/>
+                            <TextBlock Text="Xaml"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid Style="{StaticResource FadeRightStyle}">
+                        <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True"
+                                           FontFamily="Consolas" FontSize="10pt">
+                        </avalonEdit:TextEditor>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            
+        </Grid>
+    </Grid>
+</Window>

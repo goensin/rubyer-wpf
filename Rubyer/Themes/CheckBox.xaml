@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="OptionMarkFocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <!--默认多选框-->
+    <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Primary}"/>
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="checkBoxBorder" 
+                                CornerRadius="1"
+                                Background="Transparent" 
+                                BorderThickness="{TemplateBinding BorderThickness}" 
+                                BorderBrush="{TemplateBinding BorderBrush}" 
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                Margin="1" 
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid x:Name="markGrid">
+                                <Viewbox>
+                                    <Path Fill="{TemplateBinding Background}" x:Name="checkedMark" Opacity="0" SnapsToDevicePixels="True">
+                                        <Path.Data>
+                                            <GeometryGroup>
+                                                <RectangleGeometry  Rect="0 0 10 10"/>
+                                                <PathGeometry Figures="M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z"/>
+                                            </GeometryGroup>
+                                        </Path.Data>
+                                    </Path>
+                                </Viewbox>
+                                <Viewbox>
+                                    <Path Fill="{TemplateBinding Background}" x:Name="nullMark" Opacity="0">
+                                        <Path.Data>
+                                            <GeometryGroup>
+                                                <RectangleGeometry Rect="0 0 10 10"/>
+                                                <RectangleGeometry Rect="1 4 8 2"/>
+                                            </GeometryGroup>
+                                        </Path.Data>
+                                    </Path>
+                                </Viewbox>
+                            </Grid>
+                        </Border>
+                        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Margin="{TemplateBinding Padding}" 
+                                          RecognizesAccessKey="True" 
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasContent" Value="true">
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
+                            <Setter Property="Padding" Value="4,-1,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource MouseOverOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource UnEnabledOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource PressedOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Opacity" TargetName="checkedMark" Value="1"/>
+                            <Setter Property="Opacity" TargetName="nullMark" Value="0"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{Binding ElementName=checkedMark,Path=Fill}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Opacity" TargetName="checkedMark" Value="0"/>
+                            <Setter Property="Opacity" TargetName="nullMark" Value="1"/>
+                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{Binding ElementName=checkedMark,Path=Fill}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--亮色多选框-->
+    <Style x:Key="LightCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Light}"/>
+    </Style>
+
+    <!--暗色多选框-->
+    <Style x:Key="DarkCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Dark}"/>
+    </Style>
+
+    <!--强调色多选框-->
+    <Style x:Key="AccentCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Accent}"/>
+    </Style>
+
+</ResourceDictionary>
