@@ -73,5 +73,5 @@
 <img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/TextBlock_20201031223448.png" height="500"/><br/> 
 
 ##### 页码条
-<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/PageBar_20201031223509.png" height="500"/><br/> 
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/PageBar_20201031230125.png" height="500"/><br/> 
 
