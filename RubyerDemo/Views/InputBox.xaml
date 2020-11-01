@@ -76,15 +76,15 @@
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <Label Content="不可编辑" Margin="0 0 10 0"/>
                         <ComboBox Width="100" Margin="0 0 10 0">
-                            <ComboBoxItem Content="沙茶酱"/>
-                            <ComboBoxItem Content="鱼露"/>
-                            <ComboBoxItem Content="豆酱"/>
+                            <ComboBoxItem Content="选项一"/>
+                            <ComboBoxItem Content="选项二"/>
+                            <ComboBoxItem Content="选项三"/>
                         </ComboBox>
                         <ComboBox Width="100" Margin="0 0 10 0" rubyer:ComboBoxHelper.Placeholder="提示" 
                               rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}">
-                            <ComboBoxItem Content="沙茶酱"/>
-                            <ComboBoxItem Content="鱼露"/>
-                            <ComboBoxItem Content="豆酱"/>
+                            <ComboBoxItem Content="选项一"/>
+                            <ComboBoxItem Content="选项二"/>
+                            <ComboBoxItem Content="选项三"/>
                         </ComboBox>
                         <ComboBox Width="110" Margin="0 0 10 0" rubyer:ComboBoxHelper.Placeholder="可清除"
                               rubyer:ComboBoxHelper.IsClearable="True"
@@ -125,26 +125,26 @@
                     <StackPanel Orientation="Horizontal" Margin="10">
                         <Label Content="可编辑" Margin=" 0 0 10 0"/>
                         <ComboBox Width="100" IsEditable="True" Margin="0 0 10 0">
-                            <ComboBoxItem Content="沙茶酱"/>
-                            <ComboBoxItem Content="鱼露"/>
-                            <ComboBoxItem Content="豆酱"/>
+                            <ComboBoxItem Content="选项一"/>
+                            <ComboBoxItem Content="选项二"/>
+                            <ComboBoxItem Content="选项三"/>
                         </ComboBox>
 
                         <ComboBox Width="150" IsEditable="True" Margin="0 0 10 0"
                               rubyer:ComboBoxHelper.IsClearable="True"
                               rubyer:ComboBoxHelper.Placeholder="可清除"
                               rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}">
-                            <ComboBoxItem Content="沙茶酱"/>
-                            <ComboBoxItem Content="鱼露"/>
-                            <ComboBoxItem Content="豆酱"/>
+                            <ComboBoxItem Content="选项一"/>
+                            <ComboBoxItem Content="选项二"/>
+                            <ComboBoxItem Content="选项三"/>
                         </ComboBox>
 
                         <ComboBox Width="120" IsEditable="True" Margin="0 0 10 0"
-                              rubyer:ComboBoxHelper.PreContent="酱料"
+                              rubyer:ComboBoxHelper.PreContent="选择"
                               rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Dark}">
-                            <ComboBoxItem Content="沙茶酱"/>
-                            <ComboBoxItem Content="鱼露"/>
-                            <ComboBoxItem Content="豆酱"/>
+                            <ComboBoxItem Content="选项一"/>
+                            <ComboBoxItem Content="选项二"/>
+                            <ComboBoxItem Content="选项三"/>
                         </ComboBox>
 
                         <ComboBox Width="120" IsEditable="True" Margin="0 0 10 0" 

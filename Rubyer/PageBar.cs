@@ -57,10 +57,11 @@ namespace Rubyer
             {
                 pageBar.PageSizeChangedCommand.Execute(pageBar.PageSize);
             }
+            pageBar.PageIndex = 1;
         }
 
         public int PageSize
-        {
+        {   
             get { return (int)GetValue(PageSizeProperty); }
             set { SetValue(PageSizeProperty, value); }
         }

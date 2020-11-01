@@ -30,7 +30,7 @@
                 </ListBox>
             </rubyer:Card>
         <rubyer:Card Grid.Column="1">
-            <TabControl x:Name="Tab" Padding="5 10 5 5" >
+            <TabControl x:Name="Tab" Padding="5 10 5 5">
                 <TabItem>
                     <TabItem.Header>
                         <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
@@ -51,7 +51,6 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            
         </rubyer:Card>
     </Grid>
 </Window>

@@ -43,19 +43,11 @@
                     <!--Bottom-->
                     <TabControl ItemsSource="{Binding Poetries}" SelectedItem="{Binding SelectedPoetry}" 
                                 TabStripPlacement="Bottom" Grid.Row="1" Grid.Column="1"
-                                rubyer:TabControlHelper.FocusedBrush="{DynamicResource Accent}">
+                                rubyer:TabControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                rubyer:TabControlHelper.IsClearable="True">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}"/>
-                                    <Button Style="{StaticResource CircleMidButton}" 
-                                            Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}"
-                                            rubyer:ButtonHelper.CircleDima="14" Padding="0" Margin="10 0 0 0"
-                                            Command="{Binding DataContext.CloseTabItem,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}">
-                                        <rubyer:Icon Type="CloseLine" Width="12" Height="12"/>
-                                    </Button>
-                                </StackPanel>
+                                <TextBlock Text="{Binding Title}"/>
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
@@ -122,21 +114,12 @@
                     </TabControl>
 
                     <!--Bottom-->
-                    <TabControl ItemsSource="{Binding Poetries}"
+                    <TabControl ItemsSource="{Binding Poetries}" rubyer:TabControlHelper.IsClearable="True"
                                 TabStripPlacement="Bottom" Grid.Row="1" Grid.Column="1"
                                 rubyer:TabControlHelper.FocusedBrush="{DynamicResource Accent}" Style="{StaticResource CardTabControl}">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Title}"/>
-                                    <Button Style="{StaticResource CircleMidButton}"
-                                            Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}"
-                                            rubyer:ButtonHelper.CircleDima="14" Padding="0" Margin="10 0 0 0"
-                                            Command="{Binding DataContext.CloseTabItem,RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                            CommandParameter="{Binding}">
-                                        <rubyer:Icon Type="CloseLine" Width="12" Height="12"/>
-                                    </Button>
-                                </StackPanel>
+                                <TextBlock Text="{Binding Title}"/>
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>

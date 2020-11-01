@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -31,6 +35,70 @@ namespace Rubyer
         public static void SetFocusedForegroundBrush(DependencyObject obj, SolidColorBrush value)
         {
             obj.SetValue(FocusedForegroundBrushProperty, value);
+        }
+
+        // 是否显示清除按钮
+        public static readonly DependencyProperty IsClearableProperty =
+            DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsClearbleChanged));
+
+        public static bool GetIsClearable(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsClearableProperty);
+        }
+
+        public static void SetIsClearable(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsClearableProperty, value);
+        }
+
+        private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TabItem tabItem)
+            {
+                RoutedEventHandler handle = (sender, args) =>
+                {
+                    var panel = VisualTreeHelper.GetParent(tabItem);
+                    var grid = VisualTreeHelper.GetParent(panel);
+                    var tabControl = VisualTreeHelper.GetParent(grid) as TabControl;
+
+                    IEditableCollectionView items = tabControl.Items;
+
+                    if (items.CanRemove)
+                    {
+                        items.Remove(tabItem.DataContext);      // Binding 移除方式
+                    }
+                    else
+                    {
+                        tabControl.Items.Remove(tabItem);       // TabItem 移除方式
+                    }
+                };
+
+                tabItem.Loaded += (sender, arg) =>
+                {
+                    if (tabItem.Template.FindName("clearButton", tabItem) is Button clearButton)
+                    {
+                        if (GetIsClearable(tabItem))
+                        {
+                            clearButton.Click += handle;
+                        }
+                        else
+                        {
+                            clearButton.Click -= handle;
+                        }
+                    }
+                };
+
+                tabItem.Unloaded += (sender, arg) =>
+                {
+                    if (tabItem.Template.FindName("clearButton", tabItem) is Button clearButton)
+                    {
+                        if (GetIsClearable(tabItem))
+                        {
+                            clearButton.Click -= handle;
+                        }
+                    }
+                };
+            }
         }
     }
 }

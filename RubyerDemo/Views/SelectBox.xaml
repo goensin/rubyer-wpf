@@ -79,9 +79,9 @@
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10">
-                        <CheckBox Content="粿汁"/>
-                        <CheckBox Content="蚝烙"/>
-                        <CheckBox Content="反砂芋"/>
+                        <CheckBox Content="选项一"/>
+                        <CheckBox Content="选项二"/>
+                        <CheckBox Content="选项三"/>
                         <CheckBox Content="未选择" IsChecked="{x:Null}"/>
                         <CheckBox Content="不可用" IsEnabled="False"/>
                     </StackPanel>

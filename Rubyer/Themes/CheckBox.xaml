@@ -33,7 +33,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Template">
             <Setter.Value>
