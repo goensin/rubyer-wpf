@@ -1,0 +1,85 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+    
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="InfoBrush" Color="#90A4AE"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="#FF9800"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="#43A047"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="#E53935"/>
+
+    <Style x:Key="RubyerMessageCard" TargetType="{x:Type rubyer:MessageCard}">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="MinHeight" Value="30"/>
+        <Setter Property="MinWidth" Value="200"/>
+        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
+        <Setter Property="IconType" Value="InformationFill"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:MessageCard}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}"
+                            CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid  >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource PopupEffect}"
+                                    Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}" 
+                                    Grid.ColumnSpan="3"/>
+
+                            <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="{TemplateBinding Padding}"
+                                         Foreground="{TemplateBinding ThemeColorBrush}"/>
+
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                            <Button Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
+                                    Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
+                                <rubyer:Icon Type="CloseLine"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WarningMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
+        <Setter Property="ThemeColorBrush" Value="{StaticResource WarningBrush}"/>
+        <Setter Property="IconType" Value="ErrorWarningFill"/>
+    </Style>
+
+    <Style x:Key="SuccessMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
+        <Setter Property="ThemeColorBrush" Value="{StaticResource SuccessBrush}"/>
+        <Setter Property="IconType" Value="CheckboxCircleFill"/>
+    </Style>
+
+    <Style x:Key="ErrorMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
+        <Setter Property="ThemeColorBrush" Value="{StaticResource ErrorBrush}"/>
+        <Setter Property="IconType" Value="CloseCircleFill"/>
+    </Style>
+
+</ResourceDictionary>

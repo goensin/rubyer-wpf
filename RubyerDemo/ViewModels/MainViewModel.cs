@@ -26,7 +26,9 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name="日期时间-DateTimeControl",Content=new DateTimeControl{} },
                 new MenuItem{ Name="菜单栏-MenuBar",Content=new MenuBar{} },
                 new MenuItem{ Name="文本块-TextBlock",Content=new TextBlock{} },
-                new MenuItem{ Name="页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} }
+                new MenuItem{ Name="页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} },
+                new MenuItem{ Name="消息提示-Message",Content=new Message{} },
+
             };
 
             CurrentMenuItem = MenuItems[0];
