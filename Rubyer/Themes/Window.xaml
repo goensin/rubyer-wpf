@@ -1,0 +1,163 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="TitleBarButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource TextMidButton}">
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Padding" Value="12 5"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
+                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" 
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{StaticResource ButtonMouseOverBackgroundGray}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="true">
+                <Setter Property="Background" Value="{StaticResource ButtonPressedBackgroundGray}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="TitleBarCloseButtonStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource TitleBarButtonStyle}">
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type rubyer:RubyerWindow}">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Primary}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
+        <Setter Property="WindowStyle" Value="SingleBorderWindow" />
+        <Setter Property="TitleBarContent">
+            <Setter.Value>
+                <!--默认 window 的左边内容：图标 + 标题-->
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding Icon,RelativeSource={RelativeSource AncestorType={x:Type rubyer:RubyerWindow}}}" 
+                            Height="24" Width="24" Margin="10 0"/>
+                    <TextBlock Text="{Binding Title,RelativeSource={RelativeSource AncestorType={x:Type rubyer:RubyerWindow}}}" 
+                            FontSize="14" Foreground="{DynamicResource PrimaryForeground}"/>
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="WindowChrome.WindowChrome">
+            <Setter.Value>
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:RubyerWindow}">
+                    <Border x:Name="WindowBorder" BorderBrush="{TemplateBinding BorderBrush}" 
+                            BorderThickness="{TemplateBinding BorderThickness}" >
+                        <Grid x:Name="LayoutRoot" Background="{TemplateBinding Background}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid x:Name="PART_WindowTitleGrid" Grid.Row="0" Height="Auto" 
+                                  Background="{TemplateBinding BorderBrush}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.ColumnSpan="2" Background="{TemplateBinding BorderBrush}" Effect="{StaticResource PopupEffect}"
+                                        Visibility="{TemplateBinding IsShowShadow,Converter={StaticResource boolToVisibility}}"/>
+                                <!--标题栏左边内容-->
+                                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
+                                            Content="{TemplateBinding TitleBarContent}" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                                <!--标题栏右边按钮-->
+                                <StackPanel x:Name="WindowCommandButtonsStackPanel" Grid.Column="1"
+                                            HorizontalAlignment="Right" VerticalAlignment="Top"
+                                            Background="Transparent" Orientation="Horizontal"
+                                            WindowChrome.IsHitTestVisibleInChrome="True">
+                                    <Button x:Name="Minimize" Style="{StaticResource TitleBarButtonStyle}" 
+                                            Command="{Binding Source={x:Static SystemCommands.MinimizeWindowCommand}}" >
+                                        <rubyer:Icon Type="MinimizeLine"/>
+                                    </Button>
+                                    <Button x:Name="Restore" Style="{StaticResource TitleBarButtonStyle}"
+                                            Command="{Binding Source={x:Static SystemCommands.RestoreWindowCommand}}"
+                                            Visibility="Collapsed">
+                                        <rubyer:Icon Type="RestoreLine"/>
+                                    </Button>
+                                    <Button x:Name="Maximize" Style="{StaticResource TitleBarButtonStyle}"
+                                            Command="{Binding Source={x:Static SystemCommands.MaximizeWindowCommand}}">
+                                        <rubyer:Icon Type="MaximizeLine"/>
+                                    </Button>
+                                    <Button x:Name="Close" Style="{StaticResource TitleBarCloseButtonStyle}"
+                                            Command="{Binding Source={x:Static SystemCommands.CloseWindowCommand}}">
+                                        <rubyer:Icon Type="CloseLine"/>
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
+                                <ContentPresenter x:Name="MainContentPresenter" KeyboardNavigation.TabNavigation="Cycle" />
+                            </AdornerDecorator>
+                            <ResizeGrip x:Name="ResizeGrip" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                        Grid.Row="1" IsTabStop="False" Visibility="Hidden" WindowChrome.ResizeGripDirection="BottomRight" />
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActive" Value="False">
+                            <Setter Property="BorderBrush" TargetName="WindowBorder" Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Maximized">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
+                        </Trigger>
+                        <Trigger Property="WindowState" Value="Normal">
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="ResizeMode" Value="NoResize">
+                            <Setter TargetName="Minimize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Maximize" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="Restore" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="CanResizeWithGrip" />
+                                <Condition Property="WindowState" Value="Normal" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

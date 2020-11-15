@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +22,14 @@ namespace RubyerDemo.Views
         public Message()
         {
             InitializeComponent();
+        }
+
+        private void InfoBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageWindow messageWindow = MessageWindow.GetInstance();
+            messageWindow.Owner = App.Current.MainWindow;
+            messageWindow.AddMessageCard(new MessageCard() { Content = "info", IsClearable = true }, 0);
+            messageWindow.Show();
         }
     }
 }

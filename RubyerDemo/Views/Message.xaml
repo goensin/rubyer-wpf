@@ -11,7 +11,11 @@
         <Grid Style="{StaticResource FadeLeftStyle}">
             <GroupBox Header="消息通知-Message" Margin="0 0 0 10">
                 <StackPanel Margin="5">
-                    <rubyer:MessageCard Content="info"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="InfoBtn" Content="信息" Width="100" Click="InfoBtn_Click"/>
+                        <rubyer:MessageCard Content="info" IsClearable="True"/>
+                    </StackPanel>
+                    
                     <rubyer:MessageCard Content="warning" Style="{StaticResource WarningMessage}"/>
                     <rubyer:MessageCard Content="success" Style="{StaticResource SuccessMessage}"/>
                     <rubyer:MessageCard Content="error" Style="{StaticResource ErrorMessage}"/>

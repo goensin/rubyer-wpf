@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:rubyer="clr-namespace:Rubyer"
         mc:Ignorable="d"
-        WindowStyle="None" Background="Transparent"
-        ShowInTaskbar="False" WindowStartupLocation="CenterOwner" HorizontalAlignment="Center" VerticalAlignment="Top">
+        Background="Transparent" WindowStyle="None" AllowsTransparency="True" Width="Auto" Height="Auto"
+        ShowInTaskbar="True" WindowStartupLocation="CenterOwner" HorizontalAlignment="Center" VerticalAlignment="Top">
     <StackPanel x:Name="messageStackPanel">
             
     </StackPanel>

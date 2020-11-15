@@ -3,6 +3,7 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
     
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
@@ -37,6 +38,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>

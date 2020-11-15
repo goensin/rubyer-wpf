@@ -42,13 +42,21 @@
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
                             <Button x:Name="clearButton" Style="{StaticResource CircleMidButton}" 
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable),Converter={StaticResource boolToVisibility},RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                    rubyer:ButtonHelper.CircleDima="14" Padding="0" Margin="10 0 0 0"
+                                    rubyer:ButtonHelper.CircleDima="14" 
                                     Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}" >
-                                <rubyer:Icon Type="CloseLine" Width="12" Height="12"/>
+                                <rubyer:Icon Type="CloseLine" Width="11" Height="11"/>
                             </Button>
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}" Value="False"/>
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" Value="False"/>
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable),RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="clearButton" Value="Hidden"/>
+                        </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>
@@ -215,7 +223,7 @@
                         <Border x:Name="contentPanel" Background="{TemplateBinding Background}" Grid.Row="1" Grid.Column="0" 
                                 BorderThickness="{TemplateBinding BorderThickness}" 
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                KeyboardNavigation.DirectionalNavigation="Contained" 
+                                KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2">
                             <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" 
                                               Margin="{TemplateBinding Padding}" 
@@ -284,15 +292,23 @@
                                           RecognizesAccessKey="True" 
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                                <Button x:Name="clearButton" Style="{StaticResource CircleMidButton}" 
+                            <Button x:Name="clearButton" Style="{StaticResource CircleMidButton}" 
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable),Converter={StaticResource boolToVisibility},RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                    rubyer:ButtonHelper.CircleDima="14" Padding="0" Margin="10 0 0 0"
+                                    rubyer:ButtonHelper.CircleDima="14"
                                     Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}" >
-                                    <rubyer:Icon Type="CloseLine" Width="12" Height="12"/>
-                                </Button>
+                                <rubyer:Icon Type="CloseLine" Width="11" Height="11"/>
+                            </Button>
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}" Value="False"/>
+                                <Condition Binding="{Binding IsMouseOver,RelativeSource={RelativeSource Self}}" Value="False"/>
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable),RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="clearButton" Value="Hidden"/>
+                        </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true"/>

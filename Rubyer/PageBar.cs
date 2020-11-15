@@ -166,7 +166,7 @@ namespace Rubyer
                 ToolTip = "上一页",
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
-                IndexChangeCommand = new RelayCommand(IndexChanged),
+                IndexChangeCommand = new RubyerCommand(IndexChanged),
                 Foreground = Foreground,
                 Background = Background
             });
@@ -177,7 +177,7 @@ namespace Rubyer
                 ToolTip = "1",
                 Value = 1,
                 IsEnabled = true,
-                IndexChangeCommand = new RelayCommand(IndexChanged),
+                IndexChangeCommand = new RubyerCommand(IndexChanged),
                 Foreground = Foreground,
                 Background = PageIndex == 1 ? CurrentBrush : Background
             });
@@ -193,7 +193,7 @@ namespace Rubyer
                     Name = i.ToString(),
                     IsEnabled = true,
                     ToolTip = i.ToString(),
-                    IndexChangeCommand = new RelayCommand(IndexChanged),
+                    IndexChangeCommand = new RubyerCommand(IndexChanged),
                     Foreground = Foreground,
                     Background = PageIndex == i ? CurrentBrush : Background
                 };
@@ -223,7 +223,7 @@ namespace Rubyer
                     ToolTip = pageCount.ToString(),
                     Value = pageCount,
                     IsEnabled = true,
-                    IndexChangeCommand = new RelayCommand(IndexChanged),
+                    IndexChangeCommand = new RubyerCommand(IndexChanged),
                     Foreground = Foreground,
                     Background = Background
                 });
@@ -236,7 +236,7 @@ namespace Rubyer
                 ToolTip = "下一页",
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
-                IndexChangeCommand = new RelayCommand(IndexChanged),
+                IndexChangeCommand = new RubyerCommand(IndexChanged),
                 Foreground = Foreground,
                 Background = Background
             });

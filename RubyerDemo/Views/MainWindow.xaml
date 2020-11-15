@@ -1,4 +1,4 @@
-﻿<Window x:Class="RubyerDemo.MainWindow"
+﻿<rubyer:RubyerWindow x:Class="RubyerDemo.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,9 +7,17 @@
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
         Title="{Binding Title}" Height="600" Width="950"
+        Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
         Background="{DynamicResource Light}" 
         Foreground="{DynamicResource DefaultForeground}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" IsShowShadow="True">
+    <!--可自定义标题栏内容-->
+    <!--<rubyer:RubyerWindow.TitleBarContent>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{Binding Title}" Foreground="{StaticResource PrimaryForeground}" Margin="5"/>
+            <Button Content="Button" Width="100"/>
+        </StackPanel>
+    </rubyer:RubyerWindow.TitleBarContent>-->
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="170"/>
@@ -53,4 +61,4 @@
             </TabControl>
         </rubyer:Card>
     </Grid>
-</Window>
+</rubyer:RubyerWindow>

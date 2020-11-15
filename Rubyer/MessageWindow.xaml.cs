@@ -28,7 +28,7 @@ namespace Rubyer
 
         public static MessageWindow GetInstance()
         {
-            if (messageWindow != null)
+            if (messageWindow == null)
             {
                 messageWindow = new MessageWindow();
             }
@@ -37,7 +37,7 @@ namespace Rubyer
 
         public void AddMessageCard(MessageCard messageCard, double? durationSeconds)
         {
-
+            messageStackPanel.Children.Add(messageCard);
         }
     }
 }
