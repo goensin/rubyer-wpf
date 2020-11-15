@@ -53,7 +53,7 @@ namespace Rubyer
 
 
         public static readonly DependencyProperty IsClearableProperty =
-            DependencyProperty.Register("IsClearable", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsClearable", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool), OnIsClearbleChanged));
 
         public bool IsClearable
         {
@@ -61,5 +61,44 @@ namespace Rubyer
             set { SetValue(IsClearableProperty, value); }
         }
 
+        private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MessageCard messageCard)
+            {
+                RoutedEventHandler handle = (sender, args) =>
+                {
+                    if (VisualTreeHelper.GetParent(messageCard) is Panel panel)
+                    {
+                        panel.Children.Remove(messageCard);
+                    }
+                };
+
+                messageCard.Loaded += (sender, arg) =>
+                {
+                    if (messageCard.Template.FindName("clearButton", messageCard) is Button clearButton)
+                    {
+                        if (messageCard.IsClearable)
+                        {
+                            clearButton.Click += handle;
+                        }
+                        else
+                        {
+                            clearButton.Click -= handle;
+                        }
+                    }
+                };
+
+                messageCard.Unloaded += (sender, arg) =>
+                {
+                    if (messageCard.Template.FindName("clearButton", messageCard) is Button clearButton)
+                    {
+                        if (messageCard.IsClearable)
+                        {
+                            clearButton.Click -= handle;
+                        }
+                    }
+                };
+            }
+        }
     }
 }
