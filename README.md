@@ -76,4 +76,4 @@
 <img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/PageBar.png" height="400"/><br/> 
 
 ##### 消息提示
-<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/？MessageInfo.png" height="400"/><br/> 
+<img src="https://gitee.com/wuyanxin1028/rubyer-wpf/raw/master/Image/MessageInfo.png" height="400"/><br/> 
