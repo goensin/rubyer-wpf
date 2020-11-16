@@ -97,7 +97,7 @@
                                         Visibility="{TemplateBinding IsShowShadow,Converter={StaticResource boolToVisibility}}"/>
                                 <!--标题栏左边内容-->
                                 <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
-                                            Content="{TemplateBinding TitleBarContent}" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                                            Content="{TemplateBinding TitleBarContent}" WindowChrome.IsHitTestVisibleInChrome="False"/>
                                 <!--标题栏右边按钮-->
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel" Grid.Column="1"
                                             HorizontalAlignment="Right" VerticalAlignment="Top"
