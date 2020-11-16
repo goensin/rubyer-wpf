@@ -52,16 +52,16 @@ namespace Rubyer
             {
                 From = 0,
                 To = 1,
-                Duration = new Duration(TimeSpan.FromMilliseconds(500)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
 
             DoubleAnimation transformAnimation = new DoubleAnimation
             {
-                From = -50,
+                From = -30,
                 To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(500)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
@@ -76,7 +76,7 @@ namespace Rubyer
             {
                 From = 1,
                 To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(500)),
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
             Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
@@ -84,8 +84,8 @@ namespace Rubyer
             DoubleAnimation exitTransformAnimation = new DoubleAnimation
             {
                 From = 0,
-                To = -50,
-                Duration = new Duration(TimeSpan.FromMilliseconds(500)),
+                To = -30,
+                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
             Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));

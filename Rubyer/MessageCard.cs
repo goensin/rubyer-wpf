@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -69,7 +70,37 @@ namespace Rubyer
                 {
                     if (VisualTreeHelper.GetParent(messageCard) is Panel panel)
                     {
-                        panel.Children.Remove(messageCard);
+                        // 退出动画
+                        Storyboard exitStoryboard = new Storyboard();
+
+                        DoubleAnimation exitOpacityAnimation = new DoubleAnimation
+                        {
+                            From = 1,
+                            To = 0,
+                            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+                        };
+                        Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+
+                        DoubleAnimation exitTransformAnimation = new DoubleAnimation
+                        {
+                            From = 0,
+                            To = -30,
+                            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
+                            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+                        };
+                        Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+                        exitStoryboard.Children.Add(exitOpacityAnimation);
+                        exitStoryboard.Children.Add(exitTransformAnimation);
+
+                        // 动画完成
+                        exitStoryboard.Completed += (a, b) =>
+                        {
+                            panel.Children.Remove(messageCard);
+                        };
+
+                        messageCard.BeginStoryboard(exitStoryboard);    // 执行动画
                     }
                 };
 

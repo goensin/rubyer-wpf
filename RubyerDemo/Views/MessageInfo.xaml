@@ -12,19 +12,23 @@
             <GroupBox Header="消息通知-Message" Margin="0 0 0 10">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="InfoBtn" Content="提示消息" Width="100" Margin="10" Click="InfoBtn_Click"/>
+                        <Button x:Name="InfoBtn" Content="提示消息" Width="100" Margin="10"
+                                Background="{StaticResource InfoBrush}" Click="InfoBtn_Click"/>
                         <rubyer:MessageCard Content="info" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="WaringBtn" Content="警告消息" Width="100" Margin="10" Click="WaringBtn_Click"/>
+                        <Button x:Name="WaringBtn" Content="警告消息" Width="100" Margin="10" 
+                                Background="{StaticResource WarningBrush}" Click="WaringBtn_Click"/>
                         <rubyer:MessageCard Content="warning" Style="{StaticResource WarningMessage}" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="SuccessBtn" Content="成功消息" Width="100" Margin="10" Click="SuccessBtn_Click"/>
+                        <Button x:Name="SuccessBtn" Content="成功消息" Width="100" Margin="10" 
+                                Background="{StaticResource SuccessBrush}" Click="SuccessBtn_Click"/>
                         <rubyer:MessageCard Content="success" Style="{StaticResource SuccessMessage}" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                        <Button x:Name="ErrorBtn" Content="错误消息" Width="100" Margin="10" Click="ErrorBtn_Click"/>
+                        <Button x:Name="ErrorBtn" Content="错误消息" Width="100" Margin="10"
+                                Background="{StaticResource ErrorBrush}" Click="ErrorBtn_Click"/>
                         <rubyer:MessageCard Content="error" Style="{StaticResource ErrorMessage}" IsClearable="True"/>
                     </StackPanel>
                 </StackPanel>

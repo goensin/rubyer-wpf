@@ -54,7 +54,7 @@
                                     Grid.ColumnSpan="3"/>
 
                             <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="{TemplateBinding Padding}"
-                                         Foreground="{TemplateBinding ThemeColorBrush}"/>
+                                         Foreground="{TemplateBinding ThemeColorBrush}" Width="23" Height="23"/>
 
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
