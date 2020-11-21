@@ -28,6 +28,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name="文本块-TextBlock",Content=new TextBlock{} },
                 new MenuItem{ Name="页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} },
                 new MenuItem{ Name="消息提示-MessageInfo",Content=new MessageInfo{} },
+                new MenuItem{ Name="步骤条-StepBar",Content=new StepBar{} },
 
             };
 

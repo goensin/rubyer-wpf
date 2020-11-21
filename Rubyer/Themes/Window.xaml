@@ -61,6 +61,11 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform />
+            </Setter.Value>
+        </Setter>
         <Setter Property="TitleBarContent">
             <Setter.Value>
                 <!--默认 window 的左边内容：图标 + 标题-->
@@ -74,7 +79,7 @@
         </Setter>
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None" />
+                <WindowChrome CornerRadius="0" GlassFrameThickness="1" UseAeroCaptionButtons="False" NonClientFrameEdges="None"/>
             </Setter.Value>
         </Setter>
         <Setter Property="Template">
@@ -97,7 +102,7 @@
                                         Visibility="{TemplateBinding IsShowShadow,Converter={StaticResource boolToVisibility}}"/>
                                 <!--标题栏左边内容-->
                                 <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
-                                            Content="{TemplateBinding TitleBarContent}" WindowChrome.IsHitTestVisibleInChrome="False"/>
+                                            Content="{TemplateBinding TitleBarContent}"/>
                                 <!--标题栏右边按钮-->
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel" Grid.Column="1"
                                             HorizontalAlignment="Right" VerticalAlignment="Top"

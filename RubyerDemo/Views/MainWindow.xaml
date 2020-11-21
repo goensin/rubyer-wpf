@@ -12,10 +12,11 @@
         Foreground="{DynamicResource DefaultForeground}"
         WindowStartupLocation="CenterScreen" IsShowShadow="True">
     <!--可自定义标题栏内容-->
+    <!--WindowChrome.IsHitTestVisibleInChrome = "True" 才可以点击-->
     <!--<rubyer:RubyerWindow.TitleBarContent>
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="{Binding Title}" Foreground="{StaticResource PrimaryForeground}" Margin="5"/>
-            <Button Content="Button" Width="100"/>
+            <Button Content="Button" Width="100" WindowChrome.IsHitTestVisibleInChrome="True"/>
         </StackPanel>
     </rubyer:RubyerWindow.TitleBarContent>-->
     <Grid>
@@ -53,8 +54,8 @@
                         </StackPanel>
                     </TabItem.Header>
                     <Grid Style="{StaticResource FadeRightStyle}">
-                        <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True"
-                                           FontFamily="Consolas" FontSize="10pt">
+                        <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" 
+                                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         </avalonEdit:TextEditor>
                     </Grid>
                 </TabItem>

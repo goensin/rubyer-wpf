@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
@@ -19,8 +20,8 @@ namespace Rubyer
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             base.OnMouseLeftButtonDown(e);
-            if (e.ButtonState == MouseButtonState.Pressed)
-                DragMove();
+            //if (e.ButtonState == MouseButtonState.Pressed)
+            //    DragMove();
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -44,8 +45,7 @@ namespace Rubyer
 
         private void CloseWindow(object sender, ExecutedRoutedEventArgs e)
         {
-            this.Close();
-            //SystemCommands.CloseWindow(this);
+            (sender as Window).Close();
         }
 
         private void MaximizeWindow(object sender, ExecutedRoutedEventArgs e)
@@ -86,7 +86,7 @@ namespace Rubyer
         public object TitleBarContent
         {
             get { return (object)GetValue(TitleBarContentProperty); }
-            set { SetValue(TitleBarContentProperty, value); }   
+            set { SetValue(TitleBarContentProperty, value); }
         }
 
 

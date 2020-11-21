@@ -4,11 +4,6 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Assets\iconfont.ttf" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Resource Include="Assets\iconfont.ttf">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </Resource>
+	  <Folder Include="Assets\" />
 	</ItemGroup>
 </Project>

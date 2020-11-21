@@ -60,7 +60,7 @@
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0 0 10 0"/>
 
                             <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
                                     Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">

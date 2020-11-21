@@ -39,6 +39,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBar.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBarItem.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>
@@ -72,4 +74,6 @@
     <Style TargetType="{x:Type rubyer:PageBar}" BasedOn="{StaticResource RubyerPageBar}"/>
     <Style TargetType="{x:Type rubyer:Card}" BasedOn="{StaticResource RubuerCard}"/>
     <Style TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}"/>
+    <Style TargetType="{x:Type rubyer:StepBar}" BasedOn="{StaticResource RubyerStepBar}"/>
+    <Style TargetType="{x:Type rubyer:StepBarItem}" BasedOn="{StaticResource RubyerStepBarItem}"/>
 </ResourceDictionary>
