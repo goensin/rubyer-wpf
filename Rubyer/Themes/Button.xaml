@@ -29,7 +29,7 @@
         <Setter Property="Padding" Value="5 0"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="3"/>
+        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="2.5"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">
@@ -42,10 +42,10 @@
                             >
                         <Grid>
                             <Border x:Name="effectBorder" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
-                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                            >
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
+                                    CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Effect="{StaticResource ControlEffect}">
                             </Border>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
@@ -65,7 +65,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource PressedOpacity}"/>
-                            <!--<Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource PopupEffect}"/>-->
+                            <Setter Property="Effect" TargetName="effectBorder" Value="{x:Null}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource UnEnabledOpacity}"/>

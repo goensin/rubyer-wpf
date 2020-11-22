@@ -4,6 +4,9 @@
 		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Folder Include="Assets\" />
+	  <Compile Remove="Assets\**" />
+	  <EmbeddedResource Remove="Assets\**" />
+	  <None Remove="Assets\**" />
+	  <Page Remove="Assets\**" />
 	</ItemGroup>
 </Project>

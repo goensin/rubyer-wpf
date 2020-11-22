@@ -19,7 +19,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:Clock}">
                     <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="{TemplateBinding Background}" CornerRadius="2" 
+                            Background="{TemplateBinding Background}" CornerRadius="2.5" 
                             VerticalAlignment="Center">
                         <Grid>
                             <Grid.RowDefinitions>

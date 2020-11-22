@@ -262,7 +262,7 @@
                     <Border x:Name="border" Background="{TemplateBinding Background}" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
                             BorderBrush="{TemplateBinding BorderBrush}" 
-                            CornerRadius="3" SnapsToDevicePixels="true">
+                            CornerRadius="2.5" SnapsToDevicePixels="true">
 
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite" ContentTemplate="{TemplateBinding HeaderTemplate}" 

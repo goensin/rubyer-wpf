@@ -284,7 +284,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <!--前置内容-->
-                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
+                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
                                 Content="{Binding Path=(rubyer:ComboBoxHelper.PreContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsHitTestVisible="False" IsTabStop="False"/>
 
@@ -319,7 +319,7 @@
                 </Button>
 
                 <!--后置内容-->
-                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
+                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
                                Content="{Binding Path=(rubyer:ComboBoxHelper.PostContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                IsHitTestVisible="False" IsTabStop="False"/>
             </Grid>
@@ -380,7 +380,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
         <Setter Property="rubyer:ComboBoxHelper.FocusedBrush" Value="{DynamicResource Primary}"/>
-        <Setter Property="rubyer:ComboBoxHelper.CornerRadius" Value="3"/>
+        <Setter Property="rubyer:ComboBoxHelper.CornerRadius" Value="2.5"/>
         <Setter Property="MaxDropDownHeight" Value="400"/>
         <Setter Property="rubyer:ComboBoxHelper.IsKeyBoardFocused" Value="False"/>
         <Setter Property="FontSize" Value="13"/>

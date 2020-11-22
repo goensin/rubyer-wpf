@@ -33,7 +33,7 @@
         <Setter Property="AllowDrop" Value="true"/>
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
         <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
-        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="3"/>
+        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="2.5"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -57,7 +57,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <!--前置内容-->
-                                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
+                                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
                                             Content="{Binding Path=(rubyer:TextBoxHelper.PreContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
                                 <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -84,7 +84,7 @@
                                 </Button>
 
                                 <!--后置内容-->
-                                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="2 0"
+                                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
                                                 Content="{Binding Path=(rubyer:TextBoxHelper.PostContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             </Grid>
                         </Border>

@@ -313,13 +313,13 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
-                                Background="{TemplateBinding Background}" CornerRadius="3">
+                                Background="{TemplateBinding Background}" CornerRadius="2.5">
                             <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Border Background="{DynamicResource Primary}" CornerRadius="2.5 2.5 0 0">
+                                    <Border Background="{DynamicResource Primary}" CornerRadius="2 2 0 0">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="Auto" />

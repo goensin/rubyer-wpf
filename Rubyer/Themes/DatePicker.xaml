@@ -29,7 +29,7 @@
                                                Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                Style="{StaticResource RubyerTextBox}">
                             <rubyer:TextBoxHelper.PostContent>
-                                <Button x:Name="PART_Button" Focusable="False"
+                                <Button x:Name="PART_Button" Focusable="False" 
                                             Foreground="{TemplateBinding BorderBrush}" 
                                             Style="{StaticResource TextMidButton}">
                                     <Button.MaxHeight>

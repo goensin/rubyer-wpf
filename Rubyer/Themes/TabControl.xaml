@@ -40,11 +40,10 @@
                                           HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" 
                                           RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                            <Button x:Name="clearButton" Style="{StaticResource CircleMidButton}" 
+                            <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" 
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable),Converter={StaticResource boolToVisibility},RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                    rubyer:ButtonHelper.CircleDima="14" 
-                                    Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}" >
-                                <rubyer:Icon Type="CloseLine" Width="11" Height="11"/>
+                                    Foreground="{StaticResource BorderGray}"  Height="20">
+                                <rubyer:Icon Type="CloseLine"/>
                             </Button>
                         </StackPanel>
                     </Grid>
@@ -139,7 +138,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>
-                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,2"/>
+                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,5,5,0"/>
+                            <Setter Property="Margin" TargetName="clearButton" Value="5,5,5,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -149,7 +149,8 @@
                             <Setter Property="Panel.ZIndex" Value="1"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="0,2.5,0,0"/>
                             <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}"/>
-                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,2"/>
+                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,5,5,0"/>
+                            <Setter Property="Margin" TargetName="clearButton" Value="5,5,5,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -236,7 +237,7 @@
                             <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="0,-2.5,0,2.5"/>
+                            <Setter Property="Margin" TargetName="headerPanel" Value="0,-2,0,2.5"/>
                             <Setter Property="BorderThickness" TargetName="contentPanel" Value="0 0 0 2.5"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
@@ -292,11 +293,10 @@
                                           RecognizesAccessKey="True" 
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-                            <Button x:Name="clearButton" Style="{StaticResource CircleMidButton}" 
+                            <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" 
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable),Converter={StaticResource boolToVisibility},RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                    rubyer:ButtonHelper.CircleDima="14"
-                                    Background="{StaticResource BorderGray}" Foreground="{DynamicResource DefaultBackground}" >
-                                <rubyer:Icon Type="CloseLine" Width="11" Height="11"/>
+                                    Foreground="{StaticResource BorderGray}" Height="20">
+                                <rubyer:Icon Type="CloseLine"/>
                             </Button>
                         </StackPanel>
                     </Grid>
@@ -394,7 +394,8 @@
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom"/>
                             </MultiDataTrigger.Conditions>
                             <Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>
-                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,2"/>
+                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,5,5,0"/>
+                            <Setter Property="Margin" TargetName="clearButton" Value="5,5,5,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -407,7 +408,8 @@
                             <Setter Property="Background" TargetName="mainBorder"
                                     Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=Self}}"/>
                             <Setter TargetName="mainBorder" Property="CornerRadius" Value="0 0 2 2"/>
-                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,2"/>
+                            <Setter Property="Margin" TargetName="contentPresenter" Value="5,5,5,0"/>
+                            <Setter Property="Margin" TargetName="clearButton" Value="5,5,5,0"/>
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
