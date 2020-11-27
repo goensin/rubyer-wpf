@@ -120,7 +120,7 @@
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource PressedOpacity}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonPressedBackgroundGray}"/>
+                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonMouseOverBackgroundGray}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource UnEnabledOpacity}"/>
