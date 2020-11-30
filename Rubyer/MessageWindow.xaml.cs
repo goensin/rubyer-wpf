@@ -43,6 +43,8 @@ namespace Rubyer
 
         public void AddMessageCard(MessageCard messageCard, int millisecondTimeOut)
         {
+            messageCard.Close += MessageCard_Close;
+
             messageStackPanel.Children.Add(messageCard);
 
             // 进入动画
@@ -94,16 +96,21 @@ namespace Rubyer
             exitStoryboard.Children.Add(exitTransformAnimation);
 
             // 进入动画完成
-            enterStoryboard.Completed += (sender,e)=>{
-                Task.Run(() =>
+            if (millisecondTimeOut > 0)
+            {
+                enterStoryboard.Completed += async (sender, e) =>
                 {
-                    Thread.Sleep(millisecondTimeOut);
+                    await Task.Run(() =>
+                    {
+                        Thread.Sleep(millisecondTimeOut);
+                    });
+
                     Dispatcher.Invoke(() =>
                     {
                         messageCard.BeginStoryboard(exitStoryboard);
                     });
-                });
-            };
+                };
+            }
 
             // 退出动画完成
             exitStoryboard.Completed += (sender, e) =>
@@ -121,5 +128,17 @@ namespace Rubyer
             messageCard.BeginStoryboard(enterStoryboard);
         }
 
+        /// <summary>
+        /// 消息卡片关闭按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MessageCard_Close(object sender, RoutedEventArgs e)
+        {
+            if (messageStackPanel.Children.Count == 0)
+            {
+                this.Close();
+            }
+        }
     }
 }

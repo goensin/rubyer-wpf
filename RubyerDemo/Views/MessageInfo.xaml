@@ -11,28 +11,41 @@
         <Grid Style="{StaticResource FadeLeftStyle}">
             <GroupBox Header="消息通知-Message" Margin="0 0 0 10">
                 <StackPanel Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="全局弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
+                        <TextBlock Text="指定容器弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
+                    </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="InfoBtn" Content="提示消息" Width="100" Margin="10"
                                 Background="{StaticResource InfoBrush}" Click="InfoBtn_Click"/>
+                        <Button x:Name="InfoContainerBtn" Content="提示消息" Width="100" Margin="10"
+                                Background="{StaticResource InfoBrush}" Click="InfoContainerBtn_Click"/>
                         <rubyer:MessageCard Content="info" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="WaringBtn" Content="警告消息" Width="100" Margin="10" 
                                 Background="{StaticResource WarningBrush}" Click="WaringBtn_Click"/>
+                        <Button x:Name="WaringContainerBtn" Content="警告消息" Width="100" Margin="10" 
+                                Background="{StaticResource WarningBrush}" Click="WaringContainerBtn_Click"/>
                         <rubyer:MessageCard Content="warning" Style="{StaticResource WarningMessage}" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="SuccessBtn" Content="成功消息" Width="100" Margin="10" 
                                 Background="{StaticResource SuccessBrush}" Click="SuccessBtn_Click"/>
+                        <Button x:Name="SuccessContainerBtn" Content="成功消息" Width="100" Margin="10" 
+                                Background="{StaticResource SuccessBrush}" Click="SuccessContainerBtn_Click"/>
                         <rubyer:MessageCard Content="success" Style="{StaticResource SuccessMessage}" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="ErrorBtn" Content="错误消息" Width="100" Margin="10"
                                 Background="{StaticResource ErrorBrush}" Click="ErrorBtn_Click"/>
+                        <Button x:Name="ErrorContaionBtn" Content="错误消息" Width="100" Margin="10"
+                                Background="{StaticResource ErrorBrush}" Click="ErrorContaionBtn_Click"/>
                         <rubyer:MessageCard Content="error" Style="{StaticResource ErrorMessage}" IsClearable="True"/>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
+            <StackPanel rubyer:MessageCard.ContainerIdentify="MessageContainer"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

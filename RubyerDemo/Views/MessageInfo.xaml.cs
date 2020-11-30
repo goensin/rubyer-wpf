@@ -41,7 +41,27 @@ namespace RubyerDemo.Views
 
         private void ErrorBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show(MessageType.Error, "erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 3000, true);
+            Message.Show(MessageType.Error, "erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0, true);
+        }
+
+        private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("MainContainer", "info", 3000, true);
+        }
+
+        private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("MainContainer", MessageType.Warning, "warning", 3000, true);
+        }
+
+        private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("MainContainer", MessageType.Success, "success", 3000, true);
+        }
+
+        private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("MainContainer", MessageType.Error, "error", 3000);
         }
     }
 }

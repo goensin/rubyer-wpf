@@ -1,28 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
     public class MessageCard : ContentControl
     {
+        public static Dictionary<string, Panel> messageContainers = new Dictionary<string, Panel>();
+        public static readonly RoutedEvent CloseEvent;
+
         static MessageCard()
         {
+            CloseEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageCard));
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageCard), new FrameworkPropertyMetadata(typeof(MessageCard)));
         }
 
+        #region 事件
+        // 关闭消息事件
+        public event RoutedEventHandler Close
+        {
+            add { base.AddHandler(MessageCard.CloseEvent, value); }
+            remove { base.RemoveHandler(MessageCard.CloseEvent, value); }
+        }
+        #endregion
+
+        #region 附加属性
+        // 显示消息通知的容器的 ID
+        public static readonly DependencyProperty ContainerIdentifyProperty = DependencyProperty.RegisterAttached(
+            "ContainerIdentify", typeof(string), typeof(MessageCard), new PropertyMetadata(null, OnMessageContainerChanged));
+
+        private static void OnMessageContainerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Panel panel = d as Panel;
+            string identify = e.NewValue.ToString();
+
+            if (messageContainers.ContainsKey(identify))
+            {
+                throw new Exception("已存在该 ContainerIdentify 的名称！");
+            }
+            else
+            {
+                messageContainers.Add(identify, panel);
+            }
+        }
+
+        public static void SetContainerIdentify(DependencyObject element, string value)
+        {
+            element.SetValue(ContainerIdentifyProperty, value);
+        }
+
+        public static string GetContainerIdentify(DependencyObject element)
+        {
+            return (string)element.GetValue(ContainerIdentifyProperty);
+        }
+        #endregion
+
+        #region 依赖属性
         public static readonly DependencyProperty CornerRadiusProperty =
           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MessageCard), new PropertyMetadata(default(CornerRadius)));
 
@@ -98,6 +134,8 @@ namespace Rubyer
                         exitStoryboard.Completed += (a, b) =>
                         {
                             panel.Children.Remove(messageCard);
+                            RoutedEventArgs eventArgs = new RoutedEventArgs(MessageCard.CloseEvent, messageCard);
+                            messageCard.RaiseEvent(eventArgs);
                         };
 
                         messageCard.BeginStoryboard(exitStoryboard);    // 执行动画
@@ -131,5 +169,8 @@ namespace Rubyer
                 };
             }
         }
+        #endregion
+
+
     }
 }

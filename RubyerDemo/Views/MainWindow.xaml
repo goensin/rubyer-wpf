@@ -61,5 +61,6 @@
                 </TabItem>
             </TabControl>
         </rubyer:Card>
+        <StackPanel Orientation="Vertical" Grid.ColumnSpan="2" rubyer:MessageCard.ContainerIdentify="MainContainer"/>
     </Grid>
 </rubyer:RubyerWindow>
