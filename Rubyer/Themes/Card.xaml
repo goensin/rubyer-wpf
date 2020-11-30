@@ -25,7 +25,7 @@
                             CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid>
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource PopupEffect}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource AllDirectionEffect}"
                                     Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}"/>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 

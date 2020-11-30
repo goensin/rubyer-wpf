@@ -201,7 +201,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BackgroundGray}"/>
+        <Setter Property="BorderBrush" Value="{Binding Background,RelativeSource={RelativeSource Self}}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="BorderThickness" Value="0 2.5 0 0"/>
         <Setter Property="FontSize" Value="13"/>
@@ -210,7 +210,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                    <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local" Margin="0 5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition x:Name="ColumnDefinition0"/>
                             <ColumnDefinition x:Name="ColumnDefinition1" Width="0"/>
@@ -226,9 +226,13 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabNavigation="Local" KeyboardNavigation.TabIndex="2">
-                            <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" 
+                            <Grid>
+                                <Border x:Name="effectBorder" BorderThickness="0 2.5 0 0" BorderBrush="{TemplateBinding BorderBrush}" 
+                                        VerticalAlignment="Top" Effect="{StaticResource BottomEffect}" Margin="0 -2.5 0 0"/>
+                                <ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" 
                                               Margin="{TemplateBinding Padding}" 
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            </Grid>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -237,8 +241,11 @@
                             <Setter Property="Grid.Row" TargetName="contentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="0,-2,0,2.5"/>
+                            <Setter Property="Margin" TargetName="headerPanel" Value="0 -2.5 0 2.5"/>
                             <Setter Property="BorderThickness" TargetName="contentPanel" Value="0 0 0 2.5"/>
+                            <Setter Property="Margin" TargetName="effectBorder" Value="0 0 0 -2.5"/>
+                            <Setter Property="VerticalAlignment" TargetName="effectBorder" Value="Bottom"/>
+                            <Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource TopEffect}"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
@@ -249,9 +256,14 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="2.5,0,-2.5,0"/>
+                            <Setter Property="Margin" TargetName="headerPanel" Value="2.5 0 -2.5 0"/>
                             <Setter Property="BorderThickness" TargetName="contentPanel" Value="2.5 0 0 0"/>
                             <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                            <Setter Property="BorderThickness" TargetName="effectBorder" Value="2.5 0 0 0"/>
+                            <Setter Property="Margin" TargetName="effectBorder" Value="-2.5 0 0 0"/>
+                            <Setter Property="VerticalAlignment" TargetName="effectBorder" Value="Stretch"/>
+                            <Setter Property="HorizontalAlignment" TargetName="effectBorder" Value="Left"/>
+                            <Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource RightEffect}"/>
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter Property="Grid.Row" TargetName="headerPanel" Value="0"/>
@@ -262,9 +274,14 @@
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="0"/>
-                            <Setter Property="Margin" TargetName="headerPanel" Value="-2.5,0,2.5,0"/>
+                            <Setter Property="Margin" TargetName="headerPanel" Value="-2.5 0 2.5 0"/>
                             <Setter Property="BorderThickness" TargetName="contentPanel" Value="0 0 2.5 0"/>
-                            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Right"/>
+                            <Setter Property="BorderThickness" TargetName="effectBorder" Value="2.5 0 0 0"/>
+                            <Setter Property="Margin" TargetName="effectBorder" Value="0 0 -2.5 0"/>
+                            <Setter Property="VerticalAlignment" TargetName="effectBorder" Value="Stretch"/>
+                            <Setter Property="HorizontalAlignment" TargetName="effectBorder" Value="Right"/>
+                            <Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource LeftEffect}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource UnEnabledOpacity}"/>

@@ -49,7 +49,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource PopupEffect}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource AllDirectionEffect}"
                                     Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}" 
                                     Grid.ColumnSpan="3"/>
 

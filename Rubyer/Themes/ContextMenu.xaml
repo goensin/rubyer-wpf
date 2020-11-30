@@ -19,7 +19,7 @@
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Grid>
                         <Border Background="{TemplateBinding BorderThickness}" BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}"
-                                Effect="{StaticResource PopupEffect}" CornerRadius="2" Padding="0 5" Margin="5"/>
+                                Effect="{StaticResource AllDirectionEffect}" CornerRadius="2" Padding="0 5" Margin="5"/>
                         <Border x:Name="Border" Background="{DynamicResource DefaultBackground}" Padding="0 5" Margin="5"
                                 CornerRadius="2" BorderThickness="{TemplateBinding BorderThickness}" 
                                 BorderBrush="{TemplateBinding BorderBrush}">

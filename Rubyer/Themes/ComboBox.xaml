@@ -178,7 +178,7 @@
                 <Grid>
                     <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
                         CornerRadius="{Binding Path=(rubyer:ComboBoxHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                        Effect="{StaticResource PopupEffect}" Margin="5"/>
+                        Effect="{StaticResource AllDirectionEffect}" Margin="5"/>
                     <ScrollViewer x:Name="DropDownScrollViewer"  Margin="5 10">
                         <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                             <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
@@ -255,7 +255,7 @@
                 <Grid>
                     <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
                         CornerRadius="{Binding Path=(rubyer:ComboBoxHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                        Effect="{StaticResource PopupEffect}" Margin="5"/>
+                        Effect="{StaticResource AllDirectionEffect}" Margin="5"/>
                     <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 9">
                         <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
                             <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
@@ -305,16 +305,10 @@
                 </Grid>
 
                 <!--清除按钮-->
-                <Button x:Name="clearButton" Grid.Column="2"
+                <Button x:Name="clearButton" Grid.Column="2" VerticalAlignment="Center"
                                         Style="{DynamicResource TextMidButton}" 
                                         Foreground="{DynamicResource BorderGray}" 
                                         Visibility="Collapsed" IsTabStop="False">
-                    <ContentControl.MaxHeight>
-                        <MultiBinding Converter="{StaticResource subtract2}">
-                            <Binding Path="Height" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                            <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                        </MultiBinding>
-                    </ContentControl.MaxHeight>
                     <rubyer:Icon Type="CloseLine"/>
                 </Button>
 

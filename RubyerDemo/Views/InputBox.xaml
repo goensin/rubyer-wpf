@@ -64,7 +64,7 @@
                     <TextBox Width="200" Margin="10 0" rubyer:TextBoxHelper.PreContent="http://" rubyer:TextBoxHelper.PostContent=".com"/>
                     <TextBox Width="150">
                         <rubyer:TextBoxHelper.PostContent>
-                            <Button Style="{StaticResource TextMidButton}">
+                            <Button Style="{StaticResource TextMidButton}" Height="26">
                                 <rubyer:Icon Type="RefreshLine"/>
                             </Button>
                         </rubyer:TextBoxHelper.PostContent>

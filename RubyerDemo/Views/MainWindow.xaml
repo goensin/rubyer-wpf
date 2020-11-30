@@ -6,7 +6,7 @@
         xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="600" Width="950"
+        Title="{Binding Title}" Height="660" Width="1050"
         Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
         Background="{DynamicResource Light}" 
         Foreground="{DynamicResource DefaultForeground}"

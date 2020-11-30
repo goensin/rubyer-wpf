@@ -73,18 +73,13 @@
                                 <Button x:Name="clearButton" Grid.Column="2"
                                         Style="{DynamicResource TextMidButton}" 
                                         Foreground="{DynamicResource BorderGray}" 
-                                        Visibility="Collapsed">
-                                    <ContentControl.MaxHeight>
-                                        <MultiBinding Converter="{StaticResource subtract2}">
-                                            <Binding Path="Height" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                            <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                        </MultiBinding>
-                                    </ContentControl.MaxHeight>
+                                        Visibility="Collapsed" VerticalAlignment="Center">
                                     <rubyer:Icon Type="CloseLine"/>
                                 </Button>
 
                                 <!--后置内容-->
-                                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
+                                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center"
+                                                Foreground="{DynamicResource BorderGray}" Margin="3 0" 
                                                 Content="{Binding Path=(rubyer:TextBoxHelper.PostContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                             </Grid>
                         </Border>

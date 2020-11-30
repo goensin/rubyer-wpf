@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-	  <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
+	  <TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>rubyer.ico</ApplicationIcon>
   </PropertyGroup>

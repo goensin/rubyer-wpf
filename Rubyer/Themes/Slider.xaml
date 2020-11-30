@@ -27,7 +27,7 @@
             <Ellipse x:Name="grip" Fill="{DynamicResource DefaultBackground}" 
                      StrokeThickness="1" Stroke="{TemplateBinding Foreground}"
                      VerticalAlignment="Center" SnapsToDevicePixels="True" 
-                     Width="18" Height="18" Effect="{StaticResource PopupEffect}">
+                     Width="18" Height="18" Effect="{StaticResource AllDirectionEffect}">
             </Ellipse>
         </Grid>
         <ControlTemplate.Triggers>
@@ -51,7 +51,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <!--上标-->
-                <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,2"
+                <TickBar x:Name="TopTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,0,0,4"
                          Placement="Top" Grid.Row="0" Visibility="Collapsed"/>
                 <!--下标-->
                 <TickBar x:Name="BottomTick" Fill="{TemplateBinding Foreground}" Height="4" Margin="0,2,0,0"
@@ -124,7 +124,7 @@
             <Ellipse x:Name="grip" Fill="{DynamicResource DefaultBackground}" 
                      StrokeThickness="1" Stroke="{TemplateBinding Foreground}"
                      VerticalAlignment="Center" SnapsToDevicePixels="True" 
-                     Width="18" Height="18" Effect="{StaticResource PopupEffect}">
+                     Width="18" Height="18" Effect="{StaticResource AllDirectionEffect}">
             </Ellipse>
         </Grid>
         <ControlTemplate.Triggers>
@@ -150,7 +150,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TickBar x:Name="TopTick" Grid.Column="0" Fill="{TemplateBinding Foreground}" 
-                         Margin="0,0,2,0" Placement="Left" Visibility="Collapsed" Width="4"/>
+                         Margin="0,0,4,0" Placement="Left" Visibility="Collapsed" Width="4"/>
                 <TickBar x:Name="BottomTick" Grid.Column="2" Fill="{TemplateBinding Foreground}" 
                          Margin="2,0,0,0" Placement="Right" Visibility="Collapsed" Width="4"/>
                 <Border x:Name="TrackBackground" Background="{StaticResource BackgroundGray}" 

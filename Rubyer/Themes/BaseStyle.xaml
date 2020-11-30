@@ -39,8 +39,16 @@
     <system:Double x:Key="PressedOpacity">1.0</system:Double>
 
     <!--Effect-->
-    <DropShadowEffect x:Key="ControlEffect"  BlurRadius="3" ShadowDepth="1.5" Color="#9e9e9e" Direction="-45" Opacity="0.5"/>
-    <DropShadowEffect x:Key="PopupEffect" BlurRadius="6" ShadowDepth="0" Color="#9e9e9e" Direction="0" Opacity="1"/>
+    <DropShadowEffect x:Key="AllDirectionEffect"  BlurRadius="7" ShadowDepth="0" Color="#9e9e9e" Direction="0" Opacity="1"/>
+    
+    <DropShadowEffect x:Key="RightTopEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="45" Opacity="0.4"/>
+    <DropShadowEffect x:Key="LeftTopEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="135" Opacity="0.4"/>
+    <DropShadowEffect x:Key="RightBottomEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="-45" Opacity="0.4"/>
+    <DropShadowEffect x:Key="LeftBottomEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="-135" Opacity="0.4"/>
+    <DropShadowEffect x:Key="TopEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="90" Opacity="0.4"/>
+    <DropShadowEffect x:Key="BottomEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="-90" Opacity="0.4"/>
+    <DropShadowEffect x:Key="RightEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="0" Opacity="0.4"/>
+    <DropShadowEffect x:Key="LeftEffect"  BlurRadius="3" ShadowDepth="2" Color="#9e9e9e" Direction="180" Opacity="0.4"/>
 
     <!--BorderThickness-->
     <system:Double x:Key="DefaultBorderThickness">1.0</system:Double>
