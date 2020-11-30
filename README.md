@@ -4,7 +4,7 @@
 一款自用的 WPF 主题框架，免费开源，欢迎下载点 ⭐，基本重写了系统默认控件，正在添加新控件，开发中...
 
 #### 软件架构
-基于 .Net Framework 4.6 和 .Net Core 3.1 的 WPF
+基于 .Net Framework 4.6 和 .Net Core 3.1 的 WPF(改为 基于 .Net Framework 4.6 ，.Net Framework 4.5 对于控件大小外的 Effect 支持有问题)
 
 #### 安装教程
 
