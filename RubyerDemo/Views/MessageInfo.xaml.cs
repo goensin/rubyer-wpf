@@ -46,22 +46,22 @@ namespace RubyerDemo.Views
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("MainContainer", "info", 3000, true);
+            Message.Show("MainMessageContainer", "info", 3000, true);
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("MainContainer", MessageType.Warning, "warning", 3000, true);
+            Message.Show("MainMessageContainer", MessageType.Warning, "warning", 3000, true);
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("MainContainer", MessageType.Success, "success", 3000, true);
+            Message.Show("MainMessageContainer", MessageType.Success, "success", 3000, true);
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("MainContainer", MessageType.Error, "error", 3000);
+            Message.Show("MainMessageContainer", MessageType.Error, "error", 3000);
         }
     }
 }

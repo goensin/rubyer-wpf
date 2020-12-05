@@ -39,12 +39,11 @@ namespace Rubyer
 
             if (messageContainers.ContainsKey(identify))
             {
-                throw new Exception("已存在该 ContainerIdentify 的名称！");
+                //throw new Exception("已存在该 ContainerIdentify 的名称！");
+                messageContainers.Remove(identify);
             }
-            else
-            {
-                messageContainers.Add(identify, panel);
-            }
+
+            messageContainers.Add(identify, panel);
         }
 
         public static void SetContainerIdentify(DependencyObject element, string value)

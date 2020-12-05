@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -6,79 +7,102 @@ using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
-    public class ExpandAnimationAssistant : ContentControl
+    public class ExpandAnimationAssistant
     {
-        private FrameworkElement _element;
+        static bool isChangeSize = false;
+        // 圆角半径
+        public static readonly DependencyProperty AnmimationControlProperty = DependencyProperty.RegisterAttached(
+            "AnmimationControl", typeof(Control), typeof(ExpandAnimationAssistant), new PropertyMetadata(default(Control), OnControlChanged));
 
-        static ExpandAnimationAssistant()
+        private static void OnControlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ExpandAnimationAssistant), new FrameworkPropertyMetadata(typeof(ExpandAnimationAssistant)));
+            Expander expander = d as Expander;
+            expander.Expanded += Expander_Expanded;
+            expander.Collapsed += Expander_Collapsed;
+            expander.SizeChanged += Expander_SizeChanged; ;
         }
 
-        public override void OnApplyTemplate()
+        private static void Expander_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            base.OnApplyTemplate();
-
-            var element = this.Content as FrameworkElement;
-            if (element != null)
+            if (e.PreviousSize.Height == 0 || isChangeSize == true)
             {
-                this._element = element;
-                element.SizeChanged += Element_SizeChanged;
-                element.Loaded += Element_Loaded;
-
-                element.RenderTransformOrigin = new Point(0.5, 0.5);
-                element.RenderTransform = new TransformGroup
-                {
-                    Children =
-                    {
-                        new ScaleTransform(),
-                        new SkewTransform(),
-                        new RotateTransform(),
-                        new TranslateTransform()
-                    }
-                };
-            }
-        }
-
-
-
-        public AnimationType AnimationType
-        {
-            get { return (AnimationType)GetValue(AnimationTypeProperty); }
-            set { SetValue(AnimationTypeProperty, value); }
-        }
-
-        public static readonly DependencyProperty AnimationTypeProperty =
-            DependencyProperty.Register("AnimationType", typeof(AnimationType), typeof(ExpandAnimationAssistant), new PropertyMetadata(AnimationType.FloatInDown));
-
-
-
-        private void Element_Loaded(object sender, RoutedEventArgs e)
-        {
-            //var element = sender as FrameworkElement;
-            //element.BeginStoryboard(floatInStoryBoard);
-        }
-
-        private void Element_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            //var element = sender as FrameworkElement;
-            //element.BeginStoryboard(floatInStoryBoard);
-        }
-
-        protected override Size MeasureOverride(Size constraint)
-        {
-            return base.MeasureOverride(constraint);
-        }
-
-        protected override void OnChildDesiredSizeChanged(UIElement child)
-        {
-            if (_element != null)
-            {
-                Storyboard storyBoard = this.FindResource(AnimationType.ToString()) as Storyboard;
-                _element.BeginStoryboard(storyBoard);
+                return;
             }
 
-            base.OnChildDesiredSizeChanged(child);
+            isChangeSize = true;
+            Expander expander = sender as Expander;
+            DoubleAnimation animation = new DoubleAnimation();
+            animation.From = e.PreviousSize.Height;
+            animation.To = e.NewSize.Height;
+            animation.Duration = TimeSpan.FromMilliseconds(250);
+            animation.Completed += (a, b) => 
+            {
+                Thread.Sleep(100);
+                isChangeSize = false; 
+            };
+            expander.BeginAnimation(Expander.HeightProperty, animation);
         }
+
+
+        private static void Expander_Collapsed(object sender, RoutedEventArgs e)
+        {
+            //Expander expander = sender as Expander;
+            //FrameworkElement content = expander.Content as FrameworkElement;
+            //DoubleAnimation animation = new DoubleAnimation();
+            //animation.From = expander.ActualHeight;
+            //animation.To = expander.ActualHeight - content.ActualHeight;
+            //animation.Duration = TimeSpan.FromMilliseconds(250);
+
+            //expander.BeginAnimation(Expander.HeightProperty, animation);
+        }
+
+        private static void Expander_Expanded(object sender, RoutedEventArgs e)
+        {
+
+            Expander expander = sender as Expander;
+            //FrameworkElement content = expander.Content as FrameworkElement;
+            //DoubleAnimation animation = new DoubleAnimation();
+            //animation.From = expander.ActualHeight;
+            //animation.To = expander.ActualHeight + content.ActualHeight;
+            //animation.Duration = TimeSpan.FromMilliseconds(250);
+
+            //expander.BeginAnimation(Expander.HeightProperty, animation);
+        }
+
+        public static void SetAnmimationControl(DependencyObject element, Control value)
+        {
+            element.SetValue(AnmimationControlProperty, value);
+        }
+
+        public static Control GetAnmimationControl(DependencyObject element)
+        {
+            return (Control)element.GetValue(AnmimationControlProperty);
+        }
+
+        //public AnimationType AnimationType
+        //{
+        //    get { return (AnimationType)GetValue(AnimationTypeProperty); }
+        //    set { SetValue(AnimationTypeProperty, value); }
+        //}
+
+        //public static readonly DependencyProperty AnimationTypeProperty =
+        //    DependencyProperty.Register("AnimationType", typeof(AnimationType), typeof(ExpandAnimationAssistant), new PropertyMetadata(AnimationType.FloatInDown));
+
+
+        //protected override Size MeasureOverride(Size constraint)
+        //{
+        //    return base.MeasureOverride(constraint);
+        //}
+
+        //protected override void OnChildDesiredSizeChanged(UIElement child)
+        //{
+        //    if (_element != null)
+        //    {
+        //        Storyboard storyBoard = this.FindResource(AnimationType.ToString()) as Storyboard;
+        //        _element.BeginStoryboard(storyBoard);
+        //    }
+
+        //    base.OnChildDesiredSizeChanged(child);
+        //}
     }
 }

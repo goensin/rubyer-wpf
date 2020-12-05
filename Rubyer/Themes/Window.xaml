@@ -71,7 +71,7 @@
                 <!--默认 window 的左边内容：图标 + 标题-->
                 <StackPanel Orientation="Horizontal">
                     <Image Source="{Binding Icon,RelativeSource={RelativeSource AncestorType={x:Type rubyer:RubyerWindow}}}" 
-                            Height="24" Width="24" Margin="10 0"/>
+                            Height="22" Width="22" Margin="10 0" VerticalAlignment="Center"/>
                     <TextBlock Text="{Binding Title,RelativeSource={RelativeSource AncestorType={x:Type rubyer:RubyerWindow}}}" 
                             FontSize="14" Foreground="{DynamicResource PrimaryForeground}"/>
                 </StackPanel>

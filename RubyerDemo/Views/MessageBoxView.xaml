@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="RubyerDemo.Views.MessageBoxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Style="{StaticResource FadeLeftStyle}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="消息框-MessageBoxR" Margin="0 0 0 10">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}">1</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_1}">2</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_2}">3</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_3}">4</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_4}">5</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_5}">6</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_6}">7</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_7}">8</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_8}">9</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_9}">10</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_10}">11</Button>
+                    <Button Width="50" Margin="5" Command="{Binding MessageBox_11}">12</Button>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

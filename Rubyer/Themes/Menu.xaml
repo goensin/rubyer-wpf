@@ -36,7 +36,7 @@
                 <Popup x:Name="Popup" Placement="Bottom" IsOpen="{TemplateBinding IsSubmenuOpen}"
                         AllowsTransparency="True" Focusable="False" PopupAnimation="Fade" HorizontalOffset="-5">
                     <Grid>
-                        <Border CornerRadius="2" Effect="{StaticResource AllDirectionEffect}" 
+                        <Border CornerRadius="2" Effect="{StaticResource AllDirectionEffect2}" 
                                 BorderThickness="0" Background="{Binding RelativeSource={RelativeSource AncestorType=Menu},Path=Background}"
                                 BorderBrush="{StaticResource BorderGray}" Padding="0 5" Margin="5"/>
                         <Border x:Name="SubmenuBorder" SnapsToDevicePixels="True" CornerRadius="2"
@@ -102,7 +102,7 @@
                        Focusable="False" PopupAnimation="Fade">
                     <Grid>
                         <Border Background="{Binding RelativeSource={RelativeSource AncestorType=Menu},Path=Background}"
-                            Effect="{StaticResource AllDirectionEffect}" CornerRadius="2" Padding="0 5" Margin="5"/>
+                            Effect="{StaticResource AllDirectionEffect2}" CornerRadius="2" Padding="0 5" Margin="5"/>
                         <Border x:Name="SubmenuBorder" SnapsToDevicePixels="True" Padding="0 5" Margin="5"
                             Background="{Binding RelativeSource={RelativeSource AncestorType=Menu},Path=Background}" BorderThickness="0" CornerRadius="2" >
                             <ScrollViewer CanContentScroll="True" Style="{StaticResource MenuScrollViewer}">

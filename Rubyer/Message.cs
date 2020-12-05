@@ -15,7 +15,8 @@ namespace Rubyer
         private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
 
         #region 全局
-        public static void Show(MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = false)
+
+        public static void Show(MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             if (millisecondTimeOut <= 0)
             {
@@ -30,14 +31,14 @@ namespace Rubyer
                 case MessageType.Info:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable
                     };
                     break;
                 case MessageType.Warning:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = warningStyle
                     };
@@ -45,7 +46,7 @@ namespace Rubyer
                 case MessageType.Success:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = successStyle
                     };
@@ -53,7 +54,7 @@ namespace Rubyer
                 case MessageType.Error:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = errorStyle
                     };
@@ -64,26 +65,38 @@ namespace Rubyer
             messageWindow.Show();
         }
 
-        public static void Show(string message, int millisecondTimeOut = 3000, bool isClearable = false)
+        public static void Show(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(MessageType.Info, message, millisecondTimeOut, isClearable);
+            Show(MessageType.Info, element, millisecondTimeOut, isClearable);
+        }
+
+
+        public static void Show(MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            Show(type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        public static void Show(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            Show(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
         #endregion
 
 
         #region 指定容器
-        public static void Show(string containerIdentify, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = false)
+        public static void Show(string containerIdentify, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
+            if (!MessageCard.messageContainers.ContainsKey(containerIdentify))
+            {
+                return;
+            }
+
             if (millisecondTimeOut <= 0)
             {
                 isClearable = true;
             }
 
             Panel messagePanel = MessageCard.messageContainers[containerIdentify];
-            if (messagePanel == null)
-            {
-                return;
-            }
 
             MessageCard messageCard;
             switch (type)
@@ -92,14 +105,14 @@ namespace Rubyer
                 case MessageType.Info:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable
                     };
                     break;
                 case MessageType.Warning:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = warningStyle
                     };
@@ -107,7 +120,7 @@ namespace Rubyer
                 case MessageType.Success:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = successStyle
                     };
@@ -115,7 +128,7 @@ namespace Rubyer
                 case MessageType.Error:
                     messageCard = new MessageCard
                     {
-                        Content = message,
+                        Content = element,
                         IsClearable = isClearable,
                         Style = errorStyle
                     };
@@ -196,11 +209,23 @@ namespace Rubyer
             messageCard.BeginStoryboard(enterStoryboard);
         }
 
-
-        public static void Show(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = false)
+        public static void Show(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Info, message, millisecondTimeOut, isClearable);
+            Show(containerIdentify, MessageType.Info, element, millisecondTimeOut, isClearable);
         }
+
+
+        public static void Show(string containerIdentify, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            Show(containerIdentify, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        public static void Show(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            Show(containerIdentify, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        
         #endregion
     }
 

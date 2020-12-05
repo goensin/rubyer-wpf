@@ -42,7 +42,7 @@
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid  >
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
@@ -55,13 +55,11 @@
 
                             <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="{TemplateBinding Padding}"
                                          Foreground="{TemplateBinding ThemeColorBrush}" Width="23" Height="23"/>
-
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0 0 10 0"/>
-
                             <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
                                     Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
                                 <rubyer:Icon Type="CloseLine"/>
