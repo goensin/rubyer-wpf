@@ -10,7 +10,7 @@ namespace Rubyer
     public class ExpandAnimationAssistant
     {
         static bool isChangeSize = false;
-        // 圆角半径
+
         public static readonly DependencyProperty AnmimationControlProperty = DependencyProperty.RegisterAttached(
             "AnmimationControl", typeof(Control), typeof(ExpandAnimationAssistant), new PropertyMetadata(default(Control), OnControlChanged));
 

@@ -45,7 +45,6 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <StackPanel rubyer:MessageCard.ContainerIdentify="MessageContainer"/>
         </Grid>
     </ScrollViewer>
 </UserControl>

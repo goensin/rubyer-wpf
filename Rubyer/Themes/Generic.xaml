@@ -40,6 +40,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBarItem.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ExpanderResizer.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>
