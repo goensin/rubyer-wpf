@@ -54,7 +54,7 @@ namespace Rubyer
             button.Click += Button_Click;
         }
 
-        
+
 
         private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -82,7 +82,7 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty SeletedTimeProperty =
-            DependencyProperty.Register("SeletedTime", typeof(DateTime?), typeof(TimePicker), new PropertyMetadata(default(DateTime), OnSeletedTimeChanged));
+            DependencyProperty.Register("SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSeletedTimeChanged));
 
 
         public bool IsDropDownOpen
@@ -171,7 +171,7 @@ namespace Rubyer
             _textBox.SelectAll();
         }
 
-        
+
 
         // 点击时间按钮
         private void Button_Click(object sender, RoutedEventArgs e)

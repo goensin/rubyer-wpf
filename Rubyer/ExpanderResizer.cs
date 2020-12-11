@@ -1,57 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
     public class ExpanderResizer : ContentControl
     {
-        private bool isAnimationing;
-        private double? oldHeight;
+        bool isWidthAnimationing;
+        bool isHeightAnimationing;
+        bool isExpanded;
+
         static ExpanderResizer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ExpanderResizer), new FrameworkPropertyMetadata(typeof(ExpanderResizer)));
         }
-
-        public override void OnApplyTemplate()
-        {
-            var element = this.Content as FrameworkElement;
-            element.SizeChanged += Element_SizeChanged;
-            base.OnApplyTemplate();
-        }
-
-
-        public bool HasExpander
-        {
-            get { return (bool)GetValue(HasExpanderProperty); }
-            set { SetValue(HasExpanderProperty, value); }
-        }
-
-        public static readonly DependencyProperty HasExpanderProperty =
-            DependencyProperty.Register("HasExpander", typeof(bool), typeof(ExpanderResizer), new PropertyMetadata(false, HasExpanderChanged));
-
-        private static void HasExpanderChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            //ExpanderResizer resizer = d as ExpanderResizer;
-            //Expander expander = resizer.Parent as Expander;
-            //expander.Expanded += Expander_Expanded;
-            //expander.Collapsed += Expander_Collapsed;
-        }
-
-
 
         public Expander ExpanderControl
         {
@@ -60,100 +24,119 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty ExpanderControlProperty =
-            DependencyProperty.Register("ExpanderControl", typeof(Expander), typeof(ExpanderResizer), new PropertyMetadata(null, OnExpanderControlChanged));
+            DependencyProperty.Register("ExpanderControl", typeof(Expander), typeof(ExpanderResizer), new PropertyMetadata(null));
 
-        private static void OnExpanderControlChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
+        public override void OnApplyTemplate()
         {
-            //if (e.NewValue is Expander expander)
-            //{
-            //    expander.Expanded += Expander_Expanded;
-            //    expander.Collapsed += Expander_Collapsed;
-            //    var element = VisualTreeHelper.GetChild(expander, 1) as FrameworkElement;
-            //    element.SizeChanged += Content_SizeChanged;
-            //}
-        }
-
-        private static void Element_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            if (e.PreviousSize.Height != 0)
-            {
-                var element = sender as FrameworkElement;
-                ExpanderResizer resizer = element.Parent as ExpanderResizer;
-                if (!resizer.isAnimationing)
-                {
-                    resizer.isAnimationing = true;
-                    DoubleAnimation animation = new DoubleAnimation();
-                    animation.From = e.PreviousSize.Height;
-                    animation.To = e.NewSize.Height;
-                    animation.Duration = TimeSpan.FromMilliseconds(250);
-                    animation.Completed += (a, b) =>
-                    {
-                        resizer.isAnimationing = false;
-                        resizer.Height = double.NaN;
-                    };
-
-                    resizer.BeginAnimation(HeightProperty, animation);
-                }
-            }
-        }
-
-        private static void Expander_Collapsed(object sender, RoutedEventArgs e)
-        {
-            Expander expander = sender as Expander;
-            ExpanderResizer resizer = VisualTreeHelper.GetChild(expander, 0) as ExpanderResizer;
-
-            resizer.oldHeight = expander.ActualHeight;
-            //Expander expander = sender as Expander;
-            //ExpanderResizer resizer = VisualTreeHelper.GetChild(expander, 0) as ExpanderResizer;
-
-            //DoubleAnimation animation = new DoubleAnimation();
-            //animation.From = expander.ActualHeight;
-            //animation.To = 30;
-            //animation.Duration = TimeSpan.FromMilliseconds(250);
-
-            //resizer.BeginAnimation(HeightProperty, animation);
-        }
-
-        private static void Expander_Expanded(object sender, RoutedEventArgs e)
-        {
-            Expander expander = sender as Expander;
-            ExpanderResizer resizer = VisualTreeHelper.GetChild(expander, 0) as ExpanderResizer;
-
-            resizer.oldHeight = expander.ActualHeight;
-            //DoubleAnimation animation = new DoubleAnimation();
-            //animation.From = expander.ActualHeight;
-            //animation.To = 109;
-            //animation.Duration = TimeSpan.FromMilliseconds(250);
-
-            //resizer.BeginAnimation(HeightProperty, animation);
+            base.OnApplyTemplate();
         }
 
         protected override Size MeasureOverride(Size constraint)
         {
-            //    if (oldHeight != null)
-            //    {
-            //        var content = this.Content as FrameworkElement;
+            if (!isWidthAnimationing && !isHeightAnimationing || ExpanderControl.IsExpanded)
+            {
+                if (ExpanderControl != null)
+                {
+                    if (this.Content is UIElement element)
+                    {
+                        if (ExpanderControl.ExpandDirection == ExpandDirection.Down || ExpanderControl.ExpandDirection == ExpandDirection.Up)
+                        {
+                            if (ExpanderControl.IsExpanded)
+                            {
+                                return base.MeasureOverride(new Size(constraint.Width, ExpanderControl.MaxHeight));
+                            }
+                            else
+                            {
+                                return base.MeasureOverride(new Size(constraint.Width, 0));
+                            }
+                        }
+                        else
+                        {
+                            if (ExpanderControl.IsExpanded)
+                            {
+                                Panel panel = VisualTreeHelper.GetParent(this) as Panel;
+                                Control control = VisualTreeHelper.GetChild(panel, 0) as Control;
+                                return base.MeasureOverride(new Size(ExpanderControl.MaxWidth - control.ActualWidth, constraint.Height));
+                            }
+                            else
+                            {
+                                return base.MeasureOverride(new Size(0, constraint.Height));
+                            }
+                        }
+                    }
+                }
+            }
 
-            //        if (!isAnimationing && (Math.Abs((double)(content.DesiredSize.Height - ActualHeight))) > 0.1)
-            //        {
-            //            isAnimationing = true;
+            return base.MeasureOverride(new Size(constraint.Width, constraint.Height));
+        }
 
-            //            DoubleAnimation animation = new DoubleAnimation();
-            //            animation.From = oldHeight;
-            //            animation.To = content.DesiredSize.Height;
-            //            animation.Duration = TimeSpan.FromMilliseconds(250);
 
-            //            animation.Completed += (sender, e) =>
-            //            {
-            //                Thread.Sleep(200);
-            //                isAnimationing = false;
-            //            };
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            if (this.ActualHeight != 0 || this.ActualWidth != 0)
+            {
+                if ((this.ActualHeight != arrangeBounds.Height || this.ActualWidth != arrangeBounds.Width) || (!ExpanderControl.IsExpanded && arrangeBounds.Height != 0 && arrangeBounds.Width != 0))
+                {
+                    if (ExpanderControl.ExpandDirection == ExpandDirection.Down || ExpanderControl.ExpandDirection == ExpandDirection.Up)
+                    {
+                        if (!isHeightAnimationing || ExpanderControl.IsExpanded != isExpanded)
+                        {
+                            isHeightAnimationing = true;
+                            isExpanded = ExpanderControl.IsExpanded;
 
-            //            this.BeginAnimation(HeightProperty, animation);
-            //        }
-            //    }
+                            DoubleAnimation heightAnimation = new DoubleAnimation
+                            {
+                                From = ActualHeight,
+                                To = !ExpanderControl.IsExpanded ? 0 : arrangeBounds.Height,
+                                Duration = TimeSpan.FromMilliseconds(300),
+                                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                            };
 
-            return base.MeasureOverride(constraint);
+                            heightAnimation.Completed += (sender, e) =>
+                            {
+                                isHeightAnimationing = false;
+                            };
+
+                            this.BeginAnimation(HeightProperty, heightAnimation);
+
+                            return new Size(this.ActualWidth, this.ActualHeight);
+                        }
+                    }
+                    else
+                    {
+                        if (!isWidthAnimationing || ExpanderControl.IsExpanded != isExpanded)
+                        {
+                            isWidthAnimationing = true;
+                            isExpanded = ExpanderControl.IsExpanded;
+
+                            DoubleAnimation widthAnimation = new DoubleAnimation
+                            {
+                                From = ActualWidth,
+                                To = !ExpanderControl.IsExpanded ? 0 : arrangeBounds.Width,
+                                Duration = TimeSpan.FromMilliseconds(300),
+                                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                            };
+
+                            widthAnimation.Completed += (sender, e) =>
+                            {
+                                isWidthAnimationing = false;
+                            };
+
+                            this.BeginAnimation(WidthProperty, widthAnimation);
+
+                            return new Size(this.ActualWidth, this.ActualHeight);
+                        }
+
+                    }
+
+                }
+                return base.ArrangeOverride(arrangeBounds);
+            }
+            else
+            {
+                return base.ArrangeOverride(arrangeBounds);
+            }
         }
     }
 }

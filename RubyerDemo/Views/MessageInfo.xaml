@@ -43,6 +43,16 @@
                                 Background="{StaticResource ErrorBrush}" Click="ErrorContaionBtn_Click"/>
                         <rubyer:MessageCard Content="error" Style="{StaticResource ErrorMessage}" IsClearable="True"/>
                     </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="ControlBtn" Content="自定义" Width="100" Margin="10" Click="ControlBtn_Click"/>
+                        <Button x:Name="ControlContaionBtn" Content="自定义" Width="100" Margin="10" Click="ControlContaionBtn_Click"/>
+                        <rubyer:MessageCard IsClearable="True">
+                            <StackPanel Margin="5" x:Name="CustomContent">
+                                <TextBlock Style="{StaticResource Head4TextBlock}" Text="标题"/>
+                                <TextBlock Text="自定义控件内容"/>
+                            </StackPanel>
+                        </rubyer:MessageCard>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
         </Grid>

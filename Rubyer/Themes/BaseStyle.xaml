@@ -19,6 +19,8 @@
 
     <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}"/>
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}"/>
+    <!--<SolidColorBrush x:Key="DefaultForeground" Color="#252526"/>
+    <SolidColorBrush x:Key="DefaultBackground" Color="#FFFFFF"/>-->
 
     <SolidColorBrush x:Key="BackgroundGray" Color="#BDBDBD" Opacity="0.45"/>
     <SolidColorBrush x:Key="MouseOverBackgroundGray" Color="#BDBDBD" Opacity="0.75"/>

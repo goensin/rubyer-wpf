@@ -38,7 +38,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </rubyer:Card>
-        <rubyer:Card Grid.Column="1">
+        <rubyer:Card Grid.Column="1" Margin="3">
             <TabControl x:Name="Tab" Padding="5 10 5 5">
                 <TabItem>
                     <TabItem.Header>

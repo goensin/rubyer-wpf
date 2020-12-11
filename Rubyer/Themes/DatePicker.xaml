@@ -29,15 +29,9 @@
                                                Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
                                                Style="{StaticResource RubyerTextBox}">
                             <rubyer:TextBoxHelper.PostContent>
-                                <Button x:Name="PART_Button" Focusable="False" 
+                                <Button x:Name="PART_Button" Focusable="False" Height="26"
                                             Foreground="{TemplateBinding BorderBrush}" 
                                             Style="{StaticResource TextMidButton}">
-                                    <Button.MaxHeight>
-                                        <MultiBinding Converter="{StaticResource subtract2}">
-                                            <Binding Path="Height" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                            <Binding Path="BorderThickness.Top" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                        </MultiBinding>
-                                    </Button.MaxHeight>
                                     <rubyer:Icon Type="Calendar2Line"/>
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>
@@ -48,11 +42,11 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Rectangle Grid.Column="0" Fill="#A5FFFFFF" 
+                            <!--<Rectangle Grid.Column="0" Fill="#A5FFFFFF" 
                                            RadiusY="1" Grid.Row="0" RadiusX="1" />
                             <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0"
-                                           RadiusY="1" Grid.Row="0" RadiusX="1" Width="19" />
-                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" 
+                                           RadiusY="1" Grid.Row="0" RadiusX="1" Width="19" />-->
+                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
                                    PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
                             </Popup>
                         </Grid>
