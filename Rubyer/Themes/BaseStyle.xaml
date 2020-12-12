@@ -29,8 +29,12 @@
     <SolidColorBrush x:Key="ButtonPressedBackgroundGray" Color="#BDBDBD" Opacity="0.7"/>
     <SolidColorBrush x:Key="BorderGray" Color="#9e9e9e"/>
     <SolidColorBrush x:Key="GridBackground" Color="#BDBDBD" Opacity="0.1"/>
-    <SolidColorBrush x:Key="ErrorBrush" Color="#FF1744"/>
-
+    <SolidColorBrush x:Key="ErrorBrush" Color="#E53935"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="#90A4AE"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="#FF9800"/>
+    <SolidColorBrush x:Key="SuccessBrush" Color="#43A047"/>
+    <SolidColorBrush x:Key="QuestionBrush" Color="#2196F3"/>
+    
     <SolidColorBrush x:Key="ScrollBackground" Color="#BDBDBD" Opacity="0.3"/>
     <SolidColorBrush x:Key="ScrollForeground" Color="#757575" Opacity="0.4"/>
     <SolidColorBrush x:Key="ScrollMouseOverForeground" Color="#757575" Opacity="0.8"/>

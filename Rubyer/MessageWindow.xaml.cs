@@ -57,7 +57,7 @@ namespace Rubyer
                 Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(OpacityProperty));
 
             DoubleAnimation transformAnimation = new DoubleAnimation
             {
@@ -81,7 +81,7 @@ namespace Rubyer
                 Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(OpacityProperty));
 
             DoubleAnimation exitTransformAnimation = new DoubleAnimation
             {

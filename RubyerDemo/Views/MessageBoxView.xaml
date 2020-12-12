@@ -18,20 +18,29 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <GroupBox Header="消息框-MessageBoxR" Margin="0 0 0 10">
-                <StackPanel Orientation="Horizontal" Margin="5">
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}">1</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_1}">2</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_2}">3</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_3}">4</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_4}">5</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_5}">6</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_6}">7</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_7}">8</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_8}">9</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_9}">10</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBoxShow_10}">11</Button>
-                    <Button Width="50" Margin="5" Command="{Binding MessageBox_11}">12</Button>
-                </StackPanel>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="1">1</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="2">2</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="3">3</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="4">4</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="5">5</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="6">6</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="7">7</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="8">8</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="9">9</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="10">10</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="11">11</Button>
+                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="12">12</Button>
+                    </StackPanel>
+                    <rubyer:MessageBoxCard Grid.Row="1" Title="标题">
+                        <TextBlock Text="内容"/>
+                    </rubyer:MessageBoxCard>
+                </Grid>
             </GroupBox>
         </Grid>
     </ScrollViewer>

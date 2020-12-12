@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
-using System.Windows.Threading;
 
 namespace Rubyer
 {
@@ -173,16 +172,16 @@ namespace Rubyer
                 From = 0,
                 To = 1,
                 Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
 
             DoubleAnimation transformAnimation = new DoubleAnimation
             {
                 From = -30,
                 To = 0,
                 Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
 
@@ -199,7 +198,7 @@ namespace Rubyer
                 Duration = new Duration(TimeSpan.FromMilliseconds(300)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
 
             DoubleAnimation exitTransformAnimation = new DoubleAnimation
             {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,8 +14,27 @@ namespace RubyerDemo.ViewModels
         public RelayCommand MessageBoxShow => messageBoxShow ?? (messageBoxShow = new RelayCommand(MessageBoxShowExecute));
         private void MessageBoxShowExecute(object obj)
         {
-            MessageBox.Show("只有消息");
-            MessageBox.Show("只有消息");
+            switch (obj.ToString())
+            {
+                case "1":
+                    var result = MessageBoxR.Show("有消息消息消息消息", "有标题");
+                    break;
+                case "2":
+                    MessageBox.Show("有消息", "有标题");
+                    break;
+                case "3":
+                    MessageBox.Show("有消息,有按钮", "有标题", MessageBoxButton.YesNo);
+                    break;
+                case "4":
+                    MessageBox.Show("有消息,有按钮,有图标", "有标题", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                    break;
+                case "5":
+                    MessageBox.Show("有消息,有按钮,有图标,有默认结果", "有标题", MessageBoxButton.YesNo, MessageBoxImage.Stop, MessageBoxResult.OK);
+                    break;
+                default:
+                    break;
+            }
+
         }
     }
 }

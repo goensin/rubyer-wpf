@@ -8,10 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <SolidColorBrush x:Key="InfoBrush" Color="#90A4AE"/>
-    <SolidColorBrush x:Key="WarningBrush" Color="#FF9800"/>
-    <SolidColorBrush x:Key="SuccessBrush" Color="#43A047"/>
-    <SolidColorBrush x:Key="ErrorBrush" Color="#E53935"/>
+    
 
     <Style x:Key="RubyerMessageCard" TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -21,7 +18,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CornerRadius" Value="3"/>
+        <Setter Property="CornerRadius" Value="2.5"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="Margin" Value="2.5"/>
