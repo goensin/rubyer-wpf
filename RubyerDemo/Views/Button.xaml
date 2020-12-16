@@ -19,9 +19,7 @@
             </Grid.RowDefinitions>
             <GroupBox Header="普通按钮-Button" Margin="0 0 0 10">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <Grid Style="{StaticResource FadeInStyle}">
-                        <Button Width="100" IsDefault="True" ToolTip="hello" Margin="5">普通按钮</Button>
-                    </Grid>
+                    <Button Width="100" IsDefault="True" ToolTip="hello" Margin="5">普通按钮</Button>
                     <Button Width="100" Style="{DynamicResource LightButton}" Margin="5">亮色按钮</Button>
                     <Button Width="100" Style="{DynamicResource DarkButton}" Margin="5">暗色按钮</Button>
                     <Button Width="100" Style="{DynamicResource AccentButton}" Margin="5">强调按钮</Button>
@@ -29,18 +27,18 @@
             </GroupBox>
             <GroupBox Header="圆角按钮-Button" Margin="0 0 0 10" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <Button Width="100" rubyer:ButtonHelper.CornerRadius="14" Margin="5">普通按钮</Button>
-                    <Button Width="100" Style="{DynamicResource LightButton}" rubyer:ButtonHelper.CornerRadius="13" Margin="5">亮色按钮</Button>
-                    <Button Width="100" Style="{DynamicResource DarkButton}"  rubyer:ButtonHelper.CornerRadius="13" Margin="5">暗色按钮</Button>
-                    <Button Width="100" Style="{DynamicResource AccentButton}"  rubyer:ButtonHelper.CornerRadius="13" Margin="5">强调按钮</Button>
+                    <Button Width="100" rubyer:ButtonHelper.CornerRadius="14" Margin="6">普通按钮</Button>
+                    <Button Width="100" Style="{DynamicResource LightButton}" rubyer:ButtonHelper.CornerRadius="14" Margin="6">亮色按钮</Button>
+                    <Button Width="100" Style="{DynamicResource DarkButton}"  rubyer:ButtonHelper.CornerRadius="14" Margin="6">暗色按钮</Button>
+                    <Button Width="100" Style="{DynamicResource AccentButton}"  rubyer:ButtonHelper.CornerRadius="14" Margin="6">强调按钮</Button>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="文字按钮-Button" Margin="0 0 0 10" Grid.Row="2">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <Button Width="100" Style="{DynamicResource TextMidButton}" Margin="5">文字按钮</Button>
-                    <Button Width="100" Style="{DynamicResource TextLightButton}" Margin="5">文字按钮</Button>
-                    <Button Width="100" Style="{DynamicResource TextDarkButton}" Margin="5">文字按钮</Button>
-                    <Button Width="100" Style="{DynamicResource TextAccentButton}" Margin="5">文字按钮</Button>
+                    <Button Width="100" Style="{DynamicResource TextMidButton}" Margin="6">文字按钮</Button>
+                    <Button Width="100" Style="{DynamicResource TextLightButton}" Margin="6">文字按钮</Button>
+                    <Button Width="100" Style="{DynamicResource TextDarkButton}" Margin="6">文字按钮</Button>
+                    <Button Width="100" Style="{DynamicResource TextAccentButton}" Margin="6">文字按钮</Button>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="圆型按钮-Button" Margin="0 0 0 10" Grid.Row="3">

@@ -22,7 +22,6 @@
         <Setter Property="Background" Value="{DynamicResource Primary}"/>
         <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"/>
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -36,8 +35,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
+                            BorderThickness="{TemplateBinding BorderThickness}" 
+                            Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                             CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}">
                         <Grid>
                             <Border x:Name="effectBorder" BorderBrush="{TemplateBinding BorderBrush}"

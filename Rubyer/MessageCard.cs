@@ -39,7 +39,6 @@ namespace Rubyer
 
             if (messageContainers.ContainsKey(identify))
             {
-                //throw new Exception("已存在该 ContainerIdentify 的名称！");
                 messageContainers.Remove(identify);
             }
 
@@ -85,6 +84,16 @@ namespace Rubyer
         {
             get { return (IconType)GetValue(IconTypeProperty); }
             set { SetValue(IconTypeProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty IsShwoIconProperty =
+            DependencyProperty.Register("IsShwoIcon", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
+
+        public bool IsShwoIcon
+        {
+            get { return (bool)GetValue(IsShwoIconProperty); }
+            set { SetValue(IsShwoIconProperty, value); }
         }
 
 

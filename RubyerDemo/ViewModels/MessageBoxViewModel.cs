@@ -17,24 +17,60 @@ namespace RubyerDemo.ViewModels
             switch (obj.ToString())
             {
                 case "1":
-                    var result = MessageBoxR.Show("有消息消息消息消息", "有标题");
+                    MessageBoxR.Show("有消息消息消息消息消息", "标题名称");
                     break;
                 case "2":
-                    MessageBox.Show("有消息", "有标题");
+                    var result = MessageBoxR.Confirm("是否删除改数据?", "提示");
+                    Message.Show("MessageContainer", $"返回结果为 {result}");
                     break;
                 case "3":
-                    MessageBox.Show("有消息,有按钮", "有标题", MessageBoxButton.YesNo);
+                    MessageBoxR.Info("消息消息消息消息消息消息", "标题名称", MessageBoxButton.YesNo);
                     break;
                 case "4":
-                    MessageBox.Show("有消息,有按钮,有图标", "有标题", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+                    MessageBoxR.Waring("警告警告警告警告警告警告", "标题名称", MessageBoxButton.YesNo);
                     break;
                 case "5":
-                    MessageBox.Show("有消息,有按钮,有图标,有默认结果", "有标题", MessageBoxButton.YesNo, MessageBoxImage.Stop, MessageBoxResult.OK);
+                    MessageBoxR.Success("成功成功成功成功成功成功", "标题名称", MessageBoxButton.OK);
+                    break;
+                case "6":
+                    MessageBoxR.Error("错误错误错误错误错误错误", "标题名称", MessageBoxButton.YesNoCancel);
+                    break;
+            }
+        }
+
+        private RelayCommand messageBoxShowContainer;
+        public RelayCommand MessageBoxShowContainer => messageBoxShowContainer ?? (messageBoxShowContainer = new RelayCommand(MessageBoxShowContainerExecute));
+
+        private void MessageBoxShowContainerExecute(object obj)
+        {
+            switch (obj.ToString())
+            {
+                case "1":
+                    MessageBoxR.ShowInContainer("DialogContaioner", "有消息消息消息消息消息");
+                    break;
+                case "2":
+                    MessageBoxR.ConfirmInContainer("DialogContaioner", "是否删除改数据?", "提示", ConfirmReturnResult);
+                    break;
+                case "3":
+                    MessageBoxR.InfoInContainer("DialogContaioner", "消息消息消息消息消息消息", "标题名称", null, MessageBoxButton.YesNo);
+                    break;
+                case "4":
+                    MessageBoxR.WaringInContainer("DialogContaioner", "警告警告警告警告警告警告", "标题名称", null, MessageBoxButton.YesNo);
+                    break;
+                case "5":
+                    MessageBoxR.SuccessInContainer("DialogContaioner", "成功成功成功成功成功成功", "标题名称", null, MessageBoxButton.OK);
+                    break;
+                case "6":
+                    MessageBoxR.ErrorInContainer("DialogContaioner", "错误错误错误错误错误错误", "标题名称", null, MessageBoxButton.YesNoCancel);
                     break;
                 default:
                     break;
             }
+        }
 
+        private void ConfirmReturnResult(object sender, MessageBoxResultRoutedEventArge e)
+        {
+            Message.Show("MessageContainer", $"返回结果为 {e.Result}");
         }
     }
 }

@@ -75,5 +75,4 @@
     <Style TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}"/>
     <Style TargetType="{x:Type rubyer:MessageBoxCard}" BasedOn="{StaticResource RubyerMessageBoxCard}"/>
 
-    
 </ResourceDictionary>

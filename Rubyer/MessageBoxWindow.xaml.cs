@@ -9,6 +9,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -29,16 +30,32 @@ namespace Rubyer
         public void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
-
             messageBoxPanel.Children.Add(card);
         }
 
         private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArge e)
         {
-            messageBoxPanel.Children.Remove(e.Card);
-            DialogResult = true;
+            Storyboard unloadStoryboard = (Storyboard)this.Resources["UnLoadFadeUp"];
+            unloadStoryboard.Completed += (a, b) => {
+                messageBoxPanel.Children.Remove(e.Card);
+                DialogResult = true;
+            };
+
+            rootGrid.BeginStoryboard(unloadStoryboard);
             MessageBoxResult = e.Result;
-            this.Close();
+        }
+
+        private void Window_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            this.Focus();
+        }
+
+        private void Window_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            if (e.NewFocus != null)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

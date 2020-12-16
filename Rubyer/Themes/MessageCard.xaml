@@ -21,12 +21,12 @@
         <Setter Property="CornerRadius" Value="2.5"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="Margin" Value="2.5"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="MinWidth" Value="200"/>
-        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
-        <Setter Property="IconType" Value="InformationFill"/>
+        <Setter Property="IsShwoIcon" Value="False"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="RenderTransform">
             <Setter.Value>
@@ -50,13 +50,14 @@
                                     Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}" 
                                     Grid.ColumnSpan="3"/>
 
-                            <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="{TemplateBinding Padding}"
-                                         Foreground="{TemplateBinding ThemeColorBrush}" Width="23" Height="23"/>
+                            <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="8 0 0 0"
+                                         Foreground="{TemplateBinding ThemeColorBrush}" Width="23" Height="23"
+                                         Visibility="{TemplateBinding IsShwoIcon,Converter={StaticResource boolToVisibility}}"/>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0 0 10 0"/>
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="8 0"/>
                             <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
                                     Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
                                 <rubyer:Icon Type="CloseLine"/>
@@ -71,16 +72,25 @@
     <Style x:Key="WarningMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
         <Setter Property="ThemeColorBrush" Value="{StaticResource WarningBrush}"/>
         <Setter Property="IconType" Value="ErrorWarningFill"/>
+        <Setter Property="IsShwoIcon" Value="True"/>
     </Style>
 
     <Style x:Key="SuccessMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
         <Setter Property="ThemeColorBrush" Value="{StaticResource SuccessBrush}"/>
         <Setter Property="IconType" Value="CheckboxCircleFill"/>
+        <Setter Property="IsShwoIcon" Value="True"/>
     </Style>
 
     <Style x:Key="ErrorMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
         <Setter Property="ThemeColorBrush" Value="{StaticResource ErrorBrush}"/>
         <Setter Property="IconType" Value="CloseCircleFill"/>
+        <Setter Property="IsShwoIcon" Value="True"/>
+    </Style>
+
+    <Style x:Key="InfoMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
+        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
+        <Setter Property="IconType" Value="InformationFill"/>
+        <Setter Property="IsShwoIcon" Value="True"/>
     </Style>
 
 </ResourceDictionary>

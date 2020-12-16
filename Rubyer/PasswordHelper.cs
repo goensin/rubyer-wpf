@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -9,13 +10,20 @@ namespace Rubyer
     {
         // 密码内容
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordHelper), new PropertyMetadata("", PasswordChanged));
+            DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordHelper), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PasswordChanged));
 
         private static void PasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is PasswordBox passwordBox)
             {
-                passwordBox.Password = GetPassword(d);
+                passwordBox.Password = GetPassword(passwordBox);
+
+                if (passwordBox.Password.Length > 0)
+                {
+                    passwordBox.GetType()
+                   .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
+                   .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 0 });
+                }
             }
         }
 
@@ -93,6 +101,8 @@ namespace Rubyer
                 passwordBox.PasswordChanged += (sender, arg) =>
                 {
                     SetPassword(passwordBox, passwordBox.Password);
+
+                   
                 };
             }
         }

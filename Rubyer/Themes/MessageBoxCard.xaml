@@ -19,7 +19,7 @@
         <Setter Property="CornerRadius" Value="2.5"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="Margin" Value="2.5"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="10"/>
         <Setter Property="MinHeight" Value="120"/>
         <Setter Property="MinWidth" Value="250"/>
@@ -29,6 +29,11 @@
         <Setter Property="IsShowOk" Value="True"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="MessageBoxButton" Value="OK"/>
+        <Setter Property="RenderTransform">
+            <Setter.Value>
+                <TranslateTransform />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxCard}">
@@ -42,9 +47,6 @@
                                 <RowDefinition Height="*"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource AllDirectionEffect5}"
-                                    CornerRadius="{TemplateBinding CornerRadius}" Grid.RowSpan="3"/>
                             <DockPanel>
                                 <TextBlock Text="{TemplateBinding Title}" FontSize="15" DockPanel.Dock="Left" Margin="8 5"/>
                                 <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}"

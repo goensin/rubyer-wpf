@@ -10,12 +10,15 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
+
     public class MessageBoxCard : ContentControl
     {
         public const string CloseButtonPartName = "PART_CloseButton";
@@ -24,7 +27,6 @@ namespace Rubyer
         public const string YesButtonPartName = "PART_YesButton";
         public const string NoButtonPartName = "PART_NoButton";
 
-        public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
         public static readonly RoutedEvent ReturnResultEvent;
 
         static MessageBoxCard()
@@ -40,6 +42,7 @@ namespace Rubyer
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
+                CloseMessageBoxCardAnimaton();
                 MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Cancel, this);
                 this.RaiseEvent(eventArgs);
             };
@@ -49,6 +52,7 @@ namespace Rubyer
                 ButtonBase okButton = GetTemplateChild(OkButtonPartName) as ButtonBase;
                 okButton.Click += (sender, args) =>
                 {
+                    CloseMessageBoxCardAnimaton();
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.OK, this);
                     this.RaiseEvent(eventArgs);
                 };
@@ -59,6 +63,7 @@ namespace Rubyer
                 ButtonBase cancelButton = GetTemplateChild(CancelButtonPartName) as ButtonBase;
                 cancelButton.Click += (sender, args) =>
                 {
+                    CloseMessageBoxCardAnimaton();
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Cancel, this);
                     this.RaiseEvent(eventArgs);
                 };
@@ -69,6 +74,7 @@ namespace Rubyer
                 ButtonBase yesButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
                 yesButton.Click += (sender, args) =>
                 {
+                    CloseMessageBoxCardAnimaton();
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Yes, this);
                     this.RaiseEvent(eventArgs);
                 };
@@ -76,14 +82,67 @@ namespace Rubyer
 
             if (IsShowNo)
             {
-                ButtonBase noButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
+                ButtonBase noButton = GetTemplateChild(NoButtonPartName) as ButtonBase;
                 noButton.Click += (sender, args) =>
                 {
+                    CloseMessageBoxCardAnimaton();
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
                     this.RaiseEvent(eventArgs);
                 };
             }
 
+        }
+
+        private void CloseMessageBoxCardAnimaton()
+        {
+            if (VisualTreeHelper.GetParent(this) is DialogContainer container)
+            {
+                // 退出动画
+                Storyboard exitStoryboard = new Storyboard();
+
+                DoubleAnimation exitOpacityAnimation = new DoubleAnimation
+                {
+                    From = 1,
+                    To = 0,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+                };
+                Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+
+                DoubleAnimation exitTransformAnimation = new DoubleAnimation
+                {
+                    From = 0,
+                    To = 50,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+                };
+                Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+                exitStoryboard.Children.Add(exitOpacityAnimation);
+                exitStoryboard.Children.Add(exitTransformAnimation);
+
+                // 背景动画
+                ColorAnimation backgroundAnimation = new ColorAnimation
+                {
+                    To = Colors.Transparent,
+                    Duration = new Duration(TimeSpan.FromMilliseconds(150)),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
+                };
+
+                // 动画完成
+                exitStoryboard.Completed += (a, b) =>
+                {
+                    container.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+                    container.Child = null;
+                };
+
+                backgroundAnimation.Completed += (a, b) =>
+                {
+                    container.Visibility = Visibility.Hidden;
+                };
+
+                this.BeginStoryboard(exitStoryboard);    // 执行动画
+            }
         }
 
         #region 事件

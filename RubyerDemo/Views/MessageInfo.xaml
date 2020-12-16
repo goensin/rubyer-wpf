@@ -16,11 +16,18 @@
                         <TextBlock Text="指定容器弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button x:Name="MessageBtn" Content="基础消息" Width="100" Margin="10" 
+                                Style="{StaticResource LightButton}" Click="MessageBtn_Click"/>
+                        <Button x:Name="MessageContainerBtn" Content="基础消息" Width="100" Margin="10"
+                                Style="{StaticResource LightButton}" Click="MessageContainerBtn_Click"/>
+                        <rubyer:MessageCard Content="message" IsClearable="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="InfoBtn" Content="提示消息" Width="100" Margin="10"
                                 Background="{StaticResource InfoBrush}" Click="InfoBtn_Click"/>
                         <Button x:Name="InfoContainerBtn" Content="提示消息" Width="100" Margin="10"
                                 Background="{StaticResource InfoBrush}" Click="InfoContainerBtn_Click"/>
-                        <rubyer:MessageCard Content="info" IsClearable="True"/>
+                        <rubyer:MessageCard Content="info" Style="{StaticResource InfoMessage}" IsClearable="True"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <Button x:Name="WaringBtn" Content="警告消息" Width="100" Margin="10" 

@@ -9,6 +9,7 @@ namespace Rubyer
 {
     public class Message
     {
+        private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
         private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
         private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
         private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
@@ -26,11 +27,19 @@ namespace Rubyer
             switch (type)
             {
                 default:
-                case MessageType.Info:
+                case MessageType.None:
                     messageCard = new MessageCard
                     {
                         Content = element,
                         IsClearable = isClearable
+                    };
+                    break;
+                case MessageType.Info:
+                    messageCard = new MessageCard
+                    {
+                        Content = element,
+                        IsClearable = isClearable,
+                        Style = infoStyle
                     };
                     break;
                 case MessageType.Warning:
@@ -65,6 +74,11 @@ namespace Rubyer
 
         public static void Show(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
+            Show(MessageType.None, element, millisecondTimeOut, isClearable);
+        }
+
+        public static void ShowInfo(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
             Show(MessageType.Info, element, millisecondTimeOut, isClearable);
         }
 
@@ -89,6 +103,11 @@ namespace Rubyer
         }
 
         public static void Show(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            Show(MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        public static void ShowInfo(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
@@ -129,11 +148,19 @@ namespace Rubyer
             switch (type)
             {
                 default:
-                case MessageType.Info:
+                case MessageType.None:
                     messageCard = new MessageCard
                     {
                         Content = element,
                         IsClearable = isClearable
+                    };
+                    break;
+                case MessageType.Info:
+                    messageCard = new MessageCard
+                    {
+                        Content = element,
+                        IsClearable = isClearable,
+                        Style = infoStyle
                     };
                     break;
                 case MessageType.Warning:
@@ -238,6 +265,11 @@ namespace Rubyer
 
         public static void Show(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
+            Show(containerIdentify, MessageType.None, element, millisecondTimeOut, isClearable);
+        }
+
+        public static void ShowInfo(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
             Show(containerIdentify, MessageType.Info, element, millisecondTimeOut, isClearable);
         }
 
@@ -263,6 +295,11 @@ namespace Rubyer
 
         public static void Show(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
+            Show(containerIdentify, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        public static void ShowInfo(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
             Show(containerIdentify, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
@@ -285,6 +322,7 @@ namespace Rubyer
 
     public enum MessageType
     {
+        None = 0,
         Info,
         Success,
         Warning,

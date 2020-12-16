@@ -24,9 +24,14 @@ namespace RubyerDemo.Views
             InitializeComponent();
         }
 
+        private void MessageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("message");
+        }
+
         private void InfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("info");
+            Message.ShowInfo("info");
         }
 
         private void WaringBtn_Click(object sender, RoutedEventArgs e)
@@ -44,24 +49,29 @@ namespace RubyerDemo.Views
             Message.ShowError("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0);
         }
 
+        private void MessageContainerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Message.Show("MessageContainer", "message");
+        }
+
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("MainMessageContainer", "info");
+            Message.ShowInfo("MessageContainer", "info");
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowWarning("MainMessageContainer", "warning");
+            Message.ShowWarning("MessageContainer", "warning");
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowSuccess("MainMessageContainer", "success");
+            Message.ShowSuccess("MessageContainer", "success");
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowError("MainMessageContainer", "error");
+            Message.ShowError("MessageContainer", "error");
         }
 
         private void ControlBtn_Click(object sender, RoutedEventArgs e)
@@ -75,7 +85,7 @@ namespace RubyerDemo.Views
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.Show("MainMessageContainer", element);
+            Message.Show("MessageContainer", element);
         }
     }
 }

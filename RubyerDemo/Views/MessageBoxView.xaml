@@ -18,29 +18,46 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <GroupBox Header="消息框-MessageBoxR" Margin="0 0 0 10">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Orientation="Horizontal" Margin="5">
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="1">1</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="2">2</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="3">3</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="4">4</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="5">5</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="6">6</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="7">7</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="8">8</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="9">9</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="10">10</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="11">11</Button>
-                        <Button Width="50" Margin="5" Command="{Binding MessageBoxShow}" CommandParameter="12">12</Button>
+                <StackPanel Margin="5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="全局弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
+                        <TextBlock Text="指定容器弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <rubyer:MessageBoxCard Grid.Row="1" Title="标题">
-                        <TextBlock Text="内容"/>
-                    </rubyer:MessageBoxCard>
-                </Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="1"
+                                Style="{StaticResource LightButton}">消息提示</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="1"
+                                Style="{StaticResource LightButton}">消息提示</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="2">确认消息</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="2">确认消息</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="3"
+                                Background="{StaticResource InfoBrush}">信息</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="3"
+                                Background="{StaticResource InfoBrush}">信息</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="4"
+                                Background="{StaticResource WarningBrush}">警告</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="4"
+                                Background="{StaticResource WarningBrush}">警告</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="5"
+                                Background="{StaticResource SuccessBrush}">成功</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="5"
+                                Background="{StaticResource SuccessBrush}">成功</Button>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="6"
+                                Background="{StaticResource ErrorBrush}">错误</Button>
+                        <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="6"
+                                Background="{StaticResource ErrorBrush}">错误</Button>
+                    </StackPanel>
+                </StackPanel>
             </GroupBox>
         </Grid>
     </ScrollViewer>

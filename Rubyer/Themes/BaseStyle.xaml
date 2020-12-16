@@ -7,6 +7,8 @@
     <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
     <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
     <Color x:Key="DarkBackgroundColor">#252526</Color>
+
+    <Color x:Key="DialogBackground">#99000000</Color>
     
     <SolidColorBrush x:Key="Light" Color="#6EC6FF"/>
     <SolidColorBrush x:Key="LightForeground" Color="#000000"/>
@@ -19,8 +21,6 @@
 
     <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}"/>
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}"/>
-    <!--<SolidColorBrush x:Key="DefaultForeground" Color="#252526"/>
-    <SolidColorBrush x:Key="DefaultBackground" Color="#FFFFFF"/>-->
 
     <SolidColorBrush x:Key="BackgroundGray" Color="#BDBDBD" Opacity="0.45"/>
     <SolidColorBrush x:Key="MouseOverBackgroundGray" Color="#BDBDBD" Opacity="0.75"/>
