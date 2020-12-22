@@ -27,7 +27,8 @@
             <rubyer:Card Margin="3 3 0 3" Padding="0 10">
                 <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
                          SelectionChanged="ListBox_SelectionChanged" rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
-                         rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}">
+                         rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}" 
+                         Style="{StaticResource PopularListBox}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

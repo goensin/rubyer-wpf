@@ -36,7 +36,7 @@
                         <ListBoxItem Content="香蕉"/>
                         <ListBoxItem Content="苹果"/>
                     </ListBox>
-                    <ListBox x:Name="listBox1" Width="150" BorderThickness="1">
+                    <ListBox x:Name="listBox1" Width="150" BorderThickness="1" Style="{StaticResource PopularListBox}">
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="QqFill" Margin="0 0 5 0"/>
