@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,6 +29,8 @@ namespace Rubyer
                 Title = title,
                 MessageBoxButton = button,
             };
+
+            card.Dispatcher.VerifyAccess();
 
             switch (icon)
             {
@@ -108,14 +111,19 @@ namespace Rubyer
         #endregion
 
         #region 指定容器
-        public static void ShowInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        public static async Task<MessageBoxResult> ShowInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
+            MessageBoxResult result = MessageBoxResult.No;
+            bool isReturnResult = false;
+
             if (!DialogContainer.containers.ContainsKey(containerIdentify))
             {
-                return;
+                return result;
             }
 
             DialogContainer container = DialogContainer.containers[containerIdentify];
+
+            container.Dispatcher.VerifyAccess();
 
             MessageBoxCard card = new MessageBoxCard
             {
@@ -124,10 +132,11 @@ namespace Rubyer
                 MessageBoxButton = button,
             };
 
-            if (handler != null)
+            card.ReturnResult += (a, b) =>
             {
-                card.ReturnResult += handler;
-            }
+                isReturnResult = true;
+                result = b.Result;
+            };
 
             switch (icon)
             {
@@ -200,39 +209,39 @@ namespace Rubyer
             {
                 container.Child = card;
                 card.BeginStoryboard(cardStoryboard);
+                card.Focus();
             };
 
             container.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+
+            await Task.Run(() => { while (!isReturnResult) { Thread.Sleep(10); } });
+
+            return result;
         }
 
-        private static void BackgroundAnimation_Completed(object sender, EventArgs e)
+        public static async Task<MessageBoxResult> ConfirmInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
-            throw new NotImplementedException();
+            return await ShowInContainer(containerIdentify, message, title, button, icon);
         }
 
-        public static void ConfirmInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static async Task<MessageBoxResult> InfoInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
         {
-            ShowInContainer(containerIdentify, message, title, handler, button, icon);
+            return await ShowInContainer(containerIdentify, message, title, button, icon);
         }
 
-        public static void InfoInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
+        public static async Task<MessageBoxResult> WaringInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
         {
-            ShowInContainer(containerIdentify, message, title, handler, button, icon);
+            return await ShowInContainer(containerIdentify, message, title, button, icon);
         }
 
-        public static void WaringInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
+        public static async Task<MessageBoxResult> SuccessInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
         {
-            ShowInContainer(containerIdentify, message, title, handler, button, icon);
+            return await ShowInContainer(containerIdentify, message, title, button, icon);
         }
 
-        public static void SuccessInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
+        public static async Task<MessageBoxResult> ErrorInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
         {
-            ShowInContainer(containerIdentify, message, title, handler, button, icon);
-        }
-
-        public static void ErrorInContainer(string containerIdentify, string message, string title = "", MessageBoxResultRoutedEventHandler handler = null, MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
-        {
-            ShowInContainer(containerIdentify, message, title, handler, button, icon);
+            return await ShowInContainer(containerIdentify, message, title, button, icon);
         }
         #endregion
     }

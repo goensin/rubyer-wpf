@@ -23,6 +23,8 @@ namespace Rubyer
             }
 
             MessageWindow messageWindow = MessageWindow.GetInstance();
+            messageWindow.Dispatcher.VerifyAccess();
+
             MessageCard messageCard;
             switch (type)
             {
@@ -143,6 +145,7 @@ namespace Rubyer
             }
 
             Panel messagePanel = MessageCard.messageContainers[containerIdentify];
+            messagePanel.Dispatcher.VerifyAccess();
 
             MessageCard messageCard;
             switch (type)

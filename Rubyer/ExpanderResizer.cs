@@ -8,9 +8,9 @@ namespace Rubyer
 {
     public class ExpanderResizer : ContentControl
     {
-        bool isWidthAnimationing;
-        bool isHeightAnimationing;
-        bool isExpanded;
+        private bool isWidthAnimationing;
+        private bool isHeightAnimationing;
+        private bool isExpanded;
 
         static ExpanderResizer()
         {
@@ -127,9 +127,7 @@ namespace Rubyer
 
                             return new Size(this.ActualWidth, this.ActualHeight);
                         }
-
                     }
-
                 }
                 return base.ArrangeOverride(arrangeBounds);
             }

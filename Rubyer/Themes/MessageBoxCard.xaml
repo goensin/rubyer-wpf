@@ -72,7 +72,7 @@
                                 <Button x:Name="PART_CancelButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
                                         Visibility="{TemplateBinding IsShowCancel,Converter={StaticResource boolToVisibility}}">取消</Button>
                                 <Button x:Name="PART_OkButton" Width="60" Margin="5"
-                                        Visibility="{TemplateBinding IsShowOk,Converter={StaticResource boolToVisibility}}">确认</Button>
+                                        Visibility="{TemplateBinding IsShowOk,Converter={StaticResource boolToVisibility}}" IsDefault="True">确认</Button>
                             </StackPanel>
                         </Grid>
                     </Border>

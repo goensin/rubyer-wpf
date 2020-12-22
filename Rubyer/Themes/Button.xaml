@@ -53,11 +53,9 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="IsDefaulted" Value="true">
-                            -->
-                        <!--<Setter Property="BorderBrush" TargetName="border" Value="Transparent"/>-->
-                        <!--
-                        </Trigger>-->
+                        <Trigger Property="IsDefaulted" Value="true">
+                            <Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource AllDirectionEffect}"/>
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource MouseOverOpacity}"/>
                         </Trigger>

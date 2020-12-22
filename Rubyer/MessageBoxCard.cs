@@ -43,7 +43,7 @@ namespace Rubyer
             closeButton.Click += (sender, args) =>
             {
                 CloseMessageBoxCardAnimaton();
-                MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Cancel, this);
+                MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
                 this.RaiseEvent(eventArgs);
             };
 
@@ -146,7 +146,6 @@ namespace Rubyer
         }
 
         #region 事件
-        // 返回结果事件
         public event MessageBoxResultRoutedEventHandler ReturnResult
         {
             add { base.AddHandler(MessageBoxCard.ReturnResultEvent, value); }
@@ -283,6 +282,7 @@ namespace Rubyer
             get { return (MessageBoxButton)GetValue(MessageBoxButtonProperty); }
             set { SetValue(MessageBoxButtonProperty, value); }
         }
+
 
         #endregion
     }
