@@ -56,30 +56,54 @@ namespace Rubyer
                             listBox.SelectionChanged += (a, b) =>
                             {
                                 int index = listBox.SelectedIndex;
+                                double top = GetListBoxItemTop(listBox, index);
                                 ListBoxItem item = listBox.ItemContainerGenerator.ContainerFromItem(listBox.Items[index]) as ListBoxItem;
                                 rectangle.Height = item.ActualHeight;
 
                                 DoubleAnimation topAnimation = new DoubleAnimation
                                 {
-                                    To = item.ActualHeight * index,
+                                    To = top,
+                                    Duration = TimeSpan.FromMilliseconds(500),
+                                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                };
+
+                                DoubleAnimation heightAnimation = new DoubleAnimation
+                                {
+                                    To = item.ActualHeight,
                                     Duration = TimeSpan.FromMilliseconds(500),
                                     EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
                                 };
 
                                 rectangle.BeginAnimation(Canvas.TopProperty, topAnimation);
+                                rectangle.BeginAnimation(FrameworkElement.HeightProperty, heightAnimation);
                             };
 
                             if (listBox.SelectedIndex >= 0)
                             {
                                 int index = listBox.SelectedIndex;
+                                double top = GetListBoxItemTop(listBox, index);
                                 ListBoxItem item = listBox.ItemContainerGenerator.ContainerFromItem(listBox.Items[index]) as ListBoxItem;
                                 rectangle.Height = item.ActualHeight;
-                                rectangle.SetValue(Canvas.TopProperty, item.ActualHeight * index);
+                                rectangle.SetValue(Canvas.TopProperty, top);
                             }
                         }
                     }
                 };
             }
+        }
+
+        // 获取 item 所在纵向位置
+        private static double GetListBoxItemTop(ListBox listBox, int index)
+        {
+            double top = 0;
+
+            for (int i = 0; i < index; i++)
+            {
+                ListBoxItem item = listBox.ItemContainerGenerator.ContainerFromItem(listBox.Items[i]) as ListBoxItem;
+                top += item.ActualHeight;
+            }
+
+            return top;
         }
 
         public static bool GetIsAnimation(DependencyObject obj)

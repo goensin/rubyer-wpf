@@ -36,17 +36,17 @@
                         <ListBoxItem Content="香蕉"/>
                         <ListBoxItem Content="苹果"/>
                     </ListBox>
-                    <ListBox x:Name="listBox1" Width="150" BorderThickness="1" Style="{StaticResource PopularListBox}">
+                    <ListBox x:Name="listBox1" Width="150" BorderThickness="0" Style="{StaticResource PopularListBox}">
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="QqFill" Margin="0 0 5 0"/>
-                                <TextBlock Text="QQ"/>
+                                <rubyer:Icon Type="QqFill" Margin="0 0 5 0" Height="26" Width="26"/>
+                                <TextBlock Text="QQ" FontSize="26"/>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="WechatFill" Margin="0 0 5 0"/>
-                                <TextBlock Text="微信"/>
+                                <rubyer:Icon Type="WechatFill" Margin="0 0 5 0" Height="19" Width="19"/>
+                                <TextBlock Text="微信" FontSize="19"/>
                             </StackPanel>
                         </ListBoxItem>
                         <ListBoxItem>
