@@ -10,55 +10,52 @@
         <Grid Style="{StaticResource FadeLeftStyle}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <GroupBox Header="消息框-MessageBoxR" Margin="0 0 0 10" Background="#55CFC8DC">
+            <GroupBox Header="消息框-MessageBoxR" Margin="0 0 0 10" Background="#66CFC8DC">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="全局弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
                         <TextBlock Text="指定容器弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="1"
                                 Style="{StaticResource LightButton}">消息提示</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="1"
                                 Style="{StaticResource LightButton}">消息提示</Button>
                         <rubyer:MessageBoxCard Content="有消息消息消息消息消息"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="2">确认消息</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="2">确认消息</Button>
-                        <rubyer:MessageBoxCard Content="是否删除改数据?" Title="提示" MessageBoxButton="OKCancel" IsShowIcon="True" IconType="QuestionFill" />
+                        <rubyer:MessageBoxCard Content="是否删除改数据?" Title="提示" MessageBoxButton="OKCancel" IsShowIcon="True" IconType="QuestionFill" ThemeColorBrush="{StaticResource QuestionBrush}"/>
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="3"
                                 Background="{StaticResource InfoBrush}">信息</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="3"
                                 Background="{StaticResource InfoBrush}">信息</Button>
-                        <rubyer:MessageBoxCard Content="消息消息消息消息消息消息?" Title="标题名称" MessageBoxButton="YesNo" IsShowIcon="True" IconType="InformationFill" />
+                        <rubyer:MessageBoxCard Content="消息消息消息消息消息消息" Title="标题名称" MessageBoxButton="YesNo" IsShowIcon="True" IconType="InformationFill" ThemeColorBrush="{StaticResource InfoBrush}" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="4"
                                 Background="{StaticResource WarningBrush}">警告</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="4"
                                 Background="{StaticResource WarningBrush}">警告</Button>
+                        <rubyer:MessageBoxCard Content="警告警告警告警告警告警告" Title="标题名称" MessageBoxButton="YesNo" IsShowIcon="True" IconType="ErrorWarningFill" ThemeColorBrush="{StaticResource WarningBrush}" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="5"
                                 Background="{StaticResource SuccessBrush}">成功</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="5"
                                 Background="{StaticResource SuccessBrush}">成功</Button>
+                        <rubyer:MessageBoxCard Content="成功成功成功成功成功成功" Title="标题名称" MessageBoxButton="OK" IsShowIcon="True" IconType="CheckboxCircleFill" ThemeColorBrush="{StaticResource SuccessBrush}" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShow}" CommandParameter="6"
                                 Background="{StaticResource ErrorBrush}">错误</Button>
                         <Button Width="100" Margin="10" Command="{Binding MessageBoxShowContainer}" CommandParameter="6"
                                 Background="{StaticResource ErrorBrush}">错误</Button>
+                        <rubyer:MessageBoxCard Content="错误错误错误错误错误错误" Title="标题名称" MessageBoxButton="YesNoCancel" IsShowIcon="True" IconType="CloseCircleFill" ThemeColorBrush="{StaticResource ErrorBrush}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
