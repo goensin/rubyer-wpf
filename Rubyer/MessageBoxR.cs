@@ -116,12 +116,12 @@ namespace Rubyer
             MessageBoxResult result = MessageBoxResult.No;
             bool isReturnResult = false;
 
-            if (!DialogContainer.containers.ContainsKey(containerIdentify))
+            if (!MessageBoxContainer.Containers.ContainsKey(containerIdentify))
             {
                 return result;
             }
 
-            DialogContainer container = DialogContainer.containers[containerIdentify];
+            MessageBoxContainer container = MessageBoxContainer.Containers[containerIdentify];
 
             container.Dispatcher.VerifyAccess();
 

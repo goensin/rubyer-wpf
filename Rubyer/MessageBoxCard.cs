@@ -95,7 +95,7 @@ namespace Rubyer
 
         private void CloseMessageBoxCardAnimaton()
         {
-            if (VisualTreeHelper.GetParent(this) is DialogContainer container)
+            if (VisualTreeHelper.GetParent(this) is MessageBoxContainer container)
             {
                 // 退出动画
                 Storyboard exitStoryboard = new Storyboard();

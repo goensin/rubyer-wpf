@@ -134,7 +134,7 @@ namespace Rubyer
         #region 指定容器
         public static void Show(string containerIdentify, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            if (!MessageCard.messageContainers.ContainsKey(containerIdentify))
+            if (!MessageContainer.Containers.ContainsKey(containerIdentify))
             {
                 return;
             }
@@ -144,7 +144,7 @@ namespace Rubyer
                 isClearable = true;
             }
 
-            Panel messagePanel = MessageCard.messageContainers[containerIdentify];
+            Panel messagePanel = MessageContainer.Containers[containerIdentify];
             messagePanel.Dispatcher.VerifyAccess();
 
             MessageCard messageCard;

@@ -17,7 +17,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type GroupBox}">
-                    <Grid SnapsToDevicePixels="true">
+                    <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="6"/>
                             <ColumnDefinition Width="Auto"/>
@@ -31,7 +31,7 @@
                             <RowDefinition Height="6"/>
                         </Grid.RowDefinitions>
                         <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" 
-                                Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" 
+                                Background="Transparent" Grid.ColumnSpan="4" Grid.Column="0" 
                                 CornerRadius="2.5" Grid.Row="1" Grid.RowSpan="3"/>
                         <Border BorderBrush="Transparent" BorderThickness="{TemplateBinding BorderThickness}" 
                                 Grid.ColumnSpan="4" CornerRadius="2.5" Grid.Row="1" Grid.RowSpan="3">
@@ -42,7 +42,9 @@
                                     <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}"/>
                                 </MultiBinding>
                             </Border.OpacityMask>
-                            <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2.5">
+                            <Border BorderBrush="{TemplateBinding BorderBrush}" 
+                                    BorderThickness="{TemplateBinding BorderThickness}" 
+                                    CornerRadius="2.5">
                                 <!--<Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="2"/>-->
                             </Border>
                         </Border>
@@ -51,7 +53,7 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>
                         <ContentPresenter Grid.ColumnSpan="2" Grid.Column="1" 
-                                          Margin="{TemplateBinding Padding}" Grid.Row="2" 
+                                          Margin="{TemplateBinding Padding}" Grid.Row="2"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                     </Grid>
                 </ControlTemplate>
@@ -117,8 +119,8 @@
                         <ContentPresenter TextBlock.FontSize="16" ContentSource="Header" Margin="3 0 0 3"
                                               RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="Transparent" CornerRadius="2.5" Grid.Row="1">
+                            BorderThickness="{TemplateBinding BorderThickness}"  
+                            Background="{TemplateBinding Background}" CornerRadius="2.5" Grid.Row="1">
                             <ContentPresenter  Margin="{TemplateBinding Padding}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>

@@ -14,10 +14,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <GroupBox Header="默认分组框-GroupBox" Margin="0 0 0 10" Width="Auto" Height="60">
+            <GroupBox Header="默认分组框-GroupBox" Margin="0 0 0 10" Width="Auto" Height="60" >
 
             </GroupBox>
-            <GroupBox Header="色彩分组框-GroupBox" Margin="0 0 0 10" Width="Auto" Height="60"
+            <GroupBox Header="色彩分组框-GroupBox" Margin="0 0 0 10" Width="Auto" Height="60" 
                       Style="{StaticResource ColorHeaderGroupBox}" Grid.Row="1">
 
             </GroupBox>

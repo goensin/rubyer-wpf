@@ -15,38 +15,33 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
-    public class DialogContainer : Border
+    public class MessageBoxContainer : Border
     {
-        public static Dictionary<string, DialogContainer> containers = new Dictionary<string, DialogContainer>();
+        public static Dictionary<string, MessageBoxContainer> Containers = new Dictionary<string, MessageBoxContainer>();
 
-        static DialogContainer()
+        static MessageBoxContainer()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogContainer), new FrameworkPropertyMetadata(typeof(DialogContainer)));
-        }
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxContainer), new FrameworkPropertyMetadata(typeof(MessageBoxContainer)));
         }
 
 
         public static readonly DependencyProperty IdentifyProperty =
-            DependencyProperty.Register("Identify", typeof(string), typeof(DialogContainer), new PropertyMetadata(default(string),OnIdentifyChanged));
+            DependencyProperty.Register("Identify", typeof(string), typeof(MessageBoxContainer), new PropertyMetadata(default(string),OnIdentifyChanged));
 
         private static void OnIdentifyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DialogContainer container = d as DialogContainer;
+            MessageBoxContainer container = d as MessageBoxContainer;
             string identify = e.NewValue.ToString();
 
-            if (containers.ContainsKey(identify))
+            if (Containers.ContainsKey(identify))
             {
-                containers.Remove(identify);
+                Containers.Remove(identify);
             }
 
             container.Background = new SolidColorBrush(Colors.Transparent);
             container.Visibility = Visibility.Hidden;
 
-            containers.Add(identify, container);
+            Containers.Add(identify, container);
         }
 
         public string Identify

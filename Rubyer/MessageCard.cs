@@ -9,7 +9,6 @@ namespace Rubyer
 {
     public class MessageCard : ContentControl
     {
-        public static Dictionary<string, Panel> messageContainers = new Dictionary<string, Panel>();
         public static readonly RoutedEvent CloseEvent;
 
         static MessageCard()
@@ -24,35 +23,6 @@ namespace Rubyer
         {
             add { base.AddHandler(MessageCard.CloseEvent, value); }
             remove { base.RemoveHandler(MessageCard.CloseEvent, value); }
-        }
-        #endregion
-
-        #region 附加属性
-        // 显示消息通知的容器的 ID
-        public static readonly DependencyProperty ContainerIdentifyProperty = DependencyProperty.RegisterAttached(
-            "ContainerIdentify", typeof(string), typeof(MessageCard), new PropertyMetadata(null, OnMessageContainerChanged));
-
-        private static void OnMessageContainerChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            Panel panel = d as Panel;
-            string identify = e.NewValue.ToString();
-
-            if (messageContainers.ContainsKey(identify))
-            {
-                messageContainers.Remove(identify);
-            }
-
-            messageContainers.Add(identify, panel);
-        }
-
-        public static void SetContainerIdentify(DependencyObject element, string value)
-        {
-            element.SetValue(ContainerIdentifyProperty, value);
-        }
-
-        public static string GetContainerIdentify(DependencyObject element)
-        {
-            return (string)element.GetValue(ContainerIdentifyProperty);
         }
         #endregion
 
