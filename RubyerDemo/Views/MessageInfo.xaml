@@ -9,7 +9,7 @@
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                   Style="{StaticResource RubyerSmallScrollViewer}">
         <Grid Style="{StaticResource FadeLeftStyle}">
-            <GroupBox Header="消息通知-Message" Margin="0 0 0 10">
+            <GroupBox Header="消息-Message" Margin="0 0 0 10">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="全局弹出" Width="100" Margin="10" HorizontalAlignment="Center"/>

@@ -111,17 +111,17 @@ namespace Rubyer
         #endregion
 
         #region 指定容器
-        public static async Task<MessageBoxResult> ShowInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        public static async Task<MessageBoxResult> ShowInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
             MessageBoxResult result = MessageBoxResult.No;
             bool isReturnResult = false;
 
-            if (!MessageBoxContainer.Containers.ContainsKey(containerIdentify))
+            if (!MessageBoxContainer.Containers.ContainsKey(containerIdentifier))
             {
                 return result;
             }
 
-            MessageBoxContainer container = MessageBoxContainer.Containers[containerIdentify];
+            MessageBoxContainer container = MessageBoxContainer.Containers[containerIdentifier];
 
             container.Dispatcher.VerifyAccess();
 
@@ -219,29 +219,29 @@ namespace Rubyer
             return result;
         }
 
-        public static async Task<MessageBoxResult> ConfirmInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static async Task<MessageBoxResult> ConfirmInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
-            return await ShowInContainer(containerIdentify, message, title, button, icon);
+            return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
 
-        public static async Task<MessageBoxResult> InfoInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
+        public static async Task<MessageBoxResult> InfoInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
         {
-            return await ShowInContainer(containerIdentify, message, title, button, icon);
+            return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
 
-        public static async Task<MessageBoxResult> WaringInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
+        public static async Task<MessageBoxResult> WaringInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
         {
-            return await ShowInContainer(containerIdentify, message, title, button, icon);
+            return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
 
-        public static async Task<MessageBoxResult> SuccessInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
+        public static async Task<MessageBoxResult> SuccessInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
         {
-            return await ShowInContainer(containerIdentify, message, title, button, icon);
+            return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
 
-        public static async Task<MessageBoxResult> ErrorInContainer(string containerIdentify, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
+        public static async Task<MessageBoxResult> ErrorInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
         {
-            return await ShowInContainer(containerIdentify, message, title, button, icon);
+            return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
         #endregion
     }

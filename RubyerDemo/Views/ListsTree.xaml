@@ -6,6 +6,7 @@
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:vm ="clr-namespace:RubyerDemo.ViewModels"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
+             d:DataContext="{d:DesignInstance Type=vm:ListsViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>

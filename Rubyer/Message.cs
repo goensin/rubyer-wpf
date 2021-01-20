@@ -132,9 +132,9 @@ namespace Rubyer
 
 
         #region 指定容器
-        public static void Show(string containerIdentify, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            if (!MessageContainer.Containers.ContainsKey(containerIdentify))
+            if (!MessageContainer.Containers.ContainsKey(containerIdentifier))
             {
                 return;
             }
@@ -144,7 +144,7 @@ namespace Rubyer
                 isClearable = true;
             }
 
-            Panel messagePanel = MessageContainer.Containers[containerIdentify];
+            Panel messagePanel = MessageContainer.Containers[containerIdentifier];
             messagePanel.Dispatcher.VerifyAccess();
 
             MessageCard messageCard;
@@ -266,59 +266,59 @@ namespace Rubyer
             messageCard.BeginStoryboard(enterStoryboard);
         }
 
-        public static void Show(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.None, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.None, element, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowInfo(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowInfo(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Info, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Info, element, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowSuccess(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowSuccess(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Success, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Success, element, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowWarning(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowWarning(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Warning, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Warning, element, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowError(string containerIdentify, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowError(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Error, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Error, element, millisecondTimeOut, isClearable);
         }
 
-        public static void Show(string containerIdentify, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        public static void Show(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowInfo(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowInfo(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowSuccess(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowSuccess(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowWarning(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowWarning(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        public static void ShowError(string containerIdentify, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowError(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentify, MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
         #endregion
     }

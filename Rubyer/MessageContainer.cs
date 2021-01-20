@@ -19,10 +19,10 @@ namespace Rubyer
         }
 
 
-        public static readonly DependencyProperty IdentifyProperty =
-            DependencyProperty.Register("Identify", typeof(string), typeof(MessageContainer), new PropertyMetadata(default(string), OnIdentifyChanged));
+        public static readonly DependencyProperty IdentifierProperty =
+            DependencyProperty.Register("Identifier", typeof(string), typeof(MessageContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
 
-        private static void OnIdentifyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             MessageContainer container = d as MessageContainer;
             string identify = e.NewValue.ToString();
@@ -37,10 +37,10 @@ namespace Rubyer
             Containers.Add(identify, container);
         }
 
-        public string Identify
+        public string Identifier
         {
-            get { return (string)GetValue(IdentifyProperty); }
-            set { SetValue(IdentifyProperty, value); }
+            get { return (string)GetValue(IdentifierProperty); }
+            set { SetValue(IdentifierProperty, value); }
         }
     }
 }
