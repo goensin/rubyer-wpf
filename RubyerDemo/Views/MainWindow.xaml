@@ -64,6 +64,6 @@
         </rubyer:Card>
         <rubyer:MessageContainer Identifier="MessageContainer" Grid.ColumnSpan="2"/>
         <rubyer:MessageBoxContainer Identifier="DialogContaioner" Grid.ColumnSpan="2"/>
-        <rubyer:Dialog Identifier="MainDialog" Title="主对话框" Grid.ColumnSpan="2"/>
+        <rubyer:DialogBox Identifier="MainDialog" Title="主对话框" Grid.ColumnSpan="2"/>
     </Grid>
 </rubyer:RubyerWindow>

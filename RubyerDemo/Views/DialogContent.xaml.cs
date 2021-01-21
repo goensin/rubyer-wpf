@@ -28,7 +28,7 @@ namespace RubyerDemo.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Dialog.CloseDialogCommand.Execute($"用户名:{userName.Text};密码:{password.Text}", null);
+            DialogBox.CloseDialogCommand.Execute($"用户名:{userName.Text};密码:{password.Text}", null);
         }
     }
 }

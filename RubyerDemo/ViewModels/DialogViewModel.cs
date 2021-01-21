@@ -97,15 +97,15 @@ namespace RubyerDemo.ViewModels
         private void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
-            Dialog.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
+            DialogBox.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
         }
 
-        private void AfterDialog4Close(Dialog dialog, object arg)
+        private void AfterDialog4Close(DialogBox dialog, object arg)
         {
             Debug.WriteLine($"4# 对话框关闭参数:{arg}");
         }
 
-        private void BeforeDialog4Open(Dialog dialog)
+        private void BeforeDialog4Open(DialogBox dialog)
         {
             Debug.WriteLine("4# 对话框打开");
         }

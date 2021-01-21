@@ -12,25 +12,25 @@ using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
-    public class Dialog : ContentControl
+    public class DialogBox : ContentControl
     {
         public const string CloseButtonPartName = "PART_CloseButton";
         public const string RootBorderPartName = "PART_RootBorder";
         public const string CardBorderPartName = "PART_CardBorder";
 
-        public static Dictionary<string, Dialog> dialogs = new Dictionary<string, Dialog>();
+        public static Dictionary<string, DialogBox> dialogs = new Dictionary<string, DialogBox>();
 
-        private Action<Dialog> beforeOpenHandler;
-        private Action<Dialog, object> afterCloseHandler;
+        private Action<DialogBox> beforeOpenHandler;
+        private Action<DialogBox, object> afterCloseHandler;
 
         private static readonly Color containerBackgroun = Color.FromArgb(0xAA, 0, 0, 0);
         private Border rootBorder;
         private Border cardBorder;
         private object closeParameter;
 
-        static Dialog()
+        static DialogBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(Dialog), new FrameworkPropertyMetadata(typeof(Dialog)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogBox), new FrameworkPropertyMetadata(typeof(DialogBox)));
 
         }
 
@@ -70,7 +70,7 @@ namespace Rubyer
 
         // 打开前命令
         public static readonly DependencyProperty BeforeOpenCommandProperty =
-            DependencyProperty.Register("BeforeOpenCommand", typeof(ICommand), typeof(Dialog));
+            DependencyProperty.Register("BeforeOpenCommand", typeof(ICommand), typeof(DialogBox));
 
         public ICommand BeforeOpenCommand
         {
@@ -80,7 +80,7 @@ namespace Rubyer
 
         // 关闭后命令
         public static readonly DependencyProperty AfterCloseCommandProperty =
-            DependencyProperty.Register("AfterCloseCommand", typeof(ICommand), typeof(Dialog));
+            DependencyProperty.Register("AfterCloseCommand", typeof(ICommand), typeof(DialogBox));
 
         public ICommand AfterCloseCommand
         {
@@ -91,7 +91,7 @@ namespace Rubyer
 
         #region 事件
         public static readonly RoutedEvent BeforeOpenEvent =
-            EventManager.RegisterRoutedEvent("BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Dialog));
+            EventManager.RegisterRoutedEvent("BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogBox));
 
         public event RoutedEventHandler BeforeOpen
         {
@@ -101,7 +101,7 @@ namespace Rubyer
 
 
         public static readonly RoutedEvent AfterCloseEvent =
-            EventManager.RegisterRoutedEvent("AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(Dialog));
+            EventManager.RegisterRoutedEvent("AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(DialogBox));
 
         public event RoutedPropertyChangedEventHandler<object> AfterClose
         {
@@ -113,11 +113,11 @@ namespace Rubyer
         #region 依赖属性
 
         public static readonly DependencyProperty IdentifierProperty =
-            DependencyProperty.Register("Identifier", typeof(string), typeof(Dialog), new PropertyMetadata(default(string), OnIdentifierChanged));
+            DependencyProperty.Register("Identifier", typeof(string), typeof(DialogBox), new PropertyMetadata(default(string), OnIdentifierChanged));
 
         private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Dialog dialog = d as Dialog;
+            DialogBox dialog = d as DialogBox;
             string identify = e.NewValue.ToString();
 
             if (dialogs.ContainsKey(identify))
@@ -135,7 +135,7 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(Dialog), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("Title", typeof(string), typeof(DialogBox), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string Title
         {
@@ -145,7 +145,7 @@ namespace Rubyer
 
 
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Dialog), new PropertyMetadata(default(CornerRadius)));
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(DialogBox), new PropertyMetadata(default(CornerRadius)));
 
         public CornerRadius CornerRadius
         {
@@ -155,7 +155,7 @@ namespace Rubyer
 
 
         public static readonly DependencyProperty IsShowCloseButtonProperty =
-            DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(Dialog), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool IsShowCloseButton
         {
@@ -165,15 +165,15 @@ namespace Rubyer
 
 
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(Dialog), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
 
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            Dialog container = d as Dialog;
+            DialogBox container = d as DialogBox;
 
             if ((bool)e.NewValue)
             {
-                RoutedEventArgs args = new RoutedEventArgs(Dialog.BeforeOpenEvent);
+                RoutedEventArgs args = new RoutedEventArgs(DialogBox.BeforeOpenEvent);
                 container.RaiseEvent(args);
                 container.BeforeOpenCommand?.Execute(null);
                 container.beforeOpenHandler?.Invoke(container);
@@ -278,7 +278,7 @@ namespace Rubyer
                 cardBorder.Visibility = Visibility.Hidden;
 
                 RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, this.closeParameter);
-                args.RoutedEvent = Dialog.AfterCloseEvent;
+                args.RoutedEvent = DialogBox.AfterCloseEvent;
                 this.RaiseEvent(args);
                 this.AfterCloseCommand?.Execute(this.closeParameter);
                 this.afterCloseHandler?.Invoke(this, this.closeParameter);
@@ -300,20 +300,20 @@ namespace Rubyer
         /// <summary>
         /// 显示指定对话框
         /// </summary>
-        /// <param name="identifier">Dialog 标识</param>
+        /// <param name="identifier">DialogBox 标识</param>
         /// <param name="content">内容</param>
         /// <param name="openHandler">打开前处理程序</param>
         /// <param name="closeHandle">关闭后处理程序</param>
         /// <param name="title">标题</param>
         /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static void Show(string identifier, object content, string title, Action<Dialog> openHandler, Action<Dialog, object> closeHandle, bool isShowCloseButton)
+        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle, bool isShowCloseButton)
         {
             if (!dialogs.ContainsKey(identifier))
             {
                 return;
             }
 
-            Dialog dialog = dialogs[identifier];
+            DialogBox dialog = dialogs[identifier];
 
             dialog.Dispatcher.VerifyAccess();
 
@@ -340,22 +340,22 @@ namespace Rubyer
             Show(identifier, content, title, null, null, isShowCloseButton);
         }
 
-        public static void Show(string identifier, object content, Action<Dialog, object> closeHandle)
+        public static void Show(string identifier, object content, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, "", null, closeHandle, true);
         }
 
-        public static void Show(string identifier, object content, Action<Dialog> openHandler, Action<Dialog, object> closeHandle)
+        public static void Show(string identifier, object content, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, "", openHandler, closeHandle, true);
         }
 
-        public static void Show(string identifier, object content, string title, Action<Dialog, object> closeHandle)
+        public static void Show(string identifier, object content, string title, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, title, null, closeHandle, true);
         }
 
-        public static void Show(string identifier, object content, string title, Action<Dialog> openHandler, Action<Dialog, object> closeHandle)
+        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, title, openHandler, closeHandle, true);
         }
