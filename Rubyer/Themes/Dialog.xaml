@@ -8,7 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="RubyerDialog" TargetType="{x:Type rubyer:Dialog}">
+    <Style x:Key="RubyerDialog" TargetType="rubyer:Dialog">
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -21,11 +21,8 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:Dialog}">
+                <ControlTemplate TargetType="rubyer:Dialog">
                     <Border x:Name="PART_RootBorder" Visibility="Hidden">
-                        <Border.Background>
-                            <SolidColorBrush Color="Transparent"/>
-                        </Border.Background>
                         <Border x:Name="PART_CardBorder" Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
@@ -41,9 +38,10 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <DockPanel>
-                                    <TextBlock Text="{TemplateBinding Title}" FontSize="15" DockPanel.Dock="Left" Margin="8 5"/>
-                                    <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}"
-                                            HorizontalAlignment="Right" Foreground="{DynamicResource DefaultForeground}">
+                                    <TextBlock Text="{TemplateBinding Title}" FontSize="16" DockPanel.Dock="Left" Margin="15 5"/>
+                                    <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Width="32"
+                                            HorizontalAlignment="Right" Foreground="{DynamicResource DefaultForeground}"
+                                            Visibility="{TemplateBinding IsShowCloseButton,Converter={StaticResource boolToVisibility}}">
                                         <rubyer:Icon Type="CloseLine"/>
                                     </Button>
                                 </DockPanel>

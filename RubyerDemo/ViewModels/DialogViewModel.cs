@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using RubyerDemo.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -89,6 +90,25 @@ namespace RubyerDemo.ViewModels
                 Users.Add((User)user.Clone());
             }
         }
+
+        private RelayCommand openDialog4;
+        public RelayCommand OpenDialog4 => openDialog4 ?? (openDialog4 = new RelayCommand(OpenDialog4Execute));
+        // 打开 4# 对话框
+        private void OpenDialog4Execute(object obj)
+        {
+            var content = new DialogContent();
+            Dialog.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
+        }
+
+        private void AfterDialog4Close(Dialog dialog, object arg)
+        {
+            Debug.WriteLine($"4# 对话框关闭参数:{arg}");
+        }
+
+        private void BeforeDialog4Open(Dialog dialog)
+        {
+            Debug.WriteLine("4# 对话框打开");
+        }
     }
 
     public class User : ICloneable
@@ -98,7 +118,7 @@ namespace RubyerDemo.ViewModels
 
         public object Clone()
         {
-           return this.MemberwiseClone();
+            return this.MemberwiseClone();
         }
     }
 }
