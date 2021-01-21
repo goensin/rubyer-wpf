@@ -2,11 +2,21 @@
 	<PropertyGroup>
 		<TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
 		<UseWPF>true</UseWPF>
+		<Authors>Ensin</Authors>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<Description>WPF 使用的 UI 控件包</Description>
+		<PackageIcon>a6sbf-yfhzf.png</PackageIcon>
+		<PackageProjectUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</PackageProjectUrl>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Assets\**" />
 	  <EmbeddedResource Remove="Assets\**" />
 	  <None Remove="Assets\**" />
+	  <None Include="C:\Users\63583\Desktop\a6sbf-yfhzf.png">
+	    <Pack>True</Pack>
+	    <PackagePath></PackagePath>
+	  </None>
 	  <Page Remove="Assets\**" />
 	</ItemGroup>
 </Project>
