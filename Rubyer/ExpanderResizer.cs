@@ -10,7 +10,6 @@ namespace Rubyer
     {
         private bool isWidthAnimationing;
         private bool isHeightAnimationing;
-        private bool isExpanded;
 
         static ExpanderResizer()
         {
@@ -34,107 +33,72 @@ namespace Rubyer
 
         protected override Size MeasureOverride(Size constraint)
         {
-            if (!isWidthAnimationing && !isHeightAnimationing || ExpanderControl.IsExpanded)
+            if (ExpanderControl != null)
             {
-                if (ExpanderControl != null)
+                if (!isWidthAnimationing && !isHeightAnimationing)
                 {
                     if (this.Content is UIElement element)
                     {
+                        // 垂直方向
                         if (ExpanderControl.ExpandDirection == ExpandDirection.Down || ExpanderControl.ExpandDirection == ExpandDirection.Up)
                         {
-                            if (ExpanderControl.IsExpanded)
+                            if ((!ExpanderControl.IsExpanded && constraint.Height != 0)
+                                || (ExpanderControl.IsExpanded && (ActualHeight == 0 || ActualHeight != element.DesiredSize.Height)))
                             {
-                                return base.MeasureOverride(new Size(constraint.Width, ExpanderControl.MaxHeight));
-                            }
-                            else
-                            {
-                                return base.MeasureOverride(new Size(constraint.Width, 0));
+                                isHeightAnimationing = true;
+                                element.Measure(new Size(constraint.Width, double.PositiveInfinity));
+
+                                DoubleAnimation heightAnimation = new DoubleAnimation
+                                {
+                                    From = ActualHeight,
+                                    To = ExpanderControl.IsExpanded ? element.DesiredSize.Height : 0,
+                                    Duration = TimeSpan.FromMilliseconds(250),
+                                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                };
+
+                                heightAnimation.Completed += (sender, e) =>
+                                {
+                                    isHeightAnimationing = false;
+                                };
+
+                                this.BeginAnimation(HeightProperty, heightAnimation);
                             }
                         }
+                        // 水平方向
                         else
                         {
-                            if (ExpanderControl.IsExpanded)
+                            if ((!ExpanderControl.IsExpanded && constraint.Width != 0)
+                            || (ExpanderControl.IsExpanded && (ActualWidth == 0 || ActualWidth != element.DesiredSize.Width)))
                             {
+                                isWidthAnimationing = true;
+
                                 Panel panel = VisualTreeHelper.GetParent(this) as Panel;
                                 Control control = VisualTreeHelper.GetChild(panel, 0) as Control;
-                                return base.MeasureOverride(new Size(ExpanderControl.MaxWidth - control.ActualWidth, constraint.Height));
-                            }
-                            else
-                            {
-                                return base.MeasureOverride(new Size(0, constraint.Height));
+
+                                element.Measure(new Size(ExpanderControl.MaxWidth - control.ActualWidth, constraint.Height));
+
+                                DoubleAnimation widthAnimation = new DoubleAnimation
+                                {
+                                    From = ActualWidth,
+                                    To = ExpanderControl.IsExpanded ? element.DesiredSize.Width : 0,
+                                    Duration = TimeSpan.FromMilliseconds(250),
+                                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                };
+
+                                widthAnimation.Completed += (sender, e) =>
+                                {
+                                    isWidthAnimationing = false;
+                                };
+
+                                this.BeginAnimation(WidthProperty, widthAnimation);
                             }
                         }
                     }
                 }
             }
 
-            return base.MeasureOverride(new Size(constraint.Width, constraint.Height));
+            return base.MeasureOverride(constraint);
         }
 
-
-        protected override Size ArrangeOverride(Size arrangeBounds)
-        {
-            if (this.ActualHeight != 0 || this.ActualWidth != 0)
-            {
-                if ((this.ActualHeight != arrangeBounds.Height || this.ActualWidth != arrangeBounds.Width) || (!ExpanderControl.IsExpanded && arrangeBounds.Height != 0 && arrangeBounds.Width != 0))
-                {
-                    if (ExpanderControl.ExpandDirection == ExpandDirection.Down || ExpanderControl.ExpandDirection == ExpandDirection.Up)
-                    {
-                        if (!isHeightAnimationing || ExpanderControl.IsExpanded != isExpanded)
-                        {
-                            isHeightAnimationing = true;
-                            isExpanded = ExpanderControl.IsExpanded;
-
-                            DoubleAnimation heightAnimation = new DoubleAnimation
-                            {
-                                From = ActualHeight,
-                                To = !ExpanderControl.IsExpanded ? 0 : arrangeBounds.Height,
-                                Duration = TimeSpan.FromMilliseconds(300),
-                                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                            };
-
-                            heightAnimation.Completed += (sender, e) =>
-                            {
-                                isHeightAnimationing = false;
-                            };
-
-                            this.BeginAnimation(HeightProperty, heightAnimation);
-
-                            return new Size(this.ActualWidth, this.ActualHeight);
-                        }
-                    }
-                    else
-                    {
-                        if (!isWidthAnimationing || ExpanderControl.IsExpanded != isExpanded)
-                        {
-                            isWidthAnimationing = true;
-                            isExpanded = ExpanderControl.IsExpanded;
-
-                            DoubleAnimation widthAnimation = new DoubleAnimation
-                            {
-                                From = ActualWidth,
-                                To = !ExpanderControl.IsExpanded ? 0 : arrangeBounds.Width,
-                                Duration = TimeSpan.FromMilliseconds(300),
-                                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                            };
-
-                            widthAnimation.Completed += (sender, e) =>
-                            {
-                                isWidthAnimationing = false;
-                            };
-
-                            this.BeginAnimation(WidthProperty, widthAnimation);
-
-                            return new Size(this.ActualWidth, this.ActualHeight);
-                        }
-                    }
-                }
-                return base.ArrangeOverride(arrangeBounds);
-            }
-            else
-            {
-                return base.ArrangeOverride(arrangeBounds);
-            }
-        }
     }
 }

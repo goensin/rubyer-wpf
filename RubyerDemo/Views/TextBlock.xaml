@@ -6,19 +6,6 @@
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <Storyboard x:Key="OnMouseLeftButtonDown1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="textBlock">
-                <EasingDoubleKeyFrame KeyTime="0" Value="-30"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </UserControl.Resources>
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="UIElement.MouseLeftButtonDown" SourceName="textBlock">
-            <BeginStoryboard Storyboard="{StaticResource OnMouseLeftButtonDown1}"/>
-        </EventTrigger>
-    </UserControl.Triggers>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid Style="{StaticResource FadeLeftStyle}">
             <Grid.RowDefinitions>
@@ -31,15 +18,7 @@
             </Grid.RowDefinitions>
             <GroupBox Header="文本块-TextBlock" Margin="0 0 0 10">
                 <StackPanel Margin="10">
-                    <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}" RenderTransformOrigin="0.5,1">
-                        <TextBlock.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </TextBlock.RenderTransform>
+                    <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">
                     标题一标题一标题一标题一标题一标题一标题一标题一
                     </TextBlock>
                     <TextBlock Style="{StaticResource Head2TextBlock}">
