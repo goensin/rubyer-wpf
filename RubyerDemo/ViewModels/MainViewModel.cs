@@ -56,10 +56,37 @@ namespace RubyerDemo.ViewModels
                 new ThemeColor
                 {
                     Name = "酷安绿",
-                    Primary = new SolidColorBrush(Color.FromRgb(0x4C,0xAF,0x50)),
-                    Light = new SolidColorBrush(Color.FromRgb(0x80,0xE2,0x7E)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0x08,0x7F,0x23)),
+                    Primary = new SolidColorBrush(Color.FromRgb(0x0B,0xA3,0x61)),
+                    Light = new SolidColorBrush(Color.FromRgb(0x56,0xD5,0x8F)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0x00,0x73,0x36)),
                     Accent = new SolidColorBrush(Color.FromRgb(0x79,0x55,0x48)),
+                    IsSeleted =false
+                },
+                new ThemeColor
+                {
+                    Name = "姨妈红",
+                    Primary = new SolidColorBrush(Color.FromRgb(0xE5,0x39,0x35)),
+                    Light = new SolidColorBrush(Color.FromRgb(0xFF,0x6F,0x60)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0xAB,0x00,0x0D)),
+                    Accent = new SolidColorBrush(Color.FromRgb(0x39,0x49,0xAB)),
+                    IsSeleted =false
+                },
+                new ThemeColor
+                {
+                    Name = "基佬紫",
+                    Primary = new SolidColorBrush(Color.FromRgb(0x6A,0x1B,0x9A)),
+                    Light = new SolidColorBrush(Color.FromRgb(0x9C,0x4D,0xCC)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0x38,0x00,0x6B)),
+                    Accent = new SolidColorBrush(Color.FromRgb(0xE6,0x51,0x00)),
+                    IsSeleted =false
+                },
+                new ThemeColor
+                {
+                    Name = "哔哩粉",
+                    Primary = new SolidColorBrush(Color.FromRgb(0xFB,0x72,0x99)),
+                    Light = new SolidColorBrush(Color.FromRgb(0xFF,0xA4,0xCA)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0xC4,0x40,0x6B)),
+                    Accent = new SolidColorBrush(Color.FromRgb(0x73,0xC9,0xE5)),
                     IsSeleted =false
                 },
             };
