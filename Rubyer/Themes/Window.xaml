@@ -54,7 +54,7 @@
     <Style TargetType="{x:Type rubyer:RubyerWindow}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />

@@ -46,7 +46,7 @@ namespace Rubyer
                                 || (ExpanderControl.IsExpanded && (ActualHeight == 0 || ActualHeight != element.DesiredSize.Height)))
                             {
                                 isHeightAnimationing = true;
-                                element.Measure(new Size(constraint.Width, double.PositiveInfinity));
+                                element.Measure(new Size(constraint.Width, double.PositiveInfinity));   // 测量子控件所需大小
 
                                 DoubleAnimation heightAnimation = new DoubleAnimation
                                 {

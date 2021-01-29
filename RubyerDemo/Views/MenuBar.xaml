@@ -63,10 +63,10 @@
                 <StackPanel Margin="5">
                     <ToolBarTray>
                         <ToolBar>
-                            <Button ToolTip="向后导航(Ctrl+-)" Foreground="{StaticResource Primary}">
+                            <Button ToolTip="向后导航(Ctrl+-)" Foreground="{DynamicResource Primary}">
                                 <rubyer:Icon Type="ArrowLeftCircleFill"/>
                             </Button>
-                            <Button ToolTip="向前导航(Ctrl+Shift+-)" Foreground="{StaticResource Primary}">
+                            <Button ToolTip="向前导航(Ctrl+Shift+-)" Foreground="{DynamicResource Primary}">
                                 <rubyer:Icon Type="ArrowRightCircleFill"/>
                             </Button>
                             <Button ToolTip="新建项目(Ctrl+Shift+N)">
@@ -75,11 +75,11 @@
                             <Button ToolTip="打开文件(Ctrl+O)" Foreground="#FB8C00">
                                 <rubyer:Icon Type="FolderOpenFill"/>
                             </Button>
-                            <Button ToolTip="保存(Ctrl+S)" Foreground="{StaticResource Primary}">
+                            <Button ToolTip="保存(Ctrl+S)" Foreground="{DynamicResource Primary}">
                                 <rubyer:Icon Type="Save2Fill"/>
                             </Button>
                         </ToolBar>
-                        <ToolBar  Foreground="{StaticResource Dark}">
+                        <ToolBar  Foreground="{DynamicResource Dark}">
                             <RadioButton GroupName="Align" Checked="RadioButton_Checked" Tag="left">
                                 <rubyer:Icon Type="AlignLeft"/>
                             </RadioButton>
@@ -114,7 +114,7 @@
             </GroupBox>
 
             <GroupBox Header="StatusBar-状态栏" Margin="0 0 0 10" Grid.Row="2">
-                <StatusBar Background="{StaticResource Primary}" Foreground="{StaticResource PrimaryForeground}">
+                <StatusBar Background="{DynamicResource Primary}" Foreground="{StaticResource PrimaryForeground}">
                     <StatusBarItem HorizontalAlignment="Left">
                         <rubyer:Icon Type="TerminalBoxLine"/>
                     </StatusBarItem>

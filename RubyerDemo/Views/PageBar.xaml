@@ -26,13 +26,13 @@
                                 PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="3"
                                 PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True"
-                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{StaticResource Accent}"/>
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{DynamicResource Accent}"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="5"
                                 PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowTotal="True"
                                 PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" />
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="7"
                                 PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True" IsShowTotal="True"
-                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{StaticResource Accent}"/>
+                                PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10" CurrentBrush="{DynamicResource Accent}"/>
                     <rubyer:PageBar Style="{StaticResource TextPageBar}" Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="7"
                                 PageIndexChangedCommand="{Binding PageIndexChanged}" IsShowPageSize="True" IsShowTotal="True"
                                 PageSizeChangedCommand="{Binding PageSizeChanged}" Margin="10"/>

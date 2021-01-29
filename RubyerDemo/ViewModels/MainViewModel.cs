@@ -2,13 +2,21 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace RubyerDemo.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private static readonly Brush primary = (Brush)Application.Current.Resources["Primary"];
+        private static readonly Brush light = (Brush)Application.Current.Resources["Light"];
+        private static readonly Brush dark = (Brush)Application.Current.Resources["Dark"];
+        private static readonly Brush accent = (Brush)Application.Current.Resources["Accent"];
+
         public MainViewModel()
         {
             Title = "Rubyer UI";
@@ -33,6 +41,28 @@ namespace RubyerDemo.ViewModels
             };
 
             CurrentMenuItem = MenuItems[0];
+
+            ThemeColors = new ObservableCollection<ThemeColor>
+            {
+                new ThemeColor
+                {
+                    Name = "默认蓝",
+                    Primary = primary,
+                    Light = light,
+                    Dark = dark,
+                    Accent = accent,
+                    IsSeleted =true
+                },
+                new ThemeColor
+                {
+                    Name = "酷安绿",
+                    Primary = new SolidColorBrush(Color.FromRgb(0x4C,0xAF,0x50)),
+                    Light = new SolidColorBrush(Color.FromRgb(0x80,0xE2,0x7E)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0x08,0x7F,0x23)),
+                    Accent = new SolidColorBrush(Color.FromRgb(0x79,0x55,0x48)),
+                    IsSeleted =false
+                },
+            };
         }
 
         private string title;
@@ -66,6 +96,44 @@ namespace RubyerDemo.ViewModels
                 currentMenuItem = value;
                 RaisePropertyChanged("CurrentMenuItem");
             }
+        }
+
+        private ObservableCollection<ThemeColor> themeColors;
+        public ObservableCollection<ThemeColor> ThemeColors
+        {
+            get => themeColors;
+            set
+            {
+                themeColors = value;
+                RaisePropertyChanged("ThemeColors");
+            }
+        }
+
+
+        private RelayCommand changeThemeColor;
+        public RelayCommand ChangeThemeColor => changeThemeColor ?? (changeThemeColor = new RelayCommand(ChangeThemeColorExecute));
+
+        private void ChangeThemeColorExecute(object obj)
+        {
+            ThemeColor themeColor = obj as ThemeColor;
+
+            if (themeColor.IsSeleted)
+            {
+                return;
+            }
+
+            App.Current.Resources["Primary"] = themeColor.Primary;
+            App.Current.Resources["Light"] = themeColor.Light;
+            App.Current.Resources["Dark"] = themeColor.Dark;
+            App.Current.Resources["Accent"] = themeColor.Accent;
+
+            foreach (var item in ThemeColors)
+            {
+                item.IsSeleted = false;
+            }
+
+            themeColor.IsSeleted = true;
+
         }
     }
 }
