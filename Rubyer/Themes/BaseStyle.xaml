@@ -88,6 +88,7 @@
     <converter:AddConverter x:Key="add"/>
     <converter:Add2Converter x:Key="add2"/>
     <converter:GetCanvasCentreConverter x:Key="getCanvasCentre"/>
+    <converter:IsEqualConverter x:Key="isEqual"/>
     <!--Load Storyboard Animation-->
     <Storyboard x:Key="FadeLeftStoryboard">
         <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="0" To="1">

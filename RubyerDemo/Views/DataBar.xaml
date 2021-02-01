@@ -61,7 +61,7 @@
                     <!--垂直-->
                     <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
                         <Slider Value="20" Minimum="0" Maximum="100" TickFrequency="20" IsSelectionRangeEnabled="True" 
-                        Orientation="Vertical" Height="120" Margin="10 0" Foreground="LightBlue"/>
+                        Orientation="Vertical" Height="120" Margin="10 0" Foreground="{DynamicResource Light}"/>
                         <Slider Value="60" Minimum="0" Maximum="100" TickFrequency="20" IsSelectionRangeEnabled="True" 
                         Orientation="Vertical" Height="120" TickPlacement="Both" Margin="10 0"/>
                         <Slider Value="40" Minimum="0" Maximum="100" TickFrequency="20" IsSelectionRangeEnabled="True" 

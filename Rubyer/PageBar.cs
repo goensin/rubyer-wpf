@@ -1,50 +1,87 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
 namespace Rubyer
 {
-    [TemplatePart(Name = ItemsControlPartName, Type = typeof(ItemsControl))]
-    public class PageBar : Control
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(PageBarItem))]
+    public class PageBar : ItemsControl
     {
-        public const string ItemsControlPartName = "PART_ItemsControl";
-
         static PageBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PageBar), new FrameworkPropertyMetadata(typeof(PageBar)));
         }
 
-        public override void OnApplyTemplate()
+        protected override bool IsItemItsOwnContainerOverride(object item)
         {
-            base.OnApplyTemplate();
+            return item is PageBarItem;
         }
+
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new PageBarItem();
+        }
+
+        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
+        {
+            base.PrepareContainerForItemOverride(element, item);
+        }
+
+        #region 命令
+        // 每页数量改变
+        public static readonly DependencyProperty PageSizeChangedCommandProperty =
+            DependencyProperty.Register("PageSizeChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
+
+        public ICommand PageSizeChangedCommand
+        {
+            get { return (ICommand)GetValue(PageSizeChangedCommandProperty); }
+            set { SetValue(PageSizeChangedCommandProperty, value); }
+        }
+
+        // 当前页改变
+        public static readonly DependencyProperty PageIndexChangedCommandProperty =
+            DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
+
+        public ICommand PageIndexChangedCommand
+        {
+            get { return (ICommand)GetValue(PageIndexChangedCommandProperty); }
+            set { SetValue(PageIndexChangedCommandProperty, value); }
+        }
+        #endregion
+
+        #region 事件
+        public static readonly RoutedEvent PageSizeChangedEvent =
+            EventManager.RegisterRoutedEvent("PageSizeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<int>), typeof(PageBar));
+
+        public event RoutedPropertyChangedEventHandler<int> PageSizeChanged
+        {
+            add { AddHandler(PageSizeChangedEvent, value); }
+            remove { RemoveHandler(PageSizeChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent PageIndexChangedEvent =
+            EventManager.RegisterRoutedEvent("PageIndexChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<int>), typeof(PageBar));
+
+        public event RoutedPropertyChangedEventHandler<int> PageIndexChanged
+        {
+            add { AddHandler(PageIndexChangedEvent, value); }
+            remove { RemoveHandler(PageIndexChangedEvent, value); }
+        }
+        #endregion
 
         #region 依赖属性
-        // 选中颜色
-        public static readonly DependencyProperty CurrentBrushProperty =
-            DependencyProperty.Register("CurrentBrush", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
-
-        public Brush CurrentBrush
-        {
-            get { return (Brush)GetValue(CurrentBrushProperty); }
-            set { SetValue(CurrentBrushProperty, value); }
-        }
-
-
-        // 页码条按钮
-        public static readonly DependencyProperty PageInfosProperty =
-            DependencyProperty.Register("PageInfos", typeof(ObservableCollection<PageInfo>), typeof(PageBar), new PropertyMetadata(default(ObservableCollection<PageInfo>)));
-
-        public ObservableCollection<PageInfo> PageInfos
-        {
-            get { return (ObservableCollection<PageInfo>)GetValue(PageInfosProperty); }
-            set { SetValue(PageInfosProperty, value); }
-        }
-
-
         // 每页数量
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnPageSizeChanged)));
@@ -52,16 +89,20 @@ namespace Rubyer
         private static void OnPageSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PageBar pageBar = (PageBar)d;
-            pageBar.ReFreshPageBar();
-            if (pageBar.PageSizeChangedCommand != null && pageBar.PageSizeChangedCommand.CanExecute(pageBar.PageSize))
-            {
-                pageBar.PageSizeChangedCommand.Execute(pageBar.PageSize);
-            }
             pageBar.PageIndex = 1;
+            pageBar.ReFreshPageBar();
+
+
+            int oldValue = (int)e.OldValue;
+            int newValue = (int)e.NewValue;
+            RoutedPropertyChangedEventArgs<int> args = new RoutedPropertyChangedEventArgs<int>(oldValue, newValue);
+            args.RoutedEvent = PageBar.PageSizeChangedEvent;
+            pageBar.RaiseEvent(args);
+            pageBar.PageSizeChangedCommand?.Execute(newValue);
         }
 
         public int PageSize
-        {   
+        {
             get { return (int)GetValue(PageSizeProperty); }
             set { SetValue(PageSizeProperty, value); }
         }
@@ -74,11 +115,15 @@ namespace Rubyer
         {
             PageBar pageBar = (PageBar)d;
             pageBar.ReFreshPageBar();
-            if (pageBar.PageIndexChangedCommand != null && pageBar.PageIndexChangedCommand.CanExecute(pageBar.PageIndex))
-            {
-                pageBar.PageIndexChangedCommand.Execute(pageBar.PageIndex);
-            }
+
+            int oldValue = (int)e.OldValue;
+            int newValue = (int)e.NewValue;
+            RoutedPropertyChangedEventArgs<int> args = new RoutedPropertyChangedEventArgs<int>(oldValue, newValue);
+            args.RoutedEvent = PageBar.PageIndexChangedEvent;
+            pageBar.RaiseEvent(args);
+            pageBar.PageIndexChangedCommand?.Execute(newValue);
         }
+
         public int PageIndex
         {
             get { return (int)GetValue(PageIndexProperty); }
@@ -123,35 +168,13 @@ namespace Rubyer
 
         #endregion
 
-        #region 命令
-        // 每页数量改变
-        public static readonly DependencyProperty PageSizeChangedCommandProperty =
-            DependencyProperty.Register("PageSizeChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
-
-        public ICommand PageSizeChangedCommand
-        {
-            get { return (ICommand)GetValue(PageSizeChangedCommandProperty); }
-            set { SetValue(PageSizeChangedCommandProperty, value); }
-        }
-
-        // 当前页改变
-        public static readonly DependencyProperty PageIndexChangedCommandProperty =
-            DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
-
-        public ICommand PageIndexChangedCommand
-        {
-            get { return (ICommand)GetValue(PageIndexChangedCommandProperty); }
-            set { SetValue(PageIndexChangedCommandProperty, value); }
-        }
-
-        #endregion
 
         #region 方法
 
         // 刷新页码条
         private void ReFreshPageBar()
         {
-            PageInfos = new ObservableCollection<PageInfo>();
+            this.Items.Clear();
 
             if (PageSize == 0 || Total == 0)
             {
@@ -160,26 +183,22 @@ namespace Rubyer
 
             int pageCount = (int)Math.Ceiling(Total / (PageSize * 1.0));    // 总共多少页
 
-            PageInfos.Add(new PageInfo
+            this.Items.Add(new PageBarItem
             {
-                Name = "<",
+                Content = "<",
                 ToolTip = "上一页",
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
-                IndexChangeCommand = new RubyerCommand(IndexChanged),
-                Foreground = Foreground,
-                Background = Background
+                PageNumberCommand = new RubyerCommand(PageNumberChanged)
             });
 
-            PageInfos.Add(new PageInfo
+            this.Items.Add(new PageBarItem
             {
-                Name = "1",
+                Content = "1",
                 ToolTip = "1",
                 Value = 1,
                 IsEnabled = true,
-                IndexChangeCommand = new RubyerCommand(IndexChanged),
-                Foreground = Foreground,
-                Background = PageIndex == 1 ? CurrentBrush : Background
+                PageNumberCommand = new RubyerCommand(PageNumberChanged)
             });
 
             int begin = PageIndex >= 6 ? PageIndex - 3 : 2;                         // index 大于等于 6 页就从 index-3 开始，否则 2 开始
@@ -187,65 +206,59 @@ namespace Rubyer
 
             for (int i = begin; i <= end; i++)
             {
-                PageInfo info = new PageInfo()
+                PageBarItem info = new PageBarItem()
                 {
                     Value = i,
-                    Name = i.ToString(),
+                    Content = i.ToString(),
                     IsEnabled = true,
                     ToolTip = i.ToString(),
-                    IndexChangeCommand = new RubyerCommand(IndexChanged),
-                    Foreground = Foreground,
-                    Background = PageIndex == i ? CurrentBrush : Background
+                    PageNumberCommand = new RubyerCommand(PageNumberChanged)
                 };
 
                 if (i == begin && PageIndex - begin >= 3 && PageIndex > 5)
                 {
                     info.Value = PageIndex - 5;
-                    info.Name = "...";
+                    info.Content = "...";
                     info.ToolTip = "向前 5 页";
                 }
                 else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                 {
                     info.Value = PageIndex + 5;
-                    info.Name = "...";
+                    info.Content = "...";
                     info.ToolTip = "向后 5 页";
                 }
 
-                PageInfos.Add(info);
+                this.Items.Add(info);
             }
 
             // 最后一页
             if (pageCount > 1)
             {
-                PageInfos.Add(new PageInfo()
+                this.Items.Add(new PageBarItem()
                 {
-                    Name = pageCount.ToString(),
+                    Content = pageCount.ToString(),
                     ToolTip = pageCount.ToString(),
                     Value = pageCount,
                     IsEnabled = true,
-                    IndexChangeCommand = new RubyerCommand(IndexChanged),
-                    Foreground = Foreground,
-                    Background = Background
+                    PageNumberCommand = new RubyerCommand(PageNumberChanged)
                 });
             }
 
             // 下一页
-            PageInfos.Add(new PageInfo()
+            this.Items.Add(new PageBarItem()
             {
-                Name = ">",
+                Content = ">",
                 ToolTip = "下一页",
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
-                IndexChangeCommand = new RubyerCommand(IndexChanged),
-                Foreground = Foreground,
-                Background = Background
+                PageNumberCommand = new RubyerCommand(PageNumberChanged)
             });
         }
 
-        private void IndexChanged(object obj)
+        private void PageNumberChanged(object obj)
         {
-            int value = (int)obj;
-            PageIndex = value;
+            int num = (int)obj;
+            this.PageIndex = num;
         }
         #endregion
     }

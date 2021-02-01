@@ -1,12 +1,85 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:rubyer="clr-namespace:Rubyer">
+    
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <!-- 默认卡片按钮页码条 -->
+    <Style x:Key="RubyerPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
+        <Setter Property="Padding" Value="3 0" />
+        <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="Background" Value="{DynamicResource Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:PageBarItem}">
+                    <Border Background="Transparent"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Button x:Name="pageButton" Margin="{TemplateBinding Padding}"
+                                Command="{TemplateBinding PageNumberCommand}" 
+                                CommandParameter="{TemplateBinding Value}"
+                                ToolTip="{TemplateBinding ToolTip}" Content="{TemplateBinding Content}"
+                                IsEnabled="{TemplateBinding IsEnabled}" 
+                                Foreground="{TemplateBinding Foreground}" 
+                                Background="{TemplateBinding Background}"
+                                MinWidth="{TemplateBinding MinWidth}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource isEqual}">
+                                    <Binding Path="Value" RelativeSource="{RelativeSource Self}"/>
+                                    <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Background" TargetName="pageButton" Value="{DynamicResource Dark}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TextPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
+        <Setter Property="Padding" Value="3 0" />
+        <Setter Property="MinWidth" Value="30"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:PageBarItem}">
+                    <Border Background="Transparent"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <Button x:Name="pageButton" Margin="{TemplateBinding Padding}"
+                                Command="{TemplateBinding PageNumberCommand}" 
+                                CommandParameter="{TemplateBinding Value}"
+                                ToolTip="{TemplateBinding ToolTip}" Content="{TemplateBinding Content}"
+                                IsEnabled="{TemplateBinding IsEnabled}" 
+                                Foreground="{TemplateBinding Foreground}" 
+                                Background="{TemplateBinding Background}"
+                                MinWidth="{TemplateBinding MinWidth}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource isEqual}">
+                                    <Binding Path="Value" RelativeSource="{RelativeSource Self}"/>
+                                    <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}"/>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter Property="Foreground" TargetName="pageButton" Value="{DynamicResource Dark}"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    
     <Style x:Key="RubyerPageBar" TargetType="{x:Type rubyer:PageBar}">
         <Setter Property="Background" Value="{DynamicResource Primary}"/>
         <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"/>
@@ -14,104 +87,40 @@
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Padding" Value="5"/>
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="IsShowTotal" Value="False"/>
-        <Setter Property="IsShowPageSize" Value="False"/>
-        <Setter Property="CurrentBrush" Value="{DynamicResource Dark}"/>
+        <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
                     <DockPanel Margin="{TemplateBinding Padding}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" DockPanel.Dock="Left">
+                        <ItemsPresenter  DockPanel.Dock="Right" Margin="10 0"
+                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <TextBlock VerticalAlignment="Center" Text="总" Margin="5 0" 
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}"/>
                             <TextBlock VerticalAlignment="Center" Text="{Binding Total}" 
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
-                                       Foreground="{DynamicResource Accent}"/>
+                                       Foreground="{DynamicResource Primary}"/>
                             <TextBlock VerticalAlignment="Center" Text="条" Margin="5 0"  
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}"/>
-                            
+
                             <TextBox VerticalAlignment="Center" Margin="5 0" Height="24" MinWidth="30"
                                      Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
                                      Foreground="{DynamicResource DefaultForeground}" Text="{Binding PageSize}"/>
                             <TextBlock VerticalAlignment="Center" Margin="5 0"
                                        Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}" Text="条/页"/>
-                            
                         </StackPanel>
-                        <ItemsControl SnapsToDevicePixels="True" x:Name="PART_ItemsControl" DockPanel.Dock="Right"
-                                      ItemsSource="{TemplateBinding PageInfos}" HorizontalAlignment="Right" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button ToolTip="{Binding ToolTip}" Content="{Binding Name}" 
-                                            IsEnabled="{Binding IsEnabled}" Margin="3 0" MinWidth="30"
-                                            Command="{Binding IndexChangeCommand}" CommandParameter="{Binding Value}"
-                                            Foreground="{Binding Foreground}" Background="{Binding Background}"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
                     </DockPanel>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    
-    <Style x:Key="TextPageBar" TargetType="{x:Type rubyer:PageBar}">
-        <Setter Property="Background" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="IsShowTotal" Value="False"/>
-        <Setter Property="IsShowPageSize" Value="False"/>
-        <Setter Property="CurrentBrush" Value="{DynamicResource Primary}"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
-                    <Grid Margin="{TemplateBinding Padding}">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <TextBlock VerticalAlignment="Center" Text="总" Margin="5 0" 
-                                       Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
-                                       Foreground="{DynamicResource DefaultForeground}"/>
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Total}" 
-                                       Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
-                                       Foreground="{DynamicResource Accent}"/>
-                            <TextBlock VerticalAlignment="Center" Text="条" Margin="5 0"  
-                                       Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
-                                       Foreground="{DynamicResource DefaultForeground}"/>
-
-                            <TextBox VerticalAlignment="Center" Margin="5 0" Height="24" MinWidth="30"
-                                     Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
-                                     Foreground="{DynamicResource DefaultForeground}" Text="{Binding PageSize}"/>
-                            <TextBlock VerticalAlignment="Center" Margin="5 0"
-                                       Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
-                                       Foreground="{DynamicResource DefaultForeground}" Text="条/页"/>
-
-                        </StackPanel>
-                        <ItemsControl x:Name="PART_ItemsControl" ItemsSource="{TemplateBinding PageInfos}" HorizontalAlignment="Right" >
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <WrapPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Button Style="{StaticResource TextMidButton}" ToolTip="{Binding ToolTip}" Content="{Binding Name}" 
-                                            IsEnabled="{Binding IsEnabled}" Margin="3 0" MinWidth="30" 
-                                            Command="{Binding IndexChangeCommand}" CommandParameter="{Binding Value}"
-                                            Background="Transparent" Foreground="{Binding Background}"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -33,6 +33,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToolBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StatusBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DataGrid.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PageBarItem.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PageBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml"/>
@@ -76,5 +77,6 @@
     <Style TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}"/>
     <Style TargetType="{x:Type rubyer:MessageBoxCard}" BasedOn="{StaticResource RubyerMessageBoxCard}"/>
     <Style TargetType="{x:Type rubyer:DialogBox}" BasedOn="{StaticResource RubyerDialogBox}"/>
+
 
 </ResourceDictionary>

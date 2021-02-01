@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,16 @@ namespace RubyerDemo.Views
         public PageBar()
         {
             InitializeComponent();
+        }
+
+        private void PageBar_PageIndexChanged(object sender, RoutedPropertyChangedEventArgs<int> e)
+        {
+            Debug.WriteLine($"page index : {e.OldValue} => {e.NewValue}");
+        }
+
+        private void PageBar_PageSizeChanged(object sender, RoutedPropertyChangedEventArgs<int> e)
+        {
+            Debug.WriteLine($"page size : {e.OldValue} => {e.NewValue}");
         }
     }
 }
