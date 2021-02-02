@@ -23,21 +23,21 @@ namespace RubyerDemo.ViewModels
 
             MenuItems = new ObservableCollection<MenuItem>
             {
-                new MenuItem{ Name="按钮-Button",Content=new Button()},
-                new MenuItem{ Name="输入框-InputBox",Content=new InputBox() },
-                new MenuItem{ Name="选择框-SelectBox",Content=new SelectBox()},
-                new MenuItem{ Name="数据条-DataBar",Content=new DataBar()},
-                new MenuItem{ Name="图标-Icon",Content=new Icon{ DataContext = new IconViewModel()} },
-                new MenuItem{ Name="分组框-GroupBox",Content=new GroupBox() },
-                new MenuItem{ Name="列表与树-ListsTree",Content=new ListsTree{ DataContext = new ListsViewModel()} },
-                new MenuItem{ Name="选项卡-TabControl",Content=new TabControl{ DataContext = new TabControlViewModel()} },
-                new MenuItem{ Name="日期时间-DateTimeControl",Content=new DateTimeControl{} },
-                new MenuItem{ Name="菜单栏-MenuBar",Content=new MenuBar{} },
-                new MenuItem{ Name="文本块-TextBlock",Content=new TextBlock{} },
-                new MenuItem{ Name="页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} },
-                new MenuItem{ Name="消息提示-MessageInfo",Content=new MessageInfo{} },
-                new MenuItem{Name = "消息框-MessageBoxView",Content = new MessageBoxView{ DataContext= new MessageBoxViewModel()} },
-                new MenuItem{Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} }
+                new MenuItem{ Name = "按钮-Button",Content=new Button()},
+                new MenuItem{ Name = "输入框-InputBox",Content=new InputBox() },
+                new MenuItem{ Name = "选择框-SelectBox",Content=new SelectBox()},
+                new MenuItem{ Name = "数据条-DataBar",Content=new DataBar()},
+                new MenuItem{ Name = "图标-Icon",Content=new Icon{ DataContext = new IconViewModel()} },
+                new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBox() },
+                new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTree{ DataContext = new ListsViewModel()} },
+                new MenuItem{ Name = "选项卡-TabControl",Content=new TabControl{ DataContext = new TabControlViewModel()} },
+                new MenuItem{ Name = "日期时间-DateTimeControl",Content=new DateTimeControl{} },
+                new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBar{} },
+                new MenuItem{ Name = "文本块-TextBlock",Content=new TextBlock{} },
+                new MenuItem{ Name = "页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} },
+                new MenuItem{ Name = "消息提示-MessageInfo",Content=new MessageInfo{} },
+                new MenuItem{ Name = "消息框-MessageBoxView",Content = new MessageBoxView{ DataContext= new MessageBoxViewModel()} },
+                new MenuItem{ Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} }
             };
 
             CurrentMenuItem = MenuItems[0];
@@ -87,6 +87,15 @@ namespace RubyerDemo.ViewModels
                     Light = new SolidColorBrush(Color.FromRgb(0xFF,0xA4,0xCA)),
                     Dark = new SolidColorBrush(Color.FromRgb(0xC4,0x40,0x6B)),
                     Accent = new SolidColorBrush(Color.FromRgb(0x73,0xC9,0xE5)),
+                    IsSeleted =false
+                },
+                new ThemeColor
+                {
+                    Name = "高端黑",
+                    Primary = new SolidColorBrush(Color.FromRgb(0x26,0x32,0x38)),
+                    Light = new SolidColorBrush(Color.FromRgb(0x4F,0x5B,0x62)),
+                    Dark = new SolidColorBrush(Color.FromRgb(0x00,0x0A,0x12)),
+                    Accent = new SolidColorBrush(Color.FromRgb(0xAD,0x14,0x57)),
                     IsSeleted =false
                 },
             };

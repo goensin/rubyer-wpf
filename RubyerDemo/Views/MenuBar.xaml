@@ -54,8 +54,15 @@
                             </MenuItem>
                         </MenuItem>
                     </Menu>
-
-                    <TextBox Style="{StaticResource BigTextBox}" Height="75" Margin="0 10" Text="这是一段测试文字。"/>
+                    <TextBox Style="{StaticResource BigTextBox}" Height="75" Margin="0 10" Text="这是一段测试文字,右击调出菜单。">
+                        <TextBox.ContextMenu>
+                            <ContextMenu Background="{DynamicResource DefaultBackground}">
+                                <MenuItem Command="Copy"/>
+                                <MenuItem Command="Cut"/>
+                                <MenuItem Command="Paste"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
                 </StackPanel>
             </GroupBox>
 
@@ -91,13 +98,13 @@
                             </RadioButton>
                         </ToolBar>
                         <ToolBar>
-                            <ToggleButton x:Name="ItalicToggle" Checked="ItalicToggle_Checked" Unchecked="ItalicToggle_Unchecked">
+                            <ToggleButton x:Name="ItalicToggle" IsChecked="{Binding IsItalic}" Checked="ItalicToggle_Checked" Unchecked="ItalicToggle_Unchecked">
                                 <rubyer:Icon Type="Italic"/>
                             </ToggleButton>
-                            <ToggleButton x:Name="UnderlineToggle" Checked="UnderlineToggle_Checked" Unchecked="UnderlineToggle_Unchecked">
+                            <ToggleButton x:Name="UnderlineToggle" IsChecked="{Binding IsUnderline}" Checked="UnderlineToggle_Checked" Unchecked="UnderlineToggle_Unchecked">
                                 <rubyer:Icon Type="Underline"/>
                             </ToggleButton>
-                            <ToggleButton x:Name="BoldToggle" Checked="BoldToggle_Checked" Unchecked="BoldToggle_Unchecked">
+                            <ToggleButton x:Name="BoldToggle" IsChecked="{Binding IsBold}" Checked="BoldToggle_Checked" Unchecked="BoldToggle_Unchecked">
                                 <rubyer:Icon Type="Bold"/>
                             </ToggleButton>
                         </ToolBar>
@@ -109,7 +116,19 @@
                             </TextBox>
                         </ToolBar>
                     </ToolBarTray>
-                    <TextBox x:Name="TestText" Style="{StaticResource BigTextBox}" Height="75" Margin="0 10" Text="这是一段测试文字。"/>
+                    <TextBox x:Name="TestText" Style="{StaticResource BigTextBox}" Height="75" Margin="0 10" Text="这是一段测试文字，右击调出菜单">
+                        <TextBox.ContextMenu>
+                            <ContextMenu Background="{DynamicResource DefaultBackground}">
+                                <MenuItem Command="Copy"/>
+                                <MenuItem Command="Cut"/>
+                                <MenuItem Command="Paste"/>
+                                <Separator/>
+                                <MenuItem Header="斜体" IsCheckable="True" IsChecked="{Binding IsItalic}"/>
+                                <MenuItem Header="下划线" IsCheckable="True" IsChecked="{Binding IsUnderline}"/>
+                                <MenuItem Header="加粗" IsCheckable="True" IsChecked="{Binding IsBold}"/>
+                            </ContextMenu>
+                        </TextBox.ContextMenu>
+                    </TextBox>
                 </StackPanel>
             </GroupBox>
 

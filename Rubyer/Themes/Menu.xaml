@@ -17,7 +17,6 @@
     </Style>
 
     <Style x:Key="{x:Static MenuItem.SeparatorStyleKey}" TargetType="{x:Type Separator}">
-        <!--<Setter Property="Height" Value="1" />-->
         <Setter Property="Margin" Value="6" />
         <Setter Property="Template">
             <Setter.Value>
@@ -82,7 +81,8 @@
 
     <!--SubmenuHeade-->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" BorderThickness="0" Padding="5 3" Background="{Binding RelativeSource={RelativeSource AncestorType=Menu},Path=Background}">
+        <Border x:Name="Border" BorderThickness="0" Padding="5 3" 
+                Background="{DynamicResource DefaultBackground}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32" SharedSizeGroup="Icon" />
@@ -128,7 +128,8 @@
 
     <!--SubmenuItem-->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border x:Name="Border" BorderThickness="0" Padding="5 3" Background="{Binding RelativeSource={RelativeSource AncestorType=Menu},Path=Background}">
+        <Border x:Name="Border" BorderThickness="0" Padding="5 3" 
+                Background="{DynamicResource DefaultBackground}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32" SharedSizeGroup="Icon" />
@@ -142,7 +143,7 @@
                     <Canvas>
                         <Path x:Name="CheckMark" Width="16" Height="16" Visibility="Hidden"
                           SnapsToDevicePixels="False" StrokeThickness="1"
-                          Fill="{DynamicResource DefaultForeground}"  Canvas.Left="1.5" Canvas.Top="1.5"
+                          Fill="{DynamicResource DefaultForeground}"  Canvas.Left="4" Canvas.Top="4"
                           Data="M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z" />
                     </Canvas>
                 </Border>
@@ -197,7 +198,6 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -210,4 +210,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
 </ResourceDictionary>

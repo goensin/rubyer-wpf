@@ -155,7 +155,8 @@
                             SnapsToDevicePixels="true" Margin="{TemplateBinding Padding}"
                             Height="15" Width="26">
                             <Canvas>
-                                <Ellipse x:Name="littleBall" Fill="{DynamicResource DefaultBackground}" 
+                                <Ellipse x:Name="littleBall"
+                                         Fill="{DynamicResource DefaultBackground}" 
                                          Height="{Binding RelativeSource={RelativeSource Mode=Self},Path=Width}"
                                          Canvas.Right="11" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                          Effect="{StaticResource AllDirectionEffect}">

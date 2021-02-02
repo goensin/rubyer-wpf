@@ -21,7 +21,40 @@ namespace RubyerDemo.Views
         public MenuBar()
         {
             InitializeComponent();
+
+            DataContext = this;
         }
+
+
+        public static readonly DependencyProperty IsItalicProperty =
+            DependencyProperty.Register("IsItalic", typeof(bool), typeof(MenuBar), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public bool IsItalic
+        {
+            get { return (bool)GetValue(IsItalicProperty); }
+            set { SetValue(IsItalicProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty IsUnderlineProperty =
+            DependencyProperty.Register("IsUnderline", typeof(bool), typeof(MenuBar), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public bool IsUnderline
+        {
+            get { return (bool)GetValue(IsUnderlineProperty); }
+            set { SetValue(IsUnderlineProperty, value); }
+        }
+
+
+        public static readonly DependencyProperty IsBoldProperty =
+            DependencyProperty.Register("IsBold", typeof(bool), typeof(MenuBar), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        public bool IsBold
+        {
+            get { return (bool)GetValue(IsBoldProperty); }
+            set { SetValue(IsBoldProperty, value); }
+        }
+
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
