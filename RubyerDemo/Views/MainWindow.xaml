@@ -71,14 +71,14 @@
         </rubyer:Card>
         <rubyer:Card Grid.Column="1" Margin="3">
             <TabControl x:Name="Tab" Padding="5 10 5 5">
-                <TabItem>
+                <TabItem Width="200">
                     <TabItem.Header>
                         <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
                     </TabItem.Header>
                     <ContentControl Content="{Binding CurrentMenuItem.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </TabItem>
-                <TabItem>
-                    <TabItem.Header >
+                <TabItem Width="100">
+                    <TabItem.Header>
                         <StackPanel Orientation="Horizontal" Margin="0">
                             <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0" FontSize="14"/>
                             <TextBlock Text="Xaml" FontSize="14"/>

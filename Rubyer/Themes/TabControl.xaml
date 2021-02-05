@@ -24,8 +24,8 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="10,2,10,5"/>
-        <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable),RelativeSource={RelativeSource AncestorType=TabControl}}"/>
         <Setter Property="Template">
