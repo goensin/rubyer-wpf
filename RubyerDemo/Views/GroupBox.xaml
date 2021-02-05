@@ -29,11 +29,11 @@
             <GroupBox Header="折叠面板-Expander" Margin="0 0 0 10" Grid.Row="3">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <StackPanel Margin="5">
-                        <Expander x:Name="expander" Header="《思凡》" Width="300" IsExpanded="True" RenderTransformOrigin="0.5,0.5">
-                            <TextBlock x:Name="textBlock" TextWrapping="Wrap" >
+                        <Expander x:Name="expander" Header="《思凡》" Width="300">
+                            <TextBlock x:Name="textBlock" TextWrapping="Wrap">
                                 <Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Expander>
-                        <Expander x:Name="expander1" Header="《思凡》" MaxWidth="300" ExpandDirection="Up">
+                        <Expander Header="《思凡》" MaxWidth="300" ExpandDirection="Up">
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Expander>
                     </StackPanel>

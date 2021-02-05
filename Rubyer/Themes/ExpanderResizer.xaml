@@ -4,17 +4,12 @@
 
     <Style TargetType="{x:Type rubyer:ExpanderResizer}">
         <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-        <Setter Property="VerticalContentAlignment" Value="Stretch"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:ExpanderResizer">
-                    <ContentPresenter x:Name="contentPresenter" Focusable="False" Content="{TemplateBinding Content}"
-                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                      RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    <ContentPresenter x:Name="contentPresenter" 
+                                      RecognizesAccessKey="True" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

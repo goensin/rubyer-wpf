@@ -30,7 +30,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="列表框-ListBox" Margin="0 0 0 10" Grid.ColumnSpan="2">
+            <GroupBox Header="列表框-ListBox" Margin="0 0 10 10" Grid.ColumnSpan="2">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <ListBox x:Name="listBox" Width="150" Margin="0 0 20 0">
                         <ListBoxItem Content="西瓜"/>
@@ -79,23 +79,18 @@
                     </ListView>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="树状视图-TreeView" Margin="10 0 0 10" Grid.Row="1" Grid.Column="1">
-                <StackPanel Orientation="Horizontal" Margin="5">
+            <GroupBox Header="树状视图-TreeView" Margin="10 0 10 10" Grid.Row="1" Grid.Column="1">
+                <StackPanel Orientation="Horizontal" Margin="6">
                     <TreeView ItemsSource="{Binding Catalogs}" Width="200">
                         <TreeView.ItemTemplate>
                             <HierarchicalDataTemplate ItemsSource="{Binding Items}">
                                 <TextBlock Text="{Binding Name}"/>
-                                <HierarchicalDataTemplate.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </HierarchicalDataTemplate.ItemTemplate>
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="数据表格-DataGrid" Margin="0 0 0 10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
+            <GroupBox Header="数据表格-DataGrid" Margin="0 0 10 10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
                           ItemsSource="{Binding Persons}" Margin="5" Height="200">
                     <DataGrid.ContextMenu>

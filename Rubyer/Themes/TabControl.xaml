@@ -190,6 +190,24 @@
                             <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}"/>
                             <Setter Property="Margin" TargetName="contentPresenter" Value="5,2"/>
                         </MultiDataTrigger>
+                        <!--<Trigger Property="IsSelected" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard >
+                                        <ThicknessAnimation Storyboard.TargetName="mainBorder" 
+                                                            Storyboard.TargetProperty="BorderThickness"
+                                                            Duration="0:0:0.200">
+                                            <ThicknessAnimation.From>
+                                                <Thickness Bottom="0"/>
+                                            </ThicknessAnimation.From>
+                                            <ThicknessAnimation.To>
+                                                <Thickness Bottom="3"/>
+                                            </ThicknessAnimation.To>
+                                        </ThicknessAnimation> 
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

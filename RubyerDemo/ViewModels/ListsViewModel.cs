@@ -25,22 +25,30 @@ namespace RubyerDemo.ViewModels
             {
                 new Catalog
                 {
-                    Name = "运动",
+                    Name = "乐器",
                     Items = new ObservableCollection<Catalog>
                     {
-                        new Catalog{ Name="跑步" },
-                        new Catalog{ Name="篮球" },
-                        new Catalog{ Name="跑步" },
+                        new Catalog{ Name = "钢琴" },
+                        new Catalog
+                        {
+                            Name = "吉他",
+                            Items = new ObservableCollection<Catalog>
+                            {
+                            new Catalog{ Name = "木吉他"},
+                            new Catalog{ Name = "电吉他"}
+                            } 
+                        },
+                        new Catalog{ Name = "二胡" }
                     }
                 },
                 new Catalog
                 {
-                    Name = "乐器",
+                    Name = "运动",
                     Items = new ObservableCollection<Catalog>
                     {
-                        new Catalog{ Name="钢琴" },
-                        new Catalog{ Name="吉他" },
-                        new Catalog{ Name="二胡" },
+                        new Catalog{ Name = "跑步" },
+                        new Catalog{ Name = "篮球" },
+                        new Catalog{ Name = "跑步" },
                     }
                 }
             };
@@ -84,7 +92,7 @@ namespace RubyerDemo.ViewModels
         public string Name { get; set; }
         public ObservableCollection<Catalog> Items { get; set; }
     }
-    
+
     public enum GenderType
     {
         男,

@@ -19,7 +19,9 @@
             </Grid.RowDefinitions>
             <GroupBox Header="普通按钮-Button" Margin="0 0 0 10">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <Button Width="100" IsDefault="True" ToolTip="hello" Margin="5">普通按钮</Button>
+                    <Button x:Name="button" Width="100" IsDefault="True" ToolTip="hello" Margin="5">
+                        普通按钮
+                    </Button>
                     <Button Width="100" Style="{DynamicResource LightButton}" Margin="5">亮色按钮</Button>
                     <Button Width="100" Style="{DynamicResource DarkButton}" Margin="5">暗色按钮</Button>
                     <Button Width="100" Style="{DynamicResource AccentButton}" Margin="5">强调按钮</Button>
