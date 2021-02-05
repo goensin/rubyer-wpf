@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
+using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -99,6 +103,162 @@ namespace Rubyer
                     }
                 };
             }
+        }
+
+        // 选中动画
+        public static readonly DependencyProperty IsAnimationProperty =
+            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsAnimationChanged));
+
+        private static void OnIsAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TabControl tabControl)
+            {
+                tabControl.Loaded += (sender, arg) =>
+                {
+                    if (tabControl.TabStripPlacement == Dock.Top || tabControl.TabStripPlacement == Dock.Bottom)
+                    {
+                        if (tabControl.Template.FindName("selectedRectRow", tabControl) is Rectangle rectangleRow)
+                        {
+                            if (GetIsAnimation(tabControl))
+                            {
+                                tabControl.SelectionChanged += (a, b) =>
+                                {
+                                    int index = tabControl.SelectedIndex;
+                                    double left = GetListBoxItemLeft(tabControl, index);
+                                    IEditableCollectionView items = tabControl.Items;
+                                    TabItem item;
+                                    if (items.CanRemove)
+                                    {
+                                        item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+                                    }
+                                    else
+                                    {
+                                        item = tabControl.Items[index] as TabItem;
+                                    }
+
+                                    rectangleRow.Width = item.ActualWidth;
+
+                                    DoubleAnimation canvasAnimation = new DoubleAnimation
+                                    {
+                                        To = left,
+                                        Duration = TimeSpan.FromMilliseconds(500),
+                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                    };
+
+                                    DoubleAnimation sizeAnimation = new DoubleAnimation
+                                    {
+                                        To = item.ActualWidth,
+                                        Duration = TimeSpan.FromMilliseconds(500),
+                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                    };
+
+                                    rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
+                                    rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
+                                };
+
+
+                                if (tabControl.SelectedIndex >= 0)
+                                {
+                                    int index = tabControl.SelectedIndex;
+                                    double left = GetListBoxItemLeft(tabControl, index);
+                                    TabItem item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+                                    rectangleRow.Width = item.ActualWidth;
+                                    rectangleRow.SetValue(Canvas.LeftProperty, left);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tabControl.Template.FindName("selectedRectCol", tabControl) is Rectangle rectangleCol)
+                        {
+                            if (GetIsAnimation(tabControl))
+                            {
+                                tabControl.SelectionChanged += (a, b) =>
+                                {
+                                    int index = tabControl.SelectedIndex;
+                                    double top = GetListBoxItemTop(tabControl, index);
+                                    IEditableCollectionView items = tabControl.Items;
+                                    TabItem item;
+                                    if (items.CanRemove)
+                                    {
+                                        item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+                                    }
+                                    else
+                                    {
+                                        item = tabControl.Items[index] as TabItem;
+                                    }
+
+                                    rectangleCol.Height = item.ActualHeight;
+
+                                    DoubleAnimation canvasAnimation = new DoubleAnimation
+                                    {
+                                        To = top,
+                                        Duration = TimeSpan.FromMilliseconds(500),
+                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                    };
+
+                                    DoubleAnimation sizeAnimation = new DoubleAnimation
+                                    {
+                                        To = item.ActualHeight,
+                                        Duration = TimeSpan.FromMilliseconds(500),
+                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                                    };
+
+                                    rectangleCol.BeginAnimation(Canvas.TopProperty, canvasAnimation);
+                                    rectangleCol.BeginAnimation(FrameworkElement.HeightProperty, sizeAnimation);
+                                };
+
+
+                                if (tabControl.SelectedIndex >= 0)
+                                {
+                                    int index = tabControl.SelectedIndex;
+                                    double top = GetListBoxItemTop(tabControl, index);
+                                    TabItem item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+                                    rectangleCol.Height = item.ActualHeight;
+                                    rectangleCol.SetValue(Canvas.TopProperty, top);
+                                }
+                            }
+                        }
+                    }
+                };
+            }
+        }
+
+        private static double GetListBoxItemTop(TabControl tabControl, int index)
+        {
+            double top = 0;
+
+            for (int i = 0; i < index; i++)
+            {
+                TabItem item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[i]) as TabItem;
+                top += item.ActualHeight;
+            }
+
+            return top;
+        }
+
+        private static double GetListBoxItemLeft(TabControl tabControl, int index)
+        {
+            double left = 0;
+
+            for (int i = 0; i < index; i++)
+            {
+                TabItem item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[i]) as TabItem;
+                left += item.ActualWidth;
+            }
+
+            return left;
+        }
+
+        public static bool GetIsAnimation(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsAnimationProperty);
+        }
+
+        public static void SetIsAnimation(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsAnimationProperty, value);
         }
     }
 }
