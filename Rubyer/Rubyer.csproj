@@ -8,6 +8,7 @@
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
 		<PackageProjectUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</PackageProjectUrl>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Assets\**" />
