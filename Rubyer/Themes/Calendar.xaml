@@ -89,13 +89,7 @@
                                     <VisualTransition GeneratedDuration="0" />
                                 </VisualStateGroup.Transitions>
                                 <VisualState Name="Active" />
-                                <VisualState Name="Inactive">
-                                    <Storyboard>
-                                        <ColorAnimation Storyboard.TargetName="NormalText" 
-                                                        Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)"
-                                                        To="#77777777" Duration="0" />
-                                    </Storyboard>
-                                </VisualState>
+                                <VisualState Name="Inactive"/>
                             </VisualStateGroup>
                             <VisualStateGroup Name="DayStates">
                                 <VisualStateGroup.Transitions>
@@ -155,6 +149,9 @@
                         <DataTrigger Binding="{Binding Opacity, ElementName=SelectedBackground}" Value="1">
                             <Setter Property="TextBlock.Foreground" TargetName="NormalText" Value="{DynamicResource PrimaryForeground}"/>
                         </DataTrigger>
+                        <Trigger Property="IsInactive" Value="True">
+                            <Setter Property="TextBlock.Foreground" TargetName="NormalText" Value="#77777777" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -228,10 +225,10 @@
                                 <VisualState Name="CalendarButtonUnfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        
+
                         <Rectangle x:Name="SelectedBackground" RadiusX="2" RadiusY="2" Opacity="0" 
                                    Fill="{StaticResource MouseOverBackgroundGray}"/>
-                        
+
                         <Rectangle x:Name="Background" RadiusX="2" RadiusY="2" Opacity="0" 
                                    Fill="{StaticResource BackgroundGray}"/>
 
@@ -252,7 +249,7 @@
     <!--Button to go to the previous month or year.-->
     <ControlTemplate x:Key="PreviousButtonTemplate" TargetType="{x:Type Button}">
         <Grid Cursor="Hand">
-            <Grid  Background="Transparent">
+            <Grid Background="Transparent">
                 <Path x:Name="path" Margin="10 5" Stretch="Fill" HorizontalAlignment="Left"
                       Height="20" VerticalAlignment="Center" Width="12"
                       Data="M288.75,232.25 L288.75,240.625 L283,236.625 z"
@@ -315,65 +312,65 @@
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
                                 Background="{TemplateBinding Background}" CornerRadius="2.5">
                             <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Border Background="{DynamicResource Primary}" CornerRadius="2 2 0 0">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <Button x:Name="PART_PreviousButton" Template="{StaticResource PreviousButtonTemplate}"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Border Background="{DynamicResource Primary}" CornerRadius="2 2 0 0">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Button x:Name="PART_PreviousButton" Template="{StaticResource PreviousButtonTemplate}"
                                             Focusable="False" HorizontalAlignment="Left" Grid.Column="0" 
                                             Height="40" Width="28"/>
-                                            <Button x:Name="PART_HeaderButton" Focusable="False"
+                                        <Button x:Name="PART_HeaderButton" Focusable="False"
                                             FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"
                                             Grid.Column="1" Template="{StaticResource HeaderButtonTemplate}" />
-                                            <Button x:Name="PART_NextButton" Focusable="False" HorizontalAlignment="Right"
+                                        <Button x:Name="PART_NextButton" Focusable="False" HorizontalAlignment="Right"
                                             Grid.Column="2" Template="{StaticResource NextButtonTemplate}"
                                             Height="40" Width="28" />
-                                        </Grid>
-                                    </Border>
-                                    
-                                    <Grid x:Name="PART_MonthView" Visibility="Visible"
+                                    </Grid>
+                                </Border>
+
+                                <Grid x:Name="PART_MonthView" Visibility="Visible"
                                           Grid.Row="1" Margin="6,-1,6,6" HorizontalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                    </Grid>
-                                    <Grid x:Name="PART_YearView" Visibility="Hidden" Grid.ColumnSpan="3" Grid.Row="1"
-                                          HorizontalAlignment="Center" Margin="5 20 5 5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="Auto" />
-                                        </Grid.RowDefinitions>
-                                    </Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
                                 </Grid>
+                                <Grid x:Name="PART_YearView" Visibility="Hidden" Grid.ColumnSpan="3" Grid.Row="1"
+                                          HorizontalAlignment="Center" Margin="5 20 5 5">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                </Grid>
+                            </Grid>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -417,5 +414,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
 </ResourceDictionary>

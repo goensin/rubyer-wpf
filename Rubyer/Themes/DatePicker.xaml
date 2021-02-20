@@ -13,21 +13,23 @@
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
+        <Setter Property="BorderThickness" Value="1.3" />
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="Height" Value="28"/>
         <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}"/>
+        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="2.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">
                     <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                         <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0"  Foreground="{TemplateBinding Foreground}"
-                                               Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch"
-                                               Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                               Style="{StaticResource RubyerTextBox}">
+                                           Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch"
+                                           Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Style="{StaticResource RubyerTextBox}">
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button" Focusable="False" Height="26"
                                             Foreground="{TemplateBinding BorderBrush}" 
@@ -36,20 +38,9 @@
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>
                         </DatePickerTextBox>
-                        <Grid x:Name="PART_DisabledVisual"
-                                  IsHitTestVisible="False" Opacity="0" Grid.Row="0" Margin="0 0 5 5">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <!--<Rectangle Grid.Column="0" Fill="#A5FFFFFF" 
-                                           RadiusY="1" Grid.Row="0" RadiusX="1" />
-                            <Rectangle Grid.Column="1" Fill="#A5FFFFFF" Height="18" Margin="3,0,3,0"
-                                           RadiusY="1" Grid.Row="0" RadiusX="1" Width="19" />-->
-                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
-                                   PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
-                            </Popup>
-                        </Grid>
+                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
+                               PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
+                        </Popup>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

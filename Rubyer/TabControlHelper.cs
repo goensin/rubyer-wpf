@@ -75,7 +75,34 @@ namespace Rubyer
                     {
                         tabControl.Items.Remove(tabItem);       // TabItem 移除方式
                     }
+
+                    if (GetIsAnimation(tabControl))
+                    {
+                        if (tabControl.TabStripPlacement == Dock.Top || tabControl.TabStripPlacement == Dock.Bottom)
+                        {
+                            StartRowAnimation(tabControl);
+                        }
+                        else
+                        {
+                            StartColAnimation(tabControl);
+                        }
+                    }
                 };
+
+                if (tabItem.IsLoaded)
+                {
+                    if (tabItem.Template.FindName("clearButton", tabItem) is Button clearButton)
+                    {
+                        if (GetIsClearable(tabItem))
+                        {
+                            clearButton.Click += handle;
+                        }
+                        else
+                        {
+                            clearButton.Click -= handle;
+                        }
+                    }
+                }
 
                 tabItem.Loaded += (sender, arg) =>
                 {
@@ -123,39 +150,8 @@ namespace Rubyer
                             {
                                 tabControl.SelectionChanged += (a, b) =>
                                 {
-                                    int index = tabControl.SelectedIndex;
-                                    double left = GetListBoxItemLeft(tabControl, index);
-                                    IEditableCollectionView items = tabControl.Items;
-                                    TabItem item;
-                                    if (items.CanRemove)
-                                    {
-                                        item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
-                                    }
-                                    else
-                                    {
-                                        item = tabControl.Items[index] as TabItem;
-                                    }
-
-                                    rectangleRow.Width = item.ActualWidth;
-
-                                    DoubleAnimation canvasAnimation = new DoubleAnimation
-                                    {
-                                        To = left,
-                                        Duration = TimeSpan.FromMilliseconds(500),
-                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                                    };
-
-                                    DoubleAnimation sizeAnimation = new DoubleAnimation
-                                    {
-                                        To = item.ActualWidth,
-                                        Duration = TimeSpan.FromMilliseconds(500),
-                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                                    };
-
-                                    rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
-                                    rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
+                                    StartRowAnimation(tabControl);
                                 };
-
 
                                 if (tabControl.SelectedIndex >= 0)
                                 {
@@ -176,39 +172,8 @@ namespace Rubyer
                             {
                                 tabControl.SelectionChanged += (a, b) =>
                                 {
-                                    int index = tabControl.SelectedIndex;
-                                    double top = GetListBoxItemTop(tabControl, index);
-                                    IEditableCollectionView items = tabControl.Items;
-                                    TabItem item;
-                                    if (items.CanRemove)
-                                    {
-                                        item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
-                                    }
-                                    else
-                                    {
-                                        item = tabControl.Items[index] as TabItem;
-                                    }
-
-                                    rectangleCol.Height = item.ActualHeight;
-
-                                    DoubleAnimation canvasAnimation = new DoubleAnimation
-                                    {
-                                        To = top,
-                                        Duration = TimeSpan.FromMilliseconds(500),
-                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                                    };
-
-                                    DoubleAnimation sizeAnimation = new DoubleAnimation
-                                    {
-                                        To = item.ActualHeight,
-                                        Duration = TimeSpan.FromMilliseconds(500),
-                                        EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                                    };
-
-                                    rectangleCol.BeginAnimation(Canvas.TopProperty, canvasAnimation);
-                                    rectangleCol.BeginAnimation(FrameworkElement.HeightProperty, sizeAnimation);
+                                    StartColAnimation(tabControl);
                                 };
-
 
                                 if (tabControl.SelectedIndex >= 0)
                                 {
@@ -259,6 +224,90 @@ namespace Rubyer
         public static void SetIsAnimation(DependencyObject obj, bool value)
         {
             obj.SetValue(IsAnimationProperty, value);
+        }
+
+        private static void StartColAnimation(TabControl tabControl)
+        {
+            Rectangle rectangleCol = tabControl.Template.FindName("selectedRectCol", tabControl) as Rectangle;
+            int index = tabControl.SelectedIndex;
+
+            if (tabControl.Items.Count == 0 || index < 0 || index >= tabControl.Items.Count)
+            {
+                return;
+            }
+
+            double top = GetListBoxItemTop(tabControl, index);
+            IEditableCollectionView items = tabControl.Items;
+            TabItem item;
+            if (items.CanRemove)
+            {
+                item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+            }
+            else
+            {
+                item = tabControl.Items[index] as TabItem;
+            }
+
+            rectangleCol.Height = item.ActualHeight;
+
+            DoubleAnimation canvasAnimation = new DoubleAnimation
+            {
+                To = top,
+                Duration = TimeSpan.FromMilliseconds(500),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            DoubleAnimation sizeAnimation = new DoubleAnimation
+            {
+                To = item.ActualHeight,
+                Duration = TimeSpan.FromMilliseconds(500),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            rectangleCol.BeginAnimation(Canvas.TopProperty, canvasAnimation);
+            rectangleCol.BeginAnimation(FrameworkElement.HeightProperty, sizeAnimation);
+        }
+
+        private static void StartRowAnimation(TabControl tabControl)
+        {
+            Rectangle rectangleRow = tabControl.Template.FindName("selectedRectRow", tabControl) as Rectangle;
+            int index = tabControl.SelectedIndex;
+
+            if (tabControl.Items.Count == 0 || index < 0 || index >= tabControl.Items.Count)
+            {
+                return;
+            }
+
+            double left = GetListBoxItemLeft(tabControl, index);
+            IEditableCollectionView items = tabControl.Items;
+            TabItem item;
+            if (items.CanRemove)
+            {
+                item = tabControl.ItemContainerGenerator.ContainerFromItem(tabControl.Items[index]) as TabItem;
+            }
+            else
+            {
+                item = tabControl.Items[index] as TabItem;
+            }
+
+            rectangleRow.Width = item.ActualWidth;
+
+            DoubleAnimation canvasAnimation = new DoubleAnimation
+            {
+                To = left,
+                Duration = TimeSpan.FromMilliseconds(500),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            DoubleAnimation sizeAnimation = new DoubleAnimation
+            {
+                To = item.ActualWidth,
+                Duration = TimeSpan.FromMilliseconds(500),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
+            rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
         }
     }
 }

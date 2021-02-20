@@ -48,6 +48,12 @@
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}" Value="False"/>
@@ -312,10 +318,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true" >
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
                         <Border x:Name="mainBorder" Background="{TemplateBinding Background}" SnapsToDevicePixels="True"
                                 BorderThickness="0,0,0,0" BorderBrush="{TemplateBinding BorderBrush}" Margin="0"
-                                CornerRadius="2 2 0 0" Width="{Binding ActualWidth, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                CornerRadius="2 2 0 0" >
                         </Border>
                         <StackPanel Orientation="Horizontal" Margin="{TemplateBinding Padding}" 
                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
@@ -330,6 +336,14 @@
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
+                            <Setter Property="Width" TargetName="mainBorder" Value="{Binding DesiredSize.Width, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
+                            <Setter Property="Width" TargetName="mainBorder" Value="{Binding DesiredSize.Width, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
+                            <Setter Property="HorizontalAlignment" Value="Left"/>
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsSelected,RelativeSource={RelativeSource Self}}" Value="False"/>
@@ -462,7 +476,6 @@
                             <Setter Property="HorizontalAlignment" TargetName="templateRoot" Value="Left"/>
                             <Setter TargetName="mainBorder" Property="CornerRadius" Value="0 2 2 0"/>
                             <Setter Property="Margin" TargetName="contentPresenter" Value="2,3"/>
-
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
