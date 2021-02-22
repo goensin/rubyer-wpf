@@ -49,13 +49,10 @@
                                 BorderBrush="{StaticResource BorderGray}" 
                                 CornerRadius="100" 
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Viewbox>
-                                <Grid x:Name="markGrid" Margin="2">
-                                    <Ellipse x:Name="optionMark" Fill="{TemplateBinding BorderBrush}" MinHeight="0" MinWidth="0" Opacity="0"/>
-                                    <Ellipse Fill="Transparent" MinHeight="7" MinWidth="7" Opacity="0"/>
-                                </Grid>
-                            </Viewbox>
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Width="15" Height="15">
+                                <Ellipse x:Name="littleDot" Fill="{TemplateBinding BorderBrush}" 
+                                         Height="0" Width="0"/>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
@@ -74,8 +71,47 @@
                             <Setter Property="Opacity" TargetName="radioButtonBorder" Value="{StaticResource PressedOpacity}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
-                            <Setter Property="Opacity" TargetName="optionMark" Value="1"/>
-                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{Binding Fill, ElementName=optionMark}"/>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="littleDot"
+                                                         Storyboard.TargetProperty="Width"
+                                                         To="9" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="littleDot"
+                                                         Storyboard.TargetProperty="Height"
+                                                         To="9" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="littleDot"
+                                                         Storyboard.TargetProperty="Width"
+                                                         To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="littleDot"
+                                                         Storyboard.TargetProperty="Height"
+                                                         To="0" Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{Binding BorderBrush,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter Property="Opacity" TargetName="radioButtonBorder" Value="0.56"/>
