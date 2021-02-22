@@ -16,12 +16,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
-                    <Border Name="Border" BorderThickness="{TemplateBinding BorderThickness}"
-                            Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                            Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="3">
-                        <ContentPresenter Margin="4" HorizontalAlignment="Left" VerticalAlignment="Top" />
-                    </Border>
+                    <Grid Margin="5">
+                        <Border Name="Effect" BorderThickness="{TemplateBinding BorderThickness}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}" CornerRadius="2.5"
+                                Effect="{StaticResource AllDirectionEffect2}">
+                        </Border>
+                        <Border Name="Border" BorderThickness="{TemplateBinding BorderThickness}"
+                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}" CornerRadius="2.5">
+                            <ContentPresenter Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        </Border>
+                    </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="true">
                             <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true" />
