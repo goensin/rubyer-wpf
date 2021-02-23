@@ -28,6 +28,7 @@ namespace Rubyer
                 Content = message,
                 Title = title,
                 MessageBoxButton = button,
+                ShowShadow = false
             };
 
             card.Dispatcher.VerifyAccess();

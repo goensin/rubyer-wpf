@@ -17,7 +17,7 @@
         </ObjectDataProvider>
     </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Style="{StaticResource FadeLeftStyle}">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -61,7 +61,9 @@
             </GroupBox>
             <GroupBox Header="列表视图-ListView" Margin="0 0 0 10" Grid.Row="1">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <ListView ItemsSource="{Binding Persons}" Height="130">
+                    <ListView ItemsSource="{Binding Persons}" Height="130"
+                              rubyer:ListViewHelper.HeadBackground="{DynamicResource Primary}"
+                              rubyer:ListViewHelper.HeadForeground="{DynamicResource PrimaryForeground}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="序号" DisplayMemberBinding="{Binding Id}" Width="60"/>
@@ -92,7 +94,9 @@
             </GroupBox>
             <GroupBox Header="数据表格-DataGrid" Margin="0 0 10 10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
                 <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" 
-                          ItemsSource="{Binding Persons}" Margin="5" Height="200">
+                          ItemsSource="{Binding Persons}" Margin="5" Height="200" 
+                          rubyer:DataGridHelper.HeadBackground="{DynamicResource Primary}"
+                          rubyer:DataGridHelper.HeadForeground="{DynamicResource PrimaryForeground}">
                     <DataGrid.ContextMenu>
                         <ContextMenu>
                             <MenuItem Header="增加" IsCheckable="True"/>

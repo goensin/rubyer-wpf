@@ -53,7 +53,8 @@
     <Style x:Key="{x:Type GridViewColumnHeader}" TargetType="GridViewColumnHeader">
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="Background" Value="{Binding Path=(rubyer:ListViewHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=ListView}}"/>
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:ListViewHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=ListView}}"/>
         <Setter Property="FontSize" Value="13.3"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -61,7 +62,7 @@
                     <Grid>
                         <Border x:Name="HeaderBorder" BorderThickness="0 0 0 1" Padding="4"
                                 BorderBrush="{StaticResource BorderGray}" 
-                                Background="{StaticResource GridBackground}">
+                                Background="{TemplateBinding Background}">
                             
                             <ContentPresenter x:Name="HeaderContent" Margin="2 0" RecognizesAccessKey="True"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -86,6 +87,8 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="rubyer:ListViewHelper.HeadBackground" Value="{StaticResource GridBackground}" />
+        <Setter Property="rubyer:ListViewHelper.HeadForeground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListView">

@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="850">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Style="{StaticResource FadeLeftStyle}">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto" />

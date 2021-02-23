@@ -84,7 +84,7 @@
                             <TextBlock Text="Xaml" FontSize="14"/>
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid Style="{StaticResource FadeRightStyle}">
+                    <Grid>
                         <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" 
                                                VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         </avalonEdit:TextEditor>

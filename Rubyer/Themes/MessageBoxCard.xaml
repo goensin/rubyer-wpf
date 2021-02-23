@@ -29,6 +29,7 @@
         <Setter Property="IsShowOk" Value="True"/>
         <Setter Property="FontSize" Value="13"/>
         <Setter Property="MessageBoxButton" Value="OK"/>
+        <Setter Property="ShowShadow" Value="True" />
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TranslateTransform />
@@ -37,45 +38,53 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxCard}">
-                    <Border Background="{TemplateBinding Background}"
+                    <Grid>
+                        <Border x:Name="effectBorder" Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Effect="{StaticResource AllDirectionEffect}"
+                                Visibility="{TemplateBinding ShowShadow,Converter={StaticResource boolToVisibility}}"/>
+                        <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                                <RowDefinition Height="Auto"/>
-                            </Grid.RowDefinitions>
-                            <DockPanel>
-                                <TextBlock Text="{TemplateBinding Title}" FontSize="15" DockPanel.Dock="Left" Margin="8 5"/>
-                                <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}"
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                <DockPanel>
+                                    <TextBlock Text="{TemplateBinding Title}" FontSize="15" DockPanel.Dock="Left" Margin="8 5"/>
+                                    <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}"
                                         HorizontalAlignment="Right" Foreground="{DynamicResource DefaultForeground}">
-                                    <rubyer:Icon Type="CloseLine"/>
-                                </Button>
-                            </DockPanel>
-                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="{TemplateBinding Padding}">
-                                <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="5"
+                                        <rubyer:Icon Type="CloseLine"/>
+                                    </Button>
+                                </DockPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="{TemplateBinding Padding}">
+                                    <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="5"
                                              Foreground="{TemplateBinding ThemeColorBrush}" Width="28" Height="28"
                                              Visibility="{TemplateBinding IsShowIcon,Converter={StaticResource boolToVisibility}}"/>
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
-                                <Button x:Name="PART_NoButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
+                                    <Button x:Name="PART_NoButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
                                         Visibility="{TemplateBinding IsShowNo,Converter={StaticResource boolToVisibility}}">否</Button>
-                                <Button x:Name="PART_YesButton" Width="60" Margin="5"
+                                    <Button x:Name="PART_YesButton" Width="60" Margin="5"
                                         Visibility="{TemplateBinding IsShowYes,Converter={StaticResource boolToVisibility}}">是</Button>
-                                <Button x:Name="PART_CancelButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
+                                    <Button x:Name="PART_CancelButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
                                         Visibility="{TemplateBinding IsShowCancel,Converter={StaticResource boolToVisibility}}">取消</Button>
-                                <Button x:Name="PART_OkButton" Width="60" Margin="5"
+                                    <Button x:Name="PART_OkButton" Width="60" Margin="5"
                                         Visibility="{TemplateBinding IsShowOk,Converter={StaticResource boolToVisibility}}" IsDefault="True">确认</Button>
-                            </StackPanel>
-                        </Grid>
-                    </Border>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

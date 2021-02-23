@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Rubyer.Themes">
+                    xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
@@ -95,11 +95,12 @@
     </Style>
 
     <!--Style and template for the DataGridColumnHeader.-->
-    <Style x:Key="RubuerDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
+    <Style x:Key="RubyerDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="FontSize" Value="13.5"/>
-        <Setter Property="Background" Value="{StaticResource GridBackground}"/>
+        <Setter Property="Background" Value="{Binding Path=(rubyer:DataGridHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:DataGridHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -111,7 +112,7 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
-                                <Polygon x:Name="arrow" StrokeThickness="0" Fill="{DynamicResource DefaultForeground}"
+                                <Polygon x:Name="arrow" StrokeThickness="0" Fill="{TemplateBinding Foreground}"
                                      HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"
                                      Points="4,6 0,0 8,0" RenderTransformOrigin="0.5,0.5" Margin="3 0">
                                     <Polygon.RenderTransform>
@@ -206,9 +207,11 @@
         <Setter Property="GridLinesVisibility" Value="Horizontal"/>
         <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource BorderGray}"/>
         <Setter Property="VerticalGridLinesBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="ColumnHeaderStyle" Value="{StaticResource RubuerDataGridColumnHeader}"/>
+        <Setter Property="ColumnHeaderStyle" Value="{StaticResource RubyerDataGridColumnHeader}"/>
         <Setter Property="CellStyle" Value="{StaticResource RubyerDataGridCell}"/>
         <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}"/>
+        <Setter Property="rubyer:DataGridHelper.HeadBackground" Value="{StaticResource GridBackground}" />
+        <Setter Property="rubyer:DataGridHelper.HeadForeground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -229,7 +232,7 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="0" 
+                                        <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter" Grid.Column="0" Grid.ColumnSpan="2"
                                                   Visibility="{Binding HeadersVisibility,ConverterParameter={x:Static DataGridHeadersVisibility.Column}, 
                                                   Converter={x:Static DataGrid.HeadersVisibilityConverter},RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" 

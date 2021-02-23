@@ -23,7 +23,7 @@ namespace Rubyer
         private Action<DialogBox> beforeOpenHandler;
         private Action<DialogBox, object> afterCloseHandler;
 
-        private static readonly Color containerBackgroun = Color.FromArgb(0xAA, 0, 0, 0);
+        private static readonly Color containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
         private Border rootBorder;
         private Border cardBorder;
         private object closeParameter;

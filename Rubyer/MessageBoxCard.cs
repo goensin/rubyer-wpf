@@ -237,6 +237,15 @@ namespace Rubyer
         }
 
 
+        public static readonly DependencyProperty ShowShadowProperty =
+            DependencyProperty.Register("ShowShadow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+
+        public bool ShowShadow
+        {
+            get { return (bool)GetValue(ShowShadowProperty); }
+            set { SetValue(ShowShadowProperty, value); }
+        }
+
         public static readonly DependencyProperty MessageBoxButtonProperty =
             DependencyProperty.Register("MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxButton), OnMessageBoxButtonChanged));
 
