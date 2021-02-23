@@ -50,9 +50,20 @@
                                 CornerRadius="100" 
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Width="15" Height="15">
+                                Padding="1.5">
+                            <Viewbox>
                                 <Ellipse x:Name="littleDot" Fill="{TemplateBinding BorderBrush}" 
-                                         Height="0" Width="0"/>
+                                         MinHeight="9" MinWidth="9" RenderTransformOrigin="0.5,0.5">
+                                    <Ellipse.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0" ScaleY="0"/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Viewbox>
                         </Border>
                         <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
@@ -75,15 +86,15 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
-                                                         Storyboard.TargetProperty="Width"
-                                                         To="9" Duration="0:0:0.2">
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
+                                                         To="1" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <BackEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
-                                                         Storyboard.TargetProperty="Height"
-                                                         To="9" Duration="0:0:0.2">
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
+                                                         To="1" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <BackEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
@@ -95,14 +106,14 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
-                                                         Storyboard.TargetProperty="Width"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
                                                          To="0" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
-                                                         Storyboard.TargetProperty="Height"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
                                                          To="0" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
