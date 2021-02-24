@@ -201,8 +201,23 @@ namespace Rubyer
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
             });
 
-            int begin = PageIndex >= 6 ? PageIndex - 3 : 2;                         // index 大于等于 6 页就从 index-3 开始，否则 2 开始
-            int end = PageIndex + 3 >= pageCount ? pageCount - 1 : PageIndex + 3;   // index + 3 大于 total 就 total-1结束，否则 index + 3
+            int begin;
+            int end;
+            begin = PageIndex >= 6 ? PageIndex - 3 : 2;                         // index 大于等于 6 页就从 index-3 开始，否则 2 开始
+            end = PageIndex + 3 >= pageCount ? pageCount - 1 : PageIndex + 3;   // index+3 大于 total 就 total-1 结束，否则 index + 3
+
+            // 补够按键数量
+            if (end - begin < 6)
+            {
+                if (PageIndex - begin < 3)
+                {
+                    end += 3 - (PageIndex - begin);
+                }
+                else if (end - PageIndex < 3)
+                {
+                    begin -= 3 - (end - PageIndex);
+                }
+            }
 
             for (int i = begin; i <= end; i++)
             {
