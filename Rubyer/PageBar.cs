@@ -231,10 +231,12 @@ namespace Rubyer
                 if (PageIndex - begin < 3)
                 {
                     end += 3 - (PageIndex - begin);
+                    end = end > pageCount - 1 ? pageCount - 1 : end;
                 }
                 else if (end - PageIndex < 3)
                 {
                     begin -= 3 - (end - PageIndex);
+                    begin = begin < 2 ? 2 : begin;
                 }
             }
 
@@ -249,18 +251,22 @@ namespace Rubyer
                     PageNumberCommand = new RubyerCommand(PageNumberChanged)
                 };
 
-                if (i == begin && PageIndex - begin >= 3 && PageIndex > 5)
+                if (pageCount > 9)
                 {
-                    info.Value = PageIndex - 5;
-                    info.Content = "...";
-                    info.ToolTip = "向前 5 页";
+                    if (i == begin && PageIndex - begin >= 3 && PageIndex > 5)
+                    {
+                        info.Value = PageIndex - 5;
+                        info.Content = "...";
+                        info.ToolTip = "向前 5 页";
+                    }
+                    else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
+                    {
+                        info.Value = PageIndex + 5;
+                        info.Content = "...";
+                        info.ToolTip = "向后 5 页";
+                    }
                 }
-                else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
-                {
-                    info.Value = PageIndex + 5;
-                    info.Content = "...";
-                    info.ToolTip = "向后 5 页";
-                }
+
 
                 this.Items.Add(info);
             }
