@@ -23,33 +23,37 @@
                     <TextBlock Text="{Binding PageBarMessage}" HorizontalAlignment="Center" Margin="10"/>
 
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" Margin="10"
-                                       PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                       PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                       PageIndexChanged="PageBar_PageIndexChanged"
-                                       PageSizeChanged="PageBar_PageSizeChanged"/>
+                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                    PageIndexChanged="PageBar_PageIndexChanged"
+                                    PageSizeChanged="PageBar_PageSizeChanged"
+                                    CurrentBackground="{DynamicResource Light}"
+                                    CurrentForeground="{DynamicResource LightForeground}"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="3"
-                                       IsShowPageSize="True"  Margin="10"
-                                       PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                       PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                       PageIndexChanged="PageBar_PageIndexChanged"
-                                       PageSizeChanged="PageBar_PageSizeChanged"/>
+                                    IsShowPageSize="True"  Margin="10"
+                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                    PageIndexChanged="PageBar_PageIndexChanged"
+                                    PageSizeChanged="PageBar_PageSizeChanged"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="5"
-                                       IsShowTotal="True" Margin="10" 
-                                       PageIndexChangedCommand="{Binding PageIndexChanged}" 
-                                       PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                       PageIndexChanged="PageBar_PageIndexChanged"
-                                       PageSizeChanged="PageBar_PageSizeChanged"/>
+                                    IsShowTotal="True" Margin="10" 
+                                    PageIndexChangedCommand="{Binding PageIndexChanged}" 
+                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                    PageIndexChanged="PageBar_PageIndexChanged"
+                                    PageSizeChanged="PageBar_PageSizeChanged"
+                                    CurrentBackground="{DynamicResource Accent}"
+                                    CurrentForeground="{DynamicResource AccentForeground}"/>
                     <rubyer:PageBar Total="{Binding Total}" PageSize="{Binding PageSize}" PageIndex="7"
-                                       IsShowPageSize="True" IsShowTotal="True" Margin="10"
-                                       PageIndexChangedCommand="{Binding PageIndexChanged}" 
-                                       PageSizeChangedCommand="{Binding PageSizeChanged}" 
-                                       PageIndexChanged="PageBar_PageIndexChanged"
-                                       PageSizeChanged="PageBar_PageSizeChanged"/>
+                                    IsShowPageSize="True" IsShowTotal="True" Margin="10"
+                                    PageIndexChangedCommand="{Binding PageIndexChanged}" 
+                                    PageSizeChangedCommand="{Binding PageSizeChanged}" 
+                                    PageIndexChanged="PageBar_PageIndexChanged"
+                                    PageSizeChanged="PageBar_PageSizeChanged"/>
                     <rubyer:PageBar ItemContainerStyle="{StaticResource TextPageBarItem}" 
-                                       Total="{Binding Total}" PageSize="{Binding PageSize}" 
-                                       PageIndex="7" IsShowPageSize="True" IsShowTotal="True" Margin="10"
-                                       PageIndexChangedCommand="{Binding PageIndexChanged}" 
-                                       PageSizeChangedCommand="{Binding PageSizeChanged}"/>
+                                    Total="{Binding Total}" PageSize="{Binding PageSize}" 
+                                    PageIndex="7" IsShowPageSize="True" IsShowTotal="True" Margin="10"
+                                    PageIndexChangedCommand="{Binding PageIndexChanged}" 
+                                    PageSizeChangedCommand="{Binding PageSizeChanged}"/>
                 </StackPanel>
                
             </GroupBox>

@@ -101,6 +101,27 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
+        // 当前页背景色
+        public static readonly DependencyProperty CurrentBackgroundProperty =
+            DependencyProperty.Register("CurrentBackground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
+
+        public Brush CurrentBackground
+        {
+            get { return (Brush)GetValue(CurrentBackgroundProperty); }
+            set { SetValue(CurrentBackgroundProperty, value); }
+        }
+
+        // 当前页前景色
+        public static readonly DependencyProperty CurrentForegroundProperty =
+            DependencyProperty.Register("CurrentForeground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
+
+        public Brush CurrentForeground
+        {
+            get { return (Brush)GetValue(CurrentForegroundProperty); }
+            set { SetValue(CurrentForegroundProperty, value); }
+        }
+
+
         // 每页数量
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnPageSizeChanged)));

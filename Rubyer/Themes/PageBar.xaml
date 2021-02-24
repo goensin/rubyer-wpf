@@ -35,7 +35,10 @@
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}"/>
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter Property="Background" TargetName="pageButton" Value="{DynamicResource Dark}"/>
+                            <Setter Property="Background" TargetName="pageButton" 
+                                    Value="{Binding CurrentBackground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"/>
+                            <Setter Property="Foreground" TargetName="pageButton" 
+                                    Value="{Binding CurrentForeground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -48,6 +51,7 @@
         <Setter Property="MinWidth" Value="30"/>
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="FontSize" Value="15"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBarItem}">
@@ -61,7 +65,8 @@
                                 IsEnabled="{TemplateBinding IsEnabled}" 
                                 Foreground="{TemplateBinding Foreground}" 
                                 Background="{TemplateBinding Background}"
-                                MinWidth="{TemplateBinding MinWidth}"/>
+                                MinWidth="{TemplateBinding MinWidth}"
+                                FontSize="{TemplateBinding FontSize}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True">
@@ -71,7 +76,7 @@
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}"/>
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter Property="Foreground" TargetName="pageButton" Value="{DynamicResource Dark}"/>
+                            <Setter Property="Foreground" TargetName="pageButton" Value="{DynamicResource Primary}"/>
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -88,6 +93,8 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
+        <Setter Property="CurrentBackground" Value="{DynamicResource Dark}" />
+        <Setter Property="CurrentForeground" Value="{DynamicResource DarkForeground}" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>

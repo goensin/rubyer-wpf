@@ -24,8 +24,19 @@ namespace RubyerDemo.Views
             }
 
             heightCombo.ItemsSource = Heights;
+
+            TestPassword = "123456";
         }
 
+
+        public static readonly DependencyProperty TestPasswordProperty =
+            DependencyProperty.Register("TestPassword", typeof(string), typeof(InputBox), new PropertyMetadata(default(string)));
+
+        public string TestPassword
+        {
+            get { return (string)GetValue(TestPasswordProperty); }
+            set { SetValue(TestPasswordProperty, value); }
+        }
 
 
         public int? Number

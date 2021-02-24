@@ -47,7 +47,8 @@
                         </rubyer:TextBoxHelper.PreContent>
                     </TextBox>
                     <PasswordBox Width="150" rubyer:TextBoxHelper.Placeholder="密码" Margin="10 0"
-                             rubyer:PasswordHelper.ShowSwitchButton="True">
+                                 rubyer:PasswordHelper.ShowSwitchButton="True"
+                                 rubyer:PasswordHelper.Password="{Binding TestPassword}">
                         <rubyer:TextBoxHelper.PreContent>
                             <rubyer:Icon Type="LockPasswordFill"/>
                         </rubyer:TextBoxHelper.PreContent>
