@@ -16,12 +16,31 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    [TemplatePart(Name = PageSizePartName, Type = typeof(TextBox))]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(PageBarItem))]
     public class PageBar : ItemsControl
     {
+        public const string PageSizePartName = "PART_PageSizeTextBox";
+
         static PageBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PageBar), new FrameworkPropertyMetadata(typeof(PageBar)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (GetTemplateChild(PageSizePartName) is TextBox pageSizeTextBox)
+            {
+                pageSizeTextBox.KeyDown += (sender, e) =>
+                {
+                    if (e.Key == Key.Enter)
+                    {
+                        this.Focus();
+                    }
+                };
+            }
         }
 
         protected override bool IsItemItsOwnContainerOverride(object item)

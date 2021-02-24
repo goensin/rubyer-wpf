@@ -113,7 +113,7 @@
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}"/>
 
-                            <TextBox VerticalAlignment="Center" Margin="5 0" Height="24" MinWidth="30"
+                            <TextBox x:Name="PART_PageSizeTextBox" VerticalAlignment="Center" Margin="5 0" Height="24" MinWidth="30"
                                      Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
                                      Foreground="{DynamicResource DefaultForeground}" Text="{Binding PageSize}"/>
                             <TextBlock VerticalAlignment="Center" Margin="5 0"
