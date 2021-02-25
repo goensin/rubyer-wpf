@@ -8,7 +8,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="RubyerDateTimePicker" TargetType="{x:Type rubyer:DateTimePicker}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
@@ -37,17 +37,25 @@
                         <Grid x:Name="PART_DisabledVisual" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
                             <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" VerticalOffset="5"
                                    PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
-                                <rubyer:Card Margin="5" Padding="0">
+                                <rubyer:Card Margin="5" Padding="0" BorderThickness="1">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto"/>
                                             <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Calendar x:Name="PART_Calendar"/>
-                                            <rubyer:Clock x:Name="PART_Clock" IsShowConfirmButton="False"/>
-                                        </StackPanel>
-                                        <Button Grid.Row="1" Content="确认" rubyer:ButtonHelper.CornerRadius="0 0 2 2"/>
+
+                                        <TextBlock Text="{Binding Text,ElementName=PART_TextBox}" 
+                                                   Margin="10 5" FontSize="18" HorizontalAlignment="Center"/>
+                                        <Border BorderThickness="0 1" BorderBrush="{TemplateBinding BorderBrush}" Grid.Row="1">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0"/>
+                                                <rubyer:Clock x:Name="PART_Clock" OnlyShowList="False" BorderThickness="0"/>
+                                            </StackPanel>
+                                        </Border>
+                                        
+                                        <Button x:Name="PART_ConfirmButton" Content="确认" Grid.Row="2"
+                                                rubyer:ButtonHelper.CornerRadius="0 0 2 2"/>
                                     </Grid>
                                 </rubyer:Card>
                             </Popup>

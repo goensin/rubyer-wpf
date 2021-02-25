@@ -82,8 +82,6 @@ namespace Rubyer
 
             Button confirmButton = GetTemplateChild(ConfirmPartName) as Button;
             confirmButton.Click += ConfirmButton_Click;
-
-            DisplayTime = DateTime.Now;
         }
 
         #region 路由事件
@@ -108,34 +106,34 @@ namespace Rubyer
 
 
         #region 依赖属性
-        public int Hour
+        public int? Hour
         {
-            get { return (int)GetValue(HourProperty); }
+            get { return (int?)GetValue(HourProperty); }
             set { SetValue(HourProperty, value); }
         }
 
         public static readonly DependencyProperty HourProperty =
-            DependencyProperty.Register("Hour", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+            DependencyProperty.Register("Hour", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
 
 
-        public int Minute
+        public int? Minute
         {
-            get { return (int)GetValue(MinuteProperty); }
+            get { return (int?)GetValue(MinuteProperty); }
             set { SetValue(MinuteProperty, value); }
         }
 
         public static readonly DependencyProperty MinuteProperty =
-            DependencyProperty.Register("Minute", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+            DependencyProperty.Register("Minute", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
 
 
-        public int Second
+        public int? Second
         {
-            get { return (int)GetValue(SecondProperty); }
+            get { return (int?)GetValue(SecondProperty); }
             set { SetValue(SecondProperty, value); }
         }
 
         public static readonly DependencyProperty SecondProperty =
-            DependencyProperty.Register("Second", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+            DependencyProperty.Register("Second", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
 
 
         public DateTime? SelectedTime
@@ -158,27 +156,15 @@ namespace Rubyer
             DependencyProperty.Register("DisplayTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime)));
 
 
-        public static readonly DependencyProperty IsShowConfirmButtonProperty =
-            DependencyProperty.Register("IsShowConfirmButton", typeof(bool), typeof(Clock), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty OnlyShowListProperty =
+            DependencyProperty.Register("OnlyShowList", typeof(bool), typeof(Clock), new PropertyMetadata(default(bool)));
 
-        public bool IsShowConfirmButton
+        public bool OnlyShowList
         {
-            get { return (bool)GetValue(IsShowConfirmButtonProperty); }
-            set { SetValue(IsShowConfirmButtonProperty, value); }
+            get { return (bool)GetValue(OnlyShowListProperty); }
+            set { SetValue(OnlyShowListProperty, value); }
         }
-
         #endregion
-
-        // 时间选择改变
-        private static void OnListSeletedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            Clock clock = d as Clock;
-            clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}:{clock.Second}");
-
-            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>(DateTime.Now, (DateTime)clock.DisplayTime);
-            args.RoutedEvent = Clock.CurrentTimeChangedEvent;
-            clock.RaiseEvent(args);
-        }
 
         // 添加子项
         private void AddItemSource(ListBox itemsControl, int count, int index)
@@ -194,6 +180,21 @@ namespace Rubyer
             itemsControl.ScrollIntoView(((int)itemsControl.SelectedItem).ToString("D2"));
         }
 
+        // 时间选择改变
+        private static void OnListSeletedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Clock clock = d as Clock;
+            clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}:{clock.Second}");
+
+            if (e.NewValue != null)
+            {
+                RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>(DateTime.Now, (DateTime)clock.DisplayTime);
+                args.RoutedEvent = Clock.CurrentTimeChangedEvent;
+                clock.RaiseEvent(args);
+            }
+        }
+        
+
         // 确认时间
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
@@ -201,7 +202,7 @@ namespace Rubyer
             DateTime newTime = (DateTime)DisplayTime;
 
             SelectedTime = DisplayTime;
-            
+
             RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>(oldTime, newTime);
             args.RoutedEvent = Clock.SelectedTimeChangedEvent;
             this.RaiseEvent(args);

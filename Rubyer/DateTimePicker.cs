@@ -22,6 +22,7 @@ namespace Rubyer
     [TemplatePart(Name = ButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = ClockPartName, Type = typeof(Clock))]
     [TemplatePart(Name = CalendarPartName, Type = typeof(Calendar))]
+    [TemplatePart(Name = ConfirmButtonPartName, Type = typeof(Button))]
     public class DateTimePicker : Control
     {
         public const string TextBoxPartName = "PART_TextBox";
@@ -29,12 +30,16 @@ namespace Rubyer
         public const string ButtonPartName = "PART_Button";
         public const string ClockPartName = "PART_Clock";
         public const string CalendarPartName = "PART_Calendar";
-
+        public const string ConfirmButtonPartName = "PART_ConfirmButton";
+        
 
         private TextBox _textBox;
         private Popup _popup;
         private Clock _clock;
         private Calendar _calendar;
+        private Button _confirmButton;
+
+        private bool isInited;
 
         static DateTimePicker()
         {
@@ -52,10 +57,6 @@ namespace Rubyer
             Calendar calendar = GetTemplateChild(CalendarPartName) as Calendar;
             calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
             this._calendar = calendar;
-            if (calendar.SelectedDate == null)
-            {
-                calendar.SelectedDate = DateTime.Now.Date;
-            }
 
             TextBox textBox = GetTemplateChild(TextBoxPartName) as TextBox;
             Binding binding1 = new Binding("Text");
@@ -66,6 +67,7 @@ namespace Rubyer
 
             Popup popup = GetTemplateChild(PopupPartName) as Popup;
             popup.Closed += Popup_Closed;
+            popup.Opened += Popup_Opened;
             if (this.IsDropDownOpen)
             {
                 this._popup.IsOpen = true;
@@ -74,6 +76,10 @@ namespace Rubyer
 
             Button button = GetTemplateChild(ButtonPartName) as Button;
             button.Click += Button_Click;
+
+            Button confirmButton = GetTemplateChild(ConfirmButtonPartName) as Button;
+            confirmButton.Click += ConfirmButton_Click;
+            this._confirmButton = confirmButton;
         }
 
         private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -160,7 +166,6 @@ namespace Rubyer
         }
         #endregion
 
-
         #region 方法
 
 
@@ -169,34 +174,56 @@ namespace Rubyer
         private static void OnSelectedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DateTimePicker dateTimePicker = (DateTimePicker)d;
-
             dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString("yyyy-MM-dd HH:mm:ss");
 
             RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)e.OldValue, (DateTime)e.NewValue);
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
             dateTimePicker.RaiseEvent(args);
+
+            dateTimePicker._textBox.Focus();
+            dateTimePicker._textBox.SelectAll();
         }
 
         // 时钟的时间改变
         private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
+            if (!isInited)
+            {
+                return;
+            }
+
             if (SelectedDateTime != null)
             {
                 DateTime dateTime = (DateTime)SelectedDateTime;
                 DateTime newDate = e.NewValue;
                 SelectedDateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
             }
+            else
+            {
+                SelectedDateTime = e.NewValue;
+            }
         }
 
         // 日期改变
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!isInited)
+            {
+                return;
+            }
+
             if (SelectedDateTime != null)
             {
                 DateTime dateTime = (DateTime)SelectedDateTime;
                 DateTime newTime = (DateTime)_calendar.SelectedDate;
                 SelectedDateTime = new DateTime(newTime.Year, newTime.Month, newTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
             }
+            else
+            {
+                SelectedDateTime = (DateTime)_calendar.SelectedDate;
+            }
+            
+            this._textBox.Focus();
         }
 
 
@@ -206,10 +233,16 @@ namespace Rubyer
             IsDropDownOpen = !IsDropDownOpen;
         }
 
+        // popup 打开后
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            isInited = true;
+        }
+
         // popup 关闭
         private void Popup_Closed(object sender, EventArgs e)
         {
-            if (this._clock.IsKeyboardFocusWithin && this._calendar.IsKeyboardFocusWithin)
+            if (this._confirmButton.IsKeyboardFocusWithin)
             {
                 this._textBox.Focus();
             }
@@ -218,8 +251,16 @@ namespace Rubyer
                 this.IsDropDownOpen = false;
             }
         }
+        
+        // 确定
+        private void ConfirmButton_Click(object sender, RoutedEventArgs e)
+        {
+            IsDropDownOpen = false;
 
-
+            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)SelectedDateTime, (DateTime)SelectedDateTime);
+            args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
+            this.RaiseEvent(args);
+        }
         #endregion
 
     }

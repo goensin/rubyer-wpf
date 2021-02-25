@@ -38,9 +38,9 @@
                 <rubyer:TimePicker Width="120"/>
             </StackPanel>
             </GroupBox>
-            <GroupBox Header="日期时间选择框-TimePicker" Margin="10 0 0 10" Width="Auto" Grid.Row="1" Grid.Column="2">
+            <GroupBox Header="日期时间选择框-DateTimePicker" Margin="10 0 0 10" Width="Auto" Grid.Row="1" Grid.Column="2">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <rubyer:DateTimePicker Width="120"/>
+                    <rubyer:DateTimePicker Width="180"/>
                 </StackPanel>
             </GroupBox>
         </Grid>
