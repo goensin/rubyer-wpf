@@ -9,7 +9,7 @@ namespace RubyerDemo.ViewModels
         public PageBarViewModel()
         {
             Total = 100;
-            PageSize = 10;
+            PageSize = 1;
             //PageIndex = 1;
         }
 

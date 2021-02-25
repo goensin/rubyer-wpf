@@ -13,7 +13,8 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderThickness" Value="1.5"/>
+        <Setter Property="IsShowConfirmButton" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Clock}">
@@ -24,7 +25,7 @@
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="160"/>
+                                <RowDefinition Height="152" x:Name="middle"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
@@ -42,7 +43,7 @@
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
                                     <ListBox x:Name="PART_HourList" Grid.Column="0" Width="70" BorderThickness="0 0 1 0"
-                                            ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                                             ScrollViewer.VerticalScrollBarVisibility="Disabled">
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
                                                 <TextBlock Text="{Binding}" Margin="5 2"/>
@@ -67,10 +68,17 @@
                                     </ListBox>
                                 </Grid>
                             </Border>
-                                <Button x:Name="PART_ConfirmButton" Width="Auto" Grid.Row="2" 
-                                    Style="{StaticResource RubyerButton}" Content="确认" />
+                            <Button x:Name="PART_ConfirmButton" Width="Auto" Grid.Row="2" ClipToBounds="True" 
+                                    Style="{StaticResource RubyerButton}" Content="确认" 
+                                    Visibility="{TemplateBinding IsShowConfirmButton,Converter={StaticResource boolToVisibility}}"
+                                    rubyer:ButtonHelper.CornerRadius="0 0 2 2"/>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsShowConfirmButton, RelativeSource={RelativeSource Self}}" Value="False">
+                            <Setter Property="Height" TargetName="middle" Value="180" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

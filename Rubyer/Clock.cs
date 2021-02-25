@@ -87,13 +87,22 @@ namespace Rubyer
         }
 
         #region 路由事件
-        public static readonly RoutedEvent SeletedTimeChangedEvent =
-            EventManager.RegisterRoutedEvent("SeletedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(Clock));
+        public static readonly RoutedEvent SelectedTimeChangedEvent =
+            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(Clock));
 
-        public event RoutedPropertyChangedEventHandler<DateTime> SeletedTimeChanged
+        public event RoutedPropertyChangedEventHandler<DateTime> SelectedTimeChanged
         {
-            add { AddHandler(SeletedTimeChangedEvent, value); }
-            remove { RemoveHandler(SeletedTimeChangedEvent, value); }
+            add { AddHandler(SelectedTimeChangedEvent, value); }
+            remove { RemoveHandler(SelectedTimeChangedEvent, value); }
+        }
+
+        public static readonly RoutedEvent CurrentTimeChangedEvent =
+            EventManager.RegisterRoutedEvent("CurrentTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(Clock));
+
+        public event RoutedPropertyChangedEventHandler<DateTime> CurrentTimeChanged
+        {
+            add { AddHandler(CurrentTimeChangedEvent, value); }
+            remove { RemoveHandler(CurrentTimeChangedEvent, value); }
         }
         #endregion
 
@@ -136,7 +145,7 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty SelectedTimeProperty =
-            DependencyProperty.Register("SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime), OnSeletedTimeChanged));
+            DependencyProperty.Register("SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime)));
 
 
         public DateTime? DisplayTime
@@ -147,6 +156,17 @@ namespace Rubyer
 
         public static readonly DependencyProperty DisplayTimeProperty =
             DependencyProperty.Register("DisplayTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime)));
+
+
+        public static readonly DependencyProperty IsShowConfirmButtonProperty =
+            DependencyProperty.Register("IsShowConfirmButton", typeof(bool), typeof(Clock), new PropertyMetadata(default(bool)));
+
+        public bool IsShowConfirmButton
+        {
+            get { return (bool)GetValue(IsShowConfirmButtonProperty); }
+            set { SetValue(IsShowConfirmButtonProperty, value); }
+        }
+
         #endregion
 
         // 时间选择改变
@@ -154,6 +174,10 @@ namespace Rubyer
         {
             Clock clock = d as Clock;
             clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}:{clock.Second}");
+
+            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>(DateTime.Now, (DateTime)clock.DisplayTime);
+            args.RoutedEvent = Clock.CurrentTimeChangedEvent;
+            clock.RaiseEvent(args);
         }
 
         // 添加子项
@@ -179,15 +203,8 @@ namespace Rubyer
             SelectedTime = DisplayTime;
             
             RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>(oldTime, newTime);
-            args.RoutedEvent = Clock.SeletedTimeChangedEvent;
+            args.RoutedEvent = Clock.SelectedTimeChangedEvent;
             this.RaiseEvent(args);
         }
-
-        // 确认时间改变
-        private static void OnSeletedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-
-        }
-
     }
 }

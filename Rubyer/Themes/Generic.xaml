@@ -41,6 +41,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ExpanderResizer.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxCard.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DateTimePicker.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>
@@ -76,6 +77,6 @@
     <Style TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}"/>
     <Style TargetType="{x:Type rubyer:MessageBoxCard}" BasedOn="{StaticResource RubyerMessageBoxCard}"/>
     <Style TargetType="{x:Type rubyer:DialogBox}" BasedOn="{StaticResource RubyerDialogBox}"/>
-
+    <Style TargetType="{x:Type rubyer:DateTimePicker}" BasedOn="{StaticResource RubyerDateTimePicker}"/>
 
 </ResourceDictionary>

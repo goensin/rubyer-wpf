@@ -23,7 +23,7 @@ namespace RubyerDemo.Views
             InitializeComponent();
         }
 
-        private void Clock_SeletedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
+        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
             MessageBox.Show($"{e.OldValue} => {e.NewValue}");
         }

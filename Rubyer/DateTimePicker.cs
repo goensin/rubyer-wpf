@@ -1,8 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Rubyer
@@ -11,20 +21,24 @@ namespace Rubyer
     [TemplatePart(Name = PopupPartName, Type = typeof(Popup))]
     [TemplatePart(Name = ButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = ClockPartName, Type = typeof(Clock))]
-    public class TimePicker : Control
+    [TemplatePart(Name = CalendarPartName, Type = typeof(Calendar))]
+    public class DateTimePicker : Control
     {
         public const string TextBoxPartName = "PART_TextBox";
         public const string PopupPartName = "PART_Popup";
         public const string ButtonPartName = "PART_Button";
         public const string ClockPartName = "PART_Clock";
+        public const string CalendarPartName = "PART_Calendar";
+
 
         private TextBox _textBox;
         private Popup _popup;
         private Clock _clock;
+        private Calendar _calendar;
 
-        static TimePicker()
+        static DateTimePicker()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(TimePicker), new FrameworkPropertyMetadata(typeof(TimePicker)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DateTimePicker), new FrameworkPropertyMetadata(typeof(DateTimePicker)));
         }
 
         public override void OnApplyTemplate()
@@ -32,8 +46,16 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Clock clock = GetTemplateChild(ClockPartName) as Clock;
-            clock.SelectedTimeChanged += Clock_SelectedTimeChanged;
+            clock.CurrentTimeChanged += Clock_SelectedTimeChanged;
             this._clock = clock;
+
+            Calendar calendar = GetTemplateChild(CalendarPartName) as Calendar;
+            calendar.SelectedDatesChanged += Calendar_SelectedDatesChanged;
+            this._calendar = calendar;
+            if (calendar.SelectedDate == null)
+            {
+                calendar.SelectedDate = DateTime.Now.Date;
+            }
 
             TextBox textBox = GetTemplateChild(TextBoxPartName) as TextBox;
             Binding binding1 = new Binding("Text");
@@ -54,8 +76,6 @@ namespace Rubyer
             button.Click += Button_Click;
         }
 
-
-
         private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -65,7 +85,7 @@ namespace Rubyer
 
         #region 路由事件
         public static readonly RoutedEvent SelectedTimeChangedEvent =
-            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(TimePicker));
+            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(DateTimePicker));
 
         public event RoutedPropertyChangedEventHandler<DateTime> SelectedTimeChanged
         {
@@ -75,14 +95,14 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
-        public DateTime? SeletedTime
+        public DateTime? SelectedDateTime
         {
-            get { return (DateTime?)GetValue(SeletedTimeProperty); }
-            set { SetValue(SeletedTimeProperty, value); }
+            get { return (DateTime?)GetValue(SelectedDateTimeProperty); }
+            set { SetValue(SelectedDateTimeProperty, value); }
         }
 
-        public static readonly DependencyProperty SeletedTimeProperty =
-            DependencyProperty.Register("SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
+        public static readonly DependencyProperty SelectedDateTimeProperty =
+            DependencyProperty.Register("SelectedDateTime", typeof(DateTime?), typeof(DateTimePicker), new FrameworkPropertyMetadata(default(DateTime), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
 
 
         public bool IsDropDownOpen
@@ -92,12 +112,12 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(TimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
+            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
 
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TimePicker tp = d as TimePicker;
+            DateTimePicker tp = d as DateTimePicker;
             bool newValue = (bool)e.NewValue;
             if (tp._popup != null && tp._popup.IsOpen != newValue)
             {
@@ -119,23 +139,23 @@ namespace Rubyer
         }
 
         public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TimePicker), new PropertyMetadata(null, OnTextChanged));
+            DependencyProperty.Register("Text", typeof(string), typeof(DateTimePicker), new PropertyMetadata(null, OnTextChanged));
 
         // 时间文本改变
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TimePicker timePicker = (TimePicker)d;
+            DateTimePicker dateTimePicker = (DateTimePicker)d;
 
             try
             {
-                if (((DateTime)timePicker.SeletedTime).ToLongTimeString() != timePicker.Text)
+                if (((DateTime)dateTimePicker.SelectedDateTime).ToLongTimeString() != dateTimePicker.Text)
                 {
-                    timePicker.SeletedTime = Convert.ToDateTime(timePicker.Text);
+                    dateTimePicker.SelectedDateTime = Convert.ToDateTime(dateTimePicker.Text);
                 }
             }
             catch (Exception)
             {
-                timePicker.Text = ((DateTime)timePicker.SeletedTime).ToString("HH:mm:ss");
+                dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString("yyyy-MM-dd HH:mm:ss");
             }
         }
         #endregion
@@ -148,29 +168,36 @@ namespace Rubyer
         // 选择时间改变
         private static void OnSelectedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            TimePicker timePicker = (TimePicker)d;
+            DateTimePicker dateTimePicker = (DateTimePicker)d;
 
-            timePicker.Text = ((DateTime)timePicker.SeletedTime).ToString("HH:mm:ss");
+            dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString("yyyy-MM-dd HH:mm:ss");
 
             RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)e.OldValue, (DateTime)e.NewValue);
-            args.RoutedEvent = TimePicker.SelectedTimeChangedEvent;
-            timePicker.RaiseEvent(args);
+            args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
+            dateTimePicker.RaiseEvent(args);
         }
 
         // 时钟的时间改变
         private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
         {
-            if (SeletedTime != e.NewValue)
+            if (SelectedDateTime != null)
             {
-                SeletedTime = e.NewValue;
+                DateTime dateTime = (DateTime)SelectedDateTime;
+                DateTime newDate = e.NewValue;
+                SelectedDateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
             }
-
-            IsDropDownOpen = false;
-
-            _textBox.Focus();
-            _textBox.SelectAll();
         }
 
+        // 日期改变
+        private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (SelectedDateTime != null)
+            {
+                DateTime dateTime = (DateTime)SelectedDateTime;
+                DateTime newTime = (DateTime)_calendar.SelectedDate;
+                SelectedDateTime = new DateTime(newTime.Year, newTime.Month, newTime.Day, dateTime.Hour, dateTime.Minute, dateTime.Second);
+            }
+        }
 
 
         // 点击时间按钮
@@ -182,7 +209,7 @@ namespace Rubyer
         // popup 关闭
         private void Popup_Closed(object sender, EventArgs e)
         {
-            if (this._clock.IsKeyboardFocusWithin)
+            if (this._clock.IsKeyboardFocusWithin && this._calendar.IsKeyboardFocusWithin)
             {
                 this._textBox.Focus();
             }
@@ -191,8 +218,9 @@ namespace Rubyer
                 this.IsDropDownOpen = false;
             }
         }
+
+
         #endregion
 
     }
-
 }

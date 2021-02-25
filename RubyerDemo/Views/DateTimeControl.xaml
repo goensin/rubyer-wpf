@@ -12,20 +12,20 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <GroupBox Header="日历-Calendar" Margin="0 0 0 10" Width="Auto">
+            <GroupBox Header="日历-Calendar" Margin="0 0 10 10" Width="Auto">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Calendar/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="时钟-Clock" Margin="0 0 0 10" Width="Auto" Grid.Column="1">
                 <StackPanel Orientation="Horizontal" Margin="5">
-                    <rubyer:Clock SeletedTimeChanged="Clock_SeletedTimeChanged"/>
+                    <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged"/>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="日期选择框-DatePicker" Margin="0 0 0 10" Width="Auto" Grid.Row="1">
@@ -37,6 +37,11 @@
             <StackPanel Orientation="Horizontal" Margin="5">
                 <rubyer:TimePicker Width="120"/>
             </StackPanel>
+            </GroupBox>
+            <GroupBox Header="日期时间选择框-TimePicker" Margin="10 0 0 10" Width="Auto" Grid.Row="1" Grid.Column="2">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <rubyer:DateTimePicker Width="120"/>
+                </StackPanel>
             </GroupBox>
         </Grid>
     </ScrollViewer>
