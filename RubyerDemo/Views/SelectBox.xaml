@@ -35,41 +35,41 @@
                         </RadioButton.Content>
                     </RadioButton>
                     <RadioButton IsEnabled="False" GroupName="selete">
-                       不可用
+                        不可用
                     </RadioButton>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="切换按钮-ToggleButton" Margin="0 0 0 10" Grid.Row='1'>
                 <StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="10">
                         <ToggleButton Content="默认" Width="100" IsChecked="True" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource LightToggleButton}" Content="亮色" Width="100" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource DarkToggleButton}" Content="暗色" Width="100" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource AccentToggleButton}" Content="强调色" Width="100" Margin="10 0"/>
-                        </StackPanel>
+                        <ToggleButton Style="{DynamicResource LightToggleButton}" Content="亮色" Width="100" Margin="10 0"/>
+                        <ToggleButton Style="{DynamicResource DarkToggleButton}" Content="暗色" Width="100" Margin="10 0"/>
+                        <ToggleButton Style="{DynamicResource AccentToggleButton}" Content="强调色" Width="100" Margin="10 0"/>
+                    </StackPanel>
 
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <ToggleButton Style="{DynamicResource CircleMidToggleButton}" Content="默认" rubyer:ButtonHelper.CircleDima="50" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource CircleLightToggleButton}" Content="亮色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource CircleDarkToggleButton}" Content="暗色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0"/>
-                            <ToggleButton Style="{DynamicResource CircleAccentToggleButton}" Content="强调" rubyer:ButtonHelper.CircleDima="50" Margin="10 0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10">
-                            <ToggleButton Style="{DynamicResource SwitchMidToggle}" Margin="10 0">
-                                <StackPanel Orientation="Horizontal">
-                                    <rubyer:Icon Type="WifiFill"/>
-                                    <TextBlock Text="Wifi"/>
-                                </StackPanel>
-                            </ToggleButton>
-                            <ToggleButton Style="{DynamicResource SwitchLightToggle}" Margin="10 0" IsChecked="True">
-                                <StackPanel Orientation="Horizontal">
-                                    <rubyer:Icon Type="BluetoothFill"/>
-                                    <TextBlock Text="蓝牙"/>
-                                </StackPanel>
-                            </ToggleButton>
-                            <ToggleButton Style="{DynamicResource SwitchDarkToggle}" Margin="10 5" Content="NFC" IsChecked="True"/>
-                            <ToggleButton Style="{DynamicResource SwitchAccentToggle}" Margin="10 0" Content="夜间模式" IsChecked="True"/>
-                        </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <ToggleButton Style="{DynamicResource CircleMidToggleButton}" Content="默认" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
+                        <ToggleButton Style="{DynamicResource CircleLightToggleButton}" Content="亮色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
+                        <ToggleButton Style="{DynamicResource CircleDarkToggleButton}" Content="暗色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
+                        <ToggleButton Style="{DynamicResource CircleAccentToggleButton}" Content="强调" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <ToggleButton Style="{DynamicResource SwitchMidToggle}" Margin="10 0">
+                            <StackPanel Orientation="Horizontal">
+                                <rubyer:Icon Type="WifiFill"/>
+                                <TextBlock Text="Wifi"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Style="{DynamicResource SwitchLightToggle}" Margin="10 0" IsChecked="True">
+                            <StackPanel Orientation="Horizontal">
+                                <rubyer:Icon Type="BluetoothFill"/>
+                                <TextBlock Text="蓝牙"/>
+                            </StackPanel>
+                        </ToggleButton>
+                        <ToggleButton Style="{DynamicResource SwitchDarkToggle}" Margin="10 5" Content="NFC" IsChecked="True"/>
+                        <ToggleButton Style="{DynamicResource SwitchAccentToggle}" Margin="10 0" Content="夜间模式" IsChecked="True"/>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="多选框-CheckBox" Margin="0 0 0 10" Grid.Row="2">
