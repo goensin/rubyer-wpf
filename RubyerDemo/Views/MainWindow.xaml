@@ -33,7 +33,10 @@
                   Foreground="{DynamicResource DefaultForeground}" >
                 <MenuItem ItemsSource="{Binding ThemeColors}">
                     <MenuItem.Header>
-                        <rubyer:Icon Type="TShirtFill" Foreground="{DynamicResource Accent}"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="主题" Foreground="{DynamicResource PrimaryForeground}"/>
+                            <rubyer:Icon Type="TShirtFill" Foreground="{DynamicResource Accent}" Margin="5 0 0 0"/>
+                        </StackPanel>
                     </MenuItem.Header>
                     <MenuItem.ItemContainerStyle>
                         <Style TargetType="MenuItem" >
@@ -44,6 +47,15 @@
                             <Setter Property="CommandParameter" Value="{Binding}" />
                         </Style>
                     </MenuItem.ItemContainerStyle>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="帮助" Foreground="{DynamicResource PrimaryForeground}"/>
+                            <rubyer:Icon Type="QuestionFill" Foreground="{DynamicResource PrimaryForeground}" Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem Header="关于" Command="{Binding OpenAboutDialog}"/>
                 </MenuItem>
             </Menu>
         </Grid>

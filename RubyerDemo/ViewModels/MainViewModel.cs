@@ -1,4 +1,5 @@
-﻿using RubyerDemo.Views;
+﻿using Rubyer;
+using RubyerDemo.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -27,14 +28,14 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "输入框-InputBox",Content=new InputBox() },
                 new MenuItem{ Name = "选择框-SelectBox",Content=new SelectBox()},
                 new MenuItem{ Name = "数据条-DataBar",Content=new DataBar()},
-                new MenuItem{ Name = "图标-Icon",Content=new Icon{ DataContext = new IconViewModel()} },
+                new MenuItem{ Name = "图标-Icon",Content=new Views.Icon{ DataContext = new IconViewModel()} },
                 new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBox() },
                 new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTree{ DataContext = new ListsViewModel()} },
                 new MenuItem{ Name = "选项卡-TabControl",Content=new TabControl{ DataContext = new TabControlViewModel()} },
                 new MenuItem{ Name = "日期时间-DateTimeControl",Content=new DateTimeControl{} },
                 new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBar{} },
                 new MenuItem{ Name = "文本块-TextBlock",Content=new TextBlock{} },
-                new MenuItem{ Name = "页码条-PageBar",Content=new PageBar{ DataContext = new PageBarViewModel()} },
+                new MenuItem{ Name = "页码条-PageBar",Content=new Views.PageBar{ DataContext = new PageBarViewModel()} },
                 new MenuItem{ Name = "消息提示-MessageInfo",Content=new MessageInfo{} },
                 new MenuItem{ Name = "消息框-MessageBoxView",Content = new MessageBoxView{ DataContext= new MessageBoxViewModel()} },
                 new MenuItem{ Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} }
@@ -169,7 +170,15 @@ namespace RubyerDemo.ViewModels
             }
 
             themeColor.IsSeleted = true;
+        }
 
+        private RelayCommand openAboutDialog;
+        public RelayCommand OpenAboutDialog => openAboutDialog ?? (openAboutDialog = new RelayCommand(OpenAboutDialogExecute));
+
+        private void OpenAboutDialogExecute(object obj)
+        {
+            var content = new About();
+            DialogBox.Show("MainDialog", content, "关于");
         }
     }
 }

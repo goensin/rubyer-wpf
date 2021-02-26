@@ -114,7 +114,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" 
+                            <Setter Property="TextBlock.Foreground" TargetName="contentPresenter" 
                                     Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ToggleButton},Path=Background}"/>
                             <!--<Setter Property="BorderThickness" TargetName="border" Value="0"/>-->
                         </Trigger>
