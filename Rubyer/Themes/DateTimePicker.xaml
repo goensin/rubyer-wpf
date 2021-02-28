@@ -44,9 +44,12 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-
-                                        <TextBlock Text="{Binding Text,ElementName=PART_TextBox}" 
-                                                   Margin="10 5" FontSize="18" HorizontalAlignment="Center"/>
+                                        <Border Background="{DynamicResource Primary}">
+                                            <TextBlock Text="{Binding Text,ElementName=PART_TextBox}" 
+                                                       Margin="10 5" FontSize="20" HorizontalAlignment="Center"
+                                                       Foreground="{DynamicResource PrimaryForeground}"/>
+                                        </Border>
+                                       
                                         <Border BorderThickness="0 1" BorderBrush="{TemplateBinding BorderBrush}" Grid.Row="1">
                                             <StackPanel Orientation="Horizontal">
                                                 <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0"/>

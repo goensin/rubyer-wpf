@@ -33,7 +33,7 @@
             <BeginStoryboard Storyboard="{StaticResource OnUnchecked1}"/>
         </EventTrigger>
     </UserControl.Triggers>
-    <Grid Margin="50 10">
+    <Grid Margin="50 10 50 30">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
