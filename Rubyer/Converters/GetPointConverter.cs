@@ -10,7 +10,7 @@ namespace Rubyer.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return new Point(System.Convert.ToInt32(values[0]), System.Convert.ToInt32(values[1]));
+            return new Point(double.Parse(values[0].ToString()), double.Parse(values[1].ToString()));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

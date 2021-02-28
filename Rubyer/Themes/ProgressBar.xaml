@@ -114,7 +114,11 @@
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Canvas>
+                        <Grid x:Name="PathGrid" 
+                              Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), 
+                              RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource halfTheValue}}" />
+                        <Canvas Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), 
+                                RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource halfTheValue}}" >
                             <!--背景圈-->
                             <Path x:Name="Background" Stroke="{TemplateBinding Background}" RenderTransformOrigin="0, 0" 
                                   StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -125,15 +129,15 @@
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         <Binding Source="0"/>
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
                                                 <ArcSegment IsLargeArc="True" SweepDirection="Clockwise">
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
@@ -141,7 +145,7 @@
                                                             <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -152,7 +156,7 @@
                             </Path>
 
                             <!--进度圈-->
-                           
+
                             <Path x:Name="Indicator" Stroke="{TemplateBinding Foreground}" RenderTransformOrigin="0, 0"
                                   StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                 <Path.Data>
@@ -161,7 +165,7 @@
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         <Binding Source="0"/>
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
@@ -175,8 +179,8 @@
                                                     </ArcSegment.IsLargeArc>
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
@@ -184,7 +188,7 @@
                                                             <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -203,15 +207,15 @@
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         <Binding Source="0"/>
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
                                                 <ArcSegment SweepDirection="Clockwise">
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
@@ -219,7 +223,7 @@
                                                             <Binding Path="(rubyer:ProgressBarHelper.IndeterminateValue)" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
                                                             <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Width" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -229,8 +233,9 @@
                                 </Path.Data>
                                 <Path.RenderTransform>
                                     <RotateTransform x:Name="Transform"
-                                                     CenterX="{Binding ElementName=TemplateRoot,Path=ActualWidth,Converter={StaticResource halfTheValue}}"
-                                                     CenterY="{Binding ElementName=TemplateRoot,Path=ActualWidth,Converter={StaticResource halfTheValue}}"/>
+                                                     CenterX="{Binding ElementName=PathGrid,Path=ActualWidth,Converter={StaticResource halfTheValue}}"
+                                                     CenterY="{Binding ElementName=PathGrid,Path=ActualWidth,Converter={StaticResource halfTheValue}}">
+                                    </RotateTransform>
                                 </Path.RenderTransform>
                             </Path>
                         </Canvas>
@@ -240,9 +245,9 @@
                                    Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent),RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource boolToVisibility}}">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource getPercent}">
-                                    <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                    <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                    <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>

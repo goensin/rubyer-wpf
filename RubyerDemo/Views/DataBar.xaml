@@ -14,37 +14,37 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <GroupBox Header="进度条-ProgressBar" Margin="0 0 0 10">
-                <StackPanel>    
+                <StackPanel>
                     <StackPanel Orientation="Horizontal">
-                                <StackPanel VerticalAlignment="Center">
-                                    <ProgressBar Value="70" Width="150" Margin="5" 
+                        <StackPanel VerticalAlignment="Center">
+                            <ProgressBar Value="70" Width="150" Margin="5" 
                                                 rubyer:ProgressBarHelper.Thickness="5"
                                                 rubyer:ProgressBarHelper.IsShowPercent="True"/>
-                                    <ProgressBar Width="150" Margin="10" IsIndeterminate="True"
+                            <ProgressBar Width="150" Margin="10" IsIndeterminate="True"
                                                 rubyer:ProgressBarHelper.Thickness="5"/>
-                                </StackPanel>
-                                <ProgressBar Value="70" Height="150" Orientation="Vertical" Margin="10"
+                        </StackPanel>
+                        <ProgressBar Value="70" Height="150" Orientation="Vertical" Margin="10"
                                  rubyer:ProgressBarHelper.Thickness="5"
                                  rubyer:ProgressBarHelper.IsShowPercent="True"/>
-                                <ProgressBar Width="5" Height="150" Orientation="Vertical" Margin="10" IsIndeterminate="True"
+                        <ProgressBar Width="5" Height="150" Orientation="Vertical" Margin="10" IsIndeterminate="True"
                                  rubyer:ProgressBarHelper.Thickness="5"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="60" Margin="10"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10"
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="60" Margin="10" ClipToBounds="True"/>
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10"
                                  rubyer:ProgressBarHelper.IsShowPercent="True"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="80" Margin="10" Width="20" Height="20"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="90" Margin="10" Width="50" Height="50"
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="80" Margin="10" Width="20" Height="20"/>
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="90" Margin="10" Width="50" Height="50"
                                  rubyer:ProgressBarHelper.Thickness="8"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10" Width="20" Height="20" 
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10" Width="20" Height="20" 
                                  rubyer:ProgressBarHelper.IsShowBackground="False" Foreground="{DynamicResource Light}"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10" Width="50" Height="50"
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Margin="10" Width="50" Height="50"
                                  rubyer:ProgressBarHelper.Thickness="8"
                                  rubyer:ProgressBarHelper.IsShowBackground="False"
                                  rubyer:ProgressBarHelper.IsShowPercent="True" Foreground="{DynamicResource Dark}"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Orientation="Vertical" Margin="10" 
-                                 IsIndeterminate="True"/>
-                                <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Orientation="Vertical" Margin="10" 
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Orientation="Vertical" Margin="10" Width="41" Height="41" 
+                                 IsIndeterminate="True" ClipToBounds="True"/>
+                        <ProgressBar Style="{StaticResource CircleProgressBar}" Value="70" Orientation="Vertical" Margin="10" 
                                  IsIndeterminate="True" rubyer:ProgressBarHelper.IsShowBackground="False" Foreground="{DynamicResource Accent}"/>
-                            </StackPanel>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
             <GroupBox Header="滑块-Slider" Grid.Row="1">

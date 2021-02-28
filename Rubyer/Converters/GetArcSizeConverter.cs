@@ -9,7 +9,7 @@ namespace Rubyer.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            return new Size((double)values[0], (double)values[1]);
+            return new Size(double.Parse(values[0].ToString()), double.Parse(values[1].ToString()));
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
