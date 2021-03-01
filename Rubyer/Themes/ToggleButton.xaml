@@ -75,14 +75,14 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="1" Duration="0:0:0.15">
+                                                         To="1" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="1" Duration="0:0:0.15">
+                                                         To="1" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
@@ -95,14 +95,14 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="0" Duration="0:0:0.15">
+                                                         To="0" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="0" Duration="0:0:0.15">
+                                                         To="0" Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
@@ -246,7 +246,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleBall" Storyboard.TargetProperty="(Canvas.Right)"
-                                                         To="0" Duration="0:0:0.2">
+                                                         To="0" Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>
@@ -258,7 +258,7 @@
                                 <BeginStoryboard>
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleBall" Storyboard.TargetProperty="(Canvas.Right)"
-                                                         To="11" Duration="0:0:0.2">
+                                                         To="11" Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut"/>
                                             </DoubleAnimation.EasingFunction>

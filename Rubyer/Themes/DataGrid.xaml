@@ -9,6 +9,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -191,7 +192,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    
+
     <!--Style and template for the DataGrid.-->
     <Style x:Key="RubyerDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -222,7 +223,7 @@
                                       Style="{StaticResource RubyerScrollViewer}">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                                    <Grid>
+                                    <Grid x:Name="DataGrid">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -258,7 +259,19 @@
                                                        Value="{Binding HorizontalOffset, Mode=OneWay,RelativeSource={RelativeSource TemplatedParent}}"
                                                        Style="{StaticResource RubyerScrollBar}"/>
                                         </Grid>
+                                        <Border x:Name="NoDataBorder" Grid.Row="1" Grid.ColumnSpan="2" 
+                                                Background="{DynamicResource GridBackground}" Visibility="Collapsed">
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <rubyer:Icon Type="DatabaseFill" Width="22" Height="22" Margin="5 0"/>
+                                                <TextBlock Text="暂无数据" FontSize="15"/>
+                                            </StackPanel>
+                                        </Border>
                                     </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="0">
+                                            <Setter Property="Visibility" TargetName="NoDataBorder"  Value="Visible" />
+                                        </DataTrigger>
+                                    </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </ScrollViewer.Template>
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -278,13 +291,13 @@
     </Style>
 
     <Style x:Key="RubyerDataGridTextColumn" TargetType="{x:Type TextBox}" BasedOn="{StaticResource RubyerTextBox}">
-        <Setter Property="Height" Value="22"/>
+        <Setter Property="Height" Value="21"/>
     </Style>
 
     <Style x:Key="RubyerDataGridCheckBoxColumn" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
     </Style>
 
     <Style x:Key="RubyerDataGridComboBoxColumn" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource RubyerComboBox}">
-        <Setter Property="Height" Value="22"/>
+        <Setter Property="Height" Value="21"/>
     </Style>
 </ResourceDictionary>
