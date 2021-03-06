@@ -7,8 +7,7 @@
              xmlns:vm ="clr-namespace:RubyerDemo.ViewModels"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance Type=vm:ListsViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="GenderTypeEnum" MethodName="GetValues"  ObjectType="{x:Type core:Enum}">
             <ObjectDataProvider.MethodParameters>
@@ -131,10 +130,10 @@
                     </DataGrid>
                     <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" 
                               ItemsSource="{Binding Persons}" Margin="5" Height="200" GridLinesVisibility="None"
-                              AlternationCount="2" 
                               rubyer:DataGridHelper.FocusRowBackground="{DynamicResource Light}"
                               rubyer:DataGridHelper.HeadRowHeight="32"
-                              rubyer:DataGridHelper.CellRowHeight="30">
+                              rubyer:DataGridHelper.CellRowHeight="30" IsReadOnly="True"
+                              AlternationCount="2" >
                         <DataGrid.RowStyle>
                             <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource RubyerDataGridRow}">
                                 <Style.Triggers>
