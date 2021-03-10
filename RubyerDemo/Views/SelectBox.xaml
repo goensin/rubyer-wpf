@@ -18,7 +18,8 @@
             </Grid.RowDefinitions>
             <GroupBox Header="单选按钮-RadioButton" Margin="0 0 0 10">
                 <StackPanel Orientation="Horizontal" Margin="10">
-                    <RadioButton x:Name="day" GroupName="selete" IsChecked="True" Checked="RadioButton_Checked">
+                    <RadioButton x:Name="day" GroupName="selete" Checked="RadioButton_Checked" IsChecked="{x:Null}"
+                                 Style="{StaticResource CircleMidToggleButton}">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="SunFill"/>
@@ -26,7 +27,8 @@
                             </StackPanel>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton x:Name="night" GroupName="selete" Margin="10 0" Checked="RadioButton_Checked">
+                    <RadioButton x:Name="night" GroupName="selete" Margin="10 0" Checked="RadioButton_Checked" 
+                                 Style="{StaticResource CircleMidToggleButton}">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="MoonFill"/>

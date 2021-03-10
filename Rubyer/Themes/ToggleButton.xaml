@@ -114,6 +114,9 @@
                         <Trigger Property="IsChecked" Value="False">
                             <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}"/>
                         </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
