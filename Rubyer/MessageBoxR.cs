@@ -13,12 +13,22 @@ namespace Rubyer
 {
     public class MessageBoxR
     {
-        private static readonly Brush infoBrush = (Brush)Application.Current.Resources["InfoBrush"];
-        private static readonly Brush warningBrush = (Brush)Application.Current.Resources["WarningBrush"];
-        private static readonly Brush successBrush = (Brush)Application.Current.Resources["SuccessBrush"];
-        private static readonly Brush errorBrush = (Brush)Application.Current.Resources["ErrorBrush"];
-        private static readonly Brush questionBrush = (Brush)Application.Current.Resources["QuestionBrush"];
-        private static readonly Color containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
+        private static Brush infoBrush;
+        private static Brush warningBrush;
+        private static Brush successBrush;
+        private static Brush errorBrush;
+        private static Brush questionBrush;
+        private static Color containerBackgroun;
+
+        public MessageBoxR()
+        {
+            infoBrush = (Brush)Application.Current.Resources["InfoBrush"];
+            warningBrush = (Brush)Application.Current.Resources["WarningBrush"];
+            successBrush = (Brush)Application.Current.Resources["SuccessBrush"];
+            errorBrush = (Brush)Application.Current.Resources["ErrorBrush"];
+            questionBrush = (Brush)Application.Current.Resources["QuestionBrush"];
+            containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
+        }
 
         #region 全局
         public static MessageBoxResult Show(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)

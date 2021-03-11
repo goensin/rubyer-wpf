@@ -9,10 +9,18 @@ namespace Rubyer
 {
     public class Message
     {
-        private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
-        private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
-        private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
-        private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
+        private static Style infoStyle;
+        private static Style warningStyle;
+        private static Style successStyle;
+        private static Style errorStyle;
+
+        public Message()
+        {
+            infoStyle = (Style)Application.Current.Resources["InfoMessage"];
+            warningStyle = (Style)Application.Current.Resources["WarningMessage"];
+            successStyle = (Style)Application.Current.Resources["SuccessMessage"];
+            errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
+        }
 
         #region 全局
         public static void Show(MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)

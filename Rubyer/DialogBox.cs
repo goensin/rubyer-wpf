@@ -23,7 +23,7 @@ namespace Rubyer
         private Action<DialogBox> beforeOpenHandler;
         private Action<DialogBox, object> afterCloseHandler;
 
-        private static readonly Color containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
+        private static Color containerBackgroun;
         private Border rootBorder;
         private Border cardBorder;
         private object closeParameter;
@@ -31,12 +31,13 @@ namespace Rubyer
         static DialogBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogBox), new FrameworkPropertyMetadata(typeof(DialogBox)));
-
         }
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+
+            containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
 
             CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
             CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
@@ -155,7 +156,7 @@ namespace Rubyer
 
 
         public static readonly DependencyProperty IsShowCloseButtonProperty =
-            DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(true, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool IsShowCloseButton
         {

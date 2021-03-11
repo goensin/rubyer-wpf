@@ -19,6 +19,7 @@
         <Setter Property="Margin" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsShowCloseButton" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogBox">
