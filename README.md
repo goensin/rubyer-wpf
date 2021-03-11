@@ -24,6 +24,30 @@ Install-Package Rubyer 添加引用，
       </ResourceDictionary>
 </Application.Resources>
 ```
+自定义主题颜色
+
+```
+<Application.Resources>
+     <ResourceDictionary>
+        ...
+
+        <Color x:Key="LightForegroundColor">#252526</Color>
+        <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
+        <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
+        <Color x:Key="DarkBackgroundColor">#252526</Color>
+
+        <SolidColorBrush x:Key="Light" Color="#6EC6FF"/>
+        <SolidColorBrush x:Key="LightForeground" Color="#000000"/>
+        <SolidColorBrush x:Key="Primary" Color="#2196F3"/>
+        <SolidColorBrush x:Key="PrimaryForeground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="Dark" Color="#0069C0"/>
+        <SolidColorBrush x:Key="DarkForeground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="Accent" Color="#F50057"/>
+        <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
+     </ResourceDictionary>
+</Application.Resources>
+```
+
 
 #### Demo 截图
 
