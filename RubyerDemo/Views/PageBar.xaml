@@ -6,8 +6,7 @@
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewModels:PageBarViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
                   Style="{StaticResource RubyerSmallScrollViewer}">
         <Grid>

@@ -31,6 +31,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "图标-Icon",Content=new Views.Icon{ DataContext = new IconViewModel()} },
                 new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBox() },
                 new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTree{ DataContext = new ListsViewModel()} },
+                new MenuItem{ Name = "数据表格-DataGrid",Content=new DataGrid{ DataContext = new DataGridViewModel()} },
                 new MenuItem{ Name = "选项卡-TabControl",Content=new TabControl{ DataContext = new TabControlViewModel()} },
                 new MenuItem{ Name = "日期时间-DateTimeControl",Content=new DateTimeControl{} },
                 new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBar{} },

@@ -83,5 +83,19 @@ namespace Rubyer
         {
             return (double)element.GetValue(CellRowHeightProperty);
         }
+
+        // 标题栏水平对齐方式
+        public static readonly DependencyProperty HorizontalHeadAlignmentProperty =
+            DependencyProperty.RegisterAttached("HorizontalHeadAlignment", typeof(HorizontalAlignment), typeof(DataGridHelper));
+
+        public static void SetHorizontalHeadAlignment(DependencyObject element, HorizontalAlignment value)
+        {
+            element.SetValue(HorizontalHeadAlignmentProperty, value);
+        }
+
+        public static HorizontalAlignment GetHorizontalHeadAlignment(DependencyObject element)
+        {
+            return (HorizontalAlignment)element.GetValue(HorizontalHeadAlignmentProperty);
+        }
     }
 }

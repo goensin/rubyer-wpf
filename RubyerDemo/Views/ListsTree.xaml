@@ -5,16 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:vm ="clr-namespace:RubyerDemo.ViewModels"
-             xmlns:core="clr-namespace:System;assembly=mscorlib"
              d:DataContext="{d:DesignInstance Type=vm:ListsViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ObjectDataProvider x:Key="GenderTypeEnum" MethodName="GetValues"  ObjectType="{x:Type core:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type Type="vm:GenderType"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-    </UserControl.Resources>
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
@@ -89,72 +81,6 @@
                             </HierarchicalDataTemplate>
                         </TreeView.ItemTemplate>
                     </TreeView>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Header="数据表格-DataGrid" Margin="0 0 10 10" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2">
-                <StackPanel Orientation="Horizontal">
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" 
-                          ItemsSource="{Binding Persons}" Margin="5" Height="200" GridLinesVisibility="None"
-                          rubyer:DataGridHelper.HeadBackground="{DynamicResource Primary}"
-                          rubyer:DataGridHelper.HeadForeground="{DynamicResource PrimaryForeground}"
-                          AlternationCount="2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="序号" Binding="{Binding Id}" Width="60" 
-                                            EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"/>
-                            <DataGridTextColumn Header="姓名" Binding="{Binding Name}" Width="70"
-                                            EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"/>
-                            <DataGridTextColumn Header="年龄" Binding="{Binding Age}" Width="60"
-                                            EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"/>
-                            <DataGridCheckBoxColumn Header="进化" Binding="{Binding IsEvolution}" Width="60"
-                                                ElementStyle="{StaticResource RubyerDataGridCheckBoxColumn}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridCheckBoxColumnEditting}"/>
-                            <DataGridComboBoxColumn Header="性别" ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}" 
-                                                SelectedItemBinding="{Binding Gender}" Width="80"
-                                                ElementStyle="{StaticResource RubyerDataGridComboBoxColumn}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridComboBoxColumnEditting}"/>
-                            <DataGridTemplateColumn Header="操作" Width="80">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button>
-                                                <rubyer:Icon Type="PencilLine"/>
-                                            </Button>
-                                            <Button Style="{StaticResource AccentButton}">
-                                                <rubyer:Icon Type="DeleteBinLine"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                    <DataGrid AutoGenerateColumns="False" CanUserAddRows="False" 
-                              ItemsSource="{Binding Persons}" Margin="5" Height="200" GridLinesVisibility="None"
-                              rubyer:DataGridHelper.FocusRowBackground="{DynamicResource Light}"
-                              rubyer:DataGridHelper.HeadRowHeight="32"
-                              rubyer:DataGridHelper.CellRowHeight="30" IsReadOnly="True"
-                              AlternationCount="2" >
-                        <DataGrid.RowStyle>
-                            <Style TargetType="{x:Type DataGridRow}" BasedOn="{StaticResource RubyerDataGridRow}">
-                                <Style.Triggers>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                        <Setter Property="Background" Value="LavenderBlush" />
-                                    </Trigger>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                        <Setter Property="Background" Value="LightCyan" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.RowStyle>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="序号" Binding="{Binding Id}" Width="60"/>
-                            <DataGridTextColumn Header="姓名" Binding="{Binding Name}" Width="70"/>
-                            <DataGridTextColumn Header="年龄" Binding="{Binding Age}" Width="60"/>
-                            <DataGridCheckBoxColumn Header="进化" Binding="{Binding IsEvolution}" Width="60"/>
-                            <DataGridComboBoxColumn Header="性别" ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}" 
-                                                SelectedItemBinding="{Binding Gender}" Width="80"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
                 </StackPanel>
             </GroupBox>
         </Grid>

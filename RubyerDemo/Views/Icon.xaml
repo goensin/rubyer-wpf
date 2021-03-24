@@ -7,8 +7,7 @@
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              xmlns:control="clr-namespace:RubyerDemo.Controls"
              d:DataContext="{d:DesignInstance Type=viewModels:IconViewModel, IsDesignTimeCreatable=True}"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" x:Name="IconView"
+             mc:Ignorable="d" x:Name="IconView"
              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
     <GroupBox Header="图标-Icon" Grid.Row="1">
     <Grid>
