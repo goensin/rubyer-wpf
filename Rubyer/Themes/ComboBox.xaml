@@ -235,129 +235,7 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="ComboBoxTemplate" TargetType="{x:Type ComboBox}">
-        <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
-            </Grid.ColumnDefinitions>
-            <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" HorizontalOffset="-5"
-                        IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                        Placement="Bottom" 
-                        PopupAnimation="Slide"  
-                        MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                <Popup.MinWidth>
-                    <MultiBinding Converter="{StaticResource add2}">
-                        <Binding Path="ActualWidth" ElementName="templateRoot"/>
-                        <Binding Path="Margin.Left" ElementName="dropDownBorder"/>
-                    </MultiBinding>
-                </Popup.MinWidth>
-                <Grid>
-                    <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
-                        CornerRadius="{Binding Path=(rubyer:ComboBoxHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                        Effect="{StaticResource AllDirectionEffect}" Margin="5"/>
-                    <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 9">
-                        <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
-                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
-                                <Rectangle x:Name="opaqueRect" 
-                                           Fill="{Binding Background, ElementName=dropDownBorder}" 
-                                           Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
-                                           Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
-                            </Canvas>
-                            <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" 
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                        </Grid>
-                    </ScrollViewer>
-                </Grid>
-            </Popup>
-            <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" 
-                          BorderThickness="{TemplateBinding BorderThickness}" 
-                          BorderBrush="{TemplateBinding BorderBrush}" 
-                          Grid.ColumnSpan="2" 
-                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                          Style="{StaticResource ComboBoxToggleButton}"/>
-            <Grid Margin="0 0 5 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <!--前置内容-->
-                <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
-                                Content="{Binding Path=(rubyer:ComboBoxHelper.PreContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                IsHitTestVisible="False" IsTabStop="False"/>
-
-                <Grid VerticalAlignment="Center" Grid.Column="1">
-                    <ContentPresenter x:Name="contentPresenter"
-                              ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
-                              Content="{TemplateBinding SelectionBoxItem}" 
-                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
-                              ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
-                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                              IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
-                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    <!--提示占位符-->
-                    <TextBlock  x:Name="palceholder" Foreground="{DynamicResource BorderGray}" VerticalAlignment="Center" 
-                                IsHitTestVisible="False" Margin="5 0 0 0"
-                                Text="{Binding Path=(rubyer:ComboBoxHelper.Placeholder),RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                </Grid>
-
-                <!--清除按钮-->
-                <Button x:Name="clearButton" Grid.Column="2" VerticalAlignment="Center"
-                                        Style="{DynamicResource TextMidButton}" 
-                                        Foreground="{DynamicResource BorderGray}" 
-                                        Visibility="Collapsed" IsTabStop="False">
-                    <rubyer:Icon Type="CloseLine"/>
-                </Button>
-
-                <!--后置内容-->
-                <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
-                               Content="{Binding Path=(rubyer:ComboBoxHelper.PostContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                               IsHitTestVisible="False" IsTabStop="False"/>
-            </Grid>
-
-        </Grid>
-        <ControlTemplate.Triggers>
-            <Trigger Property="IsEnabled" Value="false">
-                <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource UnEnabledOpacity}"/>
-            </Trigger>
-            <Trigger Property="HasItems" Value="false">
-                <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
-            </Trigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsGrouping" Value="true"/>
-                    <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
-            </MultiTrigger>
-            <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
-                <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
-                <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
-            </Trigger>
-
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="rubyer:ComboBoxHelper.IsKeyBoardFocused" Value="true"/>
-                    <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="true"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="Visibility" TargetName="clearButton" Value="Visible"/>
-            </MultiTrigger>
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="IsMouseOver" Value="true"/>
-                    <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="true"/>
-                </MultiTrigger.Conditions>
-                <Setter Property="Visibility" TargetName="clearButton" Value="Visible"/>
-            </MultiTrigger>
-            <DataTrigger Binding="{Binding Path=Content,ElementName=contentPresenter,Converter={StaticResource isNull}}" Value="False">
-                <Setter Property="Visibility" TargetName="palceholder" Value="Hidden"/>
-            </DataTrigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-
+    
     <Style x:Key="RubyerComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
@@ -372,12 +250,137 @@
         <Setter Property="Height" Value="28"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Template" Value="{StaticResource ComboBoxTemplate}"/>
         <Setter Property="rubyer:ComboBoxHelper.FocusedBrush" Value="{DynamicResource Primary}"/>
         <Setter Property="rubyer:ComboBoxHelper.CornerRadius" Value="2.5"/>
         <Setter Property="MaxDropDownHeight" Value="400"/>
         <Setter Property="rubyer:ComboBoxHelper.IsKeyBoardFocused" Value="False"/>
         <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ComboBox}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true" Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
+                        </Grid.ColumnDefinitions>
+                        <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" HorizontalOffset="-5"
+                               IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                               Placement="Bottom" 
+                               PopupAnimation="Slide"  
+                               MaxHeight="{TemplateBinding MaxDropDownHeight}">
+                            <Popup.MinWidth>
+                                <MultiBinding Converter="{StaticResource add2}">
+                                    <Binding Path="ActualWidth" ElementName="templateRoot"/>
+                                    <Binding Path="Margin.Left" ElementName="dropDownBorder"/>
+                                </MultiBinding>
+                            </Popup.MinWidth>
+                            <Grid>
+                                <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
+                                        CornerRadius="{Binding Path=(rubyer:ComboBoxHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Effect="{StaticResource AllDirectionEffect}" Margin="5"/>
+                                <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 9">
+                                    <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                            <Rectangle x:Name="opaqueRect" 
+                                                       Fill="{Binding Background, ElementName=dropDownBorder}" 
+                                                       Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
+                                                       Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
+                                        </Canvas>
+                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" 
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                    </Grid>
+                                </ScrollViewer>
+                            </Grid>
+                        </Popup>
+                        <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" 
+                                      BorderThickness="{TemplateBinding BorderThickness}" 
+                                      BorderBrush="{TemplateBinding BorderBrush}" 
+                                      Grid.ColumnSpan="2" 
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
+                                      Style="{StaticResource ComboBoxToggleButton}"/>
+                        <Grid Margin="0 0 5 0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <!--前置内容-->
+                            <ContentControl x:Name="preContent" Grid.Column="0" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
+                                            Content="{Binding Path=(rubyer:ComboBoxHelper.PreContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsHitTestVisible="False" IsTabStop="False"/>
+
+                            <Grid VerticalAlignment="Center" Grid.Column="1">
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                                  Content="{TemplateBinding SelectionBoxItem}" 
+                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                                  ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                  IsHitTestVisible="false" Margin="{TemplateBinding Padding}" 
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                <!--提示占位符-->
+                                <TextBlock  x:Name="palceholder" Foreground="{DynamicResource BorderGray}" VerticalAlignment="Center" 
+                                            IsHitTestVisible="False" Margin="5 0 0 0"
+                                            Text="{Binding Path=(rubyer:ComboBoxHelper.Placeholder),RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            </Grid>
+
+                            <!--清除按钮-->
+                            <Button x:Name="clearButton" Grid.Column="2" VerticalAlignment="Center"
+                                    Style="{DynamicResource TextMidButton}" 
+                                    Foreground="{DynamicResource BorderGray}" 
+                                    Visibility="Collapsed" IsTabStop="False">
+                                <rubyer:Icon Type="CloseLine"/>
+                            </Button>
+
+                            <!--后置内容-->
+                            <ContentControl x:Name="postContent" Grid.Column="3" VerticalAlignment="Center" Foreground="{DynamicResource BorderGray}" Margin="3 0"
+                                            Content="{Binding Path=(rubyer:ComboBoxHelper.PostContent),RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsHitTestVisible="False" IsTabStop="False"/>
+                        </Grid>
+
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource UnEnabledOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter Property="Height" TargetName="dropDownBorder" Value="95"/>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsGrouping" Value="true"/>
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                        </MultiTrigger>
+                        <Trigger Property="ScrollViewer.CanContentScroll" SourceName="DropDownScrollViewer" Value="false">
+                            <Setter Property="Canvas.Top" TargetName="opaqueRect" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}"/>
+                            <Setter Property="Canvas.Left" TargetName="opaqueRect" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}"/>
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="rubyer:ComboBoxHelper.IsKeyBoardFocused" Value="true"/>
+                                <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="clearButton" Value="Visible"/>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="true"/>
+                                <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="clearButton" Value="Visible"/>
+                        </MultiTrigger>
+                        <DataTrigger Binding="{Binding Path=Content,ElementName=contentPresenter,Converter={StaticResource isNull}}" Value="False">
+                            <Setter Property="Visibility" TargetName="palceholder" Value="Hidden"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsEditable" Value="true">
                 <Setter Property="IsTabStop" Value="false"/>

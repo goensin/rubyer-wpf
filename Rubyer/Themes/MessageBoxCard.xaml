@@ -9,7 +9,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerMessageBoxCard" TargetType="{x:Type rubyer:MessageBoxCard}">
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Center"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
@@ -23,6 +23,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="MinHeight" Value="120"/>
         <Setter Property="MinWidth" Value="250"/>
+        <Setter Property="MaxWidth" Value="500" />
         <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
         <Setter Property="IconType" Value="InformationFill"/>
         <Setter Property="IsShowIcon" Value="False"/>
@@ -66,7 +67,7 @@
                                     <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="5"
                                              Foreground="{TemplateBinding ThemeColorBrush}" Width="28" Height="28"
                                              Visibility="{TemplateBinding IsShowIcon,Converter={StaticResource boolToVisibility}}"/>
-                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
+                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1" Margin="5 0"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"

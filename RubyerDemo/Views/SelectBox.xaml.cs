@@ -38,6 +38,7 @@ namespace RubyerDemo.Views
                 {
                     App.Current.Resources["DefaultForeground"] = new SolidColorBrush(lightForegroundColor);
                     App.Current.Resources["DefaultBackground"] = new SolidColorBrush(lightBackgroundColor);
+                   
                 }
                 else
                 {

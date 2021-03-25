@@ -51,8 +51,9 @@ namespace Rubyer
 
             rootBorder = GetTemplateChild(RootBorderPartName) as Border;
             cardBorder = GetTemplateChild(CardBorderPartName) as Border;
-        }
 
+            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
+        }
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
@@ -63,6 +64,18 @@ namespace Rubyer
         {
             closeParameter = e.Parameter;
             IsShow = false;
+        }
+
+        private void RootBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Border border)
+            {
+                if (sender.Equals(border))
+                {
+                    closeParameter = null;
+                    IsShow = false;
+                }
+            }
         }
 
         #region 命令
