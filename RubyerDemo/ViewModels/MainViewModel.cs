@@ -39,7 +39,8 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "页码条-PageBar",Content=new Views.PageBar{ DataContext = new PageBarViewModel()} },
                 new MenuItem{ Name = "消息提示-MessageInfo",Content=new MessageInfo{} },
                 new MenuItem{ Name = "消息框-MessageBoxView",Content = new MessageBoxView{ DataContext= new MessageBoxViewModel()} },
-                new MenuItem{ Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} }
+                new MenuItem{ Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} },
+                new MenuItem{ Name = "转换动画-TransitionView",Content = new TransitionView() }
             };
 
             CurrentMenuItem = MenuItems[0];
