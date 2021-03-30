@@ -58,6 +58,8 @@ namespace Rubyer
         ZoomLeft,
         ZoomRight,
         ZoomUp,
-        ZoomDown
+        ZoomDown,
+        Collapse,
+        CollapseLeft
     }
 }
