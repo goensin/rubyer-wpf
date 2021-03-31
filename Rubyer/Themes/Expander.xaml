@@ -311,12 +311,14 @@
                                           MinHeight="0" MinWidth="0" Margin="1" Padding="{TemplateBinding Padding}" 
                                           Style="{StaticResource ExpanderDownHeaderStyle}" 
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                            <rubyer:ExpanderResizer ExpanderControl="{Binding RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
+                            <!--<rubyer:ExpanderResizer ExpanderControl="{Binding RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
                                 <ContentPresenter x:Name="ExpandSite" Focusable="false" Margin="{TemplateBinding Padding}"/>
-                            </rubyer:ExpanderResizer>
+                            </rubyer:ExpanderResizer>-->
+                            <rubyer:Transition x:Name="Transition" IsShow="{TemplateBinding IsExpanded}" Type="Collapse">
+                                <ContentPresenter x:Name="ExpandSite" Focusable="false" Margin="{TemplateBinding Padding}"/>
+                            </rubyer:Transition>
                         </DockPanel>
                     </Border>
-
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <Trigger.EnterActions>
@@ -348,6 +350,7 @@
                             <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Right"/>
                             <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Left"/>
                             <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderRightHeaderStyle}"/>
+                            <Setter Property="Type" TargetName="Transition" Value="CollapseLeft" />
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Up">
                             <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Top"/>
@@ -358,6 +361,7 @@
                             <Setter Property="DockPanel.Dock" TargetName="ExpandSite" Value="Left"/>
                             <Setter Property="DockPanel.Dock" TargetName="HeaderSite" Value="Right"/>
                             <Setter Property="Style" TargetName="HeaderSite" Value="{StaticResource ExpanderLeftHeaderStyle}"/>
+                            <Setter Property="Type" TargetName="Transition" Value="CollapseLeft" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" TargetName="border" Value="{StaticResource UnEnabledOpacity}"/>

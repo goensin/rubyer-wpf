@@ -26,7 +26,7 @@
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="BorderBrush" Value="{DynamicResource BorderGray}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="BorderThickness" Value="1.3"/>
+        <Setter Property="BorderThickness" Value="2"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -155,7 +155,7 @@
         <Setter Property="AcceptsReturn" Value="True"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
         <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="Padding" Value="5 10"/>
+        <Setter Property="Padding" Value="5"/>
     </Style>
 
 </ResourceDictionary>

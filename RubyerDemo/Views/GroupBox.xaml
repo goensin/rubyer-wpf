@@ -28,7 +28,7 @@
             <GroupBox Header="折叠面板-Expander" Margin="0 0 0 10" Grid.Row="3">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <StackPanel Margin="5">
-                        <Expander x:Name="expander" Header="《思凡》" Width="300">
+                        <Expander x:Name="expander" Header="《思凡》" Width="300" IsExpanded="True">
                             <TextBlock x:Name="textBlock" TextWrapping="Wrap">
                                 <Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Expander>
@@ -36,11 +36,15 @@
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Expander>
                     </StackPanel>
-                    <Expander Header="《思凡》" MaxWidth="400" Height="80" ExpandDirection="Left">
-                        <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
+                    <Expander Header="《思凡》"  Height="120" ExpandDirection="Left">
+                        <Border MaxWidth="200">
+                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
+                        </Border>
                     </Expander>
-                    <Expander Header="《思凡》" MaxWidth="400" Height="80" ExpandDirection="Right">
-                        <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
+                    <Expander Header="《思凡》" Height="120" ExpandDirection="Right">
+                        <Border MaxWidth="200" >
+                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
+                        </Border>
                     </Expander>
                 </StackPanel>
             </GroupBox>

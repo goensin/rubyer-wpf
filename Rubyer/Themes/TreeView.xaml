@@ -103,7 +103,7 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         </Border>
 
-                        <StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
+                        <!--<StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
                             <StackPanel.Height>
                                 <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
                                     <Binding ElementName="ItemsHost" Path="ActualHeight"/>
@@ -111,7 +111,11 @@
                                 </MultiBinding>
                             </StackPanel.Height>
                             <ItemsPresenter x:Name="ItemsHost" Visibility="Collapsed" VerticalAlignment="Top" Opacity="0"/>
-                        </StackPanel>
+                        </StackPanel>-->
+                        <rubyer:Transition Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1"
+                                           IsShow="{TemplateBinding IsExpanded}" Type="Collapse">
+                            <ItemsPresenter x:Name="ItemsHost" Visibility="Collapsed" VerticalAlignment="Top" Opacity="0"/>
+                        </rubyer:Transition>
                     </Grid>
 
                     <ControlTemplate.Triggers>
