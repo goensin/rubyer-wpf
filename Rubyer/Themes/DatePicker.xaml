@@ -38,8 +38,9 @@
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>
                         </DatePickerTextBox>
-                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom"
-                               PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
+                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PopupAnimation="Fade"
+                               PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"
+                               VerticalOffset="5" Margin="5">
                         </Popup>
                     </Grid>
                 </ControlTemplate>

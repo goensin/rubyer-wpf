@@ -263,35 +263,35 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" Width="0"/>
                         </Grid.ColumnDefinitions>
-                        <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" HorizontalOffset="-5"
+                            <Popup x:Name="PART_Popup" AllowsTransparency="true" Grid.ColumnSpan="2" HorizontalOffset="-5"
                                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" 
                                Placement="Bottom" 
                                PopupAnimation="Slide"  
                                MaxHeight="{TemplateBinding MaxDropDownHeight}">
-                            <Popup.MinWidth>
-                                <MultiBinding Converter="{StaticResource add2}">
-                                    <Binding Path="ActualWidth" ElementName="templateRoot"/>
-                                    <Binding Path="Margin.Left" ElementName="dropDownBorder"/>
-                                </MultiBinding>
-                            </Popup.MinWidth>
-                            <Grid>
-                                <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
+                                <Popup.MinWidth>
+                                    <MultiBinding Converter="{StaticResource add2}">
+                                        <Binding Path="ActualWidth" ElementName="templateRoot"/>
+                                        <Binding Path="Margin.Left" ElementName="dropDownBorder"/>
+                                    </MultiBinding>
+                                </Popup.MinWidth>
+                                <Grid>
+                                    <Border x:Name="dropDownBorder" Background="{TemplateBinding Background}"
                                         CornerRadius="{Binding Path=(rubyer:ComboBoxHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         Effect="{StaticResource AllDirectionEffect}" Margin="5"/>
-                                <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 9">
-                                    <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
-                                        <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
-                                            <Rectangle x:Name="opaqueRect" 
+                                    <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 9">
+                                        <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
+                                            <Canvas x:Name="canvas" HorizontalAlignment="Left" Height="0" VerticalAlignment="Top" Width="0">
+                                                <Rectangle x:Name="opaqueRect" 
                                                        Fill="{Binding Background, ElementName=dropDownBorder}" 
                                                        Height="{Binding ActualHeight, ElementName=dropDownBorder}" 
                                                        Width="{Binding ActualWidth, ElementName=dropDownBorder}"/>
-                                        </Canvas>
-                                        <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" 
+                                            </Canvas>
+                                            <ItemsPresenter x:Name="ItemsPresenter" KeyboardNavigation.DirectionalNavigation="Contained" 
                                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                    </Grid>
-                                </ScrollViewer>
-                            </Grid>
-                        </Popup>
+                                        </Grid>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
                         <ToggleButton x:Name="toggleButton" Background="{TemplateBinding Background}" 
                                       BorderThickness="{TemplateBinding BorderThickness}" 
                                       BorderBrush="{TemplateBinding BorderBrush}" 

@@ -36,13 +36,13 @@
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Expander>
                     </StackPanel>
-                    <Expander Header="《思凡》"  Height="120" ExpandDirection="Left">
-                        <Border MaxWidth="200">
+                    <Expander Header="《思凡》"  Height="140" ExpandDirection="Left">
+                        <Border MaxWidth="160">
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Border>
                     </Expander>
-                    <Expander Header="《思凡》" Height="120" ExpandDirection="Right">
-                        <Border MaxWidth="200" >
+                    <Expander Header="《思凡》" Height="140" ExpandDirection="Right">
+                        <Border MaxWidth="160" >
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。"/></TextBlock>
                         </Border>
                     </Expander>

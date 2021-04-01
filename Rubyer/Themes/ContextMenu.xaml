@@ -28,7 +28,7 @@
                                 CornerRadius="2.5" >
                             <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" 
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                        KeyboardNavigation.TabNavigation="Cycle" />
+                                        KeyboardNavigation.TabNavigation="Cycle"/>
                         </Border>
                     </Grid>
                 </ControlTemplate>

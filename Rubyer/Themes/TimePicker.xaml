@@ -33,9 +33,11 @@
                             </rubyer:TextBoxHelper.PostContent>
                         </TextBox>
                         <Grid x:Name="PART_DisabledVisual" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
-                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" VerticalOffset="5"
-                                   PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False">
-                                <rubyer:Clock x:Name="PART_Clock" Margin="0 0 5 5"/>
+                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" 
+                                   VerticalOffset="0" HorizontalOffset="-5"
+                                   PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"
+                                   PopupAnimation="Fade">
+                                <rubyer:Clock x:Name="PART_Clock" Margin="5"/>
                             </Popup>
                         </Grid>
                     </Grid>
