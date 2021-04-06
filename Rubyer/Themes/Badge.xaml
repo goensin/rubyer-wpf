@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer"
+                    xmlns:converter="clr-namespace:Rubyer.Converters">
+
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <converter:OffsetConverter x:Key="offsetConverter"/>
+        </ResourceDictionary>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <Style x:Key="RubyerBadge" TargetType="{x:Type rubyer:Badge}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="{StaticResource ErrorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:Badge}">
+                    <Grid>
+                        <Border x:Name="border" Background="{TemplateBinding Background}" CornerRadius="10" 
+                                Height="20" MinWidth="20" 
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Panel.ZIndex="1" RenderTransformOrigin="0.5 0.5">
+                            <Border.RenderTransform>
+                                <ScaleTransform/>
+                            </Border.RenderTransform>
+                            <Border.Margin>
+                                <MultiBinding Converter="{StaticResource offsetConverter}">
+                                    <Binding ElementName="border" Path="ActualHeight"/>
+                                    <Binding ElementName="border" Path="ActualWidth"/>
+                                </MultiBinding>
+                            </Border.Margin>
+                            <TextBlock Text="{TemplateBinding Text}" FontSize="11" Margin="5 2" 
+                                       HorizontalAlignment="Center"/>
+                        </Border>
+                        
+                        <Border x:Name="littleDot" Background="{TemplateBinding Background}" 
+                                HorizontalAlignment="Right" VerticalAlignment="Top"
+                                Panel.ZIndex="1" Height="10" Width="10"
+                                Visibility="Collapsed" CornerRadius="5" Margin="0 -3 -3 0"/>
+                        
+                        <ContentPresenter Focusable="False" RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsShowLittleDot" Value="True">
+                            <Setter Property="Visibility" TargetName="border" Value="Collapsed" />
+                            <Setter Property="Visibility" TargetName="littleDot" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsHidden" Value="True">
+                            <Setter Property="Visibility" TargetName="border" Value="Collapsed" />
+                            <Setter Property="Visibility" TargetName="littleDot" Value="Collapsed" />
+                        </Trigger>
+                        <EventTrigger RoutedEvent="TextChanged">
+                            <BeginStoryboard>
+                                <BeginStoryboard.Storyboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="border"
+                                                         Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                                         From="0.6" To="1" Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <DoubleAnimation Storyboard.TargetName="border"
+                                                         Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                                         From="0.6" To="1" Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <BackEase EasingMode="EaseOut"/>
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard.Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

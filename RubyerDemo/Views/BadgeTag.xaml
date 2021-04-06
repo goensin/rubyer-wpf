@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="RubyerDemo.Views.BadgeTag"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <GroupBox Header="标记-Badge">
+                <StackPanel Margin="10">
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <rubyer:Badge x:Name="MyBadge" Text="1" Margin="10">
+                            <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1"
+                                    Click="Button_Click">存款</Button>
+                        </rubyer:Badge>
+                        <rubyer:Badge Text="11" Margin="10">
+                            <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1">回复</Button>
+                        </rubyer:Badge>
+                        <rubyer:Badge Text="99+" Margin="10">
+                            <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1">评论</Button>
+                        </rubyer:Badge>
+
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <rubyer:Badge Margin="10" IsShowLittleDot="True">
+                            <Button Width="100" Style="{DynamicResource TextMidButton}" BorderThickness="1">更新版本</Button>
+                        </rubyer:Badge>
+                        <rubyer:Badge Margin="10" IsShowLittleDot="True" Background="{StaticResource SuccessBrush}">
+                            <Button Width="100" Style="{DynamicResource TextMidButton}" BorderThickness="1">更新版本</Button>
+                        </rubyer:Badge>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

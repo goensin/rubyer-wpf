@@ -34,10 +34,10 @@
                         </TextBox>
                         <Grid x:Name="PART_DisabledVisual" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
                             <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" 
-                                   VerticalOffset="0" HorizontalOffset="-5"
+                                   VerticalOffset="5" HorizontalOffset="0"
                                    PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"
                                    PopupAnimation="Fade">
-                                <rubyer:Clock x:Name="PART_Clock" Margin="5"/>
+                                <rubyer:Clock x:Name="PART_Clock"/>
                             </Popup>
                         </Grid>
                     </Grid>

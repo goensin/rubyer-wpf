@@ -43,6 +43,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogBox.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DateTimePicker.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Badge.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>
@@ -80,4 +81,5 @@
     <Style TargetType="{x:Type rubyer:DialogBox}" BasedOn="{StaticResource RubyerDialogBox}"/>
     <Style TargetType="{x:Type rubyer:DateTimePicker}" BasedOn="{StaticResource RubyerDateTimePicker}"/>
     <Style TargetType="{x:Type rubyer:Transition}" BasedOn="{StaticResource RubuerTransition}"/>
+    <Style TargetType="{x:Type rubyer:Badge}" BasedOn="{StaticResource RubyerBadge}"/>
 </ResourceDictionary>

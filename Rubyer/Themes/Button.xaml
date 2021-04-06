@@ -111,7 +111,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource MouseOverOpacity}"/>
-                            <!--<Setter Property="Background" TargetName="border" Value="{StaticResource ButtonMouseOverBackgroundGray}"/>-->
+                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonMouseOverBackgroundGray}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Opacity" TargetName="border" Value="{DynamicResource PressedOpacity}"/>
