@@ -11,15 +11,13 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <GroupBox Header="标记-Badge">
                 <StackPanel Margin="10">
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <rubyer:Badge x:Name="MyBadge" Text="1" Margin="10">
                             <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1"
-                                    Click="Button_Click">存款</Button>
+                                    Click="Button_Click">经验+1</Button>
                         </rubyer:Badge>
                         <rubyer:Badge Text="11" Margin="10">
                             <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1">回复</Button>
@@ -27,15 +25,53 @@
                         <rubyer:Badge Text="99+" Margin="10">
                             <Button Width="60" Style="{DynamicResource TextMidButton}" BorderThickness="1">评论</Button>
                         </rubyer:Badge>
-
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="5">
                         <rubyer:Badge Margin="10" IsShowLittleDot="True">
-                            <Button Width="100" Style="{DynamicResource TextMidButton}" BorderThickness="1">更新版本</Button>
+                            <Button Width="100">更新版本</Button>
                         </rubyer:Badge>
                         <rubyer:Badge Margin="10" IsShowLittleDot="True" Background="{StaticResource SuccessBrush}">
                             <Button Width="100" Style="{DynamicResource TextMidButton}" BorderThickness="1">更新版本</Button>
                         </rubyer:Badge>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Header="标签-Tag" Grid.Row="1">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <rubyer:Tag Margin="10" Background="#07C160" Url="https://weixin.qq.com/">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="WechatFill"/>
+                            </rubyer:Tag.Header>
+                            Wechat
+                        </rubyer:Tag>
+                        <rubyer:Tag Margin="10" Url="www.baidu.com">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="BaiduFill"/>
+                            </rubyer:Tag.Header>
+                            百度
+                        </rubyer:Tag>
+                        <rubyer:Tag Margin="10" Url="https://gitee.com/wuyanxin1028"
+                                HeadBackground="#C71D23"
+                                HeadForeground="#FFFFFF"
+                                Background="{DynamicResource DefaultForeground}"
+                                Foreground="{DynamicResource DefaultBackground}">
+                            <rubyer:Tag.Header>
+                                Gitee
+                            </rubyer:Tag.Header>
+                            Rubyer
+                        </rubyer:Tag>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="5">
+                        <rubyer:Tag Margin="10">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="CloudOffLine"/>
+                            </rubyer:Tag.Header>
+                            无 url
+                        </rubyer:Tag>
+                        <rubyer:Tag Margin="10">
+                            无 header
+                        </rubyer:Tag>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
