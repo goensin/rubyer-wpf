@@ -72,6 +72,12 @@
                         <rubyer:Tag Margin="10">
                             无 header
                         </rubyer:Tag>
+                        <rubyer:Tag Margin="10" Url="C:\">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="ServerFill"/>
+                            </rubyer:Tag.Header>
+                            C 盘
+                        </rubyer:Tag>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

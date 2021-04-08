@@ -82,7 +82,7 @@
     <!--SubmenuHeade-->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border x:Name="Border" BorderThickness="0" Padding="5 3" 
-                Background="{DynamicResource DefaultBackground}">
+                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32" SharedSizeGroup="Icon" />
@@ -130,7 +130,7 @@
     <!--SubmenuItem-->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border x:Name="Border" BorderThickness="0" Padding="5 3" 
-                Background="{DynamicResource DefaultBackground}">
+                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="32" SharedSizeGroup="Icon" />
@@ -140,7 +140,7 @@
                 </Grid.ColumnDefinitions>
                 <ContentPresenter x:Name="Icon" Margin="6 0" VerticalAlignment="Center" ContentSource="Icon" />
                 <Border x:Name="Check" Width="16" Height="16" Visibility="Hidden"
-                        Margin="6 0" BorderThickness="0" Background="Transparent" BorderBrush="{DynamicResource DefaultForeground}">
+                        Margin="6 0" BorderThickness="0">
                     <Canvas>
                         <Path x:Name="CheckMark" Width="16" Height="16" Visibility="Hidden"
                           SnapsToDevicePixels="False" StrokeThickness="1"
