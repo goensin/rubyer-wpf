@@ -10,7 +10,7 @@ namespace Rubyer
     {
         // 密码内容
         public static readonly DependencyProperty PasswordProperty =
-            DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordHelper), new FrameworkPropertyMetadata("", FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PasswordChanged));
+            DependencyProperty.RegisterAttached("Password", typeof(string), typeof(PasswordHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, PasswordChanged));
 
         private static void PasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -39,14 +39,14 @@ namespace Rubyer
 
         // 是否显示切换按钮
         public static readonly DependencyProperty ShowSwitchButtonProperty =
-           DependencyProperty.RegisterAttached("ShowSwitchButton", typeof(bool?), typeof(PasswordHelper), new PropertyMetadata(null, SwitchPasswordShow));
+           DependencyProperty.RegisterAttached("ShowSwitchButton", typeof(bool), typeof(PasswordHelper), new PropertyMetadata(false, SwitchPasswordShow));
 
-        public static bool? GetShowSwitchButton(DependencyObject obj)
+        public static bool GetShowSwitchButton(DependencyObject obj)
         {
-            return (bool?)obj.GetValue(ShowSwitchButtonProperty);
+            return (bool)obj.GetValue(ShowSwitchButtonProperty);
         }
 
-        public static void SetShowSwitchButton(DependencyObject obj, bool? value)
+        public static void SetShowSwitchButton(DependencyObject obj, bool value)
         {
             obj.SetValue(ShowSwitchButtonProperty, value);
         }
@@ -101,8 +101,6 @@ namespace Rubyer
                 passwordBox.PasswordChanged += (sender, arg) =>
                 {
                     SetPassword(passwordBox, passwordBox.Password);
-
-                   
                 };
             }
         }
