@@ -113,7 +113,7 @@
                             <TextBlock VerticalAlignment="Center" Text="总" Margin="5 0" 
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}"/>
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Total}" 
+                            <TextBlock VerticalAlignment="Center" Text="{Binding Total,RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" 
                                        Visibility="{TemplateBinding IsShowTotal,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource Primary}"/>
                             <TextBlock VerticalAlignment="Center" Text="条" Margin="5 0"  
@@ -122,7 +122,8 @@
 
                             <TextBox x:Name="PART_PageSizeTextBox" VerticalAlignment="Center" Margin="5 0" Height="24" MinWidth="30"
                                      Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
-                                     Foreground="{DynamicResource DefaultForeground}" Text="{Binding PageSize}"/>
+                                     Foreground="{DynamicResource DefaultForeground}" 
+                                     Text="{Binding PageSize,RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"/>
                             <TextBlock VerticalAlignment="Center" Margin="5 0"
                                        Visibility="{TemplateBinding IsShowPageSize,Converter={StaticResource boolToVisibility}}" 
                                        Foreground="{DynamicResource DefaultForeground}" Text="条/页"/>
