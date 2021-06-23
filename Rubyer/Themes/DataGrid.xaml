@@ -103,7 +103,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" 
                 Value="{Binding (rubyer:DataGridHelper.HorizontalHeadAlignment),RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
-        <Setter Property="FontSize" Value="13.5"/>
         <Setter Property="Background" Value="{Binding Path=(rubyer:DataGridHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:DataGridHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=DataGrid}}"/>
         <Setter Property="Template">
