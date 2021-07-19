@@ -25,7 +25,7 @@ namespace Rubyer
         {
             MessageBoxCard card = new MessageBoxCard
             {
-                Content = message,
+                Message = message,
                 Title = title,
                 MessageBoxButton = button,
                 ShowShadow = false
@@ -128,7 +128,7 @@ namespace Rubyer
 
             MessageBoxCard card = new MessageBoxCard
             {
-                Content = message,
+                Message = message,
                 Title = title,
                 MessageBoxButton = button,
             };

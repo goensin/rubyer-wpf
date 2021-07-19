@@ -19,7 +19,7 @@ namespace Rubyer
 {
     public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
 
-    public class MessageBoxCard : ContentControl
+    public class MessageBoxCard : Control
     {
         public const string CloseButtonPartName = "PART_CloseButton";
         public const string OkButtonPartName = "PART_OkButton";
@@ -154,6 +154,16 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
+        public static readonly DependencyProperty MessageProperty =
+            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
+
+        public string Message
+        {
+            get { return (string)GetValue(MessageProperty); }
+            set { SetValue(MessageProperty, value); }
+        }
+
+
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
 

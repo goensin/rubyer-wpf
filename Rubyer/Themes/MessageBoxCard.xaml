@@ -23,7 +23,7 @@
         <Setter Property="Padding" Value="10"/>
         <Setter Property="MinHeight" Value="120"/>
         <Setter Property="MinWidth" Value="250"/>
-        <Setter Property="MaxWidth" Value="500" />
+        <Setter Property="MaxWidth" Value="400" />
         <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
         <Setter Property="IconType" Value="InformationFill"/>
         <Setter Property="IsShowIcon" Value="False"/>
@@ -63,16 +63,20 @@
                                         <rubyer:Icon Type="CloseLine"/>
                                     </Button>
                                 </DockPanel>
-                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="{TemplateBinding Padding}">
+                                <Grid Grid.Row="1" Margin="{TemplateBinding Padding}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
                                     <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="5"
                                              Foreground="{TemplateBinding ThemeColorBrush}" Width="28" Height="28"
                                              Visibility="{TemplateBinding IsShowIcon,Converter={StaticResource boolToVisibility}}"/>
-                                    <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1" Margin="5 0"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                </StackPanel>
+                                    <TextBlock Focusable="False" Grid.Column="1" Margin="5 0"
+                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                               TextWrapping="Wrap" Text="{TemplateBinding Message}"/>
+                                </Grid>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
                                     <Button x:Name="PART_NoButton" Width="60" Margin="5" Background="{StaticResource InfoBrush}"
                                         Visibility="{TemplateBinding IsShowNo,Converter={StaticResource boolToVisibility}}">否</Button>
