@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -39,8 +36,8 @@ namespace Rubyer
 
             containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
 
-            CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
-            CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
+            _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
+            _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
 
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
@@ -70,7 +67,7 @@ namespace Rubyer
         {
             if (e.OriginalSource is Border border)
             {
-                if (sender.Equals(border))
+                if (IsClickBackgroundToClose && sender.Equals(border))
                 {
                     closeParameter = null;
                     IsShow = false;
@@ -125,7 +122,7 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
-
+        // ID
         public static readonly DependencyProperty IdentifierProperty =
             DependencyProperty.Register("Identifier", typeof(string), typeof(DialogBox), new PropertyMetadata(default(string), OnIdentifierChanged));
 
@@ -136,7 +133,7 @@ namespace Rubyer
 
             if (dialogs.ContainsKey(identify))
             {
-                dialogs.Remove(identify);
+                _ = dialogs.Remove(identify);
             }
 
             dialogs.Add(identify, dialog);
@@ -148,6 +145,17 @@ namespace Rubyer
             set { SetValue(IdentifierProperty, value); }
         }
 
+        // 对话框内容
+        public static readonly DependencyProperty DialogContentProperty =
+            DependencyProperty.Register("DialogContent", typeof(object), typeof(DialogBox), new PropertyMetadata(default(object)));
+
+        public object DialogContent
+        {
+            get { return GetValue(DialogContentProperty); }
+            set { SetValue(DialogContentProperty, value); }
+        }
+
+        // 标题
         public static readonly DependencyProperty TitleProperty =
             DependencyProperty.Register("Title", typeof(string), typeof(DialogBox), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -157,7 +165,7 @@ namespace Rubyer
             set { SetValue(TitleProperty, value); }
         }
 
-
+        // 圆角半径
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(DialogBox), new PropertyMetadata(default(CornerRadius)));
 
@@ -167,7 +175,7 @@ namespace Rubyer
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-
+        // 是否显示关闭按钮
         public static readonly DependencyProperty IsShowCloseButtonProperty =
             DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -177,7 +185,17 @@ namespace Rubyer
             set { SetValue(IsShowCloseButtonProperty, value); }
         }
 
+        // 是否点击背景关闭弹窗
+        public static readonly DependencyProperty IsClickBackgroundToCloseProperty =
+            DependencyProperty.Register("IsClickBackgroundToClose", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        public bool IsClickBackgroundToClose
+        {
+            get { return (bool)GetValue(IsClickBackgroundToCloseProperty); }
+            set { SetValue(IsClickBackgroundToCloseProperty, value); }
+        }
+
+        // 是否显示
         public static readonly DependencyProperty IsShowProperty =
             DependencyProperty.Register("IsShow", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
 
@@ -187,54 +205,7 @@ namespace Rubyer
 
             if ((bool)e.NewValue)
             {
-                RoutedEventArgs args = new RoutedEventArgs(DialogBox.BeforeOpenEvent);
-                container.RaiseEvent(args);
-                container.BeforeOpenCommand?.Execute(null);
-                container.beforeOpenHandler?.Invoke(container);
-
-                // 卡片动画
-                Storyboard cardStoryboard = new Storyboard();
-
-                DoubleAnimation opacityAnimation = new DoubleAnimation
-                {
-                    From = 0,
-                    To = 1,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                };
-                Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-
-                DoubleAnimation transformAnimation = new DoubleAnimation
-                {
-                    From = 50,
-                    To = 0,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                };
-                Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-                cardStoryboard.Children.Add(opacityAnimation);
-                cardStoryboard.Children.Add(transformAnimation);
-
-                // 背景动画
-                ColorAnimation backgroundAnimation = new ColorAnimation
-                {
-                    From = Colors.Transparent,
-                    To = containerBackgroun,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(150)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-                };
-
-                backgroundAnimation.Completed += (a, b) =>
-                {
-                    container.cardBorder.Visibility = Visibility.Visible;
-                    container.cardBorder.BeginStoryboard(cardStoryboard);
-                    container.cardBorder.Focus();
-                };
-
-                container.rootBorder.Visibility = Visibility.Visible;
-                container.rootBorder.Background = new SolidColorBrush(Colors.Transparent);
-                container.rootBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+                container.OpenAnimiation(container);
             }
             else
             {
@@ -248,7 +219,79 @@ namespace Rubyer
             set { SetValue(IsShowProperty, value); }
         }
 
+        // 标题字体大小
+        public static readonly DependencyProperty TitleFontSizeProperty =
+            DependencyProperty.Register("TitleFontSize", typeof(double), typeof(DialogBox), new PropertyMetadata(default(double)));
+
+        public double TitleFontSize
+        {
+            get { return (double)GetValue(TitleFontSizeProperty); }
+            set { SetValue(TitleFontSizeProperty, value); }
+        }
+
+        // 标题水平对齐
+        public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
+            DependencyProperty.Register("TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(DialogBox), new PropertyMetadata(default(HorizontalAlignment)));
+
+        public HorizontalAlignment TitleHorizontalAlignment
+        {
+            get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
+            set { SetValue(TitleHorizontalAlignmentProperty, value); }
+        }
         #endregion
+
+        // 打开对话框动作
+        private void OpenAnimiation(DialogBox container)
+        {
+            RoutedEventArgs args = new RoutedEventArgs(DialogBox.BeforeOpenEvent);
+            container.RaiseEvent(args);
+            container.BeforeOpenCommand?.Execute(null);
+            container.beforeOpenHandler?.Invoke(container);
+
+            // 卡片动画
+            Storyboard cardStoryboard = new Storyboard();
+
+            DoubleAnimation opacityAnimation = new DoubleAnimation
+            {
+                From = 0,
+                To = 1,
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
+
+            DoubleAnimation transformAnimation = new DoubleAnimation
+            {
+                From = 50,
+                To = 0,
+                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+            Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+            cardStoryboard.Children.Add(opacityAnimation);
+            cardStoryboard.Children.Add(transformAnimation);
+
+            // 背景动画
+            ColorAnimation backgroundAnimation = new ColorAnimation
+            {
+                From = Colors.Transparent,
+                To = containerBackgroun,
+                Duration = new Duration(TimeSpan.FromMilliseconds(150)),
+                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+            };
+
+            backgroundAnimation.Completed += (a, b) =>
+            {
+                container.cardBorder.Visibility = Visibility.Visible;
+                container.cardBorder.BeginStoryboard(cardStoryboard);
+                container.cardBorder.Focus();
+            };
+
+            container.rootBorder.Visibility = Visibility.Visible;
+            container.rootBorder.Background = new SolidColorBrush(Colors.Transparent);
+            container.rootBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+        }
 
         // 关闭对话框动作
         private void CloseAnimaton()
@@ -293,13 +336,13 @@ namespace Rubyer
 
                 RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, this.closeParameter);
                 args.RoutedEvent = DialogBox.AfterCloseEvent;
-                this.RaiseEvent(args);
-                this.AfterCloseCommand?.Execute(this.closeParameter);
-                this.afterCloseHandler?.Invoke(this, this.closeParameter);
+                RaiseEvent(args);
+                AfterCloseCommand?.Execute(closeParameter);
+                afterCloseHandler?.Invoke(this, closeParameter);
 
-                this.closeParameter = null;
-                this.beforeOpenHandler = null;
-                this.afterCloseHandler = null;
+                closeParameter = null;
+                beforeOpenHandler = null;
+                afterCloseHandler = null;
             };
 
             // 背景动画完成
@@ -328,10 +371,8 @@ namespace Rubyer
             }
 
             DialogBox dialog = dialogs[identifier];
-
             dialog.Dispatcher.VerifyAccess();
-
-            dialog.Content = content;
+            dialog.DialogContent = content;
             dialog.Title = title;
             dialog.IsShowCloseButton = isShowCloseButton;
             dialog.beforeOpenHandler = openHandler;

@@ -60,52 +60,53 @@
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="170"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <rubyer:Card Margin="3 3 0 3" Padding="0 10">
-            <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
+    <rubyer:DialogBox Identifier="MainDialog" Title="主对话框" Grid.ColumnSpan="2">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <rubyer:Card Margin="3 3 0 3" Padding="0 10">
+                <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
                          SelectionChanged="ListBox_SelectionChanged" 
                          rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
                          rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}" 
                          Style="{StaticResource PopularListBox}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Name}" Margin="8 5" ToolTip="{Binding Name}"
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Margin="8 5" ToolTip="{Binding Name}"
                                            TextTrimming="CharacterEllipsis" Width="130"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-        </rubyer:Card>
-        <rubyer:Card Grid.Column="1" Margin="3">
-            <TabControl x:Name="Tab" Padding="5 10 5 5">
-                <TabItem Width="200">
-                    <TabItem.Header>
-                        <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
-                    </TabItem.Header>
-                    <ContentControl Content="{Binding CurrentMenuItem.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </TabItem>
-                <TabItem Width="100">
-                    <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" Margin="0">
-                            <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0" FontSize="14"/>
-                            <TextBlock Text="Xaml" FontSize="14"/>
-                        </StackPanel>
-                    </TabItem.Header>
-                    <Grid>
-                        <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" 
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </rubyer:Card>
+            <rubyer:Card Grid.Column="1" Margin="3">
+                <TabControl x:Name="Tab" Padding="5 10 5 5">
+                    <TabItem Width="200">
+                        <TabItem.Header>
+                            <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
+                        </TabItem.Header>
+                        <ContentControl Content="{Binding CurrentMenuItem.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </TabItem>
+                    <TabItem Width="100">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal" Margin="0">
+                                <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0" FontSize="14"/>
+                                <TextBlock Text="Xaml" FontSize="14"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                        <Grid>
+                            <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" 
                                                VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        </avalonEdit:TextEditor>
-                    </Grid>
-                </TabItem>
-            </TabControl>
-        </rubyer:Card>
-        <rubyer:MessageContainer Identifier="MessageContainer" Grid.ColumnSpan="2"/>
-        <rubyer:MessageBoxContainer Identifier="DialogContaioner" Grid.ColumnSpan="2"/>
-        <rubyer:DialogBox Identifier="MainDialog" Title="主对话框" Grid.ColumnSpan="2"/>
-    </Grid>
+                            </avalonEdit:TextEditor>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+            </rubyer:Card>
+            <rubyer:MessageContainer Identifier="MessageContainer" Grid.ColumnSpan="2"/>
+            <rubyer:MessageBoxContainer Identifier="DialogContaioner" Grid.ColumnSpan="2"/>
+        </Grid>
+    </rubyer:DialogBox>
 </rubyer:RubyerWindow>

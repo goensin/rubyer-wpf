@@ -63,12 +63,7 @@
 
     <!--BorderThickness-->
     <system:Double x:Key="DefaultBorderThickness">1.0</system:Double>
-    
-    <!--IconFont-->
-    <FontFamily x:Key="IconFont" >
-        pack://application:,,,/Rubyer;component/Assets/#iconfont
-    </FontFamily>
-    
+        
     <!--FontSize-->
     <system:Double x:Key="DefaultFontSize">13</system:Double>
     <system:Double x:Key="TitleFontSize">15</system:Double>

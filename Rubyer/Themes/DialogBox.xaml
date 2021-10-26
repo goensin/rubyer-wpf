@@ -17,42 +17,54 @@
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
         <Setter Property="Margin" Value="0"/>
-        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Padding" Value="30 20"/>
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="IsShowCloseButton" Value="True" />
+        <Setter Property="IsClickBackgroundToClose" Value="True" />
+        <Setter Property="TitleFontSize" Value="17" />
+        <Setter Property="TitleHorizontalAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogBox">
-                    <Border x:Name="PART_RootBorder" Visibility="Hidden">
-                        <Border x:Name="PART_CardBorder" Background="{TemplateBinding Background}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
-                                Visibility="Hidden" Effect="{StaticResource AllDirectionEffect}"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                            <Border.RenderTransform>
-                                <TranslateTransform />
-                            </Border.RenderTransform>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <DockPanel>
-                                    <TextBlock Text="{TemplateBinding Title}" FontSize="16" DockPanel.Dock="Left" Margin="15 5"/>
-                                    <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Width="32"
-                                            HorizontalAlignment="Right" Foreground="{DynamicResource DefaultForeground}"
-                                            Visibility="{TemplateBinding IsShowCloseButton,Converter={StaticResource boolToVisibility}}">
-                                        <rubyer:Icon Type="CloseLine"/>
-                                    </Button>
-                                </DockPanel>
-
-                                <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Row="1"
-                                                  RecognizesAccessKey="True" Margin="{TemplateBinding Padding}"
+                    <Grid>
+                        <ContentPresenter x:Name="contentPresenter" Focusable="False" 
+                                                  RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                            </Grid>
+
+                        <Border x:Name="PART_RootBorder" Visibility="Hidden">
+                            <Border x:Name="PART_CardBorder" Background="{TemplateBinding Background}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    Visibility="Hidden" Effect="{StaticResource AllDirectionEffect}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    ClipToBounds="True">
+                                <Border.RenderTransform>
+                                    <TranslateTransform />
+                                </Border.RenderTransform>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid>
+                                        <TextBlock Text="{TemplateBinding Title}" Margin="15 5"
+                                                   FontSize="{TemplateBinding TitleFontSize}" 
+                                                   HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"/>
+                                        <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Width="32" 
+                                                HorizontalAlignment="Right" Foreground="{TemplateBinding Foreground}"
+                                                Visibility="{TemplateBinding IsShowCloseButton,Converter={StaticResource boolToVisibility}}">
+                                            <rubyer:Icon Type="CloseLine"/>
+                                        </Button>
+                                    </Grid>
+                                    <ContentControl Focusable="False" Grid.Row="1"
+                                                    Content="{TemplateBinding DialogContent}" 
+                                                    Margin="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                </Grid>
+                            </Border>
                         </Border>
-                    </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
