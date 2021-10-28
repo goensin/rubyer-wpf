@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE0130: 命名空间与文件夹结构不匹配
+dotnet_style_namespace_match_folder = false

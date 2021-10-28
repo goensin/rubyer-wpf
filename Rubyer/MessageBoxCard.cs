@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -29,6 +19,8 @@ namespace Rubyer
 
         public static readonly RoutedEvent ReturnResultEvent;
 
+        private MessageBoxContainer ownerContaioner;
+
         static MessageBoxCard()
         {
             ReturnResultEvent = EventManager.RegisterRoutedEvent("ReturnResult", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
@@ -42,9 +34,9 @@ namespace Rubyer
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                CloseMessageBoxCardAnimaton();
+                MessageBoxR.CloseInContainer(ownerContaioner, this);
                 MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
-                this.RaiseEvent(eventArgs);
+                RaiseEvent(eventArgs);
             };
 
             if (IsShowOk)
@@ -52,9 +44,9 @@ namespace Rubyer
                 ButtonBase okButton = GetTemplateChild(OkButtonPartName) as ButtonBase;
                 okButton.Click += (sender, args) =>
                 {
-                    CloseMessageBoxCardAnimaton();
+                    MessageBoxR.CloseInContainer(ownerContaioner, this);
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.OK, this);
-                    this.RaiseEvent(eventArgs);
+                    RaiseEvent(eventArgs);
                 };
             }
 
@@ -63,9 +55,9 @@ namespace Rubyer
                 ButtonBase cancelButton = GetTemplateChild(CancelButtonPartName) as ButtonBase;
                 cancelButton.Click += (sender, args) =>
                 {
-                    CloseMessageBoxCardAnimaton();
+                    MessageBoxR.CloseInContainer(ownerContaioner, this);
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Cancel, this);
-                    this.RaiseEvent(eventArgs);
+                    RaiseEvent(eventArgs);
                 };
             }
 
@@ -74,9 +66,9 @@ namespace Rubyer
                 ButtonBase yesButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
                 yesButton.Click += (sender, args) =>
                 {
-                    CloseMessageBoxCardAnimaton();
+                    MessageBoxR.CloseInContainer(ownerContaioner, this);
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Yes, this);
-                    this.RaiseEvent(eventArgs);
+                    RaiseEvent(eventArgs);
                 };
             }
 
@@ -85,71 +77,24 @@ namespace Rubyer
                 ButtonBase noButton = GetTemplateChild(NoButtonPartName) as ButtonBase;
                 noButton.Click += (sender, args) =>
                 {
-                    CloseMessageBoxCardAnimaton();
+                    MessageBoxR.CloseInContainer(ownerContaioner, this);
                     MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
-                    this.RaiseEvent(eventArgs);
+                    RaiseEvent(eventArgs);
                 };
             }
-
         }
 
-        private void CloseMessageBoxCardAnimaton()
-        {
-            if (VisualTreeHelper.GetParent(this) is MessageBoxContainer container)
-            {
-                // 退出动画
-                Storyboard exitStoryboard = new Storyboard();
-
-                DoubleAnimation exitOpacityAnimation = new DoubleAnimation
-                {
-                    From = 1,
-                    To = 0,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-                };
-                Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
-
-                DoubleAnimation exitTransformAnimation = new DoubleAnimation
-                {
-                    From = 0,
-                    To = 50,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-                };
-                Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-                exitStoryboard.Children.Add(exitOpacityAnimation);
-                exitStoryboard.Children.Add(exitTransformAnimation);
-
-                // 背景动画
-                ColorAnimation backgroundAnimation = new ColorAnimation
-                {
-                    To = Colors.Transparent,
-                    Duration = new Duration(TimeSpan.FromMilliseconds(150)),
-                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-                };
-
-                // 动画完成
-                exitStoryboard.Completed += (a, b) =>
-                {
-                    container.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
-                    container.Child = null;
-                };
-
-                backgroundAnimation.Completed += (a, b) =>
-                {
-                    container.Visibility = Visibility.Hidden;
-                };
-
-                this.BeginStoryboard(exitStoryboard);    // 执行动画
-            }
-        }
+        /// <summary>
+        /// 设置所处容器
+        /// </summary>
+        /// <param name="container">信息框容器</param>
+        internal void SetOwnerContainer(MessageBoxContainer container) => ownerContaioner = container;
 
         #region 事件
         public event MessageBoxResultRoutedEventHandler ReturnResult
         {
-            add { base.AddHandler(MessageBoxCard.ReturnResultEvent, value); }
-            remove { base.RemoveHandler(MessageBoxCard.ReturnResultEvent, value); }
+            add { AddHandler(ReturnResultEvent, value); }
+            remove { RemoveHandler(ReturnResultEvent, value); }
         }
         #endregion
 
@@ -261,9 +206,7 @@ namespace Rubyer
 
         private static void OnMessageBoxButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            MessageBoxCard card = d as MessageBoxCard;
-
-            if (card != null)
+            if (d is MessageBoxCard card)
             {
                 switch ((MessageBoxButton)e.NewValue)
                 {

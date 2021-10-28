@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -30,7 +32,12 @@ namespace RubyerDemo.Views
 
 
         public static readonly DependencyProperty TestPasswordProperty =
-            DependencyProperty.Register("TestPassword", typeof(string), typeof(InputBox), new PropertyMetadata(default(string)));
+            DependencyProperty.Register("TestPassword", typeof(string), typeof(InputBox), new PropertyMetadata(default(string), OnTestPasswordChanged));
+
+        private static void OnTestPasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            Debug.WriteLine($"password: {e.NewValue}");
+        }
 
         public string TestPassword
         {

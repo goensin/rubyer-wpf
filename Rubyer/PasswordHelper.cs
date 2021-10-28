@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -20,7 +19,7 @@ namespace Rubyer
 
                 if (passwordBox.Password.Length > 0)
                 {
-                    passwordBox.GetType()
+                    _ = passwordBox.GetType()
                    .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
                    .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 0 });
                 }

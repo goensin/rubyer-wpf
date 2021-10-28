@@ -20,7 +20,6 @@ namespace Rubyer
         private Action<DialogBox> beforeOpenHandler;
         private Action<DialogBox, object> afterCloseHandler;
 
-        private static Color containerBackgroun;
         private Border rootBorder;
         private Border cardBorder;
         private object closeParameter;
@@ -33,8 +32,6 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            containerBackgroun = (Color)Application.Current.Resources["DialogBackground"];
 
             _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
             _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
@@ -273,10 +270,9 @@ namespace Rubyer
             cardStoryboard.Children.Add(transformAnimation);
 
             // 背景动画
-            ColorAnimation backgroundAnimation = new ColorAnimation
+            DoubleAnimation backgroundAnimation = new DoubleAnimation
             {
-                From = Colors.Transparent,
-                To = containerBackgroun,
+                To = 1,
                 Duration = new Duration(TimeSpan.FromMilliseconds(150)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
@@ -285,12 +281,11 @@ namespace Rubyer
             {
                 container.cardBorder.Visibility = Visibility.Visible;
                 container.cardBorder.BeginStoryboard(cardStoryboard);
-                container.cardBorder.Focus();
+                _ = container.cardBorder.Focus();
             };
 
             container.rootBorder.Visibility = Visibility.Visible;
-            container.rootBorder.Background = new SolidColorBrush(Colors.Transparent);
-            container.rootBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+            container.rootBorder.BeginAnimation(OpacityProperty, backgroundAnimation);
         }
 
         // 关闭对话框动作
@@ -306,7 +301,7 @@ namespace Rubyer
                 Duration = new Duration(TimeSpan.FromMilliseconds(200)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
-            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
+            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(OpacityProperty));
 
             DoubleAnimation exitTransformAnimation = new DoubleAnimation
             {
@@ -321,9 +316,9 @@ namespace Rubyer
             exitStoryboard.Children.Add(exitTransformAnimation);
 
             // 背景动画
-            ColorAnimation backgroundAnimation = new ColorAnimation
+            DoubleAnimation backgroundAnimation = new DoubleAnimation
             {
-                To = Colors.Transparent,
+                To = 0,
                 Duration = new Duration(TimeSpan.FromMilliseconds(150)),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
             };
@@ -331,11 +326,11 @@ namespace Rubyer
             // 退出动画完成
             exitStoryboard.Completed += (a, b) =>
             {
-                rootBorder.Background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
+                rootBorder.BeginAnimation(OpacityProperty, backgroundAnimation);
                 cardBorder.Visibility = Visibility.Hidden;
 
-                RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, this.closeParameter);
-                args.RoutedEvent = DialogBox.AfterCloseEvent;
+                RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, closeParameter);
+                args.RoutedEvent = AfterCloseEvent;
                 RaiseEvent(args);
                 AfterCloseCommand?.Execute(closeParameter);
                 afterCloseHandler?.Invoke(this, closeParameter);
@@ -380,36 +375,81 @@ namespace Rubyer
             dialog.IsShow = true;
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
         public static void Show(string identifier, object content)
         {
             Show(identifier, content, "", null, null, true);
         }
-
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="title">标题</param>
         public static void Show(string identifier, object content, string title)
         {
             Show(identifier, content, title, null, null, true);
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="title">标题</param>
+        /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
         public static void Show(string identifier, object content, string title, bool isShowCloseButton)
         {
             Show(identifier, content, title, null, null, isShowCloseButton);
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="closeHandle">关闭后处理程序</param>
         public static void Show(string identifier, object content, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, "", null, closeHandle, true);
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="openHandler">打开前处理程序</param>
+        /// <param name="closeHandle">关闭后处理程序</param>
         public static void Show(string identifier, object content, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, "", openHandler, closeHandle, true);
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="closeHandle">关闭后处理程序</param>
+        /// <param name="title">标题</param>
         public static void Show(string identifier, object content, string title, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, title, null, closeHandle, true);
         }
 
+        /// <summary>
+        /// 显示指定对话框
+        /// </summary>
+        /// <param name="identifier">DialogBox 标识</param>
+        /// <param name="content">内容</param>
+        /// <param name="openHandler">打开前处理程序</param>
+        /// <param name="closeHandle">关闭后处理程序</param>
+        /// <param name="title">标题</param>
         public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, title, openHandler, closeHandle, true);

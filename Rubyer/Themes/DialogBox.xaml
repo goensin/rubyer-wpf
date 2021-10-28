@@ -31,7 +31,8 @@
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
-                        <Border x:Name="PART_RootBorder" Visibility="Hidden">
+                        <Border x:Name="PART_RootBorder" Visibility="Hidden"
+                                Opacity="0" Background="{StaticResource DialogBackground}">
                             <Border x:Name="PART_CardBorder" Background="{TemplateBinding Background}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
