@@ -1,334 +1,457 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
     public class Message
     {
-        private static Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
-        private static Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
-        private static Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
-        private static Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
+        private const int TransitionTime = 300;
+        private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
+        private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
+        private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
+        private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
+        public static Dictionary<string, MessageContainer> containers = new Dictionary<string, MessageContainer>();
 
         #region 全局
+
+        /// <summary>
+        /// 全局显示
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            if (millisecondTimeOut <= 0)
-            {
-                isClearable = true;
-            }
-
             MessageWindow messageWindow = MessageWindow.GetInstance();
             messageWindow.Dispatcher.VerifyAccess();
-
-            MessageCard messageCard;
-            switch (type)
+            MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
+            CancellationTokenSource cts = new CancellationTokenSource();
+            int realTimeOut = millisecondTimeOut + TransitionTime;
+            messageCard.Close += (sender, e) =>
             {
-                default:
-                case MessageType.None:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable
-                    };
-                    break;
-                case MessageType.Info:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = infoStyle
-                    };
-                    break;
-                case MessageType.Warning:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = warningStyle
-                    };
-                    break;
-                case MessageType.Success:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = successStyle
-                    };
-                    break;
-                case MessageType.Error:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = errorStyle
-                    };
-                    break;
-            }
+                messageWindow.RemoveMessageCard(messageCard);
+            };
 
-            messageWindow.AddMessageCard(messageCard, millisecondTimeOut);
+            messageCard.MouseEnter += (sender, e) =>
+            {
+                cts.Cancel();
+            };
+
+            messageCard.MouseLeave += (sender, e) =>
+            {
+                cts = new CancellationTokenSource();
+                DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+            };
+
             messageWindow.Show();
+            messageWindow.AddMessageCard(messageCard);
+            DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
         }
 
+        /// <summary>
+        /// 全局显示
+        /// </summary>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.None, element, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示信息
+        /// </summary>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowInfo(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Info, element, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示成功
+        /// </summary>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowSuccess(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Success, element, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示警告
+        /// </summary>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowWarning(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Warning, element, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示错误
+        /// </summary>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowError(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Error, element, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示
+        /// </summary>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示信息
+        /// </summary>
+        /// <param name="type">类型</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowInfo(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示成功
+        /// </summary>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowSuccess(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示警告
+        /// </summary>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowWarning(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局显示错误
+        /// </summary>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowError(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
         #endregion
 
-
         #region 指定容器
-        public static void Show(string containerIdentifier, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+
+        /// <summary>
+        /// 容器内显示
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="type">类型</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ShowInContainer(string containerIdentifier, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            if (!MessageContainer.Containers.ContainsKey(containerIdentifier))
+            if (!containers.ContainsKey(containerIdentifier))
             {
-                return;
+                throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息框容器");
             }
 
-            if (millisecondTimeOut <= 0)
+            MessageContainer container = containers[containerIdentifier];
+            container.Dispatcher.VerifyAccess();
+            MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
+            CancellationTokenSource cts = new CancellationTokenSource();
+            int realTimeOut = millisecondTimeOut + TransitionTime;
+            messageCard.Close += (sender, e) =>
             {
-                isClearable = true;
+                container.RemoveMessageCard(messageCard);
+            };
+
+            messageCard.MouseEnter += (sender, e) =>
+            {
+                cts.Cancel();
+            };
+
+            messageCard.MouseLeave += (sender, e) =>
+            {
+                cts = new CancellationTokenSource();
+                DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+            };
+
+            container.AddMessageCard(messageCard);
+            DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+        }
+
+        /// <summary>
+        /// 容器内显示
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ShowInContainer(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.None, element, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示信息
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void InfoInContainer(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Info, element, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示成功
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void SuccessInContainer(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Success, element, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示警告
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void WarningInContainer(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Warning, element, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示错误
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="element">内容元素</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ErrorInContainer(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Error, element, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="type">类型</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ShowInContainer(string containerIdentifier, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ShowInContainer(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示信息
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void InfoInContainer(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示成功
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void SuccessInContainer(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示警告
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void WarningInContainer(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 容器内显示错误
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
+        /// <param name="isClearable">是否显示关闭按钮</param>
+        public static void ErrorInContainer(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        {
+            ShowInContainer(containerIdentifier, MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+        }
+
+
+        #endregion
+
+        /// <summary>
+        /// 更新容器
+        /// </summary>
+        /// <param name="container">容器</param>
+        /// <param name="identify">标识</param>
+        internal static void UpdateContainer(MessageContainer container, string identify)
+        {
+            if (containers.ContainsKey(identify))
+            {
+                _ = containers.Remove(identify);
             }
 
-            Panel messagePanel = MessageContainer.Containers[containerIdentifier];
-            messagePanel.Dispatcher.VerifyAccess();
+            containers.Add(identify, container);
+        }
 
-            MessageCard messageCard;
+        private static MessageCard GetMessageCard(MessageType type, UIElement element, int millisecondTimeOut, bool isClearable)
+        {
+            isClearable = millisecondTimeOut <= 0 || isClearable;
+            MessageCard messageCard = new MessageCard
+            {
+                Content = element,
+                IsClearable = isClearable,
+            };
+
             switch (type)
             {
                 default:
                 case MessageType.None:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable
-                    };
                     break;
                 case MessageType.Info:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = infoStyle
-                    };
+                    messageCard.Style = infoStyle;
                     break;
                 case MessageType.Warning:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = warningStyle
-                    };
+                    messageCard.Style = warningStyle;
                     break;
                 case MessageType.Success:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = successStyle
-                    };
+                    messageCard.Style = successStyle;
                     break;
                 case MessageType.Error:
-                    messageCard = new MessageCard
-                    {
-                        Content = element,
-                        IsClearable = isClearable,
-                        Style = errorStyle
-                    };
+                    messageCard.Style = errorStyle;
                     break;
             }
 
-            messagePanel.Children.Add(messageCard);
+            return messageCard;
+        }
 
-            // 进入动画
-            Storyboard enterStoryboard = new Storyboard();
-
-            DoubleAnimation opacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-
-            DoubleAnimation transformAnimation = new DoubleAnimation
-            {
-                From = -30,
-                To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-            enterStoryboard.Children.Add(opacityAnimation);
-            enterStoryboard.Children.Add(transformAnimation);
-
-            // 退出动画
-            Storyboard exitStoryboard = new Storyboard();
-
-            DoubleAnimation exitOpacityAnimation = new DoubleAnimation
-            {
-                From = 1,
-                To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-
-            DoubleAnimation exitTransformAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = -30,
-                Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-            exitStoryboard.Children.Add(exitOpacityAnimation);
-            exitStoryboard.Children.Add(exitTransformAnimation);
-
+        /// <summary>
+        /// 延期关闭消息卡片
+        /// </summary>
+        /// <param name="millisecondTimeOut">显示时间，为 0 时不自动关闭</param>
+        /// <param name="messageCard">消息卡片</param>
+        /// <param name="token">取消令牌</param>
+        private static void DelayCloseMessageCard(int millisecondTimeOut, MessageCard messageCard, CancellationToken token)
+        {
             if (millisecondTimeOut > 0)
             {
-                // 进入动画完成
-                enterStoryboard.Completed += async (sender, e) =>
+                _ = Task.Run(async () =>
                 {
-                    await Task.Run(() =>
+                    await Task.Delay(millisecondTimeOut, token);
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
-                        Thread.Sleep(millisecondTimeOut);
+                        messageCard.IsShow = false;
                     });
-
-                    messageCard.BeginStoryboard(exitStoryboard);
-                };
-
+                }, token);
             }
-
-            // 退出动画完成
-            exitStoryboard.Completed += (sender, e) =>
-            {
-                messagePanel.Children.Remove(messageCard);
-            };
-
-            messageCard.BeginStoryboard(enterStoryboard);
         }
-
-        public static void Show(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.None, element, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowInfo(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Info, element, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowSuccess(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Success, element, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowWarning(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Warning, element, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowError(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Error, element, millisecondTimeOut, isClearable);
-        }
-
-        public static void Show(string containerIdentifier, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        public static void Show(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowInfo(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowSuccess(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowWarning(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        public static void ShowError(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-        #endregion
     }
 
+    /// <summary>
+    /// 消息类型
+    /// </summary>
     public enum MessageType
     {
+        /// <summary>
+        /// 无
+        /// </summary>
+        [Description("无")]
         None = 0,
+
+        /// <summary>
+        /// 信息
+        /// </summary>
+        [Description("信息")]
         Info,
+
+        /// <summary>
+        /// 成功
+        /// </summary>
+        [Description("成功")]
         Success,
+
+        /// <summary>
+        /// 警告
+        /// </summary>
+        [Description("警告")]
         Warning,
+
+        /// <summary>
+        /// 错误
+        /// </summary>
+        [Description("错误")]
         Error
     }
 }

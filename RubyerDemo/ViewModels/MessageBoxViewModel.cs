@@ -16,7 +16,7 @@ namespace RubyerDemo.ViewModels
                     break;
                 case "2":
                     var result = MessageBoxR.Confirm("是否删除改数据?", "提示");
-                    Message.Show("MessageContainer", $"返回结果为 {result}");
+                    Message.ShowInContainer("MessageContainer", $"返回结果为 {result}");
                     break;
                 case "3":
                     MessageBoxR.Info("消息消息消息消息消息消息", "标题名称", MessageBoxButton.YesNo);
@@ -45,7 +45,7 @@ namespace RubyerDemo.ViewModels
                     break;
                 case "2":
                     var result = await MessageBoxR.ConfirmInContainer("DialogContaioner", "是否删除改数据?", "提示");
-                    Message.Show("MessageContainer", $"返回结果为 {result}");
+                    Message.ShowInContainer("MessageContainer", $"返回结果为 {result}");
                     break;
                 case "3":
                     await MessageBoxR.InfoInContainer("DialogContaioner", "消息消息消息消息消息消息", "标题名称", MessageBoxButton.YesNo);

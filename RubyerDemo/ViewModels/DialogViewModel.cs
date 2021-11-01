@@ -77,7 +77,7 @@ namespace RubyerDemo.ViewModels
         // 2# 对话框打开前
         private void BeforeDialog3OpenExecute(object obj)
         {
-            Message.Show("MessageContainer", "打开 3# 对话框");
+            Message.ShowInContainer("MessageContainer", "打开 3# 对话框");
         }
 
         private RelayCommand afterDialog3Close;

@@ -106,8 +106,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
                     <DockPanel Margin="{TemplateBinding Padding}">
-                        <ItemsPresenter  DockPanel.Dock="Right" Margin="10 0"
-                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <ItemsPresenter DockPanel.Dock="Right" Margin="10 0"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
                         
                         <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
                             <TextBlock VerticalAlignment="Center" Text="总" Margin="5 0" 

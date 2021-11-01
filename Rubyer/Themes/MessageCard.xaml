@@ -8,7 +8,10 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    
+
+    <BeginStoryboard x:Key="stroy">
+        <Storyboard/>
+    </BeginStoryboard>
 
     <Style x:Key="RubyerMessageCard" TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
@@ -26,19 +29,61 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="MinHeight" Value="40"/>
         <Setter Property="MinWidth" Value="200"/>
-        <Setter Property="IsShwoIcon" Value="False"/>
         <Setter Property="FontSize" Value="14"/>
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="IsShwoIcon" Value="False"/>
+        <Setter Property="IsShow" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageCard}">
-                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
+                    <Border x:Name="rootBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}"
                             CornerRadius="{TemplateBinding CornerRadius}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ShowState">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Close">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseIn"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Open">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut"/>
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.3" From="0.01" To="1"
+                                                             Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"/>
+                                            <DoubleAnimation Duration="0:0:0.3" From="-30" To="0"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"/>
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Close">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"
+                                                         Duration="0" To="0"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"
+                                                         Duration="0" To="-30"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"
+                                                         Duration="0" To="1"/>
+                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"
+                                                         Duration="0" To="0"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Border.RenderTransform>
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
@@ -58,12 +103,17 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="8 0"/>
-                            <Button x:Name="clearButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
+                            <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
                                     Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
                                 <rubyer:Icon Type="CloseLine"/>
                             </Button>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Opacity" SourceName="rootBorder" Value="0">
+                            <Setter Property="IsClosed" Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

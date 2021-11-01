@@ -30,12 +30,12 @@ namespace Rubyer
         public void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
-            messageBoxPanel.Children.Add(card);
+            _ = messageBoxPanel.Children.Add(card);
         }
 
         private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArge e)
         {
-            Storyboard unloadStoryboard = (Storyboard)this.Resources["UnLoadFadeUp"];
+            Storyboard unloadStoryboard = (Storyboard)Resources["UnLoadFadeUp"];
             unloadStoryboard.Completed += (a, b) => {
                 messageBoxPanel.Children.Remove(e.Card);
                 DialogResult = true;
@@ -47,7 +47,7 @@ namespace Rubyer
 
         private void Window_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            this.Focus();
+            Focus();
         }
 
         private void Window_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

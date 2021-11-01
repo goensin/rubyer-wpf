@@ -36,6 +36,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PageBar.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageContainer.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ExpanderResizer.xaml"/>

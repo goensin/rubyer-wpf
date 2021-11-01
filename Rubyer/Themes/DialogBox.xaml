@@ -28,8 +28,8 @@
                 <ControlTemplate TargetType="rubyer:DialogBox">
                     <Grid>
                         <ContentPresenter x:Name="contentPresenter" Focusable="False" 
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
 
                         <Border x:Name="PART_RootBorder" Visibility="Hidden"
                                 Opacity="0" Background="{StaticResource DialogBackground}">
@@ -70,6 +70,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
 </ResourceDictionary>

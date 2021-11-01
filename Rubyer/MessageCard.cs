@@ -1,14 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 消息卡片
+    /// </summary>
+    [TemplatePart(Name = CloseButtonName, Type = typeof(Button))]
+    [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
+    [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
     public class MessageCard : ContentControl
     {
+        public const string CloseButtonName = "PART_CloseButton";
+        public const string OpenStateName = "Open";
+        public const string CloseStateName = "Close";
+
         public static readonly RoutedEvent CloseEvent;
 
         static MessageCard()
@@ -17,12 +25,29 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageCard), new FrameworkPropertyMetadata(typeof(MessageCard)));
         }
 
+        public override void OnApplyTemplate()
+        {
+            if (GetTemplateChild(CloseButtonName) is ButtonBase closeButton)
+            {
+                closeButton.Click += (sender, e) =>
+                {
+                    GoToCloseState(this);
+                };
+            }
+
+            GoToOpenState(this);
+            base.OnApplyTemplate();
+        }
+
         #region 事件
-        // 关闭消息事件
+
+        /// <summary>
+        /// 关闭消息事件
+        /// </summary>
         public event RoutedEventHandler Close
         {
-            add { base.AddHandler(MessageCard.CloseEvent, value); }
-            remove { base.RemoveHandler(MessageCard.CloseEvent, value); }
+            add { AddHandler(CloseEvent, value); }
+            remove { RemoveHandler(CloseEvent, value); }
         }
         #endregion
 
@@ -36,7 +61,6 @@ namespace Rubyer
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-
         public static readonly DependencyProperty ThemeColorBrushProperty =
             DependencyProperty.Register("ThemeColorBrush", typeof(SolidColorBrush), typeof(MessageCard), new PropertyMetadata(default(SolidColorBrush)));
 
@@ -45,7 +69,6 @@ namespace Rubyer
             get { return (SolidColorBrush)GetValue(ThemeColorBrushProperty); }
             set { SetValue(ThemeColorBrushProperty, value); }
         }
-
 
         public static readonly DependencyProperty IconTypeProperty =
             DependencyProperty.Register("IconType", typeof(IconType), typeof(MessageCard), new PropertyMetadata(default(IconType)));
@@ -56,7 +79,6 @@ namespace Rubyer
             set { SetValue(IconTypeProperty, value); }
         }
 
-
         public static readonly DependencyProperty IsShwoIconProperty =
             DependencyProperty.Register("IsShwoIcon", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
 
@@ -66,9 +88,8 @@ namespace Rubyer
             set { SetValue(IsShwoIconProperty, value); }
         }
 
-
         public static readonly DependencyProperty IsClearableProperty =
-            DependencyProperty.Register("IsClearable", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool), OnIsClearbleChanged));
+            DependencyProperty.Register("IsClearable", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
 
         public bool IsClearable
         {
@@ -76,79 +97,59 @@ namespace Rubyer
             set { SetValue(IsClearableProperty, value); }
         }
 
-        private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        public static readonly DependencyProperty IsShowProperty =
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool), OnIsShowChanged));
+
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var messageCard = d as MessageCard;
+            if (messageCard.IsShow)
+            {
+                GoToOpenState(messageCard);
+            }
+            else
+            {
+                GoToCloseState(messageCard);
+            }
+        }
+
+        public bool IsShow
+        {
+            get { return (bool)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsClosedProperty =
+            DependencyProperty.Register("IsClosed", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool), OnIsClosedChanged));
+
+        private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is MessageCard messageCard)
             {
-                RoutedEventHandler handle = (sender, args) =>
+                if (messageCard.IsClosed)
                 {
-                    if (VisualTreeHelper.GetParent(messageCard) is Panel panel)
-                    {
-                        // 退出动画
-                        Storyboard exitStoryboard = new Storyboard();
-
-                        DoubleAnimation exitOpacityAnimation = new DoubleAnimation
-                        {
-                            From = 1,
-                            To = 0,
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-                        };
-                        Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(FrameworkElement.OpacityProperty));
-
-                        DoubleAnimation exitTransformAnimation = new DoubleAnimation
-                        {
-                            From = 0,
-                            To = -30,
-                            Duration = new Duration(TimeSpan.FromMilliseconds(300)),
-                            EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-                        };
-                        Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-                        exitStoryboard.Children.Add(exitOpacityAnimation);
-                        exitStoryboard.Children.Add(exitTransformAnimation);
-
-                        // 动画完成
-                        exitStoryboard.Completed += (a, b) =>
-                        {
-                            panel.Children.Remove(messageCard);
-                            RoutedEventArgs eventArgs = new RoutedEventArgs(MessageCard.CloseEvent, messageCard);
-                            messageCard.RaiseEvent(eventArgs);
-                        };
-
-                        messageCard.BeginStoryboard(exitStoryboard);    // 执行动画
-                    }
-                };
-
-                messageCard.Loaded += (sender, arg) =>
-                {
-                    if (messageCard.Template.FindName("clearButton", messageCard) is Button clearButton)
-                    {
-                        if (messageCard.IsClearable)
-                        {
-                            clearButton.Click += handle;
-                        }
-                        else
-                        {
-                            clearButton.Click -= handle;
-                        }
-                    }
-                };
-
-                messageCard.Unloaded += (sender, arg) =>
-                {
-                    if (messageCard.Template.FindName("clearButton", messageCard) is Button clearButton)
-                    {
-                        if (messageCard.IsClearable)
-                        {
-                            clearButton.Click -= handle;
-                        }
-                    }
-                };
+                    RoutedEventArgs eventArgs = new RoutedEventArgs(CloseEvent, messageCard);
+                    messageCard.RaiseEvent(eventArgs);
+                }
             }
         }
+
+        public bool IsClosed
+        {
+            get { return (bool)GetValue(IsClosedProperty); }
+            set { SetValue(IsClosedProperty, value); }
+        }
+
         #endregion
 
+        private static void GoToOpenState(MessageCard messageCard)
+        {
+            _ = VisualStateManager.GoToState(messageCard, OpenStateName, true);
+        }
 
+        private static void GoToCloseState(MessageCard messageCard)
+        {
+            _ = VisualStateManager.GoToState(messageCard, CloseStateName, true);
+        }
     }
 }

@@ -25,7 +25,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="container"></param>
         /// <param name="identify"></param>
-        internal static void UpdateMessageBoxContainer(MessageBoxContainer container, string identify)
+        internal static void UpdateContainer(MessageBoxContainer container, string identify)
         {
             if (containers.ContainsKey(identify))
             {

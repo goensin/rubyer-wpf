@@ -33,7 +33,7 @@ namespace Rubyer
             if (d is MessageBoxContainer container)
             {
                 string identify = e.NewValue.ToString();
-                MessageBoxR.UpdateMessageBoxContainer(container, identify);
+                MessageBoxR.UpdateContainer(container, identify);
             }
         }
     }
