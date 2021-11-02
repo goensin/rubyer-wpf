@@ -32,7 +32,6 @@ namespace Rubyer
             messageWindow.Dispatcher.VerifyAccess();
             MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
-            int realTimeOut = millisecondTimeOut + TransitionTime;
             messageCard.Close += (sender, e) =>
             {
                 messageWindow.RemoveMessageCard(messageCard);
@@ -46,12 +45,12 @@ namespace Rubyer
             messageCard.MouseLeave += (sender, e) =>
             {
                 cts = new CancellationTokenSource();
-                DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+                DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
             };
 
             messageWindow.Show();
             messageWindow.AddMessageCard(messageCard);
-            DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+            DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
         }
 
         /// <summary>
@@ -194,7 +193,6 @@ namespace Rubyer
             container.Dispatcher.VerifyAccess();
             MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
-            int realTimeOut = millisecondTimeOut + TransitionTime;
             messageCard.Close += (sender, e) =>
             {
                 container.RemoveMessageCard(messageCard);
@@ -208,11 +206,11 @@ namespace Rubyer
             messageCard.MouseLeave += (sender, e) =>
             {
                 cts = new CancellationTokenSource();
-                DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+                DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
             };
 
             container.AddMessageCard(messageCard);
-            DelayCloseMessageCard(realTimeOut, messageCard, cts.Token);
+            DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
         }
 
         /// <summary>
@@ -409,7 +407,7 @@ namespace Rubyer
             {
                 _ = Task.Run(async () =>
                 {
-                    await Task.Delay(millisecondTimeOut, token);
+                    await Task.Delay(millisecondTimeOut + TransitionTime, token);
                     Application.Current.Dispatcher.Invoke(() =>
                     {
                         messageCard.IsShow = false;

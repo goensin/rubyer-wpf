@@ -103,7 +103,7 @@
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="8 0"/>
-                            <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding ThemeColorBrush}"
+                            <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding Foreground}"
                                     Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
                                 <rubyer:Icon Type="CloseLine"/>
                             </Button>

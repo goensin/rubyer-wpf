@@ -11,7 +11,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
     <Style x:Key="RubyerBadge" TargetType="{x:Type rubyer:Badge}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0" />

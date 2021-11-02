@@ -95,7 +95,6 @@
                                 </Border>
                             </StackPanel>
                             <ContentPresenter x:Name="contentPresenter" Focusable="False" 
-                                          
                                           Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" 
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
