@@ -10,8 +10,7 @@
                      Title="{Binding Title}"
                      Width="1050"
                      Height="660"
-                     d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
-                                                      IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type=vm:MainViewModel,IsDesignTimeCreatable=True}"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
                      IsShowShadow="True"
@@ -34,16 +33,15 @@
                        Margin="10 0"
                        VerticalAlignment="Center"
                        Source="{Binding Icon, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                <TextBlock Foreground="{StaticResource PrimaryForeground}" Text="{Binding Title}" />
+                <TextBlock Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
             </StackPanel>
             <Menu Grid.Column="1"
                   HorizontalAlignment="Right"
-                  Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem ItemsSource="{Binding ThemeColors}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="{DynamicResource PrimaryForeground}" Text="主题" />
+                            <TextBlock Text="主题" />
                             <rubyer:Icon Margin="5 0 0 0"
                                          Foreground="{DynamicResource Accent}"
                                          Type="TShirtFill" />
@@ -62,13 +60,13 @@
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Foreground="{DynamicResource PrimaryForeground}" Text="帮助" />
+                            <TextBlock Text="帮助" />
                             <rubyer:Icon Margin="5 0 0 0"
-                                         Foreground="{DynamicResource PrimaryForeground}"
                                          Type="QuestionFill" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Command="{Binding OpenAboutDialog}" Header="关于" />
+                    <MenuItem Command="{Binding OpenAboutDialog}" Header="关于"
+                              Foreground="{DynamicResource DefaultForeground}"/>
                 </MenuItem>
             </Menu>
         </Grid>
@@ -108,9 +106,8 @@
                                 <TabItem.Header>
                                     <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
                                 </TabItem.Header>
-                                <ContentControl Margin="191 0 190.706 38.899"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Bottom"
+                                <ContentControl HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
                                                 Content="{Binding CurrentMenuItem.Content}" />
                             </TabItem>
                             <TabItem Width="100">
@@ -128,7 +125,6 @@
                                                            FontSize="10pt"
                                                            HorizontalScrollBarVisibility="Auto"
                                                            ShowLineNumbers="True"
-                                                           SyntaxHighlighting=".xaml"
                                                            VerticalScrollBarVisibility="Auto" />
                                 </Grid>
                             </TabItem>
@@ -147,7 +143,6 @@
                                                            FontSize="10pt"
                                                            HorizontalScrollBarVisibility="Auto"
                                                            ShowLineNumbers="True"
-                                                           SyntaxHighlighting=".cs"
                                                            VerticalScrollBarVisibility="Auto" />
                                 </Grid>
                             </TabItem>

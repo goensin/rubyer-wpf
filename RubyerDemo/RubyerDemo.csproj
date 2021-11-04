@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <None Remove="ali.jpg" />
+    <None Remove="Assets\TextFile1.txt" />
     <None Remove="Assets\wechat.jpg" />
     <None Remove="rubyer.ico" />
   </ItemGroup>
@@ -36,14 +37,20 @@
 
   <ItemGroup>
     <Resource Include="Assets\ali.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\wechat.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="rubyer.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Views\About.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
   </ItemGroup>
 
 </Project>
