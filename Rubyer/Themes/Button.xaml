@@ -10,116 +10,136 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" SnapsToDevicePixels="true" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" 
-                               StrokeThickness="1" StrokeDashArray="1 2"/>
+                    <Rectangle Margin="2"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--默认按钮-->
+    <!--  默认按钮  -->
     <Style x:Key="RubyerButton" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{DynamicResource Primary}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="5 0"/>
-        <Setter Property="Height" Value="28"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="2.5"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Background" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="5 0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid>
-                            <Border x:Name="effectBorder" BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" 
-                                    Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
-                                    CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    Effect="{StaticResource RightBottomEffect}">
-                            </Border>
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <Border x:Name="effectBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Effect="{StaticResource RightBottomEffect}"
+                                    SnapsToDevicePixels="true" />
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
-                            <Setter Property="Effect" TargetName="effectBorder" Value="{StaticResource AllDirectionEffect}"/>
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource AllDirectionEffect}" />
                         </Trigger>
-                       
+
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource MouseOverOpacity}"/>
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource PressedOpacity}"/>
-                            <Setter Property="Effect" TargetName="effectBorder" Value="{x:Null}"/>
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource PressedOpacity}" />
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{x:Null}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource UnEnabledOpacity}"/>
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnEnabledOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="2.5" />
     </Style>
 
 
-    <!--亮色按钮-->
-    <Style x:Key="LightButton" TargetType="{x:Type Button}" BasedOn="{StaticResource  RubyerButton}">
-        <Setter Property="Background" Value="{DynamicResource Light}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LightForeground}"/>
+    <!--  亮色按钮  -->
+    <Style x:Key="LightButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightForeground}" />
     </Style>
 
-    <!--暗色按钮-->
-    <Style x:Key="DarkButton" TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}">
-        <Setter Property="Background" Value="{DynamicResource Dark}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}"/>
+    <!--  暗色按钮  -->
+    <Style x:Key="DarkButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Dark}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}" />
     </Style>
 
-    <!--强调色按钮-->
-    <Style x:Key="AccentButton" TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}">
-        <Setter Property="Background" Value="{DynamicResource Accent}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
+    <!--  强调色按钮  -->
+    <Style x:Key="AccentButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
     </Style>
 
-    <!--文字按钮-->
-    <Style x:Key="TextMidButton" TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
+    <!--  文字按钮  -->
+    <Style x:Key="TextMidButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            Background="{TemplateBinding Background}" SnapsToDevicePixels="true"
-                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius),RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" 
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ButtonHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource MouseOverOpacity}"/>
-                            <Setter Property="Background" TargetName="border" Value="{StaticResource ButtonMouseOverBackgroundGray}"/>
+                            <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonMouseOverBackgroundGray}" />
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource PressedOpacity}"/>
-                            <Setter Property="Background" TargetName="border" Value="{DynamicResource ButtonMouseOverBackgroundGray}"/>
+                            <Setter TargetName="border" Property="Background" Value="{DynamicResource ButtonMouseOverBackgroundGray}" />
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource PressedOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="border" Value="{DynamicResource UnEnabledOpacity}"/>
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnEnabledOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -127,53 +147,64 @@
         </Setter>
     </Style>
 
-    <!--文字亮色按钮-->
-    <Style x:Key="TextLightButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TextMidButton}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Light}"/>
+    <!--  文字亮色按钮  -->
+    <Style x:Key="TextLightButton"
+           BasedOn="{StaticResource TextMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Light}" />
     </Style>
 
-    <!--文字暗色按钮-->
-    <Style x:Key="TextDarkButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TextMidButton}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Dark}"/>
+    <!--  文字暗色按钮  -->
+    <Style x:Key="TextDarkButton"
+           BasedOn="{StaticResource TextMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Dark}" />
     </Style>
 
-    <!--文字强调色按钮-->
-    <Style x:Key="TextAccentButton" TargetType="{x:Type Button}" BasedOn="{StaticResource TextMidButton}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource Accent}"/>
+    <!--  文字强调色按钮  -->
+    <Style x:Key="TextAccentButton"
+           BasedOn="{StaticResource TextMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
     </Style>
 
-    <!--圆形按钮-->
-    <Style x:Key="CircleMidButton" TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}">
-        <Setter Property="Background" Value="{DynamicResource Primary}"/>
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}"/>
-        <Setter Property="rubyer:ButtonHelper.CircleDima" Value="30"/>
-        <Setter Property="Height" 
-                Value="{Binding Path=(rubyer:ButtonHelper.CircleDima),RelativeSource={RelativeSource Mode=Self}}"/>
-        <Setter Property="Width" 
-                Value="{Binding Path=(rubyer:ButtonHelper.CircleDima),RelativeSource={RelativeSource Mode=Self}}"/>
-        <Setter Property="rubyer:ButtonHelper.CornerRadius" 
-                Value="{Binding Path=(rubyer:ButtonHelper.CircleDima),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource halfTheValue}}"/>
+    <!--  圆形按钮  -->
+    <Style x:Key="CircleMidButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Height" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}}" />
+        <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}}" />
+        <Setter Property="rubyer:ButtonHelper.CircleDima" Value="30" />
+        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource halfTheValue}}" />
     </Style>
 
-    <!--圆形亮色按钮-->
-    <Style x:Key="CircleLightButton" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleMidButton}">
-        <Setter Property="Background" Value="{DynamicResource Light}"/>
-        <Setter Property="Foreground" Value="{DynamicResource LightForeground}"/>
+    <!--  圆形亮色按钮  -->
+    <Style x:Key="CircleLightButton"
+           BasedOn="{StaticResource CircleMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="Foreground" Value="{DynamicResource LightForeground}" />
     </Style>
 
-    <!--圆形暗色按钮-->
-    <Style x:Key="CircleDarkButton" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleMidButton}">
-        <Setter Property="Background" Value="{DynamicResource Dark}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}"/>
+    <!--  圆形暗色按钮  -->
+    <Style x:Key="CircleDarkButton"
+           BasedOn="{StaticResource CircleMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Dark}" />
+        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}" />
     </Style>
 
-    <!--圆形强调色按钮-->
-    <Style x:Key="CircleAccentButton" TargetType="{x:Type Button}" BasedOn="{StaticResource CircleMidButton}">
-        <Setter Property="Background" Value="{DynamicResource Accent}"/>
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}"/>
+    <!--  圆形强调色按钮  -->
+    <Style x:Key="CircleAccentButton"
+           BasedOn="{StaticResource CircleMidButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
     </Style>
 
 </ResourceDictionary>

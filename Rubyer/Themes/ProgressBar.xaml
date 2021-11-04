@@ -7,81 +7,86 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundGray}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
                     <Grid x:Name="TemplateRoot">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Determinate"/>
-                                <VisualState x:Name="Indeterminate">
-                                    <Storyboard RepeatBehavior="Forever">
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Animation" 
-                                                                       Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="Animation" 
-                                                                      Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
-                                            <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
-                                            <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
-                                            <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
-                                        </PointAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Row="0" 
+                        <TextBlock Grid.Row="0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
                                    FontSize="{TemplateBinding FontSize}"
                                    Foreground="{DynamicResource DefaultForeground}"
-                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent),RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource boolToVisibility}}">
+                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource getPercent}">
-                                    <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                    <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                    <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
-                        <Grid Grid.Row="1" Height="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" 
-                                BorderBrush="{TemplateBinding BorderBrush}"/>
-                            <Rectangle x:Name="PART_Track"/>
-                            <Grid x:Name="PART_Indicator" ClipToBounds="true" HorizontalAlignment="Left">
-                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}"/>
-                                <Rectangle x:Name="Animation" Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5,0.5">
+                        <Grid Grid.Row="1" Height="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}" />
+                            <Rectangle x:Name="PART_Track" />
+                            <Grid x:Name="PART_Indicator"
+                                  HorizontalAlignment="Left"
+                                  ClipToBounds="true">
+                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" />
+                                <Rectangle x:Name="Animation"
+                                           Fill="{TemplateBinding Foreground}"
+                                           RenderTransformOrigin="0.5,0.5">
                                     <Rectangle.RenderTransform>
                                         <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
+                                            <ScaleTransform />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
                                         </TransformGroup>
                                     </Rectangle.RenderTransform>
                                 </Rectangle>
                             </Grid>
                         </Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Determinate" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.25" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <PointAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
+                                            <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5" />
+                                            <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5" />
+                                            <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5" />
+                                        </PointAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="LayoutTransform" TargetName="TemplateRoot">
+                            <Setter TargetName="TemplateRoot" Property="LayoutTransform">
                                 <Setter.Value>
-                                    <RotateTransform Angle="-90"/>
+                                    <RotateTransform Angle="-90" />
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <Trigger Property="IsIndeterminate" Value="true">
-                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
+                            <Setter TargetName="Indicator" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -89,63 +94,55 @@
         </Setter>
     </Style>
 
-    <!--圆形进度条-->
+    <!--  圆形进度条  -->
     <Style x:Key="CircleProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Foreground" Value="{DynamicResource Primary}"/>
-        <Setter Property="Background" Value="{StaticResource BackgroundGray}"/>
-        <Setter Property="BorderBrush" Value="Transparent"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Height" Value="40"/>
-        <Setter Property="Width" Value="40"/>
-        <Setter Property="rubyer:ProgressBarHelper.Thickness" Value="5"/>
-        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}"/>
-        <Setter Property="rubyer:ProgressBarHelper.IndeterminateValue" Value="30"/>
+        <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
                     <Grid x:Name="TemplateRoot">
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Determinate"/>
-                                <VisualState x:Name="Indeterminate">
-                                    <Storyboard TargetName="Transform" TargetProperty="Angle" RepeatBehavior="Forever">
-                                        <DoubleAnimation To="359" Duration="0:0:0.8"/>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <Grid x:Name="PathGrid" 
-                              Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), 
-                              RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource halfTheValue}}" />
-                        <Canvas Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), 
-                                RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource halfTheValue}}" >
-                            <!--背景圈-->
-                            <Path x:Name="Background" Stroke="{TemplateBinding Background}" RenderTransformOrigin="0, 0" 
-                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                  Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowBackground), RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource boolToVisibility}}">
+                        <Grid x:Name="PathGrid" Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource halfTheValue}}" />
+                        <Canvas Margin="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource halfTheValue}}">
+                            <!--  背景圈  -->
+                            <Path x:Name="Background"
+                                  RenderTransformOrigin="0, 0"
+                                  Stroke="{TemplateBinding Background}"
+                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowBackground), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
                                 <Path.Data>
                                     <GeometryGroup>
                                         <PathGeometry>
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                        <Binding Source="0"/>
+                                                        <Binding Converter="{StaticResource halfTheValue}"
+                                                                 ElementName="PathGrid"
+                                                                 Path="ActualWidth" />
+                                                        <Binding Source="0" />
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
                                                 <ArcSegment IsLargeArc="True" SweepDirection="Clockwise">
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
                                                         <MultiBinding Converter="{StaticResource getEndPoint}">
-                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
+                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding ElementName="PathGrid" Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -155,40 +152,48 @@
                                 </Path.Data>
                             </Path>
 
-                            <!--进度圈-->
+                            <!--  进度圈  -->
 
-                            <Path x:Name="Indicator" Stroke="{TemplateBinding Foreground}" RenderTransformOrigin="0, 0"
-                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            <Path x:Name="Indicator"
+                                  RenderTransformOrigin="0, 0"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                 <Path.Data>
                                     <GeometryGroup>
                                         <PathGeometry>
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                        <Binding Source="0"/>
+                                                        <Binding Converter="{StaticResource halfTheValue}"
+                                                                 ElementName="PathGrid"
+                                                                 Path="ActualWidth" />
+                                                        <Binding Source="0" />
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
                                                 <ArcSegment SweepDirection="Clockwise">
                                                     <ArcSegment.IsLargeArc>
                                                         <MultiBinding Converter="{StaticResource isLargerArc}">
-                                                            <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
+                                                            <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
                                                         </MultiBinding>
                                                     </ArcSegment.IsLargeArc>
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
                                                         <MultiBinding Converter="{StaticResource getEndPoint}">
-                                                            <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
+                                                            <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding ElementName="PathGrid" Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -198,32 +203,41 @@
                                 </Path.Data>
                             </Path>
 
-                            <!--不确定进度-->
-                            <Path x:Name="IndeterminateBar" RenderTransformOrigin="0, 0" Visibility="Collapsed" Stroke="{TemplateBinding Foreground}"
-                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness),RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            <!--  不确定进度  -->
+                            <Path x:Name="IndeterminateBar"
+                                  RenderTransformOrigin="0, 0"
+                                  Stroke="{TemplateBinding Foreground}"
+                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  Visibility="Collapsed">
                                 <Path.Data>
                                     <GeometryGroup>
                                         <PathGeometry>
                                             <PathFigure>
                                                 <PathFigure.StartPoint>
                                                     <MultiBinding Converter="{StaticResource getPoint}">
-                                                        <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                        <Binding Source="0"/>
+                                                        <Binding Converter="{StaticResource halfTheValue}"
+                                                                 ElementName="PathGrid"
+                                                                 Path="ActualWidth" />
+                                                        <Binding Source="0" />
                                                     </MultiBinding>
                                                 </PathFigure.StartPoint>
                                                 <ArcSegment SweepDirection="Clockwise">
                                                     <ArcSegment.Size>
                                                         <MultiBinding Converter="{StaticResource getArcSize}">
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid" Converter="{StaticResource halfTheValue}"/>
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
+                                                            <Binding Converter="{StaticResource halfTheValue}"
+                                                                     ElementName="PathGrid"
+                                                                     Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Size>
                                                     <ArcSegment.Point>
                                                         <MultiBinding Converter="{StaticResource getEndPoint}">
-                                                            <Binding Path="(rubyer:ProgressBarHelper.IndeterminateValue)" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}"/>
-                                                            <Binding Path="ActualWidth" ElementName="PathGrid"/>
+                                                            <Binding Path="(rubyer:ProgressBarHelper.IndeterminateValue)" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Minimum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding Path="Maximum" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                                            <Binding ElementName="PathGrid" Path="ActualWidth" />
                                                         </MultiBinding>
                                                     </ArcSegment.Point>
                                                 </ArcSegment>
@@ -232,34 +246,47 @@
                                     </GeometryGroup>
                                 </Path.Data>
                                 <Path.RenderTransform>
-                                    <RotateTransform x:Name="Transform"
-                                                     CenterX="{Binding ElementName=PathGrid,Path=ActualWidth,Converter={StaticResource halfTheValue}}"
-                                                     CenterY="{Binding ElementName=PathGrid,Path=ActualWidth,Converter={StaticResource halfTheValue}}">
-                                    </RotateTransform>
+                                    <RotateTransform x:Name="Transform" CenterX="{Binding ElementName=PathGrid, Path=ActualWidth, Converter={StaticResource halfTheValue}}" CenterY="{Binding ElementName=PathGrid, Path=ActualWidth, Converter={StaticResource halfTheValue}}" />
                                 </Path.RenderTransform>
                             </Path>
                         </Canvas>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" 
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
                                    FontSize="{TemplateBinding FontSize}"
                                    Foreground="{DynamicResource DefaultForeground}"
-                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent),RelativeSource={RelativeSource Mode=TemplatedParent},Converter={StaticResource boolToVisibility}}">
+                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource getPercent}">
-                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
-                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
-                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=ProgressBar}"/>
+                                    <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=ProgressBar}" />
+                                    <Binding Path="Minimum" RelativeSource="{RelativeSource AncestorType=ProgressBar}" />
+                                    <Binding Path="Maximum" RelativeSource="{RelativeSource AncestorType=ProgressBar}" />
                                 </MultiBinding>
                             </TextBlock.Text>
                         </TextBlock>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Determinate" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard RepeatBehavior="Forever"
+                                                TargetProperty="Angle"
+                                                TargetName="Transform">
+                                        <DoubleAnimation To="359" Duration="0:0:0.8" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsIndeterminate" Value="true">
-                            <Setter Property="Visibility" TargetName="Indicator" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="IndeterminateBar" Value="Visible"/>
+                            <Setter TargetName="IndeterminateBar" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="Indicator" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Width" Value="40" />
+        <Setter Property="rubyer:ProgressBarHelper.IndeterminateValue" Value="30" />
+        <Setter Property="rubyer:ProgressBarHelper.Thickness" Value="5" />
     </Style>
 </ResourceDictionary>

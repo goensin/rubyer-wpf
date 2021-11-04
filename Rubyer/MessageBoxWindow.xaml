@@ -3,72 +3,97 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        MinHeight="150" MinWidth="270"
-        Background="Transparent" WindowStyle="None" AllowsTransparency="True"
-        ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
-        HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="10"
-        LostKeyboardFocus="Window_LostKeyboardFocus" PreviewLostKeyboardFocus="Window_PreviewLostKeyboardFocus">
+        MinWidth="270"
+        MinHeight="150"
+        Margin="10"
+        HorizontalContentAlignment="Center"
+        VerticalContentAlignment="Center"
+        AllowsTransparency="True"
+        Background="Transparent"
+        LostKeyboardFocus="Window_LostKeyboardFocus"
+        PreviewLostKeyboardFocus="Window_PreviewLostKeyboardFocus"
+        ShowInTaskbar="False"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        mc:Ignorable="d">
     <Window.Resources>
         <Storyboard x:Key="OnLostFocus1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="effectBorder">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="effectBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0" />
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1" />
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="LoadFadeUp">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.25" From="0" To="1">
+            <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                             From="0"
+                             To="1"
+                             Duration="00:00:0.25">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Duration="00:00:0.25" From="50" To="0">
+            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y"
+                             From="50"
+                             To="0"
+                             Duration="00:00:0.25">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase  EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
         <Storyboard x:Key="UnLoadFadeUp">
-            <DoubleAnimation Storyboard.TargetProperty="Opacity" Storyboard.TargetName="rootGrid"
-                             Duration="00:00:0.25" From="1" To="0">
+            <DoubleAnimation Storyboard.TargetName="rootGrid"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1"
+                             To="0"
+                             Duration="00:00:0.25">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase EasingMode="EaseIn"/>
+                    <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
-            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.Y" Storyboard.TargetName="rootGrid"
-                             Duration="00:00:0.25" From="0" To="50">
+            <DoubleAnimation Storyboard.TargetName="rootGrid"
+                             Storyboard.TargetProperty="RenderTransform.Y"
+                             From="0"
+                             To="50"
+                             Duration="00:00:0.25">
                 <DoubleAnimation.EasingFunction>
-                    <CubicEase  EasingMode="EaseIn"/>
+                    <CubicEase EasingMode="EaseIn" />
                 </DoubleAnimation.EasingFunction>
             </DoubleAnimation>
         </Storyboard>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="UIElement.LostKeyboardFocus">
-            <BeginStoryboard Storyboard="{StaticResource OnLostFocus1}"/>
+            <BeginStoryboard Storyboard="{StaticResource OnLostFocus1}" />
         </EventTrigger>
     </Window.Triggers>
     <Grid x:Name="rootGrid">
         <Grid.RenderTransform>
-            <TranslateTransform/>
+            <TranslateTransform />
         </Grid.RenderTransform>
         <Grid.Triggers>
             <EventTrigger RoutedEvent="Loaded">
-                <BeginStoryboard Storyboard="{StaticResource LoadFadeUp}"/>
+                <BeginStoryboard Storyboard="{StaticResource LoadFadeUp}" />
             </EventTrigger>
         </Grid.Triggers>
-        <Border Background="{DynamicResource DefaultBackground}"
-            HorizontalAlignment="Center" VerticalAlignment="Center" CornerRadius="2.5" 
-            BorderThickness="0.5" BorderBrush="{StaticResource BorderGray}">
+        <Border HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource DefaultBackground}"
+                BorderBrush="{StaticResource BorderGray}"
+                BorderThickness="0.5"
+                CornerRadius="2.5">
             <Grid x:Name="messageBoxPanel">
-                <Border x:Name="effectBorder" BorderThickness="0" Background="{DynamicResource DefaultBackground}" 
-                    Effect="{StaticResource AllDirectionEffect3}" CornerRadius="2.5"/>
+                <Border x:Name="effectBorder"
+                        Background="{DynamicResource DefaultBackground}"
+                        BorderThickness="0"
+                        CornerRadius="2.5"
+                        Effect="{StaticResource AllDirectionEffect3}" />
             </Grid>
         </Border>
     </Grid>

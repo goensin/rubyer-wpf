@@ -10,56 +10,79 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerDateTimePicker" TargetType="{x:Type rubyer:DateTimePicker}">
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
+        <Setter Property="Height" Value="28" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Height" Value="28"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:DateTimePicker}">
-                    <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                        <TextBox x:Name="PART_TextBox" Grid.Column="0"  Foreground="{TemplateBinding Foreground}"
-                                 Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch"
-                                 Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
-                                 Style="{StaticResource RubyerTextBox}">
+                    <Grid x:Name="PART_Root"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <TextBox x:Name="PART_TextBox"
+                                 Style="{StaticResource RubyerTextBox}"
+                                 Grid.Row="0"
+                                 Grid.Column="0"
+                                 HorizontalContentAlignment="Stretch"
+                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                 Focusable="{TemplateBinding Focusable}"
+                                 Foreground="{TemplateBinding Foreground}">
                             <rubyer:TextBoxHelper.PostContent>
-                                <Button x:Name="PART_Button" Focusable="False" Height="26"
-                                            Foreground="{TemplateBinding BorderBrush}" 
-                                            Style="{StaticResource TextMidButton}">
-                                    <rubyer:Icon Type="TimeLine"/>
+                                <Button x:Name="PART_Button"
+                                        Style="{StaticResource TextMidButton}"
+                                        Height="26"
+                                        Focusable="False"
+                                        Foreground="{TemplateBinding BorderBrush}">
+                                    <rubyer:Icon Type="TimeLine" />
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>
                         </TextBox>
-                        <Grid x:Name="PART_DisabledVisual" IsHitTestVisible="False" Opacity="0" Grid.Row="0">
-                            <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" VerticalOffset="5"
-                                   PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"
-                                   PopupAnimation="Fade">
-                                <rubyer:Card Margin="5" Padding="0" BorderThickness="0">
+                        <Grid x:Name="PART_DisabledVisual"
+                              Grid.Row="0"
+                              IsHitTestVisible="False"
+                              Opacity="0">
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=PART_TextBox}"
+                                   PopupAnimation="Fade"
+                                   StaysOpen="False"
+                                   VerticalOffset="5">
+                                <rubyer:Card Margin="5"
+                                             Padding="0"
+                                             BorderThickness="0">
                                     <Grid>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
                                         <Border Background="{DynamicResource Primary}" CornerRadius="2.5 2.5 0 0">
-                                            <TextBlock Text="{Binding Text,ElementName=PART_TextBox}" 
-                                                       Margin="10 5" FontSize="20" HorizontalAlignment="Center"
-                                                       Foreground="{DynamicResource PrimaryForeground}"/>
+                                            <TextBlock Margin="10 5"
+                                                       HorizontalAlignment="Center"
+                                                       FontSize="20"
+                                                       Foreground="{DynamicResource PrimaryForeground}"
+                                                       Text="{Binding Text, ElementName=PART_TextBox}" />
                                         </Border>
-                                       
-                                        <Border BorderThickness="0" BorderBrush="{TemplateBinding BorderBrush}" Grid.Row="1">
+
+                                        <Border Grid.Row="1"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="0">
                                             <StackPanel Orientation="Horizontal">
-                                                <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0"/>
-                                                <rubyer:Clock x:Name="PART_Clock" OnlyShowList="False" BorderThickness="0"/>
+                                                <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0" />
+                                                <rubyer:Clock x:Name="PART_Clock"
+                                                              BorderThickness="0"
+                                                              OnlyShowList="False" />
                                             </StackPanel>
                                         </Border>
-                                        
-                                        <Button x:Name="PART_ConfirmButton" Content="确认" Grid.Row="2"
-                                                rubyer:ButtonHelper.CornerRadius="0 0 2 2"/>
+
+                                        <Button x:Name="PART_ConfirmButton"
+                                                Grid.Row="2"
+                                                rubyer:ButtonHelper.CornerRadius="0 0 2 2"
+                                                Content="确认" />
                                     </Grid>
                                 </rubyer:Card>
                             </Popup>
@@ -68,5 +91,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>

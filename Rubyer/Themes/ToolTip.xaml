@@ -7,25 +7,32 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerToolTip" TargetType="ToolTip">
-        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Background" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="HasDropShadow" Value="True" />
-        <Setter Property="Background" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
                     <Grid Margin="5">
-                        <Border Name="Effect" BorderThickness="{TemplateBinding BorderThickness}"
-                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                Background="{TemplateBinding Background}" CornerRadius="2.5"
-                                Effect="{StaticResource AllDirectionEffect2}">
-                        </Border>
-                        <Border Name="Border" BorderThickness="{TemplateBinding BorderThickness}"
-                                Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                Background="{TemplateBinding Background}" CornerRadius="2.5">
-                            <ContentPresenter Margin="10" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                        <Border Name="Effect"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2.5"
+                                Effect="{StaticResource AllDirectionEffect2}" />
+                        <Border Name="Border"
+                                Width="{TemplateBinding Width}"
+                                Height="{TemplateBinding Height}"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2.5">
+                            <ContentPresenter Margin="10"
+                                              HorizontalAlignment="Left"
+                                              VerticalAlignment="Top" />
                         </Border>
                     </Grid>
 

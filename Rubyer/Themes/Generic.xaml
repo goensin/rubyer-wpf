@@ -1,89 +1,89 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:rubyer="clr-namespace:Rubyer">
-    
+
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PasswordBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBlock.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RadioButton.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToggleButton.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/CheckBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ComboBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ProgressBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Slider.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ListBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/GroupBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Label.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ListView.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeView.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Expander.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TabControl.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DatePicker.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Calendar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DatePicker.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Clock.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TimePicker.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToolTip.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Menu.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToolBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StatusBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DataGrid.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PageBar.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageContainer.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ExpanderResizer.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxContainer.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxCard.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogBox.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DateTimePicker.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Badge.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Tag.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PasswordBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBlock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RadioButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/CheckBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ComboBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ProgressBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Slider.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ListBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/GroupBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Label.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ListView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Expander.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TabControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DatePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Calendar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DatePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Clock.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TimePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToolTip.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Menu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToolBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StatusBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DataGrid.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/PageBar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageContainer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ExpanderResizer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxContainer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxCard.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DateTimePicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Badge.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Tag.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButton}"/>
-    <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}"/>
-    <Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource RubyerComboBox}"/>
-    <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource RubyerGroupBox}"/>
-    <Style TargetType="{x:Type ListBox}" BasedOn="{StaticResource RubyerListBox}"/>
-    <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource RubyerPasswordBox}"/>
-    <Style TargetType="{x:Type ProgressBar}" BasedOn="{StaticResource RubyerProgressBar}"/>
-    <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RubyerRadioButton}"/>
-    <Style TargetType="{x:Type Slider}" BasedOn="{StaticResource RubyerSlider}"/>
-    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource RubyerTextBox}"/>
-    <Style TargetType="{x:Type ToggleButton}" BasedOn="{StaticResource RubyerToggle}"/>
-    <Style TargetType="{x:Type Label}" BasedOn="{StaticResource RubyerLabel}"/>
-    <Style TargetType="{x:Type ListView}" BasedOn="{StaticResource RubyerListView}"/>
-    <Style TargetType="{x:Type TreeView}" BasedOn="{StaticResource RubyerTreeView}"/>
-    <Style TargetType="{x:Type Expander}" BasedOn="{StaticResource RubyerExpander}"/>
-    <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource RubyerTabControl}"/>
-    <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource RubyerrTabItem}"/>
-    <Style TargetType="{x:Type Calendar}" BasedOn="{StaticResource RubyerCalendar}"/>
-    <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource RubyerDatePicker}"/>
-    <Style TargetType="{x:Type rubyer:Clock}" BasedOn="{StaticResource RubyerClock}"/>
-    <Style TargetType="{x:Type rubyer:TimePicker}" BasedOn="{StaticResource RubyerTimePicker}"/>
-    <Style TargetType="{x:Type ToolTip}" BasedOn="{StaticResource RubyerToolTip}"/>
-    <Style TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource RubyerScrollViewer}"/>
-    <Style TargetType="{x:Type Menu}" BasedOn="{StaticResource RubyerMenu}"/>
-    <Style TargetType="{x:Type ToolBar}" BasedOn="{StaticResource RubyerToolBar}"/>
-    <Style TargetType="{x:Type ToolBarTray}" BasedOn="{StaticResource RubyerToolBarTray}"/>
-    <Style TargetType="{x:Type StatusBar}" BasedOn="{StaticResource RubyerStatusBar}"/>
-    <Style TargetType="{x:Type DataGrid}" BasedOn="{StaticResource RubyerDataGrid}"/>
-    <Style TargetType="{x:Type rubyer:PageBar}" BasedOn="{StaticResource RubyerPageBar}"/>
-    <Style TargetType="{x:Type rubyer:Card}" BasedOn="{StaticResource RubuerCard}"/>
-    <Style TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}"/>
-    <Style TargetType="{x:Type rubyer:MessageBoxCard}" BasedOn="{StaticResource RubyerMessageBoxCard}"/>
-    <Style TargetType="{x:Type rubyer:DialogBox}" BasedOn="{StaticResource RubyerDialogBox}"/>
-    <Style TargetType="{x:Type rubyer:DateTimePicker}" BasedOn="{StaticResource RubyerDateTimePicker}"/>
-    <Style TargetType="{x:Type rubyer:Transition}" BasedOn="{StaticResource RubuerTransition}"/>
-    <Style TargetType="{x:Type rubyer:Badge}" BasedOn="{StaticResource RubyerBadge}"/>
-    <Style TargetType="{x:Type rubyer:Tag}" BasedOn="{StaticResource RubyerTag}"/>
+    <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
+    <Style BasedOn="{StaticResource RubyerCheckBox}" TargetType="{x:Type CheckBox}" />
+    <Style BasedOn="{StaticResource RubyerComboBox}" TargetType="{x:Type ComboBox}" />
+    <Style BasedOn="{StaticResource RubyerGroupBox}" TargetType="{x:Type GroupBox}" />
+    <Style BasedOn="{StaticResource RubyerListBox}" TargetType="{x:Type ListBox}" />
+    <Style BasedOn="{StaticResource RubyerPasswordBox}" TargetType="{x:Type PasswordBox}" />
+    <Style BasedOn="{StaticResource RubyerProgressBar}" TargetType="{x:Type ProgressBar}" />
+    <Style BasedOn="{StaticResource RubyerRadioButton}" TargetType="{x:Type RadioButton}" />
+    <Style BasedOn="{StaticResource RubyerSlider}" TargetType="{x:Type Slider}" />
+    <Style BasedOn="{StaticResource RubyerTextBox}" TargetType="{x:Type TextBox}" />
+    <Style BasedOn="{StaticResource RubyerToggle}" TargetType="{x:Type ToggleButton}" />
+    <Style BasedOn="{StaticResource RubyerLabel}" TargetType="{x:Type Label}" />
+    <Style BasedOn="{StaticResource RubyerListView}" TargetType="{x:Type ListView}" />
+    <Style BasedOn="{StaticResource RubyerTreeView}" TargetType="{x:Type TreeView}" />
+    <Style BasedOn="{StaticResource RubyerExpander}" TargetType="{x:Type Expander}" />
+    <Style BasedOn="{StaticResource RubyerTabControl}" TargetType="{x:Type TabControl}" />
+    <Style BasedOn="{StaticResource RubyerrTabItem}" TargetType="{x:Type TabItem}" />
+    <Style BasedOn="{StaticResource RubyerCalendar}" TargetType="{x:Type Calendar}" />
+    <Style BasedOn="{StaticResource RubyerDatePicker}" TargetType="{x:Type DatePicker}" />
+    <Style BasedOn="{StaticResource RubyerClock}" TargetType="{x:Type rubyer:Clock}" />
+    <Style BasedOn="{StaticResource RubyerTimePicker}" TargetType="{x:Type rubyer:TimePicker}" />
+    <Style BasedOn="{StaticResource RubyerToolTip}" TargetType="{x:Type ToolTip}" />
+    <Style BasedOn="{StaticResource RubyerScrollViewer}" TargetType="{x:Type ScrollViewer}" />
+    <Style BasedOn="{StaticResource RubyerMenu}" TargetType="{x:Type Menu}" />
+    <Style BasedOn="{StaticResource RubyerToolBar}" TargetType="{x:Type ToolBar}" />
+    <Style BasedOn="{StaticResource RubyerToolBarTray}" TargetType="{x:Type ToolBarTray}" />
+    <Style BasedOn="{StaticResource RubyerStatusBar}" TargetType="{x:Type StatusBar}" />
+    <Style BasedOn="{StaticResource RubyerDataGrid}" TargetType="{x:Type DataGrid}" />
+    <Style BasedOn="{StaticResource RubyerPageBar}" TargetType="{x:Type rubyer:PageBar}" />
+    <Style BasedOn="{StaticResource RubuerCard}" TargetType="{x:Type rubyer:Card}" />
+    <Style BasedOn="{StaticResource RubyerMessageCard}" TargetType="{x:Type rubyer:MessageCard}" />
+    <Style BasedOn="{StaticResource RubyerMessageBoxCard}" TargetType="{x:Type rubyer:MessageBoxCard}" />
+    <Style BasedOn="{StaticResource RubyerDialogBox}" TargetType="{x:Type rubyer:DialogBox}" />
+    <Style BasedOn="{StaticResource RubyerDateTimePicker}" TargetType="{x:Type rubyer:DateTimePicker}" />
+    <Style BasedOn="{StaticResource RubuerTransition}" TargetType="{x:Type rubyer:Transition}" />
+    <Style BasedOn="{StaticResource RubyerBadge}" TargetType="{x:Type rubyer:Badge}" />
+    <Style BasedOn="{StaticResource RubyerTag}" TargetType="{x:Type rubyer:Tag}" />
 </ResourceDictionary>

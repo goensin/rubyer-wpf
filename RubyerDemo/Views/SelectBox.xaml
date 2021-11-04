@@ -1,94 +1,148 @@
 ﻿<UserControl x:Class="RubyerDemo.Views.SelectBox"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <GroupBox Header="单选按钮-RadioButton" Margin="0 0 0 10">
-                <StackPanel Orientation="Horizontal" Margin="10">
-                    <RadioButton x:Name="day" GroupName="selete" Checked="RadioButton_Checked" IsChecked="True">
+            <GroupBox Margin="0 0 0 10" Header="单选按钮-RadioButton">
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <RadioButton x:Name="day"
+                                 Checked="RadioButton_Checked"
+                                 GroupName="selete"
+                                 IsChecked="True">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="SunFill"/>
-                                <TextBlock Text="白天"/>
+                                <rubyer:Icon Type="SunFill" />
+                                <TextBlock Text="白天" />
                             </StackPanel>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton x:Name="night" GroupName="selete" Margin="10 0" Checked="RadioButton_Checked">
+                    <RadioButton x:Name="night"
+                                 Margin="10 0"
+                                 Checked="RadioButton_Checked"
+                                 GroupName="selete">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="MoonFill"/>
-                                <TextBlock Text="黑夜"/>
+                                <rubyer:Icon Type="MoonFill" />
+                                <TextBlock Text="黑夜" />
                             </StackPanel>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton IsEnabled="False" GroupName="selete">
+                    <RadioButton GroupName="selete" IsEnabled="False">
                         不可用
                     </RadioButton>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="切换按钮-ToggleButton" Margin="0 0 0 10" Grid.Row='1'>
+            <GroupBox Grid.Row="1"
+                      Margin="0 0 0 10"
+                      Header="切换按钮-ToggleButton">
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <ToggleButton Content="默认" Width="100" IsChecked="True" Margin="10 0"/>
-                        <ToggleButton Style="{DynamicResource LightToggleButton}" Content="亮色" Width="100" Margin="10 0"/>
-                        <ToggleButton Style="{DynamicResource DarkToggleButton}" Content="暗色" Width="100" Margin="10 0"/>
-                        <ToggleButton Style="{DynamicResource AccentToggleButton}" Content="强调色" Width="100" Margin="10 0"/>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <ToggleButton Width="100"
+                                      Margin="10 0"
+                                      Content="默认"
+                                      IsChecked="True" />
+                        <ToggleButton Style="{DynamicResource LightToggleButton}"
+                                      Width="100"
+                                      Margin="10 0"
+                                      Content="亮色" />
+                        <ToggleButton Style="{DynamicResource DarkToggleButton}"
+                                      Width="100"
+                                      Margin="10 0"
+                                      Content="暗色" />
+                        <ToggleButton Style="{DynamicResource AccentToggleButton}"
+                                      Width="100"
+                                      Margin="10 0"
+                                      Content="强调色" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <ToggleButton Style="{DynamicResource CircleMidToggleButton}" Content="默认" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
-                        <ToggleButton Style="{DynamicResource CircleLightToggleButton}" Content="亮色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
-                        <ToggleButton Style="{DynamicResource CircleDarkToggleButton}" Content="暗色" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
-                        <ToggleButton Style="{DynamicResource CircleAccentToggleButton}" Content="强调" rubyer:ButtonHelper.CircleDima="50" Margin="10 0" IsChecked="True"/>
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <ToggleButton Style="{DynamicResource CircleMidToggleButton}"
+                                      Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDima="50"
+                                      Content="默认"
+                                      IsChecked="True" />
+                        <ToggleButton Style="{DynamicResource CircleLightToggleButton}"
+                                      Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDima="50"
+                                      Content="亮色"
+                                      IsChecked="True" />
+                        <ToggleButton Style="{DynamicResource CircleDarkToggleButton}"
+                                      Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDima="50"
+                                      Content="暗色"
+                                      IsChecked="True" />
+                        <ToggleButton Style="{DynamicResource CircleAccentToggleButton}"
+                                      Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDima="50"
+                                      Content="强调"
+                                      IsChecked="True" />
                     </StackPanel>
-                    <StackPanel Orientation="Horizontal" Margin="10">
+                    <StackPanel Margin="10" Orientation="Horizontal">
                         <ToggleButton Style="{DynamicResource SwitchMidToggle}" Margin="10 0">
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="WifiFill"/>
-                                <TextBlock Text="Wifi"/>
+                                <rubyer:Icon Type="WifiFill" />
+                                <TextBlock Text="Wifi" />
                             </StackPanel>
                         </ToggleButton>
-                        <ToggleButton Style="{DynamicResource SwitchLightToggle}" Margin="10 0" IsChecked="True">
+                        <ToggleButton Style="{DynamicResource SwitchLightToggle}"
+                                      Margin="10 0"
+                                      IsChecked="True">
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="BluetoothFill"/>
-                                <TextBlock Text="蓝牙"/>
+                                <rubyer:Icon Type="BluetoothFill" />
+                                <TextBlock Text="蓝牙" />
                             </StackPanel>
                         </ToggleButton>
-                        <ToggleButton Style="{DynamicResource SwitchDarkToggle}" Margin="10 5" Content="NFC" IsChecked="True"/>
-                        <ToggleButton Style="{DynamicResource SwitchAccentToggle}" Margin="10 0" Content="夜间模式" IsChecked="True"/>
+                        <ToggleButton Style="{DynamicResource SwitchDarkToggle}"
+                                      Margin="10 5"
+                                      Content="NFC"
+                                      IsChecked="True" />
+                        <ToggleButton Style="{DynamicResource SwitchAccentToggle}"
+                                      Margin="10 0"
+                                      Content="夜间模式"
+                                      IsChecked="True" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Header="多选框-CheckBox" Margin="0 0 0 10" Grid.Row="2">
+            <GroupBox Grid.Row="2"
+                      Margin="0 0 0 10"
+                      Header="多选框-CheckBox">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10">
-                        <CheckBox Content="选项一"/>
-                        <CheckBox Content="选项二"/>
-                        <CheckBox Content="选项三"/>
-                        <CheckBox Content="未选择" IsChecked="{x:Null}"/>
-                        <CheckBox Content="不可用" IsEnabled="False"/>
+                        <CheckBox Content="选项一" />
+                        <CheckBox Content="选项二" />
+                        <CheckBox Content="选项三" />
+                        <CheckBox Content="未选择" IsChecked="{x:Null}" />
+                        <CheckBox Content="不可用" IsEnabled="False" />
                     </StackPanel>
-                    <StackPanel Margin="20 10" Grid.Column="1">
-                        <CheckBox Content="默认" IsChecked="True" Height="25"/>
-                        <CheckBox Style="{DynamicResource LightCheckBox}" Content="亮色" IsChecked="True"/>
-                        <CheckBox Style="{DynamicResource DarkCheckBox}" Content="暗色" IsChecked="True"/>
-                        <CheckBox Style="{DynamicResource AccentCheckBox}" Content="强调色" IsChecked="True"/>
+                    <StackPanel Grid.Column="1" Margin="20 10">
+                        <CheckBox Height="25"
+                                  Content="默认"
+                                  IsChecked="True" />
+                        <CheckBox Style="{DynamicResource LightCheckBox}"
+                                  Content="亮色"
+                                  IsChecked="True" />
+                        <CheckBox Style="{DynamicResource DarkCheckBox}"
+                                  Content="暗色"
+                                  IsChecked="True" />
+                        <CheckBox Style="{DynamicResource AccentCheckBox}"
+                                  Content="强调色"
+                                  IsChecked="True" />
                     </StackPanel>
                 </Grid>
             </GroupBox>

@@ -3,10 +3,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        Background="Transparent" WindowStyle="None" AllowsTransparency="True" WindowState="Maximized"
-        ShowInTaskbar="False" WindowStartupLocation="CenterOwner" VerticalAlignment="Top" Topmost="True">
-    <StackPanel x:Name="messageStackPanel" Margin="10">
-            
-    </StackPanel> 
+        VerticalAlignment="Top"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        Topmost="True"
+        WindowStartupLocation="CenterOwner"
+        WindowState="Maximized"
+        WindowStyle="None"
+        mc:Ignorable="d">
+    <StackPanel x:Name="messageStackPanel" Margin="10" />
 </Window>

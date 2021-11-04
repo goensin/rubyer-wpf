@@ -1,162 +1,216 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rubyer="clr-namespace:Rubyer"
-                    xmlns:converter="clr-namespace:Rubyer.Converters">
+                    xmlns:converter="clr-namespace:Rubyer.Converters"
+                    xmlns:rubyer="clr-namespace:Rubyer">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
-            <converter:MathMultipleConverter x:Key="mathMultiplyConverter" Operation="Multiply"/>
+            <converter:MathMultipleConverter x:Key="mathMultiplyConverter" Operation="Multiply" />
         </ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <!--淡入淡出-->
+    <!--  淡入淡出  -->
     <Storyboard x:Key="FadeInStroyboard">
-        <DoubleAnimation Duration="00:00:0.3" Storyboard.TargetProperty="Opacity" From="0" To="1">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
     <Storyboard x:Key="FadeOutStoryboard">
-        <DoubleAnimation Duration="00:00:0.3" Storyboard.TargetProperty="Opacity" From="1" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
-    <!--左淡入淡出-->
+    <!--  左淡入淡出  -->
     <Storyboard x:Key="FadeLeftInStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="0" To="1">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"  Duration="00:00:0.3" From="50" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                         From="50"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
     <Storyboard x:Key="FadeLeftOutStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="1" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"  Duration="00:00:0.3" From="0" To="50">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                         From="0"
+                         To="50"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
-    <!--右淡入淡出-->
+    <!--  右淡入淡出  -->
     <Storyboard x:Key="FadeRightInStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="0" To="1">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"  Duration="00:00:0.3" From="-50" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                         From="-50"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
     <Storyboard x:Key="FadeRightOutStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="1" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"  Duration="00:00:0.3" From="0" To="-50">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"
+                         From="0"
+                         To="-50"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
-    <!--上淡入淡出-->
+    <!--  上淡入淡出  -->
     <Storyboard x:Key="FadeUpInStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="0" To="1">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"  Duration="00:00:0.3" From="50" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                         From="50"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
     <Storyboard x:Key="FadeUpOutStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="1" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"  Duration="00:00:0.3" From="0" To="50">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                         From="0"
+                         To="50"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
-    <!--下淡入淡出-->
+    <!--  下淡入淡出  -->
     <Storyboard x:Key="FadeDownInStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="0" To="1">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="0"
+                         To="1"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"  Duration="00:00:0.3" From="-50" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                         From="-50"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
     <Storyboard x:Key="FadeDownOutStoryboard">
-        <DoubleAnimation Storyboard.TargetProperty="Opacity" Duration="00:00:0.3" From="1" To="0">
+        <DoubleAnimation Storyboard.TargetProperty="Opacity"
+                         From="1"
+                         To="0"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
-        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"  Duration="00:00:0.3" From="0" To="-50">
+        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                         From="0"
+                         To="-50"
+                         Duration="00:00:0.3">
             <DoubleAnimation.EasingFunction>
-                <CubicEase  EasingMode="EaseOut"/>
+                <CubicEase EasingMode="EaseOut" />
             </DoubleAnimation.EasingFunction>
         </DoubleAnimation>
     </Storyboard>
 
-    <!--中心缩放-->
+    <!--  中心缩放  -->
     <Storyboard x:Key="ZoomInStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleX">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleY">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
@@ -164,46 +218,46 @@
 
     <Storyboard x:Key="ZoomOutStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleX">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleY">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 
-    <!--X 轴缩放-->
+    <!--  X 轴缩放  -->
     <Storyboard x:Key="ZoomXInStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleX">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
@@ -211,38 +265,38 @@
 
     <Storyboard x:Key="ZoomXOutStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleX">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
     </Storyboard>
 
-    <!--Y 轴缩放-->
+    <!--  Y 轴缩放  -->
     <Storyboard x:Key="ZoomYInStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleY">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="1">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
@@ -250,18 +304,18 @@
 
     <Storyboard x:Key="ZoomYOutStoryboard">
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].ScaleY">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity">
-            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
             <EasingDoubleKeyFrame KeyTime="00:00:0.3" Value="0">
                 <EasingDoubleKeyFrame.EasingFunction>
-                    <CubicEase EasingMode="EaseOut"/>
+                    <CubicEase EasingMode="EaseOut" />
                 </EasingDoubleKeyFrame.EasingFunction>
             </EasingDoubleKeyFrame>
         </DoubleAnimationUsingKeyFrames>
@@ -269,262 +323,265 @@
 
 
     <Style x:Key="RubuerTransition" TargetType="{x:Type rubyer:Transition}">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Type" Value="Fade" />
-        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         <Setter Property="IsShow" Value="True" />
-        <Setter Property="Opacity" Value="0"/>
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Opacity" Value="0" />
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </Setter.Value>
         </Setter>
+        <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Transition}">
                     <Grid>
                         <Border x:Name="rootBorder">
-                            <ContentPresenter Focusable="False" RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <ContentPresenter Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <StackPanel x:Name="rootStackPanel" Visibility="Collapsed">
-                            <ContentPresenter x:Name="content" Focusable="False" RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <ContentPresenter x:Name="content"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!--淡入淡出-->
+                        <!--  淡入淡出  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="Fade"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="Fade" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--左淡入淡出-->
+                        <!--  左淡入淡出  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="FadeLeft"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="FadeLeft" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeLeftInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeLeftInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeLeftOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeLeftOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--右淡入淡出-->
+                        <!--  右淡入淡出  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="FadeRight"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="FadeRight" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeRightInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeRightInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeRightOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeRightOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--上淡入淡出-->
+                        <!--  上淡入淡出  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="FadeUp"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="FadeUp" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeUpInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeUpInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeUpOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeUpOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--下淡入淡出-->
+                        <!--  下淡入淡出  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="FadeDown"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="FadeDown" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeDownInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeDownInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeDownOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeDownOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--中心缩放-->
+                        <!--  中心缩放  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="Zoom"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="Zoom" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--X 轴缩放-->
+                        <!--  X 轴缩放  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomX"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomX" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--Y 轴缩放-->
+                        <!--  Y 轴缩放  -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomY"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomY" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--左缩放-->
+                        <!--  左缩放  -->
                         <Trigger Property="Type" Value="ZoomLeft">
                             <Setter Property="RenderTransformOrigin" Value="0 0.5" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomLeft"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomLeft" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--右缩放-->
+                        <!--  右缩放  -->
                         <Trigger Property="Type" Value="ZoomRight">
                             <Setter Property="RenderTransformOrigin" Value="1 0.5" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomRight"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomRight" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomXOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--上缩放-->
+                        <!--  上缩放  -->
                         <Trigger Property="Type" Value="ZoomUp">
                             <Setter Property="RenderTransformOrigin" Value="0.5 0" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomUp"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomUp" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--下缩放-->
+                        <!--  下缩放  -->
                         <Trigger Property="Type" Value="ZoomDown">
                             <Setter Property="RenderTransformOrigin" Value="0.5 1" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="ZoomDown"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="ZoomDown" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYInStoryboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomYOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--向上折叠-->
+                        <!--  向上折叠  -->
                         <Trigger Property="Type" Value="Collapse">
-                            <Setter Property="Visibility" TargetName="rootStackPanel" Value="Visible" />
-                            <Setter Property="Visibility" TargetName="rootBorder" Value="Visible" />
-                            <Setter Property="Orientation" TargetName="rootStackPanel" Value="Vertical" />
-                            <Setter Property="VerticalAlignment" TargetName="rootStackPanel" Value="Top" />
-                            <Setter Property="Height" TargetName="rootStackPanel">
+                            <Setter TargetName="rootBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rootStackPanel" Property="Height">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
-                                        <Binding ElementName="content" Path="ActualHeight"/>
-                                        <Binding RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" Path="Opacity"/>
+                                        <Binding ElementName="content" Path="ActualHeight" />
+                                        <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
+                            <Setter TargetName="rootStackPanel" Property="Orientation" Value="Vertical" />
+                            <Setter TargetName="rootStackPanel" Property="VerticalAlignment" Value="Top" />
+                            <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="Collapse"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="Collapse" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
-                        <!--向左折叠-->
+                        <!--  向左折叠  -->
                         <Trigger Property="Type" Value="CollapseLeft">
-                            <Setter Property="Visibility" TargetName="rootStackPanel" Value="Visible" />
-                            <Setter Property="Visibility" TargetName="rootBorder" Value="Visible" />
-                            <Setter Property="Orientation" TargetName="rootStackPanel" Value="Horizontal" />
-                            <Setter Property="HorizontalAlignment" TargetName="rootStackPanel" Value="Left" />
-                            <Setter Property="Width" TargetName="rootStackPanel">
+                            <Setter TargetName="rootBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rootStackPanel" Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
+                            <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rootStackPanel" Property="Width">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
-                                        <Binding ElementName="content" Path="ActualWidth"/>
-                                        <Binding RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" Path="Opacity"/>
+                                        <Binding ElementName="content" Path="ActualWidth" />
+                                        <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsShow" Value="True"/>
-                                <Condition Property="Type" Value="CollapseLeft"/>
+                                <Condition Property="IsShow" Value="True" />
+                                <Condition Property="Type" Value="CollapseLeft" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeInStroyboard}" />
                             </MultiTrigger.EnterActions>
                             <MultiTrigger.ExitActions>
-                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}"/>
+                                <BeginStoryboard Storyboard="{StaticResource FadeOutStoryboard}" />
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="Type" Value="Fade" />
     </Style>
 </ResourceDictionary>

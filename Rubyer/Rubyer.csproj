@@ -20,4 +20,8 @@
 	  </None>
 	  <Page Remove="Assets\**" />
 	</ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+    <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
+  </ItemGroup>
 </Project>

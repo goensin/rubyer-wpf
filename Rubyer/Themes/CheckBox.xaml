@@ -5,12 +5,16 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Rectangle Margin="2"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -19,89 +23,101 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Rectangle Margin="14 0 0 0"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-    
-    <!--默认多选框-->
+
+    <!--  默认多选框  -->
     <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Primary}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Bottom"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
-                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                    <Grid x:Name="templateRoot"
+                          Background="Transparent"
+                          SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="checkBoxBorder" 
-                                CornerRadius="1"
-                                Background="Transparent" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                BorderBrush="{TemplateBinding BorderBrush}" 
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                Margin="1" 
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <Border x:Name="checkBoxBorder"
+                                Margin="1"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Background="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="1">
                             <Grid x:Name="markGrid">
                                 <Viewbox>
-                                    <Path Fill="{TemplateBinding Background}" x:Name="checkedMark" SnapsToDevicePixels="True" RenderTransformOrigin="0.5,0.5">
+                                    <Path x:Name="checkedMark"
+                                          Fill="{TemplateBinding Background}"
+                                          RenderTransformOrigin="0.5,0.5"
+                                          SnapsToDevicePixels="True">
                                         <Path.RenderTransform>
                                             <TransformGroup>
-                                                <ScaleTransform ScaleX="0" ScaleY="0"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
+                                                <ScaleTransform ScaleX="0" ScaleY="0" />
+                                                <SkewTransform />
+                                                <RotateTransform />
+                                                <TranslateTransform />
                                             </TransformGroup>
                                         </Path.RenderTransform>
                                         <Path.Data>
                                             <GeometryGroup>
-                                                <RectangleGeometry  Rect="0 0 10 10"/>
-                                                <PathGeometry Figures="M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z"/>
+                                                <RectangleGeometry Rect="0 0 10 10" />
+                                                <PathGeometry Figures="M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z" />
                                             </GeometryGroup>
                                         </Path.Data>
                                     </Path>
                                 </Viewbox>
                                 <Viewbox>
-                                    <Path Fill="{TemplateBinding Background}" x:Name="nullMark" Opacity="0">
+                                    <Path x:Name="nullMark"
+                                          Fill="{TemplateBinding Background}"
+                                          Opacity="0">
                                         <Path.Data>
                                             <GeometryGroup>
-                                                <RectangleGeometry Rect="0 0 10 10"/>
-                                                <RectangleGeometry Rect="1 4 8 2"/>
+                                                <RectangleGeometry Rect="0 0 10 10" />
+                                                <RectangleGeometry Rect="1 4 8 2" />
                                             </GeometryGroup>
                                         </Path.Data>
                                     </Path>
                                 </Viewbox>
                             </Grid>
                         </Border>
-                        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" 
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Column="1"
+                                          Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Margin="{TemplateBinding Padding}" 
-                                          RecognizesAccessKey="True" 
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="true">
-                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
-                            <Setter Property="Padding" Value="4,-1,0,0"/>
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
+                            <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource MouseOverOpacity}"/>
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource UnEnabledOpacity}"/>
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Opacity" TargetName="templateRoot" Value="{StaticResource PressedOpacity}"/>
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource PressedOpacity}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -109,16 +125,18 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="1" Duration="0:0:0.25">
+                                                         To="1"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut"/>
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="1" Duration="0:0:0.25">
+                                                         To="1"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut"/>
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -129,48 +147,57 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="0" Duration="0:0:0.2">
+                                                         To="0"
+                                                         Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut"/>
+                                                <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="0" Duration="0:0:0.2">
+                                                         To="0"
+                                                         Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut"/>
+                                                <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter Property="Opacity" TargetName="nullMark" Value="0"/>
-                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{Binding ElementName=checkedMark,Path=Fill}"/>
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
+                            <Setter TargetName="nullMark" Property="Opacity" Value="0" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Opacity" TargetName="checkedMark" Value="0"/>
-                            <Setter Property="Opacity" TargetName="nullMark" Value="1"/>
-                            <Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{Binding ElementName=checkedMark,Path=Fill}"/>
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
+                            <Setter TargetName="checkedMark" Property="Opacity" Value="0" />
+                            <Setter TargetName="nullMark" Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Bottom" />
     </Style>
 
-    <!--亮色多选框-->
-    <Style x:Key="LightCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Light}"/>
+    <!--  亮色多选框  -->
+    <Style x:Key="LightCheckBox"
+           BasedOn="{StaticResource RubyerCheckBox}"
+           TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Light}" />
     </Style>
 
-    <!--暗色多选框-->
-    <Style x:Key="DarkCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Dark}"/>
+    <!--  暗色多选框  -->
+    <Style x:Key="DarkCheckBox"
+           BasedOn="{StaticResource RubyerCheckBox}"
+           TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Dark}" />
     </Style>
 
-    <!--强调色多选框-->
-    <Style x:Key="AccentCheckBox" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource RubyerCheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Accent}"/>
+    <!--  强调色多选框  -->
+    <Style x:Key="AccentCheckBox"
+           BasedOn="{StaticResource RubyerCheckBox}"
+           TargetType="{x:Type CheckBox}">
+        <Setter Property="Background" Value="{DynamicResource Accent}" />
     </Style>
 
 </ResourceDictionary>

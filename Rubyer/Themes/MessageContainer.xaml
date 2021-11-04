@@ -7,14 +7,16 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="rubyer:MessageContainer">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:MessageContainer">
                     <Grid>
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                        <StackPanel x:Name="PART_MessageStackPanel" VerticalAlignment="Top"/>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <StackPanel x:Name="PART_MessageStackPanel" VerticalAlignment="Top" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

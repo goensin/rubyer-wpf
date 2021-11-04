@@ -8,7 +8,9 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}" TargetType="ScrollViewer" BasedOn="{StaticResource RubyerScrollViewer}">
+    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
+           BasedOn="{StaticResource RubyerScrollViewer}"
+           TargetType="ScrollViewer">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ScrollViewer">
@@ -22,28 +24,42 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <DockPanel Margin="{TemplateBinding Padding}">
-                            <ScrollViewer DockPanel.Dock="Top" HorizontalScrollBarVisibility="Hidden"
-                                          VerticalScrollBarVisibility="Hidden" Focusable="false">
-                                <GridViewHeaderRowPresenter Columns="{Binding Path=TemplatedParent.View.Columns,RelativeSource={RelativeSource TemplatedParent}}"
+                            <ScrollViewer DockPanel.Dock="Top"
+                                          Focusable="false"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden">
+                                <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
                                                             ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderTemplateSelector="{Binding  Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
                                                             ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
                                                             ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                            Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>
 
-                            <ScrollContentPresenter Name="PART_ScrollContentPresenter" KeyboardNavigation.DirectionalNavigation="Local"
-                                                    CanContentScroll="True" CanHorizontallyScroll="False" CanVerticallyScroll="False" />
+                            <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                    CanContentScroll="True"
+                                                    CanHorizontallyScroll="False"
+                                                    CanVerticallyScroll="False"
+                                                    KeyboardNavigation.DirectionalNavigation="Local" />
                         </DockPanel>
-                        <ScrollBar Name="PART_HorizontalScrollBar" Orientation="Horizontal" Grid.Row="1" Style="{StaticResource RubyerScrollBar}"
-                                   Maximum="{TemplateBinding ScrollableWidth}" ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Value="{TemplateBinding HorizontalOffset}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                        <ScrollBar Name="PART_HorizontalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="1"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Orientation="Horizontal"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{TemplateBinding HorizontalOffset}" />
 
-                        <ScrollBar Name="PART_VerticalScrollBar" Grid.Column="1" Style="{StaticResource RubyerScrollBar}"
-                                   Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Value="{TemplateBinding VerticalOffset}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                        <ScrollBar Name="PART_VerticalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Column="1"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Value="{TemplateBinding VerticalOffset}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -51,50 +67,52 @@
     </Style>
 
     <Style x:Key="{x:Type GridViewColumnHeader}" TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="{Binding Path=(rubyer:ListViewHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=ListView}}" />
+        <Setter Property="FontSize" Value="13.3" />
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:ListViewHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="{Binding Path=(rubyer:ListViewHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=ListView}}"/>
-        <Setter Property="Foreground" Value="{Binding Path=(rubyer:ListViewHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=ListView}}"/>
-        <Setter Property="FontSize" Value="13.3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Grid>
-                        <Border x:Name="HeaderBorder" BorderThickness="0 0 0 1" Padding="4"
-                                BorderBrush="{StaticResource BorderGray}" 
-                                Background="{TemplateBinding Background}">
-                            
-                            <ContentPresenter x:Name="HeaderContent" Margin="2 0" RecognizesAccessKey="True"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                        <Border x:Name="HeaderBorder"
+                                Padding="4"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource BorderGray}"
+                                BorderThickness="0 0 0 1">
+
+                            <ContentPresenter x:Name="HeaderContent"
+                                              Margin="2 0"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="RubyerListView" TargetType="{x:Type ListView}">
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="rubyer:ListViewHelper.HeadBackground" Value="{StaticResource GridBackground}" />
-        <Setter Property="rubyer:ListViewHelper.HeadForeground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListView">
-                    <Border Name="Border" Background="{TemplateBinding Background}" 
-                            BorderThickness="{TemplateBinding BorderThickness}" 
-                            BorderBrush="{TemplateBinding BorderBrush}" 
+                    <Border Name="Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="true">
                         <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
                             <ItemsPresenter />
@@ -103,45 +121,51 @@
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsGrouping" Value="true"/>
-                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false"/>
+                                <Condition Property="IsGrouping" Value="true" />
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}"/>
+                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ListViewHelper.HeadBackground" Value="{StaticResource GridBackground}" />
+        <Setter Property="rubyer:ListViewHelper.HeadForeground" Value="{DynamicResource DefaultForeground}" />
     </Style>
 
     <Style x:Key="{x:Type ListViewItem}" TargetType="ListViewItem">
-        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+        <Setter Property="SnapsToDevicePixels" Value="true" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
-                    <Border x:Name="Border" Padding="2" SnapsToDevicePixels="true" Background="Transparent"
-                            BorderThickness="0" >
-                        <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    <Border x:Name="Border"
+                            Padding="2"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            SnapsToDevicePixels="true">
+                        <GridViewRowPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Background" TargetName="Border" Value="{StaticResource BackgroundGray}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" TargetName="Border" Value="{StaticResource MouseOverBackgroundGray}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" TargetName="Border" Value="{StaticResource UnEnabledOpacity}"/>
+                            <Setter TargetName="Border" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
     </Style>
 </ResourceDictionary>

@@ -10,7 +10,11 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="2" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Rectangle Margin="2"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -19,67 +23,83 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Rectangle Margin="14,0,0,0" StrokeDashArray="1 2" SnapsToDevicePixels="true" StrokeThickness="1" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                    <Rectangle Margin="14 0 0 0"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--默认单选框-->
+    <!--  默认单选框  -->
     <Style x:Key="RubyerRadioButton" TargetType="{x:Type RadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Primary}"/>
-        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="Transparent"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="BorderThickness" Value="1.5"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                    <Grid x:Name="templateRoot"
+                          Background="Transparent"
+                          SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="radioButtonBorder" Margin="1,1,2,1" 
-                                Background="{TemplateBinding Background}" 
-                                BorderThickness="{TemplateBinding BorderThickness}" 
-                                BorderBrush="{StaticResource BorderGray}" 
-                                CornerRadius="100" 
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                        <Border x:Name="radioButtonBorder"
+                                Margin="1 1 2 1"
+                                Padding="1.5"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Padding="1.5">
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{StaticResource BorderGray}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="100">
                             <Viewbox>
-                                <Ellipse x:Name="littleDot" Fill="{TemplateBinding BorderBrush}" 
-                                         MinHeight="9" MinWidth="9" RenderTransformOrigin="0.5,0.5">
+                                <Ellipse x:Name="littleDot"
+                                         MinWidth="9"
+                                         MinHeight="9"
+                                         Fill="{TemplateBinding BorderBrush}"
+                                         RenderTransformOrigin="0.5,0.5">
                                     <Ellipse.RenderTransform>
                                         <TransformGroup>
-                                            <ScaleTransform ScaleX="0" ScaleY="0"/>
-                                            <SkewTransform/>
-                                            <RotateTransform/>
-                                            <TranslateTransform/>
+                                            <ScaleTransform ScaleX="0" ScaleY="0" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
                                         </TransformGroup>
                                     </Ellipse.RenderTransform>
                                 </Ellipse>
                             </Viewbox>
                         </Border>
-                        <ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Column="1"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasContent" Value="true">
-                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}"/>
-                            <Setter Property="Padding" Value="4,-1,0,0"/>
+                            <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
+                            <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Opacity" TargetName="radioButtonBorder" Value="{StaticResource MouseOverOpacity}"/>
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" TargetName="radioButtonBorder" Value="{StaticResource UnEnabledOpacity}"/>
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Opacity" TargetName="radioButtonBorder" Value="{StaticResource PressedOpacity}"/>
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource PressedOpacity}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -87,16 +107,18 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="1" Duration="0:0:0.25">
+                                                         To="1"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut"/>
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="1" Duration="0:0:0.25">
+                                                         To="1"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut"/>
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -107,47 +129,56 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="0" Duration="0:0:0.25">
+                                                         To="0"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseIn"/>
+                                                <BackEase EasingMode="EaseIn" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="littleDot"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="0" Duration="0:0:0.25">
+                                                         To="0"
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseIn"/>
+                                                <BackEase EasingMode="EaseIn" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter Property="BorderBrush" TargetName="radioButtonBorder" Value="{Binding BorderBrush,RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Opacity" TargetName="radioButtonBorder" Value="0.56"/>
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="0.56" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    
 
-    <!--亮色单选框-->
-    <Style x:Key="LightRadio" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RubyerRadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Light}"/>
+
+    <!--  亮色单选框  -->
+    <Style x:Key="LightRadio"
+           BasedOn="{StaticResource RubyerRadioButton}"
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
     </Style>
 
-    <!--暗色单选框-->
-    <Style x:Key="DarkRadio" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RubyerRadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Dark}"/>
+    <!--  暗色单选框  -->
+    <Style x:Key="DarkRadio"
+           BasedOn="{StaticResource RubyerRadioButton}"
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
     </Style>
 
-    <!--强调色单选框-->
-    <Style x:Key="AccentRadio" TargetType="{x:Type RadioButton}" BasedOn="{StaticResource RubyerRadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}"/>
+    <!--  强调色单选框  -->
+    <Style x:Key="AccentRadio"
+           BasedOn="{StaticResource RubyerRadioButton}"
+           TargetType="{x:Type RadioButton}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
     </Style>
 
 </ResourceDictionary>

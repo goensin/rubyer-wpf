@@ -5,24 +5,28 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style TargetType="rubyer:MessageBoxContainer">
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:MessageBoxContainer">
                     <Grid>
-                        <ContentPresenter x:Name="contentPresenter" Focusable="False" 
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <Border x:Name="PART_RootBorder" Visibility="Hidden"
-                                Opacity="0" Background="{StaticResource DialogBackground}">
-                            <ContentControl Focusable="False" Grid.Row="1"
-                                            Content="{TemplateBinding DialogContent}" 
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        <Border x:Name="PART_RootBorder"
+                                Background="{StaticResource DialogBackground}"
+                                Opacity="0"
+                                Visibility="Hidden">
+                            <ContentControl Grid.Row="1"
+                                            Content="{TemplateBinding DialogContent}"
+                                            Focusable="False"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>

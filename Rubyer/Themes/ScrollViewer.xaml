@@ -14,69 +14,107 @@
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Rectangle x:Name="Corner" Grid.Column="1" Grid.Row="1"
+                        <Rectangle x:Name="Corner"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
                                    Fill="{DynamicResource DefaultBackground}" />
-                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" 
-                                                CanHorizontallyScroll="False" CanVerticallyScroll="False" 
-                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                Content="{TemplateBinding Content}" 
-                                                Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
-                        <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" 
-                                   Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" 
-                                   Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
-                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                                   ViewportSize="{TemplateBinding ViewportHeight}" Style="{StaticResource RubyerScrollBar}"/>
-                        <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar"
-                                   Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" 
-                                   Minimum="0" Orientation="Horizontal" Grid.Row="1" 
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
-                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                   ViewportSize="{TemplateBinding ViewportWidth}"  Style="{StaticResource RubyerScrollBar}"/>
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="{TemplateBinding Padding}"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                CanHorizontallyScroll="False"
+                                                CanVerticallyScroll="False"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   AutomationProperties.AutomationId="VerticalScrollBar"
+                                   Cursor="Arrow"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   Minimum="0"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   AutomationProperties.AutomationId="HorizontalScrollBar"
+                                   Cursor="Arrow"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Minimum="0"
+                                   Orientation="Horizontal"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!--小滚动条-->
-    <Style x:Key="RubyerSmallScrollViewer" TargetType="{x:Type ScrollViewer}" BasedOn="{StaticResource RubyerScrollViewer}">
+    <!--  小滚动条  -->
+    <Style x:Key="RubyerSmallScrollViewer"
+           BasedOn="{StaticResource RubyerScrollViewer}"
+           TargetType="{x:Type ScrollViewer}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Rectangle x:Name="Corner" Grid.Column="1" Grid.Row="1"
+                        <Rectangle x:Name="Corner"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
                                    Fill="{DynamicResource DefaultBackground}" />
-                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanContentScroll="{TemplateBinding CanContentScroll}" 
-                                                CanHorizontallyScroll="False" CanVerticallyScroll="False" 
-                                                ContentTemplate="{TemplateBinding ContentTemplate}" 
-                                                Content="{TemplateBinding Content}" 
-                                                Grid.Column="0" Margin="{TemplateBinding Padding}" Grid.Row="0"/>
-                        <ScrollBar x:Name="PART_VerticalScrollBar" AutomationProperties.AutomationId="VerticalScrollBar" 
-                                   Cursor="Arrow" Grid.Column="1" Maximum="{TemplateBinding ScrollableHeight}" 
-                                   Minimum="0" Grid.Row="0" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" 
-                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" 
-                                   ViewportSize="{TemplateBinding ViewportHeight}" Style="{StaticResource RubyerSmallScrollBar}"/>
-                        <ScrollBar x:Name="PART_HorizontalScrollBar" AutomationProperties.AutomationId="HorizontalScrollBar"
-                                   Cursor="Arrow" Grid.Column="0" Maximum="{TemplateBinding ScrollableWidth}" 
-                                   Minimum="0" Orientation="Horizontal" Grid.Row="1" 
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" 
-                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                   ViewportSize="{TemplateBinding ViewportWidth}"  Style="{StaticResource RubyerSmallScrollBar}"/>
+                        <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                Margin="{TemplateBinding Padding}"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
+                                                CanHorizontallyScroll="False"
+                                                CanVerticallyScroll="False"
+                                                Content="{TemplateBinding Content}"
+                                                ContentTemplate="{TemplateBinding ContentTemplate}" />
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Style="{StaticResource RubyerSmallScrollBar}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   AutomationProperties.AutomationId="VerticalScrollBar"
+                                   Cursor="Arrow"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   Minimum="0"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                   Style="{StaticResource RubyerSmallScrollBar}"
+                                   Grid.Row="1"
+                                   Grid.Column="0"
+                                   AutomationProperties.AutomationId="HorizontalScrollBar"
+                                   Cursor="Arrow"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Minimum="0"
+                                   Orientation="Horizontal"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

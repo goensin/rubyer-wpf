@@ -6,12 +6,10 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type rubyer:Icon}">
-        <Setter Property="Width" Value="15"/>
-        <Setter Property="Height" Value="15"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Icon}">
@@ -19,25 +17,30 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Viewbox>
-                            <Canvas x:Name="canvas" Height="1024" Width="1024">
-                                <Path x:Name="icon" Data="{Binding Code,RelativeSource={RelativeSource TemplatedParent}}"
-                                      Fill="{TemplateBinding Foreground}" RenderTransformOrigin="0.5 0.5" Stretch="Uniform">
+                            <Canvas x:Name="canvas"
+                                    Width="1024"
+                                    Height="1024">
+                                <Path x:Name="icon"
+                                      Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
+                                      Fill="{TemplateBinding Foreground}"
+                                      RenderTransformOrigin="0.5 0.5"
+                                      Stretch="Uniform">
                                     <Canvas.Right>
                                         <MultiBinding Converter="{StaticResource getCanvasCentre}">
-                                            <Binding ElementName="canvas" Path="ActualWidth"/>
-                                            <Binding ElementName="icon" Path="ActualWidth"/>
+                                            <Binding ElementName="canvas" Path="ActualWidth" />
+                                            <Binding ElementName="icon" Path="ActualWidth" />
                                         </MultiBinding>
                                     </Canvas.Right>
                                     <Canvas.Top>
                                         <MultiBinding Converter="{StaticResource getCanvasCentre}">
-                                            <Binding ElementName="canvas" Path="ActualHeight"/>
-                                            <Binding ElementName="icon" Path="ActualHeight"/>
+                                            <Binding ElementName="canvas" Path="ActualHeight" />
+                                            <Binding ElementName="icon" Path="ActualHeight" />
                                         </MultiBinding>
                                     </Canvas.Top>
                                     <Path.RenderTransform>
                                         <TransformGroup>
-                                            <ScaleTransform ScaleX="-1" ScaleY="1"/>
-                                            <RotateTransform Angle="180"/>
+                                            <ScaleTransform ScaleX="-1" ScaleY="1" />
+                                            <RotateTransform Angle="180" />
                                         </TransformGroup>
                                     </Path.RenderTransform>
                                 </Path>
@@ -47,5 +50,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="15" />
     </Style>
 </ResourceDictionary>

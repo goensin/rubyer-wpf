@@ -1,23 +1,27 @@
 ﻿<rubyer:RubyerWindow x:Class="RubyerDemo.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
-        xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
-        xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
-        xmlns:converter="clr-namespace:RubyerDemo.Converter"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=vm:MainViewModel, IsDesignTimeCreatable=True}"
-        Title="{Binding Title}" Height="660" Width="1050"
-        Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
-        Foreground="{DynamicResource DefaultForeground}"
-        WindowStartupLocation="CenterScreen" IsShowShadow="True">
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                     xmlns:converter="clr-namespace:RubyerDemo.Converter"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+                     xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
+                     Title="{Binding Title}"
+                     Width="1050"
+                     Height="660"
+                     d:DataContext="{d:DesignInstance Type=vm:MainViewModel,
+                                                      IsDesignTimeCreatable=True}"
+                     Foreground="{DynamicResource DefaultForeground}"
+                     Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
+                     IsShowShadow="True"
+                     WindowStartupLocation="CenterScreen"
+                     mc:Ignorable="d">
     <Window.Resources>
         <converter:IsSelectedToIconConverter x:Key="IsSelectedToIcon" />
     </Window.Resources>
-    <!--可自定义标题栏内容-->
-    <!--WindowChrome.IsHitTestVisibleInChrome = "True" 才可以点击-->
+    <!--  可自定义标题栏内容  -->
+    <!--  WindowChrome.IsHitTestVisibleInChrome = "True" 才可以点击  -->
     <rubyer:RubyerWindow.TitleBarContent>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -25,60 +29,74 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Icon,RelativeSource={RelativeSource AncestorType={x:Type Window}}}" 
-                            Height="22" Width="22" Margin="10 0" VerticalAlignment="Center"/>
-                <TextBlock Text="{Binding Title}" Foreground="{StaticResource PrimaryForeground}"/>
+                <Image Width="22"
+                       Height="22"
+                       Margin="10 0"
+                       VerticalAlignment="Center"
+                       Source="{Binding Icon, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                <TextBlock Foreground="{StaticResource PrimaryForeground}" Text="{Binding Title}" />
             </StackPanel>
-            <Menu Grid.Column="1" WindowChrome.IsHitTestVisibleInChrome="True" HorizontalAlignment="Right"
-                  Foreground="{DynamicResource DefaultForeground}" >
+            <Menu Grid.Column="1"
+                  HorizontalAlignment="Right"
+                  Foreground="{DynamicResource DefaultForeground}"
+                  WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem ItemsSource="{Binding ThemeColors}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="主题" Foreground="{DynamicResource PrimaryForeground}"/>
-                            <rubyer:Icon Type="TShirtFill" Foreground="{DynamicResource Accent}" Margin="5 0 0 0"/>
+                            <TextBlock Foreground="{DynamicResource PrimaryForeground}" Text="主题" />
+                            <rubyer:Icon Margin="5 0 0 0"
+                                         Foreground="{DynamicResource Accent}"
+                                         Type="TShirtFill" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem.ItemContainerStyle>
-                        <Style TargetType="MenuItem" >
-                            <Setter Property="Icon" Value="{Binding IsSeleted,Converter={StaticResource IsSelectedToIcon}}"/>
-                            <Setter Property="Foreground" Value="{Binding Primary}"/>
-                            <Setter Property="Header" Value="{Binding Name}"/>
-                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType=Window},Path=DataContext.ChangeThemeColor}" />
+                        <Style TargetType="MenuItem">
+                            <Setter Property="Command" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.ChangeThemeColor}" />
                             <Setter Property="CommandParameter" Value="{Binding}" />
+                            <Setter Property="Foreground" Value="{Binding Primary}" />
+                            <Setter Property="Header" Value="{Binding Name}" />
+                            <Setter Property="Icon" Value="{Binding IsSeleted, Converter={StaticResource IsSelectedToIcon}}" />
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="帮助" Foreground="{DynamicResource PrimaryForeground}"/>
-                            <rubyer:Icon Type="QuestionFill" Foreground="{DynamicResource PrimaryForeground}" Margin="5 0 0 0"/>
+                            <TextBlock Foreground="{DynamicResource PrimaryForeground}" Text="帮助" />
+                            <rubyer:Icon Margin="5 0 0 0"
+                                         Foreground="{DynamicResource PrimaryForeground}"
+                                         Type="QuestionFill" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Header="关于" Command="{Binding OpenAboutDialog}"/>
+                    <MenuItem Command="{Binding OpenAboutDialog}" Header="关于" />
                 </MenuItem>
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
     <rubyer:MessageContainer Identifier="MessageContainer">
         <rubyer:MessageBoxContainer Identifier="DialogContaioner">
-            <rubyer:DialogBox Identifier="MainDialog" Title="主对话框">
+            <rubyer:DialogBox Title="主对话框" Identifier="MainDialog">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="170"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
-                        <ListBox ItemsSource="{Binding MenuItems}" SelectedItem="{Binding CurrentMenuItem}" SelectedIndex="0"
-                                 SelectionChanged="ListBox_SelectionChanged" 
+                        <ListBox Style="{StaticResource PopularListBox}"
                                  rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
-                                 rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}" 
-                                 Style="{StaticResource PopularListBox}">
+                                 rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}"
+                                 ItemsSource="{Binding MenuItems}"
+                                 SelectedIndex="0"
+                                 SelectedItem="{Binding CurrentMenuItem}"
+                                 SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" Margin="8 5" ToolTip="{Binding Name}"
-                                           TextTrimming="CharacterEllipsis" Width="130"/>
+                                        <TextBlock Width="130"
+                                                   Margin="8 5"
+                                                   Text="{Binding Name}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   ToolTip="{Binding Name}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -88,21 +106,49 @@
                         <TabControl x:Name="Tab" Padding="5 10 5 5">
                             <TabItem Width="200">
                                 <TabItem.Header>
-                                    <TextBlock Text="{Binding CurrentMenuItem.Name}" FontSize="14"/>
+                                    <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
                                 </TabItem.Header>
-                                <ContentControl Content="{Binding CurrentMenuItem.Content}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <ContentControl Margin="191 0 190.706 38.899"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Bottom"
+                                                Content="{Binding CurrentMenuItem.Content}" />
                             </TabItem>
                             <TabItem Width="100">
                                 <TabItem.Header>
-                                    <StackPanel Orientation="Horizontal" Margin="0">
-                                        <rubyer:Icon Type="CodeSSlashFill" Margin="0 0 8 0" FontSize="14"/>
-                                        <TextBlock Text="Xaml" FontSize="14"/>
+                                    <StackPanel Margin="0" Orientation="Horizontal">
+                                        <rubyer:Icon Margin="0 0 8 0"
+                                                     FontSize="14"
+                                                     Type="CodeSSlashFill" />
+                                        <TextBlock FontSize="14" Text="Xaml" />
                                     </StackPanel>
                                 </TabItem.Header>
                                 <Grid>
-                                    <avalonEdit:TextEditor x:Name="textEditor" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" 
-                                               VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                    </avalonEdit:TextEditor>
+                                    <avalonEdit:TextEditor x:Name="xamlTextEditor"
+                                                           FontFamily="Consolas"
+                                                           FontSize="10pt"
+                                                           HorizontalScrollBarVisibility="Auto"
+                                                           ShowLineNumbers="True"
+                                                           SyntaxHighlighting=".xaml"
+                                                           VerticalScrollBarVisibility="Auto" />
+                                </Grid>
+                            </TabItem>
+                            <TabItem Width="100">
+                                <TabItem.Header>
+                                    <StackPanel Margin="0" Orientation="Horizontal">
+                                        <rubyer:Icon Margin="0 0 8 0"
+                                                     FontSize="14"
+                                                     Type="CodeSSlashFill" />
+                                        <TextBlock FontSize="14" Text="CS" />
+                                    </StackPanel>
+                                </TabItem.Header>
+                                <Grid>
+                                    <avalonEdit:TextEditor x:Name="csTextEditor"
+                                                           FontFamily="Consolas"
+                                                           FontSize="10pt"
+                                                           HorizontalScrollBarVisibility="Auto"
+                                                           ShowLineNumbers="True"
+                                                           SyntaxHighlighting=".cs"
+                                                           VerticalScrollBarVisibility="Auto" />
                                 </Grid>
                             </TabItem>
                         </TabControl>

@@ -1,45 +1,45 @@
 ﻿<UserControl x:Class="RubyerDemo.Views.TextBlock"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <GroupBox Header="文本块-TextBlock" Margin="0 0 0 10">
+            <GroupBox Margin="0 0 0 10" Header="文本块-TextBlock">
                 <StackPanel Margin="10">
                     <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">
-                    标题一标题一标题一标题一标题一标题一标题一标题一
+                        标题一标题一标题一标题一标题一标题一标题一标题一
                     </TextBlock>
                     <TextBlock Style="{StaticResource Head2TextBlock}">
-                    标题二标题二标题二标题二标题二标题二标题二标题二
+                        标题二标题二标题二标题二标题二标题二标题二标题二
                     </TextBlock>
                     <TextBlock Style="{StaticResource Head3TextBlock}">
-                    标题三标题三标题三标题三标题三标题三标题三标题三
+                        标题三标题三标题三标题三标题三标题三标题三标题三
                     </TextBlock>
                     <TextBlock Style="{StaticResource Head4TextBlock}">
-                    标题四标题四标题四标题四标题四标题四标题四标题四
+                        标题四标题四标题四标题四标题四标题四标题四标题四
                     </TextBlock>
                     <TextBlock Style="{StaticResource Head5TextBlock}">
-                    标题五标题五标题五标题五标题五标题五标题五标题五
+                        标题五标题五标题五标题五标题五标题五标题五标题五
                     </TextBlock>
                     <TextBlock>
-                    内容内容内容内容内容内容内容内容内容内容内容
+                        内容内容内容内容内容内容内容内容内容内容内容
                     </TextBlock>
                     <TextBlock Style="{StaticResource SmallTextBlock}">
-                    小文本小文本小文本小文本小文本小文本小文本
+                        小文本小文本小文本小文本小文本小文本小文本
                     </TextBlock>
                     <TextBlock Style="{StaticResource MiniTextBlock}">
-                    超小文本超小文本超小文本超小文本超小文本
+                        超小文本超小文本超小文本超小文本超小文本
                     </TextBlock>
                 </StackPanel>
             </GroupBox>

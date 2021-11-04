@@ -8,139 +8,172 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
-    <BeginStoryboard x:Key="stroy">
-        <Storyboard/>
-    </BeginStoryboard>
-
     <Style x:Key="RubyerMessageCard" TargetType="{x:Type rubyer:MessageCard}">
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Center"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="CornerRadius" Value="2.5"/>
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource DefaultForeground}"/>
-        <Setter Property="Margin" Value="2.5"/>
-        <Setter Property="Padding" Value="5"/>
-        <Setter Property="MinHeight" Value="40"/>
-        <Setter Property="MinWidth" Value="200"/>
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="IsShwoIcon" Value="False"/>
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="2.5" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="IsShow" Value="True" />
+        <Setter Property="IsShwoIcon" Value="False" />
+        <Setter Property="Margin" Value="2.5" />
+        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="MinWidth" Value="200" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageCard}">
-                    <Border x:Name="rootBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}" Margin="{TemplateBinding Margin}"
+                    <Border x:Name="rootBorder"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding ThemeColorBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Border.RenderTransform>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.ColumnSpan="3"
+                                    Padding="{TemplateBinding Padding}"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding ThemeColorBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    Effect="{StaticResource AllDirectionEffect}" />
+
+                            <rubyer:Icon Grid.Column="0"
+                                         Width="23"
+                                         Height="23"
+                                         Margin="8 0 0 0"
+                                         Foreground="{TemplateBinding ThemeColorBrush}"
+                                         Type="{TemplateBinding IconType}"
+                                         Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource boolToVisibility}}" />
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Grid.Column="1"
+                                              Margin="8 0"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Button x:Name="PART_CloseButton"
+                                    Style="{StaticResource TextMidButton}"
+                                    Grid.Column="2"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Visibility="{TemplateBinding IsClearable, Converter={StaticResource boolToVisibility}}">
+                                <rubyer:Icon Type="CloseLine" />
+                            </Button>
+                        </Grid>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ShowState">
                                 <VisualStateGroup.Transitions>
                                     <VisualTransition GeneratedDuration="0:0:0.3" To="Close">
                                         <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseIn"/>
+                                            <CubicEase EasingMode="EaseIn" />
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
                                     <VisualTransition GeneratedDuration="0:0:0.3" To="Open">
                                         <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseOut"/>
+                                            <CubicEase EasingMode="EaseOut" />
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.3" From="0.01" To="1"
-                                                             Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"/>
-                                            <DoubleAnimation Duration="0:0:0.3" From="-30" To="0"
-                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"/>
+                                            <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                             From="0.01"
+                                                             To="1"
+                                                             Duration="0:0:0.3" />
+                                            <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                             From="-30"
+                                                             To="0"
+                                                             Duration="0:0:0.3" />
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
                                 <VisualState x:Name="Close">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"
-                                                         Duration="0" To="0"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"
-                                                         Duration="0" To="-30"/>
+                                        <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0"
+                                                         Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                         To="-30"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Open">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="rootBorder"
-                                                         Duration="0" To="1"/>
-                                        <DoubleAnimation Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="rootBorder"
-                                                         Duration="0" To="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="1"
+                                                         Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="rootBorder"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                         To="0"
+                                                         Duration="0" />
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Border.RenderTransform>
-                            <TransformGroup>
-                                <ScaleTransform/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
-                            </TransformGroup>
-                        </Border.RenderTransform>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding ThemeColorBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}" Effect="{StaticResource AllDirectionEffect}"
-                                    Padding="{TemplateBinding Padding}" CornerRadius="{TemplateBinding CornerRadius}" 
-                                    Grid.ColumnSpan="3"/>
-
-                            <rubyer:Icon Type="{TemplateBinding IconType}" Grid.Column="0" Margin="8 0 0 0"
-                                         Foreground="{TemplateBinding ThemeColorBrush}" Width="23" Height="23"
-                                         Visibility="{TemplateBinding IsShwoIcon,Converter={StaticResource boolToVisibility}}"/>
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" Grid.Column="1"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="8 0"/>
-                            <Button x:Name="PART_CloseButton" Style="{StaticResource TextMidButton}" Foreground="{TemplateBinding Foreground}"
-                                    Grid.Column="2" Visibility="{TemplateBinding IsClearable,Converter={StaticResource boolToVisibility}}">
-                                <rubyer:Icon Type="CloseLine"/>
-                            </Button>
-                        </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Opacity" SourceName="rootBorder" Value="0">
+                        <Trigger SourceName="rootBorder" Property="Opacity" Value="0">
                             <Setter Property="IsClosed" Value="True" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="WarningMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
-        <Setter Property="ThemeColorBrush" Value="{StaticResource WarningBrush}"/>
-        <Setter Property="IconType" Value="ErrorWarningFill"/>
-        <Setter Property="IsShwoIcon" Value="True"/>
+    <Style x:Key="WarningMessage"
+           BasedOn="{StaticResource RubyerMessageCard}"
+           TargetType="{x:Type rubyer:MessageCard}">
+        <Setter Property="IconType" Value="ErrorWarningFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource WarningBrush}" />
     </Style>
 
-    <Style x:Key="SuccessMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
-        <Setter Property="ThemeColorBrush" Value="{StaticResource SuccessBrush}"/>
-        <Setter Property="IconType" Value="CheckboxCircleFill"/>
-        <Setter Property="IsShwoIcon" Value="True"/>
+    <Style x:Key="SuccessMessage"
+           BasedOn="{StaticResource RubyerMessageCard}"
+           TargetType="{x:Type rubyer:MessageCard}">
+        <Setter Property="IconType" Value="CheckboxCircleFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource SuccessBrush}" />
     </Style>
 
-    <Style x:Key="ErrorMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
-        <Setter Property="ThemeColorBrush" Value="{StaticResource ErrorBrush}"/>
-        <Setter Property="IconType" Value="CloseCircleFill"/>
-        <Setter Property="IsShwoIcon" Value="True"/>
+    <Style x:Key="ErrorMessage"
+           BasedOn="{StaticResource RubyerMessageCard}"
+           TargetType="{x:Type rubyer:MessageCard}">
+        <Setter Property="IconType" Value="CloseCircleFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource ErrorBrush}" />
     </Style>
 
-    <Style x:Key="InfoMessage" TargetType="{x:Type rubyer:MessageCard}" BasedOn="{StaticResource RubyerMessageCard}">
-        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}"/>
-        <Setter Property="IconType" Value="InformationFill"/>
-        <Setter Property="IsShwoIcon" Value="True"/>
+    <Style x:Key="InfoMessage"
+           BasedOn="{StaticResource RubyerMessageCard}"
+           TargetType="{x:Type rubyer:MessageCard}">
+        <Setter Property="IconType" Value="InformationFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}" />
     </Style>
 
 </ResourceDictionary>

@@ -7,28 +7,33 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="{x:Type ContextMenu}">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Margin" Value="5" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Padding" Value="0 5" />
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Grid>
-                        <Border Background="{TemplateBinding Background}"
-                                Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}"
-                                CornerRadius="2.5" Effect="{StaticResource AllDirectionEffect}"/>
+                        <Border Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="2.5"
+                                Effect="{StaticResource AllDirectionEffect}" />
 
-                        <Border x:Name="Border" Background="{TemplateBinding Background}"
-                                Margin="{TemplateBinding Margin}" Padding="{TemplateBinding Padding}"
-                                CornerRadius="2.5" >
-                            <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" 
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                        KeyboardNavigation.TabNavigation="Cycle"/>
+                        <Border x:Name="Border"
+                                Margin="{TemplateBinding Margin}"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="2.5">
+                            <StackPanel IsItemsHost="True"
+                                        KeyboardNavigation.DirectionalNavigation="Cycle"
+                                        KeyboardNavigation.TabNavigation="Cycle"
+                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
                 </ControlTemplate>

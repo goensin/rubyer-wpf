@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:rubyer="clr-namespace:Rubyer">
+                    xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
@@ -9,43 +9,54 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerDatePicker" TargetType="{x:Type DatePicker}">
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderThickness" Value="1.3" />
+        <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}"/>
-        <Setter Property="BorderThickness" Value="1.3" />
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Height" Value="28"/>
-        <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}"/>
-        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="2.5"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DatePicker}">
-                    <Grid x:Name="PART_Root" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                        <DatePickerTextBox x:Name="PART_TextBox" Grid.Column="0"  Foreground="{TemplateBinding Foreground}"
-                                           Focusable="{TemplateBinding Focusable}" HorizontalContentAlignment="Stretch"
-                                           Grid.Row="0" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                           Style="{StaticResource RubyerTextBox}">
+                    <Grid x:Name="PART_Root"
+                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                        <DatePickerTextBox x:Name="PART_TextBox"
+                                           Style="{StaticResource RubyerTextBox}"
+                                           Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalContentAlignment="Stretch"
+                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Focusable="{TemplateBinding Focusable}"
+                                           Foreground="{TemplateBinding Foreground}">
                             <rubyer:TextBoxHelper.PostContent>
-                                <Button x:Name="PART_Button" Focusable="False" Height="26"
-                                            Foreground="{TemplateBinding BorderBrush}" 
-                                            Style="{StaticResource TextMidButton}">
-                                    <rubyer:Icon Type="Calendar2Line"/>
+                                <Button x:Name="PART_Button"
+                                        Style="{StaticResource TextMidButton}"
+                                        Height="26"
+                                        Focusable="False"
+                                        Foreground="{TemplateBinding BorderBrush}">
+                                    <rubyer:Icon Type="Calendar2Line" />
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>
                         </DatePickerTextBox>
-                        <Popup x:Name="PART_Popup" AllowsTransparency="True" Placement="Bottom" PopupAnimation="Fade"
-                               PlacementTarget="{Binding ElementName=PART_TextBox}" StaysOpen="False"
-                               VerticalOffset="5" Margin="5">
-                        </Popup>
+                        <Popup x:Name="PART_Popup"
+                               Margin="5"
+                               AllowsTransparency="True"
+                               Placement="Bottom"
+                               PlacementTarget="{Binding ElementName=PART_TextBox}"
+                               PopupAnimation="Fade"
+                               StaysOpen="False"
+                               VerticalOffset="5" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="2.5" />
     </Style>
 
 

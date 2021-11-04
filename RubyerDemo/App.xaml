@@ -1,8 +1,10 @@
-﻿<Application
+﻿<Application x:Class="RubyerDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:RubyerDemo"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="RubyerDemo.App">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,14 +16,14 @@
             <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
             <Color x:Key="DarkBackgroundColor">#252526</Color>
 
-            <SolidColorBrush x:Key="Light" Color="#6EC6FF"/>
-            <SolidColorBrush x:Key="LightForeground" Color="#000000"/>
-            <SolidColorBrush x:Key="Primary" Color="#2196F3"/>
-            <SolidColorBrush x:Key="PrimaryForeground" Color="#FFFFFF"/>
-            <SolidColorBrush x:Key="Dark" Color="#0069C0"/>
-            <SolidColorBrush x:Key="DarkForeground" Color="#FFFFFF"/>
-            <SolidColorBrush x:Key="Accent" Color="#F50057"/>
-            <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF"/>
+            <SolidColorBrush x:Key="Light" Color="#6EC6FF" />
+            <SolidColorBrush x:Key="LightForeground" Color="#000000" />
+            <SolidColorBrush x:Key="Primary" Color="#2196F3" />
+            <SolidColorBrush x:Key="PrimaryForeground" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="Dark" Color="#0069C0" />
+            <SolidColorBrush x:Key="DarkForeground" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="Accent" Color="#F50057" />
+            <SolidColorBrush x:Key="AccentForeground" Color="#FFFFFF" />
 
         </ResourceDictionary>
     </Application.Resources>
