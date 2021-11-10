@@ -10,7 +10,7 @@
                      Title="{Binding Title}"
                      Width="1050"
                      Height="660"
-                     d:DataContext="{d:DesignInstance Type=vm:MainViewModel,IsDesignTimeCreatable=True}"
+                     d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
                      IsShowShadow="True"
@@ -61,12 +61,12 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="帮助" />
-                            <rubyer:Icon Margin="5 0 0 0"
-                                         Type="QuestionFill" />
+                            <rubyer:Icon Margin="5 0 0 0" Type="QuestionFill" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Command="{Binding OpenAboutDialog}" Header="关于"
-                              Foreground="{DynamicResource DefaultForeground}"/>
+                    <MenuItem Command="{Binding OpenAboutDialog}"
+                              Foreground="{DynamicResource DefaultForeground}"
+                              Header="关于" />
                 </MenuItem>
             </Menu>
         </Grid>
@@ -121,24 +121,6 @@
                                 </TabItem.Header>
                                 <Grid>
                                     <avalonEdit:TextEditor x:Name="xamlTextEditor"
-                                                           FontFamily="Consolas"
-                                                           FontSize="10pt"
-                                                           HorizontalScrollBarVisibility="Auto"
-                                                           ShowLineNumbers="True"
-                                                           VerticalScrollBarVisibility="Auto" />
-                                </Grid>
-                            </TabItem>
-                            <TabItem Width="100">
-                                <TabItem.Header>
-                                    <StackPanel Margin="0" Orientation="Horizontal">
-                                        <rubyer:Icon Margin="0 0 8 0"
-                                                     FontSize="14"
-                                                     Type="CodeSSlashFill" />
-                                        <TextBlock FontSize="14" Text="CS" />
-                                    </StackPanel>
-                                </TabItem.Header>
-                                <Grid>
-                                    <avalonEdit:TextEditor x:Name="csTextEditor"
                                                            FontFamily="Consolas"
                                                            FontSize="10pt"
                                                            HorizontalScrollBarVisibility="Auto"

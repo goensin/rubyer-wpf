@@ -15,13 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ali.jpg" />
-    <None Remove="Assets\TextFile1.txt" />
-    <None Remove="Assets\wechat.jpg" />
-    <None Remove="rubyer.ico" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
   </ItemGroup>
@@ -52,5 +45,4 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
-
 </Project>

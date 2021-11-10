@@ -1,5 +1,6 @@
 ﻿using ICSharpCode.AvalonEdit.Highlighting;
 using Rubyer;
+using RubyerDemo.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -19,19 +20,18 @@ namespace RubyerDemo
             InitializeComponent();
         }
 
-        const string PROJECT_NAME = "RubyerDemo";
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
             {
                 ListBox listBox = sender as ListBox;
                 string name = $"Views/{(listBox.SelectedItem as ViewModels.MenuItem).Name.Split('-')[1]}.xaml";
-                Uri uri = new Uri($"/{PROJECT_NAME};component/{name}", UriKind.Relative);
+                Uri uri = new Uri($"{name}", UriKind.Relative);
                 var resourceInfo = Application.GetResourceStream(uri);
+                var bamlTranslator = new BamlTranslator(resourceInfo.Stream);
                 xamlTextEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".xaml");
                 xamlTextEditor.Encoding = Encoding.Default;
-                xamlTextEditor.Load(resourceInfo.Stream);
+                xamlTextEditor.Text = bamlTranslator.ToString();
                 Tab.SelectedIndex = 0;
             }
             catch (Exception ex)
