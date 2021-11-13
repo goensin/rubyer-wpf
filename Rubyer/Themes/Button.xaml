@@ -32,6 +32,8 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="2.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -77,8 +79,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="2.5" />
     </Style>
 
 

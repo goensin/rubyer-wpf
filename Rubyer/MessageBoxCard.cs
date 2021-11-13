@@ -1,14 +1,22 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
     public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
 
+    /// <summary>
+    /// 消息框卡片
+    /// </summary>
+    [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = OkButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = CancelButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = YesButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = NoButtonPartName, Type = typeof(Button))]
+    [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
+    [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
     public class MessageBoxCard : Control
     {
         public const string CloseButtonPartName = "PART_CloseButton";
@@ -16,10 +24,12 @@ namespace Rubyer
         public const string CancelButtonPartName = "PART_CancelButton";
         public const string YesButtonPartName = "PART_YesButton";
         public const string NoButtonPartName = "PART_NoButton";
+        public const string OpenStateName = "Open";
+        public const string CloseStateName = "Close";
 
+        public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
         public static readonly RoutedEvent ReturnResultEvent;
-
-        private MessageBoxContainer ownerContaioner;
+        private MessageBoxResult messageBoxResult;
 
         static MessageBoxCard()
         {
@@ -29,14 +39,11 @@ namespace Rubyer
 
         public override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                MessageBoxR.CloseInContainer(ownerContaioner, this);
-                MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
-                RaiseEvent(eventArgs);
+                messageBoxResult = MessageBoxResult.Cancel;
+                GoToCloseState(this);
             };
 
             if (IsShowOk)
@@ -44,9 +51,8 @@ namespace Rubyer
                 ButtonBase okButton = GetTemplateChild(OkButtonPartName) as ButtonBase;
                 okButton.Click += (sender, args) =>
                 {
-                    MessageBoxR.CloseInContainer(ownerContaioner, this);
-                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.OK, this);
-                    RaiseEvent(eventArgs);
+                    messageBoxResult = MessageBoxResult.OK;
+                    GoToCloseState(this);
                 };
             }
 
@@ -55,9 +61,8 @@ namespace Rubyer
                 ButtonBase cancelButton = GetTemplateChild(CancelButtonPartName) as ButtonBase;
                 cancelButton.Click += (sender, args) =>
                 {
-                    MessageBoxR.CloseInContainer(ownerContaioner, this);
-                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Cancel, this);
-                    RaiseEvent(eventArgs);
+                    messageBoxResult = MessageBoxResult.Cancel;
+                    GoToCloseState(this);
                 };
             }
 
@@ -66,9 +71,8 @@ namespace Rubyer
                 ButtonBase yesButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
                 yesButton.Click += (sender, args) =>
                 {
-                    MessageBoxR.CloseInContainer(ownerContaioner, this);
-                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.Yes, this);
-                    RaiseEvent(eventArgs);
+                    messageBoxResult = MessageBoxResult.Yes;
+                    GoToCloseState(this);
                 };
             }
 
@@ -77,18 +81,14 @@ namespace Rubyer
                 ButtonBase noButton = GetTemplateChild(NoButtonPartName) as ButtonBase;
                 noButton.Click += (sender, args) =>
                 {
-                    MessageBoxR.CloseInContainer(ownerContaioner, this);
-                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, MessageBoxResult.No, this);
-                    RaiseEvent(eventArgs);
+                    messageBoxResult = MessageBoxResult.No;
+                    GoToCloseState(this);
                 };
             }
-        }
 
-        /// <summary>
-        /// 设置所处容器
-        /// </summary>
-        /// <param name="container">信息框容器</param>
-        internal void SetOwnerContainer(MessageBoxContainer container) => ownerContaioner = container;
+            GoToOpenState(this);
+            base.OnApplyTemplate();
+        }
 
         #region 事件
         public event MessageBoxResultRoutedEventHandler ReturnResult
@@ -99,8 +99,8 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
-        public static readonly DependencyProperty MessageProperty =
-            DependencyProperty.Register("Message", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
+            "Message", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
 
         public string Message
         {
@@ -108,9 +108,8 @@ namespace Rubyer
             set { SetValue(MessageProperty, value); }
         }
 
-
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
 
         public string Title
         {
@@ -118,8 +117,8 @@ namespace Rubyer
             set { SetValue(TitleProperty, value); }
         }
 
-        public static readonly DependencyProperty CornerRadiusProperty =
-          DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MessageBoxCard), new PropertyMetadata(default(CornerRadius)));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            "CornerRadius", typeof(CornerRadius), typeof(MessageBoxCard), new PropertyMetadata(default(CornerRadius)));
 
         public CornerRadius CornerRadius
         {
@@ -127,8 +126,8 @@ namespace Rubyer
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-        public static readonly DependencyProperty ThemeColorBrushProperty =
-            DependencyProperty.Register("ThemeColorBrush", typeof(Brush), typeof(MessageBoxCard), new PropertyMetadata(default(Brush)));
+        public static readonly DependencyProperty ThemeColorBrushProperty = DependencyProperty.Register(
+            "ThemeColorBrush", typeof(Brush), typeof(MessageBoxCard), new PropertyMetadata(default(Brush)));
 
         public Brush ThemeColorBrush
         {
@@ -137,8 +136,8 @@ namespace Rubyer
         }
 
 
-        public static readonly DependencyProperty IconTypeProperty =
-            DependencyProperty.Register("IconType", typeof(IconType), typeof(MessageBoxCard), new PropertyMetadata(default(IconType)));
+        public static readonly DependencyProperty IconTypeProperty = DependencyProperty.Register(
+            "IconType", typeof(IconType), typeof(MessageBoxCard), new PropertyMetadata(default(IconType)));
 
         public IconType IconType
         {
@@ -146,8 +145,8 @@ namespace Rubyer
             set { SetValue(IconTypeProperty, value); }
         }
 
-        public static readonly DependencyProperty IsShowIconProperty =
-            DependencyProperty.Register("IsShowIcon", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsShowIconProperty = DependencyProperty.Register(
+            "IsShowIcon", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool IsShowIcon
         {
@@ -155,8 +154,8 @@ namespace Rubyer
             set { SetValue(IsShowIconProperty, value); }
         }
 
-        public static readonly DependencyProperty IsShowOkProperty =
-            DependencyProperty.Register("IsShowOk", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsShowOkProperty = DependencyProperty.Register(
+            "IsShowOk", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool IsShowOk
         {
@@ -164,8 +163,8 @@ namespace Rubyer
             set { SetValue(IsShowOkProperty, value); }
         }
 
-        public static readonly DependencyProperty IsShowNoProperty =
-            DependencyProperty.Register("IsShowNo", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsShowNoProperty = DependencyProperty.Register(
+            "IsShowNo", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool IsShowNo
         {
@@ -173,8 +172,8 @@ namespace Rubyer
             set { SetValue(IsShowNoProperty, value); }
         }
 
-        public static readonly DependencyProperty IsShowYesProperty =
-            DependencyProperty.Register("IsShowYes", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsShowYesProperty = DependencyProperty.Register(
+            "IsShowYes", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool IsShowYes
         {
@@ -182,8 +181,8 @@ namespace Rubyer
             set { SetValue(IsShowYesProperty, value); }
         }
 
-        public static readonly DependencyProperty IsShowCancelProperty =
-            DependencyProperty.Register("IsShowCancel", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty IsShowCancelProperty = DependencyProperty.Register(
+            "IsShowCancel", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool IsShowCancel
         {
@@ -191,9 +190,8 @@ namespace Rubyer
             set { SetValue(IsShowCancelProperty, value); }
         }
 
-
-        public static readonly DependencyProperty ShowShadowProperty =
-            DependencyProperty.Register("ShowShadow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.Register(
+            "ShowShadow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
 
         public bool ShowShadow
         {
@@ -201,8 +199,8 @@ namespace Rubyer
             set { SetValue(ShowShadowProperty, value); }
         }
 
-        public static readonly DependencyProperty MessageBoxButtonProperty =
-            DependencyProperty.Register("MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxButton), OnMessageBoxButtonChanged));
+        public static readonly DependencyProperty MessageBoxButtonProperty = DependencyProperty.Register(
+            "MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxButton), OnMessageBoxButtonChanged));
 
         private static void OnMessageBoxButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -245,10 +243,39 @@ namespace Rubyer
             set { SetValue(MessageBoxButtonProperty, value); }
         }
 
+        public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
+            "IsClosed", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool), OnIsClosedChanged));
 
+        private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MessageBoxCard messageBoxCard)
+            {
+                if (messageBoxCard.IsClosed)
+                {
+                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, messageBoxCard.messageBoxResult, messageBoxCard);
+                    messageBoxCard.RaiseEvent(eventArgs);
+                }
+            }
+        }
+
+        public bool IsClosed
+        {
+            get { return (bool)GetValue(IsClosedProperty); }
+            set { SetValue(IsClosedProperty, value); }
+        }
         #endregion
-    }
 
+        private static void GoToOpenState(MessageBoxCard messageBoxCard)
+        {
+            _ = VisualStateManager.GoToState(messageBoxCard, OpenStateName, true);
+            _ = messageBoxCard.Focus();
+        }
+
+        private static void GoToCloseState(MessageBoxCard messageBoxCard)
+        {
+            _ = VisualStateManager.GoToState(messageBoxCard, CloseStateName, true);
+        }
+    }
 
     public class MessageBoxResultRoutedEventArge : RoutedEventArgs
     {

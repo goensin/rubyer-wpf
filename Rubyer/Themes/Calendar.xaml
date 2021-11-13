@@ -34,7 +34,7 @@
                                    RadiusX="2"
                                    RadiusY="2" />
                         <ContentPresenter x:Name="NormalText"
-                                          Margin="5,1,5,1"
+                                          Margin="5 1 5 1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           TextElement.Foreground="{DynamicResource DefaultForeground}" />
@@ -208,7 +208,7 @@
                                    RadiusY="2" />
 
                         <ContentPresenter x:Name="NormalText"
-                                          Margin="1,0,1,1"
+                                          Margin="1 0 1 1"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           TextElement.FontSize="12"
@@ -398,7 +398,7 @@
 
                                 <Grid x:Name="PART_MonthView"
                                       Grid.Row="1"
-                                      Margin="6,-1,6,6"
+                                      Margin="6 -1 6 6"
                                       HorizontalAlignment="Center"
                                       Visibility="Visible">
                                     <Grid.ColumnDefinitions>
@@ -423,7 +423,7 @@
                                 <Grid x:Name="PART_YearView"
                                       Grid.Row="1"
                                       Grid.ColumnSpan="3"
-                                      Margin="5,20,5,5"
+                                      Margin="5 20 5 5"
                                       HorizontalAlignment="Center"
                                       Visibility="Hidden">
                                     <Grid.ColumnDefinitions>

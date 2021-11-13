@@ -14,6 +14,30 @@
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:MessageBoxContainer">
                     <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ShowStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2"/>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Show">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_RootBorder">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="PART_RootBorder">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Hide">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="PART_RootBorder">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                         <ContentPresenter x:Name="contentPresenter"
                                           Focusable="False"
                                           RecognizesAccessKey="True"
@@ -29,6 +53,11 @@
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Opacity" SourceName="PART_RootBorder" Value="0">
+                            <Setter Property="Visibility" TargetName="PART_RootBorder" Value="Hidden" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

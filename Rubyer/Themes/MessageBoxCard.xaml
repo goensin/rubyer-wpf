@@ -16,7 +16,7 @@
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="IconType" Value="InformationFill" />
         <Setter Property="IsShowIcon" Value="False" />
         <Setter Property="IsShowOk" Value="True" />
@@ -26,23 +26,29 @@
         <Setter Property="MinHeight" Value="120" />
         <Setter Property="MinWidth" Value="250" />
         <Setter Property="Padding" Value="10" />
-        <Setter Property="RenderTransform">
-            <Setter.Value>
-                <TranslateTransform />
-            </Setter.Value>
-        </Setter>
         <Setter Property="ShowShadow" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxCard}">
-                    <Grid>
+                    <Grid x:Name="root">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
+                            </TransformGroup>
+                        </Grid.RenderTransform>
                         <Border x:Name="effectBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
-                                Effect="{StaticResource AllDirectionEffect}"
+                                Effect="{StaticResource AllDirectionEffect3}"
                                 Visibility="{TemplateBinding ShowShadow, Converter={StaticResource boolToVisibility}}" />
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -95,38 +101,88 @@
                                             Width="60"
                                             Margin="5"
                                             Background="{StaticResource InfoBrush}"
-                                            Visibility="{TemplateBinding IsShowNo, Converter={StaticResource boolToVisibility}}">
-                                        否
-                                    </Button>
+                                            Content="否"
+                                            Visibility="{TemplateBinding IsShowNo, Converter={StaticResource boolToVisibility}}" />
                                     <Button x:Name="PART_YesButton"
                                             Width="60"
                                             Margin="5"
-                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource boolToVisibility}}">
-                                        是
-                                    </Button>
+                                            Content="是"
+                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource boolToVisibility}}" />
                                     <Button x:Name="PART_CancelButton"
                                             Width="60"
                                             Margin="5"
                                             Background="{StaticResource InfoBrush}"
-                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource boolToVisibility}}">
-                                        取消
-                                    </Button>
+                                            Content="取消"
+                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource boolToVisibility}}" />
                                     <Button x:Name="PART_OkButton"
                                             Width="60"
                                             Margin="5"
+                                            Content="确认"
                                             IsDefault="True"
-                                            Visibility="{TemplateBinding IsShowOk, Converter={StaticResource boolToVisibility}}">
-                                        确认
-                                    </Button>
+                                            Visibility="{TemplateBinding IsShowOk, Converter={StaticResource boolToVisibility}}" />
                                 </StackPanel>
                             </Grid>
                         </Border>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ShowState">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Close">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseIn" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                    </VisualTransition>
+                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Open">
+                                        <VisualTransition.GeneratedEasingFunction>
+                                            <CubicEase EasingMode="EaseOut" />
+                                        </VisualTransition.GeneratedEasingFunction>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="root"
+                                                             Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                             From="0.01"
+                                                             To="1"
+                                                             Duration="0:0:0.25" />
+                                            <DoubleAnimation Storyboard.TargetName="root"
+                                                             Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                             From="30"
+                                                             To="0"
+                                                             Duration="0:0:0.2" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Close">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="root"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="0"
+                                                         Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="root"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                         To="30"
+                                                         Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Open">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="root"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         To="1"
+                                                         Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="root"
+                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
+                                                         To="0"
+                                                         Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="root" Property="Opacity" Value="0">
+                            <Setter Property="IsClosed" Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>

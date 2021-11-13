@@ -162,6 +162,10 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="rubyer:ListBoxHelper.IsAnimation" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
@@ -207,10 +211,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource PrimaryForeground}" />
-        <Setter Property="rubyer:ListBoxHelper.IsAnimation" Value="True" />
     </Style>
 
 

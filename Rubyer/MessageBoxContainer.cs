@@ -1,10 +1,19 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 消息框容器
+    /// </summary>
+    [TemplateVisualState(GroupName = "ShowStates", Name = ShowStateName)]
+    [TemplateVisualState(GroupName = "ShowStates", Name = HideStateName)]
     public class MessageBoxContainer : ContentControl
     {
+        public const string ShowStateName = "Show";
+        public const string HideStateName = "Hide";
+
         static MessageBoxContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxContainer), new FrameworkPropertyMetadata(typeof(MessageBoxContainer)));
@@ -35,6 +44,30 @@ namespace Rubyer
                 string identify = e.NewValue.ToString();
                 MessageBoxR.UpdateContainer(container, identify);
             }
+        }
+
+        public static readonly DependencyProperty IsShowProperty =
+           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(default(bool), OnIsShowChanged));
+
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is MessageBoxContainer container)
+            {
+                if (container.IsShow)
+                {
+                    _ = VisualStateManager.GoToState(container, ShowStateName, true);
+                }
+                else
+                {
+                    _ = VisualStateManager.GoToState(container, HideStateName, true);
+                }
+            }
+        }
+
+        public bool IsShow
+        {
+            get { return (bool)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
         }
     }
 }

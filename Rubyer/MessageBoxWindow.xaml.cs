@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -30,24 +18,19 @@ namespace Rubyer
         public void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
-            _ = messageBoxPanel.Children.Add(card);
+            _ = messageBoxPanel.Child = card;
         }
 
         private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArge e)
         {
-            Storyboard unloadStoryboard = (Storyboard)Resources["UnLoadFadeUp"];
-            unloadStoryboard.Completed += (a, b) => {
-                messageBoxPanel.Children.Remove(e.Card);
-                DialogResult = true;
-            };
-
-            rootGrid.BeginStoryboard(unloadStoryboard);
+            messageBoxPanel.Child = null;
             MessageBoxResult = e.Result;
+            DialogResult = true;
         }
 
         private void Window_LostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)
         {
-            Focus();
+            _ = Focus();
         }
 
         private void Window_PreviewLostKeyboardFocus(object sender, KeyboardFocusChangedEventArgs e)

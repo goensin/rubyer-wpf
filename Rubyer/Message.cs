@@ -15,6 +15,7 @@ namespace Rubyer
         private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
         private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
         private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
+
         public static Dictionary<string, MessageContainer> containers = new Dictionary<string, MessageContainer>();
 
         #region 全局
@@ -32,16 +33,9 @@ namespace Rubyer
             messageWindow.Dispatcher.VerifyAccess();
             MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
-            messageCard.Close += (sender, e) =>
-            {
-                messageWindow.RemoveMessageCard(messageCard);
-            };
 
-            messageCard.MouseEnter += (sender, e) =>
-            {
-                cts.Cancel();
-            };
-
+            messageCard.Close += (sender, e) => messageWindow.RemoveMessageCard(messageCard);
+            messageCard.MouseEnter += (sender, e) => cts.Cancel();
             messageCard.MouseLeave += (sender, e) =>
             {
                 cts = new CancellationTokenSource();
@@ -186,23 +180,16 @@ namespace Rubyer
         {
             if (!containers.ContainsKey(containerIdentifier))
             {
-                throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息框容器");
+                throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息容器");
             }
 
             MessageContainer container = containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
             MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
-            messageCard.Close += (sender, e) =>
-            {
-                container.RemoveMessageCard(messageCard);
-            };
 
-            messageCard.MouseEnter += (sender, e) =>
-            {
-                cts.Cancel();
-            };
-
+            messageCard.Close += (sender, e) => container.RemoveMessageCard(messageCard);
+            messageCard.MouseEnter += (sender, e) => cts.Cancel();
             messageCard.MouseLeave += (sender, e) =>
             {
                 cts = new CancellationTokenSource();

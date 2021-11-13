@@ -31,12 +31,12 @@
   "ReorderVSM": 2,
   "ReorderGridChildren": false,
   "ReorderCanvasChildren": false,
-  "ReorderSetters": 3,
+  "ReorderSetters": 0,
   "RecordVisualStateManager": 0,
   "FormatMarkupExtension": true,
   "NoNewLineMarkupExtensions": "x:Bind, Binding, TemplateBinding, x:Static, DynamicResource, ComponentResourceKey",
   "ThicknessSeparator": 1,
   "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",
-  "FormatOnSave": false,
+  "FormatOnSave": true,
   "CommentPadding": 2
 }
