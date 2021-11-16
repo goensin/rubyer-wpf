@@ -97,7 +97,7 @@ namespace RubyerDemo.ViewModels
         private void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
-            DialogBox.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
+            Dialog.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
         }
 
         private void AfterDialog4Close(DialogBox dialog, object arg)

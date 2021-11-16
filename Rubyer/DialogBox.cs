@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
@@ -13,24 +11,19 @@ namespace Rubyer
     /// </summary>
     [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = RootBorderPartName, Type = typeof(Border))]
-    [TemplatePart(Name = CardBorderPartName, Type = typeof(Border))]
     [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
     [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
     public class DialogBox : ContentControl
     {
         public const string CloseButtonPartName = "PART_CloseButton";
         public const string RootBorderPartName = "PART_RootBorder";
-        public const string CardBorderPartName = "PART_CardBorder";
         public const string OpenStateName = "Open";
         public const string CloseStateName = "Close";
 
-        public static Dictionary<string, DialogBox> dialogs = new Dictionary<string, DialogBox>();
-
-        private Action<DialogBox> beforeOpenHandler;
-        private Action<DialogBox, object> afterCloseHandler;
+        public Action<DialogBox> BeforeOpenHandler;
+        public Action<DialogBox, object> AfterCloseHandler;
 
         private Border rootBorder;
-        private Border cardBorder;
         private object closeParameter;
 
         static DialogBox()
@@ -40,6 +33,8 @@ namespace Rubyer
 
         public override void OnApplyTemplate()
         {
+            base.OnApplyTemplate();
+
             _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
             _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
 
@@ -51,11 +46,7 @@ namespace Rubyer
             };
 
             rootBorder = GetTemplateChild(RootBorderPartName) as Border;
-            cardBorder = GetTemplateChild(CardBorderPartName) as Border;
-
             rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
-
-            base.OnApplyTemplate();
         }
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
@@ -135,15 +126,9 @@ namespace Rubyer
 
         private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DialogBox dialog = d as DialogBox;
-            string identify = e.NewValue.ToString();
-
-            if (dialogs.ContainsKey(identify))
-            {
-                _ = dialogs.Remove(identify);
-            }
-
-            dialogs.Add(identify, dialog);
+            DialogBox dialogBox = d as DialogBox;
+            string identifier = e.NewValue.ToString();
+            Dialog.AddDialogBox(identifier, dialogBox);
         }
 
         public string Identifier
@@ -258,11 +243,11 @@ namespace Rubyer
                 args.RoutedEvent = AfterCloseEvent;
                 dialog.RaiseEvent(args);
                 dialog.AfterCloseCommand?.Execute(dialog.closeParameter);
-                dialog.afterCloseHandler?.Invoke(dialog, dialog.closeParameter);
+                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameter);
 
                 dialog.closeParameter = null;
-                dialog.beforeOpenHandler = null;
-                dialog.afterCloseHandler = null;
+                dialog.BeforeOpenHandler = null;
+                dialog.AfterCloseHandler = null;
             }
         }
 
@@ -279,7 +264,7 @@ namespace Rubyer
             RoutedEventArgs args = new RoutedEventArgs(BeforeOpenEvent);
             container.RaiseEvent(args);
             container.BeforeOpenCommand?.Execute(null);
-            container.beforeOpenHandler?.Invoke(container);
+            container.BeforeOpenHandler?.Invoke(container);
 
             GoToOpenState(container);
             _ = container.Focus();
@@ -289,112 +274,6 @@ namespace Rubyer
         private void CloseAnimaton()
         {
             GoToCloseState(this);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="openHandler">打开前处理程序</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
-        /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle, bool isShowCloseButton)
-        {
-            if (!dialogs.ContainsKey(identifier))
-            {
-                return;
-            }
-
-            DialogBox dialog = dialogs[identifier];
-            dialog.Dispatcher.VerifyAccess();
-            dialog.DialogContent = content;
-            dialog.Title = string.IsNullOrEmpty(title) ? dialog.Title : title;
-            dialog.IsShowCloseButton = isShowCloseButton;
-            dialog.beforeOpenHandler = openHandler;
-            dialog.afterCloseHandler = closeHandle;
-            dialog.IsShow = true;
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        public static void Show(string identifier, object content)
-        {
-            Show(identifier, content, "", null, null, true);
-        }
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title)
-        {
-            Show(identifier, content, title, null, null, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="title">标题</param>
-        /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static void Show(string identifier, object content, string title, bool isShowCloseButton)
-        {
-            Show(identifier, content, title, null, null, isShowCloseButton);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        public static void Show(string identifier, object content, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, string.Empty, null, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="openHandler">打开前处理程序</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        public static void Show(string identifier, object content, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, string.Empty, openHandler, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, title, null, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="openHandler">打开前处理程序</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, title, openHandler, closeHandle, true);
         }
 
         private static void GoToOpenState(FrameworkElement element)
