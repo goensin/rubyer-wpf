@@ -4,16 +4,25 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 对话框
+    /// </summary>
+    [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = RootBorderPartName, Type = typeof(Border))]
+    [TemplatePart(Name = CardBorderPartName, Type = typeof(Border))]
+    [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
+    [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
     public class DialogBox : ContentControl
     {
         public const string CloseButtonPartName = "PART_CloseButton";
         public const string RootBorderPartName = "PART_RootBorder";
         public const string CardBorderPartName = "PART_CardBorder";
+        public const string OpenStateName = "Open";
+        public const string CloseStateName = "Close";
 
         public static Dictionary<string, DialogBox> dialogs = new Dictionary<string, DialogBox>();
 
@@ -31,8 +40,6 @@ namespace Rubyer
 
         public override void OnApplyTemplate()
         {
-            base.OnApplyTemplate();
-
             _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
             _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
 
@@ -47,6 +54,8 @@ namespace Rubyer
             cardBorder = GetTemplateChild(CardBorderPartName) as Border;
 
             rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
+
+            base.OnApplyTemplate();
         }
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
@@ -77,8 +86,8 @@ namespace Rubyer
         public static RoutedCommand OpenDialogCommand = new RoutedCommand();
 
         // 打开前命令
-        public static readonly DependencyProperty BeforeOpenCommandProperty =
-            DependencyProperty.Register("BeforeOpenCommand", typeof(ICommand), typeof(DialogBox));
+        public static readonly DependencyProperty BeforeOpenCommandProperty = DependencyProperty.Register(
+            "BeforeOpenCommand", typeof(ICommand), typeof(DialogBox));
 
         public ICommand BeforeOpenCommand
         {
@@ -87,8 +96,8 @@ namespace Rubyer
         }
 
         // 关闭后命令
-        public static readonly DependencyProperty AfterCloseCommandProperty =
-            DependencyProperty.Register("AfterCloseCommand", typeof(ICommand), typeof(DialogBox));
+        public static readonly DependencyProperty AfterCloseCommandProperty = DependencyProperty.Register(
+            "AfterCloseCommand", typeof(ICommand), typeof(DialogBox));
 
         public ICommand AfterCloseCommand
         {
@@ -98,8 +107,9 @@ namespace Rubyer
         #endregion
 
         #region 事件
-        public static readonly RoutedEvent BeforeOpenEvent =
-            EventManager.RegisterRoutedEvent("BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogBox));
+        // 打开前事件
+        public static readonly RoutedEvent BeforeOpenEvent = EventManager.RegisterRoutedEvent(
+            "BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogBox));
 
         public event RoutedEventHandler BeforeOpen
         {
@@ -107,9 +117,9 @@ namespace Rubyer
             remove { RemoveHandler(BeforeOpenEvent, value); }
         }
 
-
-        public static readonly RoutedEvent AfterCloseEvent =
-            EventManager.RegisterRoutedEvent("AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(DialogBox));
+        // 关闭后事件
+        public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
+            "AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(DialogBox));
 
         public event RoutedPropertyChangedEventHandler<object> AfterClose
         {
@@ -119,9 +129,9 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
-        // ID
-        public static readonly DependencyProperty IdentifierProperty =
-            DependencyProperty.Register("Identifier", typeof(string), typeof(DialogBox), new PropertyMetadata(default(string), OnIdentifierChanged));
+        // 标识
+        public static readonly DependencyProperty IdentifierProperty = DependencyProperty.Register(
+            "Identifier", typeof(string), typeof(DialogBox), new PropertyMetadata(default(string), OnIdentifierChanged));
 
         private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -143,8 +153,8 @@ namespace Rubyer
         }
 
         // 对话框内容
-        public static readonly DependencyProperty DialogContentProperty =
-            DependencyProperty.Register("DialogContent", typeof(object), typeof(DialogBox), new PropertyMetadata(default(object)));
+        public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
+            "DialogContent", typeof(object), typeof(DialogBox), new PropertyMetadata(default(object)));
 
         public object DialogContent
         {
@@ -153,8 +163,8 @@ namespace Rubyer
         }
 
         // 标题
-        public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(string), typeof(DialogBox), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
+            "Title", typeof(string), typeof(DialogBox), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public string Title
         {
@@ -163,8 +173,8 @@ namespace Rubyer
         }
 
         // 圆角半径
-        public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(DialogBox), new PropertyMetadata(default(CornerRadius)));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+            "CornerRadius", typeof(CornerRadius), typeof(DialogBox), new PropertyMetadata(default(CornerRadius)));
 
         public CornerRadius CornerRadius
         {
@@ -173,8 +183,8 @@ namespace Rubyer
         }
 
         // 是否显示关闭按钮
-        public static readonly DependencyProperty IsShowCloseButtonProperty =
-            DependencyProperty.Register("IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(
+            "IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool IsShowCloseButton
         {
@@ -183,8 +193,8 @@ namespace Rubyer
         }
 
         // 是否点击背景关闭弹窗
-        public static readonly DependencyProperty IsClickBackgroundToCloseProperty =
-            DependencyProperty.Register("IsClickBackgroundToClose", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty IsClickBackgroundToCloseProperty = DependencyProperty.Register(
+            "IsClickBackgroundToClose", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public bool IsClickBackgroundToClose
         {
@@ -193,8 +203,8 @@ namespace Rubyer
         }
 
         // 是否显示
-        public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
+        public static readonly DependencyProperty IsShowProperty = DependencyProperty.Register(
+            "IsShow", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
 
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -217,8 +227,8 @@ namespace Rubyer
         }
 
         // 标题字体大小
-        public static readonly DependencyProperty TitleFontSizeProperty =
-            DependencyProperty.Register("TitleFontSize", typeof(double), typeof(DialogBox), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty TitleFontSizeProperty = DependencyProperty.Register(
+            "TitleFontSize", typeof(double), typeof(DialogBox), new PropertyMetadata(default(double)));
 
         public double TitleFontSize
         {
@@ -227,126 +237,58 @@ namespace Rubyer
         }
 
         // 标题水平对齐
-        public static readonly DependencyProperty TitleHorizontalAlignmentProperty =
-            DependencyProperty.Register("TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(DialogBox), new PropertyMetadata(default(HorizontalAlignment)));
+        public static readonly DependencyProperty TitleHorizontalAlignmentProperty = DependencyProperty.Register(
+            "TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(DialogBox), new PropertyMetadata(default(HorizontalAlignment)));
 
         public HorizontalAlignment TitleHorizontalAlignment
         {
             get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
             set { SetValue(TitleHorizontalAlignmentProperty, value); }
         }
+
+        // 关闭完成
+        public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
+            "IsClosed", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsClosedChanged));
+
+        private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DialogBox dialog)
+            {
+                RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, dialog.closeParameter);
+                args.RoutedEvent = AfterCloseEvent;
+                dialog.RaiseEvent(args);
+                dialog.AfterCloseCommand?.Execute(dialog.closeParameter);
+                dialog.afterCloseHandler?.Invoke(dialog, dialog.closeParameter);
+
+                dialog.closeParameter = null;
+                dialog.beforeOpenHandler = null;
+                dialog.afterCloseHandler = null;
+            }
+        }
+
+        public bool IsClosed
+        {
+            get { return (bool)GetValue(IsClosedProperty); }
+            set { SetValue(IsClosedProperty, value); }
+        }
         #endregion
 
         // 打开对话框动作
         private void OpenAnimiation(DialogBox container)
         {
-            RoutedEventArgs args = new RoutedEventArgs(DialogBox.BeforeOpenEvent);
+            RoutedEventArgs args = new RoutedEventArgs(BeforeOpenEvent);
             container.RaiseEvent(args);
             container.BeforeOpenCommand?.Execute(null);
             container.beforeOpenHandler?.Invoke(container);
 
-            // 卡片动画
-            Storyboard cardStoryboard = new Storyboard();
-
-            DoubleAnimation opacityAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 1,
-                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(UIElement.OpacityProperty));
-
-            DoubleAnimation transformAnimation = new DoubleAnimation
-            {
-                From = 50,
-                To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
-            Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-            cardStoryboard.Children.Add(opacityAnimation);
-            cardStoryboard.Children.Add(transformAnimation);
-
-            // 背景动画
-            DoubleAnimation backgroundAnimation = new DoubleAnimation
-            {
-                To = 1,
-                Duration = new Duration(TimeSpan.FromMilliseconds(150)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
-
-            backgroundAnimation.Completed += (a, b) =>
-            {
-                container.cardBorder.Visibility = Visibility.Visible;
-                container.cardBorder.BeginStoryboard(cardStoryboard);
-                _ = container.cardBorder.Focus();
-            };
-
-            container.rootBorder.Visibility = Visibility.Visible;
-            container.rootBorder.BeginAnimation(OpacityProperty, backgroundAnimation);
+            GoToOpenState(container);
+            _ = container.Focus();
         }
 
         // 关闭对话框动作
         private void CloseAnimaton()
         {
-            // 退出动画
-            Storyboard exitStoryboard = new Storyboard();
-
-            DoubleAnimation exitOpacityAnimation = new DoubleAnimation
-            {
-                From = 1,
-                To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(exitOpacityAnimation, new PropertyPath(OpacityProperty));
-
-            DoubleAnimation exitTransformAnimation = new DoubleAnimation
-            {
-                From = 0,
-                To = 50,
-                Duration = new Duration(TimeSpan.FromMilliseconds(200)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-            Storyboard.SetTargetProperty(exitTransformAnimation, new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
-
-            exitStoryboard.Children.Add(exitOpacityAnimation);
-            exitStoryboard.Children.Add(exitTransformAnimation);
-
-            // 背景动画
-            DoubleAnimation backgroundAnimation = new DoubleAnimation
-            {
-                To = 0,
-                Duration = new Duration(TimeSpan.FromMilliseconds(150)),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseIn }
-            };
-
-            // 退出动画完成
-            exitStoryboard.Completed += (a, b) =>
-            {
-                rootBorder.BeginAnimation(OpacityProperty, backgroundAnimation);
-                cardBorder.Visibility = Visibility.Hidden;
-
-                RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, closeParameter);
-                args.RoutedEvent = AfterCloseEvent;
-                RaiseEvent(args);
-                AfterCloseCommand?.Execute(closeParameter);
-                afterCloseHandler?.Invoke(this, closeParameter);
-
-                closeParameter = null;
-                beforeOpenHandler = null;
-                afterCloseHandler = null;
-            };
-
-            // 背景动画完成
-            backgroundAnimation.Completed += (a, b) =>
-            {
-                rootBorder.Visibility = Visibility.Hidden;
-            };
-
-            cardBorder.BeginStoryboard(exitStoryboard);    // 执行动画
+            GoToCloseState(this);
         }
 
         /// <summary>
@@ -368,7 +310,7 @@ namespace Rubyer
             DialogBox dialog = dialogs[identifier];
             dialog.Dispatcher.VerifyAccess();
             dialog.DialogContent = content;
-            dialog.Title = title;
+            dialog.Title = string.IsNullOrEmpty(title) ? dialog.Title : title;
             dialog.IsShowCloseButton = isShowCloseButton;
             dialog.beforeOpenHandler = openHandler;
             dialog.afterCloseHandler = closeHandle;
@@ -415,7 +357,7 @@ namespace Rubyer
         /// <param name="closeHandle">关闭后处理程序</param>
         public static void Show(string identifier, object content, Action<DialogBox, object> closeHandle)
         {
-            Show(identifier, content, "", null, closeHandle, true);
+            Show(identifier, content, string.Empty, null, closeHandle, true);
         }
 
         /// <summary>
@@ -427,7 +369,7 @@ namespace Rubyer
         /// <param name="closeHandle">关闭后处理程序</param>
         public static void Show(string identifier, object content, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
-            Show(identifier, content, "", openHandler, closeHandle, true);
+            Show(identifier, content, string.Empty, openHandler, closeHandle, true);
         }
 
         /// <summary>
@@ -453,6 +395,16 @@ namespace Rubyer
         public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
         {
             Show(identifier, content, title, openHandler, closeHandle, true);
+        }
+
+        private static void GoToOpenState(FrameworkElement element)
+        {
+            _ = VisualStateManager.GoToState(element, OpenStateName, true);
+        }
+
+        private static void GoToCloseState(FrameworkElement element)
+        {
+            _ = VisualStateManager.GoToState(element, CloseStateName, true);
         }
     }
 }

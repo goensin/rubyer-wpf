@@ -53,7 +53,7 @@
                                     BorderBrush="{TemplateBinding ThemeColorBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{StaticResource AllDirectionEffect}" />
+                                    Effect="{StaticResource AllDirectionEffect2}" />
 
                             <rubyer:Icon Grid.Column="0"
                                          Width="23"
