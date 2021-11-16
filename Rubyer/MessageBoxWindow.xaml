@@ -16,6 +16,7 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         mc:Ignorable="d">
-    <Border x:Name="messageBoxPanel" HorizontalAlignment="Center" VerticalAlignment="Center">
-    </Border>
+    <Border x:Name="messageBoxPanel"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center" />
 </Window>

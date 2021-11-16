@@ -95,7 +95,7 @@
                                                 Margin="2 0"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding TitleBarContent}"
-                                                Foreground="{DynamicResource PrimaryForeground}"/>
+                                                Foreground="{DynamicResource PrimaryForeground}" />
                                 <!--  标题栏右边按钮  -->
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel"
                                             Grid.Column="1"
