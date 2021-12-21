@@ -9,10 +9,10 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="TitleBarButtonStyle"
-           BasedOn="{StaticResource TextMidButton}"
+           BasedOn="{StaticResource TextButton}"
            TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
         <Setter Property="Template">
@@ -95,7 +95,7 @@
                                                 Margin="2 0"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding TitleBarContent}"
-                                                Foreground="{DynamicResource PrimaryForeground}" />
+                                                Foreground="{DynamicResource WhiteForeground}" />
                                 <!--  标题栏右边按钮  -->
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel"
                                             Grid.Column="1"
@@ -185,7 +185,7 @@
                            VerticalAlignment="Center"
                            Source="{Binding Icon, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                     <TextBlock FontSize="14"
-                               Foreground="{DynamicResource PrimaryForeground}"
+                               Foreground="{DynamicResource WhiteForeground}"
                                Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                 </StackPanel>
             </Setter.Value>

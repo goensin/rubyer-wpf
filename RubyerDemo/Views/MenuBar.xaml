@@ -189,7 +189,7 @@
             <GroupBox Grid.Row="2"
                       Margin="0 0 0 10"
                       Header="StatusBar-状态栏">
-                <StatusBar Background="{DynamicResource Primary}" Foreground="{StaticResource PrimaryForeground}">
+                <StatusBar Background="{DynamicResource Primary}" Foreground="{StaticResource WhiteForeground}">
                     <StatusBarItem HorizontalAlignment="Left">
                         <rubyer:Icon Type="TerminalBoxLine" />
                     </StatusBarItem>

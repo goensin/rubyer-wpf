@@ -63,7 +63,7 @@
                                                    FontSize="{TemplateBinding TitleFontSize}"
                                                    Text="{TemplateBinding Title}" />
                                         <Button x:Name="PART_CloseButton"
-                                                Style="{StaticResource TextMidButton}"
+                                                Style="{StaticResource TextButton}"
                                                 Width="32"
                                                 HorizontalAlignment="Right"
                                                 Foreground="{TemplateBinding Foreground}"

@@ -83,7 +83,7 @@
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
                         <ListBox Style="{StaticResource PopularListBox}"
                                  rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
-                                 rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource AccentForeground}"
+                                 rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                                  ItemsSource="{Binding MenuItems}"
                                  SelectedIndex="0"
                                  SelectedItem="{Binding CurrentMenuItem}"

@@ -30,7 +30,7 @@
                                  Foreground="{TemplateBinding Foreground}">
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
-                                        Style="{StaticResource TextMidButton}"
+                                        Style="{StaticResource TextButton}"
                                         Height="26"
                                         Focusable="False"
                                         Foreground="{TemplateBinding BorderBrush}">

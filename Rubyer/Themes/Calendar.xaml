@@ -172,7 +172,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding Opacity, ElementName=SelectedBackground}" Value="1">
-                            <Setter TargetName="NormalText" Property="TextBlock.Foreground" Value="{DynamicResource PrimaryForeground}" />
+                            <Setter TargetName="NormalText" Property="TextBlock.Foreground" Value="{DynamicResource WhiteForeground}" />
                         </DataTrigger>
                         <Trigger Property="IsInactive" Value="True">
                             <Setter TargetName="NormalText" Property="TextBlock.Foreground" Value="#77777777" />
@@ -301,7 +301,7 @@
                       HorizontalAlignment="Left"
                       VerticalAlignment="Center"
                       Data="M288.75,232.25 L288.75,240.625 L283,236.625 z"
-                      Fill="{DynamicResource PrimaryForeground}"
+                      Fill="{DynamicResource WhiteForeground}"
                       Stretch="Fill" />
             </Grid>
         </Grid>
@@ -318,7 +318,7 @@
                       HorizontalAlignment="Right"
                       VerticalAlignment="Center"
                       Data="M282.875,231.875 L282.875,240.375 L288.625,236 z"
-                      Fill="{DynamicResource PrimaryForeground}"
+                      Fill="{DynamicResource WhiteForeground}"
                       Stretch="Fill" />
             </Grid>
         </Grid>
@@ -333,7 +333,7 @@
                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                               Content="{TemplateBinding Content}"
                               ContentTemplate="{TemplateBinding ContentTemplate}"
-                              TextElement.Foreground="{DynamicResource PrimaryForeground}" />
+                              TextElement.Foreground="{DynamicResource WhiteForeground}" />
         </Grid>
     </ControlTemplate>
 

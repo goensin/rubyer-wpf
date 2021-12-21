@@ -45,7 +45,7 @@
                                                Margin="7"
                                                HorizontalAlignment="Center"
                                                FontSize="19"
-                                               Foreground="{DynamicResource PrimaryForeground}"
+                                               Foreground="{DynamicResource WhiteForeground}"
                                                Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource boolToVisibility}}" />
                                 </Border>
 

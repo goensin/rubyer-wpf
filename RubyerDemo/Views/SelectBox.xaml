@@ -70,22 +70,18 @@
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <ToggleButton Style="{DynamicResource CircleMidToggleButton}"
                                       Margin="10 0"
-                                      rubyer:ButtonHelper.CircleDima="50"
                                       Content="默认"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleLightToggleButton}"
                                       Margin="10 0"
-                                      rubyer:ButtonHelper.CircleDima="50"
                                       Content="亮色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleDarkToggleButton}"
                                       Margin="10 0"
-                                      rubyer:ButtonHelper.CircleDima="50"
                                       Content="暗色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleAccentToggleButton}"
                                       Margin="10 0"
-                                      rubyer:ButtonHelper.CircleDima="50"
                                       Content="强调"
                                       IsChecked="True" />
                     </StackPanel>

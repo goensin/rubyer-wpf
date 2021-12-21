@@ -50,7 +50,7 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Button x:Name="clearButton"
-                                    Style="{StaticResource TextMidButton}"
+                                    Style="{StaticResource TextButton}"
                                     Height="20"
                                     Foreground="{StaticResource BorderGray}"
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=TabControl}}">
@@ -376,7 +376,7 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Button x:Name="clearButton"
-                                    Style="{StaticResource TextMidButton}"
+                                    Style="{StaticResource TextButton}"
                                     Height="20"
                                     Foreground="{StaticResource BorderGray}"
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=TabControl}}">
@@ -659,7 +659,7 @@
         </Setter>
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:TabControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:TabControlHelper.FocusedForegroundBrush" Value="{StaticResource PrimaryForeground}" />
+        <Setter Property="rubyer:TabControlHelper.FocusedForegroundBrush" Value="{StaticResource WhiteForeground}" />
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="False" />
     </Style>
 

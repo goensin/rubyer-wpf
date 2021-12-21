@@ -50,7 +50,7 @@
                 <rubyer:DialogBox x:Name="Dialog2"
                                   Title="2#对话框"
                                   Background="{DynamicResource Primary}"
-                                  Foreground="{DynamicResource PrimaryForeground}">
+                                  Foreground="{DynamicResource WhiteForeground}">
                     <rubyer:DialogBox.DialogContent>
                         <StackPanel>
                             <TextBlock Text="对话框内容" />

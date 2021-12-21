@@ -30,7 +30,7 @@
                           Margin="5"
                           HorizontalContentAlignment="Center"
                           rubyer:DataGridHelper.HeadBackground="{DynamicResource Primary}"
-                          rubyer:DataGridHelper.HeadForeground="{DynamicResource PrimaryForeground}"
+                          rubyer:DataGridHelper.HeadForeground="{DynamicResource WhiteForeground}"
                           rubyer:DataGridHelper.HorizontalHeadAlignment="Center"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"

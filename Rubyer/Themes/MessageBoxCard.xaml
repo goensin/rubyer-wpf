@@ -66,7 +66,7 @@
                                                FontSize="15"
                                                Text="{TemplateBinding Title}" />
                                     <Button x:Name="PART_CloseButton"
-                                            Style="{StaticResource TextMidButton}"
+                                            Style="{StaticResource TextButton}"
                                             HorizontalAlignment="Right"
                                             Foreground="{DynamicResource DefaultForeground}">
                                         <rubyer:Icon Type="CloseLine" />

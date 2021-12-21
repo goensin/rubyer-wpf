@@ -83,7 +83,7 @@
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
         <Setter Property="BorderThickness" Value="1.3" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">

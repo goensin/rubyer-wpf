@@ -381,7 +381,7 @@
 
                             <!--  清除按钮  -->
                             <Button x:Name="clearButton"
-                                    Style="{DynamicResource TextMidButton}"
+                                    Style="{DynamicResource TextButton}"
                                     Grid.Column="2"
                                     VerticalAlignment="Center"
                                     Foreground="{DynamicResource BorderGray}"

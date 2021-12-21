@@ -103,7 +103,7 @@
         </Setter>
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  PopularListBoxItem  -->
@@ -164,7 +164,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ListBoxHelper.IsAnimation" Value="True" />
         <Setter Property="Template">
             <Setter.Value>

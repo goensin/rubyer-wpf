@@ -9,7 +9,7 @@
 
     <Style x:Key="RubyerPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="Padding" Value="3 0" />
         <Setter Property="Template">
@@ -90,9 +90,9 @@
     <Style x:Key="RubyerPageBar" TargetType="{x:Type rubyer:PageBar}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="CurrentBackground" Value="{DynamicResource Dark}" />
-        <Setter Property="CurrentForeground" Value="{DynamicResource DarkForeground}" />
+        <Setter Property="CurrentForeground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
         <Setter Property="ItemsPanel">

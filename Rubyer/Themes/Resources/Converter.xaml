@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:Rubyer.Converters">
+
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisible"/>
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToCollapsed" TrueValue="Collapsed" FalseValue="Visible"/>
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToHidden" TrueValue="Hidden" FalseValue="Visible"/>
+
+    <converter:MathMultipleConverter x:Key="MathAddyConverter"/>
+    <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract"/>
+    <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply"/>
+    <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide"/>
+    <converter:HalfOfDoubleConverter x:Key="HalfOfDouble"/>
+</ResourceDictionary>

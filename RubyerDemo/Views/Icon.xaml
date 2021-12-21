@@ -33,7 +33,7 @@
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                         <rubyer:TextBoxHelper.PreContent>
                             <Viewbox>
-                                <Button Style="{DynamicResource TextMidButton}"
+                                <Button Style="{DynamicResource TextButton}"
                                         Command="{Binding Search}"
                                         IsDefault="True">
                                     <rubyer:Icon Type="SearchLine" />

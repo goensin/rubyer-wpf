@@ -12,7 +12,7 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="HeadBackground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HeadForeground" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

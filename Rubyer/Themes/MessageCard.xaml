@@ -71,7 +71,7 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Button x:Name="PART_CloseButton"
-                                    Style="{StaticResource TextMidButton}"
+                                    Style="{StaticResource TextButton}"
                                     Grid.Column="2"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="{TemplateBinding IsClearable, Converter={StaticResource boolToVisibility}}">

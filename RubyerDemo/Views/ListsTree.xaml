@@ -69,7 +69,7 @@
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <ListView Height="130"
                               rubyer:ListViewHelper.HeadBackground="{DynamicResource Primary}"
-                              rubyer:ListViewHelper.HeadForeground="{DynamicResource PrimaryForeground}"
+                              rubyer:ListViewHelper.HeadForeground="{DynamicResource WhiteForeground}"
                               ItemsSource="{Binding Persons}">
                         <ListView.View>
                             <GridView>

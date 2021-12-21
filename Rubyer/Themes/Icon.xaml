@@ -7,8 +7,10 @@
 
     <Style TargetType="{x:Type rubyer:Icon}">
         <Setter Property="FlowDirection" Value="LeftToRight" />
-        <Setter Property="Height" Value="15" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="Width" Value="16" />
         <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -50,7 +52,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Width" Value="15" />
     </Style>
 </ResourceDictionary>

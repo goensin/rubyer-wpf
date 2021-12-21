@@ -1,35 +1,75 @@
-﻿using System.Windows;
+﻿using Rubyer.Enums;
+using System.Windows;
 
 namespace Rubyer
 {
-    public static class ButtonHelper
+    /// <summary>
+    /// Button 帮助类
+    /// </summary>
+    public class ButtonHelper : ControlHelper
     {
-        // 圆角半径
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
-            "CornerRadius", typeof(CornerRadius), typeof(ButtonHelper));
+        /// <summary>
+        /// 显示阴影
+        /// </summary>
+        public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.RegisterAttached(
+            "ShowShadow", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(default(bool)));
 
-        public static void SetCornerRadius(DependencyObject element, CornerRadius value)
+        public static void SetShowShadow(DependencyObject element, bool value)
         {
-            element.SetValue(CornerRadiusProperty, value);
+            element.SetValue(ShowShadowProperty, value);
         }
 
-        public static CornerRadius GetCornerRadius(DependencyObject element)
+        public static bool GetShowShadow(DependencyObject element)
         {
-            return (CornerRadius)element.GetValue(CornerRadiusProperty);
+            return (bool)element.GetValue(ShowShadowProperty);
         }
 
-        // 圆型按钮直径
-        public static readonly DependencyProperty CircleDimaProperty = DependencyProperty.RegisterAttached(
-            "CircleDima", typeof(double), typeof(ButtonHelper));
+        /// <summary>
+        /// 形状
+        /// </summary>
+        public static readonly DependencyProperty ShapeProperty = DependencyProperty.RegisterAttached(
+            "Shape", typeof(ButtonShape), typeof(ButtonHelper), new PropertyMetadata(default(ButtonShape)));
 
-        public static void SetCircleDima(DependencyObject element, double value)
+        public static void SetShape(DependencyObject element, ButtonShape value)
         {
-            element.SetValue(CircleDimaProperty, value);
+            element.SetValue(ShapeProperty, value);
         }
 
-        public static double GetCircleDima(DependencyObject element)
+        public static ButtonShape GetShape(DependencyObject element)
         {
-            return (double)element.GetValue(CircleDimaProperty);
+            return (ButtonShape)element.GetValue(ShapeProperty);
+        }
+
+        /// <summary>
+        /// 圆形直径
+        /// </summary>
+        public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.RegisterAttached(
+            "CircleDiameter", typeof(double), typeof(ButtonHelper), new PropertyMetadata(default(double)));
+
+        public static void SetCircleDiameter(DependencyObject element, double value)
+        {
+            element.SetValue(CircleDiameterProperty, value);
+        }
+
+        public static double GetCircleDiameter(DependencyObject element)
+        {
+            return (double)element.GetValue(CircleDiameterProperty);
+        }
+
+        /// <summary>
+        /// 加载中
+        /// </summary>
+        public static readonly DependencyProperty LoadingProperty = DependencyProperty.RegisterAttached(
+            "Loading", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(default(bool)));
+
+        public static void SetLoading(DependencyObject element, bool value)
+        {
+            element.SetValue(LoadingProperty, value);
+        }
+
+        public static bool GetLoading(DependencyObject element)
+        {
+            return (bool)element.GetValue(LoadingProperty);
         }
     }
 }

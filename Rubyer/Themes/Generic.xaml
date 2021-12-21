@@ -47,6 +47,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Badge.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Tag.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ControlMask.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Loading.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -86,4 +88,6 @@
     <Style BasedOn="{StaticResource RubuerTransition}" TargetType="{x:Type rubyer:Transition}" />
     <Style BasedOn="{StaticResource RubyerBadge}" TargetType="{x:Type rubyer:Badge}" />
     <Style BasedOn="{StaticResource RubyerTag}" TargetType="{x:Type rubyer:Tag}" />
+    <Style BasedOn="{StaticResource RubyerControlMask}" TargetType="{x:Type rubyer:ControlMask}" />
+    <Style BasedOn="{StaticResource RubyerLoading}" TargetType="{x:Type rubyer:Loading}" />
 </ResourceDictionary>

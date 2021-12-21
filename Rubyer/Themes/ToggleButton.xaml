@@ -26,7 +26,7 @@
         <Setter Property="BorderThickness" Value="1.3" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="Height" Value="28" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5 0" />
@@ -142,7 +142,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
-        <Setter Property="Foreground" Value="{DynamicResource LightForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
     </Style>
 
     <!--  暗色  -->
@@ -151,7 +151,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Dark}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  强调色  -->
@@ -160,7 +160,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Accent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  默认圆形开关  -->
@@ -169,11 +169,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="Foreground" Value="{DynamicResource PrimaryForeground}" />
-        <Setter Property="Height" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}}" />
-        <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}}" />
-        <Setter Property="rubyer:ButtonHelper.CircleDima" Value="30" />
-        <Setter Property="rubyer:ButtonHelper.CornerRadius" Value="{Binding Path=(rubyer:ButtonHelper.CircleDima), RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource halfTheValue}}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  圆形亮色开关  -->
@@ -182,7 +178,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Light}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
-        <Setter Property="Foreground" Value="{DynamicResource LightForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
     </Style>
 
     <!--  圆形暗色开关  -->
@@ -191,7 +187,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Dark}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
-        <Setter Property="Foreground" Value="{DynamicResource DarkForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  圆形强调色开关  -->
@@ -200,7 +196,7 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Accent}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Foreground" Value="{DynamicResource AccentForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  切换开关默认  -->

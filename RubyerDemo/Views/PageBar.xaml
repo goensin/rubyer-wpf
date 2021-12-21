@@ -27,7 +27,7 @@
 
                     <rubyer:PageBar Margin="10"
                                     CurrentBackground="{DynamicResource Light}"
-                                    CurrentForeground="{DynamicResource LightForeground}"
+                                    CurrentForeground="{DynamicResource BlackForeground}"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
                                     PageSize="{Binding PageSize}"
@@ -45,7 +45,7 @@
                                     PageIndex="3" />
                     <rubyer:PageBar Margin="10"
                                     CurrentBackground="{DynamicResource Accent}"
-                                    CurrentForeground="{DynamicResource AccentForeground}"
+                                    CurrentForeground="{DynamicResource WhiteForeground}"
                                     IsShowTotal="True"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
