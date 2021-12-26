@@ -1,48 +1,19 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Rubyer
 {
     public static class TextBoxHelper
     {
-        // 圆角半径
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
-            "CornerRadius", typeof(CornerRadius), typeof(TextBoxHelper));
-
-        public static void SetCornerRadius(DependencyObject element, CornerRadius value)
-        {
-            element.SetValue(CornerRadiusProperty, value);
-        }
-
-        public static CornerRadius GetCornerRadius(DependencyObject element)
-        {
-            return (CornerRadius)element.GetValue(CornerRadiusProperty);
-        }
-
-        // 聚焦时前景色
-        public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(SolidColorBrush), typeof(TextBoxHelper), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-        public static SolidColorBrush GetFocusedBrush(DependencyObject obj)
-        {
-            return (SolidColorBrush)obj.GetValue(FocusedBrushProperty);
-        }
-
-        public static void SetFocusedBrush(DependencyObject obj, SolidColorBrush value)
-        {
-            obj.SetValue(FocusedBrushProperty, value);
-        }
-
-
-        // 前置内容
+        /// <summary>
+        /// 前置内容
+        /// </summary>
         public static readonly DependencyProperty PreContentProperty =
             DependencyProperty.RegisterAttached("PreContent", typeof(object), typeof(TextBoxHelper), new PropertyMetadata(null));
 
         public static object GetPreContent(DependencyObject obj)
         {
-            return (object)obj.GetValue(PreContentProperty);
+            return obj.GetValue(PreContentProperty);
         }
 
         public static void SetPreContent(DependencyObject obj, object value)
@@ -50,7 +21,9 @@ namespace Rubyer
             obj.SetValue(PreContentProperty, value);
         }
 
-        // 前置内容
+        /// <summary>
+        /// 前置内容
+        /// </summary>
         public static readonly DependencyProperty PostContentProperty =
             DependencyProperty.RegisterAttached("PostContent", typeof(object), typeof(TextBoxHelper), new PropertyMetadata(null));
 
@@ -64,7 +37,9 @@ namespace Rubyer
             obj.SetValue(PostContentProperty, value);
         }
 
-        // 是否显示清除按钮
+        /// <summary>
+        /// 是否显示清除按钮
+        /// </summary>
         public static readonly DependencyProperty IsClearableProperty =
             DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TextBoxHelper), new PropertyMetadata(false, OnIsClearbleChanged));
 
@@ -76,6 +51,21 @@ namespace Rubyer
         public static void SetIsClearable(DependencyObject obj, bool value)
         {
             obj.SetValue(IsClearableProperty, value);
+        }
+
+        /// <summary>
+        /// 水印
+        /// </summary>
+        public static readonly DependencyProperty WatermarkProperty = DependencyProperty.RegisterAttached(
+            "Watermark", typeof(string), typeof(TextBoxHelper), new PropertyMetadata(default(string)));
+        public static void SetWatermark(DependencyObject element, string value)
+        {
+            element.SetValue(WatermarkProperty, value);
+        }
+
+        public static string GetWatermark(DependencyObject element)
+        {
+            return (string)element.GetValue(WatermarkProperty);
         }
 
         private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -120,20 +110,6 @@ namespace Rubyer
                     }
                 };
             }
-        }
-
-        // 提示占位符
-        public static readonly DependencyProperty PlaceholderProperty =
-            DependencyProperty.RegisterAttached("Placeholder", typeof(string), typeof(TextBoxHelper), new PropertyMetadata(""));
-
-        public static string GetPlaceholder(DependencyObject obj)
-        {
-            return (string)obj.GetValue(PlaceholderProperty);
-        }
-
-        public static void SetPlaceholder(DependencyObject obj, string value)
-        {
-            obj.SetValue(PlaceholderProperty, value);
         }
     }
 }

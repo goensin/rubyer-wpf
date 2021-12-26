@@ -28,28 +28,46 @@
 
     <!--  默认文本框  -->
     <Style x:Key="RubyerTextBox" TargetType="{x:Type TextBox}">
-        <Setter Property="AllowDrop" Value="true" />
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource BorderGray}" />
-        <Setter Property="BorderThickness" Value="1.3" />
-        <Setter Property="Cursor" Value="IBeam" />
-        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Height" Value="28" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="AllowDrop" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="IBeam" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Grid>
+                        <Border x:Name="effectBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                Opacity="0">
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="shadowEffect"
+                                                  BlurRadius="2"
+                                                  Direction="0"
+                                                  ShadowDepth="0"
+                                                  Color="{Binding BorderBrush.Color, ElementName=effectBorder}" />
+                            </Border.Effect>
+                        </Border>
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:TextBoxHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 SnapsToDevicePixels="True">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -58,87 +76,102 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <!--  前置内容  -->
+
                                 <ContentControl x:Name="preContent"
                                                 Grid.Column="0"
                                                 Margin="3 0"
                                                 VerticalAlignment="Center"
                                                 Content="{Binding Path=(rubyer:TextBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                Foreground="{DynamicResource BorderGray}" />
+                                                Foreground="{DynamicResource SeconarydText}" />
 
                                 <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-                                    <!--  文本  -->
                                     <ScrollViewer x:Name="PART_ContentHost"
-                                                  Margin="0"
                                                   Focusable="false"
                                                   HorizontalScrollBarVisibility="Hidden"
                                                   VerticalScrollBarVisibility="Hidden" />
-                                    <!--  提示占位符  -->
-                                    <TextBlock x:Name="palceholder"
-                                               Margin="{TemplateBinding Padding}"
-                                               Foreground="{DynamicResource BorderGray}"
-                                               Text="{Binding Path=(rubyer:TextBoxHelper.Placeholder), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <TextBlock x:Name="watermark"
+                                               Margin="3 0"
+                                               Foreground="{DynamicResource WatermarkText}"
+                                               Text="{Binding Path=(rubyer:TextBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Grid>
 
-                                <!--  清除按钮  -->
                                 <Button x:Name="clearButton"
-                                        Style="{DynamicResource TextButton}"
+                                        Style="{StaticResource TextButton}"
                                         Grid.Column="2"
-                                        VerticalAlignment="Center"
-                                        Foreground="{DynamicResource BorderGray}"
+                                        rubyer:ButtonHelper.Shape="Circle"
+                                        rubyer:ButtonHelper.CircleDiameter="22"
+                                        Foreground="{DynamicResource SeconarydText}"
                                         Visibility="Collapsed">
                                     <rubyer:Icon Type="CloseLine" />
                                 </Button>
 
-                                <!--  后置内容  -->
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
                                                 Margin="3 0"
                                                 VerticalAlignment="Center"
                                                 Content="{Binding Path=(rubyer:TextBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                Foreground="{DynamicResource BorderGray}" />
+                                                Foreground="{DynamicResource SeconarydText}" />
                             </Grid>
                         </Border>
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnEnabledOpacity}" />
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource DefaultForeground}" />
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=TextBox}}" />
                         </Trigger>
-                        <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(rubyer:TextBoxHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType={x:Type TextBox}}}" />
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0:0:0.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Setter TargetName="border" Property="BorderBrush"
+                                    Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TextBox}}" />
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsKeyboardFocused" Value="true" />
-                                <Condition Property="rubyer:TextBoxHelper.IsClearable" Value="true" />
-                            </MultiTrigger.Conditions>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=(rubyer:TextBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="true" />
-                                <Condition Property="rubyer:TextBoxHelper.IsClearable" Value="true" />
-                            </MultiTrigger.Conditions>
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=(rubyer:TextBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource isNull}}" Value="False">
-                            <Setter TargetName="palceholder" Property="Visibility" Value="Hidden" />
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                            <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
-                        <Trigger Property="Validation.HasError" Value="true">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ErrorBrush}" />
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="effectBorder" Property="BorderBrush" Value="{StaticResource Error}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:TextBoxHelper.CornerRadius" Value="2.5" />
-        <Setter Property="rubyer:TextBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Style.Triggers>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -155,21 +188,21 @@
     <Style x:Key="LightTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:TextBoxHelper.FocusedBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  暗色文本框  -->
     <Style x:Key="DarkTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:TextBoxHelper.FocusedBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  强调色文本框  -->
     <Style x:Key="AccentTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:TextBoxHelper.FocusedBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
     </Style>
 
     <!--  大文本框  -->
@@ -177,11 +210,11 @@
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
         <Setter Property="AcceptsReturn" Value="True" />
-        <Setter Property="Padding" Value="5" />
+        <Setter Property="Padding" Value="2 4" />
         <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="rubyer:TextBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
     </Style>
 
 </ResourceDictionary>

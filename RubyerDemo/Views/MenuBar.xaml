@@ -137,7 +137,7 @@
                         <ToolBar>
                             <TextBox Width="150"
                                      rubyer:TextBoxHelper.IsClearable="True"
-                                     rubyer:TextBoxHelper.Placeholder="搜索">
+                                     rubyer:TextBoxHelper.Watermark="搜索">
                                 <rubyer:TextBoxHelper.PreContent>
                                     <rubyer:Icon Type="SearchLine" />
                                 </rubyer:TextBoxHelper.PreContent>

@@ -201,7 +201,7 @@
                     <Button Style="{StaticResource TextDarkButton}"
                             Margin="10 0"
                             rubyer:ButtonHelper.Loading="True"
-                            rubyer:ButtonHelper.Shape="Circle"/>
+                            rubyer:ButtonHelper.Shape="Circle" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Row="3"
@@ -232,6 +232,11 @@
                                      Height="25"
                                      Type="AndroidFill" />
                     </Button>
+                    <Button Width="80"
+                            Margin="5 0"
+                            rubyer:ButtonHelper.ShowShadow="True"
+                            Content="不可用"
+                            IsEnabled="False" />
                 </StackPanel>
             </GroupBox>
         </Grid>

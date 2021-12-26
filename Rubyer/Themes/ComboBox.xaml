@@ -234,7 +234,7 @@
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                      rubyer:TextBoxHelper.IsClearable="{Binding Path=(rubyer:ComboBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:TextBoxHelper.Placeholder="{Binding Path=(rubyer:ComboBoxHelper.Placeholder), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                     rubyer:TextBoxHelper.Watermark="{Binding Path=(rubyer:ComboBoxHelper.Placeholder), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      rubyer:TextBoxHelper.PostContent="{Binding Path=(rubyer:ComboBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      rubyer:TextBoxHelper.PreContent="{Binding Path=(rubyer:ComboBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
@@ -435,7 +435,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
-                        <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource isNull}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
                             <Setter TargetName="palceholder" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>

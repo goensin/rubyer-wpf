@@ -5,37 +5,43 @@
     <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
     <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
     <Color x:Key="DarkBackgroundColor">#252526</Color>
-    <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}"/>
-    <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}"/>
+    <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}" />
+    <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}" />
 
-    <SolidColorBrush x:Key="WhiteForeground" Color="#FFFFFF"/>
-    <SolidColorBrush x:Key="BlackForeground" Color="#000000"/>
-    <SolidColorBrush x:Key="Primary" Color="#2196F3"/>
-    <SolidColorBrush x:Key="Accent" Color="#F50057"/>
-    <SolidColorBrush x:Key="Light" Color="#6EC6FF"/>
-    <SolidColorBrush x:Key="Lighter" Color="#6EC6FF"/>
-    <SolidColorBrush x:Key="Dark" Color="#0069C0"/>
-    <SolidColorBrush x:Key="Darker" Color="#0069C0"/>
+    <SolidColorBrush x:Key="WhiteForeground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="BlackForeground" Color="#000000" />
+    <SolidColorBrush x:Key="Primary" Color="#2196F3" />
+    <SolidColorBrush x:Key="Accent" Color="#F50057" />
+    <SolidColorBrush x:Key="Light" Color="#6EC6FF" />
+    <SolidColorBrush x:Key="Lighter" Color="#6EC6FF" />
+    <SolidColorBrush x:Key="Dark" Color="#0069C0" />
+    <SolidColorBrush x:Key="Darker" Color="#0069C0" />
 
-    <SolidColorBrush x:Key="Error" Color="#E63935"/>
-    <SolidColorBrush x:Key="Info" Color="#909399"/>
-    <SolidColorBrush x:Key="Warning" Color="#FF9800"/>
-    <SolidColorBrush x:Key="Success" Color="#43A047"/>
+    <SolidColorBrush x:Key="Error" Color="#E63935" />
+    <SolidColorBrush x:Key="Info" Color="#909399" />
+    <SolidColorBrush x:Key="Warning" Color="#FF9800" />
+    <SolidColorBrush x:Key="Success" Color="#43A047" />
 
-    <SolidColorBrush x:Key="PrimaryText" Color="#212121"/>
-    <SolidColorBrush x:Key="RegularText" Color="#484848"/>
-    <SolidColorBrush x:Key="SeconarydText" Color="#6D6D6D"/>
-    <SolidColorBrush x:Key="WatermarkText" Color="#C0C4CC"/>
+    <SolidColorBrush x:Key="PrimaryText" Color="#212121" />
+    <SolidColorBrush x:Key="RegularText" Color="#484848" />
+    <SolidColorBrush x:Key="SeconarydText" Color="#6D6D6D" />
+    <SolidColorBrush x:Key="WatermarkText" Color="#C0C4CC" />
 
-    <SolidColorBrush x:Key="Border" Color="#9E9E9E"/>
-    <SolidColorBrush x:Key="BorderLight" Color="#BDBDBD"/>
-    <SolidColorBrush x:Key="BorderLighter" Color="#EFEFEF"/>
+    <SolidColorBrush x:Key="Border" Color="#9E9E9E" />
+    <SolidColorBrush x:Key="BorderLight" Color="#BDBDBD" />
+    <SolidColorBrush x:Key="BorderLighter" Color="#EFEFEF" />
 
-    <SolidColorBrush x:Key="MaskBackground" Color="#263238"/>
+    <SolidColorBrush x:Key="MaskBackground" Color="#263238" />
 
-    <SolidColorBrush x:Key="FocusedBackground" Color="#BDBDBD" Opacity="0.45"/>
-    <SolidColorBrush x:Key="MouseOverBackground" Color="#BDBDBD" Opacity="0.75"/>
-    <SolidColorBrush x:Key="PressedBackground" Color="#BDBDBD" Opacity="0.9"/>
+    <SolidColorBrush x:Key="FocusedBackground"
+                     Opacity="0.45"
+                     Color="#BDBDBD" />
+    <SolidColorBrush x:Key="MouseOverBackground"
+                     Opacity="0.75"
+                     Color="#BDBDBD" />
+    <SolidColorBrush x:Key="PressedBackground"
+                     Opacity="0.9"
+                     Color="#BDBDBD" />
 
     <Color x:Key="EffectColor">#6D6D6D</Color>
     <SolidColorBrush x:Key="DialogBackground">#CC252526</SolidColorBrush>

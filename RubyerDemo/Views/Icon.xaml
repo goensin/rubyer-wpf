@@ -29,7 +29,7 @@
                     </TextBlock>
                     <TextBox Margin="10"
                              rubyer:TextBoxHelper.IsClearable="True"
-                             rubyer:TextBoxHelper.Placeholder="搜索图标"
+                             rubyer:TextBoxHelper.Watermark="搜索图标"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                         <rubyer:TextBoxHelper.PreContent>
                             <Viewbox>

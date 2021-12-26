@@ -37,7 +37,7 @@
                     <TextBox Style="{DynamicResource AccentTextBox}"
                              Width="150"
                              rubyer:TextBoxHelper.IsClearable="True"
-                             rubyer:TextBoxHelper.Placeholder="可清除" />
+                             rubyer:TextBoxHelper.Watermark="可清除" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.RowSpan="2"
@@ -47,7 +47,8 @@
                 <TextBox Style="{StaticResource BigTextBox}"
                          Width="Auto"
                          Height="150"
-                         rubyer:TextBoxHelper.Placeholder="大文本框" />
+                         rubyer:TextBoxHelper.Watermark="大文本框"
+                         rubyer:TextBoxHelper.IsClearable="True"/>
             </GroupBox>
             <GroupBox Grid.Row="2"
                       Grid.Column="0"
@@ -56,7 +57,7 @@
                 <TextBox Width="150"
                          Margin="5 10"
                          HorizontalAlignment="Left"
-                         rubyer:TextBoxHelper.Placeholder="绑定了 int 类型"
+                         rubyer:TextBoxHelper.Watermark="绑定了 int 类型"
                          Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
             </GroupBox>
             <GroupBox Grid.Row="2"
@@ -66,7 +67,7 @@
                 <StackPanel Margin="5"
                             HorizontalAlignment="Stretch"
                             Orientation="Horizontal">
-                    <TextBox Width="150" rubyer:TextBoxHelper.Placeholder="账号">
+                    <TextBox Width="150" rubyer:TextBoxHelper.Watermark="账号">
                         <rubyer:TextBoxHelper.PreContent>
                             <rubyer:Icon Type="UserFill" />
                         </rubyer:TextBoxHelper.PreContent>
@@ -75,7 +76,7 @@
                                  Margin="10 0"
                                  rubyer:PasswordHelper.Password="{Binding TestPassword}"
                                  rubyer:PasswordHelper.ShowSwitchButton="True"
-                                 rubyer:TextBoxHelper.Placeholder="密码">
+                                 rubyer:TextBoxHelper.Watermark="密码">
                         <rubyer:TextBoxHelper.PreContent>
                             <rubyer:Icon Type="LockPasswordFill" />
                         </rubyer:TextBoxHelper.PreContent>
@@ -100,7 +101,9 @@
                              rubyer:TextBoxHelper.PreContent="http://" />
                     <TextBox Width="150">
                         <rubyer:TextBoxHelper.PostContent>
-                            <Button Style="{StaticResource TextButton}" Height="26">
+                            <Button Style="{StaticResource TextButton}" 
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    rubyer:ButtonHelper.CircleDiameter="22">
                                 <rubyer:Icon Type="RefreshLine" />
                             </Button>
                         </rubyer:TextBoxHelper.PostContent>

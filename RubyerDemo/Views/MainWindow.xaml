@@ -9,8 +9,6 @@
                      xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
                      xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
                      Title="{Binding Title}"
-                     Width="1050"
-                     Height="660"
                      d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
