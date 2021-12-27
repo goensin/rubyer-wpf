@@ -47,8 +47,8 @@
                 <TextBox Style="{StaticResource BigTextBox}"
                          Width="Auto"
                          Height="150"
-                         rubyer:TextBoxHelper.Watermark="大文本框"
-                         rubyer:TextBoxHelper.IsClearable="True"/>
+                         rubyer:TextBoxHelper.IsClearable="True"
+                         rubyer:TextBoxHelper.Watermark="大文本框" />
             </GroupBox>
             <GroupBox Grid.Row="2"
                       Grid.Column="0"
@@ -74,8 +74,8 @@
                     </TextBox>
                     <PasswordBox Width="150"
                                  Margin="10 0"
-                                 rubyer:PasswordHelper.Password="{Binding TestPassword}"
-                                 rubyer:PasswordHelper.ShowSwitchButton="True"
+                                 rubyer:PasswordBoxHelper.BindablePassword="{Binding TestPassword}"
+                                 rubyer:PasswordBoxHelper.ShowSwitchButton="True"
                                  rubyer:TextBoxHelper.Watermark="密码">
                         <rubyer:TextBoxHelper.PreContent>
                             <rubyer:Icon Type="LockPasswordFill" />
@@ -101,11 +101,22 @@
                              rubyer:TextBoxHelper.PreContent="http://" />
                     <TextBox Width="150">
                         <rubyer:TextBoxHelper.PostContent>
-                            <Button Style="{StaticResource TextButton}" 
-                                    rubyer:ButtonHelper.Shape="Circle"
-                                    rubyer:ButtonHelper.CircleDiameter="22">
+                            <Button Style="{StaticResource TextButton}"
+                                    rubyer:ButtonHelper.CircleDiameter="22"
+                                    rubyer:ButtonHelper.Shape="Circle">
                                 <rubyer:Icon Type="RefreshLine" />
                             </Button>
+                        </rubyer:TextBoxHelper.PostContent>
+                    </TextBox>
+                    <TextBox Width="150"
+                             Margin="10 0"
+                             IsEnabled="False"
+                             rubyer:TextBoxHelper.Watermark="不可用">
+                        <rubyer:TextBoxHelper.PreContent>
+                            <rubyer:Icon Type="EmotionUnhappyLine" />
+                        </rubyer:TextBoxHelper.PreContent>
+                        <rubyer:TextBoxHelper.PostContent>
+                            <rubyer:Icon Type="EmotionSadLine" />
                         </rubyer:TextBoxHelper.PostContent>
                     </TextBox>
                 </StackPanel>

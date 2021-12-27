@@ -30,7 +30,7 @@
                      Grid.Row="1"
                      Grid.Column="1"
                      Width="200"
-                     rubyer:PasswordHelper.ShowSwitchButton="True"
+                     rubyer:PasswordBoxHelper.ShowSwitchButton="True"
                      Password="123" />
 
         <Button Grid.Row="2"

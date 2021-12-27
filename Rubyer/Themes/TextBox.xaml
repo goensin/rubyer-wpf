@@ -39,6 +39,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="Height" Value="28" />
+        <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
