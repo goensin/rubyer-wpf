@@ -422,7 +422,7 @@
                             <Setter TargetName="Transition" Property="Type" Value="CollapseLeft" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -114,7 +114,7 @@
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource PressedOpacity}" />

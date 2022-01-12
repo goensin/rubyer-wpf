@@ -147,7 +147,7 @@
                 <Setter TargetName="Thumb" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
@@ -261,7 +261,7 @@
                 <Setter TargetName="Thumb" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
-                <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

@@ -329,7 +329,7 @@
                 <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
             </Trigger>
         </Style.Triggers>
     </Style>

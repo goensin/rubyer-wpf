@@ -184,7 +184,7 @@
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -234,7 +234,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
                             <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="true" />

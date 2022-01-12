@@ -188,7 +188,6 @@
                             Margin="6 0"
                             rubyer:ButtonHelper.Loading="True"
                             rubyer:ButtonHelper.Shape="Round"
-                            rubyer:ButtonHelper.ShowShadow="True"
                             Content="强调按钮" />
                     <Button Margin="10 0"
                             rubyer:ButtonHelper.Loading="True"
@@ -196,8 +195,7 @@
                     <Button Margin="10 0"
                             rubyer:ButtonHelper.CircleDiameter="40"
                             rubyer:ButtonHelper.Loading="True"
-                            rubyer:ButtonHelper.Shape="Circle"
-                            rubyer:ButtonHelper.ShowShadow="True" />
+                            rubyer:ButtonHelper.Shape="Circle"/>
                     <Button Style="{StaticResource TextDarkButton}"
                             Margin="10 0"
                             rubyer:ButtonHelper.Loading="True"

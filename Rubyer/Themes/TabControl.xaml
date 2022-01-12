@@ -106,28 +106,28 @@
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -339,7 +339,7 @@
                             <Setter TargetName="headerPanel" Property="Margin" Value="-2.5 0 2.5 0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -434,28 +434,28 @@
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
                                 <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </MultiDataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -651,7 +651,7 @@
                             <Setter TargetName="headerPanel" Property="Margin" Value="-2.5 0 2.5 0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

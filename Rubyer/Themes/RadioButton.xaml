@@ -96,7 +96,7 @@
                             <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource PressedOpacity}" />

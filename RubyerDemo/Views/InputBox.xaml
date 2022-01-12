@@ -110,8 +110,8 @@
                     </TextBox>
                     <TextBox Width="150"
                              Margin="10 0"
-                             IsEnabled="False"
-                             rubyer:TextBoxHelper.Watermark="不可用">
+                             rubyer:TextBoxHelper.Watermark="不可用"
+                             IsEnabled="False">
                         <rubyer:TextBoxHelper.PreContent>
                             <rubyer:Icon Type="EmotionUnhappyLine" />
                         </rubyer:TextBoxHelper.PreContent>
@@ -135,17 +135,19 @@
                         </ComboBox>
                         <ComboBox Width="100"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}"
-                                  rubyer:ComboBoxHelper.Placeholder="提示">
+                                  rubyer:ComboBoxHelper.Watermark="提示"
+                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Light}"
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Light}">
                             <ComboBoxItem Content="选项一" />
                             <ComboBoxItem Content="选项二" />
                             <ComboBoxItem Content="选项三" />
                         </ComboBox>
                         <ComboBox Width="110"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Dark}"
                                   rubyer:ComboBoxHelper.IsClearable="True"
-                                  rubyer:ComboBoxHelper.Placeholder="可清除">
+                                  rubyer:ComboBoxHelper.Watermark="可清除"
+                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Dark}"
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Dark}">
                             <ComboBoxItem Content="沙茶酱" />
                             <ComboBoxItem Content="鱼露" />
                             <ComboBoxItem Content="豆酱" />
@@ -153,16 +155,17 @@
                         <ComboBox x:Name="heightCombo"
                                   Width="120"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Accent}"
                                   rubyer:ComboBoxHelper.PostContent="cm"
                                   rubyer:ComboBoxHelper.PreContent="身高"
-                                  IsEditable="False" />
+                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"/>
 
                         <ComboBox Width="150"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="Green"
                                   rubyer:ComboBoxHelper.IsClearable="True"
-                                  rubyer:ComboBoxHelper.Placeholder="运动">
+                                  rubyer:ComboBoxHelper.Watermark="运动"
+                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}">
                             <ComboBoxItem>
                                 <StackPanel Orientation="Horizontal">
                                     <rubyer:Icon Type="RunLine" />
@@ -193,11 +196,12 @@
                             <ComboBoxItem Content="选项三" />
                         </ComboBox>
 
-                        <ComboBox Width="150"
+                        <ComboBox Width="120"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Light}"
                                   rubyer:ComboBoxHelper.IsClearable="True"
-                                  rubyer:ComboBoxHelper.Placeholder="可清除"
+                                  rubyer:ComboBoxHelper.Watermark="可清除"
+                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Warning}"
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Warning}"
                                   IsEditable="True">
                             <ComboBoxItem Content="选项一" />
                             <ComboBoxItem Content="选项二" />
@@ -206,23 +210,21 @@
 
                         <ComboBox Width="120"
                                   Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Dark}"
-                                  rubyer:ComboBoxHelper.PreContent="选择"
-                                  IsEditable="True">
-                            <ComboBoxItem Content="选项一" />
-                            <ComboBoxItem Content="选项二" />
-                            <ComboBoxItem Content="选项三" />
-                        </ComboBox>
-
-                        <ComboBox Width="120"
-                                  Margin="0 0 10 0"
-                                  rubyer:ComboBoxHelper.FocusedBrush="{DynamicResource Accent}"
                                   rubyer:ComboBoxHelper.PostContent="kg"
                                   rubyer:ComboBoxHelper.PreContent="体重"
                                   IsEditable="True">
                             <ComboBoxItem Content="50" />
                             <ComboBoxItem Content="60" />
                             <ComboBoxItem Content="70" />
+                        </ComboBox>
+
+                        <ComboBox Width="120"
+                                  Margin="0 0 10 0"
+                                  rubyer:ComboBoxHelper.PreContent="选择"
+                                  IsEditable="True"
+                                  IsEnabled="False"
+                                  SelectedIndex="0">
+                            <ComboBoxItem Content="不可用" />
                         </ComboBox>
                     </StackPanel>
                 </StackPanel>

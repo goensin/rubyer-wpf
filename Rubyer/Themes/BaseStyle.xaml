@@ -44,7 +44,6 @@
                      Color="#757575" />
 
     <!--  Opacity  -->
-    <system:Double x:Key="UnEnabledOpacity">0.3</system:Double>
     <system:Double x:Key="MouseOverOpacity">0.7</system:Double>
     <system:Double x:Key="PressedOpacity">1.0</system:Double>
 

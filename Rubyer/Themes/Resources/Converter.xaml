@@ -14,5 +14,5 @@
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
     <converter:HalfOfDoubleConverter x:Key="HalfOfDouble" />
-    <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
+    <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmpty" />
 </ResourceDictionary>

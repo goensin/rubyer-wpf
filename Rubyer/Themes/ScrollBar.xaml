@@ -36,7 +36,7 @@
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ScrollForeground}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Border" Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter TargetName="Border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

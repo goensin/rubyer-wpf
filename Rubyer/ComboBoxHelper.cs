@@ -9,36 +9,6 @@ namespace Rubyer
 {
     public static class ComboBoxHelper
     {
-        // 圆角半径
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
-            "CornerRadius", typeof(CornerRadius), typeof(ComboBoxHelper));
-
-        public static void SetCornerRadius(DependencyObject element, CornerRadius value)
-        {
-            element.SetValue(CornerRadiusProperty, value);
-        }
-
-        public static CornerRadius GetCornerRadius(DependencyObject element)
-        {
-            return (CornerRadius)element.GetValue(CornerRadiusProperty);
-        }
-
-
-        // 聚焦时颜色
-        public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(SolidColorBrush), typeof(ComboBoxHelper), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-        public static SolidColorBrush GetFocusedBrush(DependencyObject obj)
-        {
-            return (SolidColorBrush)obj.GetValue(FocusedBrushProperty);
-        }
-
-        public static void SetFocusedBrush(DependencyObject obj, SolidColorBrush value)
-        {
-            obj.SetValue(FocusedBrushProperty, value);
-        }
-
-
         // 前置内容
         public static readonly DependencyProperty PreContentProperty =
             DependencyProperty.RegisterAttached("PreContent", typeof(object), typeof(ComboBoxHelper), new PropertyMetadata(null));
@@ -122,17 +92,17 @@ namespace Rubyer
         }
 
         // 提示占位符
-        public static readonly DependencyProperty PlaceholderProperty =
-            DependencyProperty.RegisterAttached("Placeholder", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(""));
+        public static readonly DependencyProperty WatermarkProperty =
+            DependencyProperty.RegisterAttached("Watermark", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(""));
 
-        public static string GetPlaceholder(DependencyObject obj)
+        public static string GetWatermark(DependencyObject obj)
         {
-            return (string)obj.GetValue(PlaceholderProperty);
+            return (string)obj.GetValue(WatermarkProperty);
         }
 
-        public static void SetPlaceholder(DependencyObject obj, string value)
+        public static void SetWatermark(DependencyObject obj, string value)
         {
-            obj.SetValue(PlaceholderProperty, value);
+            obj.SetValue(WatermarkProperty, value);
         }
 
         // 是否聚焦

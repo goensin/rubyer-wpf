@@ -9,6 +9,9 @@
     <!--  Opacity  -->
     <system:Double x:Key="UnenableOpcity">0.4</system:Double>
 
+    <!--  CircleDiameter  -->
+    <system:Double x:Key="InsideButtonCircleDiameter">22</system:Double>
+
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
                       BlurRadius="7"

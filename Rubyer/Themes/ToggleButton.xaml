@@ -74,7 +74,7 @@
                             <Setter TargetName="border" Property="Opacity" Value="{StaticResource PressedOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Trigger.EnterActions>
@@ -263,7 +263,7 @@
                             <Setter TargetName="border" Property="Opacity" Value="{StaticResource PressedOpacity}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter TargetName="border" Property="Background" Value="{Binding Path=(rubyer:ToggleButtonHelper.CheckedBackground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />

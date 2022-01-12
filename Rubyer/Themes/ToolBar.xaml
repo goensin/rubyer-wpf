@@ -33,7 +33,7 @@
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -68,7 +68,7 @@
                             <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnEnabledOpacity}" />
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
