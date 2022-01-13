@@ -339,6 +339,7 @@
         </Setter>
         <Setter Property="RenderTransformOrigin" Value="0.5 0.5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Type" Value="Fade" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Transition}">
@@ -526,7 +527,7 @@
                         </MultiTrigger>
                         <!--  向上折叠  -->
                         <Trigger Property="Type" Value="Collapse">
-                            <Setter TargetName="rootBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rootBorder" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="rootStackPanel" Property="Height">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
@@ -553,7 +554,7 @@
                         </MultiTrigger>
                         <!--  向左折叠  -->
                         <Trigger Property="Type" Value="CollapseLeft">
-                            <Setter TargetName="rootBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="rootBorder" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="rootStackPanel" Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
                             <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
@@ -582,6 +583,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Type" Value="Fade" />
     </Style>
 </ResourceDictionary>
