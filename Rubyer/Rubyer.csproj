@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
-		<TargetFrameworks>net46;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net46;netcoreapp3.1;net5.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<Authors>Ensin</Authors>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
