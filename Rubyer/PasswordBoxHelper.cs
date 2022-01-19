@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -7,8 +8,21 @@ namespace Rubyer
 {
     public class PasswordBoxHelper
     {
+        public static readonly DependencyProperty IsBindableProperty = DependencyProperty.RegisterAttached(
+            "IsBindable", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(default(bool), OnIsBindableChanaged));
+
+        public static bool GetIsBindable(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsBindableProperty);
+        }
+
+        public static void SetIsBindable(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsBindableProperty, value);
+        }
+
         public static readonly DependencyProperty BindablePasswordProperty = DependencyProperty.RegisterAttached(
-            "BindablePassword", typeof(string), typeof(PasswordBoxHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnBindablePasswordChanged));
+            "BindablePassword", typeof(string), typeof(PasswordBoxHelper), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnBindablePasswordChanged));
 
         public static string GetBindablePassword(DependencyObject obj)
         {
@@ -46,22 +60,40 @@ namespace Rubyer
             obj.SetValue(ShowPasswordProperty, value);
         }
 
+        private static void OnIsBindableChanaged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is PasswordBox passwordBox)
+            {
+                RoutedEventHandler handler = (a, b) => SetBindablePassword(passwordBox, passwordBox.Password);
+                if (GetIsBindable(passwordBox))
+                {
+                    passwordBox.PasswordChanged += handler;
+                }
+                else
+                {
+                    passwordBox.PasswordChanged -= handler;
+                }
+            }
+        }
+
         private static void OnBindablePasswordChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is PasswordBox passwordBox)
             {
-                if (passwordBox.Password == GetBindablePassword(passwordBox))
+                if (GetIsBindable(passwordBox))
                 {
-                    return;
-                }
+                    if (passwordBox.Password.Equals(GetBindablePassword(passwordBox)))
+                    {
+                        return;
+                    }
 
-                passwordBox.Password = GetBindablePassword(passwordBox);
-
-                if (passwordBox.Password.Length > 0)
-                {
-                    _ = passwordBox.GetType()
-                   .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
-                   .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 0 });
+                    passwordBox.Password = GetBindablePassword(passwordBox);
+                    if (passwordBox.Password.Length > 0)
+                    {
+                        _ = passwordBox.GetType()
+                                       .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
+                                       .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 0 });
+                    }
                 }
             }
         }
@@ -89,11 +121,6 @@ namespace Rubyer
                         switchButton.RemoveHandler(UIElement.MouseDownEvent, handleDown);
                         switchButton.RemoveHandler(UIElement.MouseUpEvent, handleUp);
                     }
-                };
-
-                passwordBox.PasswordChanged += (sender, arg) =>
-                {
-                    SetBindablePassword(passwordBox, passwordBox.Password);
                 };
             }
         }
