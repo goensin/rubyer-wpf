@@ -359,9 +359,6 @@
                                           FontWeight="{TemplateBinding FontWeight}"
                                           Foreground="{TemplateBinding Foreground}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                            <!--<rubyer:ExpanderResizer ExpanderControl="{Binding RelativeSource={RelativeSource AncestorType={x:Type Expander}}}">
-                                <ContentPresenter x:Name="ExpandSite" Focusable="false" Margin="{TemplateBinding Padding}"/>
-                            </rubyer:ExpanderResizer>-->
                             <rubyer:Transition x:Name="Transition"
                                                IsShow="{TemplateBinding IsExpanded}"
                                                Type="Collapse">
