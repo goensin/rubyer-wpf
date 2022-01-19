@@ -59,6 +59,11 @@ namespace Rubyer
                 {
                     if (control is ComboBox comboBox)
                     {
+                        if (comboBox.IsEditable)
+                        {
+                            comboBox.Text = null;
+                        }
+
                         comboBox.SelectedItem = null;
                     }
                 };
