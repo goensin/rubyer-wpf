@@ -413,7 +413,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
                     <Grid x:Name="templateRoot"
-                          Background="{TemplateBinding Background}"
+                          Background="Transparent"
                           SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
