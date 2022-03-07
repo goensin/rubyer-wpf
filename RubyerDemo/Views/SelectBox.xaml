@@ -17,7 +17,8 @@
             </Grid.RowDefinitions>
             <GroupBox Margin="0 0 0 10" Header="单选按钮-RadioButton">
                 <StackPanel Margin="10" Orientation="Horizontal">
-                    <RadioButton x:Name="day"
+                    <RadioButton x:Name="day" 
+                                 Margin="10 0"
                                  Checked="RadioButton_Checked"
                                  GroupName="selete"
                                  IsChecked="True">
@@ -39,7 +40,9 @@
                             </StackPanel>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton GroupName="selete" IsEnabled="False">
+                    <RadioButton GroupName="selete" 
+                                 IsEnabled="False" 
+                                 Margin="10 0">
                         不可用
                     </RadioButton>
                 </StackPanel>

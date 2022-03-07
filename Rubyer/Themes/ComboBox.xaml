@@ -209,7 +209,7 @@
                             </MultiDataTrigger.Conditions>
                         </MultiDataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DefaultForeground}" />
+                            <Setter TargetName="arrow" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                             <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -238,7 +238,7 @@
                             </DataTrigger.ExitActions>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter TargetName="arrow" Property="Fill" Value="{DynamicResource DefaultForeground}" />
+                            <Setter TargetName="arrow" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>

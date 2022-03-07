@@ -36,12 +36,16 @@
     <!--  默认单选框  -->
     <Style x:Key="RubyerRadioButton" TargetType="{x:Type RadioButton}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
@@ -58,14 +62,14 @@
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{StaticResource BorderGray}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="100">
+                                CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HalfOfDouble}}">
                             <Viewbox>
                                 <Ellipse x:Name="littleDot"
-                                         MinWidth="9"
-                                         MinHeight="9"
-                                         Fill="{TemplateBinding BorderBrush}"
+                                         MinWidth="10"
+                                         MinHeight="10"
+                                         Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                          RenderTransformOrigin="0.5,0.5">
                                     <Ellipse.RenderTransform>
                                         <TransformGroup>
@@ -92,14 +96,15 @@
                             <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
+                        <Trigger SourceName="radioButtonBorder" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                             <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource PressedOpacity}" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -146,36 +151,35 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="0.56" />
+                            <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
 
 
     <!--  亮色单选框  -->
-    <Style x:Key="LightRadio"
+    <Style x:Key="LightRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  暗色单选框  -->
-    <Style x:Key="DarkRadio"
+    <Style x:Key="DarkRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  强调色单选框  -->
-    <Style x:Key="AccentRadio"
+    <Style x:Key="AccentRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />

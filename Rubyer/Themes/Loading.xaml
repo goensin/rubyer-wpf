@@ -19,31 +19,35 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Loading}">
                     <Grid>
-                        <Rectangle x:Name="background" Stroke="{TemplateBinding Background}" 
-                                   StrokeThickness="{TemplateBinding StrokeThickness}"
-                                   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}">
+                        <Rectangle x:Name="background"
+                                   Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
+                                   Stroke="{TemplateBinding Background}"
+                                   StrokeThickness="{TemplateBinding StrokeThickness}">
                             <Rectangle.RadiusX>
                                 <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                                    <Binding ElementName="background" Path="ActualWidth"/>
-                                    <Binding Source="2"/>
+                                    <Binding ElementName="background" Path="ActualWidth" />
+                                    <Binding Source="2" />
                                 </MultiBinding>
                             </Rectangle.RadiusX>
                             <Rectangle.RadiusY>
                                 <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                                    <Binding ElementName="background" Path="ActualHeight"/>
-                                    <Binding Source="2"/>
+                                    <Binding ElementName="background" Path="ActualHeight" />
+                                    <Binding Source="2" />
                                 </MultiBinding>
                             </Rectangle.RadiusY>
                         </Rectangle>
-                        <Rectangle x:Name="loading" Stroke="{TemplateBinding Foreground}"
-                                   StrokeThickness="{TemplateBinding StrokeThickness}"
-                                   Width="{TemplateBinding Width}" Height="{TemplateBinding Height}"
-                                   RenderTransformOrigin="0.5 0.5" 
+                        <Rectangle x:Name="loading"
+                                   Width="{TemplateBinding Width}"
+                                   Height="{TemplateBinding Height}"
                                    RadiusX="{Binding RadiusX, ElementName=background}"
                                    RadiusY="{Binding RadiusY, ElementName=background}"
-                                   StrokeDashArray="{TemplateBinding StrokeDashArray}">
+                                   RenderTransformOrigin="0.5 0.5"
+                                   Stroke="{TemplateBinding Foreground}"
+                                   StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                                   StrokeThickness="{TemplateBinding StrokeThickness}">
                             <Rectangle.RenderTransform>
-                                <RotateTransform x:Name="loadingAngle" Angle="0"/>
+                                <RotateTransform x:Name="loadingAngle" Angle="0" />
                             </Rectangle.RenderTransform>
                         </Rectangle>
                     </Grid>
@@ -53,22 +57,22 @@
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="loadingAngle" Storyboard.TargetProperty="Angle">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="90"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.751" Value="-90"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:1.501" Value="-180"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2.25" Value="-90"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2.251" Value="-270"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-180"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:3.01" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="90" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.751" Value="-90" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.501" Value="-180" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2.25" Value="-90" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2.251" Value="-270" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:3" Value="-180" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:3.01" Value="0" />
                                         </DoubleAnimationUsingKeyFrames>
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Progress">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.01"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="1"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.01"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:2.25" Value="1"/>
-                                            <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.01"/>
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0.01" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.01" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:2.25" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0.01" />
                                         </DoubleAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Storyboard.TargetName="loading" Storyboard.TargetProperty="FlowDirection">
                                             <DiscreteObjectKeyFrame KeyTime="0">
@@ -76,7 +80,7 @@
                                                     <FlowDirection>LeftToRight</FlowDirection>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.75" >
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.75">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <FlowDirection>RightToLeft</FlowDirection>
                                                 </DiscreteObjectKeyFrame.Value>
@@ -86,7 +90,7 @@
                                                     <FlowDirection>LeftToRight</FlowDirection>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
-                                            <DiscreteObjectKeyFrame KeyTime="0:0:2.25" >
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:2.25">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <FlowDirection>RightToLeft</FlowDirection>
                                                 </DiscreteObjectKeyFrame.Value>
