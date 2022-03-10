@@ -17,11 +17,11 @@
             </Grid.RowDefinitions>
             <GroupBox Margin="0 0 0 10" Header="单选按钮-RadioButton">
                 <StackPanel Margin="10" Orientation="Horizontal">
-                    <RadioButton x:Name="day" 
+                    <RadioButton x:Name="day"
                                  Margin="10 0"
                                  Checked="RadioButton_Checked"
                                  GroupName="selete"
-                                 IsChecked="True">
+                                 IsChecked="{Binding IsChecked, ElementName=nightMode,Converter={StaticResource BooleanToInverseConverter}}">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="SunFill" />
@@ -40,9 +40,9 @@
                             </StackPanel>
                         </RadioButton.Content>
                     </RadioButton>
-                    <RadioButton GroupName="selete" 
-                                 IsEnabled="False" 
-                                 Margin="10 0">
+                    <RadioButton Margin="10 0"
+                                 GroupName="selete"
+                                 IsEnabled="False">
                         不可用
                     </RadioButton>
                 </StackPanel>
@@ -67,29 +67,35 @@
                         <ToggleButton Style="{DynamicResource AccentToggleButton}"
                                       Width="100"
                                       Margin="10 0"
+                                      rubyer:ButtonHelper.Shape="Round"
                                       Content="强调色" />
                     </StackPanel>
 
                     <StackPanel Margin="10" Orientation="Horizontal">
-                        <ToggleButton Style="{DynamicResource CircleMidToggleButton}"
+                        <ToggleButton Style="{DynamicResource CircleToggleButton}"
                                       Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDiameter="40"
                                       Content="默认"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleLightToggleButton}"
                                       Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDiameter="40"
                                       Content="亮色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleDarkToggleButton}"
                                       Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDiameter="40"
                                       Content="暗色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource CircleAccentToggleButton}"
                                       Margin="10 0"
+                                      rubyer:ButtonHelper.CircleDiameter="50"
                                       Content="强调"
+                                      FontSize="15"
                                       IsChecked="True" />
                     </StackPanel>
                     <StackPanel Margin="10" Orientation="Horizontal">
-                        <ToggleButton Style="{DynamicResource SwitchMidToggle}" Margin="10 0">
+                        <ToggleButton Style="{DynamicResource SwitchToggle}" Margin="10 0">
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="WifiFill" />
                                 <TextBlock Text="Wifi" />
@@ -107,10 +113,14 @@
                                       Margin="10 5"
                                       Content="NFC"
                                       IsChecked="True" />
-                        <ToggleButton Style="{DynamicResource SwitchAccentToggle}"
+                        <ToggleButton x:Name="nightMode" Style="{DynamicResource SwitchAccentToggle}"
                                       Margin="10 0"
                                       Content="夜间模式"
-                                      IsChecked="True" />
+                                      IsChecked="{Binding IsChecked, ElementName=night}" />
+                        <ToggleButton Style="{DynamicResource SwitchToggle}"
+                                      Margin="10 0"
+                                      IsEnabled="False"
+                                      Content="不可用" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

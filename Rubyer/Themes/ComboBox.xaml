@@ -556,7 +556,7 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
-                        <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmpty}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>

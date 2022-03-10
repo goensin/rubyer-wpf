@@ -2,17 +2,19 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converter="clr-namespace:Rubyer.Converters">
 
-    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisible" />
-    <converter:BooleanToVisibilityConverter x:Key="BooleanToCollapsed"
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibleConverter" />
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToCollapsedConverter"
                                             FalseValue="Visible"
                                             TrueValue="Collapsed" />
-    <converter:BooleanToVisibilityConverter x:Key="BooleanToHidden"
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToHiddenConverter"
                                             FalseValue="Visible"
                                             TrueValue="Hidden" />
+    <converter:BooleanToInverseConverter x:Key="BooleanToInverseConverter" />
+    
     <converter:MathMultipleConverter x:Key="MathAddyConverter" />
     <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract" />
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
-    <converter:HalfOfDoubleConverter x:Key="HalfOfDouble" />
-    <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmpty" />
+    <converter:HalfOfDoubleConverter x:Key="HalfOfDoubleConverter" />
+    <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
 </ResourceDictionary>

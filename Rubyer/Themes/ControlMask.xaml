@@ -26,7 +26,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         To="0.18"
+                                                         To="0.12"
                                                          Duration="0:0:0.25" />
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -48,7 +48,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         To="0.35"
+                                                         To="0.3"
                                                          Duration="0:0:0.15">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut" />
