@@ -81,8 +81,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="True">
-                            <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource DefaultForeground}" />
-                            <Setter TargetName="border" Property="BorderThickness" Value="1" />
+                            <!--<Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource DefaultForeground}" />-->
+                            <!--<Setter TargetName="border" Property="BorderThickness" Value="1" />-->
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Trigger.EnterActions>

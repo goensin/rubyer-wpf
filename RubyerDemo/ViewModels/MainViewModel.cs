@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using RubyerDemo.Consts;
 using RubyerDemo.Views;
 using System;
 using System.Collections.Generic;
@@ -181,7 +182,7 @@ namespace RubyerDemo.ViewModels
         private void OpenAboutDialogExecute(object obj)
         {
             var content = new About();
-            Dialog.Show("MainDialog", content, "关于");
+            Dialog.Show(ConstNames.MainDialogBox, content, "关于");
         }
     }
 }

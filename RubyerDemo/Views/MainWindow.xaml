@@ -2,6 +2,7 @@
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:Converters="clr-namespace:Rubyer.Converters;assembly=Rubyer"
+                     xmlns:const="clr-namespace:RubyerDemo.Consts"
                      xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
                      xmlns:converter="clr-namespace:RubyerDemo.Converter"
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -70,9 +71,9 @@
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
-    <rubyer:MessageContainer Identifier="MessageContainer">
-        <rubyer:MessageBoxContainer Identifier="DialogContaioner">
-            <rubyer:DialogBox Title="主对话框" Identifier="MainDialog">
+    <rubyer:MessageContainer Identifier="{x:Static const:ConstNames.MainMessageContainer}">
+        <rubyer:MessageBoxContainer Identifier="{x:Static const:ConstNames.MainMessageBoxContainer}">
+            <rubyer:DialogBox Title="主对话框" Identifier="{x:Static const:ConstNames.MainDialogBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="170" />

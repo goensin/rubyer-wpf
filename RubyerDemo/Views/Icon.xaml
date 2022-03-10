@@ -7,52 +7,61 @@
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              xmlns:wpftk="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              x:Name="IconView"
-             HorizontalAlignment="Stretch"
-             VerticalAlignment="Stretch"
-             d:DataContext="{d:DesignInstance Type=viewModels:IconViewModel,
-                                              IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=viewModels:IconViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
-    <GroupBox Grid.Row="1" Header="图标-Icon">
+    <GroupBox Header="图标-Icon">
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Border Grid.Column="1" Padding="0 5">
-                <StackPanel Margin="5 20">
-                    <TextBlock Margin="0 10"
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Border Padding="0 5">
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <TextBlock Margin="10 0"
                                HorizontalAlignment="Center"
                                Foreground="{DynamicResource DefaultForeground}">
                         原图标地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&amp;cid=25353">
                             REMIX ICON
                         </Hyperlink>
                     </TextBlock>
-                    <TextBox Margin="10"
+                    <TextBox Width="200"
+                             Margin="10 0"
                              rubyer:TextBoxHelper.IsClearable="True"
                              rubyer:TextBoxHelper.Watermark="搜索图标"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
                         <rubyer:TextBoxHelper.PreContent>
-                            <Viewbox>
-                                <Button Style="{DynamicResource TextButton}"
-                                        Command="{Binding Search}"
-                                        IsDefault="True">
-                                    <rubyer:Icon Type="SearchLine" />
-                                </Button>
-                            </Viewbox>
+                            <Button Style="{DynamicResource TextButton}"
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    Command="{Binding Search}"
+                                    IsDefault="True"
+                                    ToolTip="搜索">
+                                <rubyer:Icon Type="SearchLine" />
+                            </Button>
                         </rubyer:TextBoxHelper.PreContent>
                     </TextBox>
-                    <TextBox Margin="10"
+                    <TextBox x:Name="currentTextBox"
+                             MinWidth="200"
+                             Margin="10 0 0 0"
                              rubyer:TextBoxHelper.PreContent="选中"
-                             Text="{Binding CurrentIcon}" />
+                             BorderThickness="0"
+                             Text="{Binding CurrentIcon, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
+                    <Button x:Name="copyButton"
+                            Style="{StaticResource TextButton}"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Click="copyButton_Click"
+                            ToolTip="复制">
+                        <rubyer:Icon Type="FileCopy2Fill" />
+                    </Button>
                 </StackPanel>
             </Border>
-            <ListBox ItemsSource="{Binding IconTypes}"
+            <ListBox Grid.Row="1"
+                     ItemsSource="{Binding IconTypes}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      SelectedItem="{Binding CurrentIcon}"
                      VirtualizingPanel.ScrollUnit="Pixel">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <wpftk:VirtualizingWrapPanel MouseWheelDelta="50"/>
+                        <wpftk:VirtualizingWrapPanel MouseWheelDelta="50" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>

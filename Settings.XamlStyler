@@ -33,7 +33,7 @@
   "ReorderCanvasChildren": false,
   "ReorderSetters": 0,
   "RecordVisualStateManager": 0,
-  "FormatMarkupExtension": true,
+  "FormatMarkupExtension": false,
   "NoNewLineMarkupExtensions": "x:Bind, Binding, TemplateBinding, x:Static, DynamicResource, ComponentResourceKey",
   "ThicknessSeparator": 1,
   "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",

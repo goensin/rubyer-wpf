@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using RubyerDemo.Consts;
 using RubyerDemo.Views;
 using System;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ namespace RubyerDemo.ViewModels
         // 2# 对话框打开前
         private void BeforeDialog3OpenExecute(object obj)
         {
-            Message.ShowInContainer("MessageContainer", "打开 3# 对话框");
+            Message.ShowInContainer(ConstNames.MainMessageContainer, "打开 3# 对话框");
         }
 
         private RelayCommand afterDialog3Close;
@@ -97,7 +98,7 @@ namespace RubyerDemo.ViewModels
         private void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
-            Dialog.Show("MainDialog", content, "登录", BeforeDialog4Open, AfterDialog4Close);
+            Dialog.Show(ConstNames.MainDialogBox, content, "登录", BeforeDialog4Open, AfterDialog4Close);
         }
 
         private void AfterDialog4Close(DialogBox dialog, object arg)

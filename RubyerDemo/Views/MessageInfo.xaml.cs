@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using RubyerDemo.Consts;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -51,27 +52,27 @@ namespace RubyerDemo.Views
 
         private void MessageContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowInContainer("MessageContainer", "message");
+            Message.ShowInContainer(ConstNames.MainMessageContainer, "message");
         }
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.InfoInContainer("MessageContainer", "info");
+            Message.InfoInContainer(ConstNames.MainMessageContainer, "info");
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.WarningInContainer("MessageContainer", "warning");
+            Message.WarningInContainer(ConstNames.MainMessageContainer, "warning");
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.SuccessInContainer("MessageContainer", "success");
+            Message.SuccessInContainer(ConstNames.MainMessageContainer, "success");
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ErrorInContainer("MessageContainer", "error");
+            Message.ErrorInContainer(ConstNames.MainMessageContainer, "error");
         }
 
         private void ControlBtn_Click(object sender, RoutedEventArgs e)
