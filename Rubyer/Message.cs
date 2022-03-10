@@ -64,7 +64,7 @@ namespace Rubyer
         /// <param name="element">内容元素</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowInfo(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Info(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Info, element, millisecondTimeOut, isClearable);
         }
@@ -75,7 +75,7 @@ namespace Rubyer
         /// <param name="element">内容元素</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowSuccess(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Success(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Success, element, millisecondTimeOut, isClearable);
         }
@@ -86,7 +86,7 @@ namespace Rubyer
         /// <param name="element">内容元素</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowWarning(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Warning(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Warning, element, millisecondTimeOut, isClearable);
         }
@@ -97,7 +97,7 @@ namespace Rubyer
         /// <param name="element">内容元素</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowError(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Error(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Error, element, millisecondTimeOut, isClearable);
         }
@@ -130,7 +130,7 @@ namespace Rubyer
         /// <param name="element">内容元素</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowInfo(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Info(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
@@ -140,7 +140,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowSuccess(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Success(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
@@ -150,7 +150,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowWarning(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Warning(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
@@ -160,7 +160,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowError(string message, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Error(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }

@@ -32,22 +32,22 @@ namespace RubyerDemo.Views
 
         private void InfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowInfo("info");
+            Message.Info("info");
         }
 
         private void WaringBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowWarning("warning");
+            Message.Warning("warning");
         }
 
         private void SuccessBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowSuccess("success");
+            Message.Success("success");
         }
 
         private void ErrorBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowError("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0);
+            Message.Error("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0);
         }
 
         private void MessageContainerBtn_Click(object sender, RoutedEventArgs e)
