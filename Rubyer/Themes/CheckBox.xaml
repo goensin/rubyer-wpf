@@ -35,13 +35,18 @@
 
     <!--  默认多选框  -->
     <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Bottom" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
@@ -53,17 +58,16 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border x:Name="checkBoxBorder"
-                                Margin="1"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Background="Transparent"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="1">
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                             <Grid x:Name="markGrid">
                                 <Viewbox>
                                     <Path x:Name="checkedMark"
-                                          Fill="{TemplateBinding Background}"
+                                          Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           RenderTransformOrigin="0.5,0.5"
                                           SnapsToDevicePixels="True">
                                         <Path.RenderTransform>
@@ -76,26 +80,27 @@
                                         </Path.RenderTransform>
                                         <Path.Data>
                                             <GeometryGroup>
-                                                <RectangleGeometry Rect="0 0 10 10" />
-                                                <PathGeometry Figures="M 9.97498,1.22334L 4.6983,9.09834L 4.52164,9.09834L 0,5.19331L 1.27664,3.52165L 4.255,6.08833L 8.33331,1.52588e-005L 9.97498,1.22334 Z" />
+                                                <RectangleGeometry Rect="0 0 12 12" />
+                                                <PathGeometry Figures="M 10.97498,2.22334L 5.6983,10.09834L 5.52164,10.09834L 1,6.19331L 2.27664,4.52165L 5.255,7.08833L 9.33331,1.0000153 10.97498,2.22334 Z" />
                                             </GeometryGroup>
                                         </Path.Data>
                                     </Path>
                                 </Viewbox>
                                 <Viewbox>
                                     <Path x:Name="nullMark"
-                                          Fill="{TemplateBinding Background}"
-                                          Opacity="0">
+                                          Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Visibility="Collapsed">
                                         <Path.Data>
                                             <GeometryGroup>
-                                                <RectangleGeometry Rect="0 0 10 10" />
-                                                <RectangleGeometry Rect="1 4 8 2" />
+                                                <RectangleGeometry Rect="0 0 12 12" />
+                                                <RectangleGeometry Rect="1 5 10 2" />
                                             </GeometryGroup>
                                         </Path.Data>
                                     </Path>
                                 </Viewbox>
                             </Grid>
                         </Border>
+
                         <ContentPresenter x:Name="contentPresenter"
                                           Grid.Column="1"
                                           Margin="{TemplateBinding Padding}"
@@ -110,14 +115,14 @@
                             <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource MouseOverOpacity}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
+                        <Trigger SourceName="checkBoxBorder" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource PressedOpacity}" />
+                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -126,17 +131,17 @@
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
                                                          To="1"
-                                                         Duration="0:0:0.25">
+                                                         Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut" />
+                                                <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
                                                          Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
                                                          To="1"
-                                                         Duration="0:0:0.25">
+                                                         Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <BackEase EasingMode="EaseOut" />
+                                                <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                     </Storyboard>
@@ -165,39 +170,41 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
-                            <Setter TargetName="nullMark" Property="Opacity" Value="0" />
+                            <Setter TargetName="nullMark" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
-                            <Setter TargetName="checkedMark" Property="Opacity" Value="0" />
-                            <Setter TargetName="nullMark" Property="Opacity" Value="1" />
+                            <Setter TargetName="checkedMark" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="nullMark" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Bottom" />
     </Style>
 
     <!--  亮色多选框  -->
     <Style x:Key="LightCheckBox"
            BasedOn="{StaticResource RubyerCheckBox}"
            TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  暗色多选框  -->
     <Style x:Key="DarkCheckBox"
            BasedOn="{StaticResource RubyerCheckBox}"
            TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  强调色多选框  -->
     <Style x:Key="AccentCheckBox"
            BasedOn="{StaticResource RubyerCheckBox}"
            TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Accent}" />
     </Style>
 
 </ResourceDictionary>

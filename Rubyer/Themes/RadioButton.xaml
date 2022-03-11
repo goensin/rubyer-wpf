@@ -44,7 +44,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -96,12 +96,12 @@
                             <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
-                        <Trigger SourceName="radioButtonBorder" Property="IsMouseOver" Value="true">
-                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="contentPresenter" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                             <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger SourceName="radioButtonBorder" Property="IsMouseOver" Value="true">
+                            <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />

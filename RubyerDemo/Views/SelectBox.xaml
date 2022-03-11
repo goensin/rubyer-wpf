@@ -21,7 +21,7 @@
                                  Margin="10 0"
                                  Checked="RadioButton_Checked"
                                  GroupName="selete"
-                                 IsChecked="{Binding IsChecked, ElementName=nightMode,Converter={StaticResource BooleanToInverseConverter}}">
+                                 IsChecked="{Binding IsChecked, ElementName=nightMode, Converter={StaticResource BooleanToInverseConverter}}">
                         <RadioButton.Content>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="SunFill" />
@@ -113,14 +113,15 @@
                                       Margin="10 5"
                                       Content="NFC"
                                       IsChecked="True" />
-                        <ToggleButton x:Name="nightMode" Style="{DynamicResource SwitchAccentToggle}"
+                        <ToggleButton x:Name="nightMode"
+                                      Style="{DynamicResource SwitchAccentToggle}"
                                       Margin="10 0"
                                       Content="夜间模式"
                                       IsChecked="{Binding IsChecked, ElementName=night}" />
                         <ToggleButton Style="{DynamicResource SwitchToggle}"
                                       Margin="10 0"
-                                      IsEnabled="False"
-                                      Content="不可用" />
+                                      Content="不可用"
+                                      IsEnabled="False" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
@@ -133,23 +134,31 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10">
-                        <CheckBox Content="选项一" />
-                        <CheckBox Content="选项二" />
-                        <CheckBox Content="选项三" />
-                        <CheckBox Content="未选择" IsChecked="{x:Null}" />
-                        <CheckBox Content="不可用" IsEnabled="False" />
+                        <CheckBox Margin="1" Content="选项一" />
+                        <CheckBox Margin="1" Content="选项二" />
+                        <CheckBox Margin="1" Content="选项三" />
+                        <CheckBox Margin="1"
+                                  Content="未选择"
+                                  IsChecked="{x:Null}" />
+                        <CheckBox Margin="1"
+                                  Content="不可用"
+                                  IsEnabled="False" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="20 10">
-                        <CheckBox Height="25"
+                        <CheckBox Height="30"
+                                  Margin="1"
                                   Content="默认"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource LightCheckBox}"
+                                  Margin="1"
                                   Content="亮色"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource DarkCheckBox}"
+                                  Margin="1"
                                   Content="暗色"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource AccentCheckBox}"
+                                  Margin="1"
                                   Content="强调色"
                                   IsChecked="True" />
                     </StackPanel>
