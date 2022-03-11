@@ -7,11 +7,11 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
+        <Setter Property="Background" Value="{StaticResource Border}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
@@ -24,8 +24,7 @@
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    FontSize="{TemplateBinding FontSize}"
-                                   Foreground="{DynamicResource DefaultForeground}"
-                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
+                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.ShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource getPercent}">
                                     <Binding Path="Value" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
@@ -38,13 +37,12 @@
                             <Border Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}" />
-                            <Rectangle x:Name="PART_Track" />
                             <Grid x:Name="PART_Indicator"
                                   HorizontalAlignment="Left"
                                   ClipToBounds="true">
-                                <Rectangle x:Name="Indicator" Fill="{TemplateBinding Foreground}" />
+                                <Rectangle x:Name="Indicator" Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <Rectangle x:Name="Animation"
-                                           Fill="{TemplateBinding Foreground}"
+                                           Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                            RenderTransformOrigin="0.5,0.5">
                                     <Rectangle.RenderTransform>
                                         <TransformGroup>
@@ -254,7 +252,7 @@
                                    VerticalAlignment="Center"
                                    FontSize="{TemplateBinding FontSize}"
                                    Foreground="{DynamicResource DefaultForeground}"
-                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
+                                   Visibility="{Binding Path=(rubyer:ProgressBarHelper.ShowPercent), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibility}}">
                             <TextBlock.Text>
                                 <MultiBinding Converter="{StaticResource getPercent}">
                                     <Binding Path="Value" RelativeSource="{RelativeSource AncestorType=ProgressBar}" />

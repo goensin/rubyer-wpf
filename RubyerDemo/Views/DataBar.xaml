@@ -18,7 +18,7 @@
                         <StackPanel VerticalAlignment="Center">
                             <ProgressBar Width="150"
                                          Margin="5"
-                                         rubyer:ProgressBarHelper.IsShowPercent="True"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
                                          rubyer:ProgressBarHelper.Thickness="5"
                                          Value="70" />
                             <ProgressBar Width="150"
@@ -28,7 +28,7 @@
                         </StackPanel>
                         <ProgressBar Height="150"
                                      Margin="10"
-                                     rubyer:ProgressBarHelper.IsShowPercent="True"
+                                     rubyer:ProgressBarHelper.ShowPercent="True"
                                      rubyer:ProgressBarHelper.Thickness="5"
                                      Orientation="Vertical"
                                      Value="70" />
@@ -44,7 +44,7 @@
                                      Value="60" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
                                      Margin="10"
-                                     rubyer:ProgressBarHelper.IsShowPercent="True"
+                                     rubyer:ProgressBarHelper.ShowPercent="True"
                                      Value="70" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
                                      Width="20"
@@ -69,7 +69,7 @@
                                      Height="50"
                                      Margin="10"
                                      rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     rubyer:ProgressBarHelper.IsShowPercent="True"
+                                     rubyer:ProgressBarHelper.ShowPercent="True"
                                      rubyer:ProgressBarHelper.Thickness="8"
                                      Foreground="{DynamicResource Dark}"
                                      Value="70" />

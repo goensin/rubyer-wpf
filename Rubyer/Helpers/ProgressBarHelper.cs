@@ -4,7 +4,7 @@ namespace Rubyer
 {
     public static class ProgressBarHelper
     {
-        // 圆型半径
+        // 厚度
         public static readonly DependencyProperty ThicknessProperty = DependencyProperty.RegisterAttached(
             "Thickness", typeof(double), typeof(ProgressBarHelper));
 
@@ -19,17 +19,17 @@ namespace Rubyer
         }
 
         // 是否显示百分比
-        public static readonly DependencyProperty IsShowPercentProperty =
-            DependencyProperty.RegisterAttached("IsShowPercent", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(false));
+        public static readonly DependencyProperty ShowPercentProperty =
+            DependencyProperty.RegisterAttached("ShowPercent", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(false));
 
-        public static bool GetIsShowPercent(DependencyObject obj)
+        public static bool GetShowPercent(DependencyObject obj)
         {
-            return (bool)obj.GetValue(IsShowPercentProperty);
+            return (bool)obj.GetValue(ShowPercentProperty);
         }
 
-        public static void SetIsShowPercent(DependencyObject obj, bool value)
+        public static void SetShowPercent(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsShowPercentProperty, value);
+            obj.SetValue(ShowPercentProperty, value);
         }
 
         // 是否显示背景

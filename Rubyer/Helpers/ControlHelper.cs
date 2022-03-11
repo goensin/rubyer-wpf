@@ -121,6 +121,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 选中颜色
+        /// </summary>
+        public static readonly DependencyProperty SelectedBrushProperty = DependencyProperty.RegisterAttached(
+           "SelectedBrush", typeof(Brush), typeof(ControlHelper), new PropertyMetadata(default(Brush)));
+
+        public static void SetSelectedBrush(DependencyObject element, Brush value)
+        {
+            element.SetValue(SelectedBrushProperty, value);
+        }
+
+        public static Brush GetSelectedBrush(DependencyObject element)
+        {
+            return (Brush)element.GetValue(SelectedBrushProperty);
+        }
+
+        /// <summary>
         /// 是否聚焦
         /// </summary>
         public static readonly DependencyProperty IsKeyBoardFocusedProperty = DependencyProperty.RegisterAttached(
