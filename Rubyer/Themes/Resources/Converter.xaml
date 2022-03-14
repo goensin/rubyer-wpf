@@ -10,11 +10,16 @@
                                             FalseValue="Visible"
                                             TrueValue="Hidden" />
     <converter:BooleanToInverseConverter x:Key="BooleanToInverseConverter" />
-    
+
     <converter:MathMultipleConverter x:Key="MathAddyConverter" />
     <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract" />
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
     <converter:HalfOfDoubleConverter x:Key="HalfOfDoubleConverter" />
     <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
+    <converter:GetPercentConverter x:Key="GetPercentConverter" />
+    <converter:DoublesToPointConverter x:Key="DoublesToPointConverter" />
+    <converter:DoublesToSizeConverter x:Key="DoublesToSizeConverter" />
+    <converter:GetArcPointConverter x:Key="GetArcPointConverter" />
+    <converter:IsLargeArcConverter x:Key="IsLargeArcConverter" />
 </ResourceDictionary>

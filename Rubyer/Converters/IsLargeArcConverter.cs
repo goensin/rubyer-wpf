@@ -8,9 +8,14 @@ namespace Rubyer.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var value = System.Convert.ToDouble(values[0]);
-            var min = System.Convert.ToDouble(values[1]);
-            var max = System.Convert.ToDouble(values[2]);
+            if (values.Length < 3)
+            {
+                throw new ArgumentException("参数少于 3 个");
+            }
+
+            double value = System.Convert.ToDouble(values[0]);
+            double min = System.Convert.ToDouble(values[1]);
+            double max = System.Convert.ToDouble(values[2]);
 
             double percent = value / (max - min) > 1 ? 1 : value / (max - min);
             double angle = percent * 360;

@@ -49,7 +49,7 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 Effect="{StaticResource AllDirectionEffect3}"
-                                Visibility="{TemplateBinding ShowShadow, Converter={StaticResource boolToVisibility}}" />
+                                Visibility="{TemplateBinding ShowShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -83,7 +83,7 @@
                                                  Margin="5"
                                                  Foreground="{TemplateBinding ThemeColorBrush}"
                                                  Type="{TemplateBinding IconType}"
-                                                 Visibility="{TemplateBinding IsShowIcon, Converter={StaticResource boolToVisibility}}" />
+                                                 Visibility="{TemplateBinding IsShowIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <TextBlock Grid.Column="1"
                                                Margin="5 0"
                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -102,24 +102,24 @@
                                             Margin="5"
                                             Background="{StaticResource InfoBrush}"
                                             Content="否"
-                                            Visibility="{TemplateBinding IsShowNo, Converter={StaticResource boolToVisibility}}" />
+                                            Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_YesButton"
                                             Width="60"
                                             Margin="5"
                                             Content="是"
-                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource boolToVisibility}}" />
+                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_CancelButton"
                                             Width="60"
                                             Margin="5"
                                             Background="{StaticResource InfoBrush}"
                                             Content="取消"
-                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource boolToVisibility}}" />
+                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"
                                             Width="60"
                                             Margin="5"
                                             Content="确认"
                                             IsDefault="True"
-                                            Visibility="{TemplateBinding IsShowOk, Converter={StaticResource boolToVisibility}}" />
+                                            Visibility="{TemplateBinding IsShowOk, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 </StackPanel>
                             </Grid>
                         </Border>

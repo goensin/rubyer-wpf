@@ -46,7 +46,7 @@
                                                HorizontalAlignment="Center"
                                                FontSize="19"
                                                Foreground="{DynamicResource WhiteForeground}"
-                                               Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource boolToVisibility}}" />
+                                               Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 </Border>
 
                                 <Border x:Name="content"
@@ -100,7 +100,7 @@
                                         rubyer:ButtonHelper.CornerRadius="0 0 2 2"
                                         ClipToBounds="True"
                                         Content="确认"
-                                        Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource boolToVisibility}}" />
+                                        Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource BooleanToVisibleConverter}}" />
                             </Grid>
                         </Border>
                     </Grid>

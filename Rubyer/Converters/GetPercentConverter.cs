@@ -8,11 +8,15 @@ namespace Rubyer.Converters
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            var value = System.Convert.ToDouble(values[0]);
-            var min = System.Convert.ToDouble(values[1]);
-            var max = System.Convert.ToDouble(values[2]);
+            if (values.Length < 3)
+            {
+                throw new ArgumentException("参数少于 3 个");
+            }
 
-            var percent = (value - min) / (max - min);
+            double value = System.Convert.ToDouble(values[0]);
+            double min = System.Convert.ToDouble(values[1]);
+            double max = System.Convert.ToDouble(values[2]);
+            double percent = (value - min) / (max - min);
 
             return $"{System.Convert.ToInt32(percent * 100)}%";
         }

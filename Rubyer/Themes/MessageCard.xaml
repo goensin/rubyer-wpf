@@ -61,7 +61,7 @@
                                          Margin="8 0 0 0"
                                          Foreground="{TemplateBinding ThemeColorBrush}"
                                          Type="{TemplateBinding IconType}"
-                                         Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource boolToVisibility}}" />
+                                         Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <ContentPresenter x:Name="contentPresenter"
                                               Grid.Column="1"
                                               Margin="8 0"
@@ -74,7 +74,7 @@
                                     Style="{StaticResource TextButton}"
                                     Grid.Column="2"
                                     Foreground="{TemplateBinding Foreground}"
-                                    Visibility="{TemplateBinding IsClearable, Converter={StaticResource boolToVisibility}}">
+                                    Visibility="{TemplateBinding IsClearable, Converter={StaticResource BooleanToVisibleConverter}}">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
                         </Grid>

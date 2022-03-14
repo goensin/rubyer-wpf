@@ -67,7 +67,7 @@
                                                 Width="32"
                                                 HorizontalAlignment="Right"
                                                 Foreground="{TemplateBinding Foreground}"
-                                                Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource boolToVisibility}}">
+                                                Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
                                             <rubyer:Icon Type="CloseLine" />
                                         </Button>
                                     </Grid>

@@ -53,7 +53,7 @@
                                     Style="{StaticResource TextButton}"
                                     Height="20"
                                     Foreground="{StaticResource BorderGray}"
-                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
                         </StackPanel>
@@ -379,7 +379,7 @@
                                     Style="{StaticResource TextButton}"
                                     Height="20"
                                     Foreground="{StaticResource BorderGray}"
-                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource boolToVisibility}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
                         </StackPanel>

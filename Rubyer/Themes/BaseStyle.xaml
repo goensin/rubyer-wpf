@@ -52,14 +52,7 @@
     <system:Double x:Key="TitleFontSize">15</system:Double>
 
     <!--  Converter  -->
-    <converter:HalfTheValueConverter x:Key="halfTheValue" />
-    <converter:BoolToVisibilityConverter x:Key="boolToVisibility" />
     <converter:GetWidthConverter x:Key="getWidth" />
-    <converter:GetPointConverter x:Key="getPoint" />
-    <converter:GetArcSizeConverter x:Key="getArcSize" />
-    <converter:GetEndPointConverter x:Key="getEndPoint" />
-    <converter:IsLargeArcConverter x:Key="isLargerArc" />
-    <converter:GetPercentConverter x:Key="getPercent" />
     <converter:ToConstConverter x:Key="toConst" />
     <converter:SubtractConverter x:Key="subtract" />
     <converter:Subtract2Converter x:Key="subtract2" />

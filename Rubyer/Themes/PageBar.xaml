@@ -117,16 +117,16 @@
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="总"
-                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource boolToVisibility}}" />
+                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <TextBlock VerticalAlignment="Center"
                                        Foreground="{DynamicResource Primary}"
                                        Text="{Binding Total, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
-                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource boolToVisibility}}" />
+                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <TextBlock Margin="5 0"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="条"
-                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource boolToVisibility}}" />
+                                       Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
 
                             <TextBox x:Name="PART_PageSizeTextBox"
                                      Height="24"
@@ -135,12 +135,12 @@
                                      VerticalAlignment="Center"
                                      Foreground="{DynamicResource DefaultForeground}"
                                      Text="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
-                                     Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource boolToVisibility}}" />
+                                     Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <TextBlock Margin="5 0"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="条/页"
-                                       Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource boolToVisibility}}" />
+                                       Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />
                         </StackPanel>
                     </DockPanel>
                 </ControlTemplate>
