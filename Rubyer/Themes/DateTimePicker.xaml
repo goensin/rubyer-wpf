@@ -81,7 +81,7 @@
 
                                         <Button x:Name="PART_ConfirmButton"
                                                 Grid.Row="2"
-                                                rubyer:ButtonHelper.CornerRadius="0 0 2 2"
+                                                rubyer:ControlHelper.CornerRadius="0 0 2 2"
                                                 Content="确认" />
                                     </Grid>
                                 </rubyer:Card>

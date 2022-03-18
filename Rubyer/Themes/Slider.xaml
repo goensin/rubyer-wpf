@@ -8,10 +8,9 @@
 
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Focusable" Value="false" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="IsTabStop" Value="false" />
-        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RepeatButton}">
@@ -28,33 +27,50 @@
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
               UseLayoutRounding="True">
-            <Ellipse x:Name="grip"
-                     Width="18"
-                     Height="18"
-                     VerticalAlignment="Center"
-                     Effect="{StaticResource AllDirectionEffect}"
-                     Fill="{DynamicResource DefaultBackground}"
-                     SnapsToDevicePixels="True"
-                     Stroke="{TemplateBinding Foreground}"
-                     StrokeThickness="1" />
+            <AdornerDecorator>
+                <Ellipse x:Name="grip"
+                         Width="18"
+                         Height="18"
+                         VerticalAlignment="Center"
+                         Effect="{StaticResource AllDirectionEffect}"
+                         Fill="{DynamicResource WhiteForeground}"
+                         SnapsToDevicePixels="True" />
+            </AdornerDecorator>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="grip" Property="StrokeThickness" Value="1.8" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To="10"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsDragging" Value="true">
                 <Setter TargetName="grip" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                <Setter TargetName="grip" Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="SliderHorizontal" TargetType="{x:Type Slider}">
         <Border x:Name="border"
-                Background="{TemplateBinding Background}"
+                Background="Transparent"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
-                SnapsToDevicePixels="True">
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -83,29 +99,48 @@
                         Height="4.0"
                         Margin="0"
                         VerticalAlignment="center"
-                        Background="{DynamicResource BackgroundGray}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
+                        Background="{TemplateBinding Background}"
                         BorderThickness="0">
-                    <Canvas Margin="-6 -1">
+                    <Canvas>
                         <Rectangle x:Name="PART_SelectionRange"
                                    Height="4.0"
-                                   Fill="{TemplateBinding Foreground}"
+                                   Fill="{Binding Path=(rubyer:SliderHelper.SelectionRangeBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                    Visibility="Hidden" />
                     </Canvas>
                 </Border>
-                <!--  当前值  -->
-                <!--
-                <Popup IsOpen="{Binding ElementName=Thumb,Path=IsDragging,Mode=OneWay}"
-                       PlacementTarget="{Binding ElementName=Thumb}"
-                       Placement="Top" PopupAnimation="Fade" AllowsTransparency="True">
-                    <Border Background="{DynamicResource DefaultForeground}"
-                            TextBlock.Foreground="{DynamicResource DefaultBackground}"
-                            CornerRadius="3" Padding="5">
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}"/>
-                    </Border>
-                </Popup>-->
 
-                <Track x:Name="PART_Track" Grid.Row="1">
+                <!--  当前值  -->
+                <Popup x:Name="valuePopup"
+                       AllowsTransparency="True"
+                       IsOpen="{Binding ElementName=Thumb, Path=IsMouseOver, Mode=OneWay}"
+                       Placement="Top"
+                       PlacementTarget="{Binding ElementName=Thumb}"
+                       PopupAnimation="Fade">
+                    <!--<Popup.HorizontalOffset>
+                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                            <Binding>
+                                <Binding.Source>
+                                    <MultiBinding Converter="{StaticResource MathDivideConverter}">
+                                        <Binding ElementName="valueBorder" Path="ActualWidth" />
+                                        <Binding Source="-2" />
+                                    </MultiBinding>
+                                </Binding.Source>
+                            </Binding>
+                            <Binding ElementName="Thumb" Path="ActualWidth" />
+                        </MultiBinding>
+                    </Popup.HorizontalOffset>-->
+                    <Border x:Name="valueBorder"
+                            Padding="10 5"
+                            Background="{DynamicResource DefaultForeground}"
+                            CornerRadius="{StaticResource AllControlCornerRadius}"
+                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
+                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
+                    </Border>
+                </Popup>
+
+                <Track x:Name="PART_Track"
+                       Grid.Row="1"
+                       Cursor="Hand">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Style="{StaticResource RepeatButtonTransparent}"
                                       Height="4.0"
@@ -115,7 +150,7 @@
                         <RepeatButton Style="{StaticResource RepeatButtonTransparent}"
                                       Height="4.0"
                                       Command="{x:Static Slider.IncreaseLarge}"
-                                      Foreground="{StaticResource BackgroundGray}" />
+                                      Foreground="Transparent" />
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb"
@@ -162,25 +197,40 @@
                      Height="18"
                      VerticalAlignment="Center"
                      Effect="{StaticResource AllDirectionEffect}"
-                     Fill="{DynamicResource DefaultBackground}"
-                     SnapsToDevicePixels="True"
-                     Stroke="{TemplateBinding Foreground}"
-                     StrokeThickness="1" />
+                     Fill="{DynamicResource WhiteForeground}"
+                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
-                <Setter TargetName="grip" Property="StrokeThickness" Value="1.8" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To="10"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             Duration="0:0:0.2" />
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsDragging" Value="true">
                 <Setter TargetName="grip" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                <Setter TargetName="grip" Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="SliderVertical" TargetType="{x:Type Slider}">
         <Border x:Name="border"
-                Background="{TemplateBinding Background}"
+                Background="Transparent"
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 SnapsToDevicePixels="True">
@@ -209,17 +259,19 @@
                         Width="4.0"
                         Margin="0"
                         HorizontalAlignment="center"
-                        Background="{StaticResource BackgroundGray}"
+                        Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="0">
-                    <Canvas Margin="-1 -6">
+                    <Canvas Margin="0">
                         <Rectangle x:Name="PART_SelectionRange"
                                    Width="4.0"
-                                   Fill="{TemplateBinding Background}"
+                                   Fill="{Binding Path=(rubyer:SliderHelper.SelectionRangeBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                    Visibility="Hidden" />
                     </Canvas>
                 </Border>
-                <Track x:Name="PART_Track" Grid.Column="1">
+                <Track x:Name="PART_Track"
+                       Grid.Column="1"
+                       Cursor="Hand">
                     <Track.DecreaseRepeatButton>
                         <RepeatButton Style="{StaticResource RepeatButtonTransparent}"
                                       Width="4.0"
@@ -229,7 +281,7 @@
                         <RepeatButton Style="{StaticResource RepeatButtonTransparent}"
                                       Width="4.0"
                                       Command="{x:Static Slider.IncreaseLarge}"
-                                      Foreground="{StaticResource BackgroundGray}" />
+                                      Foreground="Transparent" />
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb"
@@ -267,11 +319,14 @@
     </ControlTemplate>
 
     <Style x:Key="RubyerSlider" TargetType="{x:Type Slider}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource BorderLight}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
+        <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="True" />
+        <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}" />

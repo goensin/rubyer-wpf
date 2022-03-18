@@ -86,7 +86,7 @@ namespace RubyerDemo.Views
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.ShowInContainer("MessageContainer", element);
+            Message.ShowInContainer(ConstNames.MainMessageContainer, element);
         }
     }
 }

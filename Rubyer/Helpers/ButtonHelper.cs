@@ -6,7 +6,7 @@ namespace Rubyer
     /// <summary>
     /// Button 帮助类
     /// </summary>
-    public class ButtonHelper : ControlHelper
+    public class ButtonHelper
     {
         /// <summary>
         /// 显示阴影

@@ -29,7 +29,9 @@
                             Margin="5"
                             Content="默认按钮"
                             IsDefault="True"
-                            ToolTip="hello" />
+                            ToolTip="hello" 
+                            rubyer:SliderHelper.DraggingShowValue="True"/>
+
                     <Button Style="{DynamicResource LightButton}"
                             Width="80"
                             Margin="5"

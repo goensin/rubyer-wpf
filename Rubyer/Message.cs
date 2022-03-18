@@ -180,7 +180,7 @@ namespace Rubyer
         {
             if (!containers.ContainsKey(containerIdentifier))
             {
-                throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息容器");
+                throw new NullReferenceException($"找不到 Identifier 为 {containerIdentifier} 消息容器");
             }
 
             MessageContainer container = containers[containerIdentifier];

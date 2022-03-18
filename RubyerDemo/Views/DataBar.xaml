@@ -61,17 +61,17 @@
                                      Width="20"
                                      Height="20"
                                      Margin="10"
+                                     rubyer:ControlHelper.SelectedBrush="{DynamicResource Light}"
                                      rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     Foreground="{DynamicResource Light}"
                                      Value="70" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
                                      Width="50"
                                      Height="50"
                                      Margin="10"
+                                     rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
                                      rubyer:ProgressBarHelper.IsShowBackground="False"
                                      rubyer:ProgressBarHelper.ShowPercent="True"
                                      rubyer:ProgressBarHelper.Thickness="8"
-                                     Foreground="{DynamicResource Dark}"
                                      Value="70" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
                                      Width="41"
@@ -82,8 +82,8 @@
                                      Orientation="Vertical" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
                                      Margin="10"
+                                     rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"
                                      rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     Foreground="{DynamicResource Accent}"
                                      IsIndeterminate="True"
                                      Orientation="Vertical"
                                      Value="70" />
@@ -99,9 +99,11 @@
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
+                                SelectionEnd="70"
+                                SelectionStart="30"
                                 TickFrequency="5"
                                 TickPlacement="Both"
-                                Value="30" />
+                                Value="20" />
                         <Slider Margin="0 10"
                                 Foreground="{DynamicResource Dark}"
                                 IsSelectionRangeEnabled="True"
@@ -111,27 +113,41 @@
                                 TickPlacement="TopLeft"
                                 Value="80" />
                         <Slider Margin="0 10"
+                                rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Primary}"
                                 Foreground="{DynamicResource Accent}"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
+                                SelectionEnd="90"
+                                SelectionStart="70"
                                 TickFrequency="5"
                                 TickPlacement="BottomRight"
                                 Value="50" />
+                        <Slider Margin="0 10"
+                                IsEnabled="False"
+                                IsSelectionRangeEnabled="True"
+                                IsSnapToTickEnabled="True"
+                                Maximum="100"
+                                Minimum="0"
+                                SelectionEnd="70"
+                                SelectionStart="30"
+                                TickFrequency="5"
+                                TickPlacement="Both"
+                                Value="20" />
                     </StackPanel>
                     <!--  垂直  -->
-                    <StackPanel Margin="20 0 0 0" Orientation="Horizontal">
-                        <Slider Height="120"
-                                Margin="10 0"
+                    <StackPanel Margin="20 10 0 10" Orientation="Horizontal">
+                        <Slider Margin="10 0"
                                 Foreground="{DynamicResource Light}"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
                                 Orientation="Vertical"
-                                TickFrequency="20"
+                                SelectionEnd="70"
+                                SelectionStart="30"
+                                TickFrequency="10"
                                 Value="20" />
-                        <Slider Height="120"
-                                Margin="10 0"
+                        <Slider Margin="10 0"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
@@ -139,8 +155,7 @@
                                 TickFrequency="20"
                                 TickPlacement="Both"
                                 Value="60" />
-                        <Slider Height="120"
-                                Margin="10 0"
+                        <Slider Margin="10 0"
                                 Foreground="{DynamicResource Dark}"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
@@ -149,8 +164,7 @@
                                 TickFrequency="20"
                                 TickPlacement="TopLeft"
                                 Value="40" />
-                        <Slider Height="120"
-                                Margin="10 0"
+                        <Slider Margin="10 0"
                                 Foreground="{DynamicResource Accent}"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
@@ -159,6 +173,17 @@
                                 TickFrequency="20"
                                 TickPlacement="BottomRight"
                                 Value="80" />
+                        <Slider Margin="10 0"
+                                Foreground="{DynamicResource Light}"
+                                IsEnabled="False"
+                                IsSelectionRangeEnabled="True"
+                                Maximum="100"
+                                Minimum="0"
+                                Orientation="Vertical"
+                                SelectionEnd="70"
+                                SelectionStart="30"
+                                TickFrequency="10"
+                                Value="20" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

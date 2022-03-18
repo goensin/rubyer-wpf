@@ -97,7 +97,7 @@
                                         Style="{StaticResource RubyerButton}"
                                         Grid.Row="2"
                                         Width="Auto"
-                                        rubyer:ButtonHelper.CornerRadius="0 0 2 2"
+                                        rubyer:ControlHelper.CornerRadius="0 0 2 2"
                                         ClipToBounds="True"
                                         Content="确认"
                                         Visibility="{TemplateBinding OnlyShowList, Converter={StaticResource BooleanToVisibleConverter}}" />

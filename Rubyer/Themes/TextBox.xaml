@@ -99,8 +99,8 @@
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
-                                        rubyer:ButtonHelper.Shape="Circle"
                                         rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.Shape="Circle"
                                         Foreground="{DynamicResource SeconarydText}"
                                         Visibility="Collapsed">
                                     <rubyer:Icon Type="CloseLine" />
@@ -143,8 +143,7 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="border" Property="BorderBrush"
-                                    Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TextBox}}" />
+                            <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TextBox}}" />
                         </Trigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
