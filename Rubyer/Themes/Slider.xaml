@@ -27,18 +27,43 @@
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
               UseLayoutRounding="True">
-            <AdornerDecorator>
-                <Ellipse x:Name="grip"
-                         Width="18"
-                         Height="18"
-                         VerticalAlignment="Center"
-                         Effect="{StaticResource AllDirectionEffect}"
-                         Fill="{DynamicResource WhiteForeground}"
-                         SnapsToDevicePixels="True" />
-            </AdornerDecorator>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Canvas HorizontalAlignment="Center" ClipToBounds="False">
+                <rubyer:Transition x:Name="valueTransition"
+                                   Canvas.Top="-35"
+                                   IsShow="False"
+                                   Type="ZoomDown">
+                    <Canvas.Left>
+                        <MultiBinding Converter="{StaticResource MathDivideConverter}">
+                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
+                            <Binding Source="-2" />
+                        </MultiBinding>
+                    </Canvas.Left>
+                    <Border x:Name="valueBorder"
+                            Padding="10 5"
+                            Background="{DynamicResource DefaultForeground}"
+                            CornerRadius="{StaticResource AllControlCornerRadius}"
+                            IsHitTestVisible="False"
+                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
+                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
+                    </Border>
+                </rubyer:Transition>
+            </Canvas>
+
+            <Ellipse x:Name="grip"
+                     Grid.Row="1"
+                     Width="18"
+                     Height="18"
+                     VerticalAlignment="Center"
+                     Effect="{StaticResource AllDirectionEffect}"
+                     Fill="{TemplateBinding Foreground}"
+                     SnapsToDevicePixels="True" />
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="true">
+            <Trigger Property="IsMouseOver" Value="True">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -59,9 +84,42 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <Trigger Property="IsDragging" Value="true">
-                <Setter TargetName="grip" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+            <Trigger Property="IsDragging" Value="True">
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To="2"
+                                             Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(rubyer:SliderHelper.DraggingShowValue), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="valueTransition" Property="IsShow" Value="True" />
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -108,35 +166,6 @@
                                    Visibility="Hidden" />
                     </Canvas>
                 </Border>
-
-                <!--  当前值  -->
-                <Popup x:Name="valuePopup"
-                       AllowsTransparency="True"
-                       IsOpen="{Binding ElementName=Thumb, Path=IsMouseOver, Mode=OneWay}"
-                       Placement="Top"
-                       PlacementTarget="{Binding ElementName=Thumb}"
-                       PopupAnimation="Fade">
-                    <!--<Popup.HorizontalOffset>
-                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
-                            <Binding>
-                                <Binding.Source>
-                                    <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                                        <Binding ElementName="valueBorder" Path="ActualWidth" />
-                                        <Binding Source="-2" />
-                                    </MultiBinding>
-                                </Binding.Source>
-                            </Binding>
-                            <Binding ElementName="Thumb" Path="ActualWidth" />
-                        </MultiBinding>
-                    </Popup.HorizontalOffset>-->
-                    <Border x:Name="valueBorder"
-                            Padding="10 5"
-                            Background="{DynamicResource DefaultForeground}"
-                            CornerRadius="{StaticResource AllControlCornerRadius}"
-                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
-                    </Border>
-                </Popup>
 
                 <Track x:Name="PART_Track"
                        Grid.Row="1"
@@ -192,12 +221,40 @@
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
               UseLayoutRounding="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Canvas Grid.Column="1"
+                    VerticalAlignment="Center"
+                    ClipToBounds="False">
+                <rubyer:Transition x:Name="valueTransition"
+                                   Canvas.Left="10"
+                                   IsShow="False"
+                                   Type="ZoomLeft">
+                    <Canvas.Top>
+                        <MultiBinding Converter="{StaticResource MathDivideConverter}">
+                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
+                            <Binding Source="-2" />
+                        </MultiBinding>
+                    </Canvas.Top>
+                    <Border x:Name="valueBorder"
+                            Padding="10 5"
+                            Background="{DynamicResource DefaultForeground}"
+                            CornerRadius="{StaticResource AllControlCornerRadius}"
+                            IsHitTestVisible="False"
+                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
+                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
+                    </Border>
+                </rubyer:Transition>
+            </Canvas>
+
             <Ellipse x:Name="grip"
                      Width="18"
                      Height="18"
                      VerticalAlignment="Center"
                      Effect="{StaticResource AllDirectionEffect}"
-                     Fill="{DynamicResource WhiteForeground}"
+                     Fill="{TemplateBinding Foreground}"
                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
         </Grid>
         <ControlTemplate.Triggers>
@@ -223,8 +280,41 @@
                 </Trigger.ExitActions>
             </Trigger>
             <Trigger Property="IsDragging" Value="true">
-                <Setter TargetName="grip" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             To="2"
+                                             Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="grip"
+                                             Storyboard.TargetProperty="Effect.BlurRadius"
+                                             Duration="0:0:0.25">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
             </Trigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(rubyer:SliderHelper.DraggingShowValue), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="valueTransition" Property="IsShow" Value="True" />
+            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -325,7 +415,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
-        <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="True" />
+        <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="False" />
         <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
