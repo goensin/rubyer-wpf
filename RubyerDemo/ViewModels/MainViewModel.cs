@@ -25,24 +25,24 @@ namespace RubyerDemo.ViewModels
 
             MenuItems = new ObservableCollection<MenuItem>
             {
-                new MenuItem{ Name = "按钮-Button",Content=new Button()},
-                new MenuItem{ Name = "输入框-InputBox",Content=new InputBox() },
-                new MenuItem{ Name = "选择框-SelectBox",Content=new SelectBox()},
-                new MenuItem{ Name = "数据条-DataBar",Content=new DataBar()},
-                new MenuItem{ Name = "图标-Icon",Content=new Views.Icon{ DataContext = new IconViewModel()} },
-                new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBox() },
-                new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTree{ DataContext = new ListsViewModel()} },
-                new MenuItem{ Name = "数据表格-DataGrid",Content=new DataGrid{ DataContext = new DataGridViewModel()} },
-                new MenuItem{ Name = "选项卡-TabControl",Content=new TabControl{ DataContext = new TabControlViewModel()} },
-                new MenuItem{ Name = "日期时间-DateTimeControl",Content=new DateTimeControl{} },
-                new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBar{} },
-                new MenuItem{ Name = "文本块-TextBlock",Content=new TextBlock{} },
-                new MenuItem{ Name = "页码条-PageBar",Content=new Views.PageBar{ DataContext = new PageBarViewModel()} },
-                new MenuItem{ Name = "消息提示-MessageInfo",Content=new MessageInfo{} },
-                new MenuItem{ Name = "消息框-MessageBoxView",Content = new MessageBoxView{ DataContext= new MessageBoxViewModel()} },
-                new MenuItem{ Name = "对话框-DialogView",Content = new DialogView{ DataContext= new DialogViewModel()} },
-                new MenuItem{ Name = "转换动画-TransitionView",Content = new TransitionView() },
-                new MenuItem{ Name = "标记标签-BadgeTag",Content = new BadgeTag() }
+                new MenuItem{ Name = "按钮-Button",Content=new ButtonDemo()},
+                new MenuItem{ Name = "输入框-InputBox",Content=new InputBoxDemo() },
+                new MenuItem{ Name = "选择框-SelectBox",Content=new SelectBoxDemo()},
+                new MenuItem{ Name = "数据条-DataBar",Content=new DataBarDemo()},
+                new MenuItem{ Name = "图标-Icon",Content=new IconDemo{ DataContext = new IconViewModel()} },
+                new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBoxDemo() },
+                new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTreeDemo{ DataContext = new ListsViewModel()} },
+                new MenuItem{ Name = "数据表格-DataGrid",Content=new DataGridDemo{ DataContext = new DataGridViewModel()} },
+                new MenuItem{ Name = "选项卡-TabControl",Content=new TabControlDemo{ DataContext = new TabControlViewModel()} },
+                new MenuItem{ Name = "日期时间-DateTime",Content=new DateTimeDemo{} },
+                new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBarDemo{} },
+                new MenuItem{ Name = "文本块-TextBlock",Content=new TextBlockDemo{} },
+                new MenuItem{ Name = "页码条-PageBar",Content=new PageBarDemo{ DataContext = new PageBarViewModel()} },
+                new MenuItem{ Name = "消息提示-Message",Content=new MessageDemo{} },
+                new MenuItem{ Name = "消息框-MessageBox",Content = new MessageBoxDemo{ DataContext= new MessageBoxViewModel()} },
+                new MenuItem{ Name = "对话框-Dialog",Content = new DialogDemo{ DataContext= new DialogViewModel()} },
+                new MenuItem{ Name = "转换动画-Transition",Content = new TransitionDemo() },
+                new MenuItem{ Name = "标记标签-BadgeTag",Content = new BadgeTagDemo() }
             };
 
             CurrentMenuItem = MenuItems[0];

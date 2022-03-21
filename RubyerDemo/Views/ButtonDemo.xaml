@@ -1,0 +1,244 @@
+﻿<UserControl x:Class="RubyerDemo.Views.ButtonDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Grid.ColumnSpan="2"
+                      Margin="0 0 0 10"
+                      Header="普通按钮-Button">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button x:Name="button"
+                            Width="80"
+                            Margin="5"
+                            Content="默认按钮"
+                            IsDefault="True"
+                            ToolTip="hello" 
+                            rubyer:SliderHelper.DraggingShowValue="True"/>
+
+                    <Button Style="{DynamicResource LightButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="亮色按钮" />
+                    <Button Style="{DynamicResource DarkButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="暗色按钮" />
+                    <Button Style="{DynamicResource AccentButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="强调按钮" />
+                    <Button Style="{DynamicResource InfoButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="消息按钮" />
+                    <Button Style="{DynamicResource SuccessButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="成功按钮" />
+                    <Button Style="{DynamicResource WaringButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="警告按钮" />
+                    <Button Style="{DynamicResource ErrorButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="错误按钮" />
+                    <Button Width="80"
+                            Margin="5"
+                            Content="不可用"
+                            IsEnabled="False" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1"
+                      Margin="0 0 10 10"
+                      Header="圆角按钮-Button">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button Width="80"
+                            Margin="5"
+                            rubyer:ButtonHelper.Shape="Round"
+                            Content="默认按钮" />
+                    <Button Style="{DynamicResource LightButton}"
+                            Width="80"
+                            Margin="5"
+                            rubyer:ButtonHelper.Shape="Round"
+                            Content="亮色按钮" />
+                    <Button Style="{DynamicResource DarkButton}"
+                            Width="80"
+                            Margin="5"
+                            rubyer:ButtonHelper.Shape="Round"
+                            rubyer:ControlHelper.CornerRadius="10"
+                            Content="暗色按钮" />
+                    <Button Style="{DynamicResource AccentButton}"
+                            Width="80"
+                            Height="40"
+                            Margin="5"
+                            rubyer:ButtonHelper.Shape="Round"
+                            Content="强调按钮" />
+                </StackPanel>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1"
+                      Grid.Column="1"
+                      Margin="0 0 0 10"
+                      Header="圆型按钮-Button">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Content="赞" />
+                    <Button Style="{StaticResource AccentButton}"
+                            Margin="10 0"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Content="顶" />
+                    <Button Margin="10 0" rubyer:ButtonHelper.Shape="Circle">
+                        <rubyer:Icon Type="QqFill" />
+                    </Button>
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="35"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Background="Green">
+                        <rubyer:Icon Width="25"
+                                     Height="25"
+                                     Type="WechatFill" />
+                    </Button>
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="45"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Background="OrangeRed">
+                        <rubyer:Icon Width="35"
+                                     Height="35"
+                                     Type="WeiboFill" />
+                    </Button>
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="45"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Background="Gray">
+                        <rubyer:Icon Width="45"
+                                     Height="45"
+                                     Type="GithubFill" />
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="2"
+                      Margin="0 0 10 10"
+                      Header="文字按钮-Button">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button Style="{StaticResource TextButton}"
+                            Width="80"
+                            Margin="5"
+                            Content="默认按钮" />
+                    <Button Style="{DynamicResource TextAccentButton}"
+                            Width="80"
+                            Margin="5"
+                            rubyer:ButtonHelper.Shape="Round"
+                            Content="强调按钮" />
+                    <Button Style="{DynamicResource TextButton}"
+                            Margin="5"
+                            Foreground="Pink">
+                        <rubyer:Icon Type="TvFill" />
+                    </Button>
+                    <Button Style="{DynamicResource TextDarkButton}"
+                            Margin="5"
+                            rubyer:ButtonHelper.CircleDiameter="30"
+                            rubyer:ButtonHelper.Shape="Circle">
+                        <rubyer:Icon Width="25"
+                                     Height="56"
+                                     Type="EarthFill" />
+                    </Button>
+                    <Button Style="{DynamicResource TextSuccessButton}"
+                            Height="40"
+                            Margin="5">
+                        <rubyer:Icon Width="30"
+                                     Height="30"
+                                     Type="ThumbUpFill" />
+                    </Button>
+                    <Button Style="{DynamicResource TextAccentButton}"
+                            Margin="5"
+                            rubyer:ButtonHelper.CircleDiameter="40"
+                            rubyer:ButtonHelper.Shape="Circle">
+                        <rubyer:Icon Width="30"
+                                     Height="30"
+                                     Type="HeartFill" />
+                    </Button>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="2"
+                      Grid.Column="1"
+                      Margin="0 0 10 10"
+                      Header="加载按钮">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button Margin="6 0"
+                            rubyer:ButtonHelper.Loading="True"
+                            Content="默认按钮" />
+                    <Button Style="{DynamicResource AccentButton}"
+                            Margin="6 0"
+                            rubyer:ButtonHelper.Loading="True"
+                            rubyer:ButtonHelper.Shape="Round"
+                            Content="强调按钮" />
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.Loading="True"
+                            rubyer:ButtonHelper.Shape="Circle" />
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="40"
+                            rubyer:ButtonHelper.Loading="True"
+                            rubyer:ButtonHelper.Shape="Circle"/>
+                    <Button Style="{StaticResource TextDarkButton}"
+                            Margin="10 0"
+                            rubyer:ButtonHelper.Loading="True"
+                            rubyer:ButtonHelper.Shape="Circle" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="3"
+                      Margin="0 0 10 10"
+                      Header="阴影按钮">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Button Width="80"
+                            Margin="5 0"
+                            rubyer:ButtonHelper.ShowShadow="True"
+                            Content="默认按钮" />
+                    <Button Style="{DynamicResource AccentButton}"
+                            Width="80"
+                            Margin="5 0"
+                            rubyer:ButtonHelper.Shape="Round"
+                            rubyer:ButtonHelper.ShowShadow="True"
+                            Content="强调按钮" />
+                    <Button Style="{StaticResource SuccessButton}"
+                            Margin="5 0"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            rubyer:ButtonHelper.ShowShadow="True">
+                        <rubyer:Icon Type="SearchLine" />
+                    </Button>
+                    <Button Margin="5 0"
+                            rubyer:ButtonHelper.CircleDiameter="35"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            rubyer:ButtonHelper.ShowShadow="True">
+                        <rubyer:Icon Width="25"
+                                     Height="25"
+                                     Type="AndroidFill" />
+                    </Button>
+                    <Button Width="80"
+                            Margin="5 0"
+                            rubyer:ButtonHelper.ShowShadow="True"
+                            Content="不可用"
+                            IsEnabled="False" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

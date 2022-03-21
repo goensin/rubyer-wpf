@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="RubyerDemo.Views.DateTimeDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RubyerDemo.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GroupBox Width="Auto"
+                      Margin="0 0 10 10"
+                      Header="日历-Calendar">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <Calendar />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Column="1"
+                      Width="Auto"
+                      Margin="0 0 0 10"
+                      Header="时钟-Clock">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1"
+                      Width="Auto"
+                      Margin="0 0 0 10"
+                      Header="日期选择框-DatePicker">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <DatePicker Width="120" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1"
+                      Grid.Column="1"
+                      Width="Auto"
+                      Margin="10 0 0 10"
+                      Header="时间选择框-TimePicker">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <rubyer:TimePicker Width="120" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1"
+                      Grid.Column="2"
+                      Width="Auto"
+                      Margin="10 0 0 10"
+                      Header="日期时间选择框-DateTimePicker">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <rubyer:DateTimePicker Width="180" />
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
