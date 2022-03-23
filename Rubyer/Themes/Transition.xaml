@@ -322,7 +322,7 @@
     </Storyboard>
 
 
-    <Style x:Key="RubuerTransition" TargetType="{x:Type rubyer:Transition}">
+    <Style x:Key="RubyerTransition" TargetType="{x:Type rubyer:Transition}">
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="IsShow" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
