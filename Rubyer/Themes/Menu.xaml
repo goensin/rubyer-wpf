@@ -23,7 +23,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Separator}">
-                    <Border BorderBrush="{StaticResource BorderGray}" BorderThickness="0.5" />
+                    <Border BorderBrush="{StaticResource Border}" BorderThickness="0.5" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -50,7 +50,7 @@
                         <Border Margin="5"
                                 Padding="0 5"
                                 Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
-                                BorderBrush="{StaticResource BorderGray}"
+                                BorderBrush="{StaticResource Border}"
                                 BorderThickness="0"
                                 CornerRadius="2"
                                 Effect="{StaticResource AllDirectionEffect2}" />
@@ -58,7 +58,7 @@
                                 Margin="5"
                                 Padding="0 5"
                                 Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
-                                BorderBrush="{StaticResource BorderGray}"
+                                BorderBrush="{StaticResource Border}"
                                 BorderThickness="0"
                                 CornerRadius="2"
                                 SnapsToDevicePixels="True">

@@ -78,7 +78,7 @@
                         <Border x:Name="HeaderBorder"
                                 Padding="4"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{StaticResource BorderGray}"
+                                BorderBrush="{StaticResource Border}"
                                 BorderThickness="0 0 0 1">
 
                             <ContentPresenter x:Name="HeaderContent"
@@ -97,7 +97,7 @@
 
     <Style x:Key="RubyerListView" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />

@@ -52,7 +52,7 @@
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Height="20"
-                                    Foreground="{StaticResource BorderGray}"
+                                    Foreground="{StaticResource Border}"
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
@@ -378,7 +378,7 @@
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Height="20"
-                                    Foreground="{StaticResource BorderGray}"
+                                    Foreground="{StaticResource Border}"
                                     Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>

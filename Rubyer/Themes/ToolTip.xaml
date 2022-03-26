@@ -8,7 +8,7 @@
 
     <Style x:Key="RubyerToolTip" TargetType="ToolTip">
         <Setter Property="Background" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="HasDropShadow" Value="True" />

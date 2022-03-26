@@ -10,7 +10,7 @@
 
     <Style x:Key="RubyerDatePicker" TargetType="{x:Type DatePicker}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="1.3" />
         <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}" />
         <Setter Property="FontSize" Value="13" />

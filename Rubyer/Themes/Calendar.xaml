@@ -19,7 +19,7 @@
                                    Opacity="0"
                                    RadiusX="2"
                                    RadiusY="2"
-                                   Stroke="{StaticResource BorderGray}" />
+                                   Stroke="{StaticResource Border}" />
                         <Rectangle x:Name="SelectedBackground"
                                    Fill="{DynamicResource Primary}"
                                    Opacity="0"
@@ -474,7 +474,7 @@
 
     <Style x:Key="RubyerCalendar" TargetType="{x:Type Calendar}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CalendarButtonStyle" Value="{StaticResource CalendarButtonStyle}" />
         <Setter Property="CalendarDayButtonStyle" Value="{StaticResource CalendarDayButtonStyle}" />

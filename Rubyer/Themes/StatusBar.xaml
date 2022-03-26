@@ -7,7 +7,7 @@
 
     <Style x:Key="RubyerStatusBar" TargetType="{x:Type StatusBar}">
         <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -33,7 +33,7 @@
                 <ControlTemplate TargetType="{x:Type Separator}">
                     <Rectangle Width="1"
                                Margin="3"
-                               Fill="{StaticResource BorderGray}" />
+                               Fill="{StaticResource Border}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -47,7 +47,7 @@
                     <ContentPresenter Name="ContentSite" Margin="3" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource BorderGray}" />
+                            <Setter Property="Foreground" Value="{StaticResource Border}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

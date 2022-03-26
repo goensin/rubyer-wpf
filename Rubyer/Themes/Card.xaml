@@ -8,7 +8,7 @@
 
     <Style x:Key="RubuerCard" TargetType="{x:Type ruber:Card}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource BorderGray}" />
+        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="3" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
