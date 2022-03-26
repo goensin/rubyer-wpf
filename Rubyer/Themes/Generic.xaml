@@ -79,12 +79,12 @@
     <Style BasedOn="{StaticResource RubyerStatusBar}" TargetType="{x:Type StatusBar}" />
     <Style BasedOn="{StaticResource RubyerDataGrid}" TargetType="{x:Type DataGrid}" />
     <Style BasedOn="{StaticResource RubyerPageBar}" TargetType="{x:Type rubyer:PageBar}" />
-    <Style BasedOn="{StaticResource RubuerCard}" TargetType="{x:Type rubyer:Card}" />
+    <Style BasedOn="{StaticResource RubyerCard}" TargetType="{x:Type rubyer:Card}" />
     <Style BasedOn="{StaticResource RubyerMessageCard}" TargetType="{x:Type rubyer:MessageCard}" />
     <Style BasedOn="{StaticResource RubyerMessageBoxCard}" TargetType="{x:Type rubyer:MessageBoxCard}" />
     <Style BasedOn="{StaticResource RubyerDialogBox}" TargetType="{x:Type rubyer:DialogBox}" />
     <Style BasedOn="{StaticResource RubyerDateTimePicker}" TargetType="{x:Type rubyer:DateTimePicker}" />
-    <Style BasedOn="{StaticResource RubuerTransition}" TargetType="{x:Type rubyer:Transition}" />
+    <Style BasedOn="{StaticResource RubyerTransition}" TargetType="{x:Type rubyer:Transition}" />
     <Style BasedOn="{StaticResource RubyerBadge}" TargetType="{x:Type rubyer:Badge}" />
     <Style BasedOn="{StaticResource RubyerTag}" TargetType="{x:Type rubyer:Tag}" />
     <Style BasedOn="{StaticResource RubyerControlMask}" TargetType="{x:Type rubyer:ControlMask}" />

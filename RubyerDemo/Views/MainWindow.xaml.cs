@@ -4,6 +4,7 @@ using RubyerDemo.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,8 +26,9 @@ namespace RubyerDemo
             try
             {
                 ListBox listBox = sender as ListBox;
-                string name = $"Views/{(listBox.SelectedItem as ViewModels.MenuItem).Name.Split('-')[1]}.xaml";
-                Uri uri = new Uri($"{name}", UriKind.Relative);
+                var viewNames = (listBox.SelectedItem as ViewModels.MenuItem).Content.ToString().Split('.');
+                string name = $"Views/{viewNames.Last()}.xaml";
+                var uri = new Uri($"{name}", UriKind.Relative);
                 var resourceInfo = Application.GetResourceStream(uri);
                 var bamlTranslator = new BamlTranslator(resourceInfo.Stream);
                 xamlTextEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".xaml");

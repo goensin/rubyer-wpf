@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="RubyerDemo.Views.GroupBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <GroupBox Width="Auto"
+                      Height="60"
+                      Margin="0 0 0 10"
+                      Header="默认分组框-GroupBox" />
+            <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
+                      Grid.Row="1"
+                      Width="Auto"
+                      Height="60"
+                      Margin="0 0 0 10"
+                      Header="色彩分组框-GroupBox" />
+            <GroupBox Style="{StaticResource ClassicGroupBox}"
+                      Grid.Row="2"
+                      Width="Auto"
+                      Height="60"
+                      Margin="0 0 0 10"
+                      Header="经典分组框-GroupBox" />
+
+            <GroupBox Grid.Row="3"
+                      Margin="0 0 0 10"
+                      Header="折叠面板-Expander">
+                <StackPanel Margin="5" Orientation="Horizontal">
+                    <StackPanel Margin="5">
+                        <Expander x:Name="expander"
+                                  Width="300"
+                                  Header="《思凡》"
+                                  IsExpanded="True">
+                            <TextBlock x:Name="textBlock" TextWrapping="Wrap">
+                                <Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                        </Expander>
+                        <Expander MaxWidth="300"
+                                  ExpandDirection="Up"
+                                  Header="《思凡》">
+                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                        </Expander>
+                    </StackPanel>
+                    <Expander Height="140"
+                              ExpandDirection="Left"
+                              Header="《思凡》">
+                        <Border MaxWidth="160">
+                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                        </Border>
+                    </Expander>
+                    <Expander Height="140"
+                              ExpandDirection="Right"
+                              Header="《思凡》">
+                        <Border MaxWidth="160">
+                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                        </Border>
+                    </Expander>
+                </StackPanel>
+            </GroupBox>
+        </Grid>
+    </ScrollViewer>
+</UserControl>
