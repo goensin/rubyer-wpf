@@ -24,40 +24,47 @@
     </Style>
 
     <Style x:Key="ExpanderDownHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{TemplateBinding Padding}">
-                        <Grid Background="Transparent" SnapsToDevicePixels="False">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="19" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="1">
-                                <Grid.LayoutTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <TransformCollection>
-                                                <RotateTransform x:Name="arrowAngle" Angle="0" />
-                                            </TransformCollection>
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Grid.LayoutTransform>
-                                <Path x:Name="arrow"
+                    <Grid>
+                        <Border Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="19" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform x:Name="arrowAngle" Angle="0" />
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Path x:Name="arrow"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       Data="M 1,1.5 L 4.5,5 L 8,1.5"
                                       SnapsToDevicePixels="false"
-                                      Stroke="{StaticResource Border}"
+                                      Stroke="{TemplateBinding Foreground}"
                                       StrokeThickness="2" />
-                            </Grid>
-                            <ContentPresenter Margin="4 0 0 0"
-                                              HorizontalAlignment="Left"
+                                </Grid>
+                                <ContentPresenter Margin="4 0 0 0"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="Center"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="True" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
+
+                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -88,9 +95,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="arrow" Property="Stroke" Value="{DynamicResource DefaultForeground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -98,40 +102,47 @@
         </Setter>
     </Style>
     <Style x:Key="ExpanderUpHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{TemplateBinding Padding}">
-                        <Grid Background="Transparent" SnapsToDevicePixels="False">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="19" />
-                            </Grid.ColumnDefinitions>
-                            <Grid Grid.Column="1">
-                                <Grid.LayoutTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <TransformCollection>
-                                                <RotateTransform x:Name="arrowAngle" Angle="180" />
-                                            </TransformCollection>
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Grid.LayoutTransform>
-                                <Path x:Name="arrow"
+                    <Grid>
+                        <Border Padding="{TemplateBinding Padding}" 
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="19" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="1">
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform x:Name="arrowAngle" Angle="180" />
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Path x:Name="arrow"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       Data="M 1,1.5 L 4.5,5 L 8,1.5"
                                       SnapsToDevicePixels="false"
-                                      Stroke="{StaticResource Border}"
+                                      Stroke="{TemplateBinding Foreground}"
                                       StrokeThickness="2" />
-                            </Grid>
-                            <ContentPresenter Margin="4 0 0 0"
-                                              HorizontalAlignment="Left"
+                                </Grid>
+                                <ContentPresenter Margin="4 0 0 0"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="Center"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="True" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
+
+                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -163,49 +174,51 @@
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="arrow" Property="Stroke" Value="{DynamicResource DefaultForeground}" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
     <Style x:Key="ExpanderLeftHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{TemplateBinding Padding}">
-                        <Grid Background="Transparent" SnapsToDevicePixels="False">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="19" />
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="1">
-                                <Grid.LayoutTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <TransformCollection>
-                                                <RotateTransform x:Name="arrowAngle" Angle="90" />
-                                            </TransformCollection>
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Grid.LayoutTransform>
-                                <Path x:Name="arrow"
+                    <Grid>
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="19" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform x:Name="arrowAngle" Angle="90" />
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Path x:Name="arrow"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       Data="M 1,1.5 L 4.5,5 L 8,1.5"
                                       SnapsToDevicePixels="false"
-                                      Stroke="{StaticResource Border}"
+                                      Stroke="{TemplateBinding Foreground}"
                                       StrokeThickness="2" />
+                                </Grid>
+                                <ContentPresenter Margin="0 4 0 0"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                RecognizesAccessKey="True"
+                                                SnapsToDevicePixels="True" />
                             </Grid>
-                            <ContentPresenter Margin="0 4 0 0"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="Top"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="True" />
-                        </Grid>
-                    </Border>
+                        </Border>
+                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -236,9 +249,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="arrow" Property="Stroke" Value="{StaticResource DefaultForeground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -246,40 +256,45 @@
         </Setter>
     </Style>
     <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Padding="{TemplateBinding Padding}">
-                        <Grid Background="Transparent" SnapsToDevicePixels="False">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="19" />
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="1">
-                                <Grid.LayoutTransform>
-                                    <TransformGroup>
-                                        <TransformGroup.Children>
-                                            <TransformCollection>
-                                                <RotateTransform x:Name="arrowAngle" Angle="-90" />
-                                            </TransformCollection>
-                                        </TransformGroup.Children>
-                                    </TransformGroup>
-                                </Grid.LayoutTransform>
-                                <Path x:Name="arrow"
+                    <Grid>
+                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
+                            <Grid >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="19" />
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.LayoutTransform>
+                                        <TransformGroup>
+                                            <TransformGroup.Children>
+                                                <TransformCollection>
+                                                    <RotateTransform x:Name="arrowAngle" Angle="-90" />
+                                                </TransformCollection>
+                                            </TransformGroup.Children>
+                                        </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Path x:Name="arrow"
                                       HorizontalAlignment="Center"
                                       VerticalAlignment="Center"
                                       Data="M 1,1.5 L 4.5,5 L 8,1.5"
                                       SnapsToDevicePixels="false"
-                                      Stroke="{StaticResource Border}"
+                                      Stroke="{TemplateBinding Foreground}"
                                       StrokeThickness="2" />
-                            </Grid>
-                            <ContentPresenter Margin="0 4 0 0"
+                                </Grid>
+                                <ContentPresenter Margin="0 4 0 0"
                                               HorizontalAlignment="Center"
-                                              VerticalAlignment="Top"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="True" />
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
+                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -310,9 +325,6 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter TargetName="arrow" Property="Stroke" Value="{StaticResource DefaultForeground}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -323,41 +335,48 @@
     <Style x:Key="RubyerExpander" TargetType="{x:Type Expander}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
-        <Setter Property="BorderThickness" Value="1.3" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="5" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">
-
                     <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="2.5"
-                            SnapsToDevicePixels="true">
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite"
                                           Style="{StaticResource ExpanderDownHeaderStyle}"
                                           MinWidth="0"
                                           MinHeight="0"
-                                          Margin="1"
-                                          Padding="{TemplateBinding Padding}"
-                                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          HorizontalContentAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Content="{TemplateBinding Header}"
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                           DockPanel.Dock="Top"
                                           FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}"
-                                          FontFamily="{TemplateBinding FontFamily}"
-                                          FontSize="{TemplateBinding FontSize}"
                                           FontStretch="{TemplateBinding FontStretch}"
                                           FontStyle="{TemplateBinding FontStyle}"
-                                          FontWeight="{TemplateBinding FontWeight}"
-                                          Foreground="{TemplateBinding Foreground}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
                             <rubyer:Transition x:Name="Transition"
                                                IsShow="{TemplateBinding IsExpanded}"
@@ -425,6 +444,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
     </Style>
 </ResourceDictionary>

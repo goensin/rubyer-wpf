@@ -37,18 +37,24 @@
                     <StackPanel Margin="5">
                         <Expander x:Name="expander"
                                   Width="300"
+                                  Margin="5"
                                   Header="《思凡》"
                                   IsExpanded="True">
                             <TextBlock x:Name="textBlock" TextWrapping="Wrap">
                                 <Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
                         </Expander>
                         <Expander MaxWidth="300"
+                                   Margin="5"
+                                  rubyer:HeaderHelper.HorizontalAlignment="Center"
+                                  rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                                   ExpandDirection="Up"
                                   Header="《思凡》">
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
                         </Expander>
                     </StackPanel>
                     <Expander Height="140"
+                               Margin="5"
                               ExpandDirection="Left"
                               Header="《思凡》">
                         <Border MaxWidth="160">
@@ -56,7 +62,15 @@
                         </Border>
                     </Expander>
                     <Expander Height="140"
+                               Margin="5"
                               ExpandDirection="Right"
+                              BorderThickness="0"
+                              rubyer:HeaderHelper.FontSize="17"
+                              rubyer:HeaderHelper.FontWeight="Bold"
+                              rubyer:HeaderHelper.VerticalAlignment="Center"
+                              rubyer:HeaderHelper.Background="{DynamicResource Dark}"
+                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                              Background="{DynamicResource Light}"
                               Header="《思凡》">
                         <Border MaxWidth="160">
                             <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>

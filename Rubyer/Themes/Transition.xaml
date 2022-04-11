@@ -528,6 +528,9 @@
                         <!--  向上折叠  -->
                         <Trigger Property="Type" Value="Collapse">
                             <Setter TargetName="rootBorder" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="rootStackPanel" Property="Orientation" Value="Vertical" />
+                            <Setter TargetName="rootStackPanel" Property="VerticalAlignment" Value="Top" />
+                            <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
                             <Setter TargetName="rootStackPanel" Property="Height">
                                 <Setter.Value>
                                     <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
@@ -536,9 +539,6 @@
                                     </MultiBinding>
                                 </Setter.Value>
                             </Setter>
-                            <Setter TargetName="rootStackPanel" Property="Orientation" Value="Vertical" />
-                            <Setter TargetName="rootStackPanel" Property="VerticalAlignment" Value="Top" />
-                            <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
