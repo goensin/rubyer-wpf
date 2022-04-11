@@ -7,6 +7,10 @@
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -17,12 +21,33 @@
                       Height="60"
                       Margin="0 0 0 10"
                       Header="默认分组框-GroupBox" />
+            <GroupBox Grid.Column="1"
+                      Width="Auto"
+                      Height="60"
+                      Margin="0 0 0 10"
+                      Header="默认分组框-GroupBox"
+                      rubyer:HeaderHelper.FontWeight="Bold"
+                      rubyer:HeaderHelper.FontSize="16"
+                      rubyer:HeaderHelper.HorizontalAlignment="Center"/>
+            
             <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
                       Grid.Row="1"
                       Width="Auto"
                       Height="60"
                       Margin="0 0 0 10"
                       Header="色彩分组框-GroupBox" />
+            <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
+                      Grid.Row="1"
+                      Grid.Column="1"
+                      Width="Auto"
+                      Height="60"
+                      Margin="0 0 0 10"
+                      Header="色彩分组框-GroupBox" 
+                      rubyer:HeaderHelper.FontWeight="Bold"
+                      rubyer:HeaderHelper.HorizontalAlignment="Right"
+                      rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"/>
+            
             <GroupBox Style="{StaticResource ClassicGroupBox}"
                       Grid.Row="2"
                       Width="Auto"
@@ -31,6 +56,7 @@
                       Header="经典分组框-GroupBox" />
 
             <GroupBox Grid.Row="3"
+                      Grid.ColumnSpan="2"
                       Margin="0 0 0 10"
                       Header="折叠面板-Expander">
                 <StackPanel Margin="5" Orientation="Horizontal">
