@@ -63,7 +63,8 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -141,7 +142,8 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -217,7 +219,8 @@
                                                 SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -293,7 +296,8 @@
                                               SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask  CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" />
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">

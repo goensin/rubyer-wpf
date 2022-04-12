@@ -4,9 +4,6 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary>
-            <converter:MathMultipleConverter x:Key="mathMultiplyConverter" Operation="Multiply" />
-        </ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -118,7 +115,7 @@
 
                         <!--<StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
                             <StackPanel.Height>
-                                <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
+                                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                                     <Binding ElementName="ItemsHost" Path="ActualHeight"/>
                                     <Binding ElementName="ItemsHost" Path="Opacity"/>
                                 </MultiBinding>

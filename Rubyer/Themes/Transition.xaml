@@ -3,9 +3,6 @@
                     xmlns:converter="clr-namespace:Rubyer.Converters"
                     xmlns:rubyer="clr-namespace:Rubyer">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary>
-            <converter:MathMultipleConverter x:Key="mathMultiplyConverter" Operation="Multiply" />
-        </ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -533,7 +530,7 @@
                             <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
                             <Setter TargetName="rootStackPanel" Property="Height">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
+                                    <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                                         <Binding ElementName="content" Path="ActualHeight" />
                                         <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                                     </MultiBinding>
@@ -560,7 +557,7 @@
                             <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
                             <Setter TargetName="rootStackPanel" Property="Width">
                                 <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource mathMultiplyConverter}">
+                                    <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                                         <Binding ElementName="content" Path="ActualWidth" />
                                         <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                                     </MultiBinding>
