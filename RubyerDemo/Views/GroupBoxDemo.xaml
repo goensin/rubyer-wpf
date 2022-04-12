@@ -17,43 +17,58 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <GroupBox Width="Auto"
-                      Height="60"
-                      Margin="0 0 0 10"
-                      Header="默认分组框-GroupBox" />
+            <GroupBox Margin="0 0 0 10"
+                      Header="默认分组框-GroupBox" >
+                <TextBlock >
+                    蒹葭苍苍，白露为霜。所谓伊人，在水一方。
+                </TextBlock>
+            </GroupBox>
             <GroupBox Grid.Column="1"
-                      Width="Auto"
-                      Height="60"
-                      Margin="0 0 0 10"
+                      Margin="10 0 0 10"
                       Header="默认分组框-GroupBox"
                       rubyer:HeaderHelper.FontWeight="Bold"
                       rubyer:HeaderHelper.FontSize="16"
-                      rubyer:HeaderHelper.HorizontalAlignment="Center"/>
-            
+                      rubyer:HeaderHelper.HorizontalAlignment="Center">
+                <TextBlock>
+                    溯洄从之，道阻且长。溯游从之，宛在水中央。
+                </TextBlock>
+            </GroupBox>
+
             <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
                       Grid.Row="1"
-                      Width="Auto"
-                      Height="60"
                       Margin="0 0 0 10"
-                      Header="色彩分组框-GroupBox" />
+                      Header="色彩分组框-GroupBox" >
+                <TextBlock>
+                    蒹葭萋萋，白露未晞。所谓伊人，在水之湄。
+                </TextBlock>
+            </GroupBox>
             <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
                       Grid.Row="1"
                       Grid.Column="1"
-                      Width="Auto"
-                      Height="60"
-                      Margin="0 0 0 10"
+                      Margin="10 0 0 10"
                       Header="色彩分组框-GroupBox" 
+                      BorderThickness="0"
+                      Background="{DynamicResource Primary}"
+                      Foreground="{DynamicResource WhiteForeground}"
                       rubyer:HeaderHelper.FontWeight="Bold"
                       rubyer:HeaderHelper.HorizontalAlignment="Right"
                       rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"/>
-            
+                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}">
+                <TextBlock>
+                    溯洄从之，道阻且跻。溯游从之，宛在水中坻。
+                </TextBlock>
+            </GroupBox>
+
             <GroupBox Style="{StaticResource ClassicGroupBox}"
                       Grid.Row="2"
                       Width="Auto"
-                      Height="60"
                       Margin="0 0 0 10"
-                      Header="经典分组框-GroupBox" />
+                      Header="经典分组框-GroupBox" >
+                <TextBlock>
+                            蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak/>
+                            溯洄从之，道阻且右。溯游从之，宛在水中沚。
+                </TextBlock>
+            </GroupBox>
 
             <GroupBox Grid.Row="3"
                       Grid.ColumnSpan="2"
@@ -64,31 +79,47 @@
                         <Expander x:Name="expander"
                                   Width="300"
                                   Margin="5"
-                                  Header="《思凡》"
+                                  Header="《蒹葭》"
                                   IsExpanded="True">
-                            <TextBlock x:Name="textBlock" TextWrapping="Wrap">
-                                <Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                            <TextBlock >
+                                        蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak/>
+                                        溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak/>
+                                        蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak/>
+                                        溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak/>
+                                        蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak/>
+                                        溯洄从之，道阻且右。溯游从之，宛在水中沚。
+                            </TextBlock>
                         </Expander>
                         <Expander MaxWidth="300"
-                                   Margin="5"
+                                  Margin="5"
                                   rubyer:HeaderHelper.HorizontalAlignment="Center"
                                   rubyer:HeaderHelper.Background="{DynamicResource Accent}"
                                   rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                                   ExpandDirection="Up"
-                                  Header="《思凡》">
-                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
+                                  Header="《蒹葭》">
+                            <TextBlock >
+                                        蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak/>
+                                        溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak/>
+                                        蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak/>
+                                        溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak/>
+                                        蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak/>
+                                        溯洄从之，道阻且右。溯游从之，宛在水中沚。
+                            </TextBlock>
                         </Expander>
                     </StackPanel>
-                    <Expander Height="140"
-                               Margin="5"
+                    <Expander Margin="5"
                               ExpandDirection="Left"
-                              Header="《思凡》">
-                        <Border MaxWidth="160">
-                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
-                        </Border>
+                              Header="《蒹葭》">
+                        <TextBlock >
+                                        蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak/>
+                                        溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak/>
+                                        蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak/>
+                                        溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak/>
+                                        蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak/>
+                                        溯洄从之，道阻且右。溯游从之，宛在水中沚。
+                        </TextBlock>
                     </Expander>
-                    <Expander Height="140"
-                               Margin="5"
+                    <Expander Margin="5"
                               ExpandDirection="Right"
                               BorderThickness="0"
                               rubyer:HeaderHelper.FontSize="17"
@@ -97,10 +128,15 @@
                               rubyer:HeaderHelper.Background="{DynamicResource Dark}"
                               rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                               Background="{DynamicResource Light}"
-                              Header="《思凡》">
-                        <Border MaxWidth="160">
-                            <TextBlock TextWrapping="Wrap"><Run Text="小尼姑年方二八 正青春被师傅削去了头发。 我本是女娇娥， 又不是男儿郎。 为何腰系黄绦， 身穿直裰？ 见人家夫妻们洒落， 一对对着锦穿罗， 不由人心急似火， 奴把袈裟扯破。" /></TextBlock>
-                        </Border>
+                              Header="《蒹葭》">
+                        <TextBlock>
+                                        蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak/>
+                                        溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak/>
+                                        蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak/>
+                                        溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak/>
+                                        蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak/>
+                                        溯洄从之，道阻且右。溯游从之，宛在水中沚。
+                        </TextBlock>
                     </Expander>
                 </StackPanel>
             </GroupBox>
