@@ -93,7 +93,7 @@
                               BorderThickness="0"
                               rubyer:HeaderHelper.FontSize="17"
                               rubyer:HeaderHelper.FontWeight="Bold"
-                              rubyer:HeaderHelper.VerticalAlignment="Center"
+                              rubyer:HeaderHelper.VerticalAlignment="Bottom"
                               rubyer:HeaderHelper.Background="{DynamicResource Dark}"
                               rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                               Background="{DynamicResource Light}"
