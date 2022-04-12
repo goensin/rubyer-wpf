@@ -1,7 +1,6 @@
 ﻿<rubyer:RubyerWindow x:Class="RubyerDemo.MainWindow"
                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:Converters="clr-namespace:Rubyer.Converters;assembly=Rubyer"
                      xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
                      xmlns:const="clr-namespace:RubyerDemo.Consts"
                      xmlns:converter="clr-namespace:RubyerDemo.Converter"
@@ -13,9 +12,11 @@
                      d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
-                     IsShowShadow="True"
+                     TitleShadow="True"
                      WindowStartupLocation="CenterScreen"
-                     mc:Ignorable="d">
+                     mc:Ignorable="d"
+                     d:DesignHeight="600"
+                     d:DesignWidth="800">
     <rubyer:RubyerWindow.Resources>
         <converter:IsSelectedToIconConverter x:Key="IsSelectedToIcon" />
     </rubyer:RubyerWindow.Resources>

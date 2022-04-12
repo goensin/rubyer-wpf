@@ -90,15 +90,23 @@ namespace Rubyer
         }
 
 
-        public static readonly DependencyProperty IsShowShadowProperty =
-            DependencyProperty.Register("IsShowShadow", typeof(bool), typeof(RubyerWindow), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty TitleShadowProperty =
+            DependencyProperty.Register("TitleShadow", typeof(bool), typeof(RubyerWindow), new PropertyMetadata(default(bool)));
 
-        public bool IsShowShadow
+        public bool TitleShadow
         {
-            get { return (bool)GetValue(IsShowShadowProperty); }
-            set { SetValue(IsShowShadowProperty, value); }
+            get { return (bool)GetValue(TitleShadowProperty); }
+            set { SetValue(TitleShadowProperty, value); }
         }
 
+        public static readonly DependencyProperty TitleHeightProperty =
+            DependencyProperty.Register("TitleHeight", typeof(double), typeof(RubyerWindow), new PropertyMetadata(default(double)));
+
+        public double TitleHeight
+        {
+            get { return (double)GetValue(TitleHeightProperty); }
+            set { SetValue(TitleHeightProperty, value); }
+        }
         #endregion
     }
 }
