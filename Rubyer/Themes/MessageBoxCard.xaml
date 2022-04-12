@@ -28,7 +28,7 @@
         <Setter Property="Padding" Value="10" />
         <Setter Property="ShowShadow" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource Info}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -100,7 +100,7 @@
                                     <Button x:Name="PART_NoButton"
                                             Width="60"
                                             Margin="5"
-                                            Background="{StaticResource InfoBrush}"
+                                            Background="{StaticResource Info}"
                                             Content="否"
                                             Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_YesButton"
@@ -111,7 +111,7 @@
                                     <Button x:Name="PART_CancelButton"
                                             Width="60"
                                             Margin="5"
-                                            Background="{StaticResource InfoBrush}"
+                                            Background="{StaticResource Info}"
                                             Content="取消"
                                             Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"

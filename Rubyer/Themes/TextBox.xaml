@@ -18,7 +18,7 @@
                            Margin="3 1 0 1"
                            HorizontalAlignment="Left"
                            FontSize="10"
-                           Foreground="{StaticResource ErrorBrush}"
+                           Foreground="{StaticResource Error}"
                            Text="{Binding CurrentItem.ErrorContent}"
                            TextWrapping="Wrap"
                            UseLayoutRounding="false" />

@@ -21,6 +21,7 @@
     <SolidColorBrush x:Key="Info" Color="#909399" />
     <SolidColorBrush x:Key="Warning" Color="#FF9800" />
     <SolidColorBrush x:Key="Success" Color="#43A047" />
+    <SolidColorBrush x:Key="Question" Color="#2196F3" />
 
     <SolidColorBrush x:Key="PrimaryText" Color="#212121" />
     <SolidColorBrush x:Key="RegularText" Color="#484848" />

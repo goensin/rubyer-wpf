@@ -149,7 +149,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="ErrorWarningFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource WarningBrush}" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource Warning}" />
     </Style>
 
     <Style x:Key="SuccessMessage"
@@ -157,7 +157,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="CheckboxCircleFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource SuccessBrush}" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource Success}" />
     </Style>
 
     <Style x:Key="ErrorMessage"
@@ -165,7 +165,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="CloseCircleFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource ErrorBrush}" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource Error}" />
     </Style>
 
     <Style x:Key="InfoMessage"
@@ -173,7 +173,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="InformationFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource InfoBrush}" />
+        <Setter Property="ThemeColorBrush" Value="{StaticResource Info}" />
     </Style>
 
 </ResourceDictionary>

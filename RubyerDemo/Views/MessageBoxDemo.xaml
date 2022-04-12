@@ -64,21 +64,21 @@
                                                IsShowIcon="True"
                                                Message="是否删除改数据?"
                                                MessageBoxButton="OKCancel"
-                                               ThemeColorBrush="{StaticResource QuestionBrush}" />
+                                               ThemeColorBrush="{StaticResource Question}" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource InfoBrush}"
+                                Background="{StaticResource Info}"
                                 Command="{Binding MessageBoxShow}"
                                 CommandParameter="3">
                             信息
                         </Button>
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource InfoBrush}"
+                                Background="{StaticResource Info}"
                                 Command="{Binding MessageBoxShowContainer}"
                                 CommandParameter="3">
                             信息
@@ -88,21 +88,21 @@
                                                IsShowIcon="True"
                                                Message="消息消息消息消息消息消息"
                                                MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource InfoBrush}" />
+                                               ThemeColorBrush="{StaticResource Info}" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource WarningBrush}"
+                                Background="{StaticResource Warning}"
                                 Command="{Binding MessageBoxShow}"
                                 CommandParameter="4">
                             警告
                         </Button>
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource WarningBrush}"
+                                Background="{StaticResource Warning}"
                                 Command="{Binding MessageBoxShowContainer}"
                                 CommandParameter="4">
                             警告
@@ -112,21 +112,21 @@
                                                IsShowIcon="True"
                                                Message="警告警告警告警告警告警告"
                                                MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource WarningBrush}" />
+                                               ThemeColorBrush="{StaticResource Warning}" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource SuccessBrush}"
+                                Background="{StaticResource Success}"
                                 Command="{Binding MessageBoxShow}"
                                 CommandParameter="5">
                             成功
                         </Button>
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource SuccessBrush}"
+                                Background="{StaticResource Success}"
                                 Command="{Binding MessageBoxShowContainer}"
                                 CommandParameter="5">
                             成功
@@ -136,21 +136,21 @@
                                                IsShowIcon="True"
                                                Message="成功成功成功成功成功成功"
                                                MessageBoxButton="OK"
-                                               ThemeColorBrush="{StaticResource SuccessBrush}" />
+                                               ThemeColorBrush="{StaticResource Success}" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
                                 Orientation="Horizontal">
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource ErrorBrush}"
+                                Background="{StaticResource Error}"
                                 Command="{Binding MessageBoxShow}"
                                 CommandParameter="6">
                             错误
                         </Button>
                         <Button Width="100"
                                 Margin="10"
-                                Background="{StaticResource ErrorBrush}"
+                                Background="{StaticResource Error}"
                                 Command="{Binding MessageBoxShowContainer}"
                                 CommandParameter="6">
                             错误
@@ -160,7 +160,7 @@
                                                IsShowIcon="True"
                                                Message="错误错误错误错误错误错误"
                                                MessageBoxButton="YesNoCancel"
-                                               ThemeColorBrush="{StaticResource ErrorBrush}" />
+                                               ThemeColorBrush="{StaticResource Error}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

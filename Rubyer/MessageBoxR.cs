@@ -11,11 +11,11 @@ namespace Rubyer
 {
     public class MessageBoxR
     {
-        private static readonly Brush infoBrush = (Brush)Application.Current.Resources["InfoBrush"];
-        private static readonly Brush warningBrush = (Brush)Application.Current.Resources["WarningBrush"];
-        private static readonly Brush successBrush = (Brush)Application.Current.Resources["SuccessBrush"];
-        private static readonly Brush errorBrush = (Brush)Application.Current.Resources["ErrorBrush"];
-        private static readonly Brush questionBrush = (Brush)Application.Current.Resources["QuestionBrush"];
+        private static readonly Brush infoBrush = (Brush)Application.Current.Resources["Info"];
+        private static readonly Brush warningBrush = (Brush)Application.Current.Resources["Warning"];
+        private static readonly Brush successBrush = (Brush)Application.Current.Resources["Success"];
+        private static readonly Brush errorBrush = (Brush)Application.Current.Resources["Error"];
+        private static readonly Brush questionBrush = (Brush)Application.Current.Resources["Question"];
 
         public static Dictionary<string, MessageBoxContainer> containers = new Dictionary<string, MessageBoxContainer>();
 

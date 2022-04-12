@@ -51,10 +51,10 @@
            TargetType="{x:Type Button}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ErrorBrush}" />
+                <Setter Property="Background" Value="{StaticResource Error}" />
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{StaticResource ErrorBrush}" />
+                <Setter Property="Background" Value="{StaticResource Error}" />
             </Trigger>
         </Style.Triggers>
     </Style>

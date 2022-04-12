@@ -98,7 +98,6 @@
         <Setter Property="Background" Value="{StaticResource BorderLight}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Width" Value="40" />

@@ -45,7 +45,7 @@
                             <Button Width="100">更新版本</Button>
                         </rubyer:Badge>
                         <rubyer:Badge Margin="10"
-                                      Background="{StaticResource SuccessBrush}"
+                                      Background="{StaticResource Success}"
                                       IsShowLittleDot="True">
                             <Button Style="{DynamicResource TextButton}"
                                     Width="100"
