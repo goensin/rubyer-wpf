@@ -67,6 +67,7 @@
                         </Border>
 
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>

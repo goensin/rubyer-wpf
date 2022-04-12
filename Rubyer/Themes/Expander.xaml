@@ -64,6 +64,7 @@
                         </Border>
 
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -143,6 +144,7 @@
                         </Border>
 
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -220,6 +222,7 @@
                             </Grid>
                         </Border>
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -297,6 +300,7 @@
                             </Grid>
                         </Border>
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"/>
                     </Grid>
                     <ControlTemplate.Triggers>

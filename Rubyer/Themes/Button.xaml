@@ -34,6 +34,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.5" />
         <Setter Property="rubyer:ButtonHelper.ShowShadow" Value="False" />
         <Setter Property="rubyer:ButtonHelper.Loading" Value="False" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
@@ -77,6 +78,7 @@
                             </StackPanel>
 
                             <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                                Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 IsActive="{TemplateBinding IsPressed}"/>
                         </Grid>
                     </Border>
@@ -193,6 +195,7 @@
            TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.4" />
     </Style>
 
     <Style x:Key="TextLightButton"

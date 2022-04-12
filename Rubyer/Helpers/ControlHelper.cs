@@ -151,5 +151,21 @@ namespace Rubyer
         {
             obj.SetValue(IsKeyBoardFocusedProperty, value);
         }
+
+        /// <summary>
+        /// 遮罩透明度
+        /// </summary>
+        public static readonly DependencyProperty MaskOpacityProperty = DependencyProperty.RegisterAttached(
+            "MaskOpacity", typeof(double), typeof(ControlHelper), new PropertyMetadata(0.5));
+
+        public static double GetMaskOpacity(DependencyObject obj)
+        {
+            return (double)obj.GetValue(MaskOpacityProperty);
+        }
+
+        public static void SetMaskOpacity(DependencyObject obj, double value)
+        {
+            obj.SetValue(MaskOpacityProperty, value);
+        }
     }
 }

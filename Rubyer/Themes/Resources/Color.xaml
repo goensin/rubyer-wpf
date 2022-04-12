@@ -32,7 +32,7 @@
     <SolidColorBrush x:Key="BorderLight" Color="#BDBDBD" />
     <SolidColorBrush x:Key="BorderLighter" Color="#EFEFEF" />
 
-    <SolidColorBrush x:Key="MaskBackground" Color="#6D6D6D" />
+    <SolidColorBrush x:Key="MaskBackground" Color="#4D4D4D" />
 
     <SolidColorBrush x:Key="FocusedBackground"
                      Opacity="0.45"
