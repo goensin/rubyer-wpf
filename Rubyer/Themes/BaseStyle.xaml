@@ -35,14 +35,4 @@
                      Opacity="0.8"
                      Color="#757575" />
 
-    <!--  Converter  -->
-    <converter:GetWidthConverter x:Key="getWidth" />
-    <converter:ToConstConverter x:Key="toConst" />
-    <converter:SubtractConverter x:Key="subtract" />
-    <converter:Subtract2Converter x:Key="subtract2" />
-    <converter:AddConverter x:Key="add" />
-    <converter:Add2Converter x:Key="add2" />
-    <converter:GetCanvasCentreConverter x:Key="getCanvasCentre" />
-    <converter:IsEqualConverter x:Key="isEqual" />
-
 </ResourceDictionary>

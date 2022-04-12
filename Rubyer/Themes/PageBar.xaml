@@ -32,7 +32,7 @@
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource isEqual}">
+                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
                                     <Binding Path="Value" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
                                 </MultiBinding>
@@ -73,7 +73,7 @@
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource isEqual}">
+                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
                                     <Binding Path="Value" RelativeSource="{RelativeSource Self}" />
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
                                 </MultiBinding>

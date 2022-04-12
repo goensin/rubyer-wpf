@@ -22,4 +22,5 @@
     <converter:DoublesToSizeConverter x:Key="DoublesToSizeConverter" />
     <converter:GetArcPointConverter x:Key="GetArcPointConverter" />
     <converter:IsLargeArcConverter x:Key="IsLargeArcConverter" />
+    <converter:IsEqualConverter x:Key="IsEqualConverter" />
 </ResourceDictionary>
