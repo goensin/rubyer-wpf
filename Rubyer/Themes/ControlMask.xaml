@@ -19,7 +19,7 @@
                         <Border x:Name="maskBorder"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
-                                Opacity="0" >
+                                Opacity="0">
                             <Border Background="{TemplateBinding Background}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"

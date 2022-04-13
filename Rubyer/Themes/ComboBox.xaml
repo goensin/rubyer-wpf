@@ -320,7 +320,7 @@
                     </ScrollViewer>
                 </Grid>
             </Popup>
-            
+
             <TextBox x:Name="PART_EditableTextBox"
                      Style="{StaticResource RubyerComboBoxEditableTextBox}"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

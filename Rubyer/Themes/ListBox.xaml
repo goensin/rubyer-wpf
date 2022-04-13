@@ -36,9 +36,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid>
-                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" 
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsSelected}"/>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         <Border x:Name="Bd"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"

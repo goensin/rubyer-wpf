@@ -95,6 +95,7 @@
                     <!--  水平  -->
                     <StackPanel Width="500" Margin="10">
                         <Slider Margin="0 10"
+                                rubyer:SliderHelper.DraggingShowValue="True"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -103,8 +104,7 @@
                                 SelectionStart="30"
                                 TickFrequency="5"
                                 TickPlacement="Both"
-                                Value="20"
-                                rubyer:SliderHelper.DraggingShowValue="True" />
+                                Value="20" />
                         <Slider Margin="0 10"
                                 Foreground="{DynamicResource Dark}"
                                 IsSelectionRangeEnabled="True"
@@ -139,6 +139,7 @@
                     <!--  垂直  -->
                     <StackPanel Margin="20 10 0 10" Orientation="Horizontal">
                         <Slider Margin="20 0"
+                                rubyer:SliderHelper.DraggingShowValue="True"
                                 Foreground="{DynamicResource Light}"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
@@ -147,10 +148,9 @@
                                 Orientation="Vertical"
                                 SelectionEnd="70"
                                 SelectionStart="30"
-                                TickPlacement="Both"
                                 TickFrequency="10"
-                                Value="20" 
-                                 rubyer:SliderHelper.DraggingShowValue="True" />
+                                TickPlacement="Both"
+                                Value="20" />
                         <Slider Margin="20 0"
                                 Foreground="{DynamicResource Dark}"
                                 IsSelectionRangeEnabled="True"

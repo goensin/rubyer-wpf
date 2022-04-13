@@ -158,7 +158,7 @@
                                   rubyer:ComboBoxHelper.PostContent="cm"
                                   rubyer:ComboBoxHelper.PreContent="身高"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
-                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"/>
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}" />
 
                         <ComboBox Width="150"
                                   Margin="0 0 10 0"

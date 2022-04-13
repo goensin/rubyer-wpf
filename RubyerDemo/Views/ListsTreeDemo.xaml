@@ -34,7 +34,8 @@
                     </ListBox>
                     <ListBox Style="{StaticResource PopularListBox}"
                              Width="150"
-                             Margin="0 0 20 0">
+                             Margin="0 0 20 0"
+                             SelectedIndex="0">
                         <ListBoxItem Content="西瓜" />
                         <ListBoxItem Content="香蕉" />
                         <ListBoxItem Content="苹果" />
@@ -42,7 +43,8 @@
                     <ListBox x:Name="listBox1"
                              Style="{StaticResource PopularListBox}"
                              Width="150"
-                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}">
+                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                             SelectedIndex="0">
                         <ListBoxItem>
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Width="26"

@@ -6,8 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
-             d:DataContext="{d:DesignInstance Type=vm:DataGridViewModel,
-                                              IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=vm:DataGridViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ObjectDataProvider x:Key="GenderTypeEnum"

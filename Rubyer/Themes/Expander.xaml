@@ -48,24 +48,24 @@
                                         </TransformGroup>
                                     </Grid.LayoutTransform>
                                     <Path x:Name="arrow"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                      SnapsToDevicePixels="false"
-                                      Stroke="{TemplateBinding Foreground}"
-                                      StrokeThickness="2" />
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                          SnapsToDevicePixels="false"
+                                          Stroke="{TemplateBinding Foreground}"
+                                          StrokeThickness="2" />
                                 </Grid>
                                 <ContentPresenter Margin="4 0 0 0"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="True" />
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"/>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -109,10 +109,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border Padding="{TemplateBinding Padding}" 
+                        <Border Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid >
+                            <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="19" />
@@ -128,24 +128,24 @@
                                         </TransformGroup>
                                     </Grid.LayoutTransform>
                                     <Path x:Name="arrow"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                      SnapsToDevicePixels="false"
-                                      Stroke="{TemplateBinding Foreground}"
-                                      StrokeThickness="2" />
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                          SnapsToDevicePixels="false"
+                                          Stroke="{TemplateBinding Foreground}"
+                                          StrokeThickness="2" />
                                 </Grid>
                                 <ContentPresenter Margin="4 0 0 0"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="Center"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="True" />
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"/>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -189,9 +189,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                        <Border Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid >
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="19" />
@@ -207,23 +208,23 @@
                                         </TransformGroup>
                                     </Grid.LayoutTransform>
                                     <Path x:Name="arrow"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                      SnapsToDevicePixels="false"
-                                      Stroke="{TemplateBinding Foreground}"
-                                      StrokeThickness="2" />
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                          SnapsToDevicePixels="false"
+                                          Stroke="{TemplateBinding Foreground}"
+                                          StrokeThickness="2" />
                                 </Grid>
                                 <ContentPresenter Margin="0 4 0 0"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                RecognizesAccessKey="True"
-                                                SnapsToDevicePixels="True" />
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"/>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -267,9 +268,10 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
-                        <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}"
+                        <Border Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid >
+                            <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="19" />
@@ -285,23 +287,23 @@
                                         </TransformGroup>
                                     </Grid.LayoutTransform>
                                     <Path x:Name="arrow"
-                                      HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                      SnapsToDevicePixels="false"
-                                      Stroke="{TemplateBinding Foreground}"
-                                      StrokeThickness="2" />
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
+                                          SnapsToDevicePixels="false"
+                                          Stroke="{TemplateBinding Foreground}"
+                                          StrokeThickness="2" />
                                 </Grid>
                                 <ContentPresenter Margin="0 4 0 0"
-                                              HorizontalAlignment="Center"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="True" />
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}" 
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"/>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
@@ -364,27 +366,27 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <DockPanel>
                             <ToggleButton x:Name="HeaderSite"
                                           Style="{StaticResource ExpanderDownHeaderStyle}"
                                           MinWidth="0"
                                           MinHeight="0"
-                                          Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           HorizontalContentAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           VerticalContentAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           Content="{TemplateBinding Header}"
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                           DockPanel.Dock="Top"
                                           FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}"
+                                          FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           FontStretch="{TemplateBinding FontStretch}"
                                           FontStyle="{TemplateBinding FontStyle}"
+                                          FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
                             <rubyer:Transition x:Name="Transition"
                                                IsShow="{TemplateBinding IsExpanded}"

@@ -38,9 +38,9 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"/>
-                        
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
                         <Border x:Name="maskBorder"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"

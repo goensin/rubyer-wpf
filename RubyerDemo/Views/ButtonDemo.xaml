@@ -27,10 +27,10 @@
                     <Button x:Name="button"
                             Width="80"
                             Margin="5"
+                            rubyer:SliderHelper.DraggingShowValue="True"
                             Content="默认按钮"
                             IsDefault="True"
-                            ToolTip="hello" 
-                            rubyer:SliderHelper.DraggingShowValue="True"/>
+                            ToolTip="hello" />
 
                     <Button Style="{DynamicResource LightButton}"
                             Width="80"
@@ -197,7 +197,7 @@
                     <Button Margin="10 0"
                             rubyer:ButtonHelper.CircleDiameter="40"
                             rubyer:ButtonHelper.Loading="True"
-                            rubyer:ButtonHelper.Shape="Circle"/>
+                            rubyer:ButtonHelper.Shape="Circle" />
                     <Button Style="{StaticResource TextDarkButton}"
                             Margin="10 0"
                             rubyer:ButtonHelper.Loading="True"

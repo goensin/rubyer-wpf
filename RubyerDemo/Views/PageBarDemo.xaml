@@ -5,8 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
-             d:DataContext="{d:DesignInstance Type=viewModels:PageBarViewModel,
-                                              IsDesignTimeCreatable=True}"
+             d:DataContext="{d:DesignInstance Type=viewModels:PageBarViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <ScrollViewer Style="{StaticResource RubyerSmallScrollViewer}"
                   HorizontalScrollBarVisibility="Auto"

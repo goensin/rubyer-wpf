@@ -5,8 +5,8 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
-    
-    <!--Converter-->
+
+    <!--  Converter  -->
     <converter:GetCanvasCentreConverter x:Key="getCanvasCentre" />
 
     <Style TargetType="{x:Type rubyer:Icon}">
