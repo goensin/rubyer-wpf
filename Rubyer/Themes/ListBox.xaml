@@ -27,30 +27,39 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Padding" Value="4 1" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Border x:Name="Bd"
-                            Padding="{TemplateBinding Padding}"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="true">
-                        <ContentPresenter x:Name="content"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Border>
+                    <Grid>
+                        <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" 
+                                            Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsActive="{TemplateBinding IsSelected}"/>
+                        <Border x:Name="Bd"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter x:Name="content"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
+                        <!--<Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource BackgroundGray}" />
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ListBoxHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
-                            <Setter TargetName="Bd" Property="Background" Value="{Binding Path=(rubyer:ListBoxHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
-                        </Trigger>
+                        </Trigger>-->
+                        <!--<Trigger Property="IsSelected" Value="True">
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            <Setter TargetName="Bd" Property="Background" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                        </Trigger>-->
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
@@ -58,7 +67,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
     </Style>
 
     <!--  ListBox  -->
@@ -66,13 +74,18 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.7" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBox}">
@@ -81,7 +94,7 @@
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="true">
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
@@ -101,18 +114,16 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  PopularListBoxItem  -->
     <Style x:Key="PopularListBoxItem" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}" />
-        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:ListBoxHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=ListBox}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Padding" Value="3 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
@@ -132,10 +143,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ListBoxHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ListBoxHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
@@ -144,7 +155,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
     </Style>
 
     <!--  PopularListBox  -->
@@ -163,8 +173,7 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ListBoxHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ListBoxHelper.IsAnimation" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -186,7 +195,7 @@
                                            Canvas.Top="0"
                                            Width="3"
                                            Height="0"
-                                           Fill="{Binding Path=(rubyer:ListBoxHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                           Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </Canvas>
 
                             <ScrollViewer Grid.Column="1"

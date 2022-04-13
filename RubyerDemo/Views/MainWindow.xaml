@@ -82,8 +82,7 @@
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
                         <ListBox Style="{StaticResource PopularListBox}"
-                                 rubyer:ListBoxHelper.FocusedBrush="{DynamicResource Accent}"
-                                 rubyer:ListBoxHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                  ItemsSource="{Binding MenuItems}"
                                  SelectedIndex="0"
                                  SelectedItem="{Binding CurrentMenuItem}"
