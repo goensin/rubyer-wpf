@@ -80,8 +80,10 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource TreeViewItemFocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Padding" Value="1 0 0 0" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
@@ -95,10 +97,17 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
+
                         <ToggleButton x:Name="Expander"
                                       Style="{StaticResource ExpandCollapseToggleStyle}"
                                       ClickMode="Press"
                                       IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <rubyer:ControlMask Grid.Column="1"
+                                            Grid.ColumnSpan="2"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsActive="{TemplateBinding IsSelected}" />
+
                         <Border x:Name="Bd"
                                 Grid.Column="1"
                                 Grid.ColumnSpan="2"
@@ -112,16 +121,6 @@
                                               ContentSource="Header"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-
-                        <!--<StackPanel Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
-                            <StackPanel.Height>
-                                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                                    <Binding ElementName="ItemsHost" Path="ActualHeight"/>
-                                    <Binding ElementName="ItemsHost" Path="Opacity"/>
-                                </MultiBinding>
-                            </StackPanel.Height>
-                            <ItemsPresenter x:Name="ItemsHost" Visibility="Collapsed" VerticalAlignment="Top" Opacity="0"/>
-                        </StackPanel>-->
                         <rubyer:Transition Grid.Row="1"
                                            Grid.Column="1"
                                            Grid.ColumnSpan="2"
@@ -174,12 +173,6 @@
                         <Trigger Property="HasItems" Value="false">
                             <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
                         </Trigger>
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BackgroundGray}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
@@ -187,7 +180,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Style.Triggers>
             <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
                 <Setter Property="ItemsPanel">
@@ -206,18 +198,20 @@
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Padding" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
                     <Border x:Name="Bd"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="true">
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <ScrollViewer x:Name="_tv_scrollviewer_"
                                       Padding="{TemplateBinding Padding}"
                                       Background="{TemplateBinding Background}"
@@ -230,19 +224,18 @@
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
-                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
-                            <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="true" />
+                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                            <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="True" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Style.Triggers>
-            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
