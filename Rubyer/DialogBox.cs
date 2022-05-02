@@ -237,7 +237,7 @@ namespace Rubyer
 
         private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is DialogBox dialog)
+            if (d is DialogBox dialog && dialog.IsClosed)
             {
                 RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, dialog.closeParameter);
                 args.RoutedEvent = AfterCloseEvent;

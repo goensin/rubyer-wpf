@@ -153,6 +153,9 @@
                         <Trigger SourceName="PART_CardBorder" Property="Opacity" Value="0">
                             <Setter Property="IsClosed" Value="True" />
                         </Trigger>
+                        <Trigger SourceName="PART_CardBorder" Property="Opacity" Value="1">
+                            <Setter Property="IsClosed" Value="False" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
