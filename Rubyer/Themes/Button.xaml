@@ -34,7 +34,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.7" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.8" />
         <Setter Property="rubyer:ButtonHelper.ShowShadow" Value="False" />
         <Setter Property="rubyer:ButtonHelper.Loading" Value="False" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
@@ -79,7 +79,7 @@
 
                             <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 IsActive="{TemplateBinding IsPressed}"
-                                                Opacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                OpacityMask="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>

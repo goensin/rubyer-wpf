@@ -156,7 +156,7 @@ namespace Rubyer
         /// 遮罩透明度
         /// </summary>
         public static readonly DependencyProperty MaskOpacityProperty = DependencyProperty.RegisterAttached(
-            "MaskOpacity", typeof(double), typeof(ControlHelper), new PropertyMetadata(0.5));
+            "MaskOpacity", typeof(double), typeof(ControlHelper), new PropertyMetadata(0.6));
 
         public static double GetMaskOpacity(DependencyObject obj)
         {

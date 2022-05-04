@@ -64,7 +64,7 @@
     </Style>
 
     <!--  小滚动条  -->
-    <Style x:Key="RubyerSmallScrollViewer"
+    <Style x:Key="LittleScrollViewer"
            BasedOn="{StaticResource RubyerScrollViewer}"
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="Template">

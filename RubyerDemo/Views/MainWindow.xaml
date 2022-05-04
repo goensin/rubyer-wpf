@@ -91,7 +91,6 @@
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Width="130"
-                                                   Margin="8 5"
                                                    Text="{Binding Name}"
                                                    TextTrimming="CharacterEllipsis"
                                                    ToolTip="{Binding Name}" />

@@ -12,7 +12,7 @@
     <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
 
     <Style x:Key="MenuScrollViewer"
-           BasedOn="{StaticResource RubyerSmallScrollViewer}"
+           BasedOn="{StaticResource LittleScrollViewer}"
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
