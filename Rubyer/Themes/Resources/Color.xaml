@@ -46,5 +46,5 @@
 
     <Color x:Key="EffectColor">#6D6D6D</Color>
     <SolidColorBrush x:Key="DialogBackground">#CC252526</SolidColorBrush>
-    <SolidColorBrush x:Key="HeaderBackground" Color="#66BDBDBD" />
+    <SolidColorBrush x:Key="HeaderBackground" Color="#E0E0E0" />
 </ResourceDictionary>

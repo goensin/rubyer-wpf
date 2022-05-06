@@ -32,7 +32,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{DynamicResource DefaultForeground}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -45,46 +45,45 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="SnapsToDevicePixels" Value="true" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
-                    <Border x:Name="DGR_Border"
+                        <Border x:Name="DGR_Border"
                             MinHeight="{Binding Path=(rubyer:DataGridHelper.CellRowHeight), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="True">
-                        <SelectiveScrollingGrid>
-                            <SelectiveScrollingGrid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </SelectiveScrollingGrid.ColumnDefinitions>
-                            <SelectiveScrollingGrid.RowDefinitions>
-                                <RowDefinition Height="*" />
-                                <RowDefinition Height="Auto" />
-                            </SelectiveScrollingGrid.RowDefinitions>
-                            <DataGridCellsPresenter Grid.Column="1"
+
+                        <Grid>
+                            <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            OpacityMask="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                           
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+                                <DataGridCellsPresenter Grid.Column="1"
                                                     ItemsPanel="{TemplateBinding ItemsPanel}"
                                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <DataGridDetailsPresenter Grid.Row="1"
+                                <DataGridDetailsPresenter Grid.Row="1"
                                                       Grid.Column="1"
                                                       SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                       Visibility="{TemplateBinding DetailsVisibility}" />
-                        </SelectiveScrollingGrid>
+                            </SelectiveScrollingGrid>
+                        </Grid>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="DGR_Border" Property="Background" Value="{Binding Path=(rubyer:DataGridHelper.FocusRowBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                        </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="DGR_Border" Property="Background" Value="{Binding Path=(rubyer:DataGridHelper.FocusRowBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
     </Style>
 
     <!--  Style and template for the resize control on the DataGridColumnHeader.  -->
@@ -103,9 +102,13 @@
 
     <!--  Style and template for the DataGridColumnHeader.  -->
     <Style x:Key="RubyerDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Background" Value="{Binding Path=(rubyer:DataGridHelper.HeadBackground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="Foreground" Value="{Binding Path=(rubyer:DataGridHelper.HeadForeground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding (rubyer:DataGridHelper.HorizontalHeadAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Background" Value="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding (rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -114,8 +117,8 @@
                                 Padding="5 8"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{StaticResource Border}"
-                                BorderThickness="0 0 0 1">
-                            <Grid>
+                                BorderThickness="0">
+                            <Grid Margin="{TemplateBinding Padding}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -196,7 +199,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 
     <!--  Style and template for the DataGridColumnHeadersPresenter.  -->
@@ -226,9 +228,21 @@
         <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
         <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="true" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Border}" />
+        <Setter Property="rubyer:DataGridHelper.CellRowHeight" Value="36" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource BackgroundGray}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="13" />
+        <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -241,7 +255,7 @@
                         <ScrollViewer x:Name="DG_ScrollViewer"
                                       Style="{StaticResource RubyerScrollViewer}"
                                       Background="Transparent"
-                                      Focusable="false">
+                                      Focusable="False">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid x:Name="DataGrid">
@@ -295,11 +309,11 @@
                                             <StackPanel HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
                                                         Orientation="Horizontal">
-                                                <rubyer:Icon Width="22"
-                                                             Height="22"
+                                                <rubyer:Icon Width="20"
+                                                             Height="20"
                                                              Margin="5 0"
                                                              Type="DatabaseFill" />
-                                                <TextBlock FontSize="15" Text="暂无数据" />
+                                                <TextBlock FontSize="14" Text="无数据" />
                                             </StackPanel>
                                         </Border>
                                     </Grid>
@@ -316,17 +330,9 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Border}" />
-        <Setter Property="rubyer:DataGridHelper.CellRowHeight" Value="36" />
-        <Setter Property="rubyer:DataGridHelper.FocusRowBackground" Value="{StaticResource BackgroundGray}" />
-        <Setter Property="rubyer:DataGridHelper.HeadBackground" Value="{StaticResource GridBackground}" />
-        <Setter Property="rubyer:DataGridHelper.HeadForeground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:DataGridHelper.HeadRowHeight" Value="40" />
-        <Setter Property="rubyer:DataGridHelper.HorizontalHeadAlignment" Value="Left" />
         <Style.Triggers>
-            <Trigger Property="IsGrouping" Value="true">
-                <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+            <Trigger Property="IsGrouping" Value="True">
+                <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />

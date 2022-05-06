@@ -27,10 +27,12 @@
             <GroupBox Margin="0 0 10 10" Header="数据表格-DataGrid">
                 <DataGrid Height="200"
                           Margin="5"
+                          rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:HeaderHelper.HorizontalAlignment="Center"
+                          rubyer:HeaderHelper.FontSize="15"
+                          rubyer:HeaderHelper.FontWeight="Bold"
                           HorizontalContentAlignment="Center"
-                          rubyer:DataGridHelper.HeadBackground="{DynamicResource Primary}"
-                          rubyer:DataGridHelper.HeadForeground="{DynamicResource WhiteForeground}"
-                          rubyer:DataGridHelper.HorizontalHeadAlignment="Center"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           GridLinesVisibility="None"
@@ -55,7 +57,6 @@
                                                 Header="进化" />
                         <DataGridComboBoxColumn Width="80"
                                                 EditingElementStyle="{StaticResource RubyerDataGridComboBoxColumnEditting}"
-                                                ElementStyle="{StaticResource RubyerDataGridComboBoxColumn}"
                                                 Header="性别"
                                                 ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
                                                 SelectedItemBinding="{Binding Gender}" />
@@ -84,9 +85,6 @@
                       Header="数据表格-DataGrid">
                 <DataGrid Height="200"
                           Margin="5"
-                          rubyer:DataGridHelper.CellRowHeight="30"
-                          rubyer:DataGridHelper.FocusRowBackground="{DynamicResource Light}"
-                          rubyer:DataGridHelper.HeadRowHeight="32"
                           AlternationCount="2"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
