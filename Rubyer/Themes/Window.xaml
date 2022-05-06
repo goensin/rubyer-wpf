@@ -15,7 +15,6 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.9" />
     </Style>
 
     <Style x:Key="TitleBarCloseButtonStyle"
