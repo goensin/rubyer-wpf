@@ -32,8 +32,6 @@
     <SolidColorBrush x:Key="BorderLight" Color="#BDBDBD" />
     <SolidColorBrush x:Key="BorderLighter" Color="#EFEFEF" />
 
-    <SolidColorBrush x:Key="MaskBackground" Color="#BDBDBD" />
-
     <SolidColorBrush x:Key="FocusedBackground"
                      Opacity="0.45"
                      Color="#BDBDBD" />
@@ -45,6 +43,8 @@
                      Color="#BDBDBD" />
 
     <Color x:Key="EffectColor">#6D6D6D</Color>
+    <SolidColorBrush x:Key="Mask" Color="#BDBDBD" />
+    <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
     <SolidColorBrush x:Key="DialogBackground">#CC252526</SolidColorBrush>
     <SolidColorBrush x:Key="HeaderBackground" Color="#E0E0E0" />
 </ResourceDictionary>

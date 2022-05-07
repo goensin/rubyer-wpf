@@ -35,6 +35,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource MaskDark}" />
         <Setter Property="rubyer:ButtonHelper.ShowShadow" Value="False" />
         <Setter Property="rubyer:ButtonHelper.Loading" Value="False" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
@@ -56,6 +57,11 @@
                                     Effect="{StaticResource RightBottomEffect}"
                                     Visibility="{Binding Path=(rubyer:ButtonHelper.ShowShadow), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
 
+                            <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                IsActive="{TemplateBinding IsPressed}"
+                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                            
                             <StackPanel Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -76,10 +82,6 @@
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </StackPanel>
-
-                            <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                IsActive="{TemplateBinding IsPressed}"
-                                                OpacityMask="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -195,6 +197,7 @@
            TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.4" />
     </Style>
 

@@ -8,7 +8,7 @@
 
     <Style x:Key="RubyerControlMask" TargetType="{x:Type rubyer:ControlMask}">
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{StaticResource MaskBackground}" />
+        <Setter Property="Background" Value="{StaticResource Mask}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="MaskOpacity" Value="0.6" />
@@ -56,7 +56,7 @@
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="Opacity"
                                                          To="1"
-                                                         Duration="0:0:0.2">
+                                                         Duration="0:0:0.25">
                                             <DoubleAnimation.EasingFunction>
                                                 <CubicEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>

@@ -81,11 +81,11 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
-                        <ListBox Style="{StaticResource PopularListBox}"
-                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                 ItemsSource="{Binding MenuItems}"
-                                 SelectedIndex="0"
+                        <ListBox ItemsSource="{Binding MenuItems}"
+                                 SelectedIndex="0" 
                                  SelectedItem="{Binding CurrentMenuItem}"
+                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                 rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                                  SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>

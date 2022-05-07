@@ -7,7 +7,6 @@
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ListsViewModel}"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -32,14 +31,20 @@
                         <ListBoxItem Content="香蕉" />
                         <ListBoxItem Content="苹果" />
                     </ListBox>
-                    <ListBox Style="{StaticResource PopularListBox}"
-                             Width="150"
+                    
+                    <ListBox Width="150"
                              Margin="0 0 20 0"
-                             SelectedIndex="0">
-                        <ListBoxItem Content="西瓜" />
-                        <ListBoxItem Content="香蕉" />
-                        <ListBoxItem Content="苹果" />
+                             Background="{DynamicResource Light}"
+                             Foreground="{DynamicResource BlackForeground}"
+                             rubyer:ControlHelper.MaskOpacity="0.8"
+                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                             rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}">
+                        <ListBoxItem Content="西瓜" Margin="5 2" />
+                        <ListBoxItem Content="香蕉" Margin="5 2" />
+                        <ListBoxItem Content="苹果" Margin="5 2" />
                     </ListBox>
+                    
                     <ListBox x:Name="listBox1"
                              Style="{StaticResource PopularListBox}"
                              Width="150"
@@ -122,16 +127,36 @@
                       Grid.Column="1"
                       Margin="10 0 10 10"
                       Header="树状视图-TreeView">
-                <StackPanel Margin="6" Orientation="Horizontal">
-                    <TreeView Width="200" ItemsSource="{Binding Catalogs}">
-                        <TreeView.ItemTemplate>
-                            <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                                <TextBlock Text="{Binding Name}" />
-                            </HierarchicalDataTemplate>
-                        </TreeView.ItemTemplate>
-                    </TreeView>
-                </StackPanel>
-            </GroupBox>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TreeView Width="200" ItemsSource="{Binding Catalogs}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+
+                <TreeView Grid.Column="1"
+                          Width="200" 
+                          ItemsSource="{Binding Catalogs}"
+                          Background="{DynamicResource Dark}"
+                          Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                          rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                          rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Items}">
+                            <TextBlock Text="{Binding Name}"/>
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </Grid>
+        </GroupBox>
         </Grid>
-    </ScrollViewer>
 </UserControl>

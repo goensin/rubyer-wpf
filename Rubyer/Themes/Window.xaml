@@ -15,11 +15,13 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.8" />
     </Style>
 
     <Style x:Key="TitleBarCloseButtonStyle"
            BasedOn="{StaticResource TitleBarButtonStyle}"
            TargetType="{x:Type Button}">
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="Red" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource Error}" />

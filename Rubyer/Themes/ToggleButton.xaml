@@ -33,13 +33,15 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Grid>
                         <rubyer:ControlMask CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsPressed}"
-                                            OpacityMask="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
 
                         <Border x:Name="maskBorder"
                                 Background="{TemplateBinding Background}"

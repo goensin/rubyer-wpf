@@ -147,23 +147,27 @@
                             Width="80"
                             Margin="5"
                             rubyer:ButtonHelper.Shape="Round"
+                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                             Content="强调按钮" />
                     <Button Style="{DynamicResource TextButton}"
                             Margin="5"
-                            Foreground="Pink">
+                            Foreground="Pink"
+                            rubyer:ControlHelper.FocusedBrush="Pink">
                         <rubyer:Icon Type="TvFill" />
                     </Button>
                     <Button Style="{DynamicResource TextDarkButton}"
                             Margin="5"
                             rubyer:ButtonHelper.CircleDiameter="30"
-                            rubyer:ButtonHelper.Shape="Circle">
+                            rubyer:ButtonHelper.Shape="Circle"
+                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}">
                         <rubyer:Icon Width="25"
                                      Height="56"
                                      Type="EarthFill" />
                     </Button>
                     <Button Style="{DynamicResource TextSuccessButton}"
                             Height="40"
-                            Margin="5">
+                            Margin="5"
+                            rubyer:ControlHelper.FocusedBrush="{StaticResource Success}">
                         <rubyer:Icon Width="30"
                                      Height="30"
                                      Type="ThumbUpFill" />
@@ -171,7 +175,8 @@
                     <Button Style="{DynamicResource TextAccentButton}"
                             Margin="5"
                             rubyer:ButtonHelper.CircleDiameter="40"
-                            rubyer:ButtonHelper.Shape="Circle">
+                            rubyer:ButtonHelper.Shape="Circle"
+                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}">
                         <rubyer:Icon Width="30"
                                      Height="30"
                                      Type="HeartFill" />
