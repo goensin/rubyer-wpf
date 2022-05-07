@@ -77,23 +77,26 @@
             <rubyer:DialogBox Title="主对话框" Identifier="{x:Static const:ConstNames.MainDialogBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="170" />
+                        <ColumnDefinition Width="180" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
                         <ListBox ItemsSource="{Binding MenuItems}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                  SelectedIndex="0" 
                                  SelectedItem="{Binding CurrentMenuItem}"
-                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                 rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
+                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
                                  rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                                 rubyer:ControlHelper.MaskOpacity="1"
+                                 rubyer:ItemsControlHelper.ItemMargin="7 2"
+                                 rubyer:ItemsControlHelper.ItemPadding="8 5"
                                  SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Width="130"
-                                                   Text="{Binding Name}"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   ToolTip="{Binding Name}" />
+                                        <TextBlock Text="{Binding Name}"
+                                                   TextTrimming="CharacterEllipsis"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

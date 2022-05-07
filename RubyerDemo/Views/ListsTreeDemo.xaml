@@ -7,123 +7,126 @@
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ListsViewModel}"
              mc:Ignorable="d">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <GroupBox Grid.ColumnSpan="2"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <GroupBox Grid.ColumnSpan="2"
                       Margin="0 0 10 10"
                       Header="列表框-ListBox">
-                <StackPanel Margin="5" Orientation="Horizontal">
-                    <ListBox x:Name="listBox"
+            <StackPanel Margin="5" Orientation="Horizontal">
+                <ListBox x:Name="listBox"
                              Width="150"
                              Margin="0 0 20 0">
-                        <ListBoxItem Content="西瓜" />
-                        <ListBoxItem Content="香蕉" />
-                        <ListBoxItem Content="苹果" />
-                    </ListBox>
-                    
-                    <ListBox Width="150"
+                    <ListBoxItem Content="西瓜" />
+                    <ListBoxItem Content="香蕉" />
+                    <ListBoxItem Content="苹果" />
+                </ListBox>
+
+                <ListBox Width="150"
                              Margin="0 0 20 0"
+                             FontSize="14"
                              Background="{DynamicResource Light}"
                              Foreground="{DynamicResource BlackForeground}"
                              rubyer:ControlHelper.MaskOpacity="0.8"
                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
                              rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
-                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}">
-                        <ListBoxItem Content="西瓜" Margin="5 2" />
-                        <ListBoxItem Content="香蕉" Margin="5 2" />
-                        <ListBoxItem Content="苹果" Margin="5 2" />
-                    </ListBox>
-                    
-                    <ListBox x:Name="listBox1"
+                             rubyer:ControlHelper.CornerRadius="10"
+                             rubyer:ItemsControlHelper.ItemMargin="4 2"
+                             rubyer:ItemsControlHelper.ItemPadding="8">
+                    <ListBoxItem Content="西瓜" />
+                    <ListBoxItem Content="香蕉" />
+                    <ListBoxItem Content="苹果" />
+                </ListBox>
+
+                <ListBox x:Name="listBox1"
                              Style="{StaticResource PopularListBox}"
                              Width="150"
                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
                              SelectedIndex="0">
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Width="26"
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <rubyer:Icon Width="26"
                                              Height="26"
                                              Margin="0 0 5 0"
                                              Type="QqFill" />
-                                <TextBlock FontSize="26" Text="QQ" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Width="19"
+                            <TextBlock FontSize="26" Text="QQ" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <rubyer:Icon Width="19"
                                              Height="19"
                                              Margin="0 0 5 0"
                                              Type="WechatFill" />
-                                <TextBlock FontSize="19" Text="微信" />
-                            </StackPanel>
-                        </ListBoxItem>
-                        <ListBoxItem>
-                            <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Margin="0 0 5 0" Type="WeiboFill" />
-                                <TextBlock Text="微博" />
-                            </StackPanel>
-                        </ListBoxItem>
-                    </ListBox>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1"
+                            <TextBlock FontSize="19" Text="微信" />
+                        </StackPanel>
+                    </ListBoxItem>
+                    <ListBoxItem>
+                        <StackPanel Orientation="Horizontal">
+                            <rubyer:Icon Margin="0 0 5 0" Type="WeiboFill" />
+                            <TextBlock Text="微博" />
+                        </StackPanel>
+                    </ListBoxItem>
+                </ListBox>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
                       Margin="0 0 0 10"
                       Header="列表视图-ListView">
-                <StackPanel Margin="5">
-                    <ListView Height="100"
-                              Margin="0 0 0 10"
-                              ItemsSource="{Binding Persons}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name}" Margin="10 0" />
-                                    <TextBlock Text="{Binding Age}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                    <ListView Height="120"
-                              HorizontalContentAlignment="Center"
-                              rubyer:HeaderHelper.Background="{DynamicResource Primary}"
-                              rubyer:HeaderHelper.FontWeight="Bold"
-                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                              rubyer:HeaderHelper.HorizontalAlignment="Center"
-                              ItemsSource="{Binding Persons}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="60"
+            <StackPanel Margin="5">
+                <ListView Height="100"
+                          Margin="0 0 0 10"
+                          ItemsSource="{Binding Persons}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Name}" Margin="10 0" />
+                                <TextBlock Text="{Binding Age}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ListView Height="120"
+                          HorizontalContentAlignment="Center"
+                          rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                          rubyer:HeaderHelper.FontWeight="Bold"
+                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:HeaderHelper.HorizontalAlignment="Center"
+                          ItemsSource="{Binding Persons}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="60"
                                                 DisplayMemberBinding="{Binding Id}"
                                                 Header="序号" />
-                                <GridViewColumn Width="70"
+                            <GridViewColumn Width="70"
                                                 DisplayMemberBinding="{Binding Name}"
                                                 Header="名字" />
-                                <GridViewColumn Width="70"
+                            <GridViewColumn Width="70"
                                                 DisplayMemberBinding="{Binding Age}"
                                                 Header="年龄" />
-                                <GridViewColumn Width="70" Header="进化">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsEvolution}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1"
+                            <GridViewColumn Width="70" Header="进化">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsEvolution}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Grid.Row="1"
                       Grid.Column="1"
                       Margin="10 0 10 10"
                       Header="树状视图-TreeView">
@@ -149,7 +152,10 @@
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                          rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}">
+                          rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.MaskOpacity="1"
+                          rubyer:ItemsControlHelper.ItemPadding="8"
+                          rubyer:ItemsControlHelper.ItemMargin="0 2 5 2">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Items}">
                             <TextBlock Text="{Binding Name}"/>
@@ -158,5 +164,5 @@
                 </TreeView>
             </Grid>
         </GroupBox>
-        </Grid>
+    </Grid>
 </UserControl>

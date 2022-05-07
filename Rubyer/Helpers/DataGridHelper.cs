@@ -13,18 +13,6 @@ namespace Rubyer
 {
     public static class DataGridHelper
     {
-        // 单元格行高
-        public static readonly DependencyProperty CellRowHeightProperty =
-            DependencyProperty.RegisterAttached("CellRowHeight", typeof(double), typeof(DataGridHelper));
-
-        public static void SetCellRowHeight(DependencyObject element, double value)
-        {
-            element.SetValue(CellRowHeightProperty, value);
-        }
-
-        public static double GetCellRowHeight(DependencyObject element)
-        {
-            return (double)element.GetValue(CellRowHeightProperty);
-        }
+        
     }
 }

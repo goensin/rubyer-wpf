@@ -33,6 +33,8 @@
                           rubyer:HeaderHelper.HorizontalAlignment="Center"
                           rubyer:HeaderHelper.FontSize="15"
                           rubyer:HeaderHelper.FontWeight="Bold"
+                          rubyer:HeaderHelper.Padding="8"
+                          rubyer:ItemsControlHelper.ItemMargin="0 4 4 0"
                           HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
