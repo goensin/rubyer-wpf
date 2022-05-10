@@ -125,17 +125,17 @@ namespace Rubyer
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TimePicker timePicker = (TimePicker)d;
-
-            try
+            var oldDateTime = timePicker.SeletedTime.GetValueOrDefault().ToString("HH:mm:ss");
+            if (oldDateTime != timePicker.Text)
             {
-                if (((DateTime)timePicker.SeletedTime).ToLongTimeString() != timePicker.Text)
+                if (DateTime.TryParse(timePicker.Text, out DateTime result))
                 {
-                    timePicker.SeletedTime = Convert.ToDateTime(timePicker.Text);
+                    timePicker.SeletedTime = result;
                 }
-            }
-            catch (Exception)
-            {
-                timePicker.Text = ((DateTime)timePicker.SeletedTime).ToString("HH:mm:ss");
+                else
+                {
+                    timePicker.Text = oldDateTime;
+                }
             }
         }
         #endregion
