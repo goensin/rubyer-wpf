@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -13,34 +10,6 @@ namespace Rubyer
 {
     public static class TabControlHelper
     {
-        // 聚焦时颜色
-        public static readonly DependencyProperty FocusedBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedBrush", typeof(SolidColorBrush), typeof(TabControlHelper), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-        public static SolidColorBrush GetFocusedBrush(DependencyObject obj)
-        {
-            return (SolidColorBrush)obj.GetValue(FocusedBrushProperty);
-        }
-
-        public static void SetFocusedBrush(DependencyObject obj, SolidColorBrush value)
-        {
-            obj.SetValue(FocusedBrushProperty, value);
-        }
-
-        // 聚焦前景色时颜色
-        public static readonly DependencyProperty FocusedForegroundBrushProperty =
-            DependencyProperty.RegisterAttached("FocusedForegroundBrush", typeof(SolidColorBrush), typeof(TabControlHelper), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
-
-        public static SolidColorBrush GetFocusedForegroundBrush(DependencyObject obj)
-        {
-            return (SolidColorBrush)obj.GetValue(FocusedForegroundBrushProperty);
-        }
-
-        public static void SetFocusedForegroundBrush(DependencyObject obj, SolidColorBrush value)
-        {
-            obj.SetValue(FocusedForegroundBrushProperty, value);
-        }
-
         // 是否显示清除按钮
         public static readonly DependencyProperty IsClearableProperty =
             DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsClearbleChanged));

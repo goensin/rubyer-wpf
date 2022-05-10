@@ -69,11 +69,7 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="maskBorder"
                                                          Storyboard.TargetProperty="Opacity"
-                                                         Duration="0:0:0.25">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
+                                                         Duration="0:0:0.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

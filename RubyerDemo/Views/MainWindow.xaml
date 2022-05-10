@@ -81,29 +81,29 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
-                        <ListBox ItemsSource="{Binding MenuItems}"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                 SelectedIndex="0" 
-                                 SelectedItem="{Binding CurrentMenuItem}"
-                                 rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
+                        <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                                  rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
-                                 rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                                 rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
                                  rubyer:ControlHelper.MaskOpacity="1"
-                                 rubyer:ItemsControlHelper.ItemMargin="7 2"
-                                 rubyer:ItemsControlHelper.ItemPadding="8 5"
+                                 rubyer:ItemsControlHelper.ItemMargin="7 1"
+                                 rubyer:ItemsControlHelper.ItemPadding="7"
+                                 ItemsSource="{Binding MenuItems}"
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                 SelectedIndex="0"
+                                 SelectedItem="{Binding CurrentMenuItem}"
                                  SelectionChanged="ListBox_SelectionChanged">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}"
-                                                   TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                     </rubyer:Card>
+
                     <rubyer:Card Grid.Column="1" Margin="3">
-                        <TabControl x:Name="Tab" Padding="5 10 5 5">
+                        <TabControl x:Name="Tab" Style="{StaticResource LineTabControl}">
                             <TabItem Width="200">
                                 <TabItem.Header>
                                     <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />

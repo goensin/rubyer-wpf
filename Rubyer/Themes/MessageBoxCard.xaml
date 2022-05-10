@@ -126,7 +126,7 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ShowState">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Close">
+                                    <VisualTransition GeneratedDuration="0:0:0.1" To="Close">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseIn" />
                                         </VisualTransition.GeneratedEasingFunction>

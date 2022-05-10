@@ -151,8 +151,8 @@
                             Content="强调按钮" />
                     <Button Style="{DynamicResource TextButton}"
                             Margin="5"
-                            Foreground="Pink"
-                            rubyer:ControlHelper.FocusedBrush="Pink">
+                            rubyer:ControlHelper.FocusedBrush="Pink"
+                            Foreground="Pink">
                         <rubyer:Icon Type="TvFill" />
                     </Button>
                     <Button Style="{DynamicResource TextDarkButton}"

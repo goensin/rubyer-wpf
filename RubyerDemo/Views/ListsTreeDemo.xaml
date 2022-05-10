@@ -21,53 +21,53 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <GroupBox Grid.ColumnSpan="2"
-                      Margin="0 0 10 10"
-                      Header="列表框-ListBox">
+                  Margin="0 0 10 10"
+                  Header="列表框-ListBox">
             <StackPanel Margin="5" Orientation="Horizontal">
                 <ListBox x:Name="listBox"
-                             Width="150"
-                             Margin="0 0 20 0">
+                         Width="150"
+                         Margin="0 0 20 0">
                     <ListBoxItem Content="西瓜" />
                     <ListBoxItem Content="香蕉" />
                     <ListBoxItem Content="苹果" />
                 </ListBox>
 
                 <ListBox Width="150"
-                             Margin="0 0 20 0"
-                             FontSize="14"
-                             Background="{DynamicResource Light}"
-                             Foreground="{DynamicResource BlackForeground}"
-                             rubyer:ControlHelper.MaskOpacity="0.8"
-                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
-                             rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
-                             rubyer:ControlHelper.CornerRadius="10"
-                             rubyer:ItemsControlHelper.ItemMargin="4 2"
-                             rubyer:ItemsControlHelper.ItemPadding="8">
+                         Margin="0 0 20 0"
+                         rubyer:ControlHelper.CornerRadius="10"
+                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                         rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                         rubyer:ControlHelper.MaskOpacity="0.8"
+                         rubyer:ItemsControlHelper.ItemMargin="4 2"
+                         rubyer:ItemsControlHelper.ItemPadding="8"
+                         Background="{DynamicResource Light}"
+                         FontSize="15"
+                         Foreground="{DynamicResource BlackForeground}">
                     <ListBoxItem Content="西瓜" />
                     <ListBoxItem Content="香蕉" />
                     <ListBoxItem Content="苹果" />
                 </ListBox>
 
                 <ListBox x:Name="listBox1"
-                             Style="{StaticResource PopularListBox}"
-                             Width="150"
-                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
-                             SelectedIndex="0">
+                         Style="{StaticResource PopularListBox}"
+                         Width="150"
+                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                         SelectedIndex="0">
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <rubyer:Icon Width="26"
-                                             Height="26"
-                                             Margin="0 0 5 0"
-                                             Type="QqFill" />
+                                         Height="26"
+                                         Margin="0 0 5 0"
+                                         Type="QqFill" />
                             <TextBlock FontSize="26" Text="QQ" />
                         </StackPanel>
                     </ListBoxItem>
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
                             <rubyer:Icon Width="19"
-                                             Height="19"
-                                             Margin="0 0 5 0"
-                                             Type="WechatFill" />
+                                         Height="19"
+                                         Margin="0 0 5 0"
+                                         Type="WechatFill" />
                             <TextBlock FontSize="19" Text="微信" />
                         </StackPanel>
                     </ListBoxItem>
@@ -81,8 +81,8 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1"
-                      Margin="0 0 0 10"
-                      Header="列表视图-ListView">
+                  Margin="0 0 0 10"
+                  Header="列表视图-ListView">
             <StackPanel Margin="5">
                 <ListView Height="100"
                           Margin="0 0 0 10"
@@ -90,7 +90,7 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}" Margin="10 0" />
+                                <TextBlock Margin="10 0" Text="{Binding Name}" />
                                 <TextBlock Text="{Binding Age}" />
                             </StackPanel>
                         </DataTemplate>
@@ -106,14 +106,14 @@
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="60"
-                                                DisplayMemberBinding="{Binding Id}"
-                                                Header="序号" />
+                                            DisplayMemberBinding="{Binding Id}"
+                                            Header="序号" />
                             <GridViewColumn Width="70"
-                                                DisplayMemberBinding="{Binding Name}"
-                                                Header="名字" />
+                                            DisplayMemberBinding="{Binding Name}"
+                                            Header="名字" />
                             <GridViewColumn Width="70"
-                                                DisplayMemberBinding="{Binding Age}"
-                                                Header="年龄" />
+                                            DisplayMemberBinding="{Binding Age}"
+                                            Header="年龄" />
                             <GridViewColumn Width="70" Header="进化">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -127,9 +127,9 @@
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1"
-                      Grid.Column="1"
-                      Margin="10 0 10 10"
-                      Header="树状视图-TreeView">
+                  Grid.Column="1"
+                  Margin="10 0 10 10"
+                  Header="树状视图-TreeView">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -145,20 +145,20 @@
                 </TreeView>
 
                 <TreeView Grid.Column="1"
-                          Width="200" 
-                          ItemsSource="{Binding Catalogs}"
-                          Background="{DynamicResource Dark}"
-                          Foreground="{DynamicResource WhiteForeground}"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                          Width="200"
                           rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                           rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
+                          rubyer:ItemsControlHelper.ItemMargin="0 2 5 2"
                           rubyer:ItemsControlHelper.ItemPadding="8"
-                          rubyer:ItemsControlHelper.ItemMargin="0 2 5 2">
+                          Background="{DynamicResource Dark}"
+                          Foreground="{DynamicResource WhiteForeground}"
+                          ItemsSource="{Binding Catalogs}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                            <TextBlock Text="{Binding Name}"/>
+                            <TextBlock Text="{Binding Name}" />
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>

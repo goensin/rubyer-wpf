@@ -58,8 +58,7 @@
                      ItemsSource="{Binding IconTypes}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      SelectedItem="{Binding CurrentIcon}"
-                     VirtualizingPanel.ScrollUnit="Pixel"
-                     rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}">
+                     VirtualizingPanel.ScrollUnit="Pixel">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
                         <wpftk:VirtualizingWrapPanel MouseWheelDelta="50" />

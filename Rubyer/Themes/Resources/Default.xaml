@@ -11,6 +11,7 @@
 
     <!--  CircleDiameter  -->
     <system:Double x:Key="InsideButtonCircleDiameter">22</system:Double>
+    <system:Double x:Key="TabButtonCircleDiameter">18</system:Double>
 
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
@@ -47,50 +48,50 @@
     <DropShadowEffect x:Key="RightTopEffect"
                       BlurRadius="3"
                       Direction="45"
-                      Opacity="0.4"
+                      Opacity="0.7"
                       ShadowDepth="3"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="LeftTopEffect"
                       BlurRadius="3"
                       Direction="135"
-                      Opacity="0.4"
+                      Opacity="0.7"
                       ShadowDepth="3"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="RightBottomEffect"
                       BlurRadius="3"
                       Direction="-45"
-                      Opacity="0.4"
+                      Opacity="0.7"
                       ShadowDepth="3"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="LeftBottomEffect"
                       BlurRadius="3"
                       Direction="-135"
-                      Opacity="0.4"
+                      Opacity="0.7"
                       ShadowDepth="3"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="TopEffect"
-                      BlurRadius="3"
+                      BlurRadius="6"
                       Direction="90"
-                      Opacity="0.4"
-                      ShadowDepth="3"
+                      Opacity="0.7"
+                      ShadowDepth="2"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="BottomEffect"
-                      BlurRadius="3"
+                      BlurRadius="6"
                       Direction="-90"
-                      Opacity="0.4"
-                      ShadowDepth="3"
+                      Opacity="0.7"
+                      ShadowDepth="2"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="RightEffect"
-                      BlurRadius="3"
+                      BlurRadius="6"
                       Direction="0"
-                      Opacity="0.4"
-                      ShadowDepth="3"
+                      Opacity="0.7"
+                      ShadowDepth="2"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="LeftEffect"
-                      BlurRadius="3"
+                      BlurRadius="6"
                       Direction="180"
-                      Opacity="0.4"
-                      ShadowDepth="3"
+                      Opacity="0.7"
+                      ShadowDepth="2"
                       Color="{StaticResource EffectColor}" />
 
     <!--  CornerRadius  -->

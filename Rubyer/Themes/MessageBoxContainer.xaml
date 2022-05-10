@@ -14,6 +14,20 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxContainer}">
                     <Grid>
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <Border x:Name="PART_RootBorder"
+                                Background="{StaticResource DialogBackground}"
+                                Opacity="0"
+                                Visibility="Hidden">
+                            <ContentControl Grid.Row="1"
+                                            Content="{TemplateBinding DialogContent}"
+                                            Focusable="False"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ShowStates">
                                 <VisualStateGroup.Transitions>
@@ -36,7 +50,7 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
                                             </DoubleAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
                                                 <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}" />
@@ -57,20 +71,6 @@
                                 <VisualState x:Name="Hide" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <ContentPresenter x:Name="contentPresenter"
-                                          Focusable="False"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-
-                        <Border x:Name="PART_RootBorder"
-                                Background="{StaticResource DialogBackground}"
-                                Opacity="0"
-                                Visibility="Hidden">
-                            <ContentControl Grid.Row="1"
-                                            Content="{TemplateBinding DialogContent}"
-                                            Focusable="False"
-                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </Border>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

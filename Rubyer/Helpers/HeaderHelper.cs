@@ -75,6 +75,20 @@ namespace Rubyer
             obj.SetValue(PaddingProperty, value);
         }
 
+        // margin
+        public static readonly DependencyProperty MarginProperty =
+            DependencyProperty.RegisterAttached("Margin", typeof(Thickness), typeof(HeaderHelper), new PropertyMetadata(default));
+
+        public static Thickness GetMargin(DependencyObject obj)
+        {
+            return (Thickness)obj.GetValue(MarginProperty);
+        }
+
+        public static void SetMargin(DependencyObject obj, Thickness value)
+        {
+            obj.SetValue(MarginProperty, value);
+        }
+
         // 水平对齐
         public static readonly DependencyProperty HorizontalAlignmentProperty =
             DependencyProperty.RegisterAttached("HorizontalAlignment", typeof(HorizontalAlignment), typeof(HeaderHelper), new PropertyMetadata(default));

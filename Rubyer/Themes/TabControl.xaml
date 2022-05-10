@@ -12,7 +12,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="2"
-                               SnapsToDevicePixels="true"
+                               SnapsToDevicePixels="True"
                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                                StrokeDashArray="1 2"
                                StrokeThickness="1" />
@@ -21,19 +21,224 @@
         </Setter>
     </Style>
 
-    <Style x:Key="RubyerrTabItem" TargetType="{x:Type TabItem}">
+    <Style x:Key="RubyerTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:TabControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="HorizontalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="10 2 10 5" />
+        <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
+                        <rubyer:ControlMask x:Name="mask"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
+                                            CornerRadius="{StaticResource TopControlCornerRadius}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+
+                        <StackPanel Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                    Orientation="Horizontal">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Button x:Name="clearButton"
+                                    Style="{StaticResource TextButton}"
+                                    Margin="5 0 0 0"
+                                    rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Visibility="Hidden">
+                                <rubyer:Icon Type="CloseLine" />
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
+                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource LeftControlCornerRadius}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
+                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource RightControlCornerRadius}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom">
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource BottomControlCornerRadius}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
+                            <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerTabControl" TargetType="{x:Type TabControl}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTabItem}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
+        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="False" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="10 5" />
+        <Setter Property="rubyer:HeaderHelper.Margin" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Grid x:Name="templateRoot"
+                          Margin="0 5"
+                          ClipToBounds="True"
+                          KeyboardNavigation.TabNavigation="Local"
+                          SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="ColumnDefinition0" />
+                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
+                            <ColumnDefinition x:Name="ColumnDefinition2" Width="0" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
+                            <RowDefinition x:Name="RowDefinition1" Height="2.5" />
+                            <RowDefinition x:Name="RowDefinition2" Height="*" />
+                        </Grid.RowDefinitions>
+                        <TabPanel x:Name="headerPanel"
+                                  Grid.Row="0"
+                                  Grid.Column="0"
+                                  Panel.ZIndex="1"
+                                  Background="Transparent"
+                                  IsItemsHost="True"
+                                  KeyboardNavigation.TabIndex="1" />
+
+                        <Border x:Name="contentPanel"
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
+
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              ContentSource="SelectedContent"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+
+                        <Canvas x:Name="horizontalLine"
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Background="{TemplateBinding BorderBrush}">
+                            <Rectangle x:Name="selectedRectRow"
+                                       Canvas.Left="0"
+                                       Canvas.Top="0"
+                                       Width="0"
+                                       Height="2.5"
+                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Canvas>
+                        <Canvas x:Name="verticalLine"
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Background="Transparent">
+                            <Rectangle x:Name="selectedRectCol"
+                                       Canvas.Left="0"
+                                       Canvas.Top="0"
+                                       Width="2.5"
+                                       Height="0"
+                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Canvas>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Bottom">
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition2" Property="Height" Value="Auto" />
+                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="2" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
+                            <Setter TargetName="ColumnDefinition2" Property="Width" Value="*" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
+                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
+                            <Setter TargetName="ColumnDefinition2" Property="Width" Value="Auto" />
+                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
+                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
+                            <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
+                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="LineTabItem" TargetType="{x:Type TabItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <Border x:Name="mainBorder"
                                 Margin="0"
                                 Background="{TemplateBinding Background}"
@@ -51,9 +256,11 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
-                                    Height="20"
-                                    Foreground="{StaticResource Border}"
-                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                    Margin="5 0 0 0"
+                                    rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Visibility="Hidden">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
                         </StackPanel>
@@ -65,602 +272,38 @@
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="HorizontalAlignment" Value="Left" />
                         </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
+                            <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
+                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
                                 <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
                             </MultiDataTrigger.Conditions>
-                            <Setter TargetName="clearButton" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
+                        <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <!--<Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>-->
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Right" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <!--<Setter Property="BorderThickness" TargetName="mainBorder" Value="0,0,2.5,0"/>-->
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Right" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="clearButton" Property="Margin" Value="5 5 5 0" />
-                            <!--<Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>-->
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 5 5 0" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <!--<Setter Property="BorderThickness" TargetName="mainBorder" Value="0,2.5,0,0"/>-->
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="clearButton" Property="Margin" Value="5 5 5 0" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 5 5 0" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <!--<Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>-->
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Left" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <!--<Setter Property="BorderThickness" TargetName="mainBorder" Value="2.5,0,0,0"/>-->
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Left" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <!--<Setter Property="BorderBrush" TargetName="mainBorder" Value="Transparent"/>-->
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 2" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <!--<Setter Property="BorderThickness" TargetName="mainBorder" Value="0,0,0,2.5"/>-->
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 2" />
-                        </MultiDataTrigger>
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
     </Style>
 
-    <Style x:Key="RubyerTabControl" TargetType="{x:Type TabControl}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{Binding Background, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="2" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid x:Name="templateRoot"
-                          Margin="0 5"
-                          ClipToBounds="true"
-                          KeyboardNavigation.TabNavigation="Local"
-                          SnapsToDevicePixels="true">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="ColumnDefinition0" />
-                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
-                            <ColumnDefinition x:Name="ColumnDefinition2" Width="0" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
-                            <RowDefinition x:Name="RowDefinition1" Height="2.5" />
-                            <RowDefinition x:Name="RowDefinition2" Height="*" />
-                        </Grid.RowDefinitions>
-                        <TabPanel x:Name="headerPanel"
-                                  Grid.Row="0"
-                                  Grid.Column="0"
-                                  Margin="0 2 0 -2.5"
-                                  Panel.ZIndex="1"
-                                  Background="Transparent"
-                                  IsItemsHost="true"
-                                  KeyboardNavigation.TabIndex="1" />
-                        <Border x:Name="contentPanel"
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                KeyboardNavigation.DirectionalNavigation="Contained"
-                                KeyboardNavigation.TabIndex="2"
-                                KeyboardNavigation.TabNavigation="Local">
-                            <Grid>
-                                <Border x:Name="effectBorder"
-                                        Margin="0 -2.5 0 0"
-                                        VerticalAlignment="Top"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="0 2.5 0 0"
-                                        Effect="{StaticResource BottomEffect}" />
-                                <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  ContentSource="SelectedContent"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
-                        </Border>
-                        <Canvas Grid.Row="1" Grid.Column="0">
-                            <Rectangle x:Name="selectedRectRow"
-                                       Canvas.Left="0"
-                                       Canvas.Top="0"
-                                       Width="0"
-                                       Height="2.5"
-                                       Fill="{Binding Path=(rubyer:TabControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                        </Canvas>
-                        <Canvas Grid.Row="0" Grid.Column="1">
-                            <Rectangle x:Name="selectedRectCol"
-                                       Canvas.Left="0"
-                                       Canvas.Top="0"
-                                       Width="2.5"
-                                       Height="0"
-                                       Fill="{Binding Path=(rubyer:TabControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                        </Canvas>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="TabStripPlacement" Value="Bottom">
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition2" Property="Height" Value="Auto" />
-                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource TopEffect}" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="0 0 0 -2.5" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Bottom" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="2" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="0 -2.5 0 2.5" />
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="HorizontalContentAlignment" Value="Right" />
-                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
-                            <Setter TargetName="ColumnDefinition2" Property="Width" Value="*" />
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="2" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="BorderThickness" Value="2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource RightEffect}" />
-                            <Setter TargetName="effectBorder" Property="HorizontalAlignment" Value="Left" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="-2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="2.5 0 -2.5 0" />
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement" Value="Right">
-                            <Setter Property="HorizontalContentAlignment" Value="Right" />
-                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
-                            <Setter TargetName="ColumnDefinition2" Property="Width" Value="Auto" />
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="BorderThickness" Value="2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource LeftEffect}" />
-                            <Setter TargetName="effectBorder" Property="HorizontalAlignment" Value="Right" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="0 0 -2.5 0" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="2" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="-2.5 0 2.5 0" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:TabControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+    <Style x:Key="LineTabControl"
+           BasedOn="{StaticResource RubyerTabControl}"
+           TargetType="{x:Type TabControl}">
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource LineTabItem}" />
         <Setter Property="rubyer:TabControlHelper.IsAnimation" Value="True" />
-        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="False" />
     </Style>
-
-    <!--  卡片背景  -->
-    <Style x:Key="CardTabItem"
-           BasedOn="{StaticResource RubyerrTabItem}"
-           TargetType="{x:Type TabItem}">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Grid x:Name="templateRoot" SnapsToDevicePixels="true">
-                        <Border x:Name="mainBorder"
-                                Margin="0"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="0 0 0 0"
-                                CornerRadius="2 2 0 0"
-                                SnapsToDevicePixels="True" />
-                        <StackPanel Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                    Orientation="Horizontal">
-                            <ContentPresenter x:Name="contentPresenter"
-                                              ContentSource="Header"
-                                              Focusable="False"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <Button x:Name="clearButton"
-                                    Style="{StaticResource TextButton}"
-                                    Height="20"
-                                    Foreground="{StaticResource Border}"
-                                    Visibility="{Binding Path=(rubyer:TabControlHelper.IsClearable), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
-                                <rubyer:Icon Type="CloseLine" />
-                            </Button>
-                        </StackPanel>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter TargetName="mainBorder" Property="Width" Value="{Binding DesiredSize.Width, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
-                            <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter TargetName="mainBorder" Property="Width" Value="{Binding DesiredSize.Width, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                        </DataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="clearButton" Property="Visibility" Value="Hidden" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="TextBlock.Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="Transparent" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Right" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:TabControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="mainBorder" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="mainBorder" Property="CornerRadius" Value="2 0 0 2" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Right" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="clearButton" Property="Margin" Value="5 5 5 0" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 5 5 0" />
-                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="Transparent" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:TabControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="clearButton" Property="Margin" Value="5 5 5 0" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 5 5 0" />
-                            <Setter TargetName="mainBorder" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="mainBorder" Property="CornerRadius" Value="0 0 2 2" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="Transparent" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Left" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:TabControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="2 3" />
-                            <Setter TargetName="mainBorder" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="mainBorder" Property="CornerRadius" Value="0 2 2 0" />
-                            <Setter TargetName="templateRoot" Property="HorizontalAlignment" Value="Left" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="false" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 2" />
-                            <Setter TargetName="mainBorder" Property="BorderBrush" Value="Transparent" />
-                        </MultiDataTrigger>
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="true" />
-                                <Condition Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Top" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter Property="Panel.ZIndex" Value="1" />
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:TabControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
-                            <Setter TargetName="contentPresenter" Property="Margin" Value="5 2" />
-                            <Setter TargetName="mainBorder" Property="Background" Value="{Binding Path=BorderBrush, RelativeSource={RelativeSource Mode=Self}}" />
-                        </MultiDataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="rubyer:TabControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:TabControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
-    </Style>
-
-    <!--  卡片背景  -->
-    <Style x:Key="CardTabControl" TargetType="{x:Type TabControl}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:TabControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
-        <Setter Property="BorderThickness" Value="0 2.5 0 0" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="ItemContainerStyle" Value="{StaticResource CardTabItem}" />
-        <Setter Property="Padding" Value="2" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type TabControl}">
-                    <Grid x:Name="templateRoot"
-                          Margin="0 5"
-                          ClipToBounds="true"
-                          KeyboardNavigation.TabNavigation="Local"
-                          SnapsToDevicePixels="true">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="ColumnDefinition0" />
-                            <ColumnDefinition x:Name="ColumnDefinition1" Width="0" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition x:Name="RowDefinition0" Height="Auto" />
-                            <RowDefinition x:Name="RowDefinition1" Height="*" />
-                        </Grid.RowDefinitions>
-                        <TabPanel x:Name="headerPanel"
-                                  Grid.Row="0"
-                                  Grid.Column="0"
-                                  Margin="0 2 0 -2.5"
-                                  Panel.ZIndex="1"
-                                  Background="Transparent"
-                                  IsItemsHost="true"
-                                  KeyboardNavigation.TabIndex="1" />
-                        <Border x:Name="contentPanel"
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                KeyboardNavigation.DirectionalNavigation="Contained"
-                                KeyboardNavigation.TabIndex="2"
-                                KeyboardNavigation.TabNavigation="Local">
-                            <Grid>
-                                <Border x:Name="effectBorder"
-                                        Margin="0 -2.5 0 0"
-                                        VerticalAlignment="Top"
-                                        BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="0 2.5 0 0"
-                                        Effect="{StaticResource BottomEffect}" />
-                                <ContentPresenter x:Name="PART_SelectedContentHost"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  ContentSource="SelectedContent"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
-                        </Border>
-                    </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="TabStripPlacement" Value="Bottom">
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition1" Property="Height" Value="Auto" />
-                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0 0 0 2.5" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource TopEffect}" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="0 0 0 -2.5" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Bottom" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="1" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="0 -2.5 0 2.5" />
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement" Value="Left">
-                            <Setter Property="HorizontalContentAlignment" Value="Right" />
-                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="*" />
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="2.5 0 0 0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="1" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="BorderThickness" Value="2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource RightEffect}" />
-                            <Setter TargetName="effectBorder" Property="HorizontalAlignment" Value="Left" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="-2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="2.5 0 -2.5 0" />
-                        </Trigger>
-                        <Trigger Property="TabStripPlacement" Value="Right">
-                            <Setter Property="HorizontalContentAlignment" Value="Right" />
-                            <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="Auto" />
-                            <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
-                            <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
-                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0 0 2.5 0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
-                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="effectBorder" Property="BorderThickness" Value="2.5 0 0 0" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource LeftEffect}" />
-                            <Setter TargetName="effectBorder" Property="HorizontalAlignment" Value="Right" />
-                            <Setter TargetName="effectBorder" Property="Margin" Value="0 0 -2.5 0" />
-                            <Setter TargetName="effectBorder" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="headerPanel" Property="Grid.Column" Value="1" />
-                            <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="headerPanel" Property="Margin" Value="-2.5 0 2.5 0" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:TabControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:TabControlHelper.FocusedForegroundBrush" Value="{StaticResource WhiteForeground}" />
-        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="False" />
-    </Style>
-
 </ResourceDictionary>

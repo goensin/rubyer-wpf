@@ -66,7 +66,6 @@
     <Style BasedOn="{StaticResource RubyerTreeView}" TargetType="{x:Type TreeView}" />
     <Style BasedOn="{StaticResource RubyerExpander}" TargetType="{x:Type Expander}" />
     <Style BasedOn="{StaticResource RubyerTabControl}" TargetType="{x:Type TabControl}" />
-    <Style BasedOn="{StaticResource RubyerrTabItem}" TargetType="{x:Type TabItem}" />
     <Style BasedOn="{StaticResource RubyerCalendar}" TargetType="{x:Type Calendar}" />
     <Style BasedOn="{StaticResource RubyerDatePicker}" TargetType="{x:Type DatePicker}" />
     <Style BasedOn="{StaticResource RubyerClock}" TargetType="{x:Type rubyer:Clock}" />

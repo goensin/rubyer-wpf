@@ -27,15 +27,15 @@
             <GroupBox Margin="0 0 10 10" Header="数据表格-DataGrid">
                 <DataGrid Height="200"
                           Margin="5"
+                          HorizontalContentAlignment="Center"
                           rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                           rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                          rubyer:HeaderHelper.HorizontalAlignment="Center"
                           rubyer:HeaderHelper.FontSize="15"
                           rubyer:HeaderHelper.FontWeight="Bold"
+                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:HeaderHelper.HorizontalAlignment="Center"
                           rubyer:HeaderHelper.Padding="8"
                           rubyer:ItemsControlHelper.ItemMargin="0 4 4 0"
-                          HorizontalContentAlignment="Center"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           GridLinesVisibility="None"
@@ -88,16 +88,16 @@
                       Header="数据表格-DataGrid">
                 <DataGrid Height="200"
                           Margin="5"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                          rubyer:ControlHelper.MaskOpacity="1"
                           AlternationCount="2"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
+                          Foreground="{StaticResource BlackForeground}"
                           GridLinesVisibility="None"
                           IsReadOnly="True"
-                          ItemsSource="{Binding Persons}"
-                          Foreground="{StaticResource BlackForeground}"
-                          rubyer:ControlHelper.MaskOpacity="1"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}">
+                          ItemsSource="{Binding Persons}">
                     <DataGrid.RowStyle>
                         <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}">
                             <Style.Triggers>
