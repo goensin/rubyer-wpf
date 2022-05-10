@@ -6,9 +6,6 @@ namespace Rubyer
 {
     public enum IconType
     {
-        MinimizeLine,
-        MaximizeLine,
-        RestoreLine,
         ProjectorLine,
         DatabaseLine,
         FolderUnknowLine,
@@ -1962,6 +1959,9 @@ namespace Rubyer
         ZzzLine,
         PushpinFill,
         GameLine,
-        SearchEyeLine
+        SearchEyeLine,
+        MinimizeLine,
+        MaximizeLine,
+        RestoreLine,
     }
 }

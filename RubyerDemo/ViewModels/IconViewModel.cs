@@ -12,7 +12,7 @@ namespace RubyerDemo.ViewModels
 
         public IconViewModel()
         {
-            _types = new Lazy<IEnumerable<IconType>>(() => Enum.GetValues(typeof(IconType)).OfType<IconType>().ToList());
+            _types = new Lazy<IEnumerable<IconType>>(() => Enum.GetValues(typeof(IconType)).OfType<IconType>().OrderBy(x => x.ToString()).ToList());
         }
 
         private IEnumerable<IconType> iconTypes;
