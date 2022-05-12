@@ -107,7 +107,7 @@
 
                         <rubyer:ControlMask Grid.Column="1"
                                             Grid.ColumnSpan="2"
-                                            Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TreeView}}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TreeView}}" />
@@ -214,7 +214,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTreeViewItem}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ControlHelper.MaskBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />

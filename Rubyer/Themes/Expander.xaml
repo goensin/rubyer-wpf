@@ -63,7 +63,7 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -144,7 +144,7 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -224,7 +224,7 @@
                                                   SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -304,7 +304,7 @@
                                                   SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />

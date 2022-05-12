@@ -37,7 +37,7 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <rubyer:ControlMask x:Name="mask"
-                                            Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
                                             CornerRadius="{StaticResource TopControlCornerRadius}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -100,15 +100,15 @@
 
     <Style x:Key="RubyerTabControl" TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTabItem}" />
-        <Setter Property="rubyer:ControlHelper.MaskBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="False" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />

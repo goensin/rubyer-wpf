@@ -49,7 +49,7 @@
                     <!--  Bottom  -->
                     <TabControl Grid.Row="2"
                                 Grid.Column="1"
-                                rubyer:ControlHelper.MaskBrush="{DynamicResource Accent}"
+                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                 rubyer:TabControlHelper.IsClearable="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
