@@ -58,7 +58,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="True">
                         <Grid>
-                            <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 IsActive="{TemplateBinding IsSelected}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
@@ -236,7 +236,7 @@
         <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Border}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.MaskBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />

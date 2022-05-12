@@ -35,7 +35,7 @@
                 <ListBox Width="150"
                          Margin="0 0 20 0"
                          rubyer:ControlHelper.CornerRadius="10"
-                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                         rubyer:ControlHelper.MaskBrush="{DynamicResource Accent}"
                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                          rubyer:ControlHelper.MaskOpacity="0.8"
                          rubyer:ItemsControlHelper.ItemMargin="4 2"
@@ -51,7 +51,7 @@
                 <ListBox x:Name="listBox1"
                          Style="{StaticResource PopularListBox}"
                          Width="150"
-                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                         rubyer:ControlHelper.MaskBrush="{DynamicResource Dark}"
                          SelectedIndex="0">
                     <ListBoxItem>
                         <StackPanel Orientation="Horizontal">
@@ -148,7 +148,7 @@
                           Width="200"
                           rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                           rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.MaskBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
                           rubyer:ItemsControlHelper.ItemMargin="0 2 5 2"
