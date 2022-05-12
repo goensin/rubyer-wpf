@@ -63,7 +63,7 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -144,7 +144,7 @@
                             </Grid>
                         </Border>
 
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -224,7 +224,7 @@
                                                   SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -304,7 +304,7 @@
                                                   SnapsToDevicePixels="True" />
                             </Grid>
                         </Border>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.MaskBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
@@ -355,7 +355,7 @@
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="5" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource MaskDark}" />
+        <Setter Property="rubyer:ControlHelper.MaskBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
