@@ -21,7 +21,7 @@
     </Style>
 
     <!--  默认按钮  -->
-    <Style x:Key="RubyerButton" TargetType="{x:Type Button}">
+    <Style x:Key="RubyerButtonBase" TargetType="{x:Type ButtonBase}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
@@ -41,7 +41,7 @@
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
+                <ControlTemplate TargetType="{x:Type ButtonBase}">
                     <Border x:Name="border"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
@@ -85,10 +85,6 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsDefaulted" Value="True">
-                            <!--<Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource DefaultForeground}" />-->
-                            <!--<Setter TargetName="border" Property="BorderThickness" Value="1" />-->
-                        </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
@@ -141,6 +137,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="RubyerButton" TargetType="{x:Type Button}" BasedOn="{StaticResource RubyerButtonBase}"/>
 
     <Style x:Key="LightButton"
            BasedOn="{StaticResource RubyerButton}"

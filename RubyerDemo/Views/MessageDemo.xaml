@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              mc:Ignorable="d">
-    <ScrollViewer Style="{StaticResource LittleScrollViewer}"
+    <ScrollViewer Style="{StaticResource SmallScrollViewer}"
                   HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto">
         <Grid>

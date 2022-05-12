@@ -4,7 +4,7 @@
     <Color x:Key="LightForegroundColor">#252526</Color>
     <Color x:Key="LightBackgroundColor">#FFFFFF</Color>
     <Color x:Key="DarkForegroundColor">#E6E6E6</Color>
-    <Color x:Key="DarkBackgroundColor">#252526</Color>
+    <Color x:Key="DarkBackgroundColor">#1E1E1E</Color>
     <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}" />
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}" />
 
@@ -45,6 +45,6 @@
     <Color x:Key="EffectColor">#BDBDBD</Color>
     <SolidColorBrush x:Key="Mask" Color="#BDBDBD" />
     <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
-    <SolidColorBrush x:Key="DialogBackground">#CC252526</SolidColorBrush>
+    <SolidColorBrush x:Key="DialogBackground" Color="#AA9E9E9E" />
     <SolidColorBrush x:Key="HeaderBackground" Color="#E0E0E0" />
 </ResourceDictionary>

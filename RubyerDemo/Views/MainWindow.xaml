@@ -99,6 +99,9 @@
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
+                            <ListBox.Resources>
+                                <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
+                            </ListBox.Resources>
                         </ListBox>
                     </rubyer:Card>
 
