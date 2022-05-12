@@ -8,10 +8,11 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerScrollViewer" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
-        <Setter Property="rubyer:ControlHelper.MaskBrush" Value="{DynamicResource MaskDark}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource MaskDark}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarBackground" Value="Transparent" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource BorderLight}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="16" />
@@ -19,7 +20,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <Grid x:Name="Grid">
+                    <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />

@@ -64,10 +64,12 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
+                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
                             <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource LeftControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
+                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Left" />
                             <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource RightControlCornerRadius}" />
                         </DataTrigger>

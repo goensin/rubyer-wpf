@@ -167,21 +167,5 @@ namespace Rubyer
         {
             obj.SetValue(MaskOpacityProperty, value);
         }
-
-        /// <summary>
-        /// 遮罩颜色
-        /// </summary>
-        public static readonly DependencyProperty MaskBrushProperty = DependencyProperty.RegisterAttached(
-            "MaskBrush", typeof(Brush), typeof(ControlHelper), new PropertyMetadata(default(Brush)));
-
-        public static void SetMaskBrush(DependencyObject element, Brush value)
-        {
-            element.SetValue(MaskBrushProperty, value);
-        }
-
-        public static Brush GetMaskBrush(DependencyObject element)
-        {
-            return (Brush)element.GetValue(MaskBrushProperty);
-        }
     }
 }
