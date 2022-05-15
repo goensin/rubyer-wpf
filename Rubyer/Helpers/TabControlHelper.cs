@@ -30,10 +30,7 @@ namespace Rubyer
             {
                 RoutedEventHandler handle = (sender, args) =>
                 {
-                    var panel = VisualTreeHelper.GetParent(tabItem);
-                    var grid = VisualTreeHelper.GetParent(panel);
-                    var tabControl = VisualTreeHelper.GetParent(grid) as TabControl;
-
+                    TabControl tabControl = FindTabControl(tabItem);
                     IEditableCollectionView items = tabControl.Items;
 
                     if (items.CanRemove)
@@ -99,6 +96,18 @@ namespace Rubyer
                     }
                 };
             }
+        }
+
+        private static TabControl FindTabControl(DependencyObject dependencyObject)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
+
+            if (parent != null && !(parent is TabControl))
+            {
+                return FindTabControl(parent);
+            }
+
+            return parent != null ? (TabControl)parent : null;
         }
 
         // 选中动画

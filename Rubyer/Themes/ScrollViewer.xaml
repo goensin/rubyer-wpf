@@ -79,6 +79,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
     </Style>
 
+    <!--  只有箭头，没有滚动条  -->
     <Style x:Key="OnlyArrowScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -87,56 +88,98 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarBackground" Value="Transparent" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource BorderLighter}" />
-        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="16" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
+        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                     <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <Rectangle x:Name="Corner"
-                                   Grid.Row="1"
-                                   Grid.Column="1"
-                                   Fill="Transparent" />
+
                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                                Grid.Row="0"
-                                                Grid.Column="0"
+                                                Grid.Row="1"
+                                                Grid.Column="1"
                                                 Margin="{TemplateBinding Padding}"
                                                 CanContentScroll="{TemplateBinding CanContentScroll}"
                                                 CanHorizontallyScroll="False"
                                                 CanVerticallyScroll="False"
                                                 Content="{TemplateBinding Content}"
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
-                        <ScrollBar x:Name="PART_VerticalScrollBar"
-                                   Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   AutomationProperties.AutomationId="VerticalScrollBar"
-                                   Cursor="Arrow"
-                                   Maximum="{TemplateBinding ScrollableHeight}"
-                                   Minimum="0"
-                                   ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                   Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="1"
-                                   Grid.Column="0"
-                                   AutomationProperties.AutomationId="HorizontalScrollBar"
-                                   Cursor="Arrow"
-                                   Maximum="{TemplateBinding ScrollableWidth}"
-                                   Minimum="0"
-                                   Orientation="Horizontal"
-                                   ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <RepeatButton x:Name="leftButton"
+                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Grid.Row="1"
+                                      Grid.Column="0"
+                                      Width="20"
+                                      Height="Auto"
+                                      VerticalAlignment="Stretch"
+                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      Command="ScrollBar.PageLeftCommand"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
+                            <rubyer:Icon Type="ArrowLeftSLine" />
+                        </RepeatButton>
+
+                        <RepeatButton x:Name="rightButton"
+                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Grid.Row="1"
+                                      Grid.Column="2"
+                                      Width="20"
+                                      Height="Auto"
+                                      VerticalAlignment="Stretch"
+                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      Command="ScrollBar.PageRightCommand"
+                                      Cursor="Arrow"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
+                            <rubyer:Icon Type="ArrowRightSLine" />
+                        </RepeatButton>
+
+                        <RepeatButton x:Name="upButton"
+                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Grid.Row="0"
+                                      Grid.Column="1"
+                                      Width="Auto"
+                                      Height="20"
+                                      VerticalAlignment="Stretch"
+                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      Command="ScrollBar.PageUpCommand"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
+                            <rubyer:Icon Type="ArrowUpSLine" />
+                        </RepeatButton>
+
+                        <RepeatButton x:Name="downButton"
+                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Grid.Row="2"
+                                      Grid.Column="1"
+                                      Width="Auto"
+                                      Height="20"
+                                      VerticalAlignment="Stretch"
+                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                      Command="ScrollBar.PageDownCommand"
+                                      Foreground="{TemplateBinding Foreground}"
+                                      Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
+                            <rubyer:Icon Type="ArrowDownSLine" />
+                        </RepeatButton>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

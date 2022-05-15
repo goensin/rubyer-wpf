@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="FocusVisual">
@@ -133,13 +134,22 @@
                             <RowDefinition x:Name="RowDefinition1" Height="2.5" />
                             <RowDefinition x:Name="RowDefinition2" Height="*" />
                         </Grid.RowDefinitions>
-                        <TabPanel x:Name="headerPanel"
-                                  Grid.Row="0"
-                                  Grid.Column="0"
-                                  Panel.ZIndex="1"
-                                  Background="Transparent"
-                                  IsItemsHost="True"
-                                  KeyboardNavigation.TabIndex="1" />
+
+                        <ScrollViewer x:Name="headerPanel"
+                                      Style="{StaticResource OnlyArrowScrollViewer}"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      Panel.ZIndex="1"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
+                            <TabPanel Grid.Row="0"
+                                      Grid.Column="0"
+                                      Panel.ZIndex="1"
+                                      Background="Transparent"
+                                      IsItemsHost="True"
+                                      KeyboardNavigation.TabIndex="1" />
+                        </ScrollViewer>
+
 
                         <Border x:Name="contentPanel"
                                 Grid.Row="2"
