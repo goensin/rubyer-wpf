@@ -99,6 +99,7 @@
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
+                                        Focusable="False"
                                         rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Foreground="{DynamicResource SeconarydText}"

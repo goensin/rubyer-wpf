@@ -239,7 +239,7 @@ namespace Rubyer
         {
             if (d is DialogBox dialog && dialog.IsClosed)
             {
-                RoutedPropertyChangedEventArgs<object> args = new RoutedPropertyChangedEventArgs<object>(null, dialog.closeParameter);
+                var args = new RoutedPropertyChangedEventArgs<object>(null, dialog.closeParameter);
                 args.RoutedEvent = AfterCloseEvent;
                 dialog.RaiseEvent(args);
                 dialog.AfterCloseCommand?.Execute(dialog.closeParameter);

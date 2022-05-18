@@ -196,7 +196,7 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.4" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.5" />
     </Style>
 
     <Style x:Key="TextLightButton"
