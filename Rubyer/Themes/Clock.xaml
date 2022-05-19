@@ -22,7 +22,9 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="2" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
         <Style.Resources>
-            <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
+            <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer">
+                <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="6" />
+            </Style>
         </Style.Resources>
     </Style>
 

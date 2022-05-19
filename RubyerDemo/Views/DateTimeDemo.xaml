@@ -48,11 +48,8 @@
                       Margin="10 0 0 10"
                       Header="时间选择框-TimePicker">
                 <rubyer:TimePicker Width="120"
-                                   Margin="5"
-                                   rubyer:ControlHelper.FocusBorderBrush="{StaticResource Success}"
-                                   rubyer:ControlHelper.MouseOverBrush="{StaticResource Success}"
-                                   rubyer:ControlHelper.CornerRadius="14"
-                                   SelectedTimeChanged="TimePicker_SelectedTimeChanged"/>
+                                   Margin="5" 
+                                   SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
             </GroupBox>
 
             <GroupBox Grid.Row="1"

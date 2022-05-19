@@ -165,7 +165,7 @@ namespace Rubyer
         /// <param name="itemsControl">列表控件</param>
         /// <param name="count">总数</param>
         /// <param name="index">当前索引</param>
-        private void AddItemSource(ListBox itemsControl, int count, int index)
+        private void AddItemSource(ItemsControl itemsControl, int count, int index)
         {
             string[] array = new string[count];
             for (int i = 0; i < array.Length; i++)
@@ -174,8 +174,13 @@ namespace Rubyer
             }
 
             itemsControl.ItemsSource = array;
-            itemsControl.SelectedIndex = index;
-            itemsControl.ScrollIntoView(((int)itemsControl.SelectedItem).ToString("D2"));
+
+            if (itemsControl is ListBox listBox)
+            {
+                listBox.SelectedIndex = index;
+                int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
+                listBox.ScrollIntoView(array[scrollIndex]);
+            }
         }
 
         /// <summary>
