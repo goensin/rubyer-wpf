@@ -185,7 +185,7 @@ namespace Rubyer
         }
 
         // 时钟的时间改变
-        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
+        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
             if (!isInited)
             {
@@ -195,7 +195,7 @@ namespace Rubyer
             if (SelectedDateTime != null)
             {
                 DateTime dateTime = (DateTime)SelectedDateTime;
-                DateTime newDate = e.NewValue;
+                DateTime newDate = (DateTime)e.NewValue;
                 SelectedDateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
             }
             else

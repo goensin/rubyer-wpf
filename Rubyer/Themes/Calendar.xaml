@@ -302,11 +302,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
                     <Grid>
-                        <Border Background="{TemplateBinding Background}"
+                        <Border Margin="0 3 0 0"
+                                Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{StaticResource AllDirectionEffect3}"
-                                Margin="0 3 0 0"/>
-                        
+                                Effect="{StaticResource AllDirectionEffect3}" />
+
                         <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
                             <CalendarItem x:Name="PART_CalendarItem"
                                           Style="{TemplateBinding CalendarItemStyle}"

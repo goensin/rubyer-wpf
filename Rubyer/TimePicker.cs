@@ -36,7 +36,7 @@ namespace Rubyer
             this._clock = clock;
 
             TextBox textBox = GetTemplateChild(TextBoxPartName) as TextBox;
-            Binding binding1 = new Binding("Text");
+            var binding1 = new Binding("Text");
             binding1.Source = this;
             binding1.Mode = BindingMode.TwoWay;
             textBox.SetBinding(TextBox.TextProperty, binding1);
@@ -54,8 +54,6 @@ namespace Rubyer
             button.Click += Button_Click;
         }
 
-
-
         private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -65,9 +63,9 @@ namespace Rubyer
 
         #region 路由事件
         public static readonly RoutedEvent SelectedTimeChangedEvent =
-            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(TimePicker));
+            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(TimePicker));
 
-        public event RoutedPropertyChangedEventHandler<DateTime> SelectedTimeChanged
+        public event RoutedPropertyChangedEventHandler<DateTime?> SelectedTimeChanged
         {
             add { AddHandler(SelectedTimeChangedEvent, value); }
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
@@ -75,25 +73,30 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
+
+        public static readonly DependencyProperty SeletedTimeProperty = DependencyProperty.Register(
+            "SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
+
+        /// <summary>
+        /// 选中时间
+        /// </summary>
         public DateTime? SeletedTime
         {
             get { return (DateTime?)GetValue(SeletedTimeProperty); }
             set { SetValue(SeletedTimeProperty, value); }
         }
 
-        public static readonly DependencyProperty SeletedTimeProperty =
-            DependencyProperty.Register("SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
+        public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
+            "IsDropDownOpen", typeof(bool), typeof(TimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
-
+        /// <summary>
+        /// 弹窗打开
+        /// </summary>
         public bool IsDropDownOpen
         {
             get { return (bool)GetValue(IsDropDownOpenProperty); }
             set { SetValue(IsDropDownOpenProperty, value); }
         }
-
-        public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(TimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
-
 
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -112,20 +115,25 @@ namespace Rubyer
             }
         }
 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+            "Text", typeof(string), typeof(TimePicker), new PropertyMetadata(null, OnTextChanged));
+
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(TimePicker), new PropertyMetadata(null, OnTextChanged));
 
-        // 时间文本改变
+        /// <summary>
+        /// 时间文本改变
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TimePicker timePicker = (TimePicker)d;
-            var oldDateTime = timePicker.SeletedTime.GetValueOrDefault().ToString("HH:mm:ss");
+            var oldDateTime = timePicker.SeletedTime?.ToString("HH:mm:ss");
             if (oldDateTime != timePicker.Text)
             {
                 if (DateTime.TryParse(timePicker.Text, out DateTime result))
@@ -140,25 +148,26 @@ namespace Rubyer
         }
         #endregion
 
-
         #region 方法
 
-
-
-        // 选择时间改变
+        /// <summary>
+        /// 选择时间改变
+        /// </summary>
         private static void OnSelectedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TimePicker timePicker = (TimePicker)d;
 
             timePicker.Text = ((DateTime)timePicker.SeletedTime).ToString("HH:mm:ss");
 
-            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)e.OldValue, (DateTime)e.NewValue);
+            RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>((DateTime?)e.OldValue, (DateTime?)e.NewValue);
             args.RoutedEvent = TimePicker.SelectedTimeChangedEvent;
             timePicker.RaiseEvent(args);
         }
 
-        // 时钟的时间改变
-        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
+        /// <summary>
+        /// 时钟的时间改变
+        /// </summary>
+        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
             if (SeletedTime != e.NewValue)
             {
@@ -173,13 +182,17 @@ namespace Rubyer
 
 
 
-        // 点击时间按钮
+        /// <summary>
+        /// 点击时间按钮
+        /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             IsDropDownOpen = !IsDropDownOpen;
         }
 
-        // popup 关闭
+        /// <summary>
+        /// popup 关闭
+        /// </summary>
         private void Popup_Closed(object sender, EventArgs e)
         {
             if (this._clock.IsKeyboardFocusWithin)

@@ -37,6 +37,8 @@
                                            rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                            rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                            rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                           BorderBrush="{TemplateBinding BorderBrush}"
+                                           BorderThickness="{TemplateBinding BorderThickness}"
                                            Focusable="{TemplateBinding Focusable}"
                                            Foreground="{TemplateBinding Foreground}">
                             <rubyer:TextBoxHelper.PostContent>

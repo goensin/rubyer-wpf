@@ -74,8 +74,7 @@
                                             <StackPanel Orientation="Horizontal">
                                                 <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0" />
                                                 <rubyer:Clock x:Name="PART_Clock"
-                                                              BorderThickness="0"
-                                                              OnlyShowList="False" />
+                                                              BorderThickness="0" />
                                             </StackPanel>
                                         </Border>
 
