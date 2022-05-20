@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace Rubyer
@@ -31,7 +22,7 @@ namespace Rubyer
         public const string ClockPartName = "PART_Clock";
         public const string CalendarPartName = "PART_Calendar";
         public const string ConfirmButtonPartName = "PART_ConfirmButton";
-        
+        public const string DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
         private TextBox _textBox;
         private Popup _popup;
@@ -82,18 +73,11 @@ namespace Rubyer
             this._confirmButton = confirmButton;
         }
 
-        private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            textBox.Focus();
-        }
-
-
         #region 路由事件
         public static readonly RoutedEvent SelectedTimeChangedEvent =
-            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime>), typeof(DateTimePicker));
+            EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(DateTimePicker));
 
-        public event RoutedPropertyChangedEventHandler<DateTime> SelectedTimeChanged
+        public event RoutedPropertyChangedEventHandler<DateTime?> SelectedTimeChanged
         {
             add { AddHandler(SelectedTimeChangedEvent, value); }
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
@@ -101,25 +85,24 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
+
+        public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register(
+            "SelectedDateTime", typeof(DateTime?), typeof(DateTimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
+
         public DateTime? SelectedDateTime
         {
             get { return (DateTime?)GetValue(SelectedDateTimeProperty); }
             set { SetValue(SelectedDateTimeProperty, value); }
         }
 
-        public static readonly DependencyProperty SelectedDateTimeProperty =
-            DependencyProperty.Register("SelectedDateTime", typeof(DateTime?), typeof(DateTimePicker), new FrameworkPropertyMetadata(default(DateTime), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
-
+        public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
+            "IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
         public bool IsDropDownOpen
         {
             get { return (bool)GetValue(IsDropDownOpenProperty); }
             set { SetValue(IsDropDownOpenProperty, value); }
         }
-
-        public static readonly DependencyProperty IsDropDownOpenProperty =
-            DependencyProperty.Register("IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
-
 
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -138,45 +121,56 @@ namespace Rubyer
             }
         }
 
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+          "Text", typeof(string), typeof(DateTimePicker), new PropertyMetadata(null, OnTextChanged));
+
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
 
-        public static readonly DependencyProperty TextProperty =
-            DependencyProperty.Register("Text", typeof(string), typeof(DateTimePicker), new PropertyMetadata(null, OnTextChanged));
-
-        // 时间文本改变
+        /// <summary>
+        /// 时间文本改变
+        /// </summary>
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DateTimePicker dateTimePicker = (DateTimePicker)d;
 
             try
             {
-                if (((DateTime)dateTimePicker.SelectedDateTime).ToLongTimeString() != dateTimePicker.Text)
+                if (((DateTime)dateTimePicker.SelectedDateTime).ToString(DateTimeFormat) != dateTimePicker.Text)
                 {
                     dateTimePicker.SelectedDateTime = Convert.ToDateTime(dateTimePicker.Text);
                 }
             }
             catch (Exception)
             {
-                dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString("yyyy-MM-dd HH:mm:ss");
+                dateTimePicker.Text = dateTimePicker.SelectedDateTime == null ? null : ((DateTime)dateTimePicker.SelectedDateTime).ToString(DateTimeFormat);
             }
         }
         #endregion
 
         #region 方法
 
+        /// <summary>
+        /// 文本鼠标点下
+        /// </summary>
+        private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Focus();
+        }
 
-
-        // 选择时间改变
+        /// <summary>
+        /// 选择时间改变
+        /// </summary>
         private static void OnSelectedTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DateTimePicker dateTimePicker = (DateTimePicker)d;
-            dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString("yyyy-MM-dd HH:mm:ss");
+            dateTimePicker.Text = ((DateTime)dateTimePicker.SelectedDateTime).ToString(DateTimeFormat);
 
-            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)e.OldValue, (DateTime)e.NewValue);
+            var args = new RoutedPropertyChangedEventArgs<DateTime?>((DateTime?)e.OldValue, (DateTime?)e.NewValue);
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
             dateTimePicker.RaiseEvent(args);
 
@@ -184,8 +178,10 @@ namespace Rubyer
             dateTimePicker._textBox.SelectAll();
         }
 
-        // 时钟的时间改变
-        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
+        /// <summary>
+        /// 时钟的时间改变
+        /// </summary>
+        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
             if (!isInited)
             {
@@ -195,7 +191,7 @@ namespace Rubyer
             if (SelectedDateTime != null)
             {
                 DateTime dateTime = (DateTime)SelectedDateTime;
-                DateTime newDate = e.NewValue;
+                DateTime newDate = (DateTime)e.NewValue;
                 SelectedDateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
             }
             else
@@ -204,7 +200,9 @@ namespace Rubyer
             }
         }
 
-        // 日期改变
+        /// <summary>
+        /// 日期改变
+        /// </summary>
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
             if (!isInited)
@@ -220,26 +218,29 @@ namespace Rubyer
             }
             else
             {
-                SelectedDateTime = (DateTime)_calendar.SelectedDate;
+                SelectedDateTime = (DateTime)_calendar.SelectedDate + _clock.DisplayTime?.TimeOfDay;
             }
-            
+
+            Mouse.Capture(null);
             this._textBox.Focus();
         }
 
 
-        // 点击时间按钮
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            IsDropDownOpen = !IsDropDownOpen;
-        }
+        /// <summary>
+        /// 点击时间按钮
+        /// </summary>
+        private void Button_Click(object sender, RoutedEventArgs e) => IsDropDownOpen = !IsDropDownOpen;
 
-        // popup 打开后
-        private void Popup_Opened(object sender, EventArgs e)
-        {
-            isInited = true;
-        }
+        /// <summary>
+        /// popup 打开后
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Popup_Opened(object sender, EventArgs e) => isInited = true;
 
-        // popup 关闭
+        /// <summary>
+        ///  popup 关闭
+        /// </summary>
         private void Popup_Closed(object sender, EventArgs e)
         {
             if (this._confirmButton.IsKeyboardFocusWithin)
@@ -251,13 +252,15 @@ namespace Rubyer
                 this.IsDropDownOpen = false;
             }
         }
-        
-        // 确定
+
+        /// <summary>
+        /// 确定
+        /// </summary>
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             IsDropDownOpen = false;
 
-            RoutedPropertyChangedEventArgs<DateTime> args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)SelectedDateTime, (DateTime)SelectedDateTime);
+            var args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)SelectedDateTime, (DateTime)SelectedDateTime);
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
             this.RaiseEvent(args);
         }

@@ -81,8 +81,8 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <rubyer:Card Margin="3 3 0 3" Padding="0 10">
-                        <ListBox Style="{StaticResource PopularListBox}" rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
+                        <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                  rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
                                  rubyer:ControlHelper.MaskOpacity="1"
                                  rubyer:ItemsControlHelper.ItemMargin="7 1"

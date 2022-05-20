@@ -12,10 +12,14 @@
     <Style x:Key="RubyerDateTimePicker" TargetType="{x:Type rubyer:DateTimePicker}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Height" Value="28" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{StaticResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:DateTimePicker}">
@@ -28,12 +32,18 @@
                                  Grid.Column="0"
                                  HorizontalContentAlignment="Stretch"
                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                 rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}">
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
-                                        Height="26"
+                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
                                         Foreground="{TemplateBinding BorderBrush}">
                                     <rubyer:Icon Type="TimeLine" />
@@ -60,7 +70,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Border Background="{DynamicResource Primary}" CornerRadius="2.5 2.5 0 0">
+                                        <Border Background="{DynamicResource Primary}" CornerRadius="{StaticResource TopContainerCornerRadius}">
                                             <TextBlock Margin="10 5"
                                                        HorizontalAlignment="Center"
                                                        FontSize="20"
@@ -73,15 +83,13 @@
                                                 BorderThickness="0">
                                             <StackPanel Orientation="Horizontal">
                                                 <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0" />
-                                                <rubyer:Clock x:Name="PART_Clock"
-                                                              BorderThickness="0"
-                                                              OnlyShowList="False" />
+                                                <rubyer:Clock x:Name="PART_Clock" BorderThickness="0" />
                                             </StackPanel>
                                         </Border>
 
                                         <Button x:Name="PART_ConfirmButton"
                                                 Grid.Row="2"
-                                                rubyer:ControlHelper.CornerRadius="0 0 2 2"
+                                                rubyer:ControlHelper.CornerRadius="{StaticResource BottomContainerCornerRadius}"
                                                 Content="确认" />
                                     </Grid>
                                 </rubyer:Card>

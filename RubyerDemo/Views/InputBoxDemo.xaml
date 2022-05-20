@@ -36,6 +36,7 @@
                             Orientation="Horizontal">
                     <TextBox Style="{DynamicResource AccentTextBox}"
                              Width="150"
+                             rubyer:ControlHelper.CornerRadius="14"
                              rubyer:TextBoxHelper.IsClearable="True"
                              rubyer:TextBoxHelper.Watermark="可清除" />
                 </StackPanel>

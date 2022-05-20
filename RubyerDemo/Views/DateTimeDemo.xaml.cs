@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,9 +24,14 @@ namespace RubyerDemo.Views
             InitializeComponent();
         }
 
-        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime> e)
+        private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
             MessageBox.Show($"{e.OldValue} => {e.NewValue}");
-        } 
+        }
+
+        private void TimePicker_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            Debug.WriteLine($"{e.OldValue} => {e.NewValue}");
+        }
     }
 }
