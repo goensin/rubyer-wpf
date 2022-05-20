@@ -37,7 +37,6 @@
                       Margin="0 0 0 10"
                       Header="日期选择框-DatePicker">
                 <DatePicker Width="120"
-                            Margin="5"
                             rubyer:ControlHelper.FocusBorderBrush="{StaticResource Accent}"
                             rubyer:ControlHelper.MouseOverBrush="{StaticResource Accent}" />
             </GroupBox>
@@ -47,9 +46,7 @@
                       Width="Auto"
                       Margin="10 0 0 10"
                       Header="时间选择框-TimePicker">
-                <rubyer:TimePicker Width="120"
-                                   Margin="5" 
-                                   SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
+                <rubyer:TimePicker Width="120" SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
             </GroupBox>
 
             <GroupBox Grid.Row="1"
@@ -57,7 +54,7 @@
                       Width="Auto"
                       Margin="10 0 0 10"
                       Header="日期时间选择框-DateTimePicker">
-                <rubyer:DateTimePicker Width="180" Margin="5" />
+                <rubyer:DateTimePicker Width="180" />
             </GroupBox>
         </Grid>
     </ScrollViewer>
