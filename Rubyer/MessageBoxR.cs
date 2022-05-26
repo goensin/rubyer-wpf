@@ -191,30 +191,19 @@ namespace Rubyer
                 throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息框容器");
             }
 
-            CancellationTokenSource cts = new CancellationTokenSource();
-            MessageBoxResult result = MessageBoxResult.No;
+            TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
             MessageBoxContainer container = containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             card.ReturnResult += (a, b) =>
             {
-                cts.Cancel();
-                result = b.Result;
+                container.IsShow = false;
+                taskCompletionSource.SetResult(b.Result);
             };
 
             container.DialogContent = card;
             container.IsShow = true;
-            while (!cts.IsCancellationRequested)
-            {
-                try
-                {
-                    await Task.Delay(1000, cts.Token);
-                }
-                catch (Exception) { }
-            }
-
-            container.IsShow = false;
-            return result;
+            return await taskCompletionSource.Task;
         }
 
         /// <summary>
