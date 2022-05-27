@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Textbox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <converter:ComboBoxPopupWidthConverter x:Key="ComboBoxPopupWidth" />
@@ -226,16 +227,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                <ColumnDefinition Width="22" />
             </Grid.ColumnDefinitions>
             <Popup x:Name="PART_Popup"
                    Grid.ColumnSpan="2"
                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
                    AllowsTransparency="True"
-                   HorizontalOffset="-5"
+                   HorizontalOffset="5"
                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                    Placement="Bottom"
-                   PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}">
+                   PopupAnimation="Fade">
                 <Popup.MinWidth>
                     <MultiBinding Converter="{StaticResource ComboBoxPopupWidth}">
                         <Binding ElementName="templateRoot" Path="ActualWidth" />
@@ -244,24 +245,17 @@
                 </Popup.MinWidth>
                 <Grid>
                     <Border x:Name="dropDownBorder"
-                            Margin="5 1 5 5"
+                            Margin="5"
                             Background="{TemplateBinding Background}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             Effect="{StaticResource AllDirectionEffect}" />
-                    <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 6 5 10">
+                    <ScrollViewer x:Name="DropDownScrollViewer"
+                                  Style="{StaticResource SmallScrollViewer}"
+                                  Margin="5 10">
                         <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
-                            <Canvas x:Name="canvas"
-                                    Width="0"
-                                    Height="0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Top">
-                                <Rectangle x:Name="opaqueRect"
-                                           Width="{Binding ActualWidth, ElementName=dropDownBorder}"
-                                           Height="{Binding ActualHeight, ElementName=dropDownBorder}"
-                                           Fill="{Binding Background, ElementName=dropDownBorder}" />
-                            </Canvas>
                             <ItemsPresenter x:Name="ItemsPresenter"
                                             KeyboardNavigation.DirectionalNavigation="Contained"
+                                            OverridesDefaultStyle="True"
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                     </ScrollViewer>
@@ -310,10 +304,6 @@
                 </MultiTrigger.Conditions>
                 <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
             </MultiTrigger>
-            <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
-                <Setter TargetName="opaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
-                <Setter TargetName="opaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
-            </Trigger>
             <Trigger SourceName="toggleButton" Property="IsChecked" Value="True">
                 <Setter TargetName="toggleButton" Property="IsHitTestVisible" Value="False" />
             </Trigger>
@@ -357,7 +347,7 @@
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.4" />
         <Setter Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="False" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 0.5" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
@@ -367,16 +357,17 @@
                           SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="0" MinWidth="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}" />
+                            <ColumnDefinition Width="12" />
                         </Grid.ColumnDefinitions>
+
                         <Popup x:Name="PART_Popup"
                                Grid.ColumnSpan="2"
                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                AllowsTransparency="True"
-                               HorizontalOffset="-5"
+                               HorizontalOffset="5"
                                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                Placement="Bottom"
-                               PopupAnimation="Slide">
+                               PopupAnimation="Fade">
                             <Popup.MinWidth>
                                 <MultiBinding Converter="{StaticResource ComboBoxPopupWidth}">
                                     <Binding ElementName="templateRoot" Path="ActualWidth" />
@@ -385,22 +376,14 @@
                             </Popup.MinWidth>
                             <Grid>
                                 <Border x:Name="dropDownBorder"
-                                        Margin="5 1 5 5"
+                                        Margin="5"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         Effect="{StaticResource AllDirectionEffect}" />
-                                <ScrollViewer x:Name="DropDownScrollViewer" Margin="5 6 5 10">
+                                <ScrollViewer x:Name="DropDownScrollViewer"
+                                              Style="{StaticResource SmallScrollViewer}"
+                                              Margin="5 10">
                                     <Grid x:Name="grid" RenderOptions.ClearTypeHint="Enabled">
-                                        <Canvas x:Name="canvas"
-                                                Width="0"
-                                                Height="0"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Top">
-                                            <Rectangle x:Name="opaqueRect"
-                                                       Width="{Binding ActualWidth, ElementName=dropDownBorder}"
-                                                       Height="{Binding ActualHeight, ElementName=dropDownBorder}"
-                                                       Fill="{Binding Background, ElementName=dropDownBorder}" />
-                                        </Canvas>
                                         <ItemsPresenter x:Name="ItemsPresenter"
                                                         KeyboardNavigation.DirectionalNavigation="Contained"
                                                         OverridesDefaultStyle="True"
@@ -473,14 +456,13 @@
                                             IsHitTestVisible="False"
                                             IsTabStop="False" />
                         </Grid>
-
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="False">
-                            <Setter TargetName="dropDownBorder" Property="Height" Value="95" />
+                            <Setter TargetName="dropDownBorder" Property="Height" Value="100" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -489,10 +471,6 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </MultiTrigger>
-                        <Trigger SourceName="DropDownScrollViewer" Property="ScrollViewer.CanContentScroll" Value="False">
-                            <Setter TargetName="opaqueRect" Property="Canvas.Top" Value="{Binding VerticalOffset, ElementName=DropDownScrollViewer}" />
-                            <Setter TargetName="opaqueRect" Property="Canvas.Left" Value="{Binding HorizontalOffset, ElementName=DropDownScrollViewer}" />
-                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
