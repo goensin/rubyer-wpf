@@ -13,6 +13,9 @@
     <system:Double x:Key="InsideButtonCircleDiameter">22</system:Double>
     <system:Double x:Key="TabButtonCircleDiameter">18</system:Double>
 
+    <system:Double x:Key="ControlCornerRadius">3</system:Double>
+    <system:Double x:Key="ContainerCornerRadius">5</system:Double>
+    
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
                       BlurRadius="7"
@@ -95,7 +98,6 @@
                       Color="{StaticResource EffectColor}" />
 
     <!--  CornerRadius  -->
-    <system:Double x:Key="ControlCornerRadius">3</system:Double>
     <CornerRadius x:Key="AllControlCornerRadius"
                   BottomLeft="{StaticResource ControlCornerRadius}"
                   BottomRight="{StaticResource ControlCornerRadius}"
@@ -122,7 +124,6 @@
                   TopLeft="0"
                   TopRight="0" />
 
-    <system:Double x:Key="ContainerCornerRadius">5</system:Double>
     <CornerRadius x:Key="AllContainerCornerRadius"
                   BottomLeft="{StaticResource ContainerCornerRadius}"
                   BottomRight="{StaticResource ContainerCornerRadius}"
