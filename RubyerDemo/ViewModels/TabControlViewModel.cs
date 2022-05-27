@@ -5,6 +5,11 @@ namespace RubyerDemo.ViewModels
 {
     public class TabControlViewModel : ViewModelBase
     {
+        private ObservableCollection<Poetry> poetries;
+        private Poetry selectedPoetry;
+        private RelayCommand addTabItem;
+        private int count = 1;
+
         public TabControlViewModel()
         {
             Poetries = new ObservableCollection<Poetry>
@@ -40,7 +45,7 @@ namespace RubyerDemo.ViewModels
             };
         }
 
-        private ObservableCollection<Poetry> poetries;
+
         public ObservableCollection<Poetry> Poetries
         {
             get => poetries;
@@ -51,26 +56,28 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private Poetry selectedPoetry;
         public Poetry SelectedPoetry
         {
             get => selectedPoetry;
-            set 
+            set
             {
                 selectedPoetry = value;
                 RaisePropertyChanged("SelectedPoetry");
             }
         }
 
-
-
-        private RelayCommand closeTabItem;
-        public RelayCommand CloseTabItem => closeTabItem ?? (closeTabItem = new RelayCommand(CloseTabItemExecute));
-        
-        void CloseTabItemExecute(object obj)
+        public RelayCommand AddTabItem => addTabItem ?? (addTabItem = new RelayCommand(AddTabItemExecute));
+        void AddTabItemExecute(object obj)
         {
-            Poetry poetry = obj as Poetry;
-            Poetries.Remove(poetry);
+            Poetry poetry = new Poetry
+            {
+                Title = $"TabItem {count}",
+                Content = $"TabItem {count}"
+            };
+
+            count++;
+            Poetries.Add(poetry);
+            SelectedPoetry = poetry;
         }
     }
 

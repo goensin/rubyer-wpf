@@ -151,7 +151,7 @@ namespace Rubyer
 
                                 scrollViewer.ScrollChanged += (a, b) =>
                                 {
-                                    StartRowAnimation(tabControl, scrollViewer);
+                                    StartRowAnimation(tabControl, scrollViewer, durationMilliseconds: 100);
                                 };
 
                                 if (tabControl.SelectedIndex >= 0)
@@ -178,7 +178,7 @@ namespace Rubyer
 
                                 scrollViewer.ScrollChanged += (a, b) =>
                                 {
-                                    StartColAnimation(tabControl, scrollViewer);
+                                    StartColAnimation(tabControl, scrollViewer, durationMilliseconds: 0);
                                 };
 
                                 if (tabControl.SelectedIndex >= 0)
@@ -211,7 +211,7 @@ namespace Rubyer
             return item;
         }
 
-        private static void StartColAnimation(TabControl tabControl, ScrollViewer scrollViewer)
+        private static void StartColAnimation(TabControl tabControl, ScrollViewer scrollViewer, int durationMilliseconds = 400)
         {
             int index = tabControl.SelectedIndex;
             if (tabControl.Items.Count == 0 || index < 0 || index >= tabControl.Items.Count)
@@ -228,14 +228,14 @@ namespace Rubyer
             DoubleAnimation canvasAnimation = new DoubleAnimation
             {
                 To = bounds.Y,
-                Duration = TimeSpan.FromMilliseconds(500),
+                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
             DoubleAnimation sizeAnimation = new DoubleAnimation
             {
                 To = item.ActualHeight,
-                Duration = TimeSpan.FromMilliseconds(500),
+                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
@@ -243,7 +243,7 @@ namespace Rubyer
             rectangleCol.BeginAnimation(FrameworkElement.HeightProperty, sizeAnimation);
         }
 
-        private static void StartRowAnimation(TabControl tabControl, ScrollViewer scrollViewer)
+        private static void StartRowAnimation(TabControl tabControl, ScrollViewer scrollViewer, int durationMilliseconds = 400)
         {
             int index = tabControl.SelectedIndex;
             if (tabControl.Items.Count == 0 || index < 0 || index >= tabControl.Items.Count)
@@ -261,14 +261,14 @@ namespace Rubyer
             DoubleAnimation canvasAnimation = new DoubleAnimation
             {
                 To = bounds.X,
-                Duration = TimeSpan.FromMilliseconds(500),
+                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
             DoubleAnimation sizeAnimation = new DoubleAnimation
             {
                 To = item.ActualWidth,
-                Duration = TimeSpan.FromMilliseconds(500),
+                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
             };
 
