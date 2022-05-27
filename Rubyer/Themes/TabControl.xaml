@@ -169,15 +169,29 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
 
-                        <Border x:Name="horizontalLine"
+                        <Canvas x:Name="horizontalLine"
                                 Grid.Row="1"
                                 Grid.Column="0"
-                                Background="{TemplateBinding BorderBrush}" />
-
-                        <Border x:Name="verticalLine"
+                                Background="{TemplateBinding BorderBrush}">
+                            <Rectangle x:Name="selectedRectRow"
+                                       Canvas.Left="0"
+                                       Canvas.Top="0"
+                                       Width="0"
+                                       Height="2.5"
+                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Canvas>
+                        
+                        <Canvas x:Name="verticalLine"
                                 Grid.Row="0"
                                 Grid.Column="1"
-                                Background="{TemplateBinding BorderBrush}" />
+                                Background="Transparent">
+                            <Rectangle x:Name="selectedRectCol"
+                                       Canvas.Left="0"
+                                       Canvas.Top="0"
+                                       Width="2.5"
+                                       Height="0"
+                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Canvas>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
@@ -198,6 +212,8 @@
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
+                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
@@ -210,6 +226,8 @@
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="2" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
+                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
@@ -235,32 +253,30 @@
                 <ControlTemplate TargetType="{x:Type TabItem}">
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <Border x:Name="mainBorder"
-                                Margin="0 0 0 -1.5"
+                                Margin="0"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                BorderThickness="0 0 0 2.5"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="0"
                                 SnapsToDevicePixels="True" />
-                        <Border>
-                            <StackPanel Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                        Orientation="Horizontal">
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  ContentSource="Header"
-                                                  Focusable="False"
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                <Button x:Name="clearButton"
-                                        Style="{StaticResource TextButton}"
-                                        Margin="5 0 0 0"
-                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
-                                        rubyer:ButtonHelper.Shape="Circle"
-                                        Foreground="{TemplateBinding Foreground}"
-                                        Visibility="Hidden">
-                                    <rubyer:Icon Type="CloseLine" />
-                                </Button>
-                            </StackPanel>
-                        </Border>
+                        <StackPanel Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                    Orientation="Horizontal">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <Button x:Name="clearButton"
+                                    Style="{StaticResource TextButton}"
+                                    Margin="5 0 0 0"
+                                    rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Visibility="Hidden">
+                                <rubyer:Icon Type="CloseLine" />
+                            </Button>
+                        </StackPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
@@ -301,5 +317,6 @@
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource LineTabItem}" />
+        <Setter Property="rubyer:TabControlHelper.IsAnimation" Value="True" />
     </Style>
 </ResourceDictionary>
