@@ -39,6 +39,48 @@
             <Menu Grid.Column="1"
                   HorizontalAlignment="Right"
                   WindowChrome.IsHitTestVisibleInChrome="True">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="圆角" />
+                            <rubyer:Icon Type="AlbumLine" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource DefaultForeground}">
+                                <TextBlock Margin="0 0 10 0" Text="控件: " />
+                                <Slider x:Name="controlSlider"
+                                        Width="120"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="15"
+                                        Minimum="0"
+                                        TickFrequency="0.1"
+                                        ValueChanged="controlSlider_ValueChanged" />
+                                <TextBlock Width="30"
+                                           Margin="10 0 0 0"
+                                           Text="{Binding Value, ElementName=controlSlider}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource DefaultForeground}">
+                                <TextBlock Margin="0 0 10 0" Text="容器: " />
+                                <Slider x:Name="contrainerSlider"
+                                        Width="120"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="20"
+                                        Minimum="0"
+                                        TickFrequency="0.1"
+                                        ValueChanged="contrainerSlider_ValueChanged" />
+                                <TextBlock Width="30"
+                                           Margin="10 0 0 0"
+                                           Text="{Binding Value, ElementName=contrainerSlider}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
                 <MenuItem ItemsSource="{Binding ThemeColors}">
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">

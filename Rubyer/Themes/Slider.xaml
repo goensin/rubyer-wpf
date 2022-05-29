@@ -45,7 +45,7 @@
                     <Border x:Name="valueBorder"
                             Padding="10 5"
                             Background="{DynamicResource DefaultForeground}"
-                            CornerRadius="{StaticResource AllControlCornerRadius}"
+                            CornerRadius="{DynamicResource AllControlCornerRadius}"
                             IsHitTestVisible="False"
                             TextBlock.Foreground="{DynamicResource DefaultBackground}">
                         <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
@@ -241,7 +241,7 @@
                     <Border x:Name="valueBorder"
                             Padding="10 5"
                             Background="{DynamicResource DefaultForeground}"
-                            CornerRadius="{StaticResource AllControlCornerRadius}"
+                            CornerRadius="{DynamicResource AllControlCornerRadius}"
                             IsHitTestVisible="False"
                             TextBlock.Foreground="{DynamicResource DefaultBackground}">
                         <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
