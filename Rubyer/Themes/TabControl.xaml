@@ -141,7 +141,9 @@
                                       Grid.Column="0"
                                       Panel.ZIndex="1"
                                       HorizontalScrollBarVisibility="Auto"
-                                      VerticalScrollBarVisibility="Auto">
+                                      VerticalScrollBarVisibility="Auto"
+                                      rubyer:ScrollViewerHelper.HorizontalDelta="150"
+                                      rubyer:ScrollViewerHelper.VerticalDelta="75">
                             <TabPanel Grid.Row="0"
                                       Grid.Column="0"
                                       Panel.ZIndex="1"
@@ -180,7 +182,7 @@
                                        Height="2.5"
                                        Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Canvas>
-                        
+
                         <Canvas x:Name="verticalLine"
                                 Grid.Row="0"
                                 Grid.Column="1"
