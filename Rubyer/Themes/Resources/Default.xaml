@@ -15,7 +15,7 @@
 
     <system:Double x:Key="ControlCornerRadius">3</system:Double>
     <system:Double x:Key="ContainerCornerRadius">5</system:Double>
-    
+
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
                       BlurRadius="7"

@@ -1,5 +1,7 @@
 ﻿using Rubyer;
+using Rubyer.Commons;
 using RubyerDemo.Consts;
+using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,13 +27,7 @@ namespace RubyerDemo.Views
         public DialogContent()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            // DialogBox.CloseDialogCommand.Execute($"用户名:{userName.Text};密码:{password.Password}", null);
-
-            Dialog.Close(ConstNames.MainDialogBox, $"用户名:{userName.Text};密码:{password.Password}");
+            DataContext = new DialogContentViewModel();
         }
     }
 }

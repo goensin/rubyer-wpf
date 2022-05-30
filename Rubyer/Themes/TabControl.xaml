@@ -39,7 +39,7 @@
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <rubyer:ControlMask x:Name="mask"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                            CornerRadius="{StaticResource TopControlCornerRadius}"
+                                            CornerRadius="{DynamicResource TopControlCornerRadius}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TabControl}}" />
 
@@ -67,15 +67,15 @@
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource LeftControlCornerRadius}" />
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource LeftControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource RightControlCornerRadius}" />
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom">
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{StaticResource BottomControlCornerRadius}" />
+                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource BottomControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -140,6 +140,8 @@
                                       Grid.Row="0"
                                       Grid.Column="0"
                                       Panel.ZIndex="1"
+                                      rubyer:ScrollViewerHelper.HorizontalDelta="150"
+                                      rubyer:ScrollViewerHelper.VerticalDelta="75"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <TabPanel Grid.Row="0"
@@ -180,7 +182,7 @@
                                        Height="2.5"
                                        Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Canvas>
-                        
+
                         <Canvas x:Name="verticalLine"
                                 Grid.Row="0"
                                 Grid.Column="1"

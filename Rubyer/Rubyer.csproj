@@ -7,9 +7,9 @@
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
 		<PackageProjectUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</PackageProjectUrl>
-		<Version>2.0.0.2-alpha</Version>
+		<Version>2.0.0.6-alpha</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		<PackageLicenseExpression> Apache-2.0</PackageLicenseExpression>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Assets\**" />
@@ -24,6 +24,5 @@
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
-    <None Include="..\LICENSE" Link="LICENSE" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using Rubyer.Commons;
 using RubyerDemo.Consts;
 using RubyerDemo.Views;
 using System;
@@ -56,10 +57,19 @@ namespace RubyerDemo.ViewModels
             }
         }
 
+        public IParameters Paramters
+        {
+            get
+            {
+                Parameters parameters = new Parameters();
+                parameters.Add("User", User);
+                return parameters;
+            }
+        }
 
         private RelayCommand openDialog1;
         public RelayCommand OpenDialog1 => openDialog1 ?? (openDialog1 = new RelayCommand(OpenDialog1Execute));
-        // 打开 1# 对话框
+        // 打开 2# 对话框
         private void OpenDialog1Execute(object obj)
         {
             Dialog1IsShow = true;
@@ -67,7 +77,7 @@ namespace RubyerDemo.ViewModels
 
         private RelayCommand closeDialog1;
         public RelayCommand CloseDialog1 => closeDialog1 ?? (closeDialog1 = new RelayCommand(CloseDialog1Execute));
-        // 关闭 1# 对话框
+        // 关闭 2# 对话框
         private void CloseDialog1Execute(object obj)
         {
             Dialog1IsShow = false;
@@ -75,7 +85,7 @@ namespace RubyerDemo.ViewModels
 
         private RelayCommand beforeDialog3Open;
         public RelayCommand BeforeDialog3Open => beforeDialog3Open ?? (beforeDialog3Open = new RelayCommand(BeforeDialog3OpenExecute));
-        // 2# 对话框打开前
+        // 3# 对话框打开前
         private void BeforeDialog3OpenExecute(object obj)
         {
             Message.ShowInContainer(ConstNames.MainMessageContainer, "打开 3# 对话框");
@@ -83,12 +93,12 @@ namespace RubyerDemo.ViewModels
 
         private RelayCommand afterDialog3Close;
         public RelayCommand AfterDialog3Close => afterDialog3Close ?? (afterDialog3Close = new RelayCommand(AfterDialog3CloseExecute));
-        // 2# 对话框关闭后
+        // 3# 对话框关闭后
         private void AfterDialog3CloseExecute(object obj)
         {
-            if (obj is User user)
+            if (obj is IParameters parameters)
             {
-                Users.Add((User)user.Clone());
+                Users.Add((User)parameters.GetValue<User>("User").Clone());
             }
         }
 
@@ -98,12 +108,17 @@ namespace RubyerDemo.ViewModels
         private void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
-            Dialog.Show(ConstNames.MainDialogBox, content, "登录", BeforeDialog4Open, AfterDialog4Close);
+            var parameters = new Parameters();
+            parameters.Add("User", new User { Name = "wu", Password = "123" });
+            Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
         }
 
-        private void AfterDialog4Close(DialogBox dialog, object arg)
+        private void AfterDialog4Close(DialogBox dialog, IParameters parameters)
         {
-            Debug.WriteLine($"4# 对话框关闭参数:{arg}");
+            if (parameters.TryGetValue<User>("User", out var user))
+            {
+                Debug.WriteLine($"4# 对话框关闭参数:name:{user.Name},password:{user.Password}");
+            }
         }
 
         private void BeforeDialog4Open(DialogBox dialog)
@@ -112,9 +127,10 @@ namespace RubyerDemo.ViewModels
         }
     }
 
-    public class User : ICloneable
+    public class User : NotifyPropertyObject, ICloneable
     {
         public string Name { get; set; }
+        public string Password { get; set; }
         public int Age { get; set; }
 
         public object Clone()

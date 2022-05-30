@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Rubyer
 {
@@ -33,105 +35,36 @@ namespace Rubyer
         /// </summary>
         /// <param name="identifier">DialogBox 标识</param>
         /// <param name="content">内容</param>
+        /// <param name="parameters">参数</param>
+        /// <param name="title">标题</param>
         /// <param name="openHandler">打开前处理程序</param>
         /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
         /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle, bool isShowCloseButton)
+        public static void Show(string identifier, object content, IParameters parameters = null, string title = null, Action<DialogBox> openHandler = null, Action<DialogBox, IParameters> closeHandle = null, bool isShowCloseButton = true)
         {
-            if (!Dialogs.ContainsKey(identifier))
+            if (Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
             {
-                return;
+                dialogBox.Dispatcher.VerifyAccess();
+
+                if (content is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
+                {
+                    dialogBox.Title = string.IsNullOrEmpty(dialogContext.Title) ? dialogBox.Title : dialogContext.Title;
+                    dialogContext.RequestClose += (param) =>
+                    {
+                        DialogBox.CloseDialogCommand.Execute(param, dialogBox);
+                    };
+                }
+                else
+                {
+                    dialogBox.Title = string.IsNullOrEmpty(title) ? title : dialogBox.Title;
+                }
+
+                dialogBox.DialogContent = content;
+                dialogBox.IsShowCloseButton = isShowCloseButton;
+                dialogBox.BeforeOpenHandler = openHandler;
+                dialogBox.AfterCloseHandler = closeHandle;
+                DialogBox.OpenDialogCommand.Execute(parameters, dialogBox);
             }
-
-            DialogBox dialog = Dialogs[identifier];
-            dialog.Dispatcher.VerifyAccess();
-            dialog.DialogContent = content;
-            dialog.Title = string.IsNullOrEmpty(title) ? dialog.Title : title;
-            dialog.IsShowCloseButton = isShowCloseButton;
-            dialog.BeforeOpenHandler = openHandler;
-            dialog.AfterCloseHandler = closeHandle;
-            dialog.IsShow = true;
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        public static void Show(string identifier, object content)
-        {
-            Show(identifier, content, "", null, null, true);
-        }
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title)
-        {
-            Show(identifier, content, title, null, null, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="title">标题</param>
-        /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static void Show(string identifier, object content, string title, bool isShowCloseButton)
-        {
-            Show(identifier, content, title, null, null, isShowCloseButton);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        public static void Show(string identifier, object content, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, string.Empty, null, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="openHandler">打开前处理程序</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        public static void Show(string identifier, object content, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, string.Empty, openHandler, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, title, null, closeHandle, true);
-        }
-
-        /// <summary>
-        /// 显示指定对话框
-        /// </summary>
-        /// <param name="identifier">DialogBox 标识</param>
-        /// <param name="content">内容</param>
-        /// <param name="openHandler">打开前处理程序</param>
-        /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="title">标题</param>
-        public static void Show(string identifier, object content, string title, Action<DialogBox> openHandler, Action<DialogBox, object> closeHandle)
-        {
-            Show(identifier, content, title, openHandler, closeHandle, true);
         }
 
         /// <summary>
@@ -139,14 +72,12 @@ namespace Rubyer
         /// </summary>
         /// <param name="identifier">标识</param>
         /// <param name="parameter">参数</param>
-        public static void Close(string identifier, object parameter = null)
+        public static void Close(string identifier, IParameters parameter = null)
         {
-            if (!Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
+            if (Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
             {
-                return;
+                DialogBox.CloseDialogCommand.Execute(parameter, dialogBox);
             }
-
-            DialogBox.CloseDialogCommand.Execute(parameter, dialogBox);
         }
     }
 }

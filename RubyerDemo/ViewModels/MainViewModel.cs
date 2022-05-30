@@ -182,7 +182,7 @@ namespace RubyerDemo.ViewModels
         private void OpenAboutDialogExecute(object obj)
         {
             var content = new About();
-            Dialog.Show(ConstNames.MainDialogBox, content, "关于");
+            Dialog.Show(ConstNames.MainDialogBox, content, title: "关于");
         }
     }
 }
