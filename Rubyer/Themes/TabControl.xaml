@@ -140,10 +140,10 @@
                                       Grid.Row="0"
                                       Grid.Column="0"
                                       Panel.ZIndex="1"
-                                      HorizontalScrollBarVisibility="Auto"
-                                      VerticalScrollBarVisibility="Auto"
                                       rubyer:ScrollViewerHelper.HorizontalDelta="150"
-                                      rubyer:ScrollViewerHelper.VerticalDelta="75">
+                                      rubyer:ScrollViewerHelper.VerticalDelta="75"
+                                      HorizontalScrollBarVisibility="Auto"
+                                      VerticalScrollBarVisibility="Auto">
                             <TabPanel Grid.Row="0"
                                       Grid.Column="0"
                                       Panel.ZIndex="1"
