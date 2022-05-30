@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using Rubyer.Commons;
 using RubyerDemo.Consts;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,8 @@ namespace RubyerDemo.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // DialogBox.CloseDialogCommand.Execute($"用户名:{userName.Text};密码:{password.Password}", null);
-
-            Dialog.Close(ConstNames.MainDialogBox, $"用户名:{userName.Text};密码:{password.Password}");
+            var parameters = new Parameters { { "User", $"用户名:{userName.Text};密码:{password.Password}" } };
+            Dialog.Close(ConstNames.MainDialogBox, parameters);
         }
     }
 }

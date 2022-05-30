@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -21,10 +22,11 @@ namespace Rubyer
         public const string CloseStateName = "Close";
 
         public Action<DialogBox> BeforeOpenHandler;
-        public Action<DialogBox, object> AfterCloseHandler;
+        public Action<DialogBox, IParameters> AfterCloseHandler;
 
         private Border rootBorder;
-        private object closeParameter;
+        private IParameters openParameters;
+        private IParameters closeParameters;
 
         static DialogBox()
         {
@@ -41,7 +43,7 @@ namespace Rubyer
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                closeParameter = null;
+                closeParameters = null;
                 IsShow = false;
             };
 
@@ -51,12 +53,39 @@ namespace Rubyer
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
+            if (e.Parameter != null)
+            {
+                if (!(e.Parameter is IParameters parameters))
+                {
+                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
+                }
+
+                openParameters = parameters;
+            }
+            else
+            {
+                openParameters = null;
+            }
+
             IsShow = true;
         }
 
         private void CloseDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            closeParameter = e.Parameter;
+            if (e.Parameter != null)
+            {
+                if (!(e.Parameter is IParameters parameters))
+                {
+                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
+                }
+
+                closeParameters = parameters;
+            }
+            else
+            {
+                closeParameters = null;
+            }
+
             IsShow = false;
         }
 
@@ -66,7 +95,7 @@ namespace Rubyer
             {
                 if (IsClickBackgroundToClose && sender.Equals(border))
                 {
-                    closeParameter = null;
+                    closeParameters = null;
                     IsShow = false;
                 }
             }
@@ -110,9 +139,9 @@ namespace Rubyer
 
         // 关闭后事件
         public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
-            "AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<object>), typeof(DialogBox));
+            "AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<IParameters>), typeof(DialogBox));
 
-        public event RoutedPropertyChangedEventHandler<object> AfterClose
+        public event RoutedPropertyChangedEventHandler<IParameters> AfterClose
         {
             add { AddHandler(AfterCloseEvent, value); }
             remove { RemoveHandler(AfterCloseEvent, value); }
@@ -231,6 +260,23 @@ namespace Rubyer
             set { SetValue(TitleHorizontalAlignmentProperty, value); }
         }
 
+        //// 打开完成
+        //public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(
+        //    "IsOpened", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsOpenedChanged));
+
+        //private static void OnIsOpenedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        //{
+        //}
+
+        ///// <summary>
+        ///// 打开完成
+        ///// </summary>
+        //public bool IsOpened
+        //{
+        //    get { return (bool)GetValue(IsOpenedProperty); }
+        //    set { SetValue(IsOpenedProperty, value); }
+        //}
+
         // 关闭完成
         public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
             "IsClosed", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsClosedChanged));
@@ -239,18 +285,21 @@ namespace Rubyer
         {
             if (d is DialogBox dialog && dialog.IsClosed)
             {
-                var args = new RoutedPropertyChangedEventArgs<object>(null, dialog.closeParameter);
+                var args = new RoutedPropertyChangedEventArgs<IParameters>(null, dialog.closeParameters);
                 args.RoutedEvent = AfterCloseEvent;
                 dialog.RaiseEvent(args);
-                dialog.AfterCloseCommand?.Execute(dialog.closeParameter);
-                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameter);
+                dialog.AfterCloseCommand?.Execute(dialog.closeParameters);
+                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameters);
 
-                dialog.closeParameter = null;
+                dialog.closeParameters = null;
                 dialog.BeforeOpenHandler = null;
                 dialog.AfterCloseHandler = null;
             }
         }
 
+        /// <summary>
+        /// 关闭完成
+        /// </summary>
         public bool IsClosed
         {
             get { return (bool)GetValue(IsClosedProperty); }
@@ -268,6 +317,11 @@ namespace Rubyer
 
             GoToOpenState(container);
             _ = container.Focus();
+
+            if (container.DataContext is IDialogContext dialogContext)
+            {
+                dialogContext.OnDialogOpened(container.openParameters);
+            }
         }
 
         // 关闭对话框动作
