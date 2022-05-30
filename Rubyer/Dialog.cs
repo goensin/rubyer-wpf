@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons;
 using System;
 using System.Collections.Generic;
+using System.Windows;
 
 namespace Rubyer
 {
@@ -45,7 +46,7 @@ namespace Rubyer
             {
                 dialogBox.Dispatcher.VerifyAccess();
 
-                if (dialogBox.DataContext is IDialogContext dialogContext)
+                if (content is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
                 {
                     dialogBox.Title = string.IsNullOrEmpty(dialogContext.Title) ? dialogBox.Title : dialogContext.Title;
                     dialogContext.RequestClose += (param) =>

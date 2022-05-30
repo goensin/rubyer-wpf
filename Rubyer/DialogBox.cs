@@ -43,7 +43,7 @@ namespace Rubyer
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                closeParameters = null;
+                closeParameters = new Parameters();
                 IsShow = false;
             };
 
@@ -83,7 +83,7 @@ namespace Rubyer
             }
             else
             {
-                closeParameters = null;
+                closeParameters = new Parameters();
             }
 
             IsShow = false;
@@ -95,7 +95,7 @@ namespace Rubyer
             {
                 if (IsClickBackgroundToClose && sender.Equals(border))
                 {
-                    closeParameters = null;
+                    closeParameters = new Parameters();
                     IsShow = false;
                 }
             }
@@ -291,7 +291,7 @@ namespace Rubyer
                 dialog.AfterCloseCommand?.Execute(dialog.closeParameters);
                 dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameters);
 
-                dialog.closeParameters = null;
+                dialog.closeParameters = new Parameters();
                 dialog.BeforeOpenHandler = null;
                 dialog.AfterCloseHandler = null;
             }
@@ -318,7 +318,7 @@ namespace Rubyer
             GoToOpenState(container);
             _ = container.Focus();
 
-            if (container.DataContext is IDialogContext dialogContext)
+            if (container.DialogContent is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
             {
                 dialogContext.OnDialogOpened(container.openParameters);
             }

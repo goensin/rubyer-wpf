@@ -108,12 +108,17 @@ namespace RubyerDemo.ViewModels
         private void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
-            Dialog.Show(ConstNames.MainDialogBox, content, title: "登录", openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
+            var parameters = new Parameters();
+            parameters.Add("User", new User { Name = "wu", Password = "123" });
+            Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
         }
 
         private void AfterDialog4Close(DialogBox dialog, IParameters parameters)
         {
-            Debug.WriteLine($"4# 对话框关闭参数:{parameters.GetValue<string>("User")}");
+            if (parameters.TryGetValue<User>("User", out var user))
+            {
+                Debug.WriteLine($"4# 对话框关闭参数:name:{user.Name},password:{user.Password}");
+            }
         }
 
         private void BeforeDialog4Open(DialogBox dialog)
@@ -122,9 +127,10 @@ namespace RubyerDemo.ViewModels
         }
     }
 
-    public class User : ICloneable
+    public class User : NotifyPropertyObject, ICloneable
     {
         public string Name { get; set; }
+        public string Password { get; set; }
         public int Age { get; set; }
 
         public object Clone()
