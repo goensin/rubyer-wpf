@@ -294,7 +294,7 @@ namespace Rubyer
         /// 关闭对话框
         /// </summary>
         /// <param name="parameters">参数</param>
-        public void Close(IParameters parameters)
+        public void Close(IParameters parameters = null)
         {
             CloseDialogCommand.Execute(parameters, this);
         }

@@ -116,7 +116,7 @@
     </rubyer:RubyerWindow.TitleBarContent>
     <rubyer:MessageContainer Identifier="{x:Static const:ConstNames.MainMessageContainer}">
         <rubyer:MessageBoxContainer Identifier="{x:Static const:ConstNames.MainMessageBoxContainer}">
-            <rubyer:DialogBox Title="主对话框" Identifier="{x:Static const:ConstNames.MainDialogBox}">
+            <rubyer:DialogBox Identifier="{x:Static const:ConstNames.MainDialogBox}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="180" />

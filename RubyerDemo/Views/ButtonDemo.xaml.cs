@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Rubyer;
+using RubyerDemo.Consts;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,6 +24,13 @@ namespace RubyerDemo.Views
         public ButtonDemo()
         {
             InitializeComponent();
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            var dialogBox = Dialog.Show(ConstNames.MainDialogBox, new Loading { Text = "hello~" }, showCloseButton: false);
+            await Task.Delay(2000);
+            dialogBox.Close();
         }
     }
 }

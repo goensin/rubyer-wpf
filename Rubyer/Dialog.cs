@@ -39,8 +39,8 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="openHandler">打开前处理程序</param>
         /// <param name="closeHandle">关闭后处理程序</param>
-        /// <param name="isShowCloseButton">是否显示默认关闭按钮</param>
-        public static DialogBox Show(string identifier, object content, IParameters parameters = null, string title = null, Action<DialogBox> openHandler = null, Action<DialogBox, IParameters> closeHandle = null, bool isShowCloseButton = true)
+        /// <param name="showCloseButton">是否显示默认关闭按钮</param>
+        public static DialogBox Show(string identifier, object content, IParameters parameters = null, string title = null, Action<DialogBox> openHandler = null, Action<DialogBox, IParameters> closeHandle = null, bool showCloseButton = true)
         {
             if (Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
             {
@@ -60,7 +60,7 @@ namespace Rubyer
                 }
 
                 dialogBox.DialogContent = content;
-                dialogBox.IsShowCloseButton = isShowCloseButton;
+                dialogBox.IsShowCloseButton = showCloseButton;
                 dialogBox.BeforeOpenHandler = openHandler;
                 dialogBox.AfterCloseHandler = closeHandle;
                 DialogBox.OpenDialogCommand.Execute(parameters, dialogBox);
