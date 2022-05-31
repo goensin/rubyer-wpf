@@ -57,7 +57,7 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Grid>
+                                    <Grid x:Name="titleBar">
                                         <TextBlock Margin="15 5"
                                                    HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"
                                                    FontSize="{TemplateBinding TitleFontSize}"
@@ -156,6 +156,13 @@
                         <Trigger SourceName="PART_CardBorder" Property="Opacity" Value="1">
                             <Setter Property="IsClosed" Value="False" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Title" Value="{x:Null}"/>
+                                <Condition Property="IsShowCloseButton" Value="False"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Visibility" TargetName="titleBar" Value="Collapsed" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

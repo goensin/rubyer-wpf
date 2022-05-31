@@ -98,7 +98,10 @@ namespace RubyerDemo.ViewModels
         {
             if (obj is IParameters parameters)
             {
-                Users.Add((User)parameters.GetValue<User>("User").Clone());
+                if (parameters.TryGetValue("User", out User user))
+                {
+                    Users.Add((User)user.Clone());
+                }
             }
         }
 
