@@ -25,7 +25,7 @@
     <Style x:Key="RubyerTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -116,6 +116,8 @@
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="10 5" />
         <Setter Property="rubyer:HeaderHelper.Margin" Value="0" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabControl}">
@@ -139,19 +141,15 @@
                                       Style="{StaticResource OnlyArrowScrollViewer}"
                                       Grid.Row="0"
                                       Grid.Column="0"
-                                      Panel.ZIndex="1"
                                       rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                       rubyer:ScrollViewerHelper.VerticalDelta="75"
+                                      Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
-                            <TabPanel Grid.Row="0"
-                                      Grid.Column="0"
-                                      Panel.ZIndex="1"
-                                      Background="Transparent"
+                            <TabPanel Panel.ZIndex="1"
                                       IsItemsHost="True"
                                       KeyboardNavigation.TabIndex="1" />
                         </ScrollViewer>
-
 
                         <Border x:Name="contentPanel"
                                 Grid.Row="2"
@@ -243,7 +241,7 @@
     <Style x:Key="LineTabItem" TargetType="{x:Type TabItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />

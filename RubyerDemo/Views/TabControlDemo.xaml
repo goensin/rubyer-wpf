@@ -17,7 +17,9 @@
         <StackPanel Margin="10"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
-            <Button Command="{Binding AddTabItem}" Content="添加 TabItem" />
+            <Button Padding="10 0"
+                    Command="{Binding AddTabItem}"
+                    Content="添加 TabItem" />
         </StackPanel>
 
         <GroupBox Grid.Row="1"
@@ -128,6 +130,8 @@
                 <TabControl Style="{StaticResource LineTabControl}"
                             Grid.Row="0"
                             Grid.Column="1"
+                            rubyer:HeaderHelper.Background="AliceBlue"
+                            rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
                             rubyer:TabControlHelper.IsClearable="True"
                             ItemsSource="{Binding Poetries}"
                             SelectedItem="{Binding SelectedPoetry}"

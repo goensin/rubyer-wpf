@@ -21,9 +21,6 @@
     <SolidColorBrush x:Key="ButtonPressedBackgroundGray"
                      Opacity="0.7"
                      Color="#BDBDBD" />
-    <SolidColorBrush x:Key="GridBackground"
-                     Opacity="0.1"
-                     Color="#BDBDBD" />
 
     <SolidColorBrush x:Key="ScrollBackground"
                      Opacity="0.3"

@@ -308,7 +308,7 @@
                                         <Border x:Name="NoDataBorder"
                                                 Grid.Row="1"
                                                 Grid.ColumnSpan="2"
-                                                Background="{DynamicResource GridBackground}"
+                                                Background="{DynamicResource HeaderBackground}"
                                                 Visibility="Collapsed">
                                             <StackPanel HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
