@@ -33,74 +33,6 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogBox), new FrameworkPropertyMetadata(typeof(DialogBox)));
         }
 
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
-            _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
-
-            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
-            closeButton.Click += (sender, args) =>
-            {
-                closeParameters = new Parameters();
-                IsShow = false;
-            };
-
-            rootBorder = GetTemplateChild(RootBorderPartName) as Border;
-            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
-        }
-
-        private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (e.Parameter != null)
-            {
-                if (!(e.Parameter is IParameters parameters))
-                {
-                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
-                }
-
-                openParameters = parameters;
-            }
-            else
-            {
-                openParameters = null;
-            }
-
-            IsShow = true;
-        }
-
-        private void CloseDialogHandler(object sender, ExecutedRoutedEventArgs e)
-        {
-            if (e.Parameter != null)
-            {
-                if (!(e.Parameter is IParameters parameters))
-                {
-                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
-                }
-
-                closeParameters = parameters;
-            }
-            else
-            {
-                closeParameters = new Parameters();
-            }
-
-            IsShow = false;
-        }
-
-        private void RootBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.OriginalSource is Border border)
-            {
-                if (IsClickBackgroundToClose && sender.Equals(border))
-                {
-                    closeParameters = new Parameters();
-                    IsShow = false;
-                }
-            }
-        }
-
         #region 命令
         public static RoutedCommand CloseDialogCommand = new RoutedCommand();
         public static RoutedCommand OpenDialogCommand = new RoutedCommand();
@@ -260,23 +192,6 @@ namespace Rubyer
             set { SetValue(TitleHorizontalAlignmentProperty, value); }
         }
 
-        //// 打开完成
-        //public static readonly DependencyProperty IsOpenedProperty = DependencyProperty.Register(
-        //    "IsOpened", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsOpenedChanged));
-
-        //private static void OnIsOpenedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        //{
-        //}
-
-        ///// <summary>
-        ///// 打开完成
-        ///// </summary>
-        //public bool IsOpened
-        //{
-        //    get { return (bool)GetValue(IsOpenedProperty); }
-        //    set { SetValue(IsOpenedProperty, value); }
-        //}
-
         // 关闭完成
         public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
             "IsClosed", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsClosedChanged));
@@ -306,6 +221,83 @@ namespace Rubyer
             set { SetValue(IsClosedProperty, value); }
         }
         #endregion
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
+            _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
+
+            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
+            closeButton.Click += (sender, args) =>
+            {
+                closeParameters = new Parameters();
+                IsShow = false;
+            };
+
+            rootBorder = GetTemplateChild(RootBorderPartName) as Border;
+            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
+        }
+
+        private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                if (!(e.Parameter is IParameters parameters))
+                {
+                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
+                }
+
+                openParameters = parameters;
+            }
+            else
+            {
+                openParameters = null;
+            }
+
+            IsShow = true;
+        }
+
+        private void CloseDialogHandler(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter != null)
+            {
+                if (!(e.Parameter is IParameters parameters))
+                {
+                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
+                }
+
+                closeParameters = parameters;
+            }
+            else
+            {
+                closeParameters = new Parameters();
+            }
+
+            IsShow = false;
+        }
+
+        private void RootBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is Border border)
+            {
+                if (IsClickBackgroundToClose && sender.Equals(border))
+                {
+                    closeParameters = new Parameters();
+                    IsShow = false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 关闭对话框
+        /// </summary>
+        /// <param name="parameters">参数</param>
+        public void Close(IParameters parameters)
+        {
+            CloseDialogCommand.Execute(parameters, this);
+        }
 
         // 打开对话框动作
         private void OpenAnimiation(DialogBox container)
