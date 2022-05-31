@@ -39,7 +39,7 @@
                     <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
                         <rubyer:ControlMask x:Name="mask"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
-                                            CornerRadius="{DynamicResource TopControlCornerRadius}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TabControl}}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TabControl}}" />
 
@@ -67,15 +67,10 @@
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Right" />
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource LeftControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Left" />
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom">
-                            <Setter TargetName="mask" Property="CornerRadius" Value="{DynamicResource BottomControlCornerRadius}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -107,6 +102,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTabItem}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource TopControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
@@ -199,6 +195,7 @@
                             <Setter TargetName="contentPanel" Property="BorderThickness" Value="0" />
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="2" />
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource BottomControlCornerRadius}" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
@@ -213,6 +210,7 @@
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
                             <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource LeftControlCornerRadius}" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
@@ -227,6 +225,7 @@
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
                             <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
