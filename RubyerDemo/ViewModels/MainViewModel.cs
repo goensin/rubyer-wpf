@@ -42,7 +42,8 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "消息框-MessageBox",Content = new MessageBoxDemo{ DataContext= new MessageBoxViewModel()} },
                 new MenuItem{ Name = "对话框-Dialog",Content = new DialogDemo{ DataContext= new DialogViewModel()} },
                 new MenuItem{ Name = "转换动画-Transition",Content = new TransitionDemo() },
-                new MenuItem{ Name = "标记标签-BadgeTag",Content = new BadgeTagDemo() }
+                new MenuItem{ Name = "标记标签-BadgeTag",Content = new BadgeTagDemo() },
+                new MenuItem{ Name = "加载中-Loading",Content = new LoadingDemo() },
             };
 
             CurrentMenuItem = MenuItems[0];

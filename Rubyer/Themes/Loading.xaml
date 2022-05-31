@@ -10,20 +10,27 @@
         <Setter Property="Background" Value="{StaticResource BorderLight}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Foreground" Value="{StaticResource Primary}" />
-        <Setter Property="Height" Value="30" />
-        <Setter Property="Width" Value="30" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="StrokeThickness" Value="5" />
         <Setter Property="Progress" Value="0.01" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="CircleDiameter" Value="30" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Loading}">
                     <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
                         <Rectangle x:Name="background"
-                                   Width="{TemplateBinding Width}"
-                                   Height="{TemplateBinding Height}"
+                                   Width="{TemplateBinding CircleDiameter}"
+                                   Height="{TemplateBinding CircleDiameter}"
                                    Stroke="{TemplateBinding Background}"
                                    StrokeThickness="{TemplateBinding StrokeThickness}">
                             <Rectangle.RadiusX>
@@ -39,22 +46,34 @@
                                 </MultiBinding>
                             </Rectangle.RadiusY>
                         </Rectangle>
+                        
                         <Rectangle x:Name="loading"
-                                   Width="{TemplateBinding Width}"
-                                   Height="{TemplateBinding Height}"
+                                   Width="{TemplateBinding CircleDiameter}"
+                                   Height="{TemplateBinding CircleDiameter}"
                                    RadiusX="{Binding RadiusX, ElementName=background}"
                                    RadiusY="{Binding RadiusY, ElementName=background}"
                                    RenderTransformOrigin="0.5 0.5"
-                                   Stroke="{TemplateBinding Foreground}"
+                                   Stroke="{TemplateBinding FocusedBrush}"
                                    StrokeDashArray="{TemplateBinding StrokeDashArray}"
                                    StrokeThickness="{TemplateBinding StrokeThickness}">
                             <Rectangle.RenderTransform>
                                 <RotateTransform x:Name="loadingAngle" Angle="0" />
                             </Rectangle.RenderTransform>
                         </Rectangle>
+
+                        <TextBlock x:Name="Path_MessageText"
+                                   Grid.Row="1"
+                                   Margin="5"
+                                   HorizontalAlignment="Center" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Visibility" Value="Visible">
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter Property="Visibility" TargetName="Path_MessageText" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard RepeatBehavior="Forever">
