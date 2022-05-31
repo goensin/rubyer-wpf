@@ -128,7 +128,9 @@
                       Header="下拉框-ComboBox">
                 <StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
-                        <Label Margin="0 0 10 0" Content="不可编辑" />
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="不可编辑" />
                         <ComboBox Width="100" Margin="0 0 10 0">
                             <ComboBoxItem Content="选项一" />
                             <ComboBoxItem Content="选项二" />
@@ -143,7 +145,7 @@
                             <ComboBoxItem Content="选项二" />
                             <ComboBoxItem Content="选项三" />
                         </ComboBox>
-                        <ComboBox Width="110"
+                        <ComboBox Width="120"
                                   Margin="0 0 10 0"
                                   rubyer:ComboBoxHelper.IsClearable="True"
                                   rubyer:ComboBoxHelper.Watermark="可清除"
@@ -187,8 +189,10 @@
                             </ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <Label Margin="0 0 10 0" Content="可编辑" />
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="可编辑" />
                         <ComboBox Width="100"
                                   Margin="0 0 10 0"
                                   IsEditable="True">
@@ -197,7 +201,7 @@
                             <ComboBoxItem Content="选项三" />
                         </ComboBox>
 
-                        <ComboBox Width="120"
+                        <ComboBox Width="100"
                                   Margin="0 0 10 0"
                                   rubyer:ComboBoxHelper.IsClearable="True"
                                   rubyer:ComboBoxHelper.Watermark="可清除"
