@@ -16,7 +16,7 @@
 
     <Style x:Key="RuyberTextBlock" TargetType="{x:Type TextBlock}">
         <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>-->
-        <Setter Property="FontSize" Value="13" />
+        <!--<Setter Property="FontSize" Value="13" />-->
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
         <Setter Property="TextWrapping" Value="NoWrap" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -38,7 +38,7 @@
 
     <!--  默认字体大小  -->
     <Style BasedOn="{StaticResource RuyberTextBlock}" TargetType="{x:Type TextBlock}">
-        <Setter Property="TextBlock.FontSize" Value="13" />
+        <!--<Setter Property="TextBlock.FontSize" Value="13" />-->
     </Style>
 
     <!--  H5  -->

@@ -22,8 +22,8 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Card), new FrameworkPropertyMetadata(typeof(Card)));
         }
 
-        public static readonly DependencyProperty CornerRadiusProperty =
-          DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Card), new PropertyMetadata(default(CornerRadius)));
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
+              "CornerRadius", typeof(CornerRadius), typeof(Card), new PropertyMetadata(default(CornerRadius)));
 
         public CornerRadius CornerRadius
         {
