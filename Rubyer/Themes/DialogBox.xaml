@@ -14,8 +14,6 @@
         <Setter Property="CornerRadius" Value="2.5" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="IsClickBackgroundToClose" Value="True" />
-        <Setter Property="IsShowCloseButton" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="30 20" />
@@ -23,6 +21,8 @@
         <Setter Property="TitleFontSize" Value="17" />
         <Setter Property="TitleHorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="IsClickBackgroundToClose" Value="False" />
+        <Setter Property="IsShowCloseButton" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogBox">
@@ -88,7 +88,7 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
                                             </DoubleAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
@@ -158,10 +158,10 @@
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="Title" Value="{x:Null}"/>
-                                <Condition Property="IsShowCloseButton" Value="False"/>
+                                <Condition Property="Title" Value="{x:Null}" />
+                                <Condition Property="IsShowCloseButton" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="Visibility" TargetName="titleBar" Value="Collapsed" />
+                            <Setter TargetName="titleBar" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
