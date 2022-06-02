@@ -180,10 +180,10 @@ namespace RubyerDemo.ViewModels
         private RelayCommand openAboutDialog;
         public RelayCommand OpenAboutDialog => openAboutDialog ?? (openAboutDialog = new RelayCommand(OpenAboutDialogExecute));
 
-        private void OpenAboutDialogExecute(object obj)
+        private async void OpenAboutDialogExecute(object obj)
         {
             var content = new About();
-            Dialog.Show(ConstNames.MainDialogBox, content, title: "关于");
+            await Dialog.Show(ConstNames.MainDialogBox, content, title: "关于");
         }
     }
 }

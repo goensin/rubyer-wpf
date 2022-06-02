@@ -16,12 +16,12 @@ namespace Rubyer
         /// <summary>
         /// 请求关闭委托
         /// </summary>
-        event Action<IParameters> RequestClose;
+        event Action<object> RequestClose;
 
         /// <summary>
         /// 当对话框打开完成方法
         /// </summary>
         /// <param name="parameters">参数</param>
-        void OnDialogOpened(IParameters parameters);
+        void OnDialogOpened(object parameters);
     }
 }

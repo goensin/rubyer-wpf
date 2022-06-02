@@ -21,7 +21,7 @@ namespace Rubyer
             _ = messageBoxPanel.Child = card;
         }
 
-        private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArge e)
+        private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArgs e)
         {
             messageBoxPanel.Child = null;
             MessageBoxResult = e.Result;

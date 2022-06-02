@@ -113,12 +113,12 @@ namespace RubyerDemo.ViewModels
             var content = new DialogContent();
             var parameters = new Parameters();
             parameters.Add("User", new User { Name = "wu", Password = "123" });
-            Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
+            _ = Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
         }
 
-        private void AfterDialog4Close(DialogBox dialog, IParameters parameters)
+        private void AfterDialog4Close(DialogBox dialog, object parameters)
         {
-            if (parameters.TryGetValue<User>("User", out var user))
+            if (parameters is User user)
             {
                 Debug.WriteLine($"4# 对话框关闭参数:name:{user.Name},password:{user.Password}");
             }

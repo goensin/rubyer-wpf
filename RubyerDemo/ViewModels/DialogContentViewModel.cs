@@ -19,10 +19,11 @@ namespace RubyerDemo.ViewModels
         public string Title => "登录";
         public User User { get; set; }
 
-        public event Action<IParameters> RequestClose;
+        public event Action<object> RequestClose;
 
-        public void OnDialogOpened(IParameters parameters)
+        public void OnDialogOpened(object parameter)
         {
+            var parameters = (IParameters)parameter;
             User = parameters.GetValue<User>("User");
         }
 
@@ -31,9 +32,7 @@ namespace RubyerDemo.ViewModels
 
         private void LoginExecute(object obj)
         {
-            var parameters = new Parameters { { "User", User.Clone() } };
-            Dialog.Close(ConstNames.MainDialogBox, parameters);
+            Dialog.Close(ConstNames.MainDialogBox, User.Clone());
         }
-       
     }
 }

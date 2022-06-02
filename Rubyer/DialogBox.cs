@@ -21,12 +21,14 @@ namespace Rubyer
         public const string OpenStateName = "Open";
         public const string CloseStateName = "Close";
 
+        public delegate void DialogResultRoutedEventHandler(object sender, DialogResultRoutedEventArgs e);
+
         public Action<DialogBox> BeforeOpenHandler;
-        public Action<DialogBox, IParameters> AfterCloseHandler;
+        public Action<DialogBox, object> AfterCloseHandler;
 
         private Border rootBorder;
-        private IParameters openParameters;
-        private IParameters closeParameters;
+        private object openParameter;
+        private object closeParameter;
 
         static DialogBox()
         {
@@ -71,9 +73,9 @@ namespace Rubyer
 
         // 关闭后事件
         public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
-            "AfterClose", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<IParameters>), typeof(DialogBox));
+            "AfterClose", RoutingStrategy.Bubble, typeof(DialogResultRoutedEventHandler), typeof(DialogBox));
 
-        public event RoutedPropertyChangedEventHandler<IParameters> AfterClose
+        public event DialogResultRoutedEventHandler AfterClose
         {
             add { AddHandler(AfterCloseEvent, value); }
             remove { RemoveHandler(AfterCloseEvent, value); }
@@ -200,13 +202,13 @@ namespace Rubyer
         {
             if (d is DialogBox dialog && dialog.IsClosed)
             {
-                var args = new RoutedPropertyChangedEventArgs<IParameters>(null, dialog.closeParameters);
+                var args = new DialogResultRoutedEventArgs(AfterCloseEvent, dialog.closeParameter, dialog);
                 args.RoutedEvent = AfterCloseEvent;
                 dialog.RaiseEvent(args);
-                dialog.AfterCloseCommand?.Execute(dialog.closeParameters);
-                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameters);
+                dialog.AfterCloseCommand?.Execute(dialog.closeParameter);
+                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameter);
 
-                dialog.closeParameters = new Parameters();
+                dialog.closeParameter = null;
                 dialog.BeforeOpenHandler = null;
                 dialog.AfterCloseHandler = null;
             }
@@ -232,7 +234,7 @@ namespace Rubyer
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                closeParameters = new Parameters();
+                closeParameter = null;
                 IsShow = false;
             };
 
@@ -242,39 +244,13 @@ namespace Rubyer
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Parameter != null)
-            {
-                if (!(e.Parameter is IParameters parameters))
-                {
-                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
-                }
-
-                openParameters = parameters;
-            }
-            else
-            {
-                openParameters = null;
-            }
-
+            openParameter = e.Parameter;
             IsShow = true;
         }
 
         private void CloseDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Parameter != null)
-            {
-                if (!(e.Parameter is IParameters parameters))
-                {
-                    throw new InvalidOperationException("Command Parameter must inherit IParameters");
-                }
-
-                closeParameters = parameters;
-            }
-            else
-            {
-                closeParameters = new Parameters();
-            }
-
+            closeParameter = e.Parameter;
             IsShow = false;
         }
 
@@ -284,7 +260,7 @@ namespace Rubyer
             {
                 if (IsClickBackgroundToClose && sender.Equals(border))
                 {
-                    closeParameters = new Parameters();
+                    closeParameter = null;
                     IsShow = false;
                 }
             }
@@ -293,10 +269,10 @@ namespace Rubyer
         /// <summary>
         /// 关闭对话框
         /// </summary>
-        /// <param name="parameters">参数</param>
-        public void Close(IParameters parameters = null)
+        /// <param name="parameter">参数</param>
+        public void Close(object parameter = null)
         {
-            CloseDialogCommand.Execute(parameters, this);
+            CloseDialogCommand.Execute(parameter, this);
         }
 
         // 打开对话框动作
@@ -312,7 +288,7 @@ namespace Rubyer
 
             if (container.DialogContent is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
             {
-                dialogContext.OnDialogOpened(container.openParameters);
+                dialogContext.OnDialogOpened(container.openParameter);
             }
         }
 
@@ -330,6 +306,29 @@ namespace Rubyer
         private static void GoToCloseState(FrameworkElement element)
         {
             _ = VisualStateManager.GoToState(element, CloseStateName, true);
+        }
+    }
+
+    /// <summary>
+    /// 对话框结果路由参数
+    /// </summary>
+    public class DialogResultRoutedEventArgs : RoutedEventArgs
+    {
+        /// <summary>
+        /// 结果
+        /// </summary>
+        public object Result { get; set; }
+
+        /// <summary>
+        /// 对话框
+        /// </summary>
+        public DialogBox Dialog { get; set; }
+
+        public DialogResultRoutedEventArgs(RoutedEvent routedEvent, object result, DialogBox dialog)
+            : base(routedEvent)
+        {
+            Result = result;
+            Dialog = dialog;
         }
     }
 }

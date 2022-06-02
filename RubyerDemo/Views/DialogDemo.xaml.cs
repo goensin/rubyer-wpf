@@ -1,6 +1,8 @@
-﻿using RubyerDemo.ViewModels;
+﻿using Rubyer.Commons;
+using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -32,9 +34,11 @@ namespace RubyerDemo.Views
             Debug.WriteLine("打开 3# 对话框前事件");
         }
 
-        private void Dialog3_AfterClose(object sender, RoutedPropertyChangedEventArgs<Rubyer.Commons.IParameters> e)
+        private void Dialog3_AfterClose(object sender, Rubyer.DialogResultRoutedEventArgs e)
         {
-            Debug.WriteLine($"关闭 3# 对话框后事件，参数:{e.NewValue.GetValue<User>("User")}");
+            var parameters = (IParameters)e.Result;
+            var user = parameters.GetValue<User>("User");
+            Debug.WriteLine($"关闭 3# 对话框后事件，参数:{user.Name}:{user.Age}");
         }
     }
 }

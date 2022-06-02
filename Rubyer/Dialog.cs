@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 
 namespace Rubyer
@@ -40,7 +41,8 @@ namespace Rubyer
         /// <param name="openHandler">打开前处理程序</param>
         /// <param name="closeHandle">关闭后处理程序</param>
         /// <param name="showCloseButton">是否显示默认关闭按钮</param>
-        public static DialogBox Show(string identifier, object content, IParameters parameters = null, string title = null, Action<DialogBox> openHandler = null, Action<DialogBox, IParameters> closeHandle = null, bool showCloseButton = true)
+        /// <returns>结果</returns>
+        public static async Task<object> Show(string identifier, object content, object parameters = null, string title = null, Action<DialogBox> openHandler = null, Action<DialogBox, object> closeHandle = null, bool showCloseButton = true)
         {
             if (Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
             {
@@ -64,10 +66,16 @@ namespace Rubyer
                 dialogBox.BeforeOpenHandler = openHandler;
                 dialogBox.AfterCloseHandler = closeHandle;
                 DialogBox.OpenDialogCommand.Execute(parameters, dialogBox);
-                return dialogBox;
+
+                var taskCompletionSource = new TaskCompletionSource<object>();
+                DialogBox.DialogResultRoutedEventHandler handle = (sender, e) => taskCompletionSource.TrySetResult(e.Result);
+                dialogBox.AfterClose -= handle;
+                dialogBox.AfterClose += handle;
+
+                return await taskCompletionSource.Task;
             }
 
-            return default(DialogBox);
+            return default;
         }
 
         /// <summary>
@@ -75,7 +83,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="identifier">标识</param>
         /// <param name="parameter">参数</param>
-        public static void Close(string identifier, IParameters parameter = null)
+        public static void Close(string identifier, object parameter = null)
         {
             if (Dialogs.TryGetValue(identifier, out DialogBox dialogBox))
             {

@@ -5,8 +5,6 @@ using System.Windows.Media;
 
 namespace Rubyer
 {
-    public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
-
     /// <summary>
     /// 消息框卡片
     /// </summary>
@@ -27,7 +25,7 @@ namespace Rubyer
         public const string OpenStateName = "Open";
         public const string CloseStateName = "Close";
 
-        public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArge e);
+        public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArgs e);
         public static readonly RoutedEvent ReturnResultEvent;
         private MessageBoxResult messageBoxResult;
 
@@ -252,7 +250,7 @@ namespace Rubyer
             {
                 if (messageBoxCard.IsClosed)
                 {
-                    MessageBoxResultRoutedEventArge eventArgs = new MessageBoxResultRoutedEventArge(ReturnResultEvent, messageBoxCard.messageBoxResult, messageBoxCard);
+                    MessageBoxResultRoutedEventArgs eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, messageBoxCard.messageBoxResult, messageBoxCard);
                     messageBoxCard.RaiseEvent(eventArgs);
                 }
             }
@@ -277,12 +275,22 @@ namespace Rubyer
         }
     }
 
-    public class MessageBoxResultRoutedEventArge : RoutedEventArgs
+    /// <summary>
+    /// 消息框框结果路由参数
+    /// </summary>
+    public class MessageBoxResultRoutedEventArgs : RoutedEventArgs
     {
+        /// <summary>
+        /// 结果
+        /// </summary>
         public MessageBoxResult Result { get; set; }
+
+        /// <summary>
+        /// 消息框
+        /// </summary>
         public MessageBoxCard Card { get; set; }
 
-        public MessageBoxResultRoutedEventArge(RoutedEvent routedEvent, MessageBoxResult result, MessageBoxCard card) : base(routedEvent)
+        public MessageBoxResultRoutedEventArgs(RoutedEvent routedEvent, MessageBoxResult result, MessageBoxCard card) : base(routedEvent)
         {
             Result = result;
             Card = card;
