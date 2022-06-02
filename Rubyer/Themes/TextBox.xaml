@@ -21,7 +21,8 @@
                            FontSize="10"
                            Foreground="{StaticResource Error}"
                            Text="{Binding CurrentItem.ErrorContent}"
-                           TextTrimming="WordEllipsis" />
+                           TextTrimming="WordEllipsis"
+                           ToolTip="{Binding CurrentItem.ErrorContent}"/>
             </Border>
         </StackPanel>
     </ControlTemplate>

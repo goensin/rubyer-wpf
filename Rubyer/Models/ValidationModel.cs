@@ -129,13 +129,13 @@ namespace Rubyer.Models
         }
 
         /// <summary>
-        /// 设置属性值，并刷新属性错误
+        /// 设置属性值
         /// </summary>
         /// <typeparam name="T">值类型</typeparam>
         /// <param name="storage">字段引用</param>
         /// <param name="value">值</param>
         /// <param name="propertyName">属性名称</param>
-        public void SetValidationProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        public void SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(storage, value))
             {
@@ -144,6 +144,18 @@ namespace Rubyer.Models
 
             storage = value;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        /// <summary>
+        /// 设置属性值，并刷新属性错误
+        /// </summary>
+        /// <typeparam name="T">值类型</typeparam>
+        /// <param name="storage">字段引用</param>
+        /// <param name="value">值</param>
+        /// <param name="propertyName">属性名称</param>
+        public void SetValidationProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            SetProperty(ref storage, value, propertyName);
             RefreshErrors(propertyName);
         }
 
