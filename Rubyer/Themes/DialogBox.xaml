@@ -88,7 +88,7 @@
                                         </VisualTransition.GeneratedEasingFunction>
                                         <Storyboard>
                                             <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
                                             </DoubleAnimationUsingKeyFrames>
                                             <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
                                                 <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />

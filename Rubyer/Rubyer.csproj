@@ -25,4 +25,7 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
   </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+  </ItemGroup>
 </Project>

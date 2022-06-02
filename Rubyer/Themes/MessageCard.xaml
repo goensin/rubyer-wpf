@@ -81,12 +81,12 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ShowState">
                                 <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Close">
+                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Close">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseIn" />
                                         </VisualTransition.GeneratedEasingFunction>
                                     </VisualTransition>
-                                    <VisualTransition GeneratedDuration="0:0:0.3" To="Open">
+                                    <VisualTransition GeneratedDuration="0:0:0.2" To="Open">
                                         <VisualTransition.GeneratedEasingFunction>
                                             <CubicEase EasingMode="EaseOut" />
                                         </VisualTransition.GeneratedEasingFunction>
@@ -95,12 +95,12 @@
                                                              Storyboard.TargetProperty="(UIElement.Opacity)"
                                                              From="0.01"
                                                              To="1"
-                                                             Duration="0:0:0.3" />
+                                                             Duration="0:0:0.2" />
                                             <DoubleAnimation Storyboard.TargetName="rootBorder"
                                                              Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"
                                                              From="-30"
                                                              To="0"
-                                                             Duration="0:0:0.3" />
+                                                             Duration="0:0:0.2" />
                                         </Storyboard>
                                     </VisualTransition>
                                 </VisualStateGroup.Transitions>
