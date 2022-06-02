@@ -28,11 +28,7 @@ namespace RubyerDemo.Views
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await Dialog.Show(ConstNames.MainDialogBox, new Loading { Text = "hello~" }, showCloseButton: false, openHandler: async dialog =>
-            {
-                await Task.Delay(2000);
-                dialog.Close();
-            });
+           
         }
     }
 }

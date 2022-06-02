@@ -108,25 +108,42 @@ namespace RubyerDemo.ViewModels
         private RelayCommand openDialog4;
         public RelayCommand OpenDialog4 => openDialog4 ?? (openDialog4 = new RelayCommand(OpenDialog4Execute));
         // 打开 4# 对话框
-        private void OpenDialog4Execute(object obj)
+        private async void OpenDialog4Execute(object obj)
         {
             var content = new DialogContent();
             var parameters = new Parameters();
             parameters.Add("User", new User { Name = "wu", Password = "123" });
-            _ = Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
+            var para = await Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
+            Debug.WriteLine($"4# 对话框关闭异步返回结果:name:{user.Name},password:{user.Password}");
         }
 
-        private void AfterDialog4Close(DialogBox dialog, object parameters)
+        private void AfterDialog4Close(DialogBox dialog, object obj)
         {
-            if (parameters is User user)
+            if (obj is IParameters parameters)
             {
-                Debug.WriteLine($"4# 对话框关闭参数:name:{user.Name},password:{user.Password}");
+                if (parameters.TryGetValue("User", out User user))
+                {
+                    Debug.WriteLine($"4# 对话框关闭事件接收结果:name:{user.Name},password:{user.Password}");
+                }
             }
+
         }
 
         private void BeforeDialog4Open(DialogBox dialog)
         {
             Debug.WriteLine("4# 对话框打开");
+        }
+
+        private RelayCommand openDialog5;
+        public RelayCommand OpenDialog5 => openDialog5 ?? (openDialog5 = new RelayCommand(OpenDialog5Execute));
+
+        private async void OpenDialog5Execute(object obj)
+        {
+            _ = await Dialog.Show(ConstNames.MainDialogBox, new Loading { Text = "hello~" }, showCloseButton: false, openHandler: async dialog =>
+            {
+                await Task.Delay(3000);
+                dialog.Close();
+            });
         }
     }
 
@@ -136,9 +153,6 @@ namespace RubyerDemo.ViewModels
         public string Password { get; set; }
         public int Age { get; set; }
 
-        public object Clone()
-        {
-            return this.MemberwiseClone();
-        }
+        public object Clone() => this.MemberwiseClone();
     }
 }

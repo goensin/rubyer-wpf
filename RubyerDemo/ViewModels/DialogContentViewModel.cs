@@ -1,11 +1,6 @@
 ﻿using Rubyer;
 using Rubyer.Commons;
-using RubyerDemo.Consts;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
@@ -17,6 +12,7 @@ namespace RubyerDemo.ViewModels
         }
 
         public string Title => "登录";
+
         public User User { get; set; }
 
         public event Action<object> RequestClose;
@@ -32,7 +28,9 @@ namespace RubyerDemo.ViewModels
 
         private void LoginExecute(object obj)
         {
-            Dialog.Close(ConstNames.MainDialogBox, User.Clone());
+            var parameters = new Parameters();
+            parameters.Add("User", User.Clone());
+            RequestClose?.Invoke(parameters);
         }
     }
 }

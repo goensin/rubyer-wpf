@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:Background="White"
              d:DataContext="{d:DesignInstance Type=viewmodels:DialogViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
@@ -155,6 +156,22 @@
                             通过 view model 代码设置对话框内容，弹出关闭
                         </TextBlock>
                         <Button Margin="10" Command="{Binding OpenDialog4}">打开</Button>
+                    </StackPanel>
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Grid.Row="1"
+                      Grid.Column="1"
+                      Width="250"
+                      Height="250"
+                      Margin="10 0"
+                      Header="4#对话框-DialogBox">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock TextWrapping="Wrap">
+                            显示加载中对话框
+                        </TextBlock>
+                        <Button Margin="10" Command="{Binding OpenDialog5}">Loading</Button>
                     </StackPanel>
                 </Grid>
             </GroupBox>
