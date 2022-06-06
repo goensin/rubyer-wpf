@@ -275,7 +275,14 @@ namespace RubyerDemo.Utils
             foreach (Property property in attributes)
             {
                 writer.Write(" ");
-                WritePropertyDeclaration(property.PropertyDeclaration, element.TypeDeclaration, writer);
+
+                bool isAttachProperty = false;
+                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.XmlPrefix != null)
+                {
+                    isAttachProperty = !element.TypeDeclaration.ToString().Equals(property.PropertyDeclaration.DeclaringType.ToString());
+                }
+
+                WritePropertyDeclaration(property.PropertyDeclaration, element.TypeDeclaration, writer, isAttachProperty);
                 writer.Write("=");
                 writer.Write("\"");
                 switch (property.PropertyType)
@@ -340,9 +347,9 @@ namespace RubyerDemo.Utils
             writer.Write(value.ToString());
         }
 
-        private static void WritePropertyDeclaration(PropertyDeclaration value, TypeDeclaration context, TextWriter writer)
+        private static void WritePropertyDeclaration(PropertyDeclaration value, TypeDeclaration context, TextWriter writer, bool isAttachProperty = false)
         {
-            writer.Write(value.ToString());
+            writer.Write(value.ToString(isAttachProperty));
         }
 
         private static void WritePropertyValue(Property property, IndentationTextWriter writer)
@@ -3241,8 +3248,13 @@ namespace RubyerDemo.Utils
                 }
             }
 
-            public override string ToString()
+            public string ToString(bool isAttachProperty = false)
             {
+                if (isAttachProperty)
+                {
+                    return $"{this.DeclaringType}.{this.Name}";
+                }
+
                 if ((this.DeclaringType != null) && (this.DeclaringType.Name == "XmlNamespace") && (this.DeclaringType.Namespace == null) && (this.DeclaringType.Assembly == null))
                 {
                     if ((this.Name == null) || (this.Name.Length == 0))
@@ -3251,6 +3263,7 @@ namespace RubyerDemo.Utils
                     }
                     return "xmlns:" + this.Name;
                 }
+               
                 return this.Name;
             }
         }

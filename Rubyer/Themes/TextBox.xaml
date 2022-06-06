@@ -22,7 +22,7 @@
                            Foreground="{StaticResource Error}"
                            Text="{Binding CurrentItem.ErrorContent}"
                            TextTrimming="WordEllipsis"
-                           ToolTip="{Binding CurrentItem.ErrorContent}"/>
+                           ToolTip="{Binding CurrentItem.ErrorContent}" />
             </Border>
         </StackPanel>
     </ControlTemplate>

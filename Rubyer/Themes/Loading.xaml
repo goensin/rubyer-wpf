@@ -27,7 +27,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        
+
                         <Rectangle x:Name="background"
                                    Width="{TemplateBinding CircleDiameter}"
                                    Height="{TemplateBinding CircleDiameter}"
@@ -46,7 +46,7 @@
                                 </MultiBinding>
                             </Rectangle.RadiusY>
                         </Rectangle>
-                        
+
                         <Rectangle x:Name="loading"
                                    Width="{TemplateBinding CircleDiameter}"
                                    Height="{TemplateBinding CircleDiameter}"
@@ -71,7 +71,7 @@
                             <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="Text" Value="{x:Null}">
-                            <Setter Property="Visibility" TargetName="Path_MessageText" Value="Collapsed" />
+                            <Setter TargetName="Path_MessageText" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
                             <Trigger.EnterActions>
