@@ -98,26 +98,26 @@
                                             HorizontalAlignment="Right"
                                             Orientation="Horizontal">
                                     <Button x:Name="PART_NoButton"
-                                            Width="60"
+                                            MinWidth="60"
                                             Margin="5"
                                             Background="{StaticResource Info}"
-                                            Content="否"
+                                            Content="{DynamicResource I18N_MessageBox_No}"
                                             Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_YesButton"
-                                            Width="60"
+                                            MinWidth="60"
                                             Margin="5"
-                                            Content="是"
+                                            Content="{DynamicResource I18N_MessageBox_Yes}"
                                             Visibility="{TemplateBinding IsShowYes, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_CancelButton"
-                                            Width="60"
+                                            MinWidth="60"
                                             Margin="5"
                                             Background="{StaticResource Info}"
-                                            Content="取消"
+                                            Content="{DynamicResource I18N_MessageBox_Cancel}"
                                             Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"
                                             Width="60"
-                                            Margin="5"
-                                            Content="确认"
+                                            MinWidth="5"
+                                            Content="{DynamicResource I18N_MessageBox_Ok}"
                                             IsDefault="True"
                                             Visibility="{TemplateBinding IsShowOk, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 </StackPanel>

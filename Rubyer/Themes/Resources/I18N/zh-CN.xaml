@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="I18N_MessageBox_Ok">确认</system:String>
+    <system:String x:Key="I18N_MessageBox_Cancel">取消</system:String>
+    <system:String x:Key="I18N_MessageBox_Yes">是</system:String>
+    <system:String x:Key="I18N_MessageBox_No">否</system:String>
+    <system:String x:Key="I18N_DataGrid_NoData">暂无数据</system:String>
+    <system:String x:Key="I18N_PageBar_Total">总</system:String>
+    <system:String x:Key="I18N_PageBar_Piece">条</system:String>
+    <system:String x:Key="I18N_PageBar_PageSize">条/页</system:String>
+    <system:String x:Key="I18N_PageBar_NextPage">下一页</system:String>
+    <system:String x:Key="I18N_PageBar_PreviousPage">上一页</system:String>
+    <system:String x:Key="I18N_PageBar_Forward5Pages">向前 5 页</system:String>
+    <system:String x:Key="I18N_PageBar_Backwards5Pages">向后 5 页</system:String>
+</ResourceDictionary>

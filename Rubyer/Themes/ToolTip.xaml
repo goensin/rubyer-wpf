@@ -8,29 +8,29 @@
 
     <Style x:Key="RubyerToolTip" TargetType="ToolTip">
         <Setter Property="Background" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
-        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="HasDropShadow" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Margin" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToolTip">
-                    <Grid Margin="5">
+                    <Grid>
                         <Border Name="Effect"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="2.5"
+                                CornerRadius="{DynamicResource AllContainerCornerRadius}"
                                 Effect="{StaticResource AllDirectionEffect2}" />
                         <Border Name="Border"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="2.5">
-                            <ContentPresenter Margin="10"
+                                CornerRadius="{DynamicResource AllContainerCornerRadius}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="Left"
                                               VerticalAlignment="Top" />
                         </Border>

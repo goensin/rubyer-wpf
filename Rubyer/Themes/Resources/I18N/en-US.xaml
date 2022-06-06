@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="I18N_MessageBox_Ok">OK</system:String>
+    <system:String x:Key="I18N_MessageBox_Cancel">Cancel</system:String>
+    <system:String x:Key="I18N_MessageBox_Yes">Yes</system:String>
+    <system:String x:Key="I18N_MessageBox_No">No</system:String>
+    <system:String x:Key="I18N_DataGrid_NoData">No Data</system:String>
+    <system:String x:Key="I18N_PageBar_Total">Total</system:String>
+    <system:String x:Key="I18N_PageBar_Piece">|</system:String>
+    <system:String x:Key="I18N_PageBar_PageSize">/Page</system:String>
+    <system:String x:Key="I18N_PageBar_NextPage">Next Page</system:String>
+    <system:String x:Key="I18N_PageBar_PreviousPage">Previous Page</system:String>
+    <system:String x:Key="I18N_PageBar_Forward5Pages">Forward 5 Pages</system:String>
+    <system:String x:Key="I18N_PageBar_Backwards5Pages">Backwards 5 Pages</system:String>
+</ResourceDictionary>

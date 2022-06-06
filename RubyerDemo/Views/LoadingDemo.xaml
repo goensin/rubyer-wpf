@@ -12,11 +12,15 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <GroupBox Header="加载中-Loading">
-                <StackPanel Margin="10" Orientation="Horizontal" >
-                    <rubyer:Loading Margin="10"/>
-                    <rubyer:Loading Margin="10" CircleDiameter="50" StrokeThickness="8"/>
-                    <rubyer:Loading Margin="10" Text="loading.."/>
-                    <rubyer:Loading Margin="10" Text="disabled" IsEnabled="False"/>
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <rubyer:Loading Margin="10" />
+                    <rubyer:Loading Margin="10"
+                                    CircleDiameter="50"
+                                    StrokeThickness="8" />
+                    <rubyer:Loading Margin="10" Text="loading.." />
+                    <rubyer:Loading Margin="10"
+                                    IsEnabled="False"
+                                    Text="disabled" />
                 </StackPanel>
             </GroupBox>
         </Grid>

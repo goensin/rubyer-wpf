@@ -208,7 +208,6 @@ namespace Rubyer
 
         #endregion
 
-
         #region 方法
 
         // 刷新页码条
@@ -223,14 +222,17 @@ namespace Rubyer
 
             int pageCount = (int)Math.Ceiling(Total / (PageSize * 1.0));    // 总共多少页
 
-            this.Items.Add(new PageBarItem
+            var previousPage = new PageBarItem
             {
                 Content = "<",
-                ToolTip = "上一页",
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
-            });
+            };
+            var dynamicResource = new DynamicResourceExtension("I18N_PageBar_PreviousPage");
+            var resourceReferenceExpression = dynamicResource.ProvideValue(null);
+            previousPage.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+            this.Items.Add(previousPage);
 
             this.Items.Add(new PageBarItem
             {
@@ -278,13 +280,17 @@ namespace Rubyer
                     {
                         info.Value = PageIndex - 5;
                         info.Content = "...";
-                        info.ToolTip = "向前 5 页";
+                        dynamicResource = new DynamicResourceExtension("I18N_PageBar_Forward5Pages");
+                        resourceReferenceExpression = dynamicResource.ProvideValue(null);
+                        info.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
                     }
                     else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                     {
                         info.Value = PageIndex + 5;
                         info.Content = "...";
-                        info.ToolTip = "向后 5 页";
+                        dynamicResource = new DynamicResourceExtension("I18N_PageBar_Backwards5Pages");
+                        resourceReferenceExpression = dynamicResource.ProvideValue(null);
+                        info.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
                     }
                 }
 
@@ -306,14 +312,17 @@ namespace Rubyer
             }
 
             // 下一页
-            this.Items.Add(new PageBarItem()
+            var nextPage = new PageBarItem()
             {
                 Content = ">",
-                ToolTip = "下一页",
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
-            });
+            };
+            dynamicResource = new DynamicResourceExtension("I18N_PageBar_NextPage");
+            resourceReferenceExpression = dynamicResource.ProvideValue(null);
+            nextPage.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+            this.Items.Add(nextPage);
         }
 
         private void PageNumberChanged(object obj)

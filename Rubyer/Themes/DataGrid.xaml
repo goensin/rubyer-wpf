@@ -305,10 +305,9 @@
                                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                                        Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                                         </Grid>
-                                        <Border x:Name="NoDataBorder"
+                                        <Border x:Name="noDataBorder"
                                                 Grid.Row="1"
                                                 Grid.ColumnSpan="2"
-                                                Background="{DynamicResource HeaderBackground}"
                                                 Visibility="Collapsed">
                                             <StackPanel HorizontalAlignment="Center"
                                                         VerticalAlignment="Center"
@@ -317,13 +316,13 @@
                                                              Height="20"
                                                              Margin="5 0"
                                                              Type="DatabaseFill" />
-                                                <TextBlock FontSize="14" Text="无数据" />
+                                                <TextBlock FontSize="14" Text="{DynamicResource I18N_DataGrid_NoData}" />
                                             </StackPanel>
                                         </Border>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="0">
-                                            <Setter TargetName="NoDataBorder" Property="Visibility" Value="Visible" />
+                                            <Setter TargetName="noDataBorder" Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

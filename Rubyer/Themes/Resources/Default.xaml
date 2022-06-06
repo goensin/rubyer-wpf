@@ -4,6 +4,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Color.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Converter.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/zh-CN.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--  Opacity  -->
