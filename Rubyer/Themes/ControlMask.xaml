@@ -8,7 +8,7 @@
 
     <Style x:Key="RubyerControlMask" TargetType="{x:Type rubyer:ControlMask}">
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="{StaticResource Mask}" />
+        <Setter Property="Background" Value="{DynamicResource Mask}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="MaskOpacity" Value="0.6" />

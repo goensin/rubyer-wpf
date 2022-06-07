@@ -56,14 +56,18 @@
                                       Margin="10 0"
                                       Content="默认"
                                       IsChecked="True" />
-                        <ToggleButton Style="{DynamicResource LightToggleButton}"
-                                      Width="100"
+                        <ToggleButton Width="100"
                                       Margin="10 0"
-                                      Content="亮色" />
+                                      rubyer:ControlHelper.FocusedBrush="{StaticResource Success}"
+                                      rubyer:ToggleButtonHelper.CheckedContent="ON"
+                                      Background="{StaticResource Error}"
+                                      Content="OFF"
+                                      Foreground="{StaticResource WhiteForeground}" />
                         <ToggleButton Style="{DynamicResource DarkToggleButton}"
                                       Width="100"
                                       Margin="10 0"
-                                      Content="暗色" />
+                                      Content="x:Null"
+                                      IsChecked="{x:Null}" />
                         <ToggleButton Style="{DynamicResource AccentToggleButton}"
                                       Width="100"
                                       Margin="10 0"
@@ -97,9 +101,15 @@
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <ToggleButton Style="{DynamicResource SwitchToggle}" Margin="10 0">
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="WifiFill" />
-                                <TextBlock Text="Wifi" />
+                                <rubyer:Icon Type="WifiOffFill" />
+                                <TextBlock Margin="5 0 0 0" Text="Wifi 关闭" />
                             </StackPanel>
+                            <rubyer:ToggleButtonHelper.CheckedContent>
+                                <StackPanel Orientation="Horizontal">
+                                    <rubyer:Icon Type="WifiFill" />
+                                    <TextBlock Margin="5 0 0 0" Text="Wifi 打开" />
+                                </StackPanel>
+                            </rubyer:ToggleButtonHelper.CheckedContent>
                         </ToggleButton>
                         <ToggleButton Style="{DynamicResource SwitchLightToggle}"
                                       Margin="10 0"
@@ -116,6 +126,7 @@
                         <ToggleButton x:Name="nightMode"
                                       Style="{DynamicResource SwitchAccentToggle}"
                                       Margin="10 0"
+                                      rubyer:ToggleButtonHelper.CheckedContent="白天模式"
                                       Content="夜间模式"
                                       IsChecked="{Binding IsChecked, ElementName=night}" />
                         <ToggleButton Style="{DynamicResource SwitchToggle}"

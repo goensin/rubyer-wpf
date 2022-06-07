@@ -17,6 +17,7 @@
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
     <converter:HalfOfDoubleConverter x:Key="HalfOfDoubleConverter" />
     <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
+    <converter:NotNullConverter x:Key="NotNullConverter" />
     <converter:GetPercentConverter x:Key="GetPercentConverter" />
     <converter:DoublesToPointConverter x:Key="DoublesToPointConverter" />
     <converter:DoublesToSizeConverter x:Key="DoublesToSizeConverter" />

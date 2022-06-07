@@ -21,48 +21,39 @@
     </Style>
 
     <Style x:Key="RubyerToggle" TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="Height" Value="28" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5 0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ToggleButtonHelper.CheckedContent" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            IsActive="{TemplateBinding IsPressed}"
-                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Grid>
+                            <rubyer:ControlMask x:Name="mask"
+                                                Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                IsActive="{TemplateBinding IsChecked}"
+                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                        <Border x:Name="maskBorder"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                RenderTransformOrigin="0.5,0.5"
-                                SnapsToDevicePixels="true">
-                            <Border.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="0" ScaleY="0" />
-                                    <SkewTransform />
-                                    <RotateTransform />
-                                    <TranslateTransform />
-                                </TransformGroup>
-                            </Border.RenderTransform>
-                        </Border>
-                        <Border x:Name="border"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                SnapsToDevicePixels="true">
                             <ContentPresenter x:Name="contentPresenter"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -70,8 +61,8 @@
                                               Focusable="False"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </Border>
-                    </Grid>
+                        </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Button.IsDefaulted" Value="true">
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
@@ -89,56 +80,15 @@
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="maskBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="1"
-                                                         Duration="0:0:0.18">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="maskBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="1"
-                                                         Duration="0:0:0.18">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="maskBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="0"
-                                                         Duration="0:0:0.18">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="maskBorder"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="0"
-                                                         Duration="0:0:0.18">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="Foreground" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
+                            <Setter Property="BorderBrush" Value="{StaticResource Error}" />
+                            <Setter Property="BorderThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -150,64 +100,52 @@
     <Style x:Key="LightToggleButton"
            BasedOn="{StaticResource RubyerToggle}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
-        <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource BlackForeground}" />
     </Style>
 
     <!--  暗色  -->
     <Style x:Key="DarkToggleButton"
            BasedOn="{StaticResource RubyerToggle}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Dark}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  强调色  -->
     <Style x:Key="AccentToggleButton"
            BasedOn="{StaticResource RubyerToggle}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Accent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
     <!--  默认圆形开关  -->
     <Style x:Key="CircleToggleButton"
            BasedOn="{StaticResource RubyerToggle}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
 
     <!--  圆形亮色开关  -->
     <Style x:Key="CircleLightToggleButton"
-           BasedOn="{StaticResource CircleToggleButton}"
+           BasedOn="{StaticResource LightToggleButton}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Light}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
-        <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
+        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
 
     <!--  圆形暗色开关  -->
     <Style x:Key="CircleDarkToggleButton"
-           BasedOn="{StaticResource CircleToggleButton}"
+           BasedOn="{StaticResource DarkToggleButton}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Dark}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
 
     <!--  圆形强调色开关  -->
     <Style x:Key="CircleAccentToggleButton"
-           BasedOn="{StaticResource CircleToggleButton}"
+           BasedOn="{StaticResource AccentToggleButton}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Background" Value="{DynamicResource Accent}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
 
     <!--  切换开关默认  -->
@@ -222,6 +160,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ToggleButtonHelper.CheckedContent" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
