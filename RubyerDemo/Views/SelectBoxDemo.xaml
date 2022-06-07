@@ -103,12 +103,12 @@
                         <ToggleButton Style="{DynamicResource SwitchToggleButton}" Margin="10 0">
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="WifiOffFill" />
-                                <TextBlock Margin="5 0 0 0" Text="Wifi 关闭" />
+                                <TextBlock Margin="5 0 0 0" Text="Wifi" />
                             </StackPanel>
                             <rubyer:ToggleButtonHelper.CheckedContent>
                                 <StackPanel Orientation="Horizontal">
                                     <rubyer:Icon Type="WifiFill" />
-                                    <TextBlock Margin="5 0 0 0" Text="Wifi 打开" />
+                                    <TextBlock Margin="5 0 0 0" Text="Wifi" />
                                 </StackPanel>
                             </rubyer:ToggleButtonHelper.CheckedContent>
                         </ToggleButton>
@@ -146,7 +146,9 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel Margin="10">
-                        <CheckBox Margin="1" Content="选项一" />
+                        <CheckBox Margin="1"
+                                  rubyer:ToggleButtonHelper.CheckedContent="选中"
+                                  Content="未选中" />
                         <CheckBox Margin="1" Content="选项二" />
                         <CheckBox Margin="1" Content="选项三" />
                         <CheckBox Margin="1"
