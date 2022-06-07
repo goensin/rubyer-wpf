@@ -94,12 +94,13 @@
                         <ToggleButton Style="{DynamicResource CircleAccentToggleButton}"
                                       Margin="10 0"
                                       rubyer:ButtonHelper.CircleDiameter="50"
-                                      Content="强调"
+                                      rubyer:ToggleButtonHelper.CheckedContent="开"
+                                      Content="关"
                                       FontSize="15"
                                       IsChecked="True" />
                     </StackPanel>
                     <StackPanel Margin="10" Orientation="Horizontal">
-                        <ToggleButton Style="{DynamicResource SwitchToggle}" Margin="10 0">
+                        <ToggleButton Style="{DynamicResource SwitchToggleButton}" Margin="10 0">
                             <StackPanel Orientation="Horizontal">
                                 <rubyer:Icon Type="WifiOffFill" />
                                 <TextBlock Margin="5 0 0 0" Text="Wifi 关闭" />
@@ -129,7 +130,7 @@
                                       rubyer:ToggleButtonHelper.CheckedContent="白天模式"
                                       Content="夜间模式"
                                       IsChecked="{Binding IsChecked, ElementName=night}" />
-                        <ToggleButton Style="{DynamicResource SwitchToggle}"
+                        <ToggleButton Style="{DynamicResource SwitchToggleButton}"
                                       Margin="10 0"
                                       Content="不可用"
                                       IsEnabled="False" />

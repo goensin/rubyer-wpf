@@ -61,7 +61,7 @@
     <Style BasedOn="{StaticResource RubyerRadioButton}" TargetType="{x:Type RadioButton}" />
     <Style BasedOn="{StaticResource RubyerSlider}" TargetType="{x:Type Slider}" />
     <Style BasedOn="{StaticResource RubyerTextBox}" TargetType="{x:Type TextBox}" />
-    <Style BasedOn="{StaticResource RubyerToggle}" TargetType="{x:Type ToggleButton}" />
+    <Style BasedOn="{StaticResource RubyerToggleButton}" TargetType="{x:Type ToggleButton}" />
     <Style BasedOn="{StaticResource RubyerLabel}" TargetType="{x:Type Label}" />
     <Style BasedOn="{StaticResource RubyerListView}" TargetType="{x:Type ListView}" />
     <Style BasedOn="{StaticResource RubyerTreeView}" TargetType="{x:Type TreeView}" />

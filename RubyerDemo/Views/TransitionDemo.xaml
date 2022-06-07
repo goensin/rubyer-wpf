@@ -18,7 +18,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="16" Text="淡入淡出-Fade" />
                         <ToggleButton x:Name="FadeToggle"
-                                      Style="{StaticResource SwitchToggle}"
+                                      Style="{StaticResource SwitchToggleButton}"
                                       Margin="10"
                                       IsChecked="True" />
                     </StackPanel>
@@ -76,7 +76,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="16" Text="缩放-Zoom" />
                         <ToggleButton x:Name="ZoomToggle"
-                                      Style="{StaticResource SwitchToggle}"
+                                      Style="{StaticResource SwitchToggleButton}"
                                       Margin="10"
                                       IsChecked="True" />
                     </StackPanel>
@@ -156,7 +156,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="16" Text="折叠-Collapse" />
                         <ToggleButton x:Name="CollapseToggle"
-                                      Style="{StaticResource SwitchToggle}"
+                                      Style="{StaticResource SwitchToggleButton}"
                                       Margin="10"
                                       IsChecked="True" />
                     </StackPanel>

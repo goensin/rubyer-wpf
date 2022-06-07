@@ -20,7 +20,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="RubyerToggle" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="RubyerToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -98,7 +98,7 @@
 
     <!--  亮色  -->
     <Style x:Key="LightToggleButton"
-           BasedOn="{StaticResource RubyerToggle}"
+           BasedOn="{StaticResource RubyerToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource BlackForeground}" />
@@ -106,7 +106,7 @@
 
     <!--  暗色  -->
     <Style x:Key="DarkToggleButton"
-           BasedOn="{StaticResource RubyerToggle}"
+           BasedOn="{StaticResource RubyerToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
@@ -114,7 +114,7 @@
 
     <!--  强调色  -->
     <Style x:Key="AccentToggleButton"
-           BasedOn="{StaticResource RubyerToggle}"
+           BasedOn="{StaticResource RubyerToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
@@ -122,7 +122,7 @@
 
     <!--  默认圆形开关  -->
     <Style x:Key="CircleToggleButton"
-           BasedOn="{StaticResource RubyerToggle}"
+           BasedOn="{StaticResource RubyerToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
@@ -149,7 +149,7 @@
     </Style>
 
     <!--  切换开关默认  -->
-    <Style x:Key="SwitchToggle" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="SwitchToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Border}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -306,21 +306,21 @@
 
     <!--  切换开关亮色  -->
     <Style x:Key="SwitchLightToggle"
-           BasedOn="{StaticResource SwitchToggle}"
+           BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  切换开关暗色  -->
     <Style x:Key="SwitchDarkToggle"
-           BasedOn="{StaticResource SwitchToggle}"
+           BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  切换开关强调色  -->
     <Style x:Key="SwitchAccentToggle"
-           BasedOn="{StaticResource SwitchToggle}"
+           BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
     </Style>

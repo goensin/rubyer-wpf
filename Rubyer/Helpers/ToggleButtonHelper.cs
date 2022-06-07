@@ -13,19 +13,19 @@ namespace Rubyer
         /// <summary>
         /// Unchecked 显示内容,内部使用
         /// </summary>
-        internal static readonly DependencyPropertyKey UncheckContentPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
-            "UncheckContent", typeof(object), typeof(ToggleButtonHelper), new PropertyMetadata(default(object)));
+        internal static readonly DependencyPropertyKey UncheckedContentPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
+            "UncheckedContent", typeof(object), typeof(ToggleButtonHelper), new PropertyMetadata(default(object)));
 
-        public static readonly DependencyProperty UncheckContentProperty = UncheckContentPropertyKey.DependencyProperty;
+        public static readonly DependencyProperty UncheckedContentProperty = UncheckedContentPropertyKey.DependencyProperty;
 
-        private static void SetUncheckContent(DependencyObject element, object value)
+        private static void SetUncheckedContent(DependencyObject element, object value)
         {
-            element.SetValue(UncheckContentPropertyKey, value);
+            element.SetValue(UncheckedContentPropertyKey, value);
         }
 
-        public static object GetUncheckContent(DependencyObject element)
+        public static object GetUncheckedContent(DependencyObject element)
         {
-            return (object)element.GetValue(UncheckContentProperty);
+            return (object)element.GetValue(UncheckedContentProperty);
         }
 
         /// <summary>
@@ -78,9 +78,9 @@ namespace Rubyer
 
         private static void CheckAction(ToggleButton toggleButton)
         {
-            if (GetUncheckContent(toggleButton) == null)
+            if (GetUncheckedContent(toggleButton) == null)
             {
-                SetUncheckContent(toggleButton, toggleButton.Content);
+                SetUncheckedContent(toggleButton, toggleButton.Content);
                
             }
 
@@ -89,7 +89,7 @@ namespace Rubyer
 
         private static void UncheckAction(ToggleButton toggleButton)
         {
-            toggleButton.Content = GetUncheckContent(toggleButton);
+            toggleButton.Content = GetUncheckedContent(toggleButton);
         }
     }
 }
