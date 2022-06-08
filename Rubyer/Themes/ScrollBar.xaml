@@ -16,9 +16,9 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollBar}}" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollBar}}" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollBar}}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
     </Style>
 
     <Style x:Key="ScrollBarPageButton" TargetType="{x:Type RepeatButton}">

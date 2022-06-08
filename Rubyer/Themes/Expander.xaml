@@ -348,7 +348,7 @@
 
     <Style x:Key="RubyerExpander" TargetType="{x:Type Expander}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -453,7 +453,7 @@
                             <Setter TargetName="Transition" Property="Type" Value="CollapseLeft" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

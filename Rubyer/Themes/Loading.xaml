@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerLoading" TargetType="{x:Type rubyer:Loading}">
-        <Setter Property="Background" Value="{StaticResource BorderLight}" />
+        <Setter Property="Background" Value="{DynamicResource BorderLight}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -68,7 +68,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="Text" Value="{x:Null}">
                             <Setter TargetName="Path_MessageText" Property="Visibility" Value="Collapsed" />

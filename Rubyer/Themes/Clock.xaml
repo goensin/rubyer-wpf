@@ -30,7 +30,7 @@
 
     <Style x:Key="RubyerClock" TargetType="{x:Type rubyer:Clock}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
@@ -54,7 +54,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{StaticResource AllDirectionEffect3}" />
+                                Effect="{DynamicResource AllDirectionEffect3}" />
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"

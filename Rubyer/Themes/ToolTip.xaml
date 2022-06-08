@@ -23,7 +23,7 @@
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                Effect="{StaticResource AllDirectionEffect2}" />
+                                Effect="{DynamicResource AllDirectionEffect2}" />
                         <Border Name="Border"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"

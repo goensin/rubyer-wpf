@@ -9,7 +9,7 @@
 
     <Style x:Key="RubyerTimePicker" TargetType="{x:Type rubyer:TimePicker}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Height" Value="28" />
@@ -40,10 +40,10 @@
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
-                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
-                                        Foreground="{StaticResource SeconarydText}">
+                                        Foreground="{DynamicResource SeconarydText}">
                                     <rubyer:Icon Type="TimeLine" />
                                 </Button>
                             </rubyer:TextBoxHelper.PostContent>

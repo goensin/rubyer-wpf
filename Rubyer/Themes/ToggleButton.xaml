@@ -68,7 +68,7 @@
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Circle">
                             <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
@@ -83,11 +83,11 @@
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
+                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
-                            <Setter Property="BorderBrush" Value="{StaticResource Error}" />
+                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource Error}" />
                             <Setter Property="BorderThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -193,7 +193,7 @@
                                          Canvas.Right="11"
                                          Width="15"
                                          Height="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"
-                                         Effect="{StaticResource AllDirectionEffect}"
+                                         Effect="{DynamicResource AllDirectionEffect}"
                                          Fill="{DynamicResource WhiteForeground}" />
                             </Canvas>
                         </Grid>
@@ -260,7 +260,7 @@
                             </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Trigger.EnterActions>

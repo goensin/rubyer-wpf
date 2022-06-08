@@ -10,7 +10,7 @@
 
     <Style x:Key="RubyerMessageCard" TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="2.5" />
         <Setter Property="FontSize" Value="14" />
@@ -53,7 +53,7 @@
                                     BorderBrush="{TemplateBinding ThemeColorBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{StaticResource AllDirectionEffect2}" />
+                                    Effect="{DynamicResource AllDirectionEffect2}" />
 
                             <rubyer:Icon Grid.Column="0"
                                          Width="23"
@@ -149,7 +149,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="ErrorWarningFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource Warning}" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
     </Style>
 
     <Style x:Key="SuccessMessage"
@@ -157,7 +157,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="CheckboxCircleFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource Success}" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
     </Style>
 
     <Style x:Key="ErrorMessage"
@@ -165,7 +165,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="CloseCircleFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource Error}" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
     </Style>
 
     <Style x:Key="InfoMessage"
@@ -173,7 +173,7 @@
            TargetType="{x:Type rubyer:MessageCard}">
         <Setter Property="IconType" Value="InformationFill" />
         <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource Info}" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
     </Style>
 
 </ResourceDictionary>

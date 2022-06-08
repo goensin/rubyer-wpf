@@ -55,7 +55,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -128,7 +128,7 @@
                                                  Margin="0"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
-                                                 Fill="{StaticResource SeconarydText}"
+                                                 Fill="{DynamicResource SeconarydText}"
                                                  Points="5,7 0,0 10,0"
                                                  RenderTransformOrigin="0.5,0.5"
                                                  StrokeThickness="0">
@@ -161,7 +161,7 @@
                             <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:ControlHelper.IsKeyBoardFocused), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}" Value="True">
                             <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
@@ -248,7 +248,7 @@
                             Margin="5"
                             Background="{TemplateBinding Background}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                            Effect="{StaticResource AllDirectionEffect}" />
+                            Effect="{DynamicResource AllDirectionEffect}" />
                     <ScrollViewer x:Name="DropDownScrollViewer"
                                   Style="{StaticResource SmallScrollViewer}"
                                   Margin="5 10">
@@ -282,7 +282,7 @@
             <Button x:Name="clearButton"
                     Style="{StaticResource TextButton}"
                     Grid.Column="1"
-                    rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                    rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                     rubyer:ButtonHelper.Shape="Circle"
                     Foreground="{DynamicResource SeconarydText}"
                     Visibility="Collapsed">
@@ -292,7 +292,7 @@
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter TargetName="PART_EditableTextBox" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                <Setter TargetName="PART_EditableTextBox" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
             </Trigger>
             <Trigger Property="HasItems" Value="False">
                 <Setter TargetName="dropDownBorder" Property="Height" Value="95" />
@@ -327,7 +327,7 @@
     <Style x:Key="RubyerComboBox" TargetType="{x:Type ComboBox}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
@@ -379,7 +379,7 @@
                                         Margin="5"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                        Effect="{StaticResource AllDirectionEffect}" />
+                                        Effect="{DynamicResource AllDirectionEffect}" />
                                 <ScrollViewer x:Name="DropDownScrollViewer"
                                               Style="{StaticResource SmallScrollViewer}"
                                               Margin="5 10">
@@ -439,7 +439,7 @@
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Grid.Column="2"
-                                    rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                    rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                     rubyer:ButtonHelper.Shape="Circle"
                                     Focusable="False"
                                     Foreground="{DynamicResource SeconarydText}"
@@ -459,7 +459,7 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="HasItems" Value="False">
                             <Setter TargetName="dropDownBorder" Property="Height" Value="100" />

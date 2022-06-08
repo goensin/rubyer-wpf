@@ -117,7 +117,7 @@
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger SourceName="checkBoxBorder" Property="IsMouseOver" Value="true">
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />

@@ -19,7 +19,7 @@
                            Margin="1"
                            HorizontalAlignment="Left"
                            FontSize="10"
-                           Foreground="{StaticResource Error}"
+                           Foreground="{DynamicResource Error}"
                            Text="{Binding CurrentItem.ErrorContent}"
                            TextTrimming="WordEllipsis"
                            ToolTip="{Binding CurrentItem.ErrorContent}" />
@@ -100,7 +100,7 @@
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
-                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
                                         Foreground="{DynamicResource SeconarydText}"
@@ -120,7 +120,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="border" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=TextBox}}" />
@@ -167,7 +167,7 @@
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                         <Trigger Property="Validation.HasError" Value="True">
-                            <Setter TargetName="effectBorder" Property="BorderBrush" Value="{StaticResource Error}" />
+                            <Setter TargetName="effectBorder" Property="BorderBrush" Value="{DynamicResource Error}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

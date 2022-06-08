@@ -7,11 +7,11 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Background" Value="{StaticResource BorderLight}" />
+        <Setter Property="Background" Value="{DynamicResource BorderLight}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ProgressBar}">
@@ -41,9 +41,9 @@
                             <Grid x:Name="PART_Indicator"
                                   HorizontalAlignment="Left"
                                   ClipToBounds="true">
-                                <Rectangle x:Name="Indicator" Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <Rectangle x:Name="Indicator" Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <Rectangle x:Name="Animation"
-                                           Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                           Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                            RenderTransformOrigin="0.5,0.5">
                                     <Rectangle.RenderTransform>
                                         <TransformGroup>
@@ -95,13 +95,13 @@
 
     <!--  圆形进度条  -->
     <Style x:Key="CircleProgressBar" TargetType="{x:Type ProgressBar}">
-        <Setter Property="Background" Value="{StaticResource BorderLight}" />
+        <Setter Property="Background" Value="{DynamicResource BorderLight}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Height" Value="40" />
         <Setter Property="Width" Value="40" />
-        <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ProgressBarHelper.IndeterminateValue" Value="30" />
         <Setter Property="rubyer:ProgressBarHelper.Thickness" Value="5" />
         <Setter Property="Template">
@@ -157,7 +157,7 @@
                             <!--  进度圈  -->
                             <Path x:Name="Indicator"
                                   RenderTransformOrigin="0, 0"
-                                  Stroke="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  Stroke="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                 <Path.Data>
                                     <GeometryGroup>
@@ -207,7 +207,7 @@
                             <!--  不确定进度  -->
                             <Path x:Name="IndeterminateBar"
                                   RenderTransformOrigin="0, 0"
-                                  Stroke="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  Stroke="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   Visibility="Collapsed">
                                 <Path.Data>

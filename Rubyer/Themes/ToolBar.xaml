@@ -26,13 +26,13 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOverBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -61,13 +61,13 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOverBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource BackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource BackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -119,7 +119,7 @@
                                               ViewportUnits="Absolute">
                                     <DrawingBrush.Drawing>
                                         <DrawingGroup>
-                                            <GeometryDrawing Brush="{StaticResource Border}" Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z" />
+                                            <GeometryDrawing Brush="{StaticResource DynamicResource}" Geometry="M 4 4 L 4 8 L 8 8 L 8 4 z" />
                                         </DrawingGroup>
                                     </DrawingBrush.Drawing>
                                 </DrawingBrush>
@@ -152,10 +152,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource PressedBackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource PressedBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource MouseOverBackgroundGray}" />
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource MouseOverBackgroundGray}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Visibility" Value="Collapsed" />
@@ -192,7 +192,7 @@
                                        StaysOpen="false">
                                     <Grid Background="{DynamicResource DefaultBackground}">
                                         <Border x:Name="DropDownBorder"
-                                                Background="{StaticResource HeaderBackground}"
+                                                Background="{DynamicResource HeaderBackground}"
                                                 BorderThickness="0"
                                                 CornerRadius="2">
                                             <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel"
@@ -228,6 +228,6 @@
     </Style>
 
     <Style x:Key="RubyerToolBarTray" TargetType="{x:Type ToolBarTray}">
-        <Setter Property="Background" Value="{StaticResource HeaderBackground}" />
+        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
     </Style>
 </ResourceDictionary>

@@ -11,7 +11,7 @@
 
     <Style x:Key="RubyerDateTimePicker" TargetType="{x:Type rubyer:DateTimePicker}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Height" Value="28" />
@@ -42,7 +42,7 @@
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
-                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
                                         Foreground="{TemplateBinding BorderBrush}">
@@ -70,7 +70,7 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Border Background="{DynamicResource Primary}" CornerRadius="{StaticResource TopContainerCornerRadius}">
+                                        <Border Background="{DynamicResource Primary}" CornerRadius="{DynamicResource TopContainerCornerRadius}">
                                             <TextBlock Margin="10 5"
                                                        HorizontalAlignment="Center"
                                                        FontSize="20"
@@ -89,7 +89,7 @@
 
                                         <Button x:Name="PART_ConfirmButton"
                                                 Grid.Row="2"
-                                                rubyer:ControlHelper.CornerRadius="{StaticResource BottomContainerCornerRadius}"
+                                                rubyer:ControlHelper.CornerRadius="{DynamicResource BottomContainerCornerRadius}"
                                                 Content="确认" />
                                     </Grid>
                                 </rubyer:Card>

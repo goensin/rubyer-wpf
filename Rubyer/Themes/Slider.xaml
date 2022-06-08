@@ -58,7 +58,7 @@
                      Width="18"
                      Height="18"
                      VerticalAlignment="Center"
-                     Effect="{StaticResource AllDirectionEffect}"
+                     Effect="{DynamicResource AllDirectionEffect}"
                      Fill="{TemplateBinding Foreground}"
                      SnapsToDevicePixels="True" />
         </Grid>
@@ -253,7 +253,7 @@
                      Width="18"
                      Height="18"
                      VerticalAlignment="Center"
-                     Effect="{StaticResource AllDirectionEffect}"
+                     Effect="{DynamicResource AllDirectionEffect}"
                      Fill="{TemplateBinding Foreground}"
                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
         </Grid>

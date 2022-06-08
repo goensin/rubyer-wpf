@@ -305,7 +305,7 @@
                         <Border Margin="0 3 0 0"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{StaticResource AllDirectionEffect3}" />
+                                Effect="{DynamicResource AllDirectionEffect3}" />
 
                         <StackPanel x:Name="PART_Root" HorizontalAlignment="Center">
                             <CalendarItem x:Name="PART_CalendarItem"

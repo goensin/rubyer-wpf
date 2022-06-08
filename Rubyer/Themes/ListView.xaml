@@ -125,7 +125,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="root" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="root" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ListView}}" />
@@ -142,7 +142,7 @@
 
     <Style x:Key="RubyerListView" TargetType="{x:Type ListView}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -188,7 +188,7 @@
                             <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

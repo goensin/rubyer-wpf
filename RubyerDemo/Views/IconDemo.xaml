@@ -64,7 +64,7 @@
                      VirtualizingPanel.ScrollUnit="Pixel">
                 <ListBox.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <wpftk:VirtualizingWrapPanel MouseWheelDelta="50" />
+                        <wpftk:VirtualizingWrapPanel MouseWheelDelta="80" />
                     </ItemsPanelTemplate>
                 </ListBox.ItemsPanel>
                 <ListBox.ItemTemplate>

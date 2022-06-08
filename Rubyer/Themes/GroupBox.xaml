@@ -12,7 +12,7 @@
     <Style x:Key="RubyerGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="5" />
@@ -58,7 +58,7 @@
 
     <!--  经典  -->
     <Style x:Key="ClassicGroupBox" TargetType="{x:Type GroupBox}">
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="IsTabStop" Value="False" />
@@ -137,7 +137,7 @@
     <Style x:Key="ColorHeaderGroupBox" TargetType="{x:Type GroupBox}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="5" />

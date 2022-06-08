@@ -66,7 +66,7 @@
            TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{StaticResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.4" />
     </Style>
 

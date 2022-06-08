@@ -106,12 +106,18 @@
                 <TextBlock>如果使用了感觉还不错，请作者喝杯茶吧。</TextBlock>
                 <ToggleButton x:Name="toggleButton"
                               Style="{DynamicResource AccentToggleButton}"
-                              Margin="20 0">
+                              Width="80"
+                              Margin="20 0"
+                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                              
+                              Foreground="{DynamicResource WhiteForeground}"
+                              Background="{DynamicResource Accent}">
+                    <rubyer:ToggleButtonHelper.CheckedContent>
+                        <rubyer:Icon Type="ArrowUpLine" />
+                    </rubyer:ToggleButtonHelper.CheckedContent>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="10 0">打赏</TextBlock>
-                        <rubyer:Icon Width="26"
-                                     Height="26"
-                                     Type="MoneyCnyCircleFill" />
+                        <TextBlock Margin="5 0">打赏</TextBlock>
+                        <rubyer:Icon Type="MoneyCnyCircleFill" />
                     </StackPanel>
                 </ToggleButton>
             </StackPanel>

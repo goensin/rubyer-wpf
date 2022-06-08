@@ -33,7 +33,7 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                         <Border x:Name="PART_RootBorder"
-                                Background="{StaticResource DialogBackground}"
+                                Background="{DynamicResource DialogBackground}"
                                 Opacity="0"
                                 Visibility="Hidden">
                             <Border x:Name="PART_CardBorder"
@@ -43,7 +43,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     ClipToBounds="True"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{StaticResource AllDirectionEffect}">
+                                    Effect="{DynamicResource AllDirectionEffect}">
                                 <Border.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform />

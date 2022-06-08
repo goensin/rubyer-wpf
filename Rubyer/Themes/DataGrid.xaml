@@ -22,7 +22,7 @@
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
                     <Border x:Name="border"
                             Background="Transparent"
-                            BorderBrush="{StaticResource Border}"
+                            BorderBrush="{DynamicResource Border}"
                             BorderThickness="0"
                             SnapsToDevicePixels="True">
                         <ContentPresenter Margin="5 2"
@@ -43,7 +43,7 @@
     <!--  Style and template for the DataGridRow.  -->
     <Style x:Key="RubyerDataGridRow" TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
@@ -117,7 +117,7 @@
                         <Border x:Name="columnHeaderBorder"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{StaticResource Border}"
+                                BorderBrush="{DynamicResource Border}"
                                 BorderThickness="0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -219,21 +219,21 @@
     <!--  Style and template for the DataGrid.  -->
     <Style x:Key="RubyerDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CellStyle" Value="{StaticResource RubyerDataGridCell}" />
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource RubyerDataGridColumnHeader}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="HorizontalGridLinesBrush" Value="{StaticResource Border}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
         <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalGridLinesBrush" Value="{StaticResource Border}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
@@ -338,7 +338,7 @@
                 <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
             </Trigger>
         </Style.Triggers>
     </Style>

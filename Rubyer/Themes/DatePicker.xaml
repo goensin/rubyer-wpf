@@ -10,7 +10,7 @@
 
     <Style x:Key="RubyerDatePicker" TargetType="{x:Type DatePicker}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -44,7 +44,7 @@
                             <rubyer:TextBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
-                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource InsideButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
                                         Foreground="{DynamicResource SeconarydText}">

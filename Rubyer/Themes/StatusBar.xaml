@@ -6,8 +6,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerStatusBar" TargetType="{x:Type StatusBar}">
-        <Setter Property="Background" Value="{StaticResource BackgroundGray}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="Background" Value="{DynamicResource BackgroundGray}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -47,7 +47,7 @@
                     <ContentPresenter Name="ContentSite" Margin="3" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{StaticResource Border}" />
+                            <Setter Property="Foreground" Value="{DynamicResource Border}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

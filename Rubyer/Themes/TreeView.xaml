@@ -178,7 +178,7 @@
                             <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
@@ -202,7 +202,7 @@
 
     <Style x:Key="RubyerTreeView" TargetType="{x:Type TreeView}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -240,7 +240,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="Bd" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
                             <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="True" />

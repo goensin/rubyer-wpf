@@ -10,7 +10,7 @@
 
     <Style x:Key="RubyerMessageBoxCard" TargetType="{x:Type rubyer:MessageBoxCard}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{StaticResource Border}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="2.5" />
         <Setter Property="FontSize" Value="13" />
@@ -28,7 +28,7 @@
         <Setter Property="Padding" Value="10" />
         <Setter Property="ShowShadow" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{StaticResource Info}" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
@@ -48,7 +48,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
-                                Effect="{StaticResource AllDirectionEffect3}"
+                                Effect="{DynamicResource AllDirectionEffect3}"
                                 Visibility="{TemplateBinding ShowShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -100,7 +100,7 @@
                                     <Button x:Name="PART_NoButton"
                                             MinWidth="60"
                                             Margin="5"
-                                            Background="{StaticResource Info}"
+                                            Background="{DynamicResource Info}"
                                             Content="{DynamicResource I18N_MessageBox_No}"
                                             Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_YesButton"
@@ -111,7 +111,7 @@
                                     <Button x:Name="PART_CancelButton"
                                             MinWidth="60"
                                             Margin="5"
-                                            Background="{StaticResource Info}"
+                                            Background="{DynamicResource Info}"
                                             Content="{DynamicResource I18N_MessageBox_Cancel}"
                                             Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"

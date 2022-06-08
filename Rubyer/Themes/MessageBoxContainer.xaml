@@ -20,7 +20,7 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                         <Border x:Name="PART_RootBorder"
-                                Background="{StaticResource DialogBackground}"
+                                Background="{DynamicResource DialogBackground}"
                                 Opacity="0"
                                 Visibility="Hidden">
                             <ContentControl Grid.Row="1"

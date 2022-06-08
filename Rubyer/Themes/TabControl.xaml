@@ -86,7 +86,7 @@
                             <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -228,7 +228,7 @@
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -300,7 +300,7 @@
                             <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
-                            <Setter TargetName="templateRoot" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -25,7 +25,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="Red" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource Error}" />
+                <Setter Property="Background" Value="{DynamicResource Error}" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -87,7 +87,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Border Grid.ColumnSpan="2"
                                         Background="{TemplateBinding BorderBrush}"
-                                        Effect="{StaticResource BottomEffect}"
+                                        Effect="{DynamicResource BottomEffect}"
                                         Visibility="{TemplateBinding TitleShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 <!--  标题栏左边内容  -->
                                 <ContentControl x:Name="preContent"
