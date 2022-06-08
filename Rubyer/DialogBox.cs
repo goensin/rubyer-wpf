@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -83,6 +84,7 @@ namespace Rubyer
         #endregion
 
         #region 依赖属性
+
         // 标识
         public static readonly DependencyProperty IdentifierProperty = DependencyProperty.Register(
             "Identifier", typeof(string), typeof(DialogBox), new PropertyMetadata(default(string), OnIdentifierChanged));
@@ -94,6 +96,9 @@ namespace Rubyer
             Dialog.AddDialogBox(identifier, dialogBox);
         }
 
+        /// <summary>
+        /// 标识
+        /// </summary>
         public string Identifier
         {
             get { return (string)GetValue(IdentifierProperty); }
@@ -104,6 +109,9 @@ namespace Rubyer
         public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
             "DialogContent", typeof(object), typeof(DialogBox), new PropertyMetadata(default(object)));
 
+        /// <summary>
+        /// 对话框内容
+        /// </summary>
         public object DialogContent
         {
             get { return GetValue(DialogContentProperty); }
@@ -114,6 +122,9 @@ namespace Rubyer
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             "Title", typeof(string), typeof(DialogBox), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// 标题
+        /// </summary>
         public string Title
         {
             get { return (string)GetValue(TitleProperty); }
@@ -124,6 +135,9 @@ namespace Rubyer
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             "CornerRadius", typeof(CornerRadius), typeof(DialogBox), new PropertyMetadata(default(CornerRadius)));
 
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -134,6 +148,9 @@ namespace Rubyer
         public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(
             "IsShowCloseButton", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// 是否显示关闭按钮
+        /// </summary>
         public bool IsShowCloseButton
         {
             get { return (bool)GetValue(IsShowCloseButtonProperty); }
@@ -144,6 +161,9 @@ namespace Rubyer
         public static readonly DependencyProperty IsClickBackgroundToCloseProperty = DependencyProperty.Register(
             "IsClickBackgroundToClose", typeof(bool), typeof(DialogBox), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
+        /// <summary>
+        /// 是否点击背景关闭弹窗
+        /// </summary>
         public bool IsClickBackgroundToClose
         {
             get { return (bool)GetValue(IsClickBackgroundToCloseProperty); }
@@ -168,30 +188,26 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 是否显示
+        /// </summary>
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
             set { SetValue(IsShowProperty, value); }
         }
 
-        // 标题字体大小
-        public static readonly DependencyProperty TitleFontSizeProperty = DependencyProperty.Register(
-            "TitleFontSize", typeof(double), typeof(DialogBox), new PropertyMetadata(default(double)));
+        // 遮罩背景色
+        public static readonly DependencyProperty MaskBackgroundProperty = DependencyProperty.Register(
+            "MaskBackground", typeof(Brush), typeof(DialogBox), new PropertyMetadata(default(Brush)));
 
-        public double TitleFontSize
+        /// <summary>
+        ///  遮罩背景色
+        /// </summary>
+        public Brush MaskBackground
         {
-            get { return (double)GetValue(TitleFontSizeProperty); }
-            set { SetValue(TitleFontSizeProperty, value); }
-        }
-
-        // 标题水平对齐
-        public static readonly DependencyProperty TitleHorizontalAlignmentProperty = DependencyProperty.Register(
-            "TitleHorizontalAlignment", typeof(HorizontalAlignment), typeof(DialogBox), new PropertyMetadata(default(HorizontalAlignment)));
-
-        public HorizontalAlignment TitleHorizontalAlignment
-        {
-            get { return (HorizontalAlignment)GetValue(TitleHorizontalAlignmentProperty); }
-            set { SetValue(TitleHorizontalAlignmentProperty, value); }
+            get { return (Brush)GetValue(MaskBackgroundProperty); }
+            set { SetValue(MaskBackgroundProperty, value); }
         }
 
         // 关闭完成

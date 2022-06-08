@@ -10,19 +10,27 @@
 
     <Style x:Key="RubyerDialogBox" TargetType="rubyer:DialogBox">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="MaskBackground" Value="{DynamicResource DialogBackground}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="2.5" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="30 20" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="TitleFontSize" Value="17" />
-        <Setter Property="TitleHorizontalAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsClickBackgroundToClose" Value="False" />
         <Setter Property="IsShowCloseButton" Value="True" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Margin" Value="0" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="10 5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogBox">
@@ -33,17 +41,17 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                         <Border x:Name="PART_RootBorder"
-                                Background="{DynamicResource DialogBackground}"
+                                Background="{TemplateBinding MaskBackground}"
                                 Opacity="0"
                                 Visibility="Hidden">
                             <Border x:Name="PART_CardBorder"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    ClipToBounds="True"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{DynamicResource AllDirectionEffect}">
+                                    Effect="{DynamicResource AllDirectionEffect3}">
                                 <Border.RenderTransform>
                                     <TransformGroup>
                                         <ScaleTransform />
@@ -57,20 +65,28 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Grid x:Name="titleBar">
-                                        <TextBlock Margin="15 5"
-                                                   HorizontalAlignment="{TemplateBinding TitleHorizontalAlignment}"
-                                                   FontSize="{TemplateBinding TitleFontSize}"
-                                                   Text="{TemplateBinding Title}" />
-                                        <Button x:Name="PART_CloseButton"
-                                                Style="{StaticResource TextButton}"
-                                                Width="32"
-                                                HorizontalAlignment="Right"
-                                                Foreground="{TemplateBinding Foreground}"
-                                                Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
-                                            <rubyer:Icon Type="CloseLine" />
-                                        </Button>
-                                    </Grid>
+                                    <Border x:Name="titleBar"
+                                            Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            CornerRadius="{DynamicResource TopContainerCornerRadius}">
+                                        <Grid Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                            <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       Text="{TemplateBinding Title}" />
+                                            <Button x:Name="PART_CloseButton"
+                                                    Style="{StaticResource TextButton}"
+                                                    Width="32"
+                                                    HorizontalAlignment="Right"
+                                                    Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
+                                                <rubyer:Icon Type="CloseLine" />
+                                            </Button>
+                                        </Grid>
+                                    </Border>
+
                                     <ContentControl Grid.Row="1"
                                                     Margin="{TemplateBinding Padding}"
                                                     Content="{TemplateBinding DialogContent}"

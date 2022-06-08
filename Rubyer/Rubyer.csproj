@@ -7,7 +7,7 @@
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
 		<PackageProjectUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</PackageProjectUrl>
-		<Version>2.0.0.18-alpha</Version>
+		<Version>2.0.0.19-alpha</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 	</PropertyGroup>

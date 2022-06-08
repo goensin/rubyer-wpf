@@ -37,8 +37,11 @@ namespace RubyerDemo.Views
         private void Dialog3_AfterClose(object sender, Rubyer.DialogResultRoutedEventArgs e)
         {
             var parameters = (IParameters)e.Result;
-            var user = parameters.GetValue<User>("User");
-            Debug.WriteLine($"关闭 3# 对话框后事件，参数:{user.Name}:{user.Age}");
+            if (parameters != null)
+            {
+                var user = parameters.GetValue<User>("User");
+                Debug.WriteLine($"关闭 3# 对话框后事件，参数:{user.Name}:{user.Age}");
+            }
         }
     }
 }
