@@ -139,6 +139,7 @@
                 <Popup x:Name="Popup"
                        AllowsTransparency="True"
                        Focusable="False"
+                       HorizontalOffset="-5"
                        IsOpen="{TemplateBinding IsSubmenuOpen}"
                        Placement="Right"
                        PopupAnimation="Fade">
