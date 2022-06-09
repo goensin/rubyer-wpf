@@ -9,6 +9,9 @@
     <Style TargetType="rubyer:MessageBoxContainer">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="MaskBackground" Value="{DynamicResource DialogBackground}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -20,10 +23,12 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                         <Border x:Name="PART_RootBorder"
-                                Background="{DynamicResource DialogBackground}"
+                                Background="{TemplateBinding MaskBackground}"
                                 Opacity="0"
                                 Visibility="Hidden">
                             <ContentControl Grid.Row="1"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             Content="{TemplateBinding DialogContent}"
                                             Focusable="False"
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />

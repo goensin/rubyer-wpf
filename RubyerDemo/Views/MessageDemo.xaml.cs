@@ -52,27 +52,27 @@ namespace RubyerDemo.Views
 
         private void MessageContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowInContainer(ConstNames.MainMessageContainer, "message");
+            Message.ShowInContainer(ConstNames.MessageDemo, "message");
         }
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.InfoInContainer(ConstNames.MainMessageContainer, "info");
+            Message.InfoInContainer(ConstNames.MessageDemo, "info");
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.WarningInContainer(ConstNames.MainMessageContainer, "warning");
+            Message.WarningInContainer(ConstNames.MessageDemo, "warning");
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.SuccessInContainer(ConstNames.MainMessageContainer, "success");
+            Message.SuccessInContainer(ConstNames.MessageDemo, "success");
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ErrorInContainer(ConstNames.MainMessageContainer, "error");
+            Message.ErrorInContainer(ConstNames.MessageDemo, "error");
         }
 
         private void ControlBtn_Click(object sender, RoutedEventArgs e)
@@ -86,7 +86,7 @@ namespace RubyerDemo.Views
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.ShowInContainer(ConstNames.MainMessageContainer, element);
+            Message.ShowInContainer(ConstNames.MessageDemo, element);
         }
     }
 }

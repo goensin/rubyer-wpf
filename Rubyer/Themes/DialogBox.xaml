@@ -45,6 +45,7 @@
                                 Opacity="0"
                                 Visibility="Hidden">
                             <Border x:Name="PART_CardBorder"
+                                    Margin="5"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Background="{TemplateBinding Background}"

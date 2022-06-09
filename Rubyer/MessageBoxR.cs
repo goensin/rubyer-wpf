@@ -188,7 +188,7 @@ namespace Rubyer
         {
             if (!containers.ContainsKey(containerIdentifier))
             {
-                throw new NullReferenceException($"找不到 Identifier 为{containerIdentifier}消息框容器");
+                throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
             }
 
             TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();

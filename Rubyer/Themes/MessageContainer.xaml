@@ -8,6 +8,8 @@
 
     <Style TargetType="rubyer:MessageContainer">
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:MessageContainer">
@@ -16,7 +18,9 @@
                                           Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        <StackPanel x:Name="PART_MessageStackPanel" VerticalAlignment="Top" />
+                        <StackPanel x:Name="PART_MessageStackPanel"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
