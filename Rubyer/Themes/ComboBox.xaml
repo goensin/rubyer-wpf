@@ -233,7 +233,7 @@
                    Grid.ColumnSpan="2"
                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
                    AllowsTransparency="True"
-                   HorizontalOffset="5"
+                   HorizontalOffset="-5"
                    IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                    Placement="Bottom"
                    PopupAnimation="Fade">
@@ -364,7 +364,7 @@
                                Grid.ColumnSpan="2"
                                MaxHeight="{TemplateBinding MaxDropDownHeight}"
                                AllowsTransparency="True"
-                               HorizontalOffset="5"
+                               HorizontalOffset="-5"
                                IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                Placement="Bottom"
                                PopupAnimation="Fade">
