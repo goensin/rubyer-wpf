@@ -58,7 +58,7 @@ namespace Rubyer
                 }
                 else
                 {
-                    dialogBox.Title = string.IsNullOrEmpty(title) ? title : dialogBox.Title;
+                    dialogBox.Title = string.IsNullOrEmpty(title) ? dialogBox.Title: title;
                 }
 
                 dialogBox.DialogContent = content;

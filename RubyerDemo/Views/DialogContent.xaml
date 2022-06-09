@@ -30,8 +30,8 @@
                      Grid.Row="1"
                      Grid.Column="1"
                      Width="200"
-                     rubyer:PasswordBoxHelper.ShowSwitchButton="True"
-                     rubyer:PasswordBoxHelper.BindablePassword="{Binding User.Password}" />
+                     rubyer:PasswordBoxHelper.BindablePassword="{Binding User.Password}"
+                     rubyer:PasswordBoxHelper.ShowSwitchButton="True" />
 
         <Button Grid.Row="2"
                 Grid.ColumnSpan="2"

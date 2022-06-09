@@ -168,7 +168,7 @@
                       Width="250"
                       Height="250"
                       Margin="10 0"
-                      Header="4#对话框-DialogBox">
+                      Header="5#对话框-DialogBox">
                 <Grid>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                         <TextBlock TextWrapping="Wrap">
