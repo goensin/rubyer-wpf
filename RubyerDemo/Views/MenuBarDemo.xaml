@@ -136,11 +136,11 @@
                         </ToolBar>
                         <ToolBar>
                             <TextBox Width="150"
-                                     rubyer:TextBoxHelper.IsClearable="True"
-                                     rubyer:TextBoxHelper.Watermark="搜索">
-                                <rubyer:TextBoxHelper.PreContent>
+                                     rubyer:InputBoxHelper.IsClearable="True"
+                                     rubyer:InputBoxHelper.Watermark="搜索">
+                                <rubyer:InputBoxHelper.PreContent>
                                     <rubyer:Icon Type="SearchLine" />
-                                </rubyer:TextBoxHelper.PreContent>
+                                </rubyer:InputBoxHelper.PreContent>
                             </TextBox>
                         </ToolBar>
                     </ToolBarTray>

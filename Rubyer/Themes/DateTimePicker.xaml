@@ -39,7 +39,7 @@
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}">
-                            <rubyer:TextBoxHelper.PostContent>
+                            <rubyer:InputBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
                                         rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
@@ -48,7 +48,7 @@
                                         Foreground="{TemplateBinding BorderBrush}">
                                     <rubyer:Icon Type="TimeLine" />
                                 </Button>
-                            </rubyer:TextBoxHelper.PostContent>
+                            </rubyer:InputBoxHelper.PostContent>
                         </TextBox>
                         <Grid x:Name="PART_DisabledVisual"
                               Grid.Row="0"

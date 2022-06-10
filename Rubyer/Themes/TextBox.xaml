@@ -83,7 +83,7 @@
                                                 Grid.Column="0"
                                                 Margin="3 0"
                                                 VerticalAlignment="Center"
-                                                Content="{Binding Path=(rubyer:TextBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
 
                                 <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
@@ -94,7 +94,7 @@
                                     <TextBlock x:Name="watermark"
                                                Margin="3 0"
                                                Foreground="{DynamicResource WatermarkText}"
-                                               Text="{Binding Path=(rubyer:TextBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                               Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Grid>
 
                                 <Button x:Name="clearButton"
@@ -112,7 +112,7 @@
                                                 Grid.Column="3"
                                                 Margin="3 0"
                                                 VerticalAlignment="Center"
-                                                Content="{Binding Path=(rubyer:TextBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
                             </Grid>
                         </Border>
@@ -150,7 +150,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsKeyboardFocused, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
-                                <Condition Binding="{Binding Path=(rubyer:TextBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
                                 <Condition Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
@@ -158,7 +158,7 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="true" />
-                                <Condition Binding="{Binding Path=(rubyer:TextBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
+                                <Condition Binding="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=Self}}" Value="true" />
                                 <Condition Binding="{Binding Path=Text, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />

@@ -26,10 +26,10 @@
                     </TextBlock>
                     <TextBox Width="200"
                              Margin="10 0"
-                             rubyer:TextBoxHelper.IsClearable="True"
-                             rubyer:TextBoxHelper.Watermark="搜索图标"
+                             rubyer:InputBoxHelper.IsClearable="True"
+                             rubyer:InputBoxHelper.Watermark="搜索图标"
                              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
-                        <rubyer:TextBoxHelper.PreContent>
+                        <rubyer:InputBoxHelper.PreContent>
                             <Button Style="{DynamicResource TextButton}"
                                     rubyer:ButtonHelper.Shape="Circle"
                                     Command="{Binding Search}"
@@ -37,12 +37,12 @@
                                     ToolTip="搜索">
                                 <rubyer:Icon Type="SearchLine" />
                             </Button>
-                        </rubyer:TextBoxHelper.PreContent>
+                        </rubyer:InputBoxHelper.PreContent>
                     </TextBox>
                     <TextBox x:Name="currentTextBox"
                              MinWidth="200"
                              Margin="10 0 0 0"
-                             rubyer:TextBoxHelper.PreContent="选中"
+                             rubyer:InputBoxHelper.PreContent="选中"
                              BorderThickness="0"
                              Text="{Binding CurrentIcon, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
                     <Button x:Name="copyButton"

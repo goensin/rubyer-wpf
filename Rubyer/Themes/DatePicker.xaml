@@ -41,7 +41,7 @@
                                            BorderThickness="{TemplateBinding BorderThickness}"
                                            Focusable="{TemplateBinding Focusable}"
                                            Foreground="{TemplateBinding Foreground}">
-                            <rubyer:TextBoxHelper.PostContent>
+                            <rubyer:InputBoxHelper.PostContent>
                                 <Button x:Name="PART_Button"
                                         Style="{StaticResource TextButton}"
                                         rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
@@ -50,7 +50,7 @@
                                         Foreground="{DynamicResource SeconarydText}">
                                     <rubyer:Icon Type="Calendar2Line" />
                                 </Button>
-                            </rubyer:TextBoxHelper.PostContent>
+                            </rubyer:InputBoxHelper.PostContent>
                         </DatePickerTextBox>
                         <Popup x:Name="PART_Popup"
                                Margin="5"

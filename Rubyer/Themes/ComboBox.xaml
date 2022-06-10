@@ -266,9 +266,9 @@
                      Style="{StaticResource RubyerComboBoxEditableTextBox}"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                     rubyer:TextBoxHelper.PostContent="{Binding Path=(rubyer:TextBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:TextBoxHelper.PreContent="{Binding Path=(rubyer:TextBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:TextBoxHelper.Watermark="{Binding Path=(rubyer:ComboBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                     rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                     rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                     rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
 
             <ToggleButton x:Name="toggleButton"
@@ -310,14 +310,14 @@
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
-                    <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="True" />
+                    <Condition Property="rubyer:InputBoxHelper.IsClearable" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
             </MultiTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="IsMouseOver" Value="True" />
-                    <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="True" />
+                    <Condition Property="rubyer:InputBoxHelper.IsClearable" Value="True" />
                 </MultiTrigger.Conditions>
                 <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
             </MultiTrigger>
@@ -412,7 +412,7 @@
                                             Grid.Column="0"
                                             Margin="3 0"
                                             VerticalAlignment="Center"
-                                            Content="{Binding Path=(rubyer:TextBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{DynamicResource SeconarydText}"
                                             IsHitTestVisible="False"
                                             IsTabStop="False" />
@@ -433,7 +433,7 @@
                                            VerticalAlignment="Center"
                                            Foreground="{DynamicResource WatermarkText}"
                                            IsHitTestVisible="False"
-                                           Text="{Binding Path=(rubyer:ComboBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                           Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </Grid>
 
                             <Button x:Name="clearButton"
@@ -451,7 +451,7 @@
                                             Grid.Column="3"
                                             Margin="3 0"
                                             VerticalAlignment="Center"
-                                            Content="{Binding Path=(rubyer:TextBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{DynamicResource SeconarydText}"
                                             IsHitTestVisible="False"
                                             IsTabStop="False" />
@@ -474,14 +474,14 @@
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
-                                <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="True" />
+                                <Condition Property="rubyer:InputBoxHelper.IsClearable" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsMouseOver" Value="True" />
-                                <Condition Property="rubyer:ComboBoxHelper.IsClearable" Value="True" />
+                                <Condition Property="rubyer:InputBoxHelper.IsClearable" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>

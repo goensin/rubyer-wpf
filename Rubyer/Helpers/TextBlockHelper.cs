@@ -10,7 +10,7 @@ namespace Rubyer
         /// 当被 Trim 时显示 Tool Tip
         /// </summary>
         public static readonly DependencyProperty IsTrimmedShowToolTipProperty =
-            DependencyProperty.RegisterAttached("IsTrimmedShowToolTip", typeof(bool), typeof(TextBoxHelper), new PropertyMetadata(false, OnIsTrimmedShowToolTipChanged));
+            DependencyProperty.RegisterAttached("IsTrimmedShowToolTip", typeof(bool), typeof(InputBoxHelper), new PropertyMetadata(false, OnIsTrimmedShowToolTipChanged));
 
         private static void OnIsTrimmedShowToolTipChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
