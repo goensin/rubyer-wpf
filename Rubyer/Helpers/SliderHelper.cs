@@ -34,7 +34,7 @@ namespace Rubyer
         /// 拖拽时显示当前值
         /// </summary>
         public static readonly DependencyProperty DraggingShowValueProperty = DependencyProperty.RegisterAttached(
-            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(default(bool), OnDraggingShowValueChanged));
+            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(default(bool)));
 
         public static void SetDraggingShowValue(DependencyObject element, bool value)
         {
@@ -46,39 +46,20 @@ namespace Rubyer
             return (bool)element.GetValue(DraggingShowValueProperty);
         }
 
-        private static void OnDraggingShowValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// 拖拽圆示直径
+        /// </summary>
+        public static readonly DependencyProperty GripDiameterProperty = DependencyProperty.RegisterAttached(
+            "GripDiameter", typeof(double), typeof(SliderHelper), new PropertyMetadata(default(double)));
+
+        public static void SetGripDiameter(DependencyObject element, double value)
         {
-            if (d is Slider slider)
-            {
-                RoutedPropertyChangedEventHandler<double> handle = (sender, args) =>
-                {
-                    if (slider.Template.FindName("valuePopup", slider) is Popup popup)
-                    {
-                        System.Reflection.MethodInfo mi = typeof(Popup).GetMethod("UpdatePosition", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-                        _ = mi.Invoke(popup, null);
-                    }
-                };
+            element.SetValue(GripDiameterProperty, value);
+        }
 
-                slider.Loaded += (sender, arg) =>
-                {
-                    if (GetDraggingShowValue(slider))
-                    {
-                        slider.ValueChanged += handle;
-                    }
-                    else
-                    {
-                        slider.ValueChanged -= handle;
-                    }
-                };
-
-                slider.Unloaded += (sender, arg) =>
-                {
-                    if (GetDraggingShowValue(slider))
-                    {
-                        slider.ValueChanged -= handle;
-                    }
-                };
-            }
+        public static double GetGripDiameter(DependencyObject element)
+        {
+            return (double)element.GetValue(GripDiameterProperty);
         }
     }
 }

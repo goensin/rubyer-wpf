@@ -55,8 +55,8 @@
 
             <Ellipse x:Name="grip"
                      Grid.Row="1"
-                     Width="18"
-                     Height="18"
+                     Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                     Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                      VerticalAlignment="Center"
                      Effect="{DynamicResource AllDirectionEffect}"
                      Fill="{TemplateBinding Foreground}"
@@ -183,8 +183,8 @@
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb"
-                               Width="18"
-                               Height="18"
+                               Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                               Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Center"
                                Focusable="False"
                                OverridesDefaultStyle="True"
@@ -250,8 +250,8 @@
             </Canvas>
 
             <Ellipse x:Name="grip"
-                     Width="18"
-                     Height="18"
+                     Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                     Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                      VerticalAlignment="Center"
                      Effect="{DynamicResource AllDirectionEffect}"
                      Fill="{TemplateBinding Foreground}"
@@ -375,8 +375,8 @@
                     </Track.IncreaseRepeatButton>
                     <Track.Thumb>
                         <Thumb x:Name="Thumb"
-                               Width="18"
-                               Height="18"
+                               Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                               Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Top"
                                Focusable="False"
                                OverridesDefaultStyle="True"
@@ -417,6 +417,7 @@
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
         <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="False" />
         <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:SliderHelper.GripDiameter" Value="15" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}" />
