@@ -48,9 +48,7 @@
                                     Margin="5"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Background="Transparent"
                                     Effect="{DynamicResource AllDirectionEffect3}">
                                 <Border.RenderTransform>
                                     <TransformGroup>
@@ -87,7 +85,7 @@
                                         </Grid>
                                     </Border>
 
-                                    <Border Grid.Row="1"
+                                    <Border x:Name="contentBorder" Grid.Row="1"
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="{DynamicResource BottomContainerCornerRadius}">
                                         <ContentControl Margin="{TemplateBinding Padding}"
@@ -182,6 +180,7 @@
                                 <Condition Property="IsShowCloseButton" Value="False" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="titleBar" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="contentBorder" Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

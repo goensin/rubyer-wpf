@@ -50,7 +50,7 @@ namespace Rubyer
 
                 if (content is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
                 {
-                    dialogBox.Title = string.IsNullOrEmpty(dialogContext.Title) ? dialogBox.Title : dialogContext.Title;
+                    dialogBox.Title = string.IsNullOrEmpty(dialogContext.Title) ? title : dialogContext.Title;
                     dialogContext.RequestClose += (param) =>
                     {
                         DialogBox.CloseDialogCommand.Execute(param, dialogBox);
@@ -58,7 +58,7 @@ namespace Rubyer
                 }
                 else
                 {
-                    dialogBox.Title = string.IsNullOrEmpty(title) ? dialogBox.Title: title;
+                    dialogBox.Title = title;
                 }
 
                 dialogBox.DialogContent = content;

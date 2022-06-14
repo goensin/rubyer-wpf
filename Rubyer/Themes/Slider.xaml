@@ -6,6 +6,16 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <rubyer:Transition x:Key="SliderValueTransition" Type="ZoomDown" IsShow="True">
+        <rubyer:Card x:Name="valueBorder"
+                     Padding="10 5"
+                     Background="{DynamicResource DefaultForeground}"
+                     IsHitTestVisible="False"
+                     TextBlock.Foreground="{DynamicResource DefaultBackground}">
+            <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
+        </rubyer:Card>
+    </rubyer:Transition>
+
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="False" />

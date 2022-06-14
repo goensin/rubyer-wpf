@@ -34,7 +34,25 @@ namespace Rubyer
         /// 拖拽时显示当前值
         /// </summary>
         public static readonly DependencyProperty DraggingShowValueProperty = DependencyProperty.RegisterAttached(
-            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(default(bool)));
+            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(default(bool), OnDraggingShowValueChanged));
+
+        private static void OnDraggingShowValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            //if (d is Slider slider)
+            //{
+            //    slider.Loaded += (sender, args) =>
+            //    {
+            //        if (slider.Template.FindName("Thumb", slider) is Thumb grip)
+            //        {
+            //            //得到层容器
+            //            var adornerLayer = AdornerLayer.GetAdornerLayer(grip);
+            //            //在层容器中加层
+            //            adornerLayer.Add(new SliderValueAdorner(grip, slider));
+            //        }
+            //    };
+            //}
+
+        }
 
         public static void SetDraggingShowValue(DependencyObject element, bool value)
         {
