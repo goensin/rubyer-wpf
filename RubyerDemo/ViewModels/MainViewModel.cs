@@ -28,7 +28,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "按钮-Button",Content=new ButtonDemo()},
                 new MenuItem{ Name = "输入框-InputBox",Content=new InputBoxDemo() },
                 new MenuItem{ Name = "选择框-SelectBox",Content=new SelectBoxDemo()},
-                new MenuItem{ Name = "数据条-DataBar",Content=new DataBarDemo()},
+                new MenuItem{ Name = "范围条-RangeBarDemo",Content=new RangeBarDemo()},
                 new MenuItem{ Name = "图标-Icon",Content=new IconDemo{ DataContext = new IconViewModel()} },
                 new MenuItem{ Name = "分组框-GroupBox",Content=new GroupBoxDemo() },
                 new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTreeDemo{ DataContext = new ListsViewModel()} },

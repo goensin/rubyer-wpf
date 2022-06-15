@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!--  Opacity  -->
-    <system:Double x:Key="UnenableOpcity">0.6</system:Double>
+    <system:Double x:Key="UnenableOpcity">0.5</system:Double>
 
     <!--  CircleDiameter  -->
     <system:Double x:Key="InsideButtonCircleDiameter">22</system:Double>

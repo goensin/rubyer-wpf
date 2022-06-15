@@ -6,16 +6,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <rubyer:Transition x:Key="SliderValueTransition" Type="ZoomDown" IsShow="True">
-        <rubyer:Card x:Name="valueBorder"
-                     Padding="10 5"
-                     Background="{DynamicResource DefaultForeground}"
-                     IsHitTestVisible="False"
-                     TextBlock.Foreground="{DynamicResource DefaultBackground}">
-            <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
-        </rubyer:Card>
-    </rubyer:Transition>
-
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Focusable" Value="False" />
@@ -37,32 +27,6 @@
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
               UseLayoutRounding="True">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Canvas HorizontalAlignment="Center" ClipToBounds="False">
-                <rubyer:Transition x:Name="valueTransition"
-                                   Canvas.Top="-35"
-                                   IsShow="False"
-                                   Type="ZoomDown">
-                    <Canvas.Left>
-                        <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                            <Binding Path="ActualWidth" RelativeSource="{RelativeSource Self}" />
-                            <Binding Source="-2" />
-                        </MultiBinding>
-                    </Canvas.Left>
-                    <Border x:Name="valueBorder"
-                            Padding="10 5"
-                            Background="{DynamicResource DefaultForeground}"
-                            CornerRadius="{DynamicResource AllControlCornerRadius}"
-                            IsHitTestVisible="False"
-                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
-                    </Border>
-                </rubyer:Transition>
-            </Canvas>
-
             <Ellipse x:Name="grip"
                      Grid.Row="1"
                      Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
@@ -73,7 +37,7 @@
                      SnapsToDevicePixels="True" />
         </Grid>
         <ControlTemplate.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
+            <Trigger Property="IsMouseOver" Value="true">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -94,7 +58,7 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <Trigger Property="IsDragging" Value="True">
+            <Trigger Property="IsDragging" Value="true">
                 <Trigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
@@ -123,13 +87,6 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                    <Condition Binding="{Binding Path=(rubyer:SliderHelper.DraggingShowValue), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="valueTransition" Property="IsShow" Value="True" />
-            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -231,34 +188,6 @@
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
               UseLayoutRounding="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Canvas Grid.Column="1"
-                    VerticalAlignment="Center"
-                    ClipToBounds="False">
-                <rubyer:Transition x:Name="valueTransition"
-                                   Canvas.Left="10"
-                                   IsShow="False"
-                                   Type="ZoomLeft">
-                    <Canvas.Top>
-                        <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                            <Binding Path="ActualHeight" RelativeSource="{RelativeSource Self}" />
-                            <Binding Source="-2" />
-                        </MultiBinding>
-                    </Canvas.Top>
-                    <Border x:Name="valueBorder"
-                            Padding="10 5"
-                            Background="{DynamicResource DefaultForeground}"
-                            CornerRadius="{DynamicResource AllControlCornerRadius}"
-                            IsHitTestVisible="False"
-                            TextBlock.Foreground="{DynamicResource DefaultBackground}">
-                        <TextBlock Text="{Binding Value, RelativeSource={RelativeSource AncestorType=Slider}}" />
-                    </Border>
-                </rubyer:Transition>
-            </Canvas>
-
             <Ellipse x:Name="grip"
                      Width="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                      Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
@@ -318,13 +247,6 @@
                     </BeginStoryboard>
                 </Trigger.ExitActions>
             </Trigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                    <Condition Binding="{Binding Path=(rubyer:SliderHelper.DraggingShowValue), RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="True" />
-                </MultiDataTrigger.Conditions>
-                <Setter TargetName="valueTransition" Property="IsShow" Value="True" />
-            </MultiDataTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -428,9 +350,21 @@
         <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="False" />
         <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
         <Setter Property="rubyer:SliderHelper.GripDiameter" Value="15" />
+        <Setter Property="rubyer:SliderHelper.ValuePlacement" Value="Top" />
+        <Setter Property="rubyer:SliderHelper.ValueOffset" Value="-10" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}" />
+                <Setter Property="rubyer:SliderHelper.ValuePlacement" Value="Right" />
+            </Trigger>
+            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Right">
+                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="10" />
+            </Trigger>
+            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Bottom">
+                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="10" />
+            </Trigger>
+            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Left">
+                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="-10" />
             </Trigger>
         </Style.Triggers>
     </Style>

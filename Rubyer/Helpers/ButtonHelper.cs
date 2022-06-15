@@ -1,4 +1,4 @@
-﻿using Rubyer.Enums;
+﻿using Rubyer;
 using System.Windows;
 
 namespace Rubyer

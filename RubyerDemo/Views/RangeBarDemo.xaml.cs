@@ -16,9 +16,9 @@ namespace RubyerDemo.Views
     /// <summary>
     /// DataBar.xaml 的交互逻辑
     /// </summary>
-    public partial class DataBarDemo : UserControl
+    public partial class RangeBarDemo : UserControl
     {
-        public DataBarDemo()
+        public RangeBarDemo()
         {
             InitializeComponent();
         }
