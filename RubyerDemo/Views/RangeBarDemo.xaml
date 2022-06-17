@@ -19,23 +19,19 @@
                             <ProgressBar Width="150"
                                          Margin="5"
                                          rubyer:ProgressBarHelper.ShowPercent="True"
-                                         rubyer:ProgressBarHelper.Thickness="5"
                                          Value="70" />
                             <ProgressBar Width="150"
                                          Margin="10"
-                                         rubyer:ProgressBarHelper.Thickness="5"
                                          IsIndeterminate="True" />
                         </StackPanel>
                         <ProgressBar Height="150"
                                      Margin="10"
                                      rubyer:ProgressBarHelper.ShowPercent="True"
-                                     rubyer:ProgressBarHelper.Thickness="5"
                                      Orientation="Vertical"
                                      Value="70" />
                         <ProgressBar Width="5"
                                      Height="150"
                                      Margin="10"
-                                     rubyer:ProgressBarHelper.Thickness="5"
                                      IsIndeterminate="True"
                                      Orientation="Vertical" />
                         <ProgressBar Style="{StaticResource CircleProgressBar}"
