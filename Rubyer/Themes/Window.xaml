@@ -11,7 +11,7 @@
     <Style x:Key="TitleBarButtonStyle"
            BasedOn="{StaticResource TextButton}"
            TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="Foreground" Value="{Binding TitleForeground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
@@ -42,21 +42,8 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="TitleShadow" Value="False" />
         <Setter Property="TitleHeight" Value="24" />
-        <Setter Property="TitleBarContent">
-            <Setter.Value>
-                <!--  默认 window 的左边内容：图标 + 标题  -->
-                <StackPanel Orientation="Horizontal">
-                    <Image Width="22"
-                           Height="22"
-                           Margin="10 0"
-                           VerticalAlignment="Center"
-                           Source="{Binding Icon, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                    <TextBlock FontSize="14"
-                               Foreground="{DynamicResource WhiteForeground}"
-                               Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                </StackPanel>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="TitleBarContent" Value="{x:Null}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome CaptionHeight="{Binding TitleHeight, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
@@ -89,13 +76,26 @@
                                         Background="{TemplateBinding BorderBrush}"
                                         Effect="{DynamicResource BottomEffect}"
                                         Visibility="{TemplateBinding TitleShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
-                                <!--  标题栏左边内容  -->
-                                <ContentControl x:Name="preContent"
-                                                Grid.Column="0"
-                                                Margin="2 0"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding TitleBarContent}"
-                                                Foreground="{DynamicResource WhiteForeground}" />
+                                <!--  默认 window 的左边内容：图标 + 标题  -->
+                                <Grid Grid.Column="0"
+                                      Margin="2 0"
+                                      TextBlock.Foreground="{TemplateBinding TitleForeground}">
+                                    <StackPanel x:Name="defalutTitle"
+                                                Orientation="Horizontal"
+                                                Visibility="Collapsed">
+                                        <Image Width="22"
+                                               Height="22"
+                                               VerticalAlignment="Center"
+                                               Source="{Binding Icon}" />
+                                        <TextBlock Margin="10 0"
+                                                   FontSize="13"
+                                                   Text="{Binding Title}" />
+                                    </StackPanel>
+                                    <ContentControl x:Name="preContent"
+                                                    VerticalAlignment="Center"
+                                                    Content="{TemplateBinding TitleBarContent}" />
+                                </Grid>
+
                                 <!--  标题栏右边按钮  -->
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel"
                                             Grid.Column="1"
@@ -170,6 +170,9 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
+                        <Trigger Property="TitleBarContent" Value="{x:Null}">
+                            <Setter TargetName="defalutTitle" Property="Visibility" Value="Visible" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

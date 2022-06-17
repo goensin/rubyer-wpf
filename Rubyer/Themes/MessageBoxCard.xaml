@@ -21,7 +21,7 @@
         <Setter Property="IsShowIcon" Value="False" />
         <Setter Property="IsShowOk" Value="True" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="MaxWidth" Value="500" />
+        <Setter Property="MaxWidth" Value="460" />
         <Setter Property="MessageBoxButton" Value="OK" />
         <Setter Property="MinHeight" Value="120" />
         <Setter Property="MinWidth" Value="250" />
@@ -97,29 +97,29 @@
                                             Margin="5"
                                             HorizontalAlignment="Right"
                                             Orientation="Horizontal">
+                                    <Button x:Name="PART_YesButton"
+                                            MinWidth="60"
+                                            Margin="5"
+                                            Content="{DynamicResource I18N_MessageBox_Yes}"
+                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_NoButton"
                                             MinWidth="60"
                                             Margin="5"
                                             Background="{DynamicResource Info}"
                                             Content="{DynamicResource I18N_MessageBox_No}"
                                             Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
-                                    <Button x:Name="PART_YesButton"
-                                            MinWidth="60"
-                                            Margin="5"
-                                            Content="{DynamicResource I18N_MessageBox_Yes}"
-                                            Visibility="{TemplateBinding IsShowYes, Converter={StaticResource BooleanToVisibleConverter}}" />
-                                    <Button x:Name="PART_CancelButton"
-                                            MinWidth="60"
-                                            Margin="5"
-                                            Background="{DynamicResource Info}"
-                                            Content="{DynamicResource I18N_MessageBox_Cancel}"
-                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"
                                             Width="60"
                                             MinWidth="5"
                                             Content="{DynamicResource I18N_MessageBox_Ok}"
                                             IsDefault="True"
                                             Visibility="{TemplateBinding IsShowOk, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                    <Button x:Name="PART_CancelButton"
+                                            MinWidth="60"
+                                            Margin="5"
+                                            Background="{DynamicResource Info}"
+                                            Content="{DynamicResource I18N_MessageBox_Cancel}"
+                                            Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 </StackPanel>
                             </Grid>
                         </Border>

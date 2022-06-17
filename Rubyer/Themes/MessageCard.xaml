@@ -64,7 +64,7 @@
                                          Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <ContentPresenter x:Name="contentPresenter"
                                               Grid.Column="1"
-                                              Margin="8 0"
+                                              Margin="0"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Focusable="False"

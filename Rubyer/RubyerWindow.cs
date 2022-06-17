@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Rubyer
@@ -15,13 +16,6 @@ namespace Rubyer
             CommandBindings.Add(new CommandBinding(SystemCommands.MinimizeWindowCommand, MinimizeWindow, CanMinimizeWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.RestoreWindowCommand, RestoreWindow, CanResizeWindow));
             CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, ShowSystemMenu));
-        }
-
-        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
-        {
-            base.OnMouseLeftButtonDown(e);
-            //if (e.ButtonState == MouseButtonState.Pressed)
-            //    DragMove();
         }
 
         protected override void OnContentRendered(EventArgs e)
@@ -63,7 +57,6 @@ namespace Rubyer
             SystemCommands.RestoreWindow(this);
         }
 
-
         private void ShowSystemMenu(object sender, ExecutedRoutedEventArgs e)
         {
             var element = e.OriginalSource as FrameworkElement;
@@ -80,32 +73,56 @@ namespace Rubyer
 
         #region 属性
 
+        // 标题栏内容
         public static readonly DependencyProperty TitleBarContentProperty =
             DependencyProperty.Register("TitleBarContent", typeof(object), typeof(RubyerWindow), new PropertyMetadata(default(object)));
 
+        /// <summary>
+        /// 标题栏内容
+        /// </summary>
         public object TitleBarContent
         {
             get { return (object)GetValue(TitleBarContentProperty); }
             set { SetValue(TitleBarContentProperty, value); }
         }
 
-
+        // 是否显示标题栏阴影
         public static readonly DependencyProperty TitleShadowProperty =
             DependencyProperty.Register("TitleShadow", typeof(bool), typeof(RubyerWindow), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否显示标题栏阴影
+        /// </summary>
         public bool TitleShadow
         {
             get { return (bool)GetValue(TitleShadowProperty); }
             set { SetValue(TitleShadowProperty, value); }
         }
 
+        // 标题栏高度
         public static readonly DependencyProperty TitleHeightProperty =
             DependencyProperty.Register("TitleHeight", typeof(double), typeof(RubyerWindow), new PropertyMetadata(default(double)));
 
+        /// <summary>
+        /// 标题栏高度
+        /// </summary>
         public double TitleHeight
         {
             get { return (double)GetValue(TitleHeightProperty); }
             set { SetValue(TitleHeightProperty, value); }
+        }
+
+        // 标题前景色
+        public static readonly DependencyProperty TitleForegroundProperty =
+            DependencyProperty.Register("TitleForeground", typeof(Brush), typeof(RubyerWindow), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// 标题前景色
+        /// </summary>
+        public Brush TitleForeground
+        {
+            get { return (Brush)GetValue(TitleForegroundProperty); }
+            set { SetValue(TitleForegroundProperty, value); }
         }
         #endregion
     }
