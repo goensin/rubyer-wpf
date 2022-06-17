@@ -19,7 +19,7 @@
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />
-    <SolidColorBrush x:Key="Warning" Color="#FF9800" />
+    <SolidColorBrush x:Key="Warning" Color="#F57C00" />
     <SolidColorBrush x:Key="Success" Color="#43A047" />
     <SolidColorBrush x:Key="Question" Color="#2196F3" />
 
