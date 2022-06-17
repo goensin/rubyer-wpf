@@ -19,6 +19,8 @@
         <Setter Property="CircleDiameter" Value="30" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Loading}">
@@ -28,50 +30,54 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <Rectangle x:Name="background"
-                                   Width="{TemplateBinding CircleDiameter}"
-                                   Height="{TemplateBinding CircleDiameter}"
-                                   Stroke="{TemplateBinding Background}"
-                                   StrokeThickness="{TemplateBinding StrokeThickness}">
-                            <Rectangle.RadiusX>
-                                <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                                    <Binding ElementName="background" Path="ActualWidth" />
-                                    <Binding Source="2" />
-                                </MultiBinding>
-                            </Rectangle.RadiusX>
-                            <Rectangle.RadiusY>
-                                <MultiBinding Converter="{StaticResource MathDivideConverter}">
-                                    <Binding ElementName="background" Path="ActualHeight" />
-                                    <Binding Source="2" />
-                                </MultiBinding>
-                            </Rectangle.RadiusY>
-                        </Rectangle>
+                        <Grid>
+                            <Rectangle x:Name="background"
+                                       Width="{TemplateBinding CircleDiameter}"
+                                       Height="{TemplateBinding CircleDiameter}"
+                                       Stroke="{TemplateBinding Background}"
+                                       StrokeThickness="{TemplateBinding StrokeThickness}">
+                                <Rectangle.RadiusX>
+                                    <MultiBinding Converter="{StaticResource MathDivideConverter}">
+                                        <Binding ElementName="background" Path="ActualWidth" />
+                                        <Binding Source="2" />
+                                    </MultiBinding>
+                                </Rectangle.RadiusX>
+                                <Rectangle.RadiusY>
+                                    <MultiBinding Converter="{StaticResource MathDivideConverter}">
+                                        <Binding ElementName="background" Path="ActualHeight" />
+                                        <Binding Source="2" />
+                                    </MultiBinding>
+                                </Rectangle.RadiusY>
+                            </Rectangle>
 
-                        <Rectangle x:Name="loading"
-                                   Width="{TemplateBinding CircleDiameter}"
-                                   Height="{TemplateBinding CircleDiameter}"
-                                   RadiusX="{Binding RadiusX, ElementName=background}"
-                                   RadiusY="{Binding RadiusY, ElementName=background}"
-                                   RenderTransformOrigin="0.5 0.5"
-                                   Stroke="{TemplateBinding FocusedBrush}"
-                                   StrokeDashArray="{TemplateBinding StrokeDashArray}"
-                                   StrokeThickness="{TemplateBinding StrokeThickness}">
-                            <Rectangle.RenderTransform>
-                                <RotateTransform x:Name="loadingAngle" Angle="0" />
-                            </Rectangle.RenderTransform>
-                        </Rectangle>
+                            <Rectangle x:Name="loading"
+                                       Width="{TemplateBinding CircleDiameter}"
+                                       Height="{TemplateBinding CircleDiameter}"
+                                       RadiusX="{Binding RadiusX, ElementName=background}"
+                                       RadiusY="{Binding RadiusY, ElementName=background}"
+                                       RenderTransformOrigin="0.5 0.5"
+                                       Stroke="{TemplateBinding FocusedBrush}"
+                                       StrokeDashArray="{TemplateBinding StrokeDashArray}"
+                                       StrokeThickness="{TemplateBinding StrokeThickness}">
+                                <Rectangle.RenderTransform>
+                                    <RotateTransform x:Name="loadingAngle" Angle="0" />
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
 
-                        <TextBlock x:Name="Path_MessageText"
-                                   Grid.Row="1"
-                                   Margin="5"
-                                   HorizontalAlignment="Center" />
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Row="1"
+                                          Margin="0 5 0 0"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
-                        </Trigger>
-                        <Trigger Property="Text" Value="{x:Null}">
-                            <Setter TargetName="Path_MessageText" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="True">
                             <Trigger.EnterActions>
@@ -125,6 +131,9 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

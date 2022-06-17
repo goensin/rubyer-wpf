@@ -139,7 +139,7 @@ namespace RubyerDemo.ViewModels
 
         private async void OpenDialog5Execute(object obj)
         {
-            _ = await Dialog.Show(ConstNames.MainDialogBox, new Loading { Text = "loading..." }, showCloseButton: false, openHandler: async dialog =>
+            _ = await Dialog.Show(ConstNames.MainDialogBox, new Loading { Content = "loading..." }, showCloseButton: false, openHandler: async dialog =>
             {
                 await Task.Delay(3000);
                 dialog.Close();

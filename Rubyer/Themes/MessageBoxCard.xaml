@@ -21,7 +21,7 @@
         <Setter Property="IsShowIcon" Value="False" />
         <Setter Property="IsShowOk" Value="True" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="MaxWidth" Value="400" />
+        <Setter Property="MaxWidth" Value="500" />
         <Setter Property="MessageBoxButton" Value="OK" />
         <Setter Property="MinHeight" Value="120" />
         <Setter Property="MinWidth" Value="250" />

@@ -11,7 +11,7 @@ namespace Rubyer
     ///  加载中
     /// </summary>
     [TemplatePart(Name = MessageTextPartName, Type = typeof(TextBlock))]
-    public class Loading : Control
+    public class Loading : ContentControl
     {
         public const string MessageTextPartName = "Path_MessageText";
         static Loading()
@@ -22,14 +22,6 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            if (GetTemplateChild(MessageTextPartName) is TextBlock textBlock)
-            {
-                var binding = new Binding("Text");
-                binding.Source = this;
-                binding.Mode = BindingMode.TwoWay;
-                textBlock.SetBinding(TextBlock.TextProperty, binding);
-            }
         }
 
         // 边框厚度
@@ -84,19 +76,6 @@ namespace Rubyer
         {
             var loading = d as Loading;
             loading.StrokeDashArray = new DoubleCollection(new List<double> { (loading.CircleDiameter - loading.StrokeThickness) * Math.PI / loading.StrokeThickness * loading.Progress, double.MaxValue });
-        }
-
-        // 文本
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-            "Text", typeof(string), typeof(Loading), new PropertyMetadata(default(string)));
-
-        /// <summary>
-        /// 文本
-        /// </summary>
-        public string Text
-        {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
         }
 
         // 圆形直径

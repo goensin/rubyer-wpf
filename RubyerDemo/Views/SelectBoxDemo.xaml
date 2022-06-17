@@ -127,8 +127,8 @@
                         <ToggleButton x:Name="nightMode"
                                       Style="{DynamicResource SwitchAccentToggle}"
                                       Margin="10 0"
-                                      rubyer:ToggleButtonHelper.CheckedContent="白天模式"
-                                      Content="夜间模式"
+                                      rubyer:ToggleButtonHelper.CheckedContent="夜间模式"
+                                      Content="白天模式"
                                       IsChecked="{Binding IsChecked, ElementName=night}" />
                         <ToggleButton Style="{DynamicResource SwitchToggleButton}"
                                       Margin="10 0"

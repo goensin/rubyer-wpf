@@ -18,7 +18,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Margin" Value="0" />
-        <Setter Property="Padding" Value="30 20" />
+        <Setter Property="Padding" Value="10" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsClickBackgroundToClose" Value="False" />
@@ -85,7 +85,8 @@
                                         </Grid>
                                     </Border>
 
-                                    <Border x:Name="contentBorder" Grid.Row="1"
+                                    <Border x:Name="contentBorder"
+                                            Grid.Row="1"
                                             Background="{TemplateBinding Background}"
                                             CornerRadius="{DynamicResource BottomContainerCornerRadius}">
                                         <ContentControl Margin="{TemplateBinding Padding}"
