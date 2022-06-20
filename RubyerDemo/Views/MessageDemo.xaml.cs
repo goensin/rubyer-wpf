@@ -32,7 +32,7 @@ namespace RubyerDemo.Views
 
         private void InfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Info("info");
+            Message.Info("hello ~ \r\nrubyer ");
         }
 
         private void WaringBtn_Click(object sender, RoutedEventArgs e)

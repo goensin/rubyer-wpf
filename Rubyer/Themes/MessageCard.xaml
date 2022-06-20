@@ -12,15 +12,13 @@
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="CornerRadius" Value="2.5" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="CornerRadius" Value="{StaticResource AllContainerCornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="IsShow" Value="True" />
         <Setter Property="IsShwoIcon" Value="False" />
-        <Setter Property="Margin" Value="2.5" />
-        <Setter Property="MinHeight" Value="40" />
+        <Setter Property="Margin" Value="3" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -64,7 +62,7 @@
                                          Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <ContentPresenter x:Name="contentPresenter"
                                               Grid.Column="1"
-                                              Margin="0"
+                                              Margin="8"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               Focusable="False"
@@ -73,6 +71,8 @@
                             <Button x:Name="PART_CloseButton"
                                     Style="{StaticResource TextButton}"
                                     Grid.Column="2"
+                                    Height="Auto"
+                                    Padding="5"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="{TemplateBinding IsClearable, Converter={StaticResource BooleanToVisibleConverter}}">
                                 <rubyer:Icon Type="CloseLine" />
