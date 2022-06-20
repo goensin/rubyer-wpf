@@ -73,34 +73,45 @@ namespace Rubyer
         {
             if (d is Slider slider && GetDraggingShowValue(slider))
             {
-                slider.Loaded += (sender, args) =>
+                if (slider.IsLoaded)
                 {
-                    if (slider.Template.FindName("Thumb", slider) is Thumb grip)
+                    AddCurrentValueAdorner(slider);
+                }
+                else
+                {
+                    slider.Loaded += (sender, args) =>
                     {
-                        var adornerLayer = AdornerLayer.GetAdornerLayer(grip);
+                        AddCurrentValueAdorner(slider);
+                    };
+                }
+            }
+        }
 
-                        grip.MouseEnter += (a, b) =>
-                        {
-                            var placement = GetValuePlacement(slider);
-                            var offset = GetValueOffset(slider);
-                            adornerLayer.Add(new SliderValueAdorner(grip, slider, placement, offset));
-                        };
+        private static void AddCurrentValueAdorner(Slider slider)
+        {
+            if (slider.Template.FindName("Thumb", slider) is Thumb grip)
+            {
+                var adornerLayer = AdornerLayer.GetAdornerLayer(grip);
 
-                        grip.MouseLeave += (a, b) =>
+                grip.MouseEnter += (a, b) =>
+                {
+                    var placement = GetValuePlacement(slider);
+                    var offset = GetValueOffset(slider);
+                    adornerLayer.Add(new SliderValueAdorner(grip, slider, placement, offset));
+                };
+
+                grip.MouseLeave += (a, b) =>
+                {
+                    Adorner[] toRemoveArray = adornerLayer.GetAdorners(grip);
+                    if (toRemoveArray != null)
+                    {
+                        for (int x = 0; x < toRemoveArray.Length; x++)
                         {
-                            Adorner[] toRemoveArray = adornerLayer.GetAdorners(grip);
-                            if (toRemoveArray != null)
-                            {
-                                for (int x = 0; x < toRemoveArray.Length; x++)
-                                {
-                                    adornerLayer.Remove(toRemoveArray[x]);
-                                }
-                            }
-                        };
+                            adornerLayer.Remove(toRemoveArray[x]);
+                        }
                     }
                 };
             }
-
         }
 
         public static void SetDraggingShowValue(DependencyObject element, bool value)

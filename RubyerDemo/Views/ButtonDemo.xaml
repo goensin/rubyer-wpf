@@ -191,10 +191,12 @@
                       Header="加载按钮">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button Margin="6 0"
+                            Padding="5 0"
                             rubyer:ButtonHelper.Loading="True"
                             Content="默认按钮" />
                     <Button Style="{DynamicResource AccentButton}"
                             Margin="6 0"
+                            Padding="5 0"
                             rubyer:ButtonHelper.Loading="True"
                             rubyer:ButtonHelper.Shape="Round"
                             Content="强调按钮" />

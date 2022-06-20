@@ -54,7 +54,7 @@
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Effect="{DynamicResource RightBottomEffect}"
-                                    Visibility="{Binding Path=(rubyer:ButtonHelper.ShowShadow), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                    Visibility="Collapsed" />
 
                             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -114,6 +114,9 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
+                        <Trigger Property="rubyer:ButtonHelper.ShowShadow" Value="True">
+                            <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Round">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
                         </Trigger>
@@ -137,7 +140,13 @@
 
     <Style x:Key="RubyerButton"
            BasedOn="{StaticResource RubyerButtonBase}"
-           TargetType="{x:Type Button}" />
+           TargetType="{x:Type Button}" >
+        <Style.Triggers>
+            <Trigger Property="IsDefault" Value="True">
+                <Setter Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="LightButton"
            BasedOn="{StaticResource RubyerButton}"

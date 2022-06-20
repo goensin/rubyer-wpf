@@ -52,14 +52,13 @@
                                 <TextBlock Margin="0 0 10 0" Text="控件: " />
                                 <Slider x:Name="controlSlider"
                                         Width="120"
+                                        rubyer:SliderHelper.DraggingShowValue="True"
+                                        rubyer:SliderHelper.ValuePlacement="Right"
                                         IsSnapToTickEnabled="True"
                                         Maximum="15"
                                         Minimum="0"
                                         TickFrequency="0.1"
                                         ValueChanged="controlSlider_ValueChanged" />
-                                <TextBlock Width="30"
-                                           Margin="10 0 0 0"
-                                           Text="{Binding Value, ElementName=controlSlider}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -69,14 +68,13 @@
                                 <TextBlock Margin="0 0 10 0" Text="容器: " />
                                 <Slider x:Name="contrainerSlider"
                                         Width="120"
+                                        rubyer:SliderHelper.DraggingShowValue="True"
+                                        rubyer:SliderHelper.ValuePlacement="Right"
                                         IsSnapToTickEnabled="True"
                                         Maximum="20"
                                         Minimum="0"
                                         TickFrequency="0.1"
                                         ValueChanged="contrainerSlider_ValueChanged" />
-                                <TextBlock Width="30"
-                                           Margin="10 0 0 0"
-                                           Text="{Binding Value, ElementName=contrainerSlider}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
