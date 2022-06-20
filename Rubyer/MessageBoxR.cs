@@ -115,7 +115,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult Confirm(string message, string title = "", MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static MessageBoxResult Confirm(string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
             return Show(message, title, button, icon);
         }
@@ -215,7 +215,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> ConfirmInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OKCancel, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static async Task<MessageBoxResult> ConfirmInContainer(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxIcon icon = MessageBoxIcon.Question)
         {
             return await ShowInContainer(containerIdentifier, message, title, button, icon);
         }
