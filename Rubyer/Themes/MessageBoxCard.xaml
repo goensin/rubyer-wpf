@@ -107,18 +107,19 @@
                                             Margin="5"
                                             Background="{DynamicResource Info}"
                                             Content="{DynamicResource I18N_MessageBox_No}"
+                                            IsDefault="True"
                                             Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_OkButton"
                                             Width="60"
                                             MinWidth="5"
                                             Content="{DynamicResource I18N_MessageBox_Ok}"
-                                            IsDefault="True"
                                             Visibility="{TemplateBinding IsShowOk, Converter={StaticResource BooleanToVisibleConverter}}" />
                                     <Button x:Name="PART_CancelButton"
                                             MinWidth="60"
                                             Margin="5"
                                             Background="{DynamicResource Info}"
                                             Content="{DynamicResource I18N_MessageBox_Cancel}"
+                                            IsDefault="True"
                                             Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 </StackPanel>
                             </Grid>
