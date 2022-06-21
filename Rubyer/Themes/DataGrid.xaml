@@ -17,15 +17,16 @@
 
     <!--  Style and template for the DataGridCell.  -->
     <Style x:Key="RubyerDataGridCell" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
                     <Border x:Name="border"
                             Background="Transparent"
-                            BorderBrush="{DynamicResource Border}"
+                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                             BorderThickness="0"
                             SnapsToDevicePixels="True">
-                        <ContentPresenter Margin="5 2"
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                           VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -47,8 +48,6 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
@@ -63,7 +62,7 @@
                                                 IsActive="{TemplateBinding IsSelected}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
 
-                            <SelectiveScrollingGrid Margin="{TemplateBinding Padding}">
+                            <SelectiveScrollingGrid>
                                 <SelectiveScrollingGrid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
@@ -117,7 +116,7 @@
                         <Border x:Name="columnHeaderBorder"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{DynamicResource Border}"
+                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 BorderThickness="0">
                             <Grid>
                                 <Grid.ColumnDefinitions>

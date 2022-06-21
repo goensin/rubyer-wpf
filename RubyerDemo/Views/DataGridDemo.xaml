@@ -35,10 +35,9 @@
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                           rubyer:HeaderHelper.HorizontalAlignment="Center"
                           rubyer:HeaderHelper.Padding="8"
-                          rubyer:ItemsControlHelper.ItemMargin="0 4 4 0"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
-                          GridLinesVisibility="None"
+                          GridLinesVisibility="All"
                           ItemsSource="{Binding Persons}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="60"

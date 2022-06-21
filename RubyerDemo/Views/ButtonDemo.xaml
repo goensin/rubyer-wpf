@@ -153,6 +153,7 @@
                             Content="强调按钮" />
                     <Button Style="{DynamicResource TextButton}"
                             Margin="5"
+                            Padding="5"
                             rubyer:ControlHelper.FocusedBrush="Pink"
                             Foreground="Pink">
                         <rubyer:Icon Type="TvFill" />
@@ -169,6 +170,7 @@
                     <Button Style="{DynamicResource TextSuccessButton}"
                             Height="40"
                             Margin="5"
+                            Padding="5"
                             rubyer:ControlHelper.FocusedBrush="{StaticResource Success}">
                         <rubyer:Icon Width="30"
                                      Height="30"
