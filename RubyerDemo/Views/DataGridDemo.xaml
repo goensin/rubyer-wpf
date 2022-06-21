@@ -37,7 +37,7 @@
                           rubyer:HeaderHelper.Padding="8"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
-                          GridLinesVisibility="All"
+                          GridLinesVisibility="None"
                           ItemsSource="{Binding Persons}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="60"
@@ -59,6 +59,7 @@
                                                 Header="进化" />
                         <DataGridComboBoxColumn Width="80"
                                                 EditingElementStyle="{StaticResource RubyerDataGridComboBoxColumnEditting}"
+                                                ElementStyle="{StaticResource RubyerDataGridComboBoxColumn}"
                                                 Header="性别"
                                                 ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
                                                 SelectedItemBinding="{Binding Gender}" />
@@ -94,8 +95,6 @@
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           Foreground="{StaticResource BlackForeground}"
-                          GridLinesVisibility="None"
-                          IsReadOnly="True"
                           ItemsSource="{Binding Persons}">
                     <DataGrid.RowStyle>
                         <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}">
