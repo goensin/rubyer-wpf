@@ -5,10 +5,12 @@
              xmlns:local="clr-namespace:RubyerDemo.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             d:Background="{StaticResource DefaultBackground}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -75,9 +77,9 @@
                     </TextBox>
                     <PasswordBox Width="150"
                                  Margin="10 0"
+                                 rubyer:InputBoxHelper.Watermark="密码"
                                  rubyer:PasswordBoxHelper.BindablePassword="{Binding TestPassword}"
-                                 rubyer:PasswordBoxHelper.ShowSwitchButton="True"
-                                 rubyer:InputBoxHelper.Watermark="密码">
+                                 rubyer:PasswordBoxHelper.ShowSwitchButton="True">
                         <rubyer:InputBoxHelper.PreContent>
                             <rubyer:Icon Type="LockPasswordFill" />
                         </rubyer:InputBoxHelper.PreContent>
@@ -125,6 +127,16 @@
             <GroupBox Grid.Row="4"
                       Grid.ColumnSpan="2"
                       Margin="0 0 0 10"
+                      Header="数值文本框-NumberBox">
+                <StackPanel Margin="5"
+                            HorizontalAlignment="Stretch"
+                            Orientation="Horizontal">
+                    <rubyer:NumberBox Width="120" rubyer:InputBoxHelper.Watermark="只能输入数值" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="5"
+                      Grid.ColumnSpan="2"
+                      Margin="0 0 0 10"
                       Header="下拉框-ComboBox">
                 <StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
@@ -138,19 +150,19 @@
                         </ComboBox>
                         <ComboBox Width="100"
                                   Margin="0 0 10 0"
-                                  rubyer:InputBoxHelper.Watermark="提示"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Light}"
-                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Light}">
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Light}"
+                                  rubyer:InputBoxHelper.Watermark="提示">
                             <ComboBoxItem Content="选项一" />
                             <ComboBoxItem Content="选项二" />
                             <ComboBoxItem Content="选项三" />
                         </ComboBox>
                         <ComboBox Width="120"
                                   Margin="0 0 10 0"
-                                  rubyer:InputBoxHelper.IsClearable="True"
-                                  rubyer:InputBoxHelper.Watermark="可清除"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Dark}"
-                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Dark}">
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Dark}"
+                                  rubyer:InputBoxHelper.IsClearable="True"
+                                  rubyer:InputBoxHelper.Watermark="可清除">
                             <ComboBoxItem Content="沙茶酱" />
                             <ComboBoxItem Content="鱼露" />
                             <ComboBoxItem Content="豆酱" />
@@ -158,17 +170,17 @@
                         <ComboBox x:Name="heightCombo"
                                   Width="120"
                                   Margin="0 0 10 0"
-                                  rubyer:InputBoxHelper.PostContent="cm"
-                                  rubyer:InputBoxHelper.PreContent="身高"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
-                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}" />
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                                  rubyer:InputBoxHelper.PostContent="cm"
+                                  rubyer:InputBoxHelper.PreContent="身高" />
 
                         <ComboBox Width="150"
                                   Margin="0 0 10 0"
-                                  rubyer:InputBoxHelper.IsClearable="True"
-                                  rubyer:InputBoxHelper.Watermark="运动"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
-                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}">
+                                  rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
+                                  rubyer:InputBoxHelper.IsClearable="True"
+                                  rubyer:InputBoxHelper.Watermark="运动">
                             <ComboBoxItem>
                                 <StackPanel Orientation="Horizontal">
                                     <rubyer:Icon Type="RunLine" />
@@ -203,10 +215,10 @@
 
                         <ComboBox Width="100"
                                   Margin="0 0 10 0"
-                                  rubyer:InputBoxHelper.IsClearable="True"
-                                  rubyer:InputBoxHelper.Watermark="可清除"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Warning}"
                                   rubyer:ControlHelper.MouseOverBrush="{DynamicResource Warning}"
+                                  rubyer:InputBoxHelper.IsClearable="True"
+                                  rubyer:InputBoxHelper.Watermark="可清除"
                                   IsEditable="True">
                             <ComboBoxItem Content="选项一" />
                             <ComboBoxItem Content="选项二" />

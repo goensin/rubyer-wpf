@@ -49,6 +49,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ControlMask.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Loading.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RepeatButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NumberBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -90,4 +91,5 @@
     <Style BasedOn="{StaticResource RubyerControlMask}" TargetType="{x:Type rubyer:ControlMask}" />
     <Style BasedOn="{StaticResource RubyerLoading}" TargetType="{x:Type rubyer:Loading}" />
     <Style BasedOn="{StaticResource RubyerRepeatButton}" TargetType="{x:Type RepeatButton}" />
+    <Style BasedOn="{StaticResource RubyerNumberBox}" TargetType="{x:Type rubyer:NumberBox}" />
 </ResourceDictionary>

@@ -1,0 +1,73 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="RubyerNumberBox" TargetType="{x:Type rubyer:NumberBox}">
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="28" />
+        <Setter Property="Cursor" Value="IBeam" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:InputBoxHelper.IsClearable" Value="False" />
+        <Setter Property="rubyer:InputBoxHelper.PreContent" Value="{x:Null}" />
+        <Setter Property="rubyer:InputBoxHelper.Watermark" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:NumberBox}">
+                    <Grid x:Name="PART_Root">
+                        <TextBox x:Name="PART_TextBox"
+                                 Style="{StaticResource RubyerTextBox}"
+                                 Grid.Row="0"
+                                 Grid.Column="0"
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                 rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.IsClearable="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 BorderBrush="{TemplateBinding BorderBrush}"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Focusable="{TemplateBinding Focusable}"
+                                 Foreground="{TemplateBinding Foreground}">
+                            <rubyer:InputBoxHelper.PostContent>
+                                <UniformGrid Columns="1" Rows="2">
+                                    <Button x:Name="PART_UpButton"
+                                            Style="{StaticResource TextButton}"
+                                            Height="Auto"
+                                            rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
+                                            Focusable="False"
+                                            Foreground="{DynamicResource SeconarydText}">
+                                        <rubyer:Icon Type="ArrowUpSLine" />
+                                    </Button>
+                                    <Button x:Name="PART_DownButton"
+                                            Style="{StaticResource TextButton}"
+                                            Height="Auto"
+                                            rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
+                                            Focusable="False"
+                                            Foreground="{DynamicResource SeconarydText}">
+                                        <rubyer:Icon Type="ArrowDownSLine" />
+                                    </Button>
+                                </UniformGrid>
+                            </rubyer:InputBoxHelper.PostContent>
+                        </TextBox>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
