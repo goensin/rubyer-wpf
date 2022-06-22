@@ -19,33 +19,33 @@
 
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
-                      BlurRadius="7"
+                      BlurRadius="5"
                       Direction="0"
                       Opacity="0.7"
                       ShadowDepth="0"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="AllDirectionEffect2"
-                      BlurRadius="9"
+                      BlurRadius="7"
                       Direction="0"
-                      Opacity="0.7"
+                      Opacity="0.8"
                       ShadowDepth="0"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="AllDirectionEffect3"
-                      BlurRadius="11"
+                      BlurRadius="9"
                       Direction="0"
-                      Opacity="0.7"
+                      Opacity="0.85"
                       ShadowDepth="0"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="AllDirectionEffect4"
-                      BlurRadius="13"
+                      BlurRadius="11"
                       Direction="0"
-                      Opacity="0.7"
+                      Opacity="0.9"
                       ShadowDepth="0"
                       Color="{StaticResource EffectColor}" />
     <DropShadowEffect x:Key="AllDirectionEffect5"
-                      BlurRadius="15"
+                      BlurRadius="13"
                       Direction="0"
-                      Opacity="0.7"
+                      Opacity="0.95"
                       ShadowDepth="0"
                       Color="{StaticResource EffectColor}" />
 

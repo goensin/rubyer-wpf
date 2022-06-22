@@ -11,7 +11,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="2"
-                               SnapsToDevicePixels="true"
+                               SnapsToDevicePixels="True"
                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                                StrokeDashArray="1 2"
                                StrokeThickness="1" />
@@ -24,7 +24,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="14 0 0 0"
-                               SnapsToDevicePixels="true"
+                               SnapsToDevicePixels="True"
                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                                StrokeDashArray="1 2"
                                StrokeThickness="1" />
@@ -35,7 +35,7 @@
 
     <!--  默认多选框  -->
     <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="16" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
@@ -58,49 +58,44 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border x:Name="checkBoxBorder"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                            <Grid x:Name="markGrid">
-                                <Viewbox>
-                                    <Path x:Name="checkedMark"
-                                          Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          RenderTransformOrigin="0.5,0.5"
-                                          SnapsToDevicePixels="True">
-                                        <Path.RenderTransform>
+
+                        <Grid HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Border x:Name="checkBoxBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                            <rubyer:Transition IsShow="{TemplateBinding IsChecked}">
+                                <Border x:Name="backBorder"
+                                        Background="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </rubyer:Transition>
+
+                            <Viewbox>
+                                <Grid x:Name="markGrid">
+                                    <rubyer:Icon x:Name="checkedMark"
+                                                 Foreground="{TemplateBinding Background}"
+                                                 RenderTransformOrigin="0.5,0.5"
+                                                 Type="CheckFill">
+                                        <rubyer:Icon.RenderTransform>
                                             <TransformGroup>
                                                 <ScaleTransform ScaleX="0" ScaleY="0" />
                                                 <SkewTransform />
                                                 <RotateTransform />
                                                 <TranslateTransform />
                                             </TransformGroup>
-                                        </Path.RenderTransform>
-                                        <Path.Data>
-                                            <GeometryGroup>
-                                                <RectangleGeometry Rect="0 0 12 12" />
-                                                <PathGeometry Figures="M 10.97498,2.22334L 5.6983,10.09834L 5.52164,10.09834L 1,6.19331L 2.27664,4.52165L 5.255,7.08833L 9.33331,1.0000153 10.97498,2.22334 Z" />
-                                            </GeometryGroup>
-                                        </Path.Data>
-                                    </Path>
-                                </Viewbox>
-                                <Viewbox>
-                                    <Path x:Name="nullMark"
-                                          Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          Visibility="Collapsed">
-                                        <Path.Data>
-                                            <GeometryGroup>
-                                                <RectangleGeometry Rect="0 0 12 12" />
-                                                <RectangleGeometry Rect="1 5 10 2" />
-                                            </GeometryGroup>
-                                        </Path.Data>
-                                    </Path>
-                                </Viewbox>
-                            </Grid>
-                        </Border>
+                                        </rubyer:Icon.RenderTransform>
+                                    </rubyer:Icon>
+
+                                    <rubyer:Icon x:Name="nullMark"
+                                                 Foreground="{TemplateBinding Background}"
+                                                 RenderTransformOrigin="0.5,0.5"
+                                                 Type="SubtractLine"
+                                                 Visibility="Collapsed" />
+                                </Grid>
+                            </Viewbox>
+                        </Grid>
 
                         <ContentPresenter x:Name="contentPresenter"
                                           Grid.Column="1"
@@ -112,39 +107,46 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="HasContent" Value="true">
+                        <Trigger Property="HasContent" Value="True">
                             <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
-                        <Trigger SourceName="checkBoxBorder" Property="IsMouseOver" Value="true">
+                        <Trigger SourceName="checkBoxBorder" Property="IsMouseOver" Value="True">
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
+                        <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsChecked" Value="true">
+                        <Trigger Property="IsChecked" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="checkedMark"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"
-                                                         To="1"
-                                                         Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                        <DoubleAnimation Storyboard.TargetName="checkedMark"
-                                                         Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"
-                                                         To="1"
-                                                         Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="checkedMark" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="checkedMark" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetName="backBorder" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut" />
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -156,7 +158,7 @@
                                                          To="0"
                                                          Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
                                         <DoubleAnimation Storyboard.TargetName="checkedMark"
@@ -164,19 +166,25 @@
                                                          To="0"
                                                          Duration="0:0:0.2">
                                             <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
+                                                <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
+                                        <!--<DoubleAnimation Storyboard.TargetName="backBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.2">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseIn" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
-                            <Setter TargetName="nullMark" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{Binding ElementName=checkedMark, Path=Fill}" />
                             <Setter TargetName="checkedMark" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="nullMark" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="backBorder" Property="Opacity" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

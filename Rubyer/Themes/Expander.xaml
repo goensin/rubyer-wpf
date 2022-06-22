@@ -347,7 +347,7 @@
     </Style>
 
     <Style x:Key="RubyerExpander" TargetType="{x:Type Expander}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -357,7 +357,7 @@
         <Setter Property="Padding" Value="5" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
-        <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />

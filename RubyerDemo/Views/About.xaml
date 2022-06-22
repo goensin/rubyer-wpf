@@ -109,9 +109,8 @@
                               Width="80"
                               Margin="20 0"
                               rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
-                              
-                              Foreground="{DynamicResource WhiteForeground}"
-                              Background="{DynamicResource Accent}">
+                              Background="{DynamicResource Accent}"
+                              Foreground="{DynamicResource WhiteForeground}">
                     <rubyer:ToggleButtonHelper.CheckedContent>
                         <rubyer:Icon Type="ArrowUpLine" />
                     </rubyer:ToggleButtonHelper.CheckedContent>
