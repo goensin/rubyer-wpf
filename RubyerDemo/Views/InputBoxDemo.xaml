@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:RubyerDemo.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:Background="{StaticResource DefaultBackground}"
+             d:DataContext="{d:DesignInstance Type=viewmodels:InputBoxViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
@@ -131,7 +133,35 @@
                 <StackPanel Margin="5"
                             HorizontalAlignment="Stretch"
                             Orientation="Horizontal">
-                    <rubyer:NumberBox Width="120" rubyer:InputBoxHelper.Watermark="只能输入数值" />
+                    <rubyer:NumberBox Width="100"
+                                      rubyer:InputBoxHelper.Watermark="绑定 int 值"
+                                      ValueChanged="NumberBox_ValueChanged"
+                                      Value="{Binding IntValue}" />
+
+                    <Label Content="最大最小值:" />
+                    <rubyer:NumberBox Width="100"
+                                      rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
+                                      rubyer:InputBoxHelper.Watermark="-10-10"
+                                      MaxValue="10"
+                                      MinValue="-10"
+                                      Value="{Binding RangeValue}" />
+
+                    <Label Content="设置增减间隔:" />
+                    <rubyer:NumberBox Width="100"
+                                      rubyer:InputBoxHelper.Watermark="Interval=2"
+                                      Interval="2"
+                                      Value="{Binding IntervalValue}">
+                        <rubyer:InputBoxHelper.PreContent>
+                            <rubyer:Icon Type="Edit2Line" />
+                        </rubyer:InputBoxHelper.PreContent>
+                    </rubyer:NumberBox>
+
+                    <Label Content="绑定 double 值:" />
+                    <rubyer:NumberBox Width="100"
+                                      rubyer:InputBoxHelper.Watermark="NumberType=Double"
+                                      Interval="0.2"
+                                      NumberType="Double"
+                                      Value="{Binding DoubleValue}" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Row="5"

@@ -167,7 +167,7 @@
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
                         <Trigger Property="Validation.HasError" Value="True">
-                            <!--<Setter TargetName="effectBorder" Property="BorderBrush" Value="{DynamicResource Error}" />-->
+                            <Setter TargetName="effectBorder" Property="BorderBrush" Value="{DynamicResource Error}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>

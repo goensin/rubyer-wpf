@@ -54,5 +54,9 @@ namespace RubyerDemo.Views
         public static readonly DependencyProperty NumberProperty =
             DependencyProperty.Register("Number", typeof(int?), typeof(InputBoxDemo), new PropertyMetadata(null));
 
+        private void NumberBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            Debug.WriteLine($"NumberBox value changed: {e.OldValue} -> {e.NewValue}");
+        }
     }
 }

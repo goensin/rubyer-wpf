@@ -1,10 +1,12 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rubyer="clr-namespace:Rubyer">
+                    xmlns:rubyer="clr-namespace:Rubyer"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RepeatButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerNumberBox" TargetType="{x:Type rubyer:NumberBox}">
@@ -18,6 +20,12 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
+        <Setter Property="ShowButton" Value="True" />
+        <Setter Property="MaxLength" Value="{x:Static system:Int32.MaxValue}" />
+        <Setter Property="Interval" Value="1" />
+        <Setter Property="NumberType" Value="Int" />
+        <Setter Property="MinValue" Value="{x:Static system:Double.MinValue}" />
+        <Setter Property="MaxValue" Value="{x:Static system:Double.MaxValue}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -43,29 +51,39 @@
                                  BorderBrush="{TemplateBinding BorderBrush}"
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
-                                 Foreground="{TemplateBinding Foreground}">
+                                 Foreground="{TemplateBinding Foreground}"
+                                 MaxLength="{TemplateBinding MaxLength}">
                             <rubyer:InputBoxHelper.PostContent>
-                                <UniformGrid Columns="1" Rows="2">
-                                    <Button x:Name="PART_UpButton"
-                                            Style="{StaticResource TextButton}"
-                                            Height="Auto"
-                                            rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
-                                            Focusable="False"
-                                            Foreground="{DynamicResource SeconarydText}">
+                                <UniformGrid Columns="1"
+                                             Rows="2"
+                                             Visibility="{TemplateBinding ShowButton, Converter={StaticResource BooleanToVisibleConverter}}">
+                                    <RepeatButton x:Name="PART_IncreaseButton"
+                                                  Style="{StaticResource TextRepeatButton}"
+                                                  Height="Auto"
+                                                  rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
+                                                  Focusable="False"
+                                                  Foreground="{DynamicResource SeconarydText}">
                                         <rubyer:Icon Type="ArrowUpSLine" />
-                                    </Button>
-                                    <Button x:Name="PART_DownButton"
-                                            Style="{StaticResource TextButton}"
-                                            Height="Auto"
-                                            rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
-                                            Focusable="False"
-                                            Foreground="{DynamicResource SeconarydText}">
+                                    </RepeatButton>
+                                    <RepeatButton x:Name="PART_DecreaseButton"
+                                                  Style="{StaticResource TextRepeatButton}"
+                                                  Height="Auto"
+                                                  rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
+                                                  Focusable="False"
+                                                  Foreground="{DynamicResource SeconarydText}">
                                         <rubyer:Icon Type="ArrowDownSLine" />
-                                    </Button>
+                                    </RepeatButton>
                                 </UniformGrid>
                             </rubyer:InputBoxHelper.PostContent>
                         </TextBox>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter TargetName="PART_TextBox" Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Error}" />
+                            <Setter TargetName="PART_TextBox" Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Error}" />
+                            <Setter TargetName="PART_TextBox" Property="BorderBrush" Value="{DynamicResource Error}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
