@@ -86,6 +86,18 @@ namespace Rubyer
             set { SetValue(TextProperty, value); }
         }
 
+        public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(
+        "TextFormat", typeof(string), typeof(NumericBox), new PropertyMetadata(default(string)));
+
+        /// <summary>
+        /// 文本格式
+        /// </summary>
+        public string TextFormat
+        {
+            get { return (string)GetValue(TextFormatProperty); }
+            set { SetValue(TextFormatProperty, value); }
+        }
+
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
            "Value", typeof(double?), typeof(NumericBox), new FrameworkPropertyMetadata(default(double?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
 
@@ -182,6 +194,7 @@ namespace Rubyer
             get { return (string)GetValue(NumericPatternProperty); }
             set { SetValue(NumericPatternProperty, value); }
         }
+
         #endregion
 
         #region methods
@@ -202,20 +215,25 @@ namespace Rubyer
             }
         }
 
+        private void GetIntervalAndMin(out double interval, out double min)
+        {
+            interval = NumericType == NumericType.Double ? Interval : Math.Round(Interval);
+            min = MinValue == double.MinValue ? 0 : MinValue;
+        }
+
         private void IncreaseButton_Click(object sender, RoutedEventArgs e)
         {
-            var interval = NumericType == NumericType.Double ? Interval : Math.Round(Interval);
-            var min = MinValue == double.MinValue ? 0 : MinValue;
+            GetIntervalAndMin(out double interval,  out double min);
             Value = GetCalculatedValue(this, Value == null ? min + interval : Value.GetValueOrDefault() + interval);
+            textBox.Focus();
         }
 
         private void DecreaseButton_Click(object sender, RoutedEventArgs e)
         {
-            var interval = NumericType == NumericType.Double ? Interval : Math.Round(Interval);
-            var min = MinValue == double.MinValue ? 0 : MinValue;
+            GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min : Value.GetValueOrDefault() - interval);
+            textBox.Focus();
         }
-
 
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -236,13 +254,13 @@ namespace Rubyer
                 }
             }
 
-            numberBox.Text = numberBox.Value.ToString();
+            numberBox.Text = numberBox.Value.GetValueOrDefault().ToString(numberBox.TextFormat);
         }
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var numberBox = d as NumericBox;
-            numberBox.Text = numberBox.Value.ToString();
+            numberBox.Text = numberBox.Value == null ? null : numberBox.Value.GetValueOrDefault().ToString(numberBox.TextFormat);
             numberBox.textBox?.Select(numberBox.textBox.Text.Length, 1);
 
             var args = new RoutedPropertyChangedEventArgs<double?>((double?)e.OldValue, (double?)e.NewValue);
@@ -280,17 +298,23 @@ namespace Rubyer
 
             if (double.TryParse(textBox.Text, out double value))
             {
-                var newValue = GetCalculatedValue(this, value);
-                if (Value != newValue)
+                if (value < MinValue || value > MaxValue)
                 {
-                    Value = newValue;
-                    return;
+                    var newValue = GetCalculatedValue(this, value);
+                    if (Value != newValue)
+                    {
+                        Value = newValue;
+                    }
+                    else
+                    {
+                        textBox.Text = newValue.ToString(TextFormat);
+                        textBox.Select(textBox.Text.Length, 0);
+                    }
                 }
-                else
-                {
-                    textBox.Text = newValue.ToString();
-                    textBox.Select(textBox.SelectionStart, 1);
-                }
+            }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                Value = null;
             }
         }
 

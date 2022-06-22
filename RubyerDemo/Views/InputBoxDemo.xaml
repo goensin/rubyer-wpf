@@ -130,39 +130,94 @@
                       Grid.ColumnSpan="2"
                       Margin="0 0 0 10"
                       Header="数值文本框-NumericBox">
-                <StackPanel Margin="5"
-                            HorizontalAlignment="Stretch"
-                            Orientation="Horizontal">
-                    <rubyer:NumericBox Width="100"
-                                      rubyer:InputBoxHelper.Watermark="绑定 int 值"
-                                      ValueChanged="NumericBox_ValueChanged"
-                                      Value="{Binding IntValue}" />
+                <StackPanel>
+                    <StackPanel Margin="5"
+                                HorizontalAlignment="Stretch"
+                                Orientation="Horizontal">
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="绑定 int 值:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.Watermark="绑定 int 值"
+                                           ValueChanged="NumericBox_ValueChanged"
+                                           Value="{Binding IntValue}" />
 
-                    <Label Content="最大最小值:" />
-                    <rubyer:NumericBox Width="100"
-                                      rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
-                                      rubyer:InputBoxHelper.Watermark="-10-10"
-                                      MaxValue="10"
-                                      MinValue="-10"
-                                      Value="{Binding RangeValue}" />
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="最大最小值:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
+                                           rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
+                                           rubyer:InputBoxHelper.Watermark="-10-10"
+                                           MaxValue="10"
+                                           MinValue="-10"
+                                           Value="{Binding RangeValue}" />
 
-                    <Label Content="设置增减间隔:" />
-                    <rubyer:NumericBox Width="100"
-                                      rubyer:InputBoxHelper.Watermark="Interval=2"
-                                      Interval="2"
-                                      Value="{Binding IntervalValue}">
-                        <rubyer:InputBoxHelper.PreContent>
-                            <rubyer:Icon Type="Edit2Line" />
-                        </rubyer:InputBoxHelper.PreContent>
-                    </rubyer:NumericBox>
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="增减间隔:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.Watermark="Interval=2"
+                                           Interval="2"
+                                           Value="{Binding IntervalValue}">
+                            <rubyer:InputBoxHelper.PreContent>
+                                <rubyer:Icon Type="Edit2Line" />
+                            </rubyer:InputBoxHelper.PreContent>
+                        </rubyer:NumericBox>
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="可清除:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.IsClearable="True"
+                                           rubyer:InputBoxHelper.Watermark="Clearable"
+                                           Interval="2"
+                                           Value="{Binding NullableIntValue}" />
+                    </StackPanel>
+                    <StackPanel Margin="5"
+                                HorizontalAlignment="Stretch"
+                                Orientation="Horizontal">
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="double 值:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.Watermark="NumericType=Double"
+                                           Interval="0.1"
+                                           NumericType="Double"
+                                           Value="{Binding DoubleValue}" />
 
-                    <Label Content="绑定 double 值:" />
-                    <rubyer:NumericBox Width="100"
-                                      rubyer:InputBoxHelper.Watermark="NumericType=Double"
-                                      Interval="0.2"
-                                      NumericType="Double"
-                                      Value="{Binding DoubleValue}" />
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="格式化文本:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.Watermark="NumericType=Double"
+                                           NumericType="Double"
+                                           TextFormat="E2"
+                                           Value="{Binding ExponentDoubleValue}" />
+
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="不显示按钮:" />
+                        <rubyer:NumericBox Width="100"
+                                           rubyer:InputBoxHelper.Watermark="0-100"
+                                           MaxValue="100"
+                                           MinValue="0"
+                                           ShowButton="False"
+                                           Value="1" />
+
+                        <Label Width="80"
+                               HorizontalContentAlignment="Right"
+                               Content="前后按钮:" />
+                        <rubyer:NumericBox Style="{StaticResource FrontBackNumericBox}"
+                                           Width="100"
+                                           rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                                           rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                                           MaxValue="100"
+                                           MinValue="0"
+                                           Value="2" />
+                    </StackPanel>
                 </StackPanel>
+
             </GroupBox>
             <GroupBox Grid.Row="5"
                       Grid.ColumnSpan="2"

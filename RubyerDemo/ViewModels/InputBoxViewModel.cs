@@ -8,8 +8,8 @@ namespace RubyerDemo.ViewModels
 {
     public class InputBoxViewModel : ViewModelBase
     {
-        private double intValue;
-        public double IntValue
+        private int intValue;
+        public int IntValue
         {
             get => intValue;
             set
@@ -19,8 +19,8 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private double rangeValue;
-        public double RangeValue
+        private int rangeValue;
+        public int RangeValue
         {
             get => rangeValue;
             set
@@ -30,14 +30,25 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private double intervalValue;
-        public double IntervalValue
+        private int intervalValue;
+        public int IntervalValue
         {
             get => intervalValue;
             set
             {
                 intervalValue = value;
                 RaisePropertyChanged("IntervalValue");
+            }
+        }
+
+        private int? nullableIntValue;
+        public int? NullableIntValue
+        {
+            get => nullableIntValue;
+            set
+            {
+                nullableIntValue = value;
+                RaisePropertyChanged("NullableIntValue");
             }
         }
 
@@ -51,5 +62,17 @@ namespace RubyerDemo.ViewModels
                 RaisePropertyChanged("DoubleValue");
             }
         }
+
+        private double exponentDoubleValue;
+        public double ExponentDoubleValue
+        {
+            get => exponentDoubleValue;
+            set
+            {
+                exponentDoubleValue = value;
+                RaisePropertyChanged("ExponentDoubleValue");
+            }
+        }
+        
     }
 }
