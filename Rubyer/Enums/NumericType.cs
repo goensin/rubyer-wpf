@@ -5,7 +5,7 @@ namespace Rubyer.Enums
     /// <summary>
     /// 数值类型
     /// </summary>
-    public enum NumberType
+    public enum NumericType
     {
         /// <summary>
         /// int type

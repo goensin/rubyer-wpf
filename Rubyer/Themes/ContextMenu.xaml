@@ -6,7 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Menu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style TargetType="{x:Type ContextMenu}">
+    <Style x:Key="RubyerContextMenu" TargetType="{x:Type ContextMenu}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Grid.IsSharedSizeScope" Value="True" />

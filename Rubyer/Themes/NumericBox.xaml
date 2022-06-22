@@ -23,7 +23,7 @@
         <Setter Property="ShowButton" Value="True" />
         <Setter Property="MaxLength" Value="{x:Static system:Int32.MaxValue}" />
         <Setter Property="Interval" Value="1" />
-        <Setter Property="NumberType" Value="Int" />
+        <Setter Property="NumericType" Value="Int" />
         <Setter Property="MinValue" Value="{x:Static system:Double.MinValue}" />
         <Setter Property="MaxValue" Value="{x:Static system:Double.MaxValue}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
@@ -52,6 +52,7 @@
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}"
+                                 InputMethod.IsInputMethodEnabled="False"
                                  MaxLength="{TemplateBinding MaxLength}">
                             <rubyer:InputBoxHelper.PostContent>
                                 <UniformGrid Columns="1"

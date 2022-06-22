@@ -158,9 +158,9 @@
 
                     <Label Content="绑定 double 值:" />
                     <rubyer:NumericBox Width="100"
-                                      rubyer:InputBoxHelper.Watermark="NumberType=Double"
+                                      rubyer:InputBoxHelper.Watermark="NumericType=Double"
                                       Interval="0.2"
-                                      NumberType="Double"
+                                      NumericType="Double"
                                       Value="{Binding DoubleValue}" />
                 </StackPanel>
             </GroupBox>
