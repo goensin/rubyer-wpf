@@ -7,6 +7,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Card.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Clock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerDateTimePicker" TargetType="{x:Type rubyer:DateTimePicker}">
@@ -20,6 +21,13 @@
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="17" />
+        <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="5 7" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:DateTimePicker}">
@@ -46,7 +54,7 @@
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
                                         Foreground="{TemplateBinding BorderBrush}">
-                                    <rubyer:Icon Type="TimeLine" />
+                                    <rubyer:Icon Type="CalendarTodoFill" />
                                 </Button>
                             </rubyer:InputBoxHelper.PostContent>
                         </TextBox>
@@ -70,20 +78,36 @@
                                             <RowDefinition Height="Auto" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
-                                        <Border Background="{DynamicResource Primary}" CornerRadius="{DynamicResource TopContainerCornerRadius}">
-                                            <TextBlock Margin="10 5"
-                                                       HorizontalAlignment="Center"
-                                                       FontSize="20"
-                                                       Foreground="{DynamicResource WhiteForeground}"
+
+                                        <Border x:Name="title"
+                                                Grid.Row="0"
+                                                Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                CornerRadius="{DynamicResource TopContainerCornerRadius}"
+                                                Effect="{DynamicResource BottomEffect}">
+                                            <TextBlock HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        Text="{Binding Text, ElementName=PART_TextBox}" />
                                         </Border>
 
                                         <Border Grid.Row="1"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="0">
-                                            <StackPanel Orientation="Horizontal">
-                                                <Calendar x:Name="PART_Calendar" BorderThickness="0 0 1 0" />
-                                                <rubyer:Clock x:Name="PART_Clock" BorderThickness="0" />
+                                            <StackPanel>
+                                                <Calendar x:Name="PART_Calendar"
+                                                          Margin="0"
+                                                          rubyer:ControlHelper.CornerRadius="0"
+                                                          rubyer:HeaderHelper.Background="{TemplateBinding Background}"
+                                                          rubyer:HeaderHelper.Foreground="{TemplateBinding Foreground}" />
+                                                <rubyer:Clock x:Name="PART_Clock"
+                                                              Style="{StaticResource ComboBoxClock}"
+                                                              Margin="0"
+                                                              Padding="5 8"
+                                                              rubyer:ControlHelper.CornerRadius="0"
+                                                              BorderThickness="0 1 0 0" />
                                             </StackPanel>
                                         </Border>
 
@@ -99,6 +123,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Setter Property="VerticalContentAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>

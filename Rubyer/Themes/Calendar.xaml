@@ -302,8 +302,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
                     <Grid>
-                        <Border Margin="0 3 0 0"
-                                Background="{TemplateBinding Background}"
+                        <Border Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 Effect="{DynamicResource AllDirectionEffect3}" />
 

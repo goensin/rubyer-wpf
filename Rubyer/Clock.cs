@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 
 namespace Rubyer
 {
-    [TemplatePart(Name = HourListPartName, Type = typeof(ListBox))]
-    [TemplatePart(Name = MinuteListPartName, Type = typeof(ListBox))]
-    [TemplatePart(Name = SecondListPartName, Type = typeof(ListBox))]
+    [TemplatePart(Name = HourListPartName, Type = typeof(Selector))]
+    [TemplatePart(Name = MinuteListPartName, Type = typeof(Selector))]
+    [TemplatePart(Name = SecondListPartName, Type = typeof(Selector))]
     [TemplatePart(Name = ConfirmPartName, Type = typeof(Button))]
     [TemplatePart(Name = SelectTimePartName, Type = typeof(TextBlock))]
     public class Clock : Control
@@ -38,32 +39,32 @@ namespace Rubyer
 
             DateTime now = DateTime.Now;
 
-            if (GetTemplateChild(HourListPartName) is ListBox hourList)
+            if (GetTemplateChild(HourListPartName) is Selector hourList)
             {
                 var binding = new Binding("Hour");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
-                hourList.SetBinding(ListBox.SelectedItemProperty, binding);
+                hourList.SetBinding(Selector.SelectedItemProperty, binding);
 
                 AddItemSource(hourList, 24, now.Hour);
             }
 
-            if (GetTemplateChild(MinuteListPartName) is ListBox minuteList)
+            if (GetTemplateChild(MinuteListPartName) is Selector minuteList)
             {
                 var binding = new Binding("Minute");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
-                minuteList.SetBinding(ListBox.SelectedItemProperty, binding);
+                minuteList.SetBinding(Selector.SelectedItemProperty, binding);
 
                 AddItemSource(minuteList, 60, now.Minute);
             }
 
-            if (GetTemplateChild(SecondListPartName) is ListBox secondList)
+            if (GetTemplateChild(SecondListPartName) is Selector secondList)
             {
                 var binding = new Binding("Second");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
-                secondList.SetBinding(ListBox.SelectedItemProperty, binding);
+                secondList.SetBinding(Selector.SelectedItemProperty, binding);
 
                 AddItemSource(secondList, 60, now.Second);
             }
@@ -93,7 +94,6 @@ namespace Rubyer
             remove { RemoveHandler(CurrentTimeChangedEvent, value); }
         }
         #endregion
-
 
         #region 依赖属性
 
@@ -165,7 +165,7 @@ namespace Rubyer
         /// <param name="itemsControl">列表控件</param>
         /// <param name="count">总数</param>
         /// <param name="index">当前索引</param>
-        private void AddItemSource(ItemsControl itemsControl, int count, int index)
+        private void AddItemSource(Selector itemsControl, int count, int index)
         {
             string[] array = new string[count];
             for (int i = 0; i < array.Length; i++)
@@ -174,10 +174,10 @@ namespace Rubyer
             }
 
             itemsControl.ItemsSource = array;
+            itemsControl.SelectedIndex = index;
 
             if (itemsControl is ListBox listBox)
             {
-                listBox.SelectedIndex = index;
                 int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
                 listBox.ScrollIntoView(array[scrollIndex]);
             }
@@ -210,7 +210,7 @@ namespace Rubyer
 
             SelectedTime = DisplayTime;
 
-            RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);
+            var args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);
             args.RoutedEvent = Clock.SelectedTimeChangedEvent;
             this.RaiseEvent(args);
         }
