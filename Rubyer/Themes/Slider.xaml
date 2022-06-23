@@ -22,7 +22,7 @@
         </Setter>
     </Style>
 
-    <!--  水平  -->
+    <!--  Horizontal  -->
     <ControlTemplate x:Key="SliderThumbHorizontalDefault" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -154,6 +154,7 @@
                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Center"
                                Focusable="False"
+                               Foreground="{DynamicResource DefaultBackground}"
                                OverridesDefaultStyle="True"
                                Template="{StaticResource SliderThumbHorizontalDefault}" />
                     </Track.Thumb>
@@ -174,16 +175,13 @@
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter TargetName="PART_SelectionRange" Property="Visibility" Value="Visible" />
             </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter TargetName="Thumb" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-            </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-    <!--  垂直  -->
+    <!--  Vertical  -->
     <ControlTemplate x:Key="SliderThumbVerticalDefault" TargetType="{x:Type Thumb}">
         <Grid HorizontalAlignment="Center"
               VerticalAlignment="Center"
@@ -311,6 +309,7 @@
                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Top"
                                Focusable="False"
+                               Foreground="{DynamicResource DefaultBackground}"
                                OverridesDefaultStyle="True"
                                Template="{StaticResource SliderThumbVerticalDefault}" />
                     </Track.Thumb>
@@ -330,9 +329,6 @@
             </Trigger>
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter TargetName="PART_SelectionRange" Property="Visibility" Value="Visible" />
-            </Trigger>
-            <Trigger Property="IsKeyboardFocused" Value="true">
-                <Setter TargetName="Thumb" Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
