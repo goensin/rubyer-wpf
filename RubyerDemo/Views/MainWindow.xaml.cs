@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.AvalonEdit.Highlighting;
+using Microsoft.Win32;
 using Rubyer;
 using RubyerDemo.Utils;
 using System;
@@ -21,6 +22,12 @@ namespace RubyerDemo
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;
+            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
+        }
+
+        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
+        {
+            
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

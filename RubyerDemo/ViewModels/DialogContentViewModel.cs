@@ -1,5 +1,6 @@
 ﻿using Rubyer;
 using Rubyer.Commons;
+using Rubyer.Models;
 using System;
 
 namespace RubyerDemo.ViewModels

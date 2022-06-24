@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Rubyer.Commons
+namespace Rubyer.Models
 {
     /// <summary>
     /// 传输参数
@@ -33,7 +33,7 @@ namespace Rubyer.Commons
         public int Count => entries.Count;
 
         /// <inheritdoc/>
-        public IEnumerable<string> Keys => entries.Select((KeyValuePair<string, object> x) => x.Key);
+        public IEnumerable<string> Keys => entries.Select((x) => x.Key);
 
         /// <inheritdoc/>
         public void Add(string key, object value) => entries.Add(new KeyValuePair<string, object>(key, value));
@@ -60,7 +60,7 @@ namespace Rubyer.Commons
                 }
             }
 
-            return default(T);
+            return default;
         }
 
         /// <inheritdoc/>
@@ -78,7 +78,7 @@ namespace Rubyer.Commons
                 }
             }
 
-            value = default(T);
+            value = default;
             return false;
         }
 

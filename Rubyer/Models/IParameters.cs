@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-namespace Rubyer.Commons
+namespace Rubyer.Models
 {
     /// <summary>
     /// 传输参数接口

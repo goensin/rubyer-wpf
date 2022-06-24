@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -37,7 +38,20 @@ namespace Rubyer.Converters
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (value is bool flag && flag) ? TrueValue : FalseValue;
+            return BooleanConverter<T>.ConvertBooleanToType(value, TrueValue, FalseValue);
+        }
+
+        /// <summary>
+        /// 转换 bool 为类型
+        /// </summary>
+        /// <param name="value">bool 值</param>
+        /// <param name="trueValue">true 时的值</param>
+        /// <param name="falseValue">false 时的值</param>
+        /// <returns>类型的值</returns>
+        internal static T ConvertBooleanToType(object value, T trueValue, T falseValue)
+        {
+            bool flag = ValidateArgument.NotNullOrEmptyCast<bool>(value, "value");
+            return flag ? trueValue : falseValue;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
