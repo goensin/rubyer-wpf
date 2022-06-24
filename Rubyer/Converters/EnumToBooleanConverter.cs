@@ -19,8 +19,8 @@ namespace Rubyer.Converters
         internal static bool ConvertEnumToBool(object value, object parameter)
         {
             string text = ValidateArgument.NotNullOrEmptyCast<string>(parameter, "parameter");
-            Enum enumValue = ValidateArgument.NotNullOrEmptyCast<Enum>(value, "value");
-            return text.Equals(enumValue.ToString());
+            ValidateArgument.NotNull(value, "value");
+            return text.Equals(value.ToString());
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

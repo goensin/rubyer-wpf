@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Textbox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -124,18 +125,16 @@
                                             BorderBrush="Transparent"
                                             BorderThickness="1"
                                             SnapsToDevicePixels="True">
-                                        <Polygon x:Name="arrow"
-                                                 Margin="0"
-                                                 HorizontalAlignment="Center"
-                                                 VerticalAlignment="Center"
-                                                 Fill="{DynamicResource SeconarydText}"
-                                                 Points="5,7 0,0 10,0"
-                                                 RenderTransformOrigin="0.5,0.5"
-                                                 StrokeThickness="0">
-                                            <Polygon.RenderTransform>
+                                        <rubyer:Icon x:Name="arrow"
+                                                     HorizontalAlignment="Center"
+                                                     VerticalAlignment="Center"
+                                                     Foreground="{DynamicResource SeconarydText}"
+                                                     RenderTransformOrigin="0.5,0.5"
+                                                     Type="ArrowDownSLine">
+                                            <rubyer:Icon.RenderTransform>
                                                 <RotateTransform x:Name="arrowTransform" Angle="0" />
-                                            </Polygon.RenderTransform>
-                                        </Polygon>
+                                            </rubyer:Icon.RenderTransform>
+                                        </rubyer:Icon>
                                     </Border>
                                 </StackPanel>
                                 <ContentPresenter x:Name="contentPresenter"
@@ -157,7 +156,7 @@
                             </MultiDataTrigger.Conditions>
                         </MultiDataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="arrow" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
+                            <Setter TargetName="arrow" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                             <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
@@ -186,7 +185,7 @@
                             </DataTrigger.ExitActions>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter TargetName="arrow" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
+                            <Setter TargetName="arrow" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
                             <DataTrigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
@@ -269,7 +268,7 @@
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
                           IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-            
+
             <TextBox x:Name="PART_EditableTextBox"
                      Style="{StaticResource RubyerComboBoxEditableTextBox}"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
