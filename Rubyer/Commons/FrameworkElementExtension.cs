@@ -15,7 +15,7 @@ namespace Rubyer.Commons
     /// <summary>
     /// FrameworkElement 扩展
     /// </summary>
-    public static class FrameworkElementHelpers
+    public static class FrameworkElementExtension
     {
         /// <summary>
         /// 获取 root 元素

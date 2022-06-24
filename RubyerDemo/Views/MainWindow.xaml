@@ -120,7 +120,7 @@
                         <ColumnDefinition Width="180" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    <rubyer:Card Margin="3 3 0 3" Padding="0 10">
+                    <rubyer:Card Margin="5 5 0 5" Padding="0 10">
                         <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                                  rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                  rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
@@ -145,7 +145,7 @@
                         </ListBox>
                     </rubyer:Card>
 
-                    <rubyer:Card Grid.Column="1" Margin="3">
+                    <rubyer:Card Grid.Column="1" Margin="5">
                         <TabControl x:Name="Tab" Style="{StaticResource LineTabControl}">
                             <TabItem Width="200">
                                 <TabItem.Header>

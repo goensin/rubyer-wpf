@@ -17,21 +17,19 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderEffect" Value="{DynamicResource AllDirectionEffect}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ruber:Card}">
-                    <Border Margin="{TemplateBinding Margin}"
-                            Background="{TemplateBinding Background}"
+                    <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}">
                         <Grid>
                             <Border Padding="{TemplateBinding Padding}"
                                     Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{StaticResource AllDirectionEffect}" />
+                                    Effect="{TemplateBinding BorderEffect}" />
                             <ContentPresenter x:Name="contentPresenter"
                                               Margin="{TemplateBinding Padding}"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -44,5 +42,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="NoShadowCard" TargetType="{x:Type ruber:Card}">
+        <Setter Property="BorderEffect" Value="{DynamicResource AllDirectionEffect}" />
+        <Setter Property="BorderThickness" Value="1" />
     </Style>
 </ResourceDictionary>
