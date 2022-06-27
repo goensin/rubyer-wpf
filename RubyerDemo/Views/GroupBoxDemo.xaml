@@ -107,7 +107,7 @@
                     <Expander Margin="5"
                               rubyer:ControlHelper.CornerRadius="0"
                               rubyer:HeaderHelper.Background="#88BDBDBD"
-                              BorderThickness="2 0"
+                              BorderThickness="1 0"
                               ExpandDirection="Left"
                               Header="《蒹葭》">
                         <TextBlock>
