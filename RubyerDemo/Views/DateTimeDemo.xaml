@@ -31,7 +31,7 @@
                       Header="时钟-Clock">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged" />
-                    <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="20 0 0 0"/>
+                    <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="20 0 0 0" />
                 </StackPanel>
             </GroupBox>
             <GroupBox Grid.Row="1"
