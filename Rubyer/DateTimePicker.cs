@@ -260,7 +260,7 @@ namespace Rubyer
         {
             IsDropDownOpen = false;
 
-            var args = new RoutedPropertyChangedEventArgs<DateTime>((DateTime)SelectedDateTime, (DateTime)SelectedDateTime);
+            var args = new RoutedPropertyChangedEventArgs<DateTime?>(SelectedDateTime, SelectedDateTime);
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
             this.RaiseEvent(args);
         }
