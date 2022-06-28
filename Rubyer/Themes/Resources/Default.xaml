@@ -14,9 +14,6 @@
     <system:Double x:Key="InsideButtonCircleDiameter">22</system:Double>
     <system:Double x:Key="TabButtonCircleDiameter">18</system:Double>
 
-    <system:Double x:Key="ControlCornerRadius">3</system:Double>
-    <system:Double x:Key="ContainerCornerRadius">5</system:Double>
-
     <!--  Effect  -->
     <DropShadowEffect x:Key="AllDirectionEffect"
                       BlurRadius="5"
@@ -99,56 +96,16 @@
                       Color="{StaticResource EffectColor}" />
 
     <!--  CornerRadius  -->
-    <CornerRadius x:Key="AllControlCornerRadius"
-                  BottomLeft="{StaticResource ControlCornerRadius}"
-                  BottomRight="{StaticResource ControlCornerRadius}"
-                  TopLeft="{StaticResource ControlCornerRadius}"
-                  TopRight="{StaticResource ControlCornerRadius}" />
-    <CornerRadius x:Key="LeftControlCornerRadius"
-                  BottomLeft="{StaticResource ControlCornerRadius}"
-                  BottomRight="0"
-                  TopLeft="{StaticResource ControlCornerRadius}"
-                  TopRight="0" />
-    <CornerRadius x:Key="RightControlCornerRadius"
-                  BottomLeft="0"
-                  BottomRight="{StaticResource ControlCornerRadius}"
-                  TopLeft="0"
-                  TopRight="{StaticResource ControlCornerRadius}" />
-    <CornerRadius x:Key="TopControlCornerRadius"
-                  BottomLeft="0"
-                  BottomRight="0"
-                  TopLeft="{StaticResource ControlCornerRadius}"
-                  TopRight="{StaticResource ControlCornerRadius}" />
-    <CornerRadius x:Key="BottomControlCornerRadius"
-                  BottomLeft="{StaticResource ControlCornerRadius}"
-                  BottomRight="{StaticResource ControlCornerRadius}"
-                  TopLeft="0"
-                  TopRight="0" />
+    <CornerRadius x:Key="AllControlCornerRadius">3</CornerRadius>
+    <CornerRadius x:Key="LeftControlCornerRadius">3 0 0 3</CornerRadius>
+    <CornerRadius x:Key="RightControlCornerRadius">0 3 3 0</CornerRadius>
+    <CornerRadius x:Key="TopControlCornerRadius">3 3 0 0</CornerRadius>
+    <CornerRadius x:Key="BottomControlCornerRadius">0 0 3 3</CornerRadius>
 
-    <CornerRadius x:Key="AllContainerCornerRadius"
-                  BottomLeft="{StaticResource ContainerCornerRadius}"
-                  BottomRight="{StaticResource ContainerCornerRadius}"
-                  TopLeft="{StaticResource ContainerCornerRadius}"
-                  TopRight="{StaticResource ContainerCornerRadius}" />
-    <CornerRadius x:Key="LeftContainerCornerRadius"
-                  BottomLeft="{StaticResource ContainerCornerRadius}"
-                  BottomRight="0"
-                  TopLeft="{StaticResource ContainerCornerRadius}"
-                  TopRight="0" />
-    <CornerRadius x:Key="RightContainerCornerRadius"
-                  BottomLeft="0"
-                  BottomRight="{StaticResource ContainerCornerRadius}"
-                  TopLeft="0"
-                  TopRight="{StaticResource ContainerCornerRadius}" />
-    <CornerRadius x:Key="TopContainerCornerRadius"
-                  BottomLeft="0"
-                  BottomRight="0"
-                  TopLeft="{StaticResource ContainerCornerRadius}"
-                  TopRight="{StaticResource ContainerCornerRadius}" />
-    <CornerRadius x:Key="BottomContainerCornerRadius"
-                  BottomLeft="{StaticResource ContainerCornerRadius}"
-                  BottomRight="{StaticResource ContainerCornerRadius}"
-                  TopLeft="0"
-                  TopRight="0" />
+    <CornerRadius x:Key="AllContainerCornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="LeftContainerCornerRadius">5 0 0 5</CornerRadius>
+    <CornerRadius x:Key="RightContainerCornerRadius">0 5 5 0</CornerRadius>
+    <CornerRadius x:Key="TopContainerCornerRadius">5 5 0 0</CornerRadius>
+    <CornerRadius x:Key="BottomContainerCornerRadius">0 0 5 5</CornerRadius>
 
 </ResourceDictionary>

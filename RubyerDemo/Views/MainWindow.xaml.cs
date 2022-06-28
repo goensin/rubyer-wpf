@@ -32,8 +32,8 @@ namespace RubyerDemo
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            controlSlider.Value = (double)App.Current.Resources["ControlCornerRadius"];
-            contrainerSlider.Value = (double)App.Current.Resources["ContainerCornerRadius"];
+            controlSlider.Value = ((CornerRadius)App.Current.Resources["AllControlCornerRadius"]).TopLeft;
+            contrainerSlider.Value = ((CornerRadius)App.Current.Resources["AllContainerCornerRadius"]).TopLeft;
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -61,7 +61,6 @@ namespace RubyerDemo
         private void controlSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var value = e.NewValue;
-            App.Current.Resources["ControlCornerRadius"] = e.NewValue;
             App.Current.Resources["AllControlCornerRadius"] = new CornerRadius(value);
             App.Current.Resources["LeftControlCornerRadius"] = new CornerRadius(value, 0, 0, value);
             App.Current.Resources["RightControlCornerRadius"] = new CornerRadius(0, value, value, 0);
@@ -72,7 +71,6 @@ namespace RubyerDemo
         private void contrainerSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             var value = e.NewValue;
-            App.Current.Resources["ContainerCornerRadius"] = e.NewValue;
             App.Current.Resources["AllContainerCornerRadius"] = new CornerRadius(value);
             App.Current.Resources["LeftContainerCornerRadius"] = new CornerRadius(value, 0, 0, value);
             App.Current.Resources["RightContainerCornerRadius"] = new CornerRadius(0, value, value, 0);
