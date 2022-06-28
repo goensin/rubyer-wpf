@@ -33,6 +33,20 @@ namespace Rubyer
             obj.SetValue(ForegroundProperty, value);
         }
 
+        // 字体
+        public static readonly DependencyProperty FontFamilyProperty =
+            DependencyProperty.RegisterAttached("FontFamily", typeof(FontFamily), typeof(HeaderHelper), new PropertyMetadata(default));
+
+        public static FontFamily GetFontFamily(DependencyObject obj)
+        {
+            return (FontFamily)obj.GetValue(FontFamilyProperty);
+        }
+
+        public static void SetFontFamily(DependencyObject obj, FontFamily value)
+        {
+            obj.SetValue(FontFamilyProperty, value);
+        }
+
         // 字体大小
         public static readonly DependencyProperty FontSizeProperty =
             DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(HeaderHelper), new PropertyMetadata(default));

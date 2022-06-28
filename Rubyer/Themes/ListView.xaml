@@ -74,6 +74,7 @@
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=ListView}}" />
+        <Setter Property="FontFamily" Value="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=ListView}}" />
         <Setter Property="Template">

@@ -180,6 +180,7 @@
                         <Border x:Name="headBorder"
                                 Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 CornerRadius="{DynamicResource TopContainerCornerRadius}"
+                                TextBlock.FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">

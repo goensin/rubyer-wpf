@@ -37,6 +37,7 @@
                                           ContentSource="Header"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                          TextBlock.FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           TextBlock.FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
@@ -117,6 +118,7 @@
                             <ContentPresenter ContentSource="Header"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              TextBlock.FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                               TextBlock.FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                               TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                               TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
@@ -172,6 +174,7 @@
                                                   ContentSource="Header"
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  TextBlock.FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   TextBlock.FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />

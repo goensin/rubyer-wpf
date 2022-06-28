@@ -387,6 +387,7 @@
                                           ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
                                           DockPanel.Dock="Top"
                                           FocusVisualStyle="{StaticResource ExpanderHeaderFocusVisual}"
+                                          FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           FontStretch="{TemplateBinding FontStretch}"
                                           FontStyle="{TemplateBinding FontStyle}"

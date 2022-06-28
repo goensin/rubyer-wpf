@@ -78,6 +78,10 @@
                         <Expander x:Name="expander"
                                   Width="300"
                                   Margin="5"
+                                  rubyer:HeaderHelper.FontFamily="隶书"
+                                  rubyer:HeaderHelper.FontSize="18"
+                                  FontFamily="隶书"
+                                  FontSize="13"
                                   Header="《蒹葭》"
                                   IsExpanded="True">
                             <TextBlock>
