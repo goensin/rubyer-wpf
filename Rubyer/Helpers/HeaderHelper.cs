@@ -35,7 +35,7 @@ namespace Rubyer
 
         // 字体
         public static readonly DependencyProperty FontFamilyProperty =
-            DependencyProperty.RegisterAttached("FontFamily", typeof(FontFamily), typeof(HeaderHelper), new PropertyMetadata(default));
+            DependencyProperty.RegisterAttached("FontFamily", typeof(FontFamily), typeof(HeaderHelper), new PropertyMetadata(SystemFonts.CaptionFontFamily));
 
         public static FontFamily GetFontFamily(DependencyObject obj)
         {
@@ -49,7 +49,7 @@ namespace Rubyer
 
         // 字体大小
         public static readonly DependencyProperty FontSizeProperty =
-            DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(HeaderHelper), new PropertyMetadata(default));
+            DependencyProperty.RegisterAttached("FontSize", typeof(double), typeof(HeaderHelper), new PropertyMetadata(SystemFonts.CaptionFontSize));
 
         public static double GetFontSize(DependencyObject obj)
         {
@@ -63,7 +63,7 @@ namespace Rubyer
 
         // 字体加粗
         public static readonly DependencyProperty FontWeightProperty =
-            DependencyProperty.RegisterAttached("FontWeight", typeof(FontWeight), typeof(HeaderHelper), new PropertyMetadata(default));
+            DependencyProperty.RegisterAttached("FontWeight", typeof(FontWeight), typeof(HeaderHelper), new PropertyMetadata(SystemFonts.CaptionFontWeight));
 
         public static FontWeight GetFontWeight(DependencyObject obj)
         {

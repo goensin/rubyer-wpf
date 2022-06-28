@@ -19,6 +19,7 @@ namespace RubyerDemo
     {
         public MainWindow()
         {
+            var fontFamily = FontFamily;
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;
@@ -27,7 +28,7 @@ namespace RubyerDemo
 
         private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
