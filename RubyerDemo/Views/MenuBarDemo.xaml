@@ -45,8 +45,11 @@
                                     <rubyer:Icon Type="SurveyLine" />
                                 </MenuItem.Icon>
                             </MenuItem>
+                            <Separator />
+                            <MenuItem Header="高级">
+                                <MenuItem Header="转换为大写" />
+                            </MenuItem>
                         </MenuItem>
-                        <Separator />
                         <MenuItem Header="视图">
                             <MenuItem Header="工具栏">
                                 <MenuItem Header="文本编辑器"
@@ -59,6 +62,8 @@
                                 <MenuItem Header="调试" IsCheckable="true" />
                             </MenuItem>
                         </MenuItem>
+                        <Separator />
+                        <MenuItem Header="无内容" />
                     </Menu>
                     <TextBox Style="{StaticResource BigTextBox}"
                              Height="75"

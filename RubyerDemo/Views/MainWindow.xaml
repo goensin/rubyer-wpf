@@ -43,7 +43,7 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="圆角" />
-                            <rubyer:Icon Type="AlbumLine" />
+                            <rubyer:Icon Type="RoundedCorner" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem>
@@ -89,7 +89,7 @@
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem.ItemContainerStyle>
-                        <Style TargetType="{x:Type MenuItem}">
+                        <Style BasedOn="{StaticResource RubyerMenuItem}" TargetType="{x:Type MenuItem}">
                             <Setter Property="Command" Value="{Binding DataContext.ChangeThemeColor, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                             <Setter Property="CommandParameter" Value="{Binding}" />
                             <Setter Property="Foreground" Value="{Binding Primary}" />
@@ -107,7 +107,11 @@
                     </MenuItem.Header>
                     <MenuItem Command="{Binding OpenAboutDialog}"
                               Foreground="{DynamicResource DefaultForeground}"
-                              Header="关于" />
+                              Header="关于">
+                        <MenuItem.Icon>
+                            <rubyer:Icon Type="InformationFill" />
+                        </MenuItem.Icon>
+                    </MenuItem>
                 </MenuItem>
             </Menu>
         </Grid>
