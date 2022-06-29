@@ -19,7 +19,6 @@ namespace RubyerDemo
     {
         public MainWindow()
         {
-            var fontFamily = FontFamily;
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;

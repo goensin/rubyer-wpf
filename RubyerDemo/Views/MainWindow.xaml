@@ -43,7 +43,7 @@
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="圆角" />
-                            <rubyer:Icon Type="RoundedCorner" />
+                            <rubyer:Icon Margin="5 0 0 0" Type="RoundedCorner" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem>
