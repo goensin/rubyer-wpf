@@ -92,6 +92,7 @@
                             <Button Foreground="{DynamicResource Primary}" ToolTip="向前导航(Ctrl+Shift+-)">
                                 <rubyer:Icon Type="ArrowRightCircleFill" />
                             </Button>
+                            <Separator />
                             <Button ToolTip="新建项目(Ctrl+Shift+N)">
                                 <rubyer:Icon Type="FileAddFill" />
                             </Button>
@@ -194,10 +195,11 @@
             <GroupBox Grid.Row="2"
                       Margin="0 0 0 10"
                       Header="StatusBar-状态栏">
-                <StatusBar Background="{DynamicResource Primary}" Foreground="{StaticResource WhiteForeground}">
+                <StatusBar Background="{DynamicResource Accent}" Foreground="{DynamicResource WhiteForeground}">
                     <StatusBarItem HorizontalAlignment="Left">
                         <rubyer:Icon Type="TerminalBoxLine" />
                     </StatusBarItem>
+                    <Separator BorderBrush="{DynamicResource WhiteForeground}" />
                     <StatusBarItem HorizontalAlignment="Left" Content="就绪" />
                     <StatusBarItem HorizontalAlignment="Right">
                         <StackPanel Orientation="Horizontal">
