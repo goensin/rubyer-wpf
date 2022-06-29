@@ -102,6 +102,26 @@
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.Header>
+                        <ToggleButton Height="Auto"
+                                      Padding="0"
+                                      rubyer:ControlHelper.FocusedBrush="Transparent"
+                                      Background="Transparent"
+                                      Click="BlackSwitch_Click">
+                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                                <TextBlock Text="夜间模式" />
+                                <rubyer:Icon Margin="5 0 0 0" Type="MoonFill" />
+                            </StackPanel>
+                            <rubyer:ToggleButtonHelper.CheckedContent>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="白天模式" />
+                                    <rubyer:Icon Margin="5 0 0 0" Type="SunFill" />
+                                </StackPanel>
+                            </rubyer:ToggleButtonHelper.CheckedContent>
+                        </ToggleButton>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                             <TextBlock Text="帮助" />
                             <rubyer:Icon Margin="5 0 0 0" Type="QuestionFill" />

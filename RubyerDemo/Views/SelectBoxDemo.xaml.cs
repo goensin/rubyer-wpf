@@ -23,29 +23,5 @@ namespace RubyerDemo.Views
         {
             InitializeComponent();
         }
-
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
-        {
-            if (sender is RadioButton radio)
-            {
-                Color lightForegroundColor = (Color)App.Current.FindResource("LightForegroundColor");
-                Color lightBackgroundColor = (Color)App.Current.FindResource("LightBackgroundColor");
-                Color darkForegroundColor = (Color)App.Current.FindResource("DarkForegroundColor");
-                Color darkBackgroundColor = (Color)App.Current.FindResource("DarkBackgroundColor");
-
-
-                if (radio.Name == "day")
-                {
-                    App.Current.Resources["DefaultForeground"] = new SolidColorBrush(lightForegroundColor);
-                    App.Current.Resources["DefaultBackground"] = new SolidColorBrush(lightBackgroundColor);
-                   
-                }
-                else
-                {
-                    App.Current.Resources["DefaultForeground"] = new SolidColorBrush(darkForegroundColor);
-                    App.Current.Resources["DefaultBackground"] = new SolidColorBrush(darkBackgroundColor);
-                }
-            }
-        }
     }
 }

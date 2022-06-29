@@ -37,6 +37,7 @@
         <Setter Property="Width" Value="28" />
         <Setter Property="Margin" Value="0 0 1 0" />
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
     </Style>

@@ -45,7 +45,7 @@
     <Color x:Key="EffectColor">#BDBDBD</Color>
     <SolidColorBrush x:Key="Mask" Color="#BDBDBD" />
     <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
-    <SolidColorBrush x:Key="DialogBackground" Color="#AABDBDBD" />
+    <SolidColorBrush x:Key="DialogBackground" Color="#AA424242" />
     <SolidColorBrush x:Key="HeaderBackground" Color="#E0E0E0" />
     <SolidColorBrush x:Key="FunctionBarBackground" Color="#AAE0E0E0" />
 </ResourceDictionary>
