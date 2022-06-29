@@ -38,17 +38,19 @@
             </StackPanel>
             <Menu Grid.Column="1"
                   HorizontalAlignment="Right"
+                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                  Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                             <TextBlock Text="圆角" />
                             <rubyer:Icon Margin="5 0 0 0" Type="RoundedCorner" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem>
                         <MenuItem.Header>
-                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource DefaultForeground}">
+                            <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="0 0 10 0" Text="控件: " />
                                 <Slider x:Name="controlSlider"
                                         Width="120"
@@ -81,7 +83,7 @@
                 </MenuItem>
                 <MenuItem ItemsSource="{Binding ThemeColors}">
                     <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                             <TextBlock Text="主题" />
                             <rubyer:Icon Margin="5 0 0 0"
                                          Foreground="{DynamicResource Accent}"
@@ -100,16 +102,14 @@
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                             <TextBlock Text="帮助" />
                             <rubyer:Icon Margin="5 0 0 0" Type="QuestionFill" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem Command="{Binding OpenAboutDialog}"
-                              Foreground="{DynamicResource DefaultForeground}"
-                              Header="关于">
+                    <MenuItem Command="{Binding OpenAboutDialog}" Header="关于">
                         <MenuItem.Icon>
-                            <rubyer:Icon Type="InformationFill" />
+                            <rubyer:Icon Foreground="{DynamicResource Info}" Type="InformationFill" />
                         </MenuItem.Icon>
                     </MenuItem>
                 </MenuItem>

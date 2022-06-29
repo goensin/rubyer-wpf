@@ -7,10 +7,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
-    <!--  ScrollViewer for a MenuItem  -->
-    <MenuScrollingVisibilityConverter x:Key="MenuScrollingVisibilityConverter" />
-
     <Style x:Key="MenuScrollViewer"
            BasedOn="{StaticResource SmallScrollViewer}"
            TargetType="{x:Type ScrollViewer}">
@@ -34,7 +30,7 @@
 
     <!--  TopLevelHeader  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border Background="Transparent"
+        <Border Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=MenuBase}}"
                 BorderBrush="{Binding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -46,7 +42,8 @@
 
                 <ContentPresenter Margin="{TemplateBinding Padding}"
                                   ContentSource="Header"
-                                  RecognizesAccessKey="True" />
+                                  RecognizesAccessKey="True"
+                                  TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
 
                 <Popup x:Name="Popup"
                        AllowsTransparency="True"
@@ -87,7 +84,10 @@
 
     <!--  TopLevelItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Border>
+        <Border Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=MenuBase}}"
+                BorderBrush="{Binding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
             <Grid>
                 <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -95,7 +95,8 @@
                                     MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                 <ContentPresenter Margin="{TemplateBinding Padding}"
                                   ContentSource="Header"
-                                  RecognizesAccessKey="True" />
+                                  RecognizesAccessKey="True"
+                                  TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
@@ -288,6 +289,8 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 1" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="10 5" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
