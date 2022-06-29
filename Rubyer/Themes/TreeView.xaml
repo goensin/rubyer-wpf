@@ -4,7 +4,7 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z" />

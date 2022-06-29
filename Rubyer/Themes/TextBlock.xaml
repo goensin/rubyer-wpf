@@ -3,7 +3,7 @@
                     xmlns:System="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate DataType="{x:Type System:String}">

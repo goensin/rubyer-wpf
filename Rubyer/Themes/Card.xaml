@@ -3,7 +3,7 @@
                     xmlns:ruber="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/BaseStyle.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerCard" TargetType="{x:Type ruber:Card}">
