@@ -237,7 +237,6 @@ namespace Rubyer
             this.Items.Add(new PageBarItem
             {
                 Content = "1",
-                ToolTip = "1",
                 Value = 1,
                 IsEnabled = true,
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
@@ -270,7 +269,6 @@ namespace Rubyer
                     Value = i,
                     Content = i.ToString(),
                     IsEnabled = true,
-                    ToolTip = i.ToString(),
                     PageNumberCommand = new RubyerCommand(PageNumberChanged)
                 };
 
@@ -304,7 +302,6 @@ namespace Rubyer
                 this.Items.Add(new PageBarItem()
                 {
                     Content = pageCount.ToString(),
-                    ToolTip = pageCount.ToString(),
                     Value = pageCount,
                     IsEnabled = true,
                     PageNumberCommand = new RubyerCommand(PageNumberChanged)
