@@ -90,6 +90,7 @@
                       rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                       rubyer:ControlHelper.MaskOpacity="1"
                       AlternationCount="2"
+                      RowDetailsVisibilityMode="Visible"
                       AutoGenerateColumns="False"
                       CanUserAddRows="False"
                       Foreground="{StaticResource BlackForeground}"
