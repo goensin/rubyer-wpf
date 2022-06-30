@@ -27,6 +27,7 @@
     <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract" />
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
+
     <converter:HalfOfDoubleConverter x:Key="HalfOfDoubleConverter" />
     <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
     <converter:NotNullConverter x:Key="NotNullConverter" />
@@ -36,4 +37,5 @@
     <converter:GetArcPointConverter x:Key="GetArcPointConverter" />
     <converter:IsLargeArcConverter x:Key="IsLargeArcConverter" />
     <converter:IsEqualConverter x:Key="IsEqualConverter" />
+    <converter:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
 </ResourceDictionary>

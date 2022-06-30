@@ -10,6 +10,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/CheckBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ComboBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToggleButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 
@@ -25,6 +26,7 @@
                             Background="Transparent"
                             BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                             BorderThickness="0"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                             SnapsToDevicePixels="True">
                         <ContentPresenter Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -33,7 +35,10 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="border" Property="BorderThickness" Value="1" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -81,6 +86,11 @@
                             </SelectiveScrollingGrid>
                         </Grid>
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -280,6 +290,7 @@
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource Border}" />
+        <Setter Property="RowDetailsVisibilityMode" Value="Collapsed" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
@@ -418,4 +429,73 @@
     <Style x:Key="RubyerDataGridComboBoxColumnEditting"
            BasedOn="{StaticResource RubyerComboBox}"
            TargetType="{x:Type ComboBox}" />
+
+    <Style x:Key="RubyerDataGridDetailToggleButtonColumn" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="5 0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="IsChecked" Value="{Binding DetailsVisibility, RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource VisibilityToBooleanConverter}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <rubyer:Icon RenderTransformOrigin="0.5 0.5" Type="ArrowDownSLine">
+                            <rubyer:Icon.RenderTransform>
+                                <RotateTransform x:Name="arrowTransform" Angle="0" />
+                            </rubyer:Icon.RenderTransform>
+                        </rubyer:Icon>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="arrowTransform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="180"
+                                                         Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="arrowTransform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="0"
+                                                         Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

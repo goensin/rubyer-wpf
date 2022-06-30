@@ -29,13 +29,13 @@
     <SolidColorBrush x:Key="WatermarkText" Color="#AA6D6D6D" />
 
     <SolidColorBrush x:Key="Border" Color="#9E9E9E" />
-    <SolidColorBrush x:Key="BorderLight" Color="#BDBDBD" />
+    <SolidColorBrush x:Key="BorderLight" Color="#CFCFCF" />
     <SolidColorBrush x:Key="BorderLighter" Color="#E0E0E0" />
 
     <Color x:Key="EffectColor">#BDBDBD</Color>
     <SolidColorBrush x:Key="Mask" Color="#9E9E9E" />
     <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
     <SolidColorBrush x:Key="DialogBackground" Color="#AA424242" />
-    <SolidColorBrush x:Key="HeaderBackground" Color="#9E9E9E" />
+    <SolidColorBrush x:Key="HeaderBackground" Color="#CFCFCF" />
     <SolidColorBrush x:Key="FunctionBarBackground" Color="#AA9E9E9E" />
 </ResourceDictionary>

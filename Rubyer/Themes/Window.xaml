@@ -142,7 +142,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="Transparent" />
+                            <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />

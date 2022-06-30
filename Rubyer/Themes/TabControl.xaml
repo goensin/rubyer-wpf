@@ -57,6 +57,7 @@
                                     Margin="5 0 0 0"
                                     rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
                                     rubyer:ButtonHelper.Shape="Circle"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource MaskDark}"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Hidden">
                                 <rubyer:Icon Type="CloseLine" />
