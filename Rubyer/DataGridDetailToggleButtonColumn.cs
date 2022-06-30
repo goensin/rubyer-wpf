@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -84,9 +85,11 @@ namespace Rubyer
             {
                 toggleButton.Focus();
                 bool? isChecked = toggleButton.IsChecked;
-                if ((IsMouseLeftButtonDown(editingEventArgs) && IsMouseOver(toggleButton, editingEventArgs)) || IsSpaceKeyDown(editingEventArgs))
+                if (IsMouseLeftButtonDown(editingEventArgs))
                 {
-                    toggleButton.IsChecked = isChecked != true;
+                    toggleButton.IsChecked = !isChecked.GetValueOrDefault();
+                    var dataGridCell = editingElement.GetVisualAncestry().OfType<DataGridCell>().FirstOrDefault();
+                    dataGridCell.IsEditing = false;
                 }
 
                 return isChecked;

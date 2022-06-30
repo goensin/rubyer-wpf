@@ -45,6 +45,7 @@
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           GridLinesVisibility="None"
+                          HeadersVisibility="All"
                           ItemsSource="{Binding Persons}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="60"
@@ -108,6 +109,7 @@
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
+                          rubyer:DataGridHelper.ClickToEdit="False"
                           AlternationCount="2"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
@@ -142,21 +144,21 @@
                     <DataGrid.Columns>
                         <rubyer:DataGridDetailToggleButtonColumn Width="30" Header="+" />
                         <DataGridTextColumn Width="60"
-                                            Binding="{Binding Id, Mode=OneWay}"
+                                            Binding="{Binding Id}"
                                             Header="序号" />
                         <DataGridTextColumn Width="70"
-                                            Binding="{Binding Name, Mode=OneWay}"
+                                            Binding="{Binding Name}"
                                             Header="姓名" />
                         <DataGridTextColumn Width="60"
-                                            Binding="{Binding Age, Mode=OneWay}"
+                                            Binding="{Binding Age}"
                                             Header="年龄" />
                         <DataGridCheckBoxColumn Width="60"
-                                                Binding="{Binding IsEvolution, Mode=OneWay}"
+                                                Binding="{Binding IsEvolution}"
                                                 Header="进化" />
                         <DataGridComboBoxColumn Width="80"
                                                 Header="性别"
                                                 ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
-                                                SelectedItemBinding="{Binding Gender, Mode=OneWay}" />
+                                                SelectedItemBinding="{Binding Gender}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
