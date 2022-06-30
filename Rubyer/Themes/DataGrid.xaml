@@ -47,6 +47,66 @@
         </Setter>
     </Style>
 
+    <!--  Style and template for the resize control on the DataGridRowHeader.  -->
+    <Style x:Key="RowHeaderGripperStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="Height" Value="8" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="SizeNS" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Style and template for the DataGridRowHeader.  -->
+    <Style x:Key="RubyerDataGridRowHeader" TargetType="{x:Type DataGridRowHeader}">
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
+                    <Grid>
+                        <Border x:Name="rowHeaderBorder"
+                                Width="10"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource Border}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <StackPanel Orientation="Horizontal">
+                                <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Control SnapsToDevicePixels="False"
+                                         Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
+                                         Visibility="{Binding (Validation.HasError), Converter={StaticResource bool2VisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                            </StackPanel>
+                        </Border>
+
+                        <Thumb x:Name="PART_TopHeaderGripper"
+                               Style="{StaticResource RowHeaderGripperStyle}"
+                               VerticalAlignment="Top" />
+                        <Thumb x:Name="PART_BottomHeaderGripper"
+                               Style="{StaticResource RowHeaderGripperStyle}"
+                               VerticalAlignment="Bottom" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="All">
+                            <Setter Property="BorderThickness" Value="0 0 1 1" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Horizontal">
+                            <Setter Property="BorderThickness" Value="0 0 1 0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
+                            <Setter Property="BorderThickness" Value="0 0 0 1" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <!--  Style and template for the DataGridRow.  -->
     <Style x:Key="RubyerDataGridRow" TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="Transparent" />
@@ -87,6 +147,10 @@
                                                    Type="Collapse">
                                     <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                 </rubyer:Transition>
+
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                                   Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                             </SelectiveScrollingGrid>
                         </Grid>
                     </Border>
@@ -284,12 +348,13 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CellStyle" Value="{StaticResource RubyerDataGridCell}" />
         <Setter Property="ColumnHeaderStyle" Value="{StaticResource RubyerDataGridColumnHeader}" />
+        <Setter Property="RowHeaderStyle" Value="{StaticResource RubyerDataGridRowHeader}" />
+        <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
-        <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />

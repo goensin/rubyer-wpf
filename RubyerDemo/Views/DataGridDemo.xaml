@@ -109,7 +109,6 @@
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
-                          rubyer:DataGridHelper.ClickToEdit="False"
                           AlternationCount="2"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
