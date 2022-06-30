@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,31 @@ namespace RubyerDemo.ViewModels
 {
     public class InputBoxViewModel : ViewModelBase
     {
+        private int? number;
+        public int? Number
+        {
+            get => number;
+            set
+            {
+                number = value;
+                RaisePropertyChanged("Number");
+            }
+        }
+
+        private string testpassword;
+        public string TestPassword
+        {
+            get => testpassword;
+            set
+            {
+                testpassword = value;
+                RaisePropertyChanged("NuTestPasswordmber");
+                Debug.WriteLine($"password: {testpassword}");
+            }
+        }
+
+        public List<int> Heights => Enumerable.Range(0, 100).ToList();
+
         private int intValue;
         public int IntValue
         {
@@ -73,6 +99,10 @@ namespace RubyerDemo.ViewModels
                 RaisePropertyChanged("ExponentDoubleValue");
             }
         }
-        
+
+        public InputBoxViewModel()
+        {
+            TestPassword = "123456";
+        }
     }
 }

@@ -85,11 +85,10 @@
                                                 Visibility="Collapsed">
                                         <Image Width="22"
                                                Height="22"
+                                               Margin="10 0"
                                                VerticalAlignment="Center"
-                                               Source="{Binding Icon}" />
-                                        <TextBlock Margin="10 0"
-                                                   FontSize="13"
-                                                   Text="{Binding Title}" />
+                                               Source="{TemplateBinding Icon}" />
+                                        <TextBlock FontSize="13" Text="{TemplateBinding Title}" />
                                     </StackPanel>
                                     <ContentControl x:Name="preContent"
                                                     VerticalAlignment="Center"

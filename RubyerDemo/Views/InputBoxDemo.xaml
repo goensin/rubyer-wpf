@@ -139,7 +139,6 @@
                                Content="绑定 int 值:" />
                         <rubyer:NumericBox Width="100"
                                            rubyer:InputBoxHelper.Watermark="绑定 int 值"
-                                           ValueChanged="NumericBox_ValueChanged"
                                            Value="{Binding IntValue}" />
 
                         <Label Width="80"
@@ -252,13 +251,13 @@
                             <ComboBoxItem Content="鱼露" />
                             <ComboBoxItem Content="豆酱" />
                         </ComboBox>
-                        <ComboBox x:Name="heightCombo"
-                                  Width="120"
+                        <ComboBox Width="120"
                                   Margin="0 0 10 0"
                                   rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
                                   rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
                                   rubyer:InputBoxHelper.PostContent="cm"
-                                  rubyer:InputBoxHelper.PreContent="身高" />
+                                  rubyer:InputBoxHelper.PreContent="身高"
+                                  ItemsSource="{Binding Heights}" />
 
                         <ComboBox Width="150"
                                   Margin="0 0 10 0"
