@@ -23,24 +23,35 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Border x:Name="border"
-                            Background="Transparent"
-                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            BorderThickness="0"
-                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            SnapsToDevicePixels="True">
-                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                          HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Border>
+                    <Grid>
+                        <rubyer:ControlMask x:Name="mask"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            Visibility="Visible" />
+
+                        <Border x:Name="border"
+                                Background="Transparent"
+                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                BorderThickness="0"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                            <!--<Setter TargetName="border" Property="BorderThickness" Value="1" />-->
                         </Trigger>
-                        <Trigger Property="IsFocused" Value="True">
-                            <Setter TargetName="border" Property="BorderThickness" Value="1" />
-                        </Trigger>
+                        <DataTrigger Binding="{Binding SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="FullRow">
+                            <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -49,7 +60,7 @@
 
     <!--  Style and template for the resize control on the DataGridRowHeader.  -->
     <Style x:Key="RowHeaderGripperStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Height" Value="8" />
+        <Setter Property="Height" Value="5" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="SizeNS" />
         <Setter Property="Template">
@@ -72,15 +83,18 @@
                 <ControlTemplate TargetType="{x:Type DataGridRowHeader}">
                     <Grid>
                         <Border x:Name="rowHeaderBorder"
-                                Width="10"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{DynamicResource Border}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
-                            <StackPanel Orientation="Horizontal">
-                                <ContentPresenter VerticalAlignment="Center" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                <Control SnapsToDevicePixels="False"
+                            <StackPanel Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                        Orientation="Horizontal">
+                                <Control Margin="0 0 3 0"
+                                         SnapsToDevicePixels="False"
                                          Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
-                                         Visibility="{Binding (Validation.HasError), Converter={StaticResource bool2VisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                         Visibility="{Binding (Validation.HasError), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </StackPanel>
                         </Border>
 
@@ -168,7 +182,7 @@
     <Style x:Key="ColumnHeaderGripperStyle" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="SizeWE" />
-        <Setter Property="Width" Value="8" />
+        <Setter Property="Width" Value="5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -196,8 +210,7 @@
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                BorderThickness="0"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}">
+                                BorderThickness="0">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -281,7 +294,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="SelectAllDataGridColumnHeader"
+    <Style x:Key="FirstDataGridColumnHeader"
            BasedOn="{StaticResource RubyerDataGridColumnHeader}"
            TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Template">
@@ -294,22 +307,47 @@
                                 BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 BorderThickness="0">
 
-                            <StackPanel Orientation="Horizontal">
-                                <CheckBox x:Name="SelectAllCheckBox"
-                                          Margin="0 0 3 0"
-                                          Command="DataGrid.SelectAllCommand" />
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </StackPanel>
-
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-                        <Thumb x:Name="PART_LeftHeaderGripper"
-                               Style="{StaticResource ColumnHeaderGripperStyle}"
-                               HorizontalAlignment="Left" />
-                        <Thumb x:Name="PART_RightHeaderGripper"
-                               Style="{StaticResource ColumnHeaderGripperStyle}"
-                               HorizontalAlignment="Right" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
+                            <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 1 0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Horizontal">
+                            <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 0 1" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="All">
+                            <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 1 1" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DataGridSelectCheckBoxColumnHeader"
+           BasedOn="{StaticResource RubyerDataGridColumnHeader}"
+           TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
+                    <Grid>
+                        <Border x:Name="columnHeaderBorder"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                BorderThickness="0">
+
+                            <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Orientation="Horizontal">
+                                <CheckBox Margin="0 0 3 0" rubyer:DataGridHelper.IsHeaderSelectCheckBox="True" />
+                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </StackPanel>
+                        </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
@@ -333,8 +371,22 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
                     <Grid>
-                        <DataGridColumnHeader x:Name="PART_FillerColumnHeader" IsHitTestVisible="False" />
-                        <ItemsPresenter />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <DataGridColumnHeader Style="{StaticResource FirstDataGridColumnHeader}"
+                                              Width="{Binding RowHeaderActualWidth, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              Command="DataGrid.SelectAllCommand"
+                                              Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                            <rubyer:Icon Type="ListCheck" />
+                        </DataGridColumnHeader>
+
+                        <Grid Grid.Column="1">
+                            <DataGridColumnHeader x:Name="PART_FillerColumnHeader" IsHitTestVisible="False" />
+                            <ItemsPresenter />
+                        </Grid>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -352,6 +404,7 @@
         <Setter Property="RowStyle" Value="{StaticResource RubyerDataGridRow}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
+        <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
@@ -507,7 +560,7 @@
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=DataGridCell}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="5 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

@@ -30,7 +30,7 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置" />
+                <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
 
                 <DataGrid Grid.Row="1"
                           HorizontalContentAlignment="Center"
@@ -45,9 +45,12 @@
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           GridLinesVisibility="None"
-                          HeadersVisibility="All"
-                          ItemsSource="{Binding Persons}">
+                          ItemsSource="{Binding Persons}"
+                          SelectionUnit="Cell">
                     <DataGrid.Columns>
+                        <rubyer:DataGridSelectCheckBoxColumn Width="80"
+                                                             Binding="{Binding IsSelected}"
+                                                             Header="全选" />
                         <DataGridTextColumn Width="60"
                                             Binding="{Binding Id}"
                                             EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"
@@ -60,11 +63,7 @@
                                             Binding="{Binding Age}"
                                             EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"
                                             Header="年龄" />
-                        <DataGridCheckBoxColumn Width="60"
-                                                Binding="{Binding IsEvolution}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridCheckBoxColumnEditting}"
-                                                ElementStyle="{StaticResource RubyerDataGridCheckBoxColumn}"
-                                                Header="进化" />
+
                         <DataGridComboBoxColumn Width="80"
                                                 EditingElementStyle="{StaticResource RubyerDataGridComboBoxColumnEditting}"
                                                 ElementStyle="{StaticResource RubyerDataGridComboBoxColumn}"
@@ -103,9 +102,10 @@
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容" />
+                <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
 
                 <DataGrid Grid.Row="1"
+                          HorizontalContentAlignment="Center"
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
@@ -114,7 +114,17 @@
                           CanUserAddRows="False"
                           Foreground="{StaticResource BlackForeground}"
                           GridLinesVisibility="All"
-                          ItemsSource="{Binding Persons}">
+                          HeadersVisibility="All"
+                          ItemsSource="{Binding Persons}"
+                          RowHeaderWidth="40"
+                          SelectionMode="Extended">
+                    <DataGrid.RowHeaderTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
+                            </Border>
+                        </DataTemplate>
+                    </DataGrid.RowHeaderTemplate>
                     <DataGrid.RowDetailsTemplate>
                         <DataTemplate>
                             <StackPanel Margin="30 5" Orientation="Vertical">
@@ -142,6 +152,9 @@
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <rubyer:DataGridDetailToggleButtonColumn Width="30" Header="+" />
+                        <DataGridCheckBoxColumn Width="50"
+                                                Binding="{Binding IsSelected}"
+                                                Header="选中" />
                         <DataGridTextColumn Width="60"
                                             Binding="{Binding Id}"
                                             Header="序号" />
@@ -151,9 +164,6 @@
                         <DataGridTextColumn Width="60"
                                             Binding="{Binding Age}"
                                             Header="年龄" />
-                        <DataGridCheckBoxColumn Width="60"
-                                                Binding="{Binding IsEvolution}"
-                                                Header="进化" />
                         <DataGridComboBoxColumn Width="80"
                                                 Header="性别"
                                                 ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"

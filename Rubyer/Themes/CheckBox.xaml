@@ -140,13 +140,6 @@
                                                 </EasingDoubleKeyFrame.EasingFunction>
                                             </EasingDoubleKeyFrame>
                                         </DoubleAnimationUsingKeyFrames>
-                                        <!--<DoubleAnimationUsingKeyFrames Storyboard.TargetName="backBorder" Storyboard.TargetProperty="Opacity">
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="1">
-                                                <EasingDoubleKeyFrame.EasingFunction>
-                                                    <CubicEase EasingMode="EaseOut" />
-                                                </EasingDoubleKeyFrame.EasingFunction>
-                                            </EasingDoubleKeyFrame>
-                                        </DoubleAnimationUsingKeyFrames>-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -169,14 +162,6 @@
                                                 <BackEase EasingMode="EaseOut" />
                                             </DoubleAnimation.EasingFunction>
                                         </DoubleAnimation>
-                                        <!--<DoubleAnimation Storyboard.TargetName="backBorder"
-                                                         Storyboard.TargetProperty="Opacity"
-                                                         To="0"
-                                                         Duration="0:0:0.2">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseIn" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>-->
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>

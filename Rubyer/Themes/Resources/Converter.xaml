@@ -38,4 +38,5 @@
     <converter:IsLargeArcConverter x:Key="IsLargeArcConverter" />
     <converter:IsEqualConverter x:Key="IsEqualConverter" />
     <converter:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
+    <converter:DataGridRowIndexConverter x:Key="DataGridRowIndexConverter" />
 </ResourceDictionary>

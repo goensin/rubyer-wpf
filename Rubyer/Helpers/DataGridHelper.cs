@@ -15,6 +15,75 @@ namespace Rubyer
     public static class DataGridHelper
     {
         /// <summary>
+        /// 是否为表头全选 CheckBox
+        /// </summary>
+        public static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
+            "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnIsHeaderSelectCheckBoxChanged));
+
+        public static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
+        {
+            element.SetValue(IsHeaderSelectCheckBoxProperty, value);
+        }
+
+        public static bool GetIsHeaderSelectCheckBox(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsHeaderSelectCheckBoxProperty);
+        }
+
+        private static void OnIsHeaderSelectCheckBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is CheckBox checkBox)
+            {
+                if (GetIsHeaderSelectCheckBox(checkBox))
+                {
+                    checkBox.Checked += CheckBox_Checked;
+                    checkBox.Unchecked += CheckBox_Checked;
+                }
+                else
+                {
+                    checkBox.Checked -= CheckBox_Checked;
+                    checkBox.Unchecked -= CheckBox_Checked;
+                }
+            }
+        }
+
+        private static void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var checkBox = (CheckBox)sender;
+            var columnHeader = checkBox.TryGetParentFromVisualTree<DataGridColumnHeader>();
+            var headersPanel = checkBox.TryGetParentFromVisualTree<DataGridCellsPanel>();
+            var index = headersPanel.Children.IndexOf(columnHeader);
+            var datagrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
+            ChangeAllCheckBoxCell(datagrid, index, checkBox.IsChecked);
+        }
+
+        private static void ChangeAllCheckBoxCell(DataGrid dataGrid, int index, bool? isChecked)
+        {
+            var rows = dataGrid.VisualDepthFirstTraversal().OfType<DataGridRow>();
+
+            if (!rows.Any())
+            {
+                return;
+            }
+
+            foreach (var row in rows)
+            {
+                var cells = row.VisualDepthFirstTraversal().OfType<DataGridCell>().ToList();
+                var cell = cells[index];
+                if (cell.Content is CheckBox checkBox)
+                {
+                    dataGrid.BeginEdit();
+                    dataGrid.CurrentCell = new DataGridCellInfo(cell);
+                    checkBox.IsChecked = isChecked;
+                }
+            }
+
+            dataGrid.BeginEdit();
+            dataGrid.CurrentCell = new DataGridCellInfo();
+        }
+
+
+        /// <summary>
         /// 单击直接编辑
         /// </summary>
         public static readonly DependencyProperty ClickToEditProperty = DependencyProperty.RegisterAttached(

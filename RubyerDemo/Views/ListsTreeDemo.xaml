@@ -117,7 +117,7 @@
                             <GridViewColumn Width="70" Header="进化">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <CheckBox IsChecked="{Binding IsEvolution}" />
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
