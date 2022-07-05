@@ -184,6 +184,35 @@ namespace Rubyer
             set { SetValue(InitialScaleProperty, value); }
         }
 
+        /// <summary>
+        /// 显示缓动
+        /// </summary>
+        public static readonly DependencyProperty ShowEasingFunctionProperty =
+            DependencyProperty.Register("ShowEasingFunction", typeof(IEasingFunction), typeof(Transition), new PropertyMetadata(default(IEasingFunction)));
+
+        /// <summary>
+        /// 显示缓动
+        /// </summary>
+        public IEasingFunction ShowEasingFunction
+        {
+            get { return (IEasingFunction)GetValue(ShowEasingFunctionProperty); }
+            set { SetValue(ShowEasingFunctionProperty, value); }
+        }
+
+        /// <summary>
+        /// 关闭缓动
+        /// </summary>
+        public static readonly DependencyProperty CloseEasingFunctionProperty =
+            DependencyProperty.Register("CloseEasingFunction", typeof(IEasingFunction), typeof(Transition), new PropertyMetadata(default(IEasingFunction)));
+
+        /// <summary>
+        /// 关闭缓动
+        /// </summary>
+        public IEasingFunction CloseEasingFunction
+        {
+            get { return (IEasingFunction)GetValue(CloseEasingFunctionProperty); }
+            set { SetValue(CloseEasingFunctionProperty, value); }
+        }
         #endregion
 
         private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -212,7 +241,7 @@ namespace Rubyer
                 transition.ShowedCommand?.Execute(null);
             };
 
-            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 0, 1);
+            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 0, 1, transition.ShowEasingFunction);
 
             switch (transition.Type)
             {
@@ -226,67 +255,67 @@ namespace Rubyer
                     break;
 
                 case TransitionType.FadeLeft:
-                    DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, transition.Offset, 0);
+                    DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeRight:
-                    translateAnimation = GetTranslateXAnimation(transition, -transition.Offset, 0);
+                    translateAnimation = GetTranslateXAnimation(transition, -transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeUp:
-                    translateAnimation = GetTranslateYAnimation(transition, transition.Offset, 0);
+                    translateAnimation = GetTranslateYAnimation(transition, transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeDown:
-                    translateAnimation = GetTranslateYAnimation(transition, -transition.Offset, 0);
+                    translateAnimation = GetTranslateYAnimation(transition, -transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.Zoom:
-                    DoubleAnimation scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1);
-                    DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1);
+                    DoubleAnimation scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
+                    DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomX:
-                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1);
+                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomY:
-                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1);
+                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
-                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1);
+                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
-                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1);
+                    scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
-                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1);
+                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
-                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1);
+                    scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
@@ -306,7 +335,7 @@ namespace Rubyer
                 transition.ClosedCommand?.Execute(null);
             };
 
-            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 1, 0);
+            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 1, 0, transition.CloseEasingFunction);
 
             switch (transition.Type)
             {
@@ -320,67 +349,67 @@ namespace Rubyer
                     break;
 
                 case TransitionType.FadeLeft:
-                    DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, 0, transition.Offset);
+                    DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, 0, transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeRight:
-                    translateAnimation = GetTranslateXAnimation(transition, 0, -transition.Offset);
+                    translateAnimation = GetTranslateXAnimation(transition, 0, -transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeUp:
-                    translateAnimation = GetTranslateYAnimation(transition, 0, transition.Offset);
+                    translateAnimation = GetTranslateYAnimation(transition, 0, transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.FadeDown:
-                    translateAnimation = GetTranslateYAnimation(transition, 0, -transition.Offset);
+                    translateAnimation = GetTranslateYAnimation(transition, 0, -transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
 
                 case TransitionType.Zoom:
-                    DoubleAnimation scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale);
-                    DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale);
+                    DoubleAnimation scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
+                    DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomX:
-                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale);
+                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomY:
-                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale);
+                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
-                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale);
+                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
-                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale);
+                    scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
-                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale);
+                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
-                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale);
+                    scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
@@ -389,14 +418,14 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static DoubleAnimation GetOpacityAnimation(Transition transition, double from, double to)
+        private static DoubleAnimation GetOpacityAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation opacityAnimation = new DoubleAnimation()
             {
                 From = from,
                 To = to,
                 Duration = transition.Duration,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EasingFunction = easing,
             };
 
             Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(OpacityProperty));
@@ -404,14 +433,14 @@ namespace Rubyer
             return opacityAnimation;
         }
 
-        private static DoubleAnimation GetTranslateXAnimation(Transition transition, double from, double to)
+        private static DoubleAnimation GetTranslateXAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation transformAnimation = new DoubleAnimation()
             {
                 From = from,
                 To = to,
                 Duration = transition.Duration,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EasingFunction = easing,
             };
 
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"));
@@ -419,14 +448,14 @@ namespace Rubyer
             return transformAnimation;
         }
 
-        private static DoubleAnimation GetTranslateYAnimation(Transition transition, double from, double to)
+        private static DoubleAnimation GetTranslateYAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation transformAnimation = new DoubleAnimation()
             {
                 From = from,
                 To = to,
                 Duration = transition.Duration,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EasingFunction = easing,
             };
 
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)"));
@@ -434,14 +463,14 @@ namespace Rubyer
             return transformAnimation;
         }
 
-        private static DoubleAnimation GetScaleXAnimation(Transition transition, double from, double to)
+        private static DoubleAnimation GetScaleXAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation transformAnimation = new DoubleAnimation()
             {
                 From = from,
                 To = to,
                 Duration = transition.Duration,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EasingFunction = easing,
             };
 
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)"));
@@ -449,14 +478,14 @@ namespace Rubyer
             return transformAnimation;
         }
 
-        private static DoubleAnimation GetScaleYAnimation(Transition transition, double from, double to)
+        private static DoubleAnimation GetScaleYAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation transformAnimation = new DoubleAnimation()
             {
                 From = from,
                 To = to,
                 Duration = transition.Duration,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut },
+                EasingFunction = easing,
             };
 
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"));

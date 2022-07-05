@@ -95,6 +95,16 @@
         <Setter Property="Type" Value="Fade" />
         <Setter Property="Duration" Value="0:0:0.3" />
         <Setter Property="Offset" Value="50" />
+        <Setter Property="ShowEasingFunction">
+            <Setter.Value>
+                <CubicEase EasingMode="EaseOut" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="CloseEasingFunction">
+            <Setter.Value>
+                <CubicEase EasingMode="EaseOut" />
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template" Value="{StaticResource RubyerTransitionTemplate}" />
         <Style.Triggers>
             <Trigger Property="Type" Value="CollapseUp">

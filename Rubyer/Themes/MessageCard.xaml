@@ -31,6 +31,9 @@
                     <rubyer:Transition x:Name="Path_Transition"
                                        IsShow="{TemplateBinding IsShow}"
                                        Type="FadeDown">
+                        <rubyer:Transition.CloseEasingFunction>
+                            <CubicEase EasingMode="EaseIn" />
+                        </rubyer:Transition.CloseEasingFunction>
                         <Border x:Name="rootBorder"
                                 Margin="{TemplateBinding Margin}"
                                 Background="{TemplateBinding Background}"
