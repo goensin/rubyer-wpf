@@ -38,6 +38,75 @@ namespace Rubyer
             }
         }
 
+        #region 命令
+
+        /// <summary>
+        /// 显示完命令
+        /// </summary>
+        public static readonly DependencyProperty ShowedCommandProperty =
+            DependencyProperty.Register("ShowedCommand", typeof(ICommand), typeof(Transition), new PropertyMetadata(default(ICommand)));
+
+        /// <summary>
+        /// 显示完命令
+        /// </summary>
+        public ICommand ShowedCommand
+        {
+            get { return (ICommand)GetValue(ShowedCommandProperty); }
+            set { SetValue(ShowedCommandProperty, value); }
+        }
+
+
+        /// <summary>
+        /// 关闭完命令
+        /// </summary>
+        public static readonly DependencyProperty ClosedCommandProperty =
+            DependencyProperty.Register("ClosedCommand", typeof(ICommand), typeof(Transition), new PropertyMetadata(default(ICommand)));
+
+        /// <summary>
+        /// 关闭完命令
+        /// </summary>
+        public ICommand ClosedCommand
+        {
+            get { return (ICommand)GetValue(ClosedCommandProperty); }
+            set { SetValue(ClosedCommandProperty, value); }
+        }
+
+        #endregion
+
+        #region 事件
+
+        /// <summary>
+        /// 显示完事件
+        /// </summary>
+        public static readonly RoutedEvent ShowedEvent =
+           EventManager.RegisterRoutedEvent("Showed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Transition));
+
+        /// <summary>
+        /// 显示完事件 handler
+        /// </summary>
+        public event RoutedEventHandler Showed
+        {
+            add { AddHandler(ShowedEvent, value); }
+            remove { RemoveHandler(ShowedEvent, value); }
+        }
+
+        /// <summary>
+        /// 关闭完事件
+        /// </summary>
+        public static readonly RoutedEvent ClosedEvent =
+          EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Transition));
+
+        /// <summary>
+        /// 关闭完事件 handler
+        /// </summary>
+        public event RoutedEventHandler Closed
+        {
+            add { AddHandler(ClosedEvent, value); }
+            remove { RemoveHandler(ClosedEvent, value); }
+        }
+
+        #endregion
+
         #region 依赖属性
 
         /// <summary>
@@ -127,7 +196,7 @@ namespace Rubyer
                 }
                 else
                 {
-                    HideAnimation(transition);
+                    CloseAnimation(transition);
                 }
             }
         }
@@ -135,6 +204,13 @@ namespace Rubyer
         private static void ShowAnimation(Transition transition)
         {
             Storyboard storyboard = new Storyboard();
+            storyboard.Completed += (sender, e) =>
+            {
+                var args = new RoutedEventArgs();
+                args.RoutedEvent = Transition.ShowedEvent;
+                transition.RaiseEvent(args);
+                transition.ShowedCommand?.Execute(null);
+            };
 
             DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 0, 1);
 
@@ -219,9 +295,16 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static void HideAnimation(Transition transition)
+        private static void CloseAnimation(Transition transition)
         {
             Storyboard storyboard = new Storyboard();
+            storyboard.Completed += (sender, e) =>
+            {
+                var args = new RoutedEventArgs();
+                args.RoutedEvent = Transition.ClosedEvent;
+                transition.RaiseEvent(args);
+                transition.ClosedCommand?.Execute(null);
+            };
 
             DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 1, 0);
 

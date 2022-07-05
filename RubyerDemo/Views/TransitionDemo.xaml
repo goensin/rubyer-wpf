@@ -24,7 +24,12 @@
                     </StackPanel>
                 </GroupBox.Header>
                 <StackPanel Height="100" Orientation="Horizontal">
-                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}" Duration="0:0:1">
+                    <rubyer:Transition Closed="Transition_Closed"
+                                       ClosedCommand="{Binding ClosedCommand}"
+                                       IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}"
+                                       Showed="Transition_Showed"
+                                       ShowedCommand="{Binding ShowedCommand}"
+                                       Duration="0:0:1">
                         <rubyer:Card Width="150"
                                      Margin="5"
                                      Background="{DynamicResource Primary}">
