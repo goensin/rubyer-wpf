@@ -177,15 +177,27 @@
                     </StackPanel>
                 </GroupBox.Header>
                 <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}" Type="Collapse">
+                    <UniformGrid Rows="1">
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}" Type="CollapseUp">
                             <rubyer:Card Width="150"
                                          Height="100"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">
                                 <TextBlock HorizontalAlignment="Center"
                                            FontSize="20"
-                                           Text="Collapse" />
+                                           Text="CollapseUp" />
+                            </rubyer:Card>
+                        </rubyer:Transition>
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}"
+                                           Type="CollapseDown"
+                                           Duration="0:0:1">
+                            <rubyer:Card Width="150"
+                                         Height="100"
+                                         Margin="5"
+                                         Background="{DynamicResource Primary}">
+                                <TextBlock HorizontalAlignment="Center"
+                                           FontSize="20"
+                                           Text="CollapseDown" />
                             </rubyer:Card>
                         </rubyer:Transition>
                         <rubyer:Transition IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}" Type="CollapseLeft">
@@ -198,7 +210,19 @@
                                            Text="CollapseLeft" />
                             </rubyer:Card>
                         </rubyer:Transition>
-                    </StackPanel>
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}"
+                                           Type="CollapseRight"
+                                           Duration="0:0:1">
+                            <rubyer:Card Width="150"
+                                         Height="100"
+                                         Margin="5"
+                                         Background="{DynamicResource Primary}">
+                                <TextBlock HorizontalAlignment="Center"
+                                           FontSize="20"
+                                           Text="CollapseRight" />
+                            </rubyer:Card>
+                        </rubyer:Transition>
+                    </UniformGrid>
                 </StackPanel>
             </GroupBox>
         </Grid>

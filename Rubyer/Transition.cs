@@ -141,8 +141,10 @@ namespace Rubyer
             switch (transition.Type)
             {
                 case TransitionType.Fade:
-                case TransitionType.Collapse:
+                case TransitionType.CollapseUp:
+                case TransitionType.CollapseDown:
                 case TransitionType.CollapseLeft:
+                case TransitionType.CollapseRight:
                 default:
                     storyboard.Children.Add(opacityAnimation);
                     break;
@@ -226,8 +228,10 @@ namespace Rubyer
             switch (transition.Type)
             {
                 case TransitionType.Fade:
-                case TransitionType.Collapse:
+                case TransitionType.CollapseUp:
+                case TransitionType.CollapseDown:
                 case TransitionType.CollapseLeft:
+                case TransitionType.CollapseRight:
                 default:
                     storyboard.Children.Add(opacityAnimation);
                     break;
@@ -378,6 +382,9 @@ namespace Rubyer
         }
     }
 
+    /// <summary>
+    /// 转换类型
+    /// </summary>
     public enum TransitionType
     {
         Fade = 0,
@@ -392,7 +399,9 @@ namespace Rubyer
         ZoomRight,
         ZoomUp,
         ZoomDown,
-        Collapse,
-        CollapseLeft
+        CollapseUp,
+        CollapseDown,
+        CollapseLeft,
+        CollapseRight,
     }
 }

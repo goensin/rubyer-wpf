@@ -158,7 +158,7 @@
                                 <rubyer:Transition Grid.Row="1"
                                                    Grid.Column="1"
                                                    IsShow="{TemplateBinding DetailsVisibility, Converter={StaticResource VisibilityToBooleanConverter}}"
-                                                   Type="Collapse">
+                                                   Type="CollapseUp">
                                     <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                 </rubyer:Transition>
 

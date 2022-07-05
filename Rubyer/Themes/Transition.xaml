@@ -16,17 +16,28 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="CollapseTransitionTemplate" TargetType="{x:Type rubyer:Transition}">
-        <StackPanel x:Name="rootStackPanel" Visibility="Collapsed">
-            <ContentPresenter x:Name="content"
-                              Focusable="False"
-                              RecognizesAccessKey="True"
-                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-        </StackPanel>
+        <Border x:Name="root" VerticalAlignment="Top">
+            <StackPanel x:Name="rootStackPanel">
+                <ContentPresenter x:Name="content"
+                                  Focusable="False"
+                                  RecognizesAccessKey="True"
+                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+            </StackPanel>
+        </Border>
         <ControlTemplate.Triggers>
-            <Trigger Property="Type" Value="Collapse">
-                <Setter TargetName="rootStackPanel" Property="VerticalAlignment" Value="Top" />
-                <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
-                <Setter TargetName="rootStackPanel" Property="Height">
+            <Trigger Property="Type" Value="CollapseUp">
+                <Setter TargetName="root" Property="Height">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualHeight" />
+                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseDown">
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Bottom" />
+                <Setter TargetName="root" Property="Height">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualHeight" />
@@ -37,8 +48,22 @@
             </Trigger>
             <Trigger Property="Type" Value="CollapseLeft">
                 <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
-                <Setter TargetName="rootStackPanel" Property="Visibility" Value="Visible" />
-                <Setter TargetName="rootStackPanel" Property="Width">
+                <Setter TargetName="root" Property="HorizontalAlignment" Value="Left" />
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Stretch" />
+                <Setter TargetName="root" Property="Width">
+                    <Setter.Value>
+                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                            <Binding ElementName="content" Path="ActualWidth" />
+                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                        </MultiBinding>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseRight">
+                <Setter TargetName="rootStackPanel" Property="Orientation" Value="Horizontal" />
+                <Setter TargetName="root" Property="HorizontalAlignment" Value="Right" />
+                <Setter TargetName="root" Property="VerticalAlignment" Value="Stretch" />
+                <Setter TargetName="root" Property="Width">
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualWidth" />
@@ -72,10 +97,16 @@
         <Setter Property="Offset" Value="50" />
         <Setter Property="Template" Value="{StaticResource RubyerTransitionTemplate}" />
         <Style.Triggers>
-            <Trigger Property="Type" Value="Collapse">
+            <Trigger Property="Type" Value="CollapseUp">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseDown">
                 <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
             </Trigger>
             <Trigger Property="Type" Value="CollapseLeft">
+                <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="Type" Value="CollapseRight">
                 <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
             </Trigger>
         </Style.Triggers>

@@ -129,7 +129,7 @@
                                            Grid.Column="1"
                                            Grid.ColumnSpan="2"
                                            IsShow="{TemplateBinding IsExpanded}"
-                                           Type="Collapse">
+                                           Type="CollapseUp">
                             <ItemsPresenter x:Name="ItemsHost"
                                             VerticalAlignment="Top"
                                             Opacity="0"

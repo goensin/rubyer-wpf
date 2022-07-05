@@ -396,7 +396,7 @@
                                           IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
                             <rubyer:Transition x:Name="Transition"
                                                IsShow="{TemplateBinding IsExpanded}"
-                                               Type="Collapse">
+                                               Type="CollapseUp">
                                 <ContentPresenter x:Name="ExpandSite"
                                                   Margin="{TemplateBinding Padding}"
                                                   Focusable="false" />
