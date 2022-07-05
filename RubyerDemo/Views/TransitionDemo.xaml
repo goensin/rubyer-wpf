@@ -24,7 +24,7 @@
                     </StackPanel>
                 </GroupBox.Header>
                 <StackPanel Height="100" Orientation="Horizontal">
-                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}">
+                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}" Duration="0:0:1">
                         <rubyer:Card Width="150"
                                      Margin="5"
                                      Background="{DynamicResource Primary}">
@@ -42,7 +42,10 @@
                                        Text="FadeRight" />
                         </rubyer:Card>
                     </rubyer:Transition>
-                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}" Type="FadeLeft">
+                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}"
+                                       Type="FadeLeft"
+                                       Offset="150"
+                                       Duration="0:0:1">
                         <rubyer:Card Width="150"
                                      Margin="5"
                                      Background="{DynamicResource Primary}">
@@ -51,7 +54,9 @@
                                        Text="FadeLeft" />
                         </rubyer:Card>
                     </rubyer:Transition>
-                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}" Type="FadeUp">
+                    <rubyer:Transition IsShow="{Binding IsChecked, ElementName=FadeToggle, Mode=TwoWay}"
+                                       Type="FadeUp"
+                                       Duration="0:0:0.7">
                         <rubyer:Card Width="150"
                                      Margin="5"
                                      Background="{DynamicResource Primary}">
@@ -83,7 +88,9 @@
                 </GroupBox.Header>
                 <StackPanel>
                     <StackPanel Height="100" Orientation="Horizontal">
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}" Type="Zoom">
+                        <rubyer:Transition InitialScale="0.5"
+                                           IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}"
+                                           Type="Zoom">
                             <rubyer:Card Width="150"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">
@@ -101,7 +108,9 @@
                                            Text="ZoomX" />
                             </rubyer:Card>
                         </rubyer:Transition>
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}" Type="ZoomY">
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}"
+                                           Type="ZoomY"
+                                           Duration="0:0:1">
                             <rubyer:Card Width="150"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">
@@ -112,7 +121,9 @@
                         </rubyer:Transition>
                     </StackPanel>
                     <StackPanel Height="100" Orientation="Horizontal">
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}" Type="ZoomLeft">
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}"
+                                           Type="ZoomLeft"
+                                           Duration="0:0:1">
                             <rubyer:Card Width="150"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">
@@ -121,7 +132,9 @@
                                            Text="ZoomLeft" />
                             </rubyer:Card>
                         </rubyer:Transition>
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}" Type="ZoomRight">
+                        <rubyer:Transition InitialScale="0.5"
+                                           IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}"
+                                           Type="ZoomRight">
                             <rubyer:Card Width="150"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">
@@ -139,7 +152,9 @@
                                            Text="ZoomUp" />
                             </rubyer:Card>
                         </rubyer:Transition>
-                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}" Type="ZoomDown">
+                        <rubyer:Transition IsShow="{Binding IsChecked, ElementName=ZoomToggle, Mode=TwoWay}"
+                                           Type="ZoomDown"
+                                           Duration="0:0:1">
                             <rubyer:Card Width="150"
                                          Margin="5"
                                          Background="{DynamicResource Primary}">

@@ -16,10 +16,10 @@ namespace Rubyer
 
     public class SliderValueAdorner : Adorner
     {
-        private TextBlock valueTextBlock;
-        private Card card;
-        private Dock placement;
-        private double offset;
+        private readonly TextBlock valueTextBlock;
+        private readonly Card card;
+        private readonly Dock placement;
+        private readonly double offset;
 
         public SliderValueAdorner(UIElement adornedElement, Slider slider, Dock placement, double offset)
           : base(adornedElement)
