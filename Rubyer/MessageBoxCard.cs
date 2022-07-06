@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
@@ -13,8 +14,6 @@ namespace Rubyer
     [TemplatePart(Name = CancelButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = YesButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = NoButtonPartName, Type = typeof(Button))]
-    [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
-    [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
     public class MessageBoxCard : Control
     {
         public const string CloseButtonPartName = "PART_CloseButton";
@@ -22,26 +21,22 @@ namespace Rubyer
         public const string CancelButtonPartName = "PART_CancelButton";
         public const string YesButtonPartName = "PART_YesButton";
         public const string NoButtonPartName = "PART_NoButton";
-        public const string OpenStateName = "Open";
-        public const string CloseStateName = "Close";
 
         public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArgs e);
-        public static readonly RoutedEvent ReturnResultEvent;
-        private MessageBoxResult messageBoxResult;
 
         static MessageBoxCard()
         {
-            ReturnResultEvent = EventManager.RegisterRoutedEvent("ReturnResult", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxCard), new FrameworkPropertyMetadata(typeof(MessageBoxCard)));
         }
 
         public override void OnApplyTemplate()
         {
+            base.OnApplyTemplate();
+
             ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
             closeButton.Click += (sender, args) =>
             {
-                messageBoxResult = MessageBoxResult.Cancel;
-                GoToCloseState(this);
+                InternalReturnResult(this, MessageBoxResult.Cancel);
             };
 
             if (IsShowOk)
@@ -49,8 +44,7 @@ namespace Rubyer
                 ButtonBase okButton = GetTemplateChild(OkButtonPartName) as ButtonBase;
                 okButton.Click += (sender, args) =>
                 {
-                    messageBoxResult = MessageBoxResult.OK;
-                    GoToCloseState(this);
+                    InternalReturnResult(this, MessageBoxResult.OK);
                 };
             }
 
@@ -59,8 +53,7 @@ namespace Rubyer
                 ButtonBase cancelButton = GetTemplateChild(CancelButtonPartName) as ButtonBase;
                 cancelButton.Click += (sender, args) =>
                 {
-                    messageBoxResult = MessageBoxResult.Cancel;
-                    GoToCloseState(this);
+                    InternalReturnResult(this, MessageBoxResult.Cancel);
                 };
             }
 
@@ -69,8 +62,7 @@ namespace Rubyer
                 ButtonBase yesButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
                 yesButton.Click += (sender, args) =>
                 {
-                    messageBoxResult = MessageBoxResult.Yes;
-                    GoToCloseState(this);
+                    InternalReturnResult(this, MessageBoxResult.Yes);
                 };
             }
 
@@ -79,24 +71,34 @@ namespace Rubyer
                 ButtonBase noButton = GetTemplateChild(NoButtonPartName) as ButtonBase;
                 noButton.Click += (sender, args) =>
                 {
-                    messageBoxResult = MessageBoxResult.No;
-                    GoToCloseState(this);
+                    InternalReturnResult(this, MessageBoxResult.No);
                 };
             }
-
-            GoToOpenState(this);
-            base.OnApplyTemplate();
         }
 
         #region 事件
+
+        public static readonly RoutedEvent ReturnResultEvent = EventManager.RegisterRoutedEvent("ReturnResult", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
+
         public event MessageBoxResultRoutedEventHandler ReturnResult
         {
             add { AddHandler(ReturnResultEvent, value); }
             remove { RemoveHandler(ReturnResultEvent, value); }
         }
+
         #endregion
 
         #region 依赖属性
+
+        public static readonly DependencyProperty IsShowProperty =
+           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+
+        public bool IsShow
+        {
+            get { return (bool)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
+        }
+
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
             "Message", typeof(string), typeof(MessageBoxCard), new PropertyMetadata(default(string)));
 
@@ -241,37 +243,13 @@ namespace Rubyer
             set { SetValue(MessageBoxButtonProperty, value); }
         }
 
-        public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
-            "IsClosed", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool), OnIsClosedChanged));
-
-        private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is MessageBoxCard messageBoxCard)
-            {
-                if (messageBoxCard.IsClosed)
-                {
-                    MessageBoxResultRoutedEventArgs eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, messageBoxCard.messageBoxResult, messageBoxCard);
-                    messageBoxCard.RaiseEvent(eventArgs);
-                }
-            }
-        }
-
-        public bool IsClosed
-        {
-            get { return (bool)GetValue(IsClosedProperty); }
-            set { SetValue(IsClosedProperty, value); }
-        }
         #endregion
 
-        private static void GoToOpenState(MessageBoxCard messageBoxCard)
+        private void InternalReturnResult(MessageBoxCard card, MessageBoxResult result)
         {
-            _ = VisualStateManager.GoToState(messageBoxCard, OpenStateName, true);
-            _ = messageBoxCard.Focus();
-        }
-
-        private static void GoToCloseState(MessageBoxCard messageBoxCard)
-        {
-            _ = VisualStateManager.GoToState(messageBoxCard, CloseStateName, true);
+            IsShow = false;
+            MessageBoxResultRoutedEventArgs eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, result, card);
+            card.RaiseEvent(eventArgs);
         }
     }
 

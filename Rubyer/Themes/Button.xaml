@@ -143,7 +143,7 @@
            TargetType="{x:Type Button}">
         <Style.Triggers>
             <Trigger Property="IsDefault" Value="True">
-                <Setter Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
+                <Setter Property="Effect" Value="{DynamicResource AllDirectionEffect}" />
             </Trigger>
         </Style.Triggers>
     </Style>

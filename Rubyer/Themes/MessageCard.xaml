@@ -82,6 +82,7 @@
                                         Grid.Column="2"
                                         Height="Auto"
                                         Padding="5"
+                                        rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
                                         Foreground="{TemplateBinding Foreground}"
                                         Visibility="{TemplateBinding IsClearable, Converter={StaticResource BooleanToVisibleConverter}}">
                                     <rubyer:Icon Type="CloseLine" />
