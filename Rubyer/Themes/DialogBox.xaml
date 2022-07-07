@@ -23,6 +23,8 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsClickBackgroundToClose" Value="False" />
         <Setter Property="IsShowCloseButton" Value="True" />
+        <Setter Property="IsShow" Value="False" />
+        <Setter Property="IsClosed" Value="True" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
@@ -36,146 +38,73 @@
                 <ControlTemplate TargetType="rubyer:DialogBox">
                     <Grid>
                         <ContentPresenter x:Name="contentPresenter"
+                                          Panel.ZIndex="1"
                                           Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <Border x:Name="PART_RootBorder"
-                                Background="{TemplateBinding MaskBackground}"
-                                Opacity="0"
-                                Visibility="Hidden">
-                            <Border x:Name="PART_CardBorder"
-                                    Margin="5"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Background="Transparent"
-                                    Effect="{DynamicResource AllDirectionEffect3}">
-                                <Border.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform />
-                                        <SkewTransform />
-                                        <RotateTransform />
-                                        <TranslateTransform />
-                                    </TransformGroup>
-                                </Border.RenderTransform>
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
-                                    <Border x:Name="titleBar"
-                                            Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            CornerRadius="{DynamicResource TopContainerCornerRadius}">
-                                        <Grid Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                            <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Text="{TemplateBinding Title}" />
-                                            <Button x:Name="PART_CloseButton"
-                                                    Style="{StaticResource TextButton}"
-                                                    Width="32"
-                                                    HorizontalAlignment="Right"
-                                                    Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
-                                                <rubyer:Icon Type="CloseLine" />
-                                            </Button>
-                                        </Grid>
-                                    </Border>
 
-                                    <Border x:Name="contentBorder"
-                                            Grid.Row="1"
-                                            Background="{TemplateBinding Background}"
-                                            CornerRadius="{DynamicResource BottomContainerCornerRadius}">
-                                        <ContentControl Margin="{TemplateBinding Padding}"
-                                                        Content="{TemplateBinding DialogContent}"
-                                                        Focusable="False"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </Border>
+                        <Grid x:Name="cardRoot" Panel.ZIndex="100">
+                            <rubyer:Transition x:Name="Path_Transition" IsShow="{TemplateBinding IsShow}">
+                                <Border x:Name="PART_BackgroundBorder" Background="{TemplateBinding MaskBackground}" />
+                            </rubyer:Transition>
 
-                                </Grid>
-                            </Border>
-                        </Border>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="ShowStates">
-                                <VisualStateGroup.Transitions>
-                                    <VisualTransition GeneratedDuration="0" To="Open">
-                                        <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseOut" />
-                                        </VisualTransition.GeneratedEasingFunction>
-                                        <Storyboard>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="30" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="0.01" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                    <VisualTransition GeneratedDuration="0" To="Close">
-                                        <VisualTransition.GeneratedEasingFunction>
-                                            <CubicEase EasingMode="EaseIn" />
-                                        </VisualTransition.GeneratedEasingFunction>
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
-                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.2" Value="{x:Static Visibility.Hidden}" />
-                                            </ObjectAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)">
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="30" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                                <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                                                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0" />
-                                            </DoubleAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualTransition>
-                                </VisualStateGroup.Transitions>
-                                <VisualState x:Name="Open">
-                                    <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="1" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RootBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                                <VisualState x:Name="Close">
-                                    <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.Visibility)">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Hidden}" />
-                                        </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_CardBorder" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                                        </DoubleAnimationUsingKeyFrames>
-                                    </Storyboard>
-                                </VisualState>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
+                            <rubyer:Transition InitialScale="0.5"
+                                               IsShow="{TemplateBinding IsShow}"
+                                               Type="Zoom">
+                                <Border x:Name="PART_CardBorder"
+                                        Margin="5"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Background="Transparent"
+                                        Effect="{DynamicResource AllDirectionEffect3}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Border x:Name="titleBar"
+                                                Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                CornerRadius="{DynamicResource TopContainerCornerRadius}">
+                                            <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                <Button x:Name="PART_CloseButton"
+                                                        Style="{StaticResource TextButton}"
+                                                        Padding="5"
+                                                        VerticalAlignment="Top"
+                                                        rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
+                                                        DockPanel.Dock="Right"
+                                                        Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                        Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
+                                                    <rubyer:Icon Type="CloseLine" />
+                                                </Button>
+
+                                                <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           Text="{TemplateBinding Title}" />
+                                            </DockPanel>
+                                        </Border>
+
+                                        <Border x:Name="contentBorder"
+                                                Grid.Row="1"
+                                                Background="{TemplateBinding Background}"
+                                                CornerRadius="{DynamicResource BottomContainerCornerRadius}">
+                                            <ContentControl Margin="{TemplateBinding Padding}"
+                                                            Content="{TemplateBinding DialogContent}"
+                                                            Focusable="False"
+                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </Border>
+
+                                    </Grid>
+                                </Border>
+                            </rubyer:Transition>
+                        </Grid>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger SourceName="PART_CardBorder" Property="Opacity" Value="0">
-                            <Setter Property="IsClosed" Value="True" />
-                        </Trigger>
-                        <Trigger SourceName="PART_CardBorder" Property="Opacity" Value="1">
-                            <Setter Property="IsClosed" Value="False" />
-                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Title" Value="{x:Null}" />
@@ -183,6 +112,14 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="titleBar" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="contentBorder" Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsShow" Value="False" />
+                                <Condition Property="IsClosed" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="cardRoot" Property="Panel.ZIndex" Value="0" />
+                            <Setter TargetName="cardRoot" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

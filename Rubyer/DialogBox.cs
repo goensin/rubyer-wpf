@@ -11,16 +11,14 @@ namespace Rubyer
     /// <summary>
     /// 对话框
     /// </summary>
+    [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
     [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
-    [TemplatePart(Name = RootBorderPartName, Type = typeof(Border))]
-    [TemplateVisualState(GroupName = "ShowStates", Name = OpenStateName)]
-    [TemplateVisualState(GroupName = "ShowStates", Name = CloseStateName)]
+    [TemplatePart(Name = BackgroundBorderPartName, Type = typeof(Border))]
     public class DialogBox : ContentControl
     {
+        public const string TransitionName = "Path_Transition";
         public const string CloseButtonPartName = "PART_CloseButton";
-        public const string RootBorderPartName = "PART_RootBorder";
-        public const string OpenStateName = "Open";
-        public const string CloseStateName = "Close";
+        public const string BackgroundBorderPartName = "PART_BackgroundBorder";
 
         public delegate void DialogResultRoutedEventHandler(object sender, DialogResultRoutedEventArgs e);
 
@@ -34,6 +32,30 @@ namespace Rubyer
         static DialogBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogBox), new FrameworkPropertyMetadata(typeof(DialogBox)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
+            CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
+
+            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
+            closeButton.Click += (sender, args) =>
+            {
+                closeParameter = null;
+                IsShow = false;
+            };
+
+            rootBorder = GetTemplateChild(BackgroundBorderPartName) as Border;
+            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
+
+            if (GetTemplateChild(TransitionName) is Transition transition)
+            {
+                transition.Showed += (sender, e) => IsClosed = false;
+                transition.Closed += Closed; ;
+            }
         }
 
         #region 命令
@@ -176,15 +198,11 @@ namespace Rubyer
 
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DialogBox container = d as DialogBox;
+            DialogBox dialogBox = d as DialogBox;
 
             if ((bool)e.NewValue)
             {
-                container.OpenAnimiation(container);
-            }
-            else
-            {
-                container.CloseAnimaton();
+                dialogBox.OpenAnimiation(dialogBox);
             }
         }
 
@@ -212,23 +230,7 @@ namespace Rubyer
 
         // 关闭完成
         public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
-            "IsClosed", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool), OnIsClosedChanged));
-
-        private static void OnIsClosedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is DialogBox dialog && dialog.IsClosed)
-            {
-                var args = new DialogResultRoutedEventArgs(AfterCloseEvent, dialog.closeParameter, dialog);
-                args.RoutedEvent = AfterCloseEvent;
-                dialog.RaiseEvent(args);
-                dialog.AfterCloseCommand?.Execute(dialog.closeParameter);
-                dialog.AfterCloseHandler?.Invoke(dialog, dialog.closeParameter);
-
-                dialog.closeParameter = null;
-                dialog.BeforeOpenHandler = null;
-                dialog.AfterCloseHandler = null;
-            }
-        }
+            "IsClosed", typeof(bool), typeof(DialogBox), new PropertyMetadata(default(bool)));
 
         /// <summary>
         /// 关闭完成
@@ -239,24 +241,6 @@ namespace Rubyer
             set { SetValue(IsClosedProperty, value); }
         }
         #endregion
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _ = CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
-            _ = CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
-
-            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
-            closeButton.Click += (sender, args) =>
-            {
-                closeParameter = null;
-                IsShow = false;
-            };
-
-            rootBorder = GetTemplateChild(RootBorderPartName) as Border;
-            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
-        }
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
@@ -292,36 +276,34 @@ namespace Rubyer
         }
 
         // 打开对话框动作
-        private void OpenAnimiation(DialogBox container)
+        private void OpenAnimiation(DialogBox dialogBox)
         {
             RoutedEventArgs args = new RoutedEventArgs(BeforeOpenEvent);
-            container.RaiseEvent(args);
-            container.BeforeOpenCommand?.Execute(null);
-            container.BeforeOpenHandler?.Invoke(container);
+            dialogBox.RaiseEvent(args);
+            dialogBox.BeforeOpenCommand?.Execute(null);
+            dialogBox.BeforeOpenHandler?.Invoke(dialogBox);
 
-            GoToOpenState(container);
-            _ = container.Focus();
+            _ = dialogBox.Focus();
 
-            if (container.DialogContent is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
+            if (dialogBox.DialogContent is FrameworkElement element && element.DataContext is IDialogContext dialogContext)
             {
-                dialogContext.OnDialogOpened(container.openParameter);
+                dialogContext.OnDialogOpened(dialogBox.openParameter);
             }
         }
 
-        // 关闭对话框动作
-        private void CloseAnimaton()
+        private void Closed(object sender, RoutedEventArgs e)
         {
-            GoToCloseState(this);
-        }
+            IsClosed = true;
 
-        private static void GoToOpenState(FrameworkElement element)
-        {
-            _ = VisualStateManager.GoToState(element, OpenStateName, true);
-        }
+            var args = new DialogResultRoutedEventArgs(AfterCloseEvent, this.closeParameter, this);
+            args.RoutedEvent = AfterCloseEvent;
+            this.RaiseEvent(args);
+            this.AfterCloseCommand?.Execute(this.closeParameter);
+            this.AfterCloseHandler?.Invoke(this, this.closeParameter);
 
-        private static void GoToCloseState(FrameworkElement element)
-        {
-            _ = VisualStateManager.GoToState(element, CloseStateName, true);
+            this.closeParameter = null;
+            this.BeforeOpenHandler = null;
+            this.AfterCloseHandler = null;
         }
     }
 
