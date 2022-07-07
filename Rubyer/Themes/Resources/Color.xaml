@@ -37,5 +37,5 @@
     <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
     <SolidColorBrush x:Key="DialogBackground" Color="#AA424242" />
     <SolidColorBrush x:Key="HeaderBackground" Color="#CFCFCF" />
-    <SolidColorBrush x:Key="FunctionBarBackground" Color="#AA9E9E9E" />
+    <SolidColorBrush x:Key="FunctionBarBackground" Color="#889E9E9E" />
 </ResourceDictionary>
