@@ -44,6 +44,9 @@ namespace Rubyer
 
         #region 事件
 
+        /// <summary>
+        /// 关闭消息事件
+        /// </summary>
         public static readonly RoutedEvent CloseEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageCard));
 
         /// <summary>
@@ -54,6 +57,7 @@ namespace Rubyer
             add { AddHandler(CloseEvent, value); }
             remove { RemoveHandler(CloseEvent, value); }
         }
+
         #endregion
 
         #region 依赖属性

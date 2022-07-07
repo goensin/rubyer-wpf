@@ -18,13 +18,18 @@ namespace Rubyer
         public void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
+            card.Close += Card_Close;
             _ = messageBoxPanel.Child = card;
         }
 
         private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArgs e)
         {
-            messageBoxPanel.Child = null;
             MessageBoxResult = e.Result;
+        }
+
+        private void Card_Close(object sender, RoutedEventArgs e)
+        {
+            messageBoxPanel.Child = null;
             DialogResult = true;
         }
 

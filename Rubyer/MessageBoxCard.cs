@@ -9,6 +9,7 @@ namespace Rubyer
     /// <summary>
     /// 消息框卡片
     /// </summary>
+    [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
     [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = OkButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = CancelButtonPartName, Type = typeof(Button))]
@@ -16,6 +17,7 @@ namespace Rubyer
     [TemplatePart(Name = NoButtonPartName, Type = typeof(Button))]
     public class MessageBoxCard : Control
     {
+        public const string TransitionName = "Path_Transition";
         public const string CloseButtonPartName = "PART_CloseButton";
         public const string OkButtonPartName = "PART_OkButton";
         public const string CancelButtonPartName = "PART_CancelButton";
@@ -74,16 +76,47 @@ namespace Rubyer
                     InternalReturnResult(this, MessageBoxResult.No);
                 };
             }
+
+            if (GetTemplateChild(TransitionName) is Transition transition)
+            {
+                transition.Closed += (sender, e) =>
+                {
+                    RoutedEventArgs eventArgs = new RoutedEventArgs(CloseEvent, this);
+                    this.RaiseEvent(eventArgs);
+                };
+            }
         }
 
         #region 事件
 
+        /// <summary>
+        /// 返回结果事件
+        /// </summary>
         public static readonly RoutedEvent ReturnResultEvent = EventManager.RegisterRoutedEvent("ReturnResult", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
 
+        /// <summary>
+        ///  /// <summary>
+        /// 返回结果事件
+        /// </summary>
+        /// </summary>
         public event MessageBoxResultRoutedEventHandler ReturnResult
         {
             add { AddHandler(ReturnResultEvent, value); }
             remove { RemoveHandler(ReturnResultEvent, value); }
+        }
+
+        /// <summary>
+        /// 关闭消息事件
+        /// </summary>
+        public static readonly RoutedEvent CloseEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+
+        /// <summary>
+        /// 关闭消息事件
+        /// </summary>
+        public event RoutedEventHandler Close
+        {
+            add { AddHandler(CloseEvent, value); }
+            remove { RemoveHandler(CloseEvent, value); }
         }
 
         #endregion
