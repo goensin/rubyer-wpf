@@ -88,7 +88,7 @@ namespace RubyerDemo.ViewModels
         // 3# 对话框打开前
         private void BeforeDialog3OpenExecute(object obj)
         {
-            Message.ShowInContainer(ConstNames.MainMessageContainer, "打开 3# 对话框");
+            Message.Show("打开 3# 对话框");
         }
 
         private RelayCommand afterDialog3Close;
@@ -113,11 +113,11 @@ namespace RubyerDemo.ViewModels
             var content = new DialogContent();
             var parameters = new Parameters();
             parameters.Add("User", new User { Name = "wu", Password = "123" });
-            var para = await Dialog.Show(ConstNames.MainDialogBox, content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
+            var para = await Dialog.Show(content, parameters: parameters, openHandler: BeforeDialog4Open, closeHandle: AfterDialog4Close);
             Debug.WriteLine($"4# 对话框关闭异步返回结果:name:{user.Name},password:{user.Password}");
         }
 
-        private void AfterDialog4Close(DialogBox dialog, object obj)
+        private void AfterDialog4Close(DialogContainer dialog, object obj)
         {
             if (obj is IParameters parameters)
             {
@@ -129,7 +129,7 @@ namespace RubyerDemo.ViewModels
 
         }
 
-        private void BeforeDialog4Open(DialogBox dialog)
+        private void BeforeDialog4Open(DialogContainer dialog)
         {
             Debug.WriteLine("4# 对话框打开");
         }
@@ -139,7 +139,7 @@ namespace RubyerDemo.ViewModels
 
         private async void OpenDialog5Execute(object obj)
         {
-            _ = await Dialog.Show(ConstNames.MainDialogBox, new Loading { Content = "loading..." }, showCloseButton: false, openHandler: async dialog =>
+            _ = await Dialog.Show(new Loading { Content = "loading..." }, showCloseButton: false, openHandler: async dialog =>
             {
                 await Task.Delay(3000);
                 dialog.Close();

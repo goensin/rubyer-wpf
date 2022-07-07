@@ -8,9 +8,6 @@ namespace RubyerDemo.Consts
 {
     public class ConstNames
     {
-        public const string MainMessageContainer = "MainMessageContainer";
-        public const string MainMessageBoxContainer = "MainMessageBoxContainer";
-        public const string MainDialogBox = "MainDialogBox";
         public const string MessageDemo = "MessageDemo";
     }
 }

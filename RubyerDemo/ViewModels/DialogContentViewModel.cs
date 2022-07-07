@@ -5,7 +5,7 @@ using System;
 
 namespace RubyerDemo.ViewModels
 {
-    public class DialogContentViewModel : ViewModelBase, IDialogContext
+    public class DialogContentViewModel : ViewModelBase, IDialogViewModel
     {
         public DialogContentViewModel()
         {

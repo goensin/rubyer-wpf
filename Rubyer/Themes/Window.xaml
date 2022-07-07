@@ -127,7 +127,13 @@
                                 </StackPanel>
                             </Grid>
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
-                                <ContentPresenter x:Name="MainContentPresenter" KeyboardNavigation.TabNavigation="Cycle" />
+                                <rubyer:MessageContainer Identifier="{x:Static rubyer:Message.DefaultMessageContainerIdentifier}">
+                                    <rubyer:MessageBoxContainer Identifier="{x:Static rubyer:MessageBoxR.DefaultMessageBoxContainerIdentifier}">
+                                        <rubyer:DialogContainer Identifier="{x:Static rubyer:Dialog.DefaultDialogIdentifier}">
+                                            <ContentPresenter x:Name="MainContentPresenter" KeyboardNavigation.TabNavigation="Cycle" />
+                                        </rubyer:DialogContainer>
+                                    </rubyer:MessageBoxContainer>
+                                </rubyer:MessageContainer>
                             </AdornerDecorator>
                             <ResizeGrip x:Name="ResizeGrip"
                                         Grid.Row="1"

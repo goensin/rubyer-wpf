@@ -29,7 +29,7 @@ namespace RubyerDemo.Views
         {
             currentTextBox.SelectAll();
             ApplicationCommands.Copy.Execute(currentTextBox.Text, currentTextBox);
-            Message.SuccessInContainer(ConstNames.MainMessageContainer, "复制成功");
+            Message.Success( "复制成功");
         }
     }
 }

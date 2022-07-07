@@ -27,66 +27,66 @@ namespace RubyerDemo.Views
 
         private void MessageBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Show("message");
+            Message.ShowGlobal("message");
         }
 
         private void InfoBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Info("hello ~ \r\nrubyer ");
+            Message.InfoGlobal("hello ~ \r\nrubyer ");
         }
 
         private void WaringBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Warning("warning");
+            Message.WarningGlobal("warning");
         }
 
         private void SuccessBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Success("success");
+            Message.SuccessGlobal("success");
         }
 
         private void ErrorBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.Error("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0);
+            Message.ErrorGlobal("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", 0);
         }
 
         private void MessageContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ShowInContainer(ConstNames.MessageDemo, "message");
+            Message.Show(ConstNames.MessageDemo, "message");
         }
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.InfoInContainer(ConstNames.MessageDemo, "info");
+            Message.Info(ConstNames.MessageDemo, "info");
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.WarningInContainer(ConstNames.MessageDemo, "warning");
+            Message.Warning(ConstNames.MessageDemo, "warning");
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.SuccessInContainer(ConstNames.MessageDemo, "success");
+            Message.Success(ConstNames.MessageDemo, "success");
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
-            Message.ErrorInContainer(ConstNames.MessageDemo, "error");
+            Message.Error(ConstNames.MessageDemo, "error");
         }
 
         private void ControlBtn_Click(object sender, RoutedEventArgs e)
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.Show(element);
+            Message.ShowGlobal(element);
         }
 
         private void ControlContaionBtn_Click(object sender, RoutedEventArgs e)
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.ShowInContainer(ConstNames.MessageDemo, element);
+            Message.Show(ConstNames.MessageDemo, element);
         }
     }
 }

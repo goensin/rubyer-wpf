@@ -136,71 +136,65 @@
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
-    <rubyer:MessageContainer Identifier="{x:Static const:ConstNames.MainMessageContainer}">
-        <rubyer:MessageBoxContainer Identifier="{x:Static const:ConstNames.MainMessageBoxContainer}">
-            <rubyer:DialogBox Identifier="{x:Static const:ConstNames.MainDialogBox}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="180" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <rubyer:Card Margin="5 5 0 5" Padding="0 10">
-                        <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                 rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
-                                 rubyer:ControlHelper.MaskOpacity="1"
-                                 rubyer:ItemsControlHelper.ItemMargin="7 1"
-                                 rubyer:ItemsControlHelper.ItemPadding="7"
-                                 ItemsSource="{Binding MenuItems}"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                 SelectedIndex="0"
-                                 SelectedItem="{Binding CurrentMenuItem}"
-                                 SelectionChanged="ListBox_SelectionChanged">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <ListBox.Resources>
-                                <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
-                            </ListBox.Resources>
-                        </ListBox>
-                    </rubyer:Card>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="180" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <rubyer:Card Margin="5 5 0 5" Padding="0 10">
+            <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                     rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                     rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
+                     rubyer:ControlHelper.MaskOpacity="1"
+                     rubyer:ItemsControlHelper.ItemMargin="7 1"
+                     rubyer:ItemsControlHelper.ItemPadding="7"
+                     ItemsSource="{Binding MenuItems}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     SelectedIndex="0"
+                     SelectedItem="{Binding CurrentMenuItem}"
+                     SelectionChanged="ListBox_SelectionChanged">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.Resources>
+                    <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
+                </ListBox.Resources>
+            </ListBox>
+        </rubyer:Card>
 
-                    <rubyer:Card Grid.Column="1" Margin="5">
-                        <TabControl x:Name="Tab" Style="{StaticResource LineTabControl}">
-                            <TabItem Width="200">
-                                <TabItem.Header>
-                                    <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
-                                </TabItem.Header>
-                                <ContentControl HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Content="{Binding CurrentMenuItem.Content}" />
-                            </TabItem>
-                            <TabItem Width="100">
-                                <TabItem.Header>
-                                    <StackPanel Margin="0" Orientation="Horizontal">
-                                        <rubyer:Icon Margin="0 0 8 0"
-                                                     FontSize="14"
-                                                     Type="CodeSSlashFill" />
-                                        <TextBlock FontSize="14" Text="Xaml" />
-                                    </StackPanel>
-                                </TabItem.Header>
-                                <Grid>
-                                    <avalonEdit:TextEditor x:Name="xamlTextEditor"
-                                                           FontFamily="Consolas"
-                                                           FontSize="10pt"
-                                                           HorizontalScrollBarVisibility="Auto"
-                                                           ShowLineNumbers="True"
-                                                           VerticalScrollBarVisibility="Auto" />
-                                </Grid>
-                            </TabItem>
-                        </TabControl>
-                    </rubyer:Card>
-                </Grid>
-            </rubyer:DialogBox>
-        </rubyer:MessageBoxContainer>
-    </rubyer:MessageContainer>
+        <rubyer:Card Grid.Column="1" Margin="5">
+            <TabControl x:Name="Tab" Style="{StaticResource LineTabControl}">
+                <TabItem Width="200">
+                    <TabItem.Header>
+                        <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
+                    </TabItem.Header>
+                    <ContentControl HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="{Binding CurrentMenuItem.Content}" />
+                </TabItem>
+                <TabItem Width="100">
+                    <TabItem.Header>
+                        <StackPanel Margin="0" Orientation="Horizontal">
+                            <rubyer:Icon Margin="0 0 8 0"
+                                         FontSize="14"
+                                         Type="CodeSSlashFill" />
+                            <TextBlock FontSize="14" Text="Xaml" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <avalonEdit:TextEditor x:Name="xamlTextEditor"
+                                               FontFamily="Consolas"
+                                               FontSize="10pt"
+                                               HorizontalScrollBarVisibility="Auto"
+                                               ShowLineNumbers="True"
+                                               VerticalScrollBarVisibility="Auto" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </rubyer:Card>
+    </Grid>
 </rubyer:RubyerWindow>
