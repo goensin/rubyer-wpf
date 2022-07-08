@@ -4,8 +4,12 @@ using System.Windows.Data;
 
 namespace Rubyer.Converters
 {
+    /// <summary>
+    /// 是否为大弧形
+    /// </summary>
     public class IsLargeArcConverter : IMultiValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length < 3)
@@ -23,6 +27,7 @@ namespace Rubyer.Converters
             return angle > 180;
         }
 
+        /// <inheritdoc/>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return null;

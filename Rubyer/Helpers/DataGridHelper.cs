@@ -12,6 +12,9 @@ using System.Windows.Media.Media3D;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// DataGrid 帮助类
+    /// </summary>
     public static class DataGridHelper
     {
         /// <summary>
@@ -20,16 +23,31 @@ namespace Rubyer
         public static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
             "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnIsHeaderSelectCheckBoxChanged));
 
+        /// <summary>
+        /// Sets the is header select check box.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
         {
             element.SetValue(IsHeaderSelectCheckBoxProperty, value);
         }
 
+        /// <summary>
+        /// Gets the is header select check box.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A bool.</returns>
         public static bool GetIsHeaderSelectCheckBox(DependencyObject element)
         {
             return (bool)element.GetValue(IsHeaderSelectCheckBoxProperty);
         }
 
+        /// <summary>
+        /// Ons the is header select check box changed.
+        /// </summary>
+        /// <param name="d">The d.</param>
+        /// <param name="e">The e.</param>
         private static void OnIsHeaderSelectCheckBoxChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is CheckBox checkBox)
@@ -47,6 +65,11 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// Checks the box_ checked.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The e.</param>
         private static void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             var checkBox = (CheckBox)sender;
@@ -57,6 +80,12 @@ namespace Rubyer
             ChangeAllCheckBoxCell(datagrid, index, checkBox.IsChecked);
         }
 
+        /// <summary>
+        /// Changes the all check box cell.
+        /// </summary>
+        /// <param name="dataGrid">The data grid.</param>
+        /// <param name="index">The index.</param>
+        /// <param name="isChecked">If true, is checked.</param>
         private static void ChangeAllCheckBoxCell(DataGrid dataGrid, int index, bool? isChecked)
         {
             var rows = dataGrid.VisualDepthFirstTraversal().OfType<DataGridRow>();
@@ -82,23 +111,37 @@ namespace Rubyer
             dataGrid.CurrentCell = new DataGridCellInfo();
         }
 
-
         /// <summary>
         /// 单击直接编辑
         /// </summary>
         public static readonly DependencyProperty ClickToEditProperty = DependencyProperty.RegisterAttached(
             "ClickToEdit", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnClickToEditChanged));
 
+        /// <summary>
+        /// Sets the click to edit.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetClickToEdit(DependencyObject element, bool value)
         {
             element.SetValue(ClickToEditProperty, value);
         }
 
+        /// <summary>
+        /// Gets the click to edit.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A bool.</returns>
         public static bool GetClickToEdit(DependencyObject element)
         {
             return (bool)element.GetValue(ClickToEditProperty);
         }
 
+        /// <summary>
+        /// Ons the click to edit changed.
+        /// </summary>
+        /// <param name="d">The d.</param>
+        /// <param name="e">The e.</param>
         private static void OnClickToEditChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var dataGrid = (DataGrid)d;

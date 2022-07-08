@@ -8,6 +8,9 @@ using System.Windows.Threading;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 日期时间选择器
+    /// </summary>
     [TemplatePart(Name = TextBoxPartName, Type = typeof(TextBox))]
     [TemplatePart(Name = PopupPartName, Type = typeof(Popup))]
     [TemplatePart(Name = ButtonPartName, Type = typeof(Button))]
@@ -16,12 +19,39 @@ namespace Rubyer
     [TemplatePart(Name = ConfirmButtonPartName, Type = typeof(Button))]
     public class DateTimePicker : Control
     {
+        /// <summary>
+        /// 文本框名称
+        /// </summary>
         public const string TextBoxPartName = "PART_TextBox";
+
+        /// <summary>
+        /// 弹窗名称
+        /// </summary>
         public const string PopupPartName = "PART_Popup";
+
+        /// <summary>
+        /// 选择按钮名称
+        /// </summary>
         public const string ButtonPartName = "PART_Button";
+
+        /// <summary>
+        /// 时钟名称
+        /// </summary>
         public const string ClockPartName = "PART_Clock";
+
+        /// <summary>
+        /// 日历名称
+        /// </summary>
         public const string CalendarPartName = "PART_Calendar";
+
+        /// <summary>
+        /// 确认按钮名称
+        /// </summary>
         public const string ConfirmButtonPartName = "PART_ConfirmButton";
+
+        /// <summary>
+        /// 日期时间格式化
+        /// </summary>
         public const string DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
 
         private TextBox _textBox;
@@ -32,11 +62,15 @@ namespace Rubyer
 
         private bool isInited;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimePicker"/> class.
+        /// </summary>
         static DateTimePicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DateTimePicker), new FrameworkPropertyMetadata(typeof(DateTimePicker)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -74,36 +108,61 @@ namespace Rubyer
         }
 
         #region 路由事件
+
+        /// <summary>
+        /// 选择时间改变事件
+        /// </summary>
         public static readonly RoutedEvent SelectedTimeChangedEvent =
             EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(DateTimePicker));
 
+        /// <summary>
+        /// 选择时间改变事件处理
+        /// </summary>
         public event RoutedPropertyChangedEventHandler<DateTime?> SelectedTimeChanged
         {
             add { AddHandler(SelectedTimeChangedEvent, value); }
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
         }
-        #endregion
+
+        #endregion 路由事件
 
         #region 依赖属性
 
+        /// <summary>
+        /// 选择的日期时间
+        /// </summary>
         public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register(
             "SelectedDateTime", typeof(DateTime?), typeof(DateTimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
 
+        /// <summary>
+        /// 选择的日期时间
+        /// </summary>
         public DateTime? SelectedDateTime
         {
             get { return (DateTime?)GetValue(SelectedDateTimeProperty); }
             set { SetValue(SelectedDateTimeProperty, value); }
         }
 
+        /// <summary>
+        /// 是否下拉打开
+        /// </summary>
         public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
             "IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
+        /// <summary>
+        /// 是否下拉打开
+        /// </summary>
         public bool IsDropDownOpen
         {
             get { return (bool)GetValue(IsDropDownOpenProperty); }
             set { SetValue(IsDropDownOpenProperty, value); }
         }
 
+        /// <summary>
+        /// Ons the is drop down open changed.
+        /// </summary>
+        /// <param name="d">The d.</param>
+        /// <param name="e">The e.</param>
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             DateTimePicker tp = d as DateTimePicker;
@@ -121,9 +180,15 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
           "Text", typeof(string), typeof(DateTimePicker), new PropertyMetadata(null, OnTextChanged));
 
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         public string Text
         {
             get { return (string)GetValue(TextProperty); }
@@ -149,7 +214,8 @@ namespace Rubyer
                 dateTimePicker.Text = dateTimePicker.SelectedDateTime == null ? null : ((DateTime)dateTimePicker.SelectedDateTime).ToString(DateTimeFormat);
             }
         }
-        #endregion
+
+        #endregion 依赖属性
 
         #region 方法
 
@@ -225,7 +291,6 @@ namespace Rubyer
             this._textBox.Focus();
         }
 
-
         /// <summary>
         /// 点击时间按钮
         /// </summary>
@@ -264,7 +329,7 @@ namespace Rubyer
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
             this.RaiseEvent(args);
         }
-        #endregion
 
+        #endregion 方法
     }
 }

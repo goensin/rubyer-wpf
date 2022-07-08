@@ -16,6 +16,9 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 转换动画
+    /// </summary>
     public class Transition : ContentControl
     {
         static Transition()
@@ -23,6 +26,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Transition), new FrameworkPropertyMetadata(typeof(Transition)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -55,7 +59,6 @@ namespace Rubyer
             set { SetValue(ShowedCommandProperty, value); }
         }
 
-
         /// <summary>
         /// 关闭完命令
         /// </summary>
@@ -71,7 +74,7 @@ namespace Rubyer
             set { SetValue(ClosedCommandProperty, value); }
         }
 
-        #endregion
+        #endregion 命令
 
         #region 事件
 
@@ -105,7 +108,7 @@ namespace Rubyer
             remove { RemoveHandler(ClosedEvent, value); }
         }
 
-        #endregion
+        #endregion 事件
 
         #region 依赖属性
 
@@ -213,7 +216,8 @@ namespace Rubyer
             get { return (IEasingFunction)GetValue(CloseEasingFunctionProperty); }
             set { SetValue(CloseEasingFunctionProperty, value); }
         }
-        #endregion
+
+        #endregion 依赖属性
 
         private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -285,34 +289,40 @@ namespace Rubyer
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomX:
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomY:
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
@@ -379,34 +389,40 @@ namespace Rubyer
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomX:
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomY:
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
                     storyboard.Children.Add(opacityAnimation);
                     break;
+
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
@@ -499,21 +515,84 @@ namespace Rubyer
     /// </summary>
     public enum TransitionType
     {
+        /// <summary>
+        /// 淡入
+        /// </summary>
         Fade = 0,
+
+        /// <summary>
+        /// 向左淡入
+        /// </summary>
         FadeLeft,
+
+        /// <summary>
+        /// 向右淡入
+        /// </summary>
         FadeRight,
+
+        /// <summary>
+        /// 向上淡入
+        /// </summary>
         FadeUp,
+
+        /// <summary>
+        /// 向下淡入
+        /// </summary>
         FadeDown,
+
+        /// <summary>
+        /// 缩放
+        /// </summary>
         Zoom,
+
+        /// <summary>
+        /// X 轴缩放
+        /// </summary>
         ZoomX,
+
+        /// <summary>
+        /// Y 轴缩放
+        /// </summary>
         ZoomY,
+
+        /// <summary>
+        /// 向左缩放
+        /// </summary>
         ZoomLeft,
+
+        /// <summary>
+        /// 向右缩放
+        /// </summary>
         ZoomRight,
+
+        /// <summary>
+        /// 向上缩放
+        /// </summary>
         ZoomUp,
+
+        /// <summary>
+        /// 向下缩放
+        /// </summary>
         ZoomDown,
+
+        /// <summary>
+        /// 向上折叠
+        /// </summary>
         CollapseUp,
+
+        /// <summary>
+        /// 向下折叠
+        /// </summary>
         CollapseDown,
+
+        /// <summary>
+        /// 向左折叠
+        /// </summary>
         CollapseLeft,
+
+        /// <summary>
+        /// 向右折叠
+        /// </summary>
         CollapseRight,
     }
 }

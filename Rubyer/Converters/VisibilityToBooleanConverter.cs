@@ -10,8 +10,12 @@ using System.Windows.Data;
 
 namespace Rubyer.Converters
 {
+    /// <summary>
+    /// Visibility -> bool
+    /// </summary>
     public class VisibilityToBooleanConverter : IValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return VisibilityToBooleanConverter.ConvertVisibilityToBool(value);
@@ -23,6 +27,7 @@ namespace Rubyer.Converters
             return visibility == Visibility.Visible;
         }
 
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             bool flag = ValidateArgument.NotNullOrEmptyCast<bool>(value, "value");

@@ -9,8 +9,14 @@ using System.Windows.Controls.Primitives;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// DataGrid 选择列
+    /// </summary>
     public class DataGridSelectCheckBoxColumn : DataGridCheckBoxColumn
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridSelectCheckBoxColumn"/> class.
+        /// </summary>
         static DataGridSelectCheckBoxColumn()
         {
             var elementStyle = Application.Current.FindResource("RubyerDataGridCheckBoxColumnEditting");
@@ -18,6 +24,9 @@ namespace Rubyer
             DataGridBoundColumn.EditingElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(elementStyle));
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridSelectCheckBoxColumn"/> class.
+        /// </summary>
         public DataGridSelectCheckBoxColumn()
         {
             var headStyle = (Style)Application.Current.FindResource("DataGridSelectCheckBoxColumnHeader");

@@ -14,6 +14,9 @@ namespace Rubyer.Models
     /// </summary>
     public class ValidationModel : INotifyDataErrorInfo, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ValidationModel"/> class.
+        /// </summary>
         public ValidationModel()
         {
             Errors = new Dictionary<string, List<string>>();

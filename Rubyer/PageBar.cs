@@ -16,10 +16,16 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 页码条
+    /// </summary>
     [TemplatePart(Name = PageSizePartName, Type = typeof(TextBox))]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(PageBarItem))]
     public class PageBar : ItemsControl
     {
+        /// <summary>
+        /// 每页条数文本框
+        /// </summary>
         public const string PageSizePartName = "PART_PageSizeTextBox";
 
         static PageBar()
@@ -27,6 +33,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PageBar), new FrameworkPropertyMetadata(typeof(PageBar)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -43,86 +50,127 @@ namespace Rubyer
             }
         }
 
+        /// <inheritdoc/>
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             return item is PageBarItem;
         }
 
+        /// <inheritdoc/>
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new PageBarItem();
         }
 
+        /// <inheritdoc/>
         protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
         {
             base.PrepareContainerForItemOverride(element, item);
         }
 
         #region 命令
-        // 每页数量改变
+
+        /// <summary>
+        /// 每页数量改变命令
+        /// </summary>
         public static readonly DependencyProperty PageSizeChangedCommandProperty =
             DependencyProperty.Register("PageSizeChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
 
+        /// <summary>
+        /// 每页数量改变命令
+        /// </summary>
         public ICommand PageSizeChangedCommand
         {
             get { return (ICommand)GetValue(PageSizeChangedCommandProperty); }
             set { SetValue(PageSizeChangedCommandProperty, value); }
         }
 
-        // 当前页改变
+        /// <summary>
+        /// 当前页改变命令
+        /// </summary>
         public static readonly DependencyProperty PageIndexChangedCommandProperty =
             DependencyProperty.Register("PageIndexChangedCommand", typeof(ICommand), typeof(PageBar), new PropertyMetadata(default(ICommand)));
 
+        /// <summary>
+        /// 当前页改变命令
+        /// </summary>
         public ICommand PageIndexChangedCommand
         {
             get { return (ICommand)GetValue(PageIndexChangedCommandProperty); }
             set { SetValue(PageIndexChangedCommandProperty, value); }
         }
-        #endregion
+
+        #endregion 命令
 
         #region 事件
+
+        /// <summary>
+        /// 每页数量改变事件
+        /// </summary>
         public static readonly RoutedEvent PageSizeChangedEvent =
             EventManager.RegisterRoutedEvent("PageSizeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<int>), typeof(PageBar));
 
+        /// <summary>
+        /// 每页数量改变事件
+        /// </summary>
         public event RoutedPropertyChangedEventHandler<int> PageSizeChanged
         {
             add { AddHandler(PageSizeChangedEvent, value); }
             remove { RemoveHandler(PageSizeChangedEvent, value); }
         }
 
+        /// <summary>
+        /// 当前页改变事件
+        /// </summary>
         public static readonly RoutedEvent PageIndexChangedEvent =
             EventManager.RegisterRoutedEvent("PageIndexChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<int>), typeof(PageBar));
 
+        /// <summary>
+        /// 当前页改变事件
+        /// </summary>
         public event RoutedPropertyChangedEventHandler<int> PageIndexChanged
         {
             add { AddHandler(PageIndexChangedEvent, value); }
             remove { RemoveHandler(PageIndexChangedEvent, value); }
         }
-        #endregion
+
+        #endregion 事件
 
         #region 依赖属性
-        // 当前页背景色
+
+        /// <summary>
+        /// 当前页背景色
+        /// </summary>
         public static readonly DependencyProperty CurrentBackgroundProperty =
             DependencyProperty.Register("CurrentBackground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
 
+        /// <summary>
+        /// 当前页背景色
+        /// </summary>
         public Brush CurrentBackground
         {
             get { return (Brush)GetValue(CurrentBackgroundProperty); }
             set { SetValue(CurrentBackgroundProperty, value); }
         }
 
-        // 当前页前景色
+        /// <summary>
+        /// 当前页前景色
+        /// </summary>
         public static readonly DependencyProperty CurrentForegroundProperty =
             DependencyProperty.Register("CurrentForeground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
 
+        /// <summary>
+        /// 当前页前景色
+        /// </summary>
         public Brush CurrentForeground
         {
             get { return (Brush)GetValue(CurrentForegroundProperty); }
             set { SetValue(CurrentForegroundProperty, value); }
         }
 
-
-        // 每页数量
+        /// <summary>
+        /// 每页数量
+        /// </summary>
         public static readonly DependencyProperty PageSizeProperty =
             DependencyProperty.Register("PageSize", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnPageSizeChanged)));
 
@@ -132,7 +180,6 @@ namespace Rubyer
             pageBar.PageIndex = 1;
             pageBar.ReFreshPageBar();
 
-
             int oldValue = (int)e.OldValue;
             int newValue = (int)e.NewValue;
             RoutedPropertyChangedEventArgs<int> args = new RoutedPropertyChangedEventArgs<int>(oldValue, newValue);
@@ -141,13 +188,18 @@ namespace Rubyer
             pageBar.PageSizeChangedCommand?.Execute(newValue);
         }
 
+        /// <summary>
+        /// 每页数量
+        /// </summary>
         public int PageSize
         {
             get { return (int)GetValue(PageSizeProperty); }
             set { SetValue(PageSizeProperty, value); }
         }
 
-        // 当前页
+        /// <summary>
+        /// 当前页
+        /// </summary>
         public static readonly DependencyProperty PageIndexProperty =
             DependencyProperty.Register("PageIndex", typeof(int), typeof(PageBar), new PropertyMetadata(1, new PropertyChangedCallback(OnPageIndexChanged)));
 
@@ -164,13 +216,18 @@ namespace Rubyer
             pageBar.PageIndexChangedCommand?.Execute(newValue);
         }
 
+        /// <summary>
+        /// 当前页
+        /// </summary>
         public int PageIndex
         {
             get { return (int)GetValue(PageIndexProperty); }
             set { SetValue(PageIndexProperty, value); }
         }
 
-        // 总数量
+        /// <summary>
+        /// 总数量
+        /// </summary>
         public static readonly DependencyProperty TotalProperty =
             DependencyProperty.Register("Total", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnTotalChanged)));
 
@@ -180,33 +237,46 @@ namespace Rubyer
             pageBar.ReFreshPageBar();
         }
 
+        /// <summary>
+        /// 总数量
+        /// </summary>
         public int Total
         {
             get { return (int)GetValue(TotalProperty); }
             set { SetValue(TotalProperty, value); }
         }
 
-
+        /// <summary>
+        /// 是否显示总数量
+        /// </summary>
         public static readonly DependencyProperty IsShowTotalProperty =
             DependencyProperty.Register("IsShowTotal", typeof(bool), typeof(PageBar), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否显示总数量
+        /// </summary>
         public bool IsShowTotal
         {
             get { return (bool)GetValue(IsShowTotalProperty); }
             set { SetValue(IsShowTotalProperty, value); }
         }
 
-
+        /// <summary>
+        /// 是否显示每页数量
+        /// </summary>
         public static readonly DependencyProperty IsShowPageSizeProperty =
             DependencyProperty.Register("IsShowPageSize", typeof(bool), typeof(PageBar), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否显示每页数量
+        /// </summary>
         public bool IsShowPageSize
         {
             get { return (bool)GetValue(IsShowPageSizeProperty); }
             set { SetValue(IsShowPageSizeProperty, value); }
         }
 
-        #endregion
+        #endregion 依赖属性
 
         #region 方法
 
@@ -292,7 +362,6 @@ namespace Rubyer
                     }
                 }
 
-
                 this.Items.Add(info);
             }
 
@@ -327,6 +396,7 @@ namespace Rubyer
             int num = (int)obj;
             this.PageIndex = num;
         }
-        #endregion
+
+        #endregion 方法
     }
 }

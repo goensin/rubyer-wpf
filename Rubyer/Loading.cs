@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -13,18 +12,25 @@ namespace Rubyer
     [TemplatePart(Name = MessageTextPartName, Type = typeof(TextBlock))]
     public class Loading : ContentControl
     {
+        /// <summary>
+        /// 消息文本名称
+        /// </summary>
         public const string MessageTextPartName = "Path_MessageText";
+
         static Loading()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Loading), new FrameworkPropertyMetadata(typeof(Loading)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
         }
 
-        // 边框厚度
+        /// <summary>
+        /// 边框厚度
+        /// </summary>
         public static readonly DependencyProperty StrokeThicknessProperty = DependencyProperty.Register(
             "StrokeThickness", typeof(double), typeof(Loading), new PropertyMetadata(default(double)));
 
@@ -37,16 +43,24 @@ namespace Rubyer
             set { SetValue(StrokeThicknessProperty, value); }
         }
 
+        /// <summary>
+        /// 虚线和间隙的值的集合
+        /// </summary>
         public static readonly DependencyProperty StrokeDashArrayProperty = DependencyProperty.Register(
             "StrokeDashArray", typeof(DoubleCollection), typeof(Loading), new PropertyMetadata(default(DoubleCollection)));
 
+        /// <summary>
+        /// 虚线和间隙的值的集合
+        /// </summary>
         public DoubleCollection StrokeDashArray
         {
             get { return (DoubleCollection)GetValue(StrokeDashArrayProperty); }
             set { SetValue(StrokeDashArrayProperty, value); }
         }
 
-        // 聚焦颜色
+        /// <summary>
+        /// 聚焦颜色
+        /// </summary>
         public static readonly DependencyProperty FocusedBrushProperty = DependencyProperty.RegisterAttached(
             "FocusedBrush", typeof(Brush), typeof(Loading), new PropertyMetadata(default(Brush)));
 
@@ -59,7 +73,9 @@ namespace Rubyer
             set { SetValue(FocusedBrushProperty, value); }
         }
 
-        // 进度
+        /// <summary>
+        /// 进度
+        /// </summary>
         public static readonly DependencyProperty ProgressProperty = DependencyProperty.Register(
             "Progress", typeof(double), typeof(Loading), new PropertyMetadata(default(double), OnProgressChanged));
 
@@ -78,7 +94,9 @@ namespace Rubyer
             loading.StrokeDashArray = new DoubleCollection(new List<double> { (loading.CircleDiameter - loading.StrokeThickness) * Math.PI / loading.StrokeThickness * loading.Progress, double.MaxValue });
         }
 
-        // 圆形直径
+        /// <summary>
+        /// 圆形直径
+        /// </summary>
         public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.RegisterAttached(
             "CircleDiameter", typeof(double), typeof(Loading), new PropertyMetadata(default(double)));
 

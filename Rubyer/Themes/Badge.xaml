@@ -6,7 +6,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
-            <converter:OffsetConverter x:Key="offsetConverter" />
+            <converter:BadgeOffsetConverter x:Key="BadgeOffsetConverter" />
         </ResourceDictionary>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -35,7 +35,7 @@
                                 <ScaleTransform />
                             </Border.RenderTransform>
                             <Border.Margin>
-                                <MultiBinding Converter="{StaticResource offsetConverter}">
+                                <MultiBinding Converter="{StaticResource BadgeOffsetConverter}">
                                     <Binding ElementName="border" Path="ActualHeight" />
                                     <Binding ElementName="border" Path="ActualWidth" />
                                 </MultiBinding>

@@ -8,11 +8,18 @@ namespace Rubyer
     /// <summary>
     /// 消息卡片
     /// </summary>
-    [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
+    [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
     [TemplatePart(Name = CloseButtonName, Type = typeof(Button))]
     public class MessageCard : ContentControl
     {
-        public const string TransitionName = "Path_Transition";
+        /// <summary>
+        /// 转换动画名称
+        /// </summary>
+        public const string TransitionPartName = "Path_Transition";
+
+        /// <summary>
+        /// 关闭按钮名称
+        /// </summary>
         public const string CloseButtonName = "PART_CloseButton";
 
         static MessageCard()
@@ -20,6 +27,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageCard), new FrameworkPropertyMetadata(typeof(MessageCard)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -32,7 +40,7 @@ namespace Rubyer
                 };
             }
 
-            if (GetTemplateChild(TransitionName) is Transition transition)
+            if (GetTemplateChild(TransitionPartName) is Transition transition)
             {
                 transition.Closed += (sender, e) =>
                 {
@@ -58,63 +66,100 @@ namespace Rubyer
             remove { RemoveHandler(CloseEvent, value); }
         }
 
-        #endregion
+        #endregion 事件
 
         #region 依赖属性
+
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty =
           DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MessageCard), new PropertyMetadata(default(CornerRadius)));
 
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
             set { SetValue(CornerRadiusProperty, value); }
         }
 
+        /// <summary>
+        /// 主题色
+        /// </summary>
         public static readonly DependencyProperty ThemeColorBrushProperty =
             DependencyProperty.Register("ThemeColorBrush", typeof(SolidColorBrush), typeof(MessageCard), new PropertyMetadata(default(SolidColorBrush)));
 
+        /// <summary>
+        /// 主题色
+        /// </summary>
         public SolidColorBrush ThemeColorBrush
         {
             get { return (SolidColorBrush)GetValue(ThemeColorBrushProperty); }
             set { SetValue(ThemeColorBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 图标类型
+        /// </summary>
         public static readonly DependencyProperty IconTypeProperty =
             DependencyProperty.Register("IconType", typeof(IconType), typeof(MessageCard), new PropertyMetadata(default(IconType)));
 
+        /// <summary>
+        /// 图标类型
+        /// </summary>
         public IconType IconType
         {
             get { return (IconType)GetValue(IconTypeProperty); }
             set { SetValue(IconTypeProperty, value); }
         }
 
+        /// <summary>
+        /// 是否显示图标
+        /// </summary>
         public static readonly DependencyProperty IsShwoIconProperty =
             DependencyProperty.Register("IsShwoIcon", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否显示图标
+        /// </summary>
         public bool IsShwoIcon
         {
             get { return (bool)GetValue(IsShwoIconProperty); }
             set { SetValue(IsShwoIconProperty, value); }
         }
 
+        /// <summary>
+        /// 是否可清除
+        /// </summary>
         public static readonly DependencyProperty IsClearableProperty =
             DependencyProperty.Register("IsClearable", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否可清除
+        /// </summary>
         public bool IsClearable
         {
             get { return (bool)GetValue(IsClearableProperty); }
             set { SetValue(IsClearableProperty, value); }
         }
 
+        /// <summary>
+        /// 是否显示
+        /// </summary>
         public static readonly DependencyProperty IsShowProperty =
             DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageCard), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否显示
+        /// </summary>
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
             set { SetValue(IsShowProperty, value); }
         }
 
-        #endregion
+        #endregion 依赖属性
     }
 }

@@ -36,6 +36,7 @@ namespace Rubyer.Converters
         /// </summary>
         public T FalseValue { get; set; }
 
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return BooleanConverter<T>.ConvertBooleanToType(value, TrueValue, FalseValue);
@@ -54,6 +55,7 @@ namespace Rubyer.Converters
             return flag ? trueValue : falseValue;
         }
 
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value is T flag && EqualityComparer<T>.Default.Equals(flag, TrueValue);

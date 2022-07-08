@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 标签
+    /// </summary>
     public class Tag : ContentControl
     {
         static Tag()
@@ -22,6 +25,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Tag), new FrameworkPropertyMetadata(typeof(Tag)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -31,51 +35,70 @@ namespace Rubyer
 
         #region 属性
 
+        /// <summary>
+        /// 标题
+        /// </summary>
         public static readonly DependencyProperty HeaderProperty =
             DependencyProperty.Register("Header", typeof(object), typeof(Tag), new PropertyMetadata(default(object)));
 
+        /// <summary>
+        /// 标题
+        /// </summary>
         public object Header
         {
             get { return (object)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 
-
+        /// <summary>
+        /// 标题背景色
+        /// </summary>
         public static readonly DependencyProperty HeadBackgroundProperty =
             DependencyProperty.Register("HeadBackground", typeof(Brush), typeof(Tag), new PropertyMetadata(default(Brush)));
 
+        /// <summary>
+        /// 标题背景色
+        /// </summary>
         public Brush HeadBackground
         {
             get { return (Brush)GetValue(HeadBackgroundProperty); }
             set { SetValue(HeadBackgroundProperty, value); }
         }
 
-
+        /// <summary>
+        /// 标题前景色
+        /// </summary>
         public static readonly DependencyProperty HeadForegroundProperty =
             DependencyProperty.Register("HeadForeground", typeof(Brush), typeof(Tag), new PropertyMetadata(default(Brush)));
 
+        /// <summary>
+        /// 标题前景色
+        /// </summary>
         public Brush HeadForeground
         {
             get { return (Brush)GetValue(HeadForegroundProperty); }
             set { SetValue(HeadForegroundProperty, value); }
         }
 
-
-
+        /// <summary>
+        /// 链接
+        /// </summary>
         public static readonly DependencyProperty UrlProperty =
             DependencyProperty.Register("Url", typeof(string), typeof(Tag), new PropertyMetadata(default(string)));
 
-
+        /// <summary>
+        /// 链接
+        /// </summary>
         public string Url
         {
             get { return (string)GetValue(UrlProperty); }
             set { SetValue(UrlProperty, value); }
         }
 
-        #endregion
-
+        #endregion 属性
 
         #region 方法
+
         private void Tag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!string.IsNullOrEmpty(this.Url))
@@ -83,6 +106,7 @@ namespace Rubyer
                 System.Diagnostics.Process.Start(this.Url);
             }
         }
-        #endregion
+
+        #endregion 方法
     }
 }

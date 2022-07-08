@@ -9,6 +9,9 @@ namespace Rubyer
     [TemplatePart(Name = MessageStackPanelName, Type = typeof(StackPanel))]
     public class MessageContainer : ContentControl
     {
+        /// <summary>
+        /// 消息堆叠面板名称
+        /// </summary>
         public const string MessageStackPanelName = "PART_MessageStackPanel";
 
         private StackPanel messageStackPanel;
@@ -18,6 +21,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageContainer), new FrameworkPropertyMetadata(typeof(MessageContainer)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -25,9 +29,15 @@ namespace Rubyer
             messageStackPanel = GetTemplateChild(MessageStackPanelName) as StackPanel;
         }
 
+        /// <summary>
+        /// 标识
+        /// </summary>
         public static readonly DependencyProperty IdentifierProperty =
             DependencyProperty.Register("Identifier", typeof(string), typeof(MessageContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
 
+        /// <summary>
+        /// 标识
+        /// </summary>
         public string Identifier
         {
             get { return (string)GetValue(IdentifierProperty); }

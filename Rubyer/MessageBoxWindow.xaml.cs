@@ -8,14 +8,24 @@ namespace Rubyer
     /// </summary>
     public partial class MessageBoxWindow : Window
     {
+        /// <summary>
+        /// 消息框结果
+        /// </summary>
         public MessageBoxResult MessageBoxResult { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="MessageBoxWindow"/> class.
+        /// </summary>
         public MessageBoxWindow()
         {
             InitializeComponent();
         }
 
-        public void AddMessageBoxCard(MessageBoxCard card)
+        /// <summary>
+        /// 添加消息框
+        /// </summary>
+        /// <param name="card">消息框卡片</param>
+        internal void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
             card.Close += Card_Close;

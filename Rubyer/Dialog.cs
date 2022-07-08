@@ -7,16 +7,19 @@ using System.Windows;
 namespace Rubyer
 {
     /// <summary>
-    /// 对话框
+    /// 对话框操作类
     /// </summary>
     public class Dialog
     {
+        /// <summary>
+        /// 默认对话框标识
+        /// </summary>
         public const string DefaultDialogIdentifier = "Rubyer.Dialog";
 
         /// <summary>
         /// 对话框集合
         /// </summary>
-        public static Dictionary<string, DialogContainer> Dialogs { get; private set; } = new Dictionary<string, DialogContainer>();
+        internal static Dictionary<string, DialogContainer> Dialogs { get; private set; } = new Dictionary<string, DialogContainer>();
 
         /// <summary>
         /// 添加对话框
@@ -112,7 +115,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭对话框
         /// </summary>
-        /// <param name="identifier">标识</param>
+        /// <param name="dialog">对话框</param>
         /// <param name="parameter">参数</param>
         public static void Close(DialogContainer dialog, IParameters parameter = null)
         {

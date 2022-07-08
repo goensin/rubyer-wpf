@@ -6,8 +6,14 @@ using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// rubyer 窗体
+    /// </summary>
     public class RubyerWindow : Window
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RubyerWindow"/> class.
+        /// </summary>
         public RubyerWindow()
         {
             DefaultStyleKey = typeof(RubyerWindow);
@@ -18,6 +24,7 @@ namespace Rubyer
             CommandBindings.Add(new CommandBinding(SystemCommands.ShowSystemMenuCommand, ShowSystemMenu));
         }
 
+        /// <inheritdoc/>
         protected override void OnContentRendered(EventArgs e)
         {
             base.OnContentRendered(e);
@@ -69,11 +76,13 @@ namespace Rubyer
             SystemCommands.ShowSystemMenu(this, point);
         }
 
-        #endregion
+        #endregion Window Commands
 
         #region 属性
 
-        // 标题栏内容
+        /// <summary>
+        /// 标题栏内容
+        /// </summary>
         public static readonly DependencyProperty TitleBarContentProperty =
             DependencyProperty.Register("TitleBarContent", typeof(object), typeof(RubyerWindow), new PropertyMetadata(default(object)));
 
@@ -86,7 +95,9 @@ namespace Rubyer
             set { SetValue(TitleBarContentProperty, value); }
         }
 
-        // 是否显示标题栏阴影
+        /// <summary>
+        /// 是否显示标题栏阴影
+        /// </summary>
         public static readonly DependencyProperty TitleShadowProperty =
             DependencyProperty.Register("TitleShadow", typeof(bool), typeof(RubyerWindow), new PropertyMetadata(default(bool)));
 
@@ -99,7 +110,9 @@ namespace Rubyer
             set { SetValue(TitleShadowProperty, value); }
         }
 
-        // 标题栏高度
+        /// <summary>
+        /// 标题栏高度
+        /// </summary>
         public static readonly DependencyProperty TitleHeightProperty =
             DependencyProperty.Register("TitleHeight", typeof(double), typeof(RubyerWindow), new PropertyMetadata(default(double)));
 
@@ -112,7 +125,9 @@ namespace Rubyer
             set { SetValue(TitleHeightProperty, value); }
         }
 
-        // 标题前景色
+        /// <summary>
+        /// 标题前景色
+        /// </summary>
         public static readonly DependencyProperty TitleForegroundProperty =
             DependencyProperty.Register("TitleForeground", typeof(Brush), typeof(RubyerWindow), new PropertyMetadata(default(Brush)));
 
@@ -124,6 +139,7 @@ namespace Rubyer
             get { return (Brush)GetValue(TitleForegroundProperty); }
             set { SetValue(TitleForegroundProperty, value); }
         }
-        #endregion
+
+        #endregion 属性
     }
 }

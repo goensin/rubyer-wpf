@@ -9,35 +9,53 @@ namespace Rubyer
     /// </summary>
     public class ControlMask : Control
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ControlMask"/> class.
+        /// </summary>
         static ControlMask()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ControlMask), new FrameworkPropertyMetadata(typeof(ControlMask)));
         }
 
-        // 是否激活
+        /// <summary>
+        /// 是否激活
+        /// </summary>
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
             "IsActive", typeof(bool), typeof(ControlMask), new PropertyMetadata(default(bool)));
 
+        /// <summary>
+        /// 是否激活
+        /// </summary>
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
             set { SetValue(IsActiveProperty, value); }
         }
 
-        // 圆角半径
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             "CornerRadius", typeof(CornerRadius), typeof(ControlMask), new PropertyMetadata(default(CornerRadius)));
 
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-        // 遮罩透明度
+        /// <summary>
+        /// 遮罩透明度
+        /// </summary>
         public static readonly DependencyProperty MaskOpacityProperty = DependencyProperty.Register(
             "MaskOpacity", typeof(double), typeof(ControlMask), new PropertyMetadata(default(double)));
 
+        /// <summary>
+        /// 遮罩透明度
+        /// </summary>
         public double MaskOpacity
         {
             get { return (double)GetValue(MaskOpacityProperty); }

@@ -7,26 +7,48 @@ using System.Windows.Threading;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 时间选择器
+    /// </summary>
     [TemplatePart(Name = TextBoxPartName, Type = typeof(TextBox))]
     [TemplatePart(Name = PopupPartName, Type = typeof(Popup))]
     [TemplatePart(Name = ButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = ClockPartName, Type = typeof(Clock))]
     public class TimePicker : Control
     {
+        /// <summary>
+        /// 文本框名称
+        /// </summary>
         public const string TextBoxPartName = "PART_TextBox";
+
+        /// <summary>
+        /// 弹窗名称
+        /// </summary>
         public const string PopupPartName = "PART_Popup";
+
+        /// <summary>
+        /// 选择按钮名称
+        /// </summary>
         public const string ButtonPartName = "PART_Button";
+
+        /// <summary>
+        /// 时钟名称
+        /// </summary>
         public const string ClockPartName = "PART_Clock";
 
         private TextBox _textBox;
         private Popup _popup;
         private Clock _clock;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TimePicker"/> class.
+        /// </summary>
         static TimePicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TimePicker), new FrameworkPropertyMetadata(typeof(TimePicker)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -60,20 +82,30 @@ namespace Rubyer
             textBox.Focus();
         }
 
-
         #region 路由事件
+
+        /// <summary>
+        /// 选择时间改变事件
+        /// </summary>
         public static readonly RoutedEvent SelectedTimeChangedEvent =
             EventManager.RegisterRoutedEvent("SelectedTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(TimePicker));
 
+        /// <summary>
+        /// 选择时间改变事件
+        /// </summary>
         public event RoutedPropertyChangedEventHandler<DateTime?> SelectedTimeChanged
         {
             add { AddHandler(SelectedTimeChangedEvent, value); }
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
         }
-        #endregion
+
+        #endregion 路由事件
 
         #region 依赖属性
 
+        /// <summary>
+        /// 选中时间
+        /// </summary>
         public static readonly DependencyProperty SeletedTimeProperty = DependencyProperty.Register(
             "SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
 
@@ -86,6 +118,9 @@ namespace Rubyer
             set { SetValue(SeletedTimeProperty, value); }
         }
 
+        /// <summary>
+        /// 弹窗打开
+        /// </summary>
         public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
             "IsDropDownOpen", typeof(bool), typeof(TimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
 
@@ -115,6 +150,9 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
             "Text", typeof(string), typeof(TimePicker), new PropertyMetadata(null, OnTextChanged));
 
@@ -127,9 +165,6 @@ namespace Rubyer
             set { SetValue(TextProperty, value); }
         }
 
-
-        /// <summary>
-        /// 时间文本改变
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TimePicker timePicker = (TimePicker)d;
@@ -146,7 +181,8 @@ namespace Rubyer
                 }
             }
         }
-        #endregion
+
+        #endregion 依赖属性
 
         #region 方法
 
@@ -180,8 +216,6 @@ namespace Rubyer
             _textBox.SelectAll();
         }
 
-
-
         /// <summary>
         /// 点击时间按钮
         /// </summary>
@@ -204,8 +238,7 @@ namespace Rubyer
                 this.IsDropDownOpen = false;
             }
         }
-        #endregion
 
+        #endregion 方法
     }
-
 }

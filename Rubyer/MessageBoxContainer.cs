@@ -8,28 +8,34 @@ namespace Rubyer
     /// <summary>
     /// 消息框容器
     /// </summary>
-    [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
+    [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
     public class MessageBoxContainer : ContentControl
     {
-        public const string TransitionName = "Path_Transition";
+        /// <summary>
+        /// 转换动画名称
+        /// </summary>
+        public const string TransitionPartName = "Path_Transition";
 
         static MessageBoxContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxContainer), new FrameworkPropertyMetadata(typeof(MessageBoxContainer)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            if (GetTemplateChild(TransitionName) is Transition transition)
+            if (GetTemplateChild(TransitionPartName) is Transition transition)
             {
                 transition.Showed += (sender, e) => IsClosed = false;
                 transition.Closed += (sender, e) => IsClosed = true;
             }
         }
 
-        // 标识
+        /// <summary>
+        /// 标识
+        /// </summary>
         public static readonly DependencyProperty IdentifierProperty =
             DependencyProperty.Register("Identifier", typeof(string), typeof(MessageBoxContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
 
@@ -42,7 +48,9 @@ namespace Rubyer
             set { SetValue(IdentifierProperty, value); }
         }
 
-        // 弹窗内容
+        /// <summary>
+        /// 弹窗内容
+        /// </summary>
         public static readonly DependencyProperty DialogContentProperty =
             DependencyProperty.Register("DialogContent", typeof(object), typeof(MessageBoxContainer), new PropertyMetadata(default(object)));
 
@@ -64,7 +72,9 @@ namespace Rubyer
             }
         }
 
-        // 遮罩背景色
+        /// <summary>
+        /// 遮罩背景色
+        /// </summary>
         public static readonly DependencyProperty MaskBackgroundProperty = DependencyProperty.Register(
             "MaskBackground", typeof(Brush), typeof(MessageBoxContainer), new PropertyMetadata(default(Brush)));
 
@@ -77,7 +87,9 @@ namespace Rubyer
             set { SetValue(MaskBackgroundProperty, value); }
         }
 
-        // 是否显示
+        /// <summary>
+        /// 是否显示
+        /// </summary>
         public static readonly DependencyProperty IsShowProperty =
            DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(default(bool)));
 
@@ -90,7 +102,9 @@ namespace Rubyer
             set { SetValue(IsShowProperty, value); }
         }
 
-        // 是否关闭后
+        /// <summary>
+        /// 是否关闭后
+        /// </summary>
         public static readonly DependencyProperty IsClosedProperty =
            DependencyProperty.Register("IsClosed", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(default(bool)));
 
@@ -102,7 +116,5 @@ namespace Rubyer
             get { return (bool)GetValue(IsClosedProperty); }
             set { SetValue(IsClosedProperty, value); }
         }
-
-
     }
 }

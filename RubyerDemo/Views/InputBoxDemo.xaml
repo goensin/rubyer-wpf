@@ -162,6 +162,9 @@
                             <rubyer:InputBoxHelper.PreContent>
                                 <rubyer:Icon Type="Edit2Line" />
                             </rubyer:InputBoxHelper.PreContent>
+                            <rubyer:InputBoxHelper.PostContent>
+                                <rubyer:Icon Type="Edit2Line" />
+                            </rubyer:InputBoxHelper.PostContent>
                         </rubyer:NumericBox>
                         <Label Width="80"
                                HorizontalContentAlignment="Right"
@@ -213,7 +216,11 @@
                                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
                                            MaxValue="100"
                                            MinValue="0"
-                                           Value="2" />
+                                           Value="2">
+                            <rubyer:InputBoxHelper.PreContent>
+                                <rubyer:Icon Type="Edit2Line" />
+                            </rubyer:InputBoxHelper.PreContent>
+                        </rubyer:NumericBox>
                     </StackPanel>
                 </StackPanel>
 

@@ -1,17 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// ListBox 帮助类
+    /// </summary>
     public static class ListBoxHelper
     {
-        // 选中动画
+        /// <summary>
+        /// 选中动画
+        /// </summary>
         public static readonly DependencyProperty IsAnimationProperty =
             DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(false, OnIsAnimationChanged));
 
@@ -78,11 +80,21 @@ namespace Rubyer
             return top;
         }
 
+        /// <summary>
+        /// Gets the is animation.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetIsAnimation(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsAnimationProperty);
         }
 
+        /// <summary>
+        /// Sets the is animation.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetIsAnimation(DependencyObject obj, bool value)
         {
             obj.SetValue(IsAnimationProperty, value);

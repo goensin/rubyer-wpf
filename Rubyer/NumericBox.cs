@@ -13,24 +13,50 @@ using System.Windows.Input;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 数值框
+    /// </summary>
     [TemplatePart(Name = TextBoxPartName, Type = typeof(TextBox))]
     [TemplatePart(Name = ButtonIncreasePartName, Type = typeof(ButtonBase))]
     [TemplatePart(Name = ButtonDecreasePartName, Type = typeof(ButtonBase))]
     public class NumericBox : Control
     {
+        /// <summary>
+        /// 文本框名称
+        /// </summary>
         public const string TextBoxPartName = "PART_TextBox";
+
+        /// <summary>
+        /// 增加按钮名称
+        /// </summary>
         public const string ButtonIncreasePartName = "PART_IncreaseButton";
+
+        /// <summary>
+        /// 减少按钮名称
+        /// </summary>
         public const string ButtonDecreasePartName = "PART_DecreaseButton";
+
+        /// <summary>
+        /// 默认 int 类型正则匹配
+        /// </summary>
         public const string DefaultIntPattern = "[0-9-]";
+
+        /// <summary>
+        /// 默认 double 类型正则匹配
+        /// </summary>
         public const string DefaultDoublePattern = "[0-9-+Ee\\.]";
 
         private TextBox textBox;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NumericBox"/> class.
+        /// </summary>
         static NumericBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericBox), new FrameworkPropertyMetadata(typeof(NumericBox)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -61,19 +87,28 @@ namespace Rubyer
 
         #region events
 
+        /// <summary>
+        /// 值改变事件
+        /// </summary>
         public static readonly RoutedEvent ValueChangedEvent =
             EventManager.RegisterRoutedEvent("ValueChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<double?>), typeof(NumericBox));
 
+        /// <summary>
+        /// 值改变事件处理
+        /// </summary>
         public event RoutedPropertyChangedEventHandler<double?> ValueChanged
         {
             add { AddHandler(ValueChangedEvent, value); }
             remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
-        #endregion
+        #endregion events
 
         #region propteries
 
+        /// <summary>
+        /// 显示文本
+        /// </summary>
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
            "Text", typeof(string), typeof(NumericBox), new PropertyMetadata(null, OnTextChanged));
 
@@ -86,6 +121,9 @@ namespace Rubyer
             set { SetValue(TextProperty, value); }
         }
 
+        /// <summary>
+        /// 文本格式
+        /// </summary>
         public static readonly DependencyProperty TextFormatProperty = DependencyProperty.Register(
         "TextFormat", typeof(string), typeof(NumericBox), new PropertyMetadata(default(string)));
 
@@ -98,6 +136,9 @@ namespace Rubyer
             set { SetValue(TextFormatProperty, value); }
         }
 
+        /// <summary>
+        /// 值
+        /// </summary>
         public static readonly DependencyProperty ValueProperty = DependencyProperty.Register(
            "Value", typeof(double?), typeof(NumericBox), new FrameworkPropertyMetadata(default(double?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnValueChanged));
 
@@ -110,11 +151,14 @@ namespace Rubyer
             set { SetValue(ValueProperty, value); }
         }
 
+        /// <summary>
+        /// 最小值
+        /// </summary>
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register(
            "MinValue", typeof(double), typeof(NumericBox), new PropertyMetadata(default(double)));
 
         /// <summary>
-        /// 值
+        /// 最小值
         /// </summary>
         public double MinValue
         {
@@ -122,11 +166,14 @@ namespace Rubyer
             set { SetValue(MinValueProperty, value); }
         }
 
+        /// <summary>
+        /// 最大值
+        /// </summary>
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register(
            "MaxValue", typeof(double), typeof(NumericBox), new PropertyMetadata(default(double)));
 
         /// <summary>
-        /// 值
+        /// 最大值
         /// </summary>
         public double MaxValue
         {
@@ -134,7 +181,9 @@ namespace Rubyer
             set { SetValue(MaxValueProperty, value); }
         }
 
-
+        /// <summary>
+        /// 是否显示增减按钮
+        /// </summary>
         public static readonly DependencyProperty ShowButtonProperty = DependencyProperty.Register(
            "ShowButton", typeof(bool), typeof(NumericBox), new PropertyMetadata(default(bool)));
 
@@ -147,6 +196,9 @@ namespace Rubyer
             set { SetValue(ShowButtonProperty, value); }
         }
 
+        /// <summary>
+        /// 最大长度
+        /// </summary>
         public static readonly DependencyProperty MaxLengthProperty = DependencyProperty.Register(
           "MaxLength", typeof(int), typeof(NumericBox), new PropertyMetadata(default(int)));
 
@@ -159,6 +211,9 @@ namespace Rubyer
             set { SetValue(MaxLengthProperty, value); }
         }
 
+        /// <summary>
+        /// 增减间隔
+        /// </summary>
         public static readonly DependencyProperty IntervalProperty = DependencyProperty.Register(
           "Interval", typeof(double), typeof(NumericBox), new PropertyMetadata(default(double)));
 
@@ -171,6 +226,9 @@ namespace Rubyer
             set { SetValue(IntervalProperty, value); }
         }
 
+        /// <summary>
+        /// 数值类型
+        /// </summary>
         public static readonly DependencyProperty NumericTypeProperty = DependencyProperty.Register(
           "NumericType", typeof(NumericType), typeof(NumericBox), new PropertyMetadata(default(NumericType)));
 
@@ -183,6 +241,9 @@ namespace Rubyer
             set { SetValue(NumericTypeProperty, value); }
         }
 
+        /// <summary>
+        /// 数值输入正则匹配
+        /// </summary>
         public static readonly DependencyProperty NumericPatternProperty = DependencyProperty.Register(
          "NumericPattern", typeof(string), typeof(NumericBox), new PropertyMetadata(default(string)));
 
@@ -195,7 +256,7 @@ namespace Rubyer
             set { SetValue(NumericPatternProperty, value); }
         }
 
-        #endregion
+        #endregion propteries
 
         #region methods
 
@@ -223,7 +284,7 @@ namespace Rubyer
 
         private void IncreaseButton_Click(object sender, RoutedEventArgs e)
         {
-            GetIntervalAndMin(out double interval,  out double min);
+            GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min + interval : Value.GetValueOrDefault() + interval);
             textBox.Focus();
         }
@@ -318,6 +379,6 @@ namespace Rubyer
             }
         }
 
-        #endregion
+        #endregion methods
     }
 }

@@ -5,8 +5,12 @@ using System.Windows.Data;
 
 namespace Rubyer.Converters
 {
+    /// <summary>
+    /// 4 个 double 计算 Arc 点
+    /// </summary>
     public class GetArcPointConverter : IMultiValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length < 4)
@@ -28,6 +32,7 @@ namespace Rubyer.Converters
             return new Point(pointX, pointY);
         }
 
+        /// <inheritdoc/>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return null;

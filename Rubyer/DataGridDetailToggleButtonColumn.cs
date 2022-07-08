@@ -12,8 +12,14 @@ using System.Windows.Media;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// DataGrid 详细内容展开列
+    /// </summary>
     public class DataGridDetailToggleButtonColumn : DataGridBoundColumn
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DataGridDetailToggleButtonColumn"/> class.
+        /// </summary>
         static DataGridDetailToggleButtonColumn()
         {
             var elementStyle = (Style)Application.Current.FindResource("RubyerDataGridDetailToggleButtonColumn");
@@ -21,16 +27,23 @@ namespace Rubyer
             DataGridBoundColumn.EditingElementStyleProperty.OverrideMetadata(typeof(DataGridDetailToggleButtonColumn), new FrameworkPropertyMetadata(elementStyle));
         }
 
+        /// <inheritdoc/>
         protected override FrameworkElement GenerateElement(DataGridCell cell, object dataItem)
         {
             return GenerateToggleButton(isEditing: false, cell);
         }
 
+        /// <inheritdoc/>
         protected override FrameworkElement GenerateEditingElement(DataGridCell cell, object dataItem)
         {
             return GenerateToggleButton(isEditing: true, cell);
         }
 
+        /// <summary>
+        /// Applies the binding.
+        /// </summary>
+        /// <param name="target">The target.</param>
+        /// <param name="property">The property.</param>
         internal void ApplyBinding(DependencyObject target, DependencyProperty property)
         {
             BindingBase binding = Binding;
@@ -44,6 +57,12 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// Applies the style.
+        /// </summary>
+        /// <param name="isEditing">If true, is editing.</param>
+        /// <param name="defaultToElementStyle">If true, default to element style.</param>
+        /// <param name="element">The element.</param>
         internal void ApplyStyle(bool isEditing, bool defaultToElementStyle, FrameworkElement element)
         {
             Style style = PickStyle(isEditing, defaultToElementStyle);
@@ -53,6 +72,12 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// Picks the style.
+        /// </summary>
+        /// <param name="isEditing">If true, is editing.</param>
+        /// <param name="defaultToElementStyle">If true, default to element style.</param>
+        /// <returns>A Style.</returns>
         private Style PickStyle(bool isEditing, bool defaultToElementStyle)
         {
             Style style = (isEditing ? EditingElementStyle : ElementStyle);
@@ -64,6 +89,12 @@ namespace Rubyer
             return style;
         }
 
+        /// <summary>
+        /// Generates the toggle button.
+        /// </summary>
+        /// <param name="isEditing">If true, is editing.</param>
+        /// <param name="cell">The cell.</param>
+        /// <returns>A ToggleButton.</returns>
         private ToggleButton GenerateToggleButton(bool isEditing, DataGridCell cell)
         {
             ToggleButton toggleButton = (cell != null) ? (cell.Content as ToggleButton) : null;
@@ -78,6 +109,7 @@ namespace Rubyer
             return toggleButton;
         }
 
+        /// <inheritdoc/>
         protected override object PrepareCellForEdit(FrameworkElement editingElement, RoutedEventArgs editingEventArgs)
         {
             ToggleButton toggleButton = editingElement as ToggleButton;
@@ -98,28 +130,16 @@ namespace Rubyer
             return false;
         }
 
+        /// <summary>
+        /// Are the mouse left button down.
+        /// </summary>
+        /// <param name="e">The e.</param>
+        /// <returns>A bool.</returns>
         private static bool IsMouseLeftButtonDown(RoutedEventArgs e)
         {
-            MouseButtonEventArgs mouseButtonEventArgs = e as MouseButtonEventArgs;
-            if (mouseButtonEventArgs != null && mouseButtonEventArgs.ChangedButton == MouseButton.Left)
+            if (e is MouseButtonEventArgs mouseButtonEventArgs && mouseButtonEventArgs.ChangedButton == MouseButton.Left)
             {
                 return mouseButtonEventArgs.ButtonState == MouseButtonState.Pressed;
-            }
-
-            return false;
-        }
-
-        private static bool IsMouseOver(ToggleButton toggleButton, RoutedEventArgs e)
-        {
-            return toggleButton.InputHitTest(((MouseButtonEventArgs)e).GetPosition(toggleButton)) != null;
-        }
-
-        private static bool IsSpaceKeyDown(RoutedEventArgs e)
-        {
-            KeyEventArgs keyEventArgs = e as KeyEventArgs;
-            if (keyEventArgs != null && keyEventArgs.RoutedEvent == Keyboard.KeyDownEvent && (keyEventArgs.KeyStates & KeyStates.Down) == KeyStates.Down)
-            {
-                return keyEventArgs.Key == Key.Space;
             }
 
             return false;

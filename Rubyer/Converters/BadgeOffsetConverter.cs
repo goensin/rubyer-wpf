@@ -6,22 +6,16 @@ using System.Windows.Data;
 namespace Rubyer.Converters
 {
     /// <summary>
-    /// 2 double -> Size
+    /// Badge 偏移计算转换器
     /// </summary>
-    public class DoublesToSizeConverter : IMultiValueConverter
+    public class BadgeOffsetConverter : IMultiValueConverter
     {
         /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length < 2)
-            {
-                throw new ArgumentException("参数少于 2 个");
-            }
-
-            double width = System.Convert.ToDouble(values[0]);
-            double height = System.Convert.ToDouble(values[1]);
-
-            return new Size(width, height);
+            double verOffset = ((double)values[0] - 10) * -1;
+            double horOffset = ((double)values[1] - 10) * -1;
+            return new Thickness(0, verOffset, horOffset, 0);
         }
 
         /// <inheritdoc/>

@@ -4,8 +4,12 @@ using System.Windows.Data;
 
 namespace Rubyer.Converters
 {
+    /// <summary>
+    /// 获取百分比
+    /// </summary>
     public class GetPercentConverter : IMultiValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             if (values.Length < 3)
@@ -21,6 +25,7 @@ namespace Rubyer.Converters
             return $"{System.Convert.ToInt32(percent * 100)}%";
         }
 
+        /// <inheritdoc/>
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
         {
             return null;

@@ -10,11 +10,13 @@ namespace Rubyer.Converters
     /// </summary>
     public class HalfOfDoubleConverter : IValueConverter
     {
+        /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return value is double d ? d / 2 : DependencyProperty.UnsetValue;
         }
 
+        /// <inheritdoc/>
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return DependencyProperty.UnsetValue;

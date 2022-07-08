@@ -21,6 +21,9 @@ namespace Rubyer
         internal static readonly DependencyPropertyKey IsValidPropertyKey = DependencyProperty.RegisterReadOnly(
              "IsValid", typeof(bool), typeof(ValidationForm), new FrameworkPropertyMetadata(true));
 
+        /// <summary>
+        /// 是否有效
+        /// </summary>
         public static readonly DependencyProperty IsValidProperty = IsValidPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -35,6 +38,9 @@ namespace Rubyer
         internal static readonly DependencyPropertyKey ErrorsPropertyKey = DependencyProperty.RegisterReadOnly(
             "Errors", typeof(ReadOnlyObservableCollection<ValidationError>), typeof(ValidationForm), new FrameworkPropertyMetadata(new ReadOnlyObservableCollection<ValidationError>(new ObservableCollection<ValidationError>()), FrameworkPropertyMetadataOptions.NotDataBindable));
 
+        /// <summary>
+        /// 所有错误
+        /// </summary>
         public static readonly DependencyProperty ErrorsProperty = ErrorsPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -49,6 +55,9 @@ namespace Rubyer
         internal static readonly DependencyPropertyKey FirstErrorPropertyKey = DependencyProperty.RegisterReadOnly(
             "FirstError", typeof(ValidationError), typeof(ValidationForm), new FrameworkPropertyMetadata(default(ValidationError)));
 
+        /// <summary>
+        /// 所有错误
+        /// </summary>
         public static readonly DependencyProperty FirstErrorProperty = FirstErrorPropertyKey.DependencyProperty;
 
         /// <summary>
@@ -60,6 +69,7 @@ namespace Rubyer
             private set { SetValue(FirstErrorPropertyKey, value); }
         }
 
+        /// <inheritdoc/>
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -67,7 +77,7 @@ namespace Rubyer
             AddValidationDependencyObject(this);
         }
 
-        protected void AddValidationDependencyObject(DependencyObject element)
+        private void AddValidationDependencyObject(DependencyObject element)
         {
             if (element == null)
             {
@@ -92,6 +102,7 @@ namespace Rubyer
                 case ValidationErrorEventAction.Added:
                     errors.Add(e.Error);
                     break;
+
                 case ValidationErrorEventAction.Removed:
                     errors.Remove(e.Error);
                     break;

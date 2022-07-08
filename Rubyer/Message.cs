@@ -8,17 +8,30 @@ using System.Windows.Controls;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 消息操作类
+    /// </summary>
     public class Message
     {
+        /// <summary>
+        /// 默认 Message 容器标识
+        /// </summary>
         public const string DefaultMessageContainerIdentifier = "Rubyer.Message";
 
-        private const int TransitionTime = 300;
+        /// <summary>
+        /// Transition 动画时长
+        /// </summary>
+        public const int TransitionTime = 300;
+
         private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
         private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
         private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
         private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
 
-        public static Dictionary<string, MessageContainer> containers = new Dictionary<string, MessageContainer>();
+        /// <summary>
+        /// 所有容器集合
+        /// </summary>
+        internal static Dictionary<string, MessageContainer> Containers = new Dictionary<string, MessageContainer>();
 
         #region 全局
 
@@ -107,6 +120,7 @@ namespace Rubyer
         /// <summary>
         /// 全局显示
         /// </summary>
+        /// <param name="message">消息</param>
         /// <param name="type">类型</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
@@ -118,6 +132,7 @@ namespace Rubyer
         /// <summary>
         /// 全局显示
         /// </summary>
+        /// <param name="message">消息</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
@@ -128,8 +143,7 @@ namespace Rubyer
         /// <summary>
         /// 全局显示信息
         /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="message">消息</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void InfoGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
@@ -140,6 +154,7 @@ namespace Rubyer
         /// <summary>
         /// 全局显示成功
         /// </summary>
+        /// <param name="message">消息</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void SuccessGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
@@ -150,6 +165,7 @@ namespace Rubyer
         /// <summary>
         /// 全局显示警告
         /// </summary>
+        /// <param name="message">消息</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void WarningGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
@@ -160,13 +176,15 @@ namespace Rubyer
         /// <summary>
         /// 全局显示错误
         /// </summary>
+        /// <param name="message">消息</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ErrorGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             ShowGlobal(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
-        #endregion
+
+        #endregion 全局
 
         #region 指定容器
 
@@ -180,12 +198,12 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(string containerIdentifier, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            if (!containers.ContainsKey(containerIdentifier))
+            if (!Containers.ContainsKey(containerIdentifier))
             {
                 throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
             }
 
-            MessageContainer container = containers[containerIdentifier];
+            MessageContainer container = Containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
             MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -480,7 +498,7 @@ namespace Rubyer
             Show(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
         }
 
-        #endregion
+        #endregion 指定容器
 
         /// <summary>
         /// 更新容器
@@ -489,12 +507,12 @@ namespace Rubyer
         /// <param name="identify">标识</param>
         internal static void UpdateContainer(MessageContainer container, string identify)
         {
-            if (containers.ContainsKey(identify))
+            if (Containers.ContainsKey(identify))
             {
-                _ = containers.Remove(identify);
+                _ = Containers.Remove(identify);
             }
 
-            containers.Add(identify, container);
+            Containers.Add(identify, container);
         }
 
         private static MessageCard GetMessageCard(MessageType type, UIElement element, int millisecondTimeOut, bool isClearable)
@@ -511,15 +529,19 @@ namespace Rubyer
                 default:
                 case MessageType.None:
                     break;
+
                 case MessageType.Info:
                     messageCard.Style = infoStyle;
                     break;
+
                 case MessageType.Warning:
                     messageCard.Style = warningStyle;
                     break;
+
                 case MessageType.Success:
                     messageCard.Style = successStyle;
                     break;
+
                 case MessageType.Error:
                     messageCard.Style = errorStyle;
                     break;

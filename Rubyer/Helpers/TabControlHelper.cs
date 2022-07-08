@@ -9,6 +9,9 @@ using System.Windows.Shapes;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// TabControl 帮助类
+    /// </summary>
     public static class TabControlHelper
     {
         /// <summary>
@@ -17,11 +20,21 @@ namespace Rubyer
         public static readonly DependencyProperty IsClearableProperty =
             DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsClearbleChanged));
 
+        /// <summary>
+        /// Gets the is clearable.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetIsClearable(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsClearableProperty);
         }
 
+        /// <summary>
+        /// Sets the is clearable.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetIsClearable(DependencyObject obj, bool value)
         {
             obj.SetValue(IsClearableProperty, value);
@@ -120,11 +133,21 @@ namespace Rubyer
         public static readonly DependencyProperty IsAnimationProperty =
             DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsAnimationChanged));
 
+        /// <summary>
+        /// Gets the is animation.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetIsAnimation(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsAnimationProperty);
         }
 
+        /// <summary>
+        /// Sets the is animation.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetIsAnimation(DependencyObject obj, bool value)
         {
             obj.SetValue(IsAnimationProperty, value);

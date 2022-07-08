@@ -9,8 +9,14 @@ using System.Windows.Media;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 消息框操作类
+    /// </summary>
     public class MessageBoxR
     {
+        /// <summary>
+        /// 默认消息框容器标识
+        /// </summary>
         public const string DefaultMessageBoxContainerIdentifier = "Rubyer.MessageBox";
 
         private static readonly Brush infoBrush = (Brush)Application.Current.Resources["Info"];
@@ -19,7 +25,10 @@ namespace Rubyer
         private static readonly Brush errorBrush = (Brush)Application.Current.Resources["Error"];
         private static readonly Brush questionBrush = (Brush)Application.Current.Resources["Question"];
 
-        public static Dictionary<string, MessageBoxContainer> containers = new Dictionary<string, MessageBoxContainer>();
+        /// <summary>
+        /// 所有容器集合
+        /// </summary>
+        internal static Dictionary<string, MessageBoxContainer> Containers = new Dictionary<string, MessageBoxContainer>();
 
         /// <summary>
         /// 更新信息框容器
@@ -28,12 +37,12 @@ namespace Rubyer
         /// <param name="identify"></param>
         internal static void UpdateContainer(MessageBoxContainer container, string identify)
         {
-            if (containers.ContainsKey(identify))
+            if (Containers.ContainsKey(identify))
             {
-                _ = containers.Remove(identify);
+                _ = Containers.Remove(identify);
             }
 
-            containers.Add(identify, container);
+            Containers.Add(identify, container);
         }
 
         private static MessageBoxCard GetMessageBoxCard(string message, string title, MessageBoxButton button, MessageBoxIcon icon)
@@ -53,26 +62,31 @@ namespace Rubyer
                 default:
                     card.IsShowIcon = false;
                     break;
+
                 case MessageBoxIcon.Info:
                     card.IsShowIcon = true;
                     card.IconType = IconType.InformationFill;
                     card.ThemeColorBrush = infoBrush;
                     break;
+
                 case MessageBoxIcon.Success:
                     card.IsShowIcon = true;
                     card.IconType = IconType.CheckboxCircleFill;
                     card.ThemeColorBrush = successBrush;
                     break;
+
                 case MessageBoxIcon.Warining:
                     card.IsShowIcon = true;
                     card.IconType = IconType.ErrorWarningFill;
                     card.ThemeColorBrush = warningBrush;
                     break;
+
                 case MessageBoxIcon.Error:
                     card.IsShowIcon = true;
                     card.IconType = IconType.CloseCircleFill;
                     card.ThemeColorBrush = errorBrush;
                     break;
+
                 case MessageBoxIcon.Question:
                     card.IsShowIcon = true;
                     card.IconType = IconType.QuestionFill;
@@ -84,6 +98,7 @@ namespace Rubyer
         }
 
         #region 全局
+
         /// <summary>
         /// 全局显示
         /// </summary>
@@ -173,7 +188,8 @@ namespace Rubyer
         {
             return ShowGlobal(message, title, button, icon);
         }
-        #endregion
+
+        #endregion 全局
 
         #region 指定容器
 
@@ -188,13 +204,13 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<MessageBoxResult> Show(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
-            if (!containers.ContainsKey(containerIdentifier))
+            if (!Containers.ContainsKey(containerIdentifier))
             {
                 throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
             }
 
             TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
-            MessageBoxContainer container = containers[containerIdentifier];
+            MessageBoxContainer container = Containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             card.ReturnResult += (a, b) =>
@@ -362,7 +378,7 @@ namespace Rubyer
             return await Show(message, title, button, icon);
         }
 
-        #endregion
+        #endregion 指定容器
     }
 
     /// <summary>

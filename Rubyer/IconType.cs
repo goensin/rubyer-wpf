@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 图标类型
+    /// </summary>
     public enum IconType
     {
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         ProjectorLine,
         DatabaseLine,
         FolderUnknowLine,
@@ -1963,5 +1967,6 @@ namespace Rubyer
         MinimizeLine,
         MaximizeLine,
         RestoreLine,
+#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
     }
 }

@@ -1,5 +1,4 @@
-﻿using Rubyer.Commons;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -16,24 +15,51 @@ namespace Rubyer
     [TemplatePart(Name = BackgroundBorderPartName, Type = typeof(Border))]
     public class DialogContainer : ContentControl
     {
+        /// <summary>
+        /// 转换动画名称
+        /// </summary>
         public const string TransitionName = "Path_Transition";
+
+        /// <summary>
+        /// 关闭按钮名称
+        /// </summary>
         public const string CloseButtonPartName = "PART_CloseButton";
+
+        /// <summary>
+        /// 背景 Border 名称
+        /// </summary>
         public const string BackgroundBorderPartName = "PART_BackgroundBorder";
 
+        /// <summary>
+        /// 对话框结果路由事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public delegate void DialogResultRoutedEventHandler(object sender, DialogResultRoutedEventArgs e);
 
+        /// <summary>
+        /// 打开对话框前事件处理
+        /// </summary>
         public Action<DialogContainer> BeforeOpenHandler;
+
+        /// <summary>
+        /// 打开对话框后事件处理
+        /// </summary>
         public Action<DialogContainer, object> AfterCloseHandler;
 
         private Border rootBorder;
         private object openParameter;
         private object closeParameter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DialogContainer"/> class.
+        /// </summary>
         static DialogContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogContainer), new FrameworkPropertyMetadata(typeof(DialogContainer)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -59,55 +85,88 @@ namespace Rubyer
         }
 
         #region 命令
+
+        /// <summary>
+        /// 关闭对话框命令
+        /// </summary>
         public static RoutedCommand CloseDialogCommand = new RoutedCommand();
+
+        /// <summary>
+        /// 打开对话框命令
+        /// </summary>
         public static RoutedCommand OpenDialogCommand = new RoutedCommand();
 
-        // 打开前命令
+        /// <summary>
+        /// 打开前命令
+        /// </summary>
         public static readonly DependencyProperty BeforeOpenCommandProperty = DependencyProperty.Register(
             "BeforeOpenCommand", typeof(ICommand), typeof(DialogContainer));
 
+        /// <summary>
+        /// 打开前命令
+        /// </summary>
         public ICommand BeforeOpenCommand
         {
             get { return (ICommand)GetValue(BeforeOpenCommandProperty); }
             set { SetValue(BeforeOpenCommandProperty, value); }
         }
 
-        // 关闭后命令
+        /// <summary>
+        /// 关闭后命令
+        /// </summary>
         public static readonly DependencyProperty AfterCloseCommandProperty = DependencyProperty.Register(
             "AfterCloseCommand", typeof(ICommand), typeof(DialogContainer));
 
+        /// <summary>
+        /// 关闭后命令
+        /// </summary>
         public ICommand AfterCloseCommand
         {
             get { return (ICommand)GetValue(AfterCloseCommandProperty); }
             set { SetValue(AfterCloseCommandProperty, value); }
         }
-        #endregion
+
+        #endregion 命令
 
         #region 事件
-        // 打开前事件
+
+        /// <summary>
+        /// 打开前事件
+        /// </summary>
         public static readonly RoutedEvent BeforeOpenEvent = EventManager.RegisterRoutedEvent(
             "BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogContainer));
 
+        /// <summary>
+        /// 打开前事件
+        /// </summary>
         public event RoutedEventHandler BeforeOpen
         {
             add { AddHandler(BeforeOpenEvent, value); }
             remove { RemoveHandler(BeforeOpenEvent, value); }
         }
 
-        // 关闭后事件
+        /// <summary>
+        /// 关闭后事件
+        /// </summary>
         public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
             "AfterClose", RoutingStrategy.Bubble, typeof(DialogResultRoutedEventHandler), typeof(DialogContainer));
 
+        /// <summary>
+        /// 关闭后事件
+        /// </summary>
         public event DialogResultRoutedEventHandler AfterClose
         {
             add { AddHandler(AfterCloseEvent, value); }
             remove { RemoveHandler(AfterCloseEvent, value); }
         }
-        #endregion
+
+        #endregion 事件
 
         #region 依赖属性
 
-        // 标识
+        /// <summary>
+        /// 标识
+        /// </summary>
         public static readonly DependencyProperty IdentifierProperty = DependencyProperty.Register(
             "Identifier", typeof(string), typeof(DialogContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
 
@@ -127,7 +186,9 @@ namespace Rubyer
             set { SetValue(IdentifierProperty, value); }
         }
 
-        // 对话框内容
+        /// <summary>
+        /// 对话框内容
+        /// </summary>
         public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
             "DialogContent", typeof(object), typeof(DialogContainer), new PropertyMetadata(default(object)));
 
@@ -140,7 +201,9 @@ namespace Rubyer
             set { SetValue(DialogContentProperty, value); }
         }
 
-        // 标题
+        /// <summary>
+        /// 标题
+        /// </summary>
         public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
             "Title", typeof(string), typeof(DialogContainer), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -153,7 +216,9 @@ namespace Rubyer
             set { SetValue(TitleProperty, value); }
         }
 
-        // 圆角半径
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
             "CornerRadius", typeof(CornerRadius), typeof(DialogContainer), new PropertyMetadata(default(CornerRadius)));
 
@@ -166,7 +231,9 @@ namespace Rubyer
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-        // 是否显示关闭按钮
+        /// <summary>
+        /// 是否显示关闭按钮
+        /// </summary>
         public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(
             "IsShowCloseButton", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -179,7 +246,9 @@ namespace Rubyer
             set { SetValue(IsShowCloseButtonProperty, value); }
         }
 
-        // 是否点击背景关闭弹窗
+        /// <summary>
+        /// 是否点击背景关闭弹窗
+        /// </summary>
         public static readonly DependencyProperty IsClickBackgroundToCloseProperty = DependencyProperty.Register(
             "IsClickBackgroundToClose", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
@@ -192,7 +261,9 @@ namespace Rubyer
             set { SetValue(IsClickBackgroundToCloseProperty, value); }
         }
 
-        // 是否显示
+        /// <summary>
+        /// 是否显示
+        /// </summary>
         public static readonly DependencyProperty IsShowProperty = DependencyProperty.Register(
             "IsShow", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
 
@@ -215,7 +286,9 @@ namespace Rubyer
             set { SetValue(IsShowProperty, value); }
         }
 
-        // 遮罩背景色
+        /// <summary>
+        /// 遮罩背景色
+        /// </summary>
         public static readonly DependencyProperty MaskBackgroundProperty = DependencyProperty.Register(
             "MaskBackground", typeof(Brush), typeof(DialogContainer), new PropertyMetadata(default(Brush)));
 
@@ -228,7 +301,9 @@ namespace Rubyer
             set { SetValue(MaskBackgroundProperty, value); }
         }
 
-        // 关闭完成
+        /// <summary>
+        /// 关闭完成
+        /// </summary>
         public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
             "IsClosed", typeof(bool), typeof(DialogContainer), new PropertyMetadata(default(bool)));
 
@@ -240,7 +315,8 @@ namespace Rubyer
             get { return (bool)GetValue(IsClosedProperty); }
             set { SetValue(IsClosedProperty, value); }
         }
-        #endregion
+
+        #endregion 依赖属性
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
@@ -322,6 +398,12 @@ namespace Rubyer
         /// </summary>
         public DialogContainer Dialog { get; set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DialogResultRoutedEventArgs"/> class.
+        /// </summary>
+        /// <param name="routedEvent">The routed event.</param>
+        /// <param name="result">The result.</param>
+        /// <param name="dialog">The dialog.</param>
         public DialogResultRoutedEventArgs(RoutedEvent routedEvent, object result, DialogContainer dialog)
             : base(routedEvent)
         {

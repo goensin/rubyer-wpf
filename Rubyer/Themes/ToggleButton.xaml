@@ -190,7 +190,7 @@
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             <Canvas>
                                 <Ellipse x:Name="littleBall"
-                                         Canvas.Right="11"
+                                         Canvas.Right="12"
                                          Width="15"
                                          Height="{Binding ActualWidth, RelativeSource={RelativeSource Mode=Self}}"
                                          Effect="{DynamicResource AllDirectionEffect}"
@@ -324,5 +324,4 @@
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
     </Style>
-
 </ResourceDictionary>

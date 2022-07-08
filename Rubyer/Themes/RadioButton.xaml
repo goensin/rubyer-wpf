@@ -65,7 +65,7 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HalfOfDoubleConverter}}">
-                            <Viewbox Margin="1">
+                            <Viewbox Margin="2">
                                 <Ellipse x:Name="littleDot"
                                          MinWidth="10"
                                          MinHeight="10"
@@ -162,8 +162,6 @@
         </Setter>
     </Style>
 
-
-
     <!--  亮色单选框  -->
     <Style x:Key="LightRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
@@ -184,5 +182,4 @@
            TargetType="{x:Type RadioButton}">
         <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
     </Style>
-
 </ResourceDictionary>

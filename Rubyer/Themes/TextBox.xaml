@@ -33,6 +33,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="3 0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -110,7 +111,7 @@
 
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
-                                                Margin="3 0"
+                                                Margin="{TemplateBinding Padding}"
                                                 VerticalAlignment="Center"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />

@@ -6,55 +6,110 @@ using System.Windows.Input;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// PasswordBox 帮助类
+    /// </summary>
     public class PasswordBoxHelper
     {
+        /// <summary>
+        /// 是否可以绑定密码
+        /// </summary>
         public static readonly DependencyProperty IsBindableProperty = DependencyProperty.RegisterAttached(
             "IsBindable", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(default(bool), OnIsBindableChanaged));
 
+        /// <summary>
+        /// Gets the is bindable.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetIsBindable(DependencyObject obj)
         {
             return (bool)obj.GetValue(IsBindableProperty);
         }
 
+        /// <summary>
+        /// Sets the is bindable.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetIsBindable(DependencyObject obj, bool value)
         {
             obj.SetValue(IsBindableProperty, value);
         }
 
+        /// <summary>
+        /// 可绑定的密码
+        /// </summary>
         public static readonly DependencyProperty BindablePasswordProperty = DependencyProperty.RegisterAttached(
             "BindablePassword", typeof(string), typeof(PasswordBoxHelper), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnBindablePasswordChanged));
 
+        /// <summary>
+        /// Gets the bindable password.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A string.</returns>
         public static string GetBindablePassword(DependencyObject obj)
         {
             return (string)obj.GetValue(BindablePasswordProperty);
         }
 
+        /// <summary>
+        /// Sets the bindable password.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">The value.</param>
         public static void SetBindablePassword(DependencyObject obj, string value)
         {
             obj.SetValue(BindablePasswordProperty, value);
         }
 
+        /// <summary>
+        /// 是否显示切换密码可见按钮
+        /// </summary>
         public static readonly DependencyProperty ShowSwitchButtonProperty = DependencyProperty.RegisterAttached(
             "ShowSwitchButton", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(false, SwitchPasswordShow));
 
+        /// <summary>
+        /// Gets the show switch button.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetShowSwitchButton(DependencyObject obj)
         {
             return (bool)obj.GetValue(ShowSwitchButtonProperty);
         }
 
+        /// <summary>
+        /// Sets the show switch button.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetShowSwitchButton(DependencyObject obj, bool value)
         {
             obj.SetValue(ShowSwitchButtonProperty, value);
         }
 
+        /// <summary>
+        /// 显示密码
+        /// </summary>
         public static readonly DependencyProperty ShowPasswordProperty = DependencyProperty.RegisterAttached(
             "ShowPassword", typeof(bool), typeof(PasswordBoxHelper));
 
+        /// <summary>
+        /// Gets the show password.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
         public static bool GetShowPassword(DependencyObject obj)
         {
             return (bool)obj.GetValue(ShowPasswordProperty);
         }
 
+        /// <summary>
+        /// Sets the show password.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
         public static void SetShowPassword(DependencyObject obj, bool value)
         {
             obj.SetValue(ShowPasswordProperty, value);
