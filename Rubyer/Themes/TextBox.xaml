@@ -33,7 +33,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="3 0" />
+        <Setter Property="Padding" Value="0" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -87,8 +87,11 @@
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
 
-                                <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid Grid.Column="1"
+                                      Margin="{TemplateBinding Padding}"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <ScrollViewer x:Name="PART_ContentHost"
+                                                  Padding="0"
                                                   Focusable="false"
                                                   HorizontalScrollBarVisibility="Hidden"
                                                   VerticalScrollBarVisibility="Hidden" />
@@ -111,7 +114,7 @@
 
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
-                                                Margin="{TemplateBinding Padding}"
+                                                Margin="3 0"
                                                 VerticalAlignment="Center"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
