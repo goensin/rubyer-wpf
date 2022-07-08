@@ -10,9 +10,21 @@ namespace RubyerDemo.ViewModels
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void RaisePropertyChanged(string property)
+        protected void RaisePropertyChanged(string property)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(property));
+        }
+
+        protected virtual bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(storage, value))
+            {
+                return false;
+            }
+
+            storage = value;
+            RaisePropertyChanged(propertyName);
+            return true;
         }
     }
 }

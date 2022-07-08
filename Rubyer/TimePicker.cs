@@ -107,12 +107,12 @@ namespace Rubyer
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SeletedTimeProperty = DependencyProperty.Register(
-            "SeletedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
+            "SelectedTime", typeof(DateTime?), typeof(TimePicker), new FrameworkPropertyMetadata(default(DateTime?), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedTimeChanged));
 
         /// <summary>
         /// 选中时间
         /// </summary>
-        public DateTime? SeletedTime
+        public DateTime? SelectedTime
         {
             get { return (DateTime?)GetValue(SeletedTimeProperty); }
             set { SetValue(SeletedTimeProperty, value); }
@@ -168,18 +168,45 @@ namespace Rubyer
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             TimePicker timePicker = (TimePicker)d;
-            var oldDateTime = timePicker.SeletedTime?.ToString("HH:mm:ss");
+            var oldDateTime = timePicker.SelectedTime?.ToString(timePicker.SelectedTimeFormat);
             if (oldDateTime != timePicker.Text)
             {
                 if (DateTime.TryParse(timePicker.Text, out DateTime result))
                 {
-                    timePicker.SeletedTime = result;
+                    timePicker.SelectedTime = result;
+                }
+                else if (string.IsNullOrEmpty(timePicker.Text))
+                {
+                    timePicker.SelectedTime = null;
                 }
                 else
                 {
                     timePicker.Text = oldDateTime;
                 }
             }
+        }
+
+        /// <summary>
+        /// 选择时间格式化
+        /// </summary>
+        public static readonly DependencyProperty SelectedTimeFormatProperty = DependencyProperty.Register(
+            "SelectedTimeFormat", typeof(string), typeof(TimePicker), new PropertyMetadata(default(string), OnSelectedTimeFormatChanged));
+
+        private static void OnSelectedTimeFormatChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TimePicker timePicker)
+            {
+                timePicker.Text = timePicker.SelectedTime?.ToString(timePicker.SelectedTimeFormat);
+            }
+        }
+
+        /// <summary>
+        /// 选择时间格式化
+        /// </summary>
+        public string SelectedTimeFormat
+        {
+            get { return (string)GetValue(SelectedTimeFormatProperty); }
+            set { SetValue(SelectedTimeFormatProperty, value); }
         }
 
         #endregion 依赖属性
@@ -193,7 +220,7 @@ namespace Rubyer
         {
             TimePicker timePicker = (TimePicker)d;
 
-            timePicker.Text = ((DateTime)timePicker.SeletedTime).ToString("HH:mm:ss");
+            timePicker.Text = timePicker.SelectedTime?.ToString(timePicker.SelectedTimeFormat);
 
             RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>((DateTime?)e.OldValue, (DateTime?)e.NewValue);
             args.RoutedEvent = TimePicker.SelectedTimeChangedEvent;
@@ -205,9 +232,9 @@ namespace Rubyer
         /// </summary>
         private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
-            if (SeletedTime != e.NewValue)
+            if (SelectedTime != e.NewValue)
             {
-                SeletedTime = e.NewValue;
+                SelectedTime = e.NewValue;
             }
 
             IsDropDownOpen = false;

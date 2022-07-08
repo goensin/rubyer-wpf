@@ -34,7 +34,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "列表与树-ListsTree",Content=new ListsTreeDemo{ DataContext = new ListsViewModel()} },
                 new MenuItem{ Name = "数据表格-DataGrid",Content=new DataGridDemo{ DataContext = new DataGridViewModel()} },
                 new MenuItem{ Name = "选项卡-TabControl",Content=new TabControlDemo{ DataContext = new TabControlViewModel()} },
-                new MenuItem{ Name = "日期时间-DateTime",Content=new DateTimeDemo{} },
+                new MenuItem{ Name = "日期时间-DateTime",Content=new DateTimeDemo{ DataContext = new DateTimeViewModel() } },
                 new MenuItem{ Name = "菜单栏-MenuBar",Content=new MenuBarDemo{} },
                 new MenuItem{ Name = "文本块-TextBlock",Content=new TextBlockDemo{} },
                 new MenuItem{ Name = "页码条-PageBar",Content=new PageBarDemo{ DataContext = new PageBarViewModel()} },
@@ -108,6 +108,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private string title;
+
         public string Title
         {
             get => title;
@@ -119,6 +120,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private ObservableCollection<MenuItem> menuItems;
+
         public ObservableCollection<MenuItem> MenuItems
         {
             get => menuItems;
@@ -130,6 +132,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private MenuItem currentMenuItem;
+
         public MenuItem CurrentMenuItem
         {
             get => currentMenuItem;
@@ -141,6 +144,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private ObservableCollection<ThemeColor> themeColors;
+
         public ObservableCollection<ThemeColor> ThemeColors
         {
             get => themeColors;
@@ -150,7 +154,6 @@ namespace RubyerDemo.ViewModels
                 RaisePropertyChanged("ThemeColors");
             }
         }
-
 
         private RelayCommand changeThemeColor;
         public RelayCommand ChangeThemeColor => changeThemeColor ?? (changeThemeColor = new RelayCommand(ChangeThemeColorExecute));

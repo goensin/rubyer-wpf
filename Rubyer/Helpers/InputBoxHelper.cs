@@ -125,14 +125,17 @@ namespace Rubyer
                 {
                     if (control is TextBox textBox)
                     {
-                        textBox.Text = "";
+                        textBox.Focus();
+                        textBox.Text = null;
                     }
                     else if (control is PasswordBox passwordBox)
                     {
-                        passwordBox.Password = "";
+                        passwordBox.Focus();
+                        passwordBox.Password = null;
                     }
                     else if (control is ComboBox comboBox)
                     {
+                        comboBox.Focus();
                         if (comboBox.IsEditable)
                         {
                             comboBox.Text = null;

@@ -18,6 +18,7 @@
         <Setter Property="Height" Value="28" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="SelectedDateTimeFormat" Value="yyyy-MM-dd HH:mm:ss" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -43,6 +44,9 @@
                                  rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.IsClearable="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  BorderBrush="{TemplateBinding BorderBrush}"
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
@@ -85,13 +89,13 @@
                                                 Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{DynamicResource TopContainerCornerRadius}"
                                                 Effect="{DynamicResource BottomEffect}">
-                                            <TextBlock HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            <TextBlock x:Name="PART_CurrentTextBox"
+                                                       HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Text="{Binding Text, ElementName=PART_TextBox}" />
+                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </Border>
 
                                         <Border Grid.Row="1"
