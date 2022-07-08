@@ -83,12 +83,15 @@
                                     <StackPanel x:Name="defalutTitle"
                                                 Orientation="Horizontal"
                                                 Visibility="Collapsed">
-                                        <Image Width="22"
+                                        <Image x:Name="icon"
+                                               Width="22"
                                                Height="22"
-                                               Margin="10 0"
+                                               Margin="10 0 0 0"
                                                VerticalAlignment="Center"
                                                Source="{TemplateBinding Icon}" />
-                                        <TextBlock FontSize="13" Text="{TemplateBinding Title}" />
+                                        <TextBlock Margin="10 0 0 0"
+                                                   FontSize="13"
+                                                   Text="{TemplateBinding Title}" />
                                     </StackPanel>
                                     <ContentControl x:Name="preContent"
                                                     VerticalAlignment="Center"
@@ -177,6 +180,9 @@
                         </MultiTrigger>
                         <Trigger Property="TitleBarContent" Value="{x:Null}">
                             <Setter TargetName="defalutTitle" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Icon" Value="{x:Null}">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

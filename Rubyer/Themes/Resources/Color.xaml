@@ -13,9 +13,9 @@
     <SolidColorBrush x:Key="Primary" Color="#2196F3" />
     <SolidColorBrush x:Key="Accent" Color="#F50057" />
     <SolidColorBrush x:Key="Light" Color="#6EC6FF" />
-    <SolidColorBrush x:Key="Lighter" Color="#6EC6FF" />
+    <SolidColorBrush x:Key="Lighter" Color="#9BE7FF" />
     <SolidColorBrush x:Key="Dark" Color="#0069C0" />
-    <SolidColorBrush x:Key="Darker" Color="#0069C0" />
+    <SolidColorBrush x:Key="Darker" Color="#004BA0" />
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />
