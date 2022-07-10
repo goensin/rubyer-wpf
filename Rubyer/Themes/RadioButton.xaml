@@ -11,7 +11,7 @@
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="2"
-                               SnapsToDevicePixels="true"
+                               SnapsToDevicePixels="True"
                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                                StrokeDashArray="1 2"
                                StrokeThickness="1" />
@@ -19,12 +19,13 @@
             </Setter.Value>
         </Setter>
     </Style>
+
     <Style x:Key="OptionMarkFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
                     <Rectangle Margin="14 0 0 0"
-                               SnapsToDevicePixels="true"
+                               SnapsToDevicePixels="True"
                                Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
                                StrokeDashArray="1 2"
                                StrokeThickness="1" />
@@ -65,23 +66,27 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HalfOfDoubleConverter}}">
-                            <Viewbox Margin="2">
-                                <Ellipse x:Name="littleDot"
-                                         MinWidth="10"
-                                         MinHeight="10"
-                                         Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         RenderTransformOrigin="0.5,0.5">
-                                    <Ellipse.RenderTransform>
+                            <Viewbox>
+                                <Border x:Name="littleDot"
+                                        MinWidth="12"
+                                        MinHeight="12"
+                                        Background="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        BorderBrush="Transparent"
+                                        BorderThickness="2"
+                                        CornerRadius="{TemplateBinding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}}"
+                                        RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
                                         <TransformGroup>
                                             <ScaleTransform ScaleX="0" ScaleY="0" />
                                             <SkewTransform />
                                             <RotateTransform />
                                             <TranslateTransform />
                                         </TransformGroup>
-                                    </Ellipse.RenderTransform>
-                                </Ellipse>
+                                    </Border.RenderTransform>
+                                </Border>
                             </Viewbox>
                         </Border>
+
                         <ContentPresenter x:Name="contentPresenter"
                                           Grid.Column="1"
                                           Margin="{TemplateBinding Padding}"
@@ -92,21 +97,21 @@
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="HasContent" Value="true">
+                        <Trigger Property="HasContent" Value="True">
                             <Setter Property="FocusVisualStyle" Value="{StaticResource OptionMarkFocusVisual}" />
                             <Setter Property="Padding" Value="4 -1 0 0" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="contentPresenter" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                             <Setter TargetName="radioButtonBorder" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
-                        <Trigger SourceName="radioButtonBorder" Property="IsMouseOver" Value="true">
+                        <Trigger SourceName="radioButtonBorder" Property="IsMouseOver" Value="True">
                             <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsPressed" Value="true">
+                        <Trigger Property="IsPressed" Value="True">
                             <Setter TargetName="radioButtonBorder" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
-                        <Trigger Property="IsChecked" Value="true">
+                        <Trigger Property="IsChecked" Value="True">
                             <Trigger.EnterActions>
                                 <BeginStoryboard>
                                     <Storyboard>
