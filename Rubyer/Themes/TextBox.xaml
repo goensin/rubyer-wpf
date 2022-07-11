@@ -215,6 +215,7 @@
     <Style x:Key="BigTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="AcceptsReturn" Value="True" />
         <Setter Property="Padding" Value="2 4" />
         <Setter Property="TextWrapping" Value="Wrap" />
