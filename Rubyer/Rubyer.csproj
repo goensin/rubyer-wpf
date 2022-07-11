@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 	<PropertyGroup>
-		<TargetFrameworks>net46;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<Authors>Ensin</Authors>
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
@@ -26,7 +26,7 @@
     <None Include="..\.editorconfig" Link=".editorconfig" />
     <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net46' ">
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
 </Project>

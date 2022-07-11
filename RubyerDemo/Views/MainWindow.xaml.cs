@@ -25,12 +25,6 @@ namespace RubyerDemo
             InitializeComponent();
 
             Loaded += MainWindow_Loaded;
-            SystemEvents.DisplaySettingsChanged += SystemEvents_DisplaySettingsChanged;
-        }
-
-        private void SystemEvents_DisplaySettingsChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -59,7 +53,6 @@ namespace RubyerDemo
                 Debug.WriteLine(ex);
             }
         }
-
 
         private void controlSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {

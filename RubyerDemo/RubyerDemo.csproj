@@ -2,9 +2,10 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFrameworks>net46;netcoreapp3.1;net6.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;netcoreapp3.1;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
     <ApplicationIcon>rubyer.ico</ApplicationIcon>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,4 +47,8 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>
+
+	<PropertyGroup>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+	</PropertyGroup>
 </Project>
