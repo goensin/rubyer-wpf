@@ -155,7 +155,7 @@ namespace Rubyer
         /// 最小值
         /// </summary>
         public static readonly DependencyProperty MinValueProperty = DependencyProperty.Register(
-           "MinValue", typeof(double), typeof(NumericBox), new PropertyMetadata(default(double)));
+           "MinValue", typeof(double), typeof(NumericBox), new PropertyMetadata(double.MinValue));
 
         /// <summary>
         /// 最小值
@@ -170,7 +170,7 @@ namespace Rubyer
         /// 最大值
         /// </summary>
         public static readonly DependencyProperty MaxValueProperty = DependencyProperty.Register(
-           "MaxValue", typeof(double), typeof(NumericBox), new PropertyMetadata(default(double)));
+           "MaxValue", typeof(double), typeof(NumericBox), new PropertyMetadata(double.MaxValue));
 
         /// <summary>
         /// 最大值

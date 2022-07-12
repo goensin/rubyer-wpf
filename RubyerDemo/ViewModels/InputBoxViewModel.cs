@@ -45,7 +45,7 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private int rangeValue;
+        private int rangeValue = 3;
         public int RangeValue
         {
             get => rangeValue;
@@ -78,7 +78,7 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private double doubleValue;
+        private double doubleValue = 0.1;
         public double DoubleValue
         {
             get => doubleValue;

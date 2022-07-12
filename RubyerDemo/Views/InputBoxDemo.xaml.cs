@@ -14,6 +14,11 @@ namespace RubyerDemo.Views
         public InputBoxDemo()
         {
             InitializeComponent();
-        }       
+        }
+
+        private void NumericBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)
+        {
+            Debug.WriteLine($"NumericBox ValueChanged: {e.NewValue}");
+        }
     }
 }
