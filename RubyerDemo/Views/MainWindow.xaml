@@ -142,7 +142,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <rubyer:Card Margin="5 5 0 5">
-            <TabControl Style="{StaticResource LineTabControl}">
+            <TabControl Style="{StaticResource LineTabControl}"
+                        rubyer:HeaderHelper.FontSize="14"
+                        rubyer:HeaderHelper.FontWeight="Bold">
                 <TabItem Width="90" Header="Controls">
                     <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
@@ -169,6 +171,7 @@
                 </TabItem>
 
                 <TabItem Width="85" Header="Demos" />
+
             </TabControl>
         </rubyer:Card>
 

@@ -14,9 +14,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
-    <BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
-
     <!--  Style and template for the DataGridCell.  -->
     <Style x:Key="RubyerDataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />

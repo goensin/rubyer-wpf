@@ -83,7 +83,7 @@
                                 <ContentControl x:Name="preContent"
                                                 Grid.Column="0"
                                                 Margin="3 0"
-                                                VerticalAlignment="Center"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
 
@@ -104,6 +104,7 @@
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
@@ -115,7 +116,7 @@
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
                                                 Margin="3 0"
-                                                VerticalAlignment="Center"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
                             </Grid>
