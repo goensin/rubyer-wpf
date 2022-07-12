@@ -38,6 +38,7 @@
                     <Grid x:Name="PART_Root">
                         <TextBox x:Name="PART_TextBox"
                                  Style="{StaticResource RubyerTextBox}"
+                                 Height="Auto"
                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                  rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -109,6 +110,7 @@
                         <TextBox x:Name="PART_TextBox"
                                  Style="{StaticResource RubyerTextBox}"
                                  Grid.Column="1"
+                                 Height="Auto"
                                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                  rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
