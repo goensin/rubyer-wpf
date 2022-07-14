@@ -11,7 +11,7 @@ namespace Rubyer
     /// form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
     /// MaterialDesignThemes.Wpf.Extensions
     /// </summary>
-    internal static class Extensions
+    public static class Extensions
     {
         public static IEnumerable<DependencyObject> VisualDepthFirstTraversal(this DependencyObject node)
         {

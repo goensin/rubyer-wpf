@@ -57,11 +57,6 @@ namespace Rubyer
                     checkBox.Checked += CheckBox_Checked;
                     checkBox.Unchecked += CheckBox_Checked;
                 }
-                else
-                {
-                    checkBox.Checked -= CheckBox_Checked;
-                    checkBox.Unchecked -= CheckBox_Checked;
-                }
             }
         }
 
@@ -74,19 +69,17 @@ namespace Rubyer
         {
             var checkBox = (CheckBox)sender;
             var columnHeader = checkBox.TryGetParentFromVisualTree<DataGridColumnHeader>();
-            var headersPanel = checkBox.TryGetParentFromVisualTree<DataGridCellsPanel>();
-            var index = headersPanel.Children.IndexOf(columnHeader);
             var datagrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
-            ChangeAllCheckBoxCell(datagrid, index, checkBox.IsChecked);
+            ChangeAllCheckBoxCell(datagrid, columnHeader, checkBox.IsChecked);
         }
 
         /// <summary>
         /// Changes the all check box cell.
         /// </summary>
         /// <param name="dataGrid">The data grid.</param>
-        /// <param name="index">The index.</param>
+        /// <param name="columnHeader">column header</param>
         /// <param name="isChecked">If true, is checked.</param>
-        private static void ChangeAllCheckBoxCell(DataGrid dataGrid, int index, bool? isChecked)
+        private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked)
         {
             var rows = dataGrid.VisualDepthFirstTraversal().OfType<DataGridRow>();
 
@@ -97,9 +90,9 @@ namespace Rubyer
 
             foreach (var row in rows)
             {
-                var cells = row.VisualDepthFirstTraversal().OfType<DataGridCell>().ToList();
-                var cell = cells[index];
-                if (cell.Content is CheckBox checkBox)
+                var cellContent = columnHeader.Column.GetCellContent(row);
+                var cell = cellContent.TryGetParentFromVisualTree<DataGridCell>();
+                if (cellContent is CheckBox checkBox)
                 {
                     dataGrid.BeginEdit();
                     dataGrid.CurrentCell = new DataGridCellInfo(cell);

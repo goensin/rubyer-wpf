@@ -144,9 +144,11 @@
         <rubyer:Card Margin="5 5 0 5">
             <TabControl Style="{StaticResource LineTabControl}"
                         rubyer:HeaderHelper.FontSize="14"
-                        rubyer:HeaderHelper.FontWeight="Bold">
-                <TabItem Width="90" Header="Controls">
-                    <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                        rubyer:HeaderHelper.FontWeight="Bold"
+                        TabStripPlacement="Bottom">
+                <TabItem Header="Controls">
+                    <ListBox Margin="0 5"
+                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                              rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
                              rubyer:ControlHelper.MaskOpacity="1"
@@ -170,7 +172,7 @@
                     </ListBox>
                 </TabItem>
 
-                <TabItem Width="85" Header="Demos" />
+                <TabItem Header="Demos" />
 
             </TabControl>
         </rubyer:Card>

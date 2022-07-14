@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Rubyer.Converters"
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
@@ -325,6 +326,8 @@
         </Setter>
     </Style>
 
+    <converters:GetDataGridColumnCheckedContentConverter x:Key="GetDataGridColumnCheckedContent" />
+
     <Style x:Key="DataGridSelectCheckBoxColumnHeader"
            BasedOn="{StaticResource RubyerDataGridColumnHeader}"
            TargetType="{x:Type DataGridColumnHeader}">
@@ -341,8 +344,19 @@
                             <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         Orientation="Horizontal">
-                                <CheckBox Margin="0 0 3 0" rubyer:DataGridHelper.IsHeaderSelectCheckBox="True" />
-                                <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <CheckBox Margin="0 0 3 0"
+                                          rubyer:DataGridHelper.IsHeaderSelectCheckBox="True"
+                                          Foreground="{TemplateBinding Foreground}">
+                                    <rubyer:ToggleButtonHelper.CheckedContent>
+                                        <MultiBinding Converter="{StaticResource GetDataGridColumnCheckedContent}" Mode="OneWay">
+                                            <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" />
+                                            <Binding RelativeSource="{RelativeSource AncestorType=DataGridColumnHeader}" />
+                                        </MultiBinding>
+                                    </rubyer:ToggleButtonHelper.CheckedContent>
+                                    <CheckBox.Content>
+                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                    </CheckBox.Content>
+                                </CheckBox>
                             </StackPanel>
                         </Border>
                     </Grid>

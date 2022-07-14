@@ -49,6 +49,7 @@
                           SelectionUnit="Cell">
                     <DataGrid.Columns>
                         <rubyer:DataGridSelectCheckBoxColumn Width="80"
+                                                             rubyer:ToggleButtonHelper.CheckedContent="不选"
                                                              Binding="{Binding IsSelected}"
                                                              Header="全选" />
                         <DataGridTextColumn Width="60"

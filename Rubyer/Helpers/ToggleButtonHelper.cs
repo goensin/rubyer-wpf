@@ -62,6 +62,8 @@ namespace Rubyer
         {
             if (d is ToggleButton toggleButton)
             {
+                SetUncheckedContent(toggleButton, toggleButton.Content);
+
                 if (toggleButton.IsChecked == true)
                 {
                     CheckAction(toggleButton);
@@ -69,10 +71,13 @@ namespace Rubyer
 
                 toggleButton.Checked -= ToggleButton_Checked;
                 toggleButton.Unchecked -= ToggleButton_Checked;
+                toggleButton.Indeterminate -= ToggleButton_Checked;
+
                 if (GetCheckedContent(toggleButton) != null)
                 {
                     toggleButton.Checked += ToggleButton_Checked;
                     toggleButton.Unchecked += ToggleButton_Checked;
+                    toggleButton.Indeterminate += ToggleButton_Checked;
                 }
             }
         }
@@ -80,13 +85,13 @@ namespace Rubyer
         private static void ToggleButton_Checked(object sender, RoutedEventArgs e)
         {
             var toggleButton = (ToggleButton)sender;
-            if (toggleButton.IsChecked == true)
+            if (toggleButton.IsChecked == false)
             {
-                CheckAction(toggleButton);
+                UncheckAction(toggleButton);
             }
             else
             {
-                UncheckAction(toggleButton);
+                CheckAction(toggleButton);
             }
         }
 
