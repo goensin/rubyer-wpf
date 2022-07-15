@@ -274,29 +274,31 @@ namespace Rubyer
                 return;
             }
 
-            Rectangle rectangleRow = tabControl.Template.FindName("selectedRectRow", tabControl) as Rectangle;
-            IEditableCollectionView items = tabControl.Items;
-            TabItem item = GetItem(tabControl, index, items);
-            rectangleRow.Width = item.ActualWidth;
-
-            var bounds = item.TransformToAncestor(scrollViewer).TransformBounds(new Rect(new Point(0, 0), item.RenderSize));
-
-            DoubleAnimation canvasAnimation = new DoubleAnimation
+            if (tabControl.Template.FindName("selectedRectRow", tabControl) is Rectangle rectangleRow)
             {
-                To = bounds.X,
-                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
+                IEditableCollectionView items = tabControl.Items;
+                TabItem item = GetItem(tabControl, index, items);
+                rectangleRow.Width = item.ActualWidth;
 
-            DoubleAnimation sizeAnimation = new DoubleAnimation
-            {
-                To = item.ActualWidth,
-                Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
-            };
+                var bounds = item.TransformToAncestor(scrollViewer).TransformBounds(new Rect(new Point(0, 0), item.RenderSize));
 
-            rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
-            rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
+                DoubleAnimation canvasAnimation = new DoubleAnimation
+                {
+                    To = bounds.X,
+                    Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+
+                DoubleAnimation sizeAnimation = new DoubleAnimation
+                {
+                    To = item.ActualWidth,
+                    Duration = TimeSpan.FromMilliseconds(durationMilliseconds),
+                    EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut }
+                };
+
+                rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
+                rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
+            }
         }
     }
 }

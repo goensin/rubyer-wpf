@@ -142,16 +142,19 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <rubyer:Card Margin="5 5 0 5">
-            <TabControl Style="{StaticResource LineTabControl}"
+            <TabControl Style="{StaticResource CardTabControl}"
+                        Margin="5"
+                        rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
+                        rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
                         rubyer:HeaderHelper.FontSize="14"
                         rubyer:HeaderHelper.FontWeight="Bold"
-                        TabStripPlacement="Bottom">
-                <TabItem Header="Controls">
+                        TabStripPlacement="Top">
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Width="55" Text="Controls" />
+                    </TabItem.Header>
                     <ListBox Margin="0 5"
-                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                             rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
-                             rubyer:ControlHelper.MaskOpacity="1"
+                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
                              rubyer:ItemsControlHelper.ItemMargin="7 1"
                              rubyer:ItemsControlHelper.ItemPadding="7"
                              ItemsSource="{Binding MenuItems}"
@@ -172,7 +175,11 @@
                     </ListBox>
                 </TabItem>
 
-                <TabItem Header="Demos" />
+                <TabItem>
+                    <TabItem.Header>
+                        <TextBlock Width="55" Text="Demos" />
+                    </TabItem.Header>
+                </TabItem>
 
             </TabControl>
         </rubyer:Card>
