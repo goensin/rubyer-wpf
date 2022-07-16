@@ -172,7 +172,7 @@
                                            rubyer:InputBoxHelper.IsClearable="True"
                                            rubyer:InputBoxHelper.Watermark="Clearable"
                                            Interval="2"
-                                           Value="{Binding NullableIntValue}" />
+                                           Value="{Binding NullableValue}" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Stretch"

@@ -67,13 +67,13 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private int? nullableIntValue;
-        public int? NullableIntValue
+        private double? nullableValue;
+        public double? NullableValue
         {
-            get => nullableIntValue;
+            get => nullableValue;
             set
             {
-                nullableIntValue = value;
+                nullableValue = value;
                 RaisePropertyChanged("NullableIntValue");
             }
         }

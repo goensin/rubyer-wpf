@@ -46,7 +46,7 @@
         <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="{Binding TitleHeight, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
+                <WindowChrome CaptionHeight="{Binding TitleHeight, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=rubyer:RubyerWindow, AncestorLevel=1}}"
                               CornerRadius="0"
                               GlassFrameThickness="1"
                               NonClientFrameEdges="None"
