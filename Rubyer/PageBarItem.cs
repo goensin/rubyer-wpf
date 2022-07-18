@@ -68,7 +68,7 @@ namespace Rubyer
             DependencyProperty.Register("CurrentBrush", typeof(Brush), typeof(PageBarItem), new PropertyMetadata(default(Brush)));
 
         /// <summary>
-        /// 值
+        /// 当前颜色
         /// </summary>
         public Brush CurrentBrush
         {
