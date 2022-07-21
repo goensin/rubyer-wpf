@@ -37,7 +37,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogContainer">
                     <Grid>
-                        <ContentPresenter x:Name="contentPresenter"
+                        <ContentPresenter x:Name="PART_ContentPresenter"
                                           Panel.ZIndex="1"
                                           Focusable="False"
                                           RecognizesAccessKey="True"

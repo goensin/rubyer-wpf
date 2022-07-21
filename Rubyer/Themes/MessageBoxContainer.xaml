@@ -19,7 +19,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxContainer}">
                     <Grid>
-                        <ContentPresenter x:Name="contentPresenter"
+                        <ContentPresenter x:Name="PART_ContentPresenter"
                                           Panel.ZIndex="1"
                                           Focusable="False"
                                           RecognizesAccessKey="True"

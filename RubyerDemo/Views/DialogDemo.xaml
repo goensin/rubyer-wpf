@@ -24,11 +24,11 @@
                       Height="250"
                       Header="1#对话框-DialogContainer">
                 <rubyer:DialogContainer Title="1#对话框"
-                                  rubyer:HeaderHelper.FontSize="22"
-                                  rubyer:HeaderHelper.FontWeight="Bold"
-                                  IsClickBackgroundToClose="True"
-                                  IsShow="{Binding Dialog1IsShow}"
-                                  IsShowCloseButton="False">
+                                        rubyer:HeaderHelper.FontSize="22"
+                                        rubyer:HeaderHelper.FontWeight="Bold"
+                                        IsClickBackgroundToClose="True"
+                                        IsShow="{Binding Dialog1IsShow}"
+                                        IsShowCloseButton="False">
                     <rubyer:DialogContainer.DialogContent>
                         <StackPanel>
                             <TextBlock Text="对话框内容" />
@@ -51,11 +51,11 @@
                       Margin="10 0"
                       Header="2#对话框-DialogContainer">
                 <rubyer:DialogContainer x:Name="Dialog2"
-                                  Title="2#对话框"
-                                  rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                                  Background="{DynamicResource Primary}"
-                                  Foreground="{DynamicResource WhiteForeground}">
+                                        Title="2#对话框"
+                                        rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                                        rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                        Background="{DynamicResource Primary}"
+                                        Foreground="{DynamicResource WhiteForeground}">
                     <rubyer:DialogContainer.DialogContent>
                         <StackPanel>
                             <TextBlock Text="对话框内容" />
@@ -87,13 +87,13 @@
                       Margin="10 0"
                       Header="3#对话框-DialogContainer">
                 <rubyer:DialogContainer x:Name="Dialog3"
-                                  Title="添加用户"
-                                  rubyer:HeaderHelper.HorizontalAlignment="Center"
-                                  AfterClose="Dialog3_AfterClose"
-                                  AfterCloseCommand="{Binding AfterDialog3Close}"
-                                  BeforeOpen="Dialog3_BeforeOpen"
-                                  BeforeOpenCommand="{Binding BeforeDialog3Open}"
-                                  IsClickBackgroundToClose="False">
+                                        Title="添加用户"
+                                        rubyer:HeaderHelper.HorizontalAlignment="Center"
+                                        AfterClose="Dialog3_AfterClose"
+                                        AfterCloseCommand="{Binding AfterDialog3Close}"
+                                        BeforeOpen="Dialog3_BeforeOpen"
+                                        BeforeOpenCommand="{Binding BeforeDialog3Open}"
+                                        IsClickBackgroundToClose="False">
                     <rubyer:DialogContainer.DialogContent>
                         <Grid>
                             <Grid.ColumnDefinitions>

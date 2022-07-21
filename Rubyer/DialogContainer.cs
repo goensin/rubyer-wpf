@@ -13,6 +13,7 @@ namespace Rubyer
     [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
     [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = BackgroundBorderPartName, Type = typeof(Border))]
+    [TemplatePart(Name = ContentPresenterPartName, Type = typeof(ContentPresenter))]
     public class DialogContainer : ContentControl
     {
         /// <summary>
@@ -29,6 +30,11 @@ namespace Rubyer
         /// 背景 Border 名称
         /// </summary>
         public const string BackgroundBorderPartName = "PART_BackgroundBorder";
+
+        /// <summary>
+        /// Content 内容名称
+        /// </summary>
+        public const string ContentPresenterPartName = "PART_ContentPresenter";
 
         /// <summary>
         /// 对话框结果路由事件处理
@@ -81,6 +87,11 @@ namespace Rubyer
             {
                 transition.Showed += (sender, e) => IsClosed = false;
                 transition.Closed += Closed; ;
+            }
+
+            if (GetTemplateChild(ContentPresenterPartName) is ContentPresenter contentPresenter)
+            {
+                contentPresenter.PreviewKeyDown += ContentPresenter_PreviewKeyDown;
             }
         }
 
@@ -380,6 +391,15 @@ namespace Rubyer
             this.closeParameter = null;
             this.BeforeOpenHandler = null;
             this.AfterCloseHandler = null;
+        }
+
+        private void ContentPresenter_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Key key = e.Key == Key.System ? e.SystemKey : e.Key;
+            if (key == Key.Tab && IsShow)
+            {
+                e.Handled = true;
+            }
         }
     }
 

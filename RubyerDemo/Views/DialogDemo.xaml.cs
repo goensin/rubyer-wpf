@@ -1,4 +1,5 @@
-﻿using Rubyer.Models;
+﻿using Rubyer;
+using Rubyer.Models;
 using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;

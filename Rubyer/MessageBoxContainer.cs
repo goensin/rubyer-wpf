@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -9,12 +10,18 @@ namespace Rubyer
     /// 消息框容器
     /// </summary>
     [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
+    [TemplatePart(Name = ContentPresenterPartName, Type = typeof(ContentPresenter))]
     public class MessageBoxContainer : ContentControl
     {
         /// <summary>
         /// 转换动画名称
         /// </summary>
         public const string TransitionPartName = "Path_Transition";
+
+        /// <summary>
+        /// Content 内容名称
+        /// </summary>
+        public const string ContentPresenterPartName = "PART_ContentPresenter";
 
         static MessageBoxContainer()
         {
@@ -30,6 +37,11 @@ namespace Rubyer
             {
                 transition.Showed += (sender, e) => IsClosed = false;
                 transition.Closed += (sender, e) => IsClosed = true;
+            }
+
+            if (GetTemplateChild(ContentPresenterPartName) is ContentPresenter contentPresenter)
+            {
+                contentPresenter.PreviewKeyDown += ContentPresenter_PreviewKeyDown;
             }
         }
 
@@ -115,6 +127,15 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsClosedProperty); }
             set { SetValue(IsClosedProperty, value); }
+        }
+
+        private void ContentPresenter_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            Key key = e.Key == Key.System ? e.SystemKey : e.Key;
+            if (key == Key.Tab && IsShow)
+            {
+                e.Handled = true;
+            }
         }
     }
 }
