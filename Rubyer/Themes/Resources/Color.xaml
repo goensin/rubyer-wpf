@@ -25,7 +25,7 @@
 
     <SolidColorBrush x:Key="PrimaryText" Color="#212121" />
     <SolidColorBrush x:Key="RegularText" Color="#484848" />
-    <SolidColorBrush x:Key="SeconarydText" Color="#6D6D6D" />
+    <SolidColorBrush x:Key="SeconarydText" Color="#A4A4A4" />
     <SolidColorBrush x:Key="WatermarkText" Color="#AA6D6D6D" />
 
     <SolidColorBrush x:Key="Border" Color="#9E9E9E" />

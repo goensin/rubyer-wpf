@@ -35,6 +35,7 @@
 
                         <rubyer:StepBar Margin="10"
                                         HorizontalContentAlignment="Left"
+                                        rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
                                         CurrentIndex="{Binding CurrentIndex}"
                                         DescriptionStringFormat="时间: {0}"
                                         DisplayDescriptionPath="Description"
@@ -73,6 +74,7 @@
                                     Orientation="Vertical" />
 
                     <rubyer:StepBar Margin="10"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                     CurrentIndex="{Binding CurrentIndex}"
                                     Orientation="Vertical">
                         <rubyer:StepBarItem IconType="SunFill">晴</rubyer:StepBarItem>
