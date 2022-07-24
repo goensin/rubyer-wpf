@@ -16,6 +16,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private IEnumerable<IconType> iconTypes;
+
         public IEnumerable<IconType> IconTypes
         {
             get { return iconTypes ?? (iconTypes = _types.Value); }
@@ -27,6 +28,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private IconType currentIcon;
+
         public IconType CurrentIcon
         {
             get => currentIcon;
@@ -38,6 +40,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private string searchText;
+
         public string SearchText
         {
             get => searchText;
@@ -50,6 +53,7 @@ namespace RubyerDemo.ViewModels
 
         private RelayCommand search;
         public RelayCommand Search => search ?? (search = new RelayCommand(SearchExecute));
+
         // 搜索
         private void SearchExecute(object obj)
         {

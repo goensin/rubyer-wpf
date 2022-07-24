@@ -174,6 +174,21 @@ namespace Rubyer
             set { SetValue(IsFinishedProperty, value); }
         }
 
+        /// <summary>
+        /// 是否结束状态
+        /// </summary>
+        public static readonly DependencyProperty IconTypeProperty =
+            DependencyProperty.Register("IconType", typeof(IconType?), typeof(StepBarItem), new PropertyMetadata(default(IconType?)));
+
+        /// <summary>
+        /// 是否结束成状态
+        /// </summary>
+        public IconType? IconType
+        {
+            get { return (IconType?)GetValue(IconTypeProperty); }
+            set { SetValue(IconTypeProperty, value); }
+        }
+
         #endregion properties
 
         static StepBarItem()

@@ -13,6 +13,7 @@
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="CurrentIndex" Value="{Binding CurrentIndex, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="IconType" Value="{x:Null}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="Template">
@@ -20,7 +21,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid x:Name="root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
+                            <RowDefinition Height="25" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -34,14 +35,13 @@
                                    Height="2"
                                    Fill="{TemplateBinding Foreground}" />
 
-                        <!--  icon  -->
                         <Viewbox Grid.Column="1" Focusable="False">
                             <Grid>
-                                <Ellipse Width="20"
-                                         Height="20"
-                                         Fill="{TemplateBinding Foreground}"
-                                         Stroke="{TemplateBinding Foreground}"
-                                         StrokeThickness="2" />
+                                <rubyer:Icon x:Name="icon"
+                                             Width="25"
+                                             Height="25"
+                                             Type="{TemplateBinding IconType}" />
+
                                 <TextBlock x:Name="indexText"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
@@ -129,6 +129,28 @@
                             <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False">
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxBlankCircleFill" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False" />
+                                <Condition Binding="{Binding IsCompleted, RelativeSource={RelativeSource Mode=Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False" />
+                                <Condition Binding="{Binding IsFinished, RelativeSource={RelativeSource Mode=Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -143,7 +165,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="22" />
+                            <ColumnDefinition Width="25" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -156,14 +178,13 @@
                                    Width="2"
                                    Fill="{TemplateBinding Foreground}" />
 
-                        <!--  icon  -->
                         <Viewbox Grid.Row="1" Focusable="False">
                             <Grid>
-                                <Ellipse Width="20"
-                                         Height="20"
-                                         Fill="{TemplateBinding Foreground}"
-                                         Stroke="{TemplateBinding Foreground}"
-                                         StrokeThickness="2" />
+                                <rubyer:Icon x:Name="icon"
+                                             Width="25"
+                                             Height="25"
+                                             Type="{TemplateBinding IconType}" />
+
                                 <TextBlock x:Name="indexText"
                                            HorizontalAlignment="Center"
                                            VerticalAlignment="Center"
@@ -247,6 +268,28 @@
                             <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False">
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxBlankCircleFill" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False" />
+                                <Condition Binding="{Binding IsCompleted, RelativeSource={RelativeSource Mode=Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="False" />
+                                <Condition Binding="{Binding IsFinished, RelativeSource={RelativeSource Mode=Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="indexText" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
