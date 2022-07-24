@@ -50,6 +50,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Loading.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RepeatButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NumericBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -94,4 +95,6 @@
     <Style BasedOn="{StaticResource RubyerLoading}" TargetType="{x:Type rubyer:Loading}" />
     <Style BasedOn="{StaticResource RubyerRepeatButton}" TargetType="{x:Type RepeatButton}" />
     <Style BasedOn="{StaticResource RubyerNumericBox}" TargetType="{x:Type rubyer:NumericBox}" />
+    <Style BasedOn="{StaticResource HorizontalStepBarItem}" TargetType="{x:Type rubyer:StepBarItem}" />
+    <Style BasedOn="{StaticResource RubyerStepBar}" TargetType="{x:Type rubyer:StepBar}" />
 </ResourceDictionary>

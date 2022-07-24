@@ -1,0 +1,296 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="HorizontalStepBarItem" TargetType="{x:Type rubyer:StepBarItem}">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="CurrentIndex" Value="{Binding CurrentIndex, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
+                    <Grid x:Name="root">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle x:Name="leftLine"
+                                   Height="2"
+                                   Fill="{TemplateBinding Foreground}" />
+
+                        <!--  icon  -->
+                        <Viewbox Grid.Column="1" Focusable="False">
+                            <Grid>
+                                <Ellipse Width="20"
+                                         Height="20"
+                                         Fill="{TemplateBinding Foreground}"
+                                         Stroke="{TemplateBinding Foreground}"
+                                         StrokeThickness="2" />
+                                <TextBlock x:Name="indexText"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="13"
+                                           Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                           Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </Grid>
+                        </Viewbox>
+
+                        <Rectangle x:Name="rightLine"
+                                   Grid.Column="2"
+                                   Height="2"
+                                   Fill="{TemplateBinding Foreground}" />
+
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Row="1"
+                                          Grid.ColumnSpan="3"
+                                          Margin="0 6 0 0"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <!--  description  -->
+                        <TextBlock x:Name="descriptionText"
+                                   Grid.Row="2"
+                                   Grid.ColumnSpan="3"
+                                   Margin="0 6 0 0"
+                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                   Focusable="False"
+                                   FontSize="12"
+                                   FontWeight="Normal"
+                                   Text="{TemplateBinding Description}" />
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ViewStates">
+                                <VisualState x:Name="Waiting" />
+                                <VisualState x:Name="Underway" />
+                                <VisualState x:Name="Completed" />
+                                <VisualState x:Name="Finished" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=descriptionText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                            <Setter TargetName="descriptionText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <Trigger Property="IsFirst" Value="True">
+                            <Setter TargetName="leftLine" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsFirst" Value="False">
+                            <Setter TargetName="leftLine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsLast" Value="True">
+                            <Setter TargetName="rightLine" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsLast" Value="False">
+                            <Setter TargetName="rightLine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="HorizontalContentAlignment" Value="Left">
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="contentPresenter" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="descriptionText" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="descriptionText" Property="Grid.ColumnSpan" Value="2" />
+                        </Trigger>
+                        <Trigger Property="HorizontalContentAlignment" Value="Right">
+                            <Setter TargetName="contentPresenter" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="contentPresenter" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="descriptionText" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="descriptionText" Property="Grid.ColumnSpan" Value="2" />
+                        </Trigger>
+                        <Trigger Property="IsWaiting" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SeconarydText}" />
+                        </Trigger>
+                        <Trigger Property="IsUnderway" Value="True">
+                            <Setter TargetName="rightLine" Property="Fill" Value="{DynamicResource SeconarydText}" />
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsCompleted" Value="True">
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="rightLine" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+                        </Trigger>
+                        <Trigger Property="IsFinished" Value="True">
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="VerticalStepBarItem"
+           BasedOn="{StaticResource HorizontalStepBarItem}"
+           TargetType="{x:Type rubyer:StepBarItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="22" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Rectangle x:Name="topLine"
+                                   Width="2"
+                                   Fill="{TemplateBinding Foreground}" />
+
+                        <!--  icon  -->
+                        <Viewbox Grid.Row="1" Focusable="False">
+                            <Grid>
+                                <Ellipse Width="20"
+                                         Height="20"
+                                         Fill="{TemplateBinding Foreground}"
+                                         Stroke="{TemplateBinding Foreground}"
+                                         StrokeThickness="2" />
+                                <TextBlock x:Name="indexText"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="13"
+                                           Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                           Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </Grid>
+                        </Viewbox>
+
+                        <Rectangle x:Name="bottomLine"
+                                   Grid.Row="2"
+                                   Width="2"
+                                   Fill="{TemplateBinding Foreground}" />
+
+                        <StackPanel x:Name="contentPanel"
+                                    Grid.Row="1"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Margin="6 0 0 0"
+                                    VerticalAlignment="Top">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <!--  description  -->
+                            <TextBlock x:Name="descriptionText"
+                                       Margin="0 6 0 0"
+                                       Focusable="False"
+                                       FontSize="12"
+                                       FontWeight="Normal"
+                                       Text="{TemplateBinding Description}" />
+                        </StackPanel>
+
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="ViewStates">
+                                <VisualState x:Name="Waiting" />
+                                <VisualState x:Name="Underway" />
+                                <VisualState x:Name="Completed" />
+                                <VisualState x:Name="Finished" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding Text, ElementName=descriptionText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                            <Setter TargetName="descriptionText" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <Trigger Property="IsFirst" Value="True">
+                            <Setter TargetName="topLine" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsFirst" Value="False">
+                            <Setter TargetName="topLine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsLast" Value="True">
+                            <Setter TargetName="bottomLine" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsLast" Value="False">
+                            <Setter TargetName="bottomLine" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="VerticalContentAlignment" Value="Top">
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="Grid.RowSpan" Value="3" />
+                        </Trigger>
+                        <Trigger Property="VerticalContentAlignment" Value="Bottom">
+                            <Setter TargetName="contentPanel" Property="Grid.Row" Value="2" />
+                            <Setter TargetName="contentPanel" Property="Grid.RowSpan" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsWaiting" Value="True">
+                            <Setter Property="Foreground" Value="{DynamicResource SeconarydText}" />
+                        </Trigger>
+                        <Trigger Property="IsUnderway" Value="True">
+                            <Setter TargetName="bottomLine" Property="Fill" Value="{DynamicResource SeconarydText}" />
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsCompleted" Value="True">
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="bottomLine" Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+                        </Trigger>
+                        <Trigger Property="IsFinished" Value="True">
+                            <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerStepBar" TargetType="{x:Type rubyer:StepBar}">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource HorizontalStepBarItem}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:StepBar}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="ItemContainerStyle" Value="{StaticResource VerticalStepBarItem}" />
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="1" />
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

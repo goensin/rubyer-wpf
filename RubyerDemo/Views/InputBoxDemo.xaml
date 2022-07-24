@@ -5,7 +5,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
-             d:Background="{StaticResource DefaultBackground}"
              d:DataContext="{d:DesignInstance Type=viewmodels:InputBoxViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
