@@ -15,11 +15,11 @@
 
     <converter:EnumToBooleanConverter x:Key="EnumToBooleanConverter" />
     <converter:EnumToBooleanInverseConverter x:Key="EnumToBooleanInverseConverter" />
-    <converter:EnumToVisibilityConverter x:Key="EnumToVisibleConverterConverter" />
-    <converter:EnumToVisibilityConverter x:Key="EnumToCollapsedConverterConverter"
+    <converter:EnumToVisibilityConverter x:Key="EnumToVisibleConverter" />
+    <converter:EnumToVisibilityConverter x:Key="EnumToCollapsedConverter"
                                          FalseVisibility="Visible"
                                          TrueVisibility="Collapsed" />
-    <converter:EnumToVisibilityConverter x:Key="EnumToHiddenConverterConverter"
+    <converter:EnumToVisibilityConverter x:Key="EnumToHiddenConverter"
                                          FalseVisibility="Visible"
                                          TrueVisibility="Hidden" />
 
