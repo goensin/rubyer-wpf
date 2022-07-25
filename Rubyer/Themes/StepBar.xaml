@@ -33,6 +33,7 @@
 
                         <Rectangle x:Name="leftLine"
                                    Height="2"
+                                   Margin="-1 0"
                                    Fill="{TemplateBinding Foreground}" />
 
                         <Viewbox Grid.Column="1" Focusable="False">
@@ -54,6 +55,7 @@
                         <Rectangle x:Name="rightLine"
                                    Grid.Column="2"
                                    Height="2"
+                                   Margin="-1 0"
                                    Fill="{TemplateBinding Foreground}" />
 
                         <ContentPresenter x:Name="contentPresenter"
@@ -176,6 +178,7 @@
 
                         <Rectangle x:Name="topLine"
                                    Width="2"
+                                   Margin="0 -1"
                                    Fill="{TemplateBinding Foreground}" />
 
                         <Viewbox Grid.Row="1" Focusable="False">
@@ -197,6 +200,7 @@
                         <Rectangle x:Name="bottomLine"
                                    Grid.Row="2"
                                    Width="2"
+                                   Margin="0 -1"
                                    Fill="{TemplateBinding Foreground}" />
 
                         <StackPanel x:Name="contentPanel"
