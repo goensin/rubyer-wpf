@@ -70,40 +70,24 @@ namespace Rubyer
                 InternalReturnResult(this, MessageBoxResult.Cancel);
             };
 
-            if (IsShowOk)
+            if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
             {
-                ButtonBase okButton = GetTemplateChild(OkButtonPartName) as ButtonBase;
-                okButton.Click += (sender, args) =>
-                {
-                    InternalReturnResult(this, MessageBoxResult.OK);
-                };
+                okButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.OK);
             }
 
-            if (IsShowCancel)
+            if (GetTemplateChild(CancelButtonPartName) is ButtonBase cancelButton)
             {
-                ButtonBase cancelButton = GetTemplateChild(CancelButtonPartName) as ButtonBase;
-                cancelButton.Click += (sender, args) =>
-                {
-                    InternalReturnResult(this, MessageBoxResult.Cancel);
-                };
+                cancelButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Cancel);
             }
 
-            if (IsShowYes)
+            if (GetTemplateChild(YesButtonPartName) is ButtonBase yesButton)
             {
-                ButtonBase yesButton = GetTemplateChild(YesButtonPartName) as ButtonBase;
-                yesButton.Click += (sender, args) =>
-                {
-                    InternalReturnResult(this, MessageBoxResult.Yes);
-                };
+                yesButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Yes);
             }
 
-            if (IsShowNo)
+            if (GetTemplateChild(NoButtonPartName) is ButtonBase noButton)
             {
-                ButtonBase noButton = GetTemplateChild(NoButtonPartName) as ButtonBase;
-                noButton.Click += (sender, args) =>
-                {
-                    InternalReturnResult(this, MessageBoxResult.No);
-                };
+                noButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.No);
             }
 
             if (GetTemplateChild(TransitionPartName) is Transition transition)
@@ -258,66 +242,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 是否显示确认按钮
-        /// </summary>
-        public static readonly DependencyProperty IsShowOkProperty = DependencyProperty.Register(
-            "IsShowOk", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示确认按钮
-        /// </summary>
-        public bool IsShowOk
-        {
-            get { return (bool)GetValue(IsShowOkProperty); }
-            set { SetValue(IsShowOkProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示否按钮
-        /// </summary>
-        public static readonly DependencyProperty IsShowNoProperty = DependencyProperty.Register(
-            "IsShowNo", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示否按钮
-        /// </summary>
-        public bool IsShowNo
-        {
-            get { return (bool)GetValue(IsShowNoProperty); }
-            set { SetValue(IsShowNoProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示是按钮
-        /// </summary>
-        public static readonly DependencyProperty IsShowYesProperty = DependencyProperty.Register(
-            "IsShowYes", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示是按钮
-        /// </summary>
-        public bool IsShowYes
-        {
-            get { return (bool)GetValue(IsShowYesProperty); }
-            set { SetValue(IsShowYesProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示取消按钮
-        /// </summary>
-        public static readonly DependencyProperty IsShowCancelProperty = DependencyProperty.Register(
-            "IsShowCancel", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示取消按钮
-        /// </summary>
-        public bool IsShowCancel
-        {
-            get { return (bool)GetValue(IsShowCancelProperty); }
-            set { SetValue(IsShowCancelProperty, value); }
-        }
-
-        /// <summary>
         /// 是否显示阴影
         /// </summary>
         public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.Register(
@@ -336,45 +260,7 @@ namespace Rubyer
         /// 消息框按钮类型
         /// </summary>
         public static readonly DependencyProperty MessageBoxButtonProperty = DependencyProperty.Register(
-            "MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxButton), OnMessageBoxButtonChanged));
-
-        private static void OnMessageBoxButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is MessageBoxCard card)
-            {
-                switch ((MessageBoxButton)e.NewValue)
-                {
-                    case MessageBoxButton.OK:
-                    default:
-                        card.IsShowOk = true;
-                        card.IsShowCancel = false;
-                        card.IsShowYes = false;
-                        card.IsShowNo = false;
-                        break;
-
-                    case MessageBoxButton.OKCancel:
-                        card.IsShowOk = true;
-                        card.IsShowCancel = true;
-                        card.IsShowYes = false;
-                        card.IsShowNo = false;
-                        break;
-
-                    case MessageBoxButton.YesNoCancel:
-                        card.IsShowOk = false;
-                        card.IsShowCancel = true;
-                        card.IsShowYes = true;
-                        card.IsShowNo = true;
-                        break;
-
-                    case MessageBoxButton.YesNo:
-                        card.IsShowOk = false;
-                        card.IsShowCancel = false;
-                        card.IsShowYes = true;
-                        card.IsShowNo = true;
-                        break;
-                }
-            }
-        }
+            "MessageBoxButton", typeof(MessageBoxButton), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxButton)));
 
         /// <summary>
         /// 消息框按钮类型
