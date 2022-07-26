@@ -18,7 +18,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="IconType" Value="InformationFill" />
         <Setter Property="IsShowIcon" Value="False" />
-        <Setter Property="IsShowOk" Value="True" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="MaxWidth" Value="460" />
         <Setter Property="MessageBoxButton" Value="OK" />
@@ -100,31 +99,59 @@
                                                 MinWidth="60"
                                                 Margin="5"
                                                 Content="{DynamicResource I18N_MessageBox_Yes}"
-                                                Visibility="{TemplateBinding IsShowYes, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                Visibility="Collapsed" />
                                         <Button x:Name="PART_NoButton"
                                                 MinWidth="60"
                                                 Margin="5"
                                                 Background="{DynamicResource Info}"
                                                 Content="{DynamicResource I18N_MessageBox_No}"
-                                                IsDefault="True"
-                                                Visibility="{TemplateBinding IsShowNo, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                Visibility="Visible" />
                                         <Button x:Name="PART_OkButton"
                                                 Width="60"
                                                 MinWidth="5"
                                                 Content="{DynamicResource I18N_MessageBox_Ok}"
-                                                Visibility="{TemplateBinding IsShowOk, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                Visibility="Collapsed" />
                                         <Button x:Name="PART_CancelButton"
                                                 MinWidth="60"
                                                 Margin="5"
                                                 Background="{DynamicResource Info}"
                                                 Content="{DynamicResource I18N_MessageBox_Cancel}"
-                                                IsDefault="True"
-                                                Visibility="{TemplateBinding IsShowCancel, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                Visibility="Collapsed" />
                                     </StackPanel>
                                 </Grid>
                             </Border>
                         </Grid>
                     </rubyer:Transition>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="MessageBoxButton" Value="OK">
+                            <Setter TargetName="PART_OkButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_YesButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_NoButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_OkButton" Property="IsDefault" Value="True" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="OKCancel">
+                            <Setter TargetName="PART_OkButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_YesButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_NoButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="YesNo">
+                            <Setter TargetName="PART_OkButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_YesButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_NoButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_NoButton" Property="IsDefault" Value="True" />
+                        </Trigger>
+                        <Trigger Property="MessageBoxButton" Value="YesNoCancel">
+                            <Setter TargetName="PART_OkButton" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_YesButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_NoButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
