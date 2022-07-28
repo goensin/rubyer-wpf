@@ -11,7 +11,6 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
-        <Setter Property="FontSize" Value="16" />
         <Setter Property="CurrentIndex" Value="{Binding CurrentIndex, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="IconType" Value="{x:Null}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
@@ -308,6 +307,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource HorizontalStepBarItem}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
