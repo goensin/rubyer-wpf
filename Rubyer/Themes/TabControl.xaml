@@ -140,6 +140,7 @@
                                       rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                       rubyer:ScrollViewerHelper.VerticalDelta="75"
                                       Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <TabPanel Panel.ZIndex="1"
@@ -431,6 +432,7 @@
                                           rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                           rubyer:ScrollViewerHelper.VerticalDelta="75"
                                           Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           HorizontalScrollBarVisibility="Auto"
                                           VerticalScrollBarVisibility="Auto">
                                 <TabPanel Panel.ZIndex="1"
