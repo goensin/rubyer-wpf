@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Rubyer.Enums
+namespace Rubyer
 {
     /// <summary>
     /// 数值类型
