@@ -4,7 +4,7 @@
              xmlns:core="clr-namespace:System;assembly=mscorlib"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:DataGridViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">

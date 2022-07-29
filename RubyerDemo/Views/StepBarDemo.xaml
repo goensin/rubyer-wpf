@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:rubyer="clr-namespace:Rubyer;assembly=Rubyer"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              MinWidth="900"
              MinHeight="600"
