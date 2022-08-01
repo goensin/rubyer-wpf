@@ -34,7 +34,7 @@
 
                 <ListBox Width="150"
                          Margin="0 0 20 0"
-                         rubyer:ControlHelper.CornerRadius="10"
+                         rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                          rubyer:ControlHelper.MaskOpacity="0.8"

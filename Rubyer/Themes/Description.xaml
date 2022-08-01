@@ -1,0 +1,104 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="RubyerDescriptionItem" TargetType="{x:Type rubyer:DescriptionItem}">
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="DescriptionBackground" Value="{Binding DescriptionBackground, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="DescriptionForeground" Value="{Binding DescriptionForeground, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="DescriptionFontSize" Value="{Binding DescriptionFontSize, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="DescriptionFontWeight" Value="{Binding DescriptionFontWeight, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="HorizontalDescriptionAlignment" Value="{Binding HorizontalDescriptionAlignment, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="VerticalDescriptionAlignment" Value="{Binding VerticalDescriptionAlignment, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:DescriptionItem}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{TemplateBinding DescriptionWidth}" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="descriptionBorder"
+                                Background="{TemplateBinding DescriptionBackground}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding DescriptionBorderThickness}">
+                            <ContentControl x:Name="descriptionContent"
+                                            Margin="{TemplateBinding Padding}"
+                                            HorizontalAlignment="{TemplateBinding HorizontalDescriptionAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalDescriptionAlignment}"
+                                            Content="{TemplateBinding Description}"
+                                            Focusable="False"
+                                            FontSize="{TemplateBinding DescriptionFontSize}"
+                                            FontWeight="{TemplateBinding DescriptionFontWeight}"
+                                            Foreground="{TemplateBinding DescriptionForeground}"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <Border x:Name="contentBorder"
+                                Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding ContentBorderThickness}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerDescription" TargetType="{x:Type rubyer:Description}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Columns" Value="1" />
+        <Setter Property="DescriptionBackground" Value="Transparent" />
+        <Setter Property="DescriptionForeground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalDescriptionAlignment" Value="Center" />
+        <Setter Property="HorizontalDescriptionAlignment" Value="Left" />
+        <Setter Property="DescriptionFontWeight" Value="Normal" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <Grid rubyer:GridHelper.Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" rubyer:GridHelper.Rows="{Binding Rows, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:Description}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BorderDescription"
+           BasedOn="{StaticResource RubyerDescription}"
+           TargetType="{x:Type rubyer:Description}">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="DescriptionForeground" Value="{DynamicResource BlackForeground}" />
+        <Setter Property="DescriptionBackground" Value="{DynamicResource HeaderBackground}" />
+    </Style>
+</ResourceDictionary>

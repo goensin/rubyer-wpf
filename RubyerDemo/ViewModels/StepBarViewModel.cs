@@ -12,6 +12,9 @@ namespace RubyerDemo.ViewModels
     /// </summary>
     public class StepBarViewModel : ViewModelBase
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="StepBarViewModel"/> class.
+        /// </summary>
         public StepBarViewModel()
         {
             Models = new ObservableCollection<StepModel>
@@ -26,6 +29,9 @@ namespace RubyerDemo.ViewModels
 
         private int currentIndex = 0;
 
+        /// <summary>
+        /// 当前步骤
+        /// </summary>
         public int CurrentIndex
         {
             get => currentIndex;
@@ -38,6 +44,9 @@ namespace RubyerDemo.ViewModels
 
         private ObservableCollection<StepModel> models;
 
+        /// <summary>
+        /// 所有步骤
+        /// </summary>
         public ObservableCollection<StepModel> Models
         {
             get => models;
@@ -50,6 +59,9 @@ namespace RubyerDemo.ViewModels
 
         private RelayCommand nextStep;
 
+        /// <summary>
+        /// 下一步命令
+        /// </summary>
         public RelayCommand NextStep => nextStep ?? (nextStep = new RelayCommand(NextStepExecute));
 
         private void NextStepExecute(object obj)
@@ -62,9 +74,19 @@ namespace RubyerDemo.ViewModels
         }
     }
 
+    /// <summary>
+    /// 步骤模型
+    /// </summary>
     public class StepModel
     {
+        /// <summary>
+        /// 内容
+        /// </summary>
         public string Content { get; set; }
+
+        /// <summary>
+        /// 描述
+        /// </summary>
         public string Description { get; set; }
     }
 }

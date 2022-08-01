@@ -1,0 +1,123 @@
+﻿<UserControl x:Class="RubyerDemo.Views.DescriptionDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DescriptionViewModel}"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <rubyer:NumericBox Width="120"
+                               Margin="5 20 5 5"
+                               HorizontalAlignment="Center"
+                               rubyer:InputBoxHelper.PreContent="显示列数:"
+                               MaxValue="3"
+                               MinValue="1"
+                               Value="{Binding CurrentColumn}" />
+
+            <GroupBox Margin="10" Header="默认无边框 - Description">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
+
+                    <rubyer:Description x:Name="item"
+                                        Grid.Row="1"
+                                        Margin="5"
+                                        Columns="{Binding CurrentColumn}"
+                                        HorizontalDescriptionAlignment="Right">
+                        <rubyer:DescriptionItem >
+                            <rubyer:DescriptionItem.Description>
+                                <CheckBox Content="列数"/>
+                            </rubyer:DescriptionItem.Description>
+                            <rubyer:DescriptionItem.Content>
+                                <Button Padding="10 5" Content="Columns" />
+                            </rubyer:DescriptionItem.Content>
+                        </rubyer:DescriptionItem>
+                        <rubyer:DescriptionItem Content="HorizontalDescriptionAlignment" Description="水平对齐" />
+                        <rubyer:DescriptionItem Content="VerticalDescriptionAlignment" Description="垂直对齐" />
+                        <rubyer:DescriptionItem Content="DescriptionFontSize" Description="字体大小" />
+                        <rubyer:DescriptionItem Description="其他">
+                            <rubyer:DescriptionItem.Content>
+                                <TextBlock TextWrapping="Wrap">DescriptionFontWeight, DescriptionBackground, DescriptionForeground, DisplayDescriptionPath, DescriptionStringFormat</TextBlock>
+                            </rubyer:DescriptionItem.Content>
+                        </rubyer:DescriptionItem>
+                    </rubyer:Description>
+
+                    <TextBlock Style="{StaticResource Head4TextBlock}"
+                               Grid.Row="2"
+                               Text="Binding 方式:" />
+
+                    <rubyer:Description x:Name="binding"
+                                        Grid.Row="3"
+                                        Margin="10"
+                                        Columns="{Binding CurrentColumn}"
+                                        DescriptionFontSize="14"
+                                        DescriptionFontWeight="Bold"
+                                        DescriptionStringFormat="1: {0}"
+                                        DisplayDescriptionPath="Description"
+                                        DisplayMemberPath="Content"
+                                        ItemStringFormat="2: {0}"
+                                        ItemsSource="{Binding Models}" />
+
+                </Grid>
+            </GroupBox>
+            <GroupBox Margin="10" Header="带边框 - BorderDescription">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
+
+                    <rubyer:Description Style="{StaticResource BorderDescription}"
+                                        Grid.Row="1"
+                                        Margin="10"
+                                        Columns="{Binding CurrentColumn}">
+                        <rubyer:DescriptionItem Content="Columns" Description="列数" />
+                        <rubyer:DescriptionItem Content="HorizontalDescriptionAlignment" Description="水平对齐" />
+                        <rubyer:DescriptionItem Content="VerticalDescriptionAlignment" Description="垂直对齐" />
+                        <rubyer:DescriptionItem Content="DescriptionFontSize" Description="字体大小" />
+                        <rubyer:DescriptionItem Description="其他">
+                            <rubyer:DescriptionItem.Content>
+                                <TextBlock TextWrapping="Wrap">DescriptionFontWeight, DescriptionBackground, DescriptionForeground, DisplayDescriptionPath, DescriptionStringFormat</TextBlock>
+                            </rubyer:DescriptionItem.Content>
+                        </rubyer:DescriptionItem>
+                    </rubyer:Description>
+
+                    <TextBlock Style="{StaticResource Head4TextBlock}"
+                               Grid.Row="2"
+                               Text="DescriptionItem 方式:" />
+
+                    <rubyer:Description Style="{StaticResource BorderDescription}"
+                                        Grid.Row="3"
+                                        Margin="10"
+                                        HorizontalAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Background="{DynamicResource Light}"
+                                        BorderThickness="3"
+                                        Columns="{Binding CurrentColumn}"
+                                        DescriptionBackground="{DynamicResource Darker}"
+                                        DescriptionFontSize="14"
+                                        DescriptionFontWeight="Bold"
+                                        DescriptionForeground="{DynamicResource WhiteForeground}"
+                                        DisplayDescriptionPath="Description"
+                                        DisplayMemberPath="Content"
+                                        HorizontalDescriptionAlignment="Center"
+                                        ItemsSource="{Binding Models}" />
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+
+    </ScrollViewer>
+</UserControl>
