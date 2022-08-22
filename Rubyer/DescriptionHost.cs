@@ -68,7 +68,7 @@ namespace Rubyer
         /// 描述背景色
         /// </summary>
         public static readonly DependencyProperty DescriptionBackgroundProperty =
-            DependencyProperty.Register("DescriptionBackground", typeof(Brush), typeof(Description), new PropertyMetadata(default(Brush)));
+            DependencyProperty.Register("DescriptionBackground", typeof(Brush), typeof(Description), new FrameworkPropertyMetadata(default(Brush)));
 
         /// <summary>
         /// 描述背景色
@@ -83,7 +83,7 @@ namespace Rubyer
         /// 描述前景色
         /// </summary>
         public static readonly DependencyProperty DescriptionForegroundProperty =
-            DependencyProperty.Register("DescriptionForeground", typeof(Brush), typeof(Description), new PropertyMetadata(default(Brush)));
+            DependencyProperty.Register("DescriptionForeground", typeof(Brush), typeof(Description), new FrameworkPropertyMetadata(default(Brush)));
 
         /// <summary>
         /// 描述前景色

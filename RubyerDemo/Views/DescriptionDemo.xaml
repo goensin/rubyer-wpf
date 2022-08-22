@@ -107,7 +107,7 @@
                                         Background="{DynamicResource Light}"
                                         BorderThickness="3"
                                         Columns="{Binding CurrentColumn}"
-                                        DescriptionBackground="{DynamicResource Darker}"
+                                        DescriptionBackground="{DynamicResource Dark}"
                                         DescriptionFontSize="14"
                                         DescriptionFontWeight="Bold"
                                         DescriptionForeground="{DynamicResource WhiteForeground}"
