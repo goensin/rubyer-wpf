@@ -142,7 +142,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <rubyer:Card Margin="5 5 0 5">
-            <TabControl Style="{StaticResource CardTabControl}"
+            <!--<TabControl Style="{StaticResource CardTabControl}"
                         Margin="5"
                         rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
                         rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
@@ -152,7 +152,7 @@
                 <TabItem>
                     <TabItem.Header>
                         <TextBlock Width="55" Text="Controls" />
-                    </TabItem.Header>
+                    </TabItem.Header>-->
                     <ListBox Margin="0 5"
                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
                              rubyer:ItemsControlHelper.ItemMargin="7 1"
@@ -173,7 +173,7 @@
                             <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
                         </ListBox.Resources>
                     </ListBox>
-                </TabItem>
+                <!--</TabItem>
 
                 <TabItem>
                     <TabItem.Header>
@@ -181,7 +181,7 @@
                     </TabItem.Header>
                 </TabItem>
 
-            </TabControl>
+            </TabControl>-->
         </rubyer:Card>
 
         <rubyer:Card Grid.Column="1" Margin="5">
