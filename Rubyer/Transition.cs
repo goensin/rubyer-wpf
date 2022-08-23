@@ -39,6 +39,7 @@ namespace Rubyer
             if (IsShow)
             {
                 ShowAnimation(this);
+                Loaded -= Transition_Loaded;
             }
         }
 

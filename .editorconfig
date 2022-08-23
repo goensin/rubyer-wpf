@@ -73,6 +73,12 @@ dotnet_naming_style.pascal_case.required_suffix =
 dotnet_naming_style.pascal_case.word_separator = 
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 
+# MethodDocumentationHeader: The method must have a documentation header.
+dotnet_diagnostic.MethodDocumentationHeader.severity = none
+
+# ConstructorDocumentationHeader: The constructor must have a documentation header.
+dotnet_diagnostic.ConstructorDocumentationHeader.severity = none
+
 [*.vb]
 #### 命名样式 ####
 
