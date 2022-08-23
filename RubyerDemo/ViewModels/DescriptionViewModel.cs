@@ -26,7 +26,7 @@ namespace RubyerDemo.ViewModels
                 new DescriptionModel{ Content = "DescriptionFontWeight, DescriptionBackground, DescriptionForeground, DisplayDescriptionPath, DescriptionStringFormat", Description = "其他"},
             };
 
-            CurrentColumn = 1;
+            CurrentColumn = 2;
         }
 
         private ObservableCollection<DescriptionModel> models;
