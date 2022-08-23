@@ -299,9 +299,8 @@ namespace Rubyer
                 IsEnabled = PageIndex != 1 && pageCount != 1,
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
             };
-            var dynamicResource = new DynamicResourceExtension("I18N_PageBar_PreviousPage");
-            var resourceReferenceExpression = dynamicResource.ProvideValue(null);
-            previousPage.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+
+            previousPage.SetResourceReference(ToolTipProperty, "I18N_PageBar_PreviousPage");
             this.Items.Add(previousPage);
 
             this.Items.Add(new PageBarItem
@@ -348,17 +347,13 @@ namespace Rubyer
                     {
                         info.Value = PageIndex - 5;
                         info.Content = "...";
-                        dynamicResource = new DynamicResourceExtension("I18N_PageBar_Forward5Pages");
-                        resourceReferenceExpression = dynamicResource.ProvideValue(null);
-                        info.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+                        info.SetResourceReference(ToolTipProperty, "I18N_PageBar_Forward5Pages");
                     }
                     else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                     {
                         info.Value = PageIndex + 5;
                         info.Content = "...";
-                        dynamicResource = new DynamicResourceExtension("I18N_PageBar_Backwards5Pages");
-                        resourceReferenceExpression = dynamicResource.ProvideValue(null);
-                        info.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+                        info.SetResourceReference(ToolTipProperty, "I18N_PageBar_Backwards5Pages");
                     }
                 }
 
@@ -385,9 +380,8 @@ namespace Rubyer
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
                 PageNumberCommand = new RubyerCommand(PageNumberChanged)
             };
-            dynamicResource = new DynamicResourceExtension("I18N_PageBar_NextPage");
-            resourceReferenceExpression = dynamicResource.ProvideValue(null);
-            nextPage.SetValue(PageBarItem.ToolTipProperty, resourceReferenceExpression);
+
+            nextPage.SetResourceReference(ToolTipProperty, "I18N_PageBar_NextPage");
             this.Items.Add(nextPage);
         }
 
