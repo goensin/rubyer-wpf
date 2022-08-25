@@ -73,7 +73,6 @@
                                           Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
@@ -135,6 +134,122 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
                         </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WaveLoading" TargetType="{x:Type rubyer:Loading}">
+        <Setter Property="StrokeThickness" Value="3" />
+        <Setter Property="MinHeight" Value="15" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:Loading}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                            <Border Width="{TemplateBinding StrokeThickness}"
+                                    Margin="1 0"
+                                    Background="{TemplateBinding FocusedBrush}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="s1" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border Width="{TemplateBinding StrokeThickness}"
+                                    Margin="1 0"
+                                    Background="{TemplateBinding FocusedBrush}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="s2" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border Width="{TemplateBinding StrokeThickness}"
+                                    Margin="1 0"
+                                    Background="{TemplateBinding FocusedBrush}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="s3" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border Width="{TemplateBinding StrokeThickness}"
+                                    Margin="1 0"
+                                    Background="{TemplateBinding FocusedBrush}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="s4" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                            <Border Width="{TemplateBinding StrokeThickness}"
+                                    Margin="1 0"
+                                    Background="{TemplateBinding FocusedBrush}"
+                                    RenderTransformOrigin="0.5 0.5">
+                                <Border.RenderTransform>
+                                    <ScaleTransform x:Name="s5" ScaleY="1" />
+                                </Border.RenderTransform>
+                            </Border>
+                        </StackPanel>
+
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Grid.Row="1"
+                                          Margin="0 5 0 0"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s1" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.25" Value="2" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s2" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.125" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="2" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s3" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.325" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="2" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s4" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.625" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="2" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.25" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s5" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.875" Value="1" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.25" Value="2" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NotNullConverter}}" Value="True">
+                            <Setter Property="MinHeight" Value="35" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

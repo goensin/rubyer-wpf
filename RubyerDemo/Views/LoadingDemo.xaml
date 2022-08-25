@@ -16,11 +16,32 @@
                     <rubyer:Loading Margin="10" />
                     <rubyer:Loading Margin="10"
                                     CircleDiameter="50"
+                                    FocusedBrush="{DynamicResource Accent}"
                                     StrokeThickness="8" />
-                    <rubyer:Loading Margin="10" Content="loading.." />
                     <rubyer:Loading Margin="10"
-                                    IsEnabled="False"
-                                    Content="disabled" />
+                                    Content="loading.."
+                                    FocusedBrush="{DynamicResource Dark}" />
+                    <rubyer:Loading Margin="10"
+                                    Content="disabled"
+                                    IsEnabled="False" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="1" Header="波形加载中-WaveLoading">
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <rubyer:Loading Style="{StaticResource WaveLoading}" Margin="10" />
+                    <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                    Height="30"
+                                    Margin="10"
+                                    FocusedBrush="{DynamicResource Accent}"
+                                    StrokeThickness="8" />
+                    <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                    Margin="10"
+                                    Content="loading.."
+                                    FocusedBrush="{DynamicResource Dark}" />
+                    <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                    Margin="10"
+                                    Content="disabled"
+                                    IsEnabled="False" />
                 </StackPanel>
             </GroupBox>
         </Grid>
