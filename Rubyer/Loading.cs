@@ -91,22 +91,22 @@ namespace Rubyer
         private static void OnProgressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var loading = d as Loading;
-            loading.StrokeDashArray = new DoubleCollection(new List<double> { (loading.CircleDiameter - loading.StrokeThickness) * Math.PI / loading.StrokeThickness * loading.Progress, double.MaxValue });
+            loading.StrokeDashArray = new DoubleCollection(new List<double> { (loading.Diameter - loading.StrokeThickness) * Math.PI / loading.StrokeThickness * loading.Progress, double.MaxValue });
         }
 
         /// <summary>
-        /// 圆形直径
+        /// 直径
         /// </summary>
-        public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.RegisterAttached(
-            "CircleDiameter", typeof(double), typeof(Loading), new PropertyMetadata(default(double)));
+        public static readonly DependencyProperty DiameterProperty = DependencyProperty.RegisterAttached(
+            "Diameter", typeof(double), typeof(Loading), new PropertyMetadata(default(double)));
 
         /// <summary>
-        /// 圆形直径
+        /// 直径
         /// </summary>
-        public double CircleDiameter
+        public double Diameter
         {
-            get { return (double)GetValue(CircleDiameterProperty); }
-            set { SetValue(CircleDiameterProperty, value); }
+            get { return (double)GetValue(DiameterProperty); }
+            set { SetValue(DiameterProperty, value); }
         }
     }
 }

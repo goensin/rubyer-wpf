@@ -15,11 +15,11 @@
                 <StackPanel Margin="10" Orientation="Horizontal">
                     <rubyer:Loading Margin="10" />
                     <rubyer:Loading Margin="10"
-                                    CircleDiameter="50"
+                                    Diameter="50"
                                     FocusedBrush="{DynamicResource Accent}"
                                     StrokeThickness="8" />
                     <rubyer:Loading Margin="10"
-                                    Content="loading.."
+                                    Content="loading"
                                     FocusedBrush="{DynamicResource Dark}" />
                     <rubyer:Loading Margin="10"
                                     Content="disabled"
@@ -30,13 +30,13 @@
                 <StackPanel Margin="10" Orientation="Horizontal">
                     <rubyer:Loading Style="{StaticResource WaveLoading}" Margin="10" />
                     <rubyer:Loading Style="{StaticResource WaveLoading}"
-                                    Height="30"
                                     Margin="10"
+                                    Diameter="30"
                                     FocusedBrush="{DynamicResource Accent}"
-                                    StrokeThickness="8" />
+                                    StrokeThickness="5" />
                     <rubyer:Loading Style="{StaticResource WaveLoading}"
                                     Margin="10"
-                                    Content="loading.."
+                                    Content="loading"
                                     FocusedBrush="{DynamicResource Dark}" />
                     <rubyer:Loading Style="{StaticResource WaveLoading}"
                                     Margin="10"

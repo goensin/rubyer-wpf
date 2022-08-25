@@ -16,7 +16,7 @@
         <Setter Property="Progress" Value="0.01" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="CircleDiameter" Value="30" />
+        <Setter Property="Diameter" Value="30" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -32,8 +32,8 @@
 
                         <Grid>
                             <Rectangle x:Name="background"
-                                       Width="{TemplateBinding CircleDiameter}"
-                                       Height="{TemplateBinding CircleDiameter}"
+                                       Width="{TemplateBinding Diameter}"
+                                       Height="{TemplateBinding Diameter}"
                                        Stroke="{TemplateBinding Background}"
                                        StrokeThickness="{TemplateBinding StrokeThickness}">
                                 <Rectangle.RadiusX>
@@ -51,8 +51,8 @@
                             </Rectangle>
 
                             <Rectangle x:Name="loading"
-                                       Width="{TemplateBinding CircleDiameter}"
-                                       Height="{TemplateBinding CircleDiameter}"
+                                       Width="{TemplateBinding Diameter}"
+                                       Height="{TemplateBinding Diameter}"
                                        RadiusX="{Binding RadiusX, ElementName=background}"
                                        RadiusY="{Binding RadiusY, ElementName=background}"
                                        RenderTransformOrigin="0.5 0.5"
@@ -142,7 +142,7 @@
 
     <Style x:Key="WaveLoading" TargetType="{x:Type rubyer:Loading}">
         <Setter Property="StrokeThickness" Value="3" />
-        <Setter Property="MinHeight" Value="15" />
+        <Setter Property="Diameter" Value="15" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Loading}">
@@ -152,7 +152,9 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
 
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel Height="{TemplateBinding Diameter}"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
                             <Border Width="{TemplateBinding StrokeThickness}"
                                     Margin="1 0"
                                     Background="{TemplateBinding FocusedBrush}"
@@ -247,9 +249,6 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}, Converter={StaticResource NotNullConverter}}" Value="True">
-                            <Setter Property="MinHeight" Value="35" />
-                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
