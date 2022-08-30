@@ -16,7 +16,7 @@
                     Visibility="Visible">
                 <TextBlock x:Name="message"
                            MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
-                           Margin="1"
+                           Margin="1 -1"
                            HorizontalAlignment="Left"
                            FontSize="10"
                            Foreground="{DynamicResource Error}"
