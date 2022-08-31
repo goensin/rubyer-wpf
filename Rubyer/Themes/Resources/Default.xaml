@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Color.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/DefaultColor.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Converter.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/zh-CN.xaml" />
     </ResourceDictionary.MergedDictionaries>
@@ -107,5 +107,4 @@
     <CornerRadius x:Key="RightContainerCornerRadius">0 5 5 0</CornerRadius>
     <CornerRadius x:Key="TopContainerCornerRadius">5 5 0 0</CornerRadius>
     <CornerRadius x:Key="BottomContainerCornerRadius">0 0 5 5</CornerRadius>
-
 </ResourceDictionary>

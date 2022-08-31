@@ -36,6 +36,11 @@ namespace Rubyer
             {
                 closeButton.Click += (sender, e) =>
                 {
+                    if (!IsShow)
+                    {
+                        IsShow = true;
+                    }
+
                     IsShow = false;
                 };
             }

@@ -29,4 +29,7 @@
   <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
     <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Themes\Resources\Colors\" />
+  </ItemGroup>
 </Project>

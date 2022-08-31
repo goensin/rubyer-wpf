@@ -36,7 +36,6 @@
     <!--  默认多选框  -->
     <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Height" Value="16" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
@@ -200,5 +199,4 @@
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Accent}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Accent}" />
     </Style>
-
 </ResourceDictionary>

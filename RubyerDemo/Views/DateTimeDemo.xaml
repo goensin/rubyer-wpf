@@ -40,8 +40,8 @@
                       Margin="0 0 0 10"
                       Header="日期选择框-DatePicker">
                 <DatePicker Width="140"
-                            rubyer:ControlHelper.FocusBorderBrush="{StaticResource Accent}"
-                            rubyer:ControlHelper.MouseOverBrush="{StaticResource Accent}"
+                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
                             rubyer:InputBoxHelper.IsClearable="True"
                             rubyer:InputBoxHelper.Watermark="请选择日期"
                             SelectedDate="{Binding Date}" />

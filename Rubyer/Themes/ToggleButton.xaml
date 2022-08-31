@@ -24,7 +24,6 @@
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="Height" Value="28" />
@@ -36,6 +35,7 @@
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ToggleButtonHelper.CheckedContent" Value="{x:Null}" />
         <Setter Property="Template">
@@ -49,9 +49,8 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid>
                             <rubyer:ControlMask x:Name="mask"
-                                                Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Background="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                IsActive="{TemplateBinding IsChecked}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                             <ContentPresenter x:Name="contentPresenter"
@@ -81,9 +80,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
-                        </Trigger>
-                        <Trigger Property="IsChecked" Value="False">
-                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+                            <Setter TargetName="border" Property="Background" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToggleButton}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
@@ -156,7 +153,6 @@
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
