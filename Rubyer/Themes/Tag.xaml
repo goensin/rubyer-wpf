@@ -6,7 +6,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-
     <Style x:Key="RubyerTag" TargetType="{x:Type rubyer:Tag}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -30,7 +29,7 @@
                             <Border x:Name="headBorder"
                                     Padding="5 3"
                                     Background="{TemplateBinding HeadBackground}"
-                                    CornerRadius="3 0 0 3"
+                                    CornerRadius="{DynamicResource LeftControlCornerRadius}"
                                     TextBlock.FontWeight="Bold"
                                     TextBlock.Foreground="{TemplateBinding HeadForeground}">
                                 <ContentPresenter ContentSource="Header"
@@ -42,7 +41,7 @@
                                     Grid.Column="1"
                                     Padding="5 3"
                                     Background="{TemplateBinding Background}"
-                                    CornerRadius="0 3 3 0"
+                                    CornerRadius="{DynamicResource RightControlCornerRadius}"
                                     TextBlock.FontWeight="Bold"
                                     TextBlock.Foreground="{TemplateBinding Foreground}">
                                 <ContentPresenter Focusable="False"
