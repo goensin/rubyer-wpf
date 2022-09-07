@@ -26,7 +26,21 @@
             <StackPanel Margin="5" Orientation="Horizontal">
                 <ListBox x:Name="listBox"
                          Width="150"
-                         Margin="0 0 20 0">
+                         Margin="0 0 20 0"
+                         SelectedIndex="0">
+                    <ListBoxItem Content="西瓜" />
+                    <ListBoxItem Content="香蕉" />
+                    <ListBoxItem Content="苹果" />
+                </ListBox>
+
+                <ListBox Width="150"
+                         Margin="0 0 20 0"
+                         rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
+                         rubyer:ItemsControlHelper.ItemMargin="4 2"
+                         rubyer:ItemsControlHelper.ItemPadding="8 5"
+                         rubyer:ListBoxHelper.IsShowLittleBar="True"
+                         BorderThickness="1"
+                         SelectedIndex="0">
                     <ListBoxItem Content="西瓜" />
                     <ListBoxItem Content="香蕉" />
                     <ListBoxItem Content="苹果" />
@@ -42,7 +56,8 @@
                          rubyer:ItemsControlHelper.ItemPadding="8"
                          Background="{DynamicResource Light}"
                          FontSize="15"
-                         Foreground="{DynamicResource BlackForeground}">
+                         Foreground="{DynamicResource BlackForeground}"
+                         SelectedIndex="0">
                     <ListBoxItem Content="西瓜" />
                     <ListBoxItem Content="香蕉" />
                     <ListBoxItem Content="苹果" />

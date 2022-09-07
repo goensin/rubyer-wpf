@@ -38,8 +38,7 @@
                                                Type="ZoomY">
                                 <Rectangle Width="3"
                                            Height="{Binding ActualHeight, ElementName=content}"
-                                           Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                           Visibility="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                           Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                             </rubyer:Transition>
                         </Grid>
 

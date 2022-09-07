@@ -39,6 +39,18 @@
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+
+                        <rubyer:Transition HorizontalAlignment="Left"
+                                           IsShow="{TemplateBinding IsSelected}"
+                                           Type="ZoomY"
+                                           Visibility="{Binding (rubyer:ListBoxHelper.IsShowLittleBar), RelativeSource={RelativeSource AncestorType=ListBox}, Converter={StaticResource BooleanToVisibleConverter}}">
+                            <Rectangle Width="3"
+                                       Height="{Binding ActualHeight, ElementName=content}"
+                                       Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                       Visibility="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
+                        </rubyer:Transition>
+
+
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -49,6 +61,7 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
                         </Border>
                     </Grid>
 
@@ -79,6 +92,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerListBoxItem}" />
+        <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />

@@ -99,5 +99,31 @@ namespace Rubyer
         {
             obj.SetValue(IsAnimationProperty, value);
         }
+
+        /// <summary>
+        /// 选中动画
+        /// </summary>
+        public static readonly DependencyProperty IsShowLittleBarProperty =
+            DependencyProperty.RegisterAttached("IsShowLittleBar", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(false));
+
+        /// <summary>
+        /// Gets the is ShowLittleBar.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A bool.</returns>
+        public static bool GetIsShowLittleBar(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsShowLittleBarProperty);
+        }
+
+        /// <summary>
+        /// Sets the is ShowLittleBar.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">If true, value.</param>
+        public static void SetIsShowLittleBar(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsShowLittleBarProperty, value);
+        }
     }
 }
