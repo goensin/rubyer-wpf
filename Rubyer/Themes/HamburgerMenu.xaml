@@ -13,7 +13,7 @@
                  x:Shared="False"
                  Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenuItem}}" />
 
-    <!--  ListBoxItem  -->
+    <!--  HamburgerMenuItem  -->
     <Style x:Key="RubyerHamburgerMenuItem" TargetType="{x:Type rubyer:HamburgerMenuItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="Transparent" />
@@ -22,25 +22,26 @@
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ListBox}}" />
-        <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuItem}">
                     <Grid x:Name="root">
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                            IsActive="{TemplateBinding IsSelected}"
-                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                        <Grid Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=ListBox}}">
+                            <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                IsActive="{TemplateBinding IsSelected}"
+                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 
-                        <rubyer:Transition HorizontalAlignment="Left"
-                                           IsShow="{TemplateBinding IsSelected}"
-                                           Type="ZoomY">
-                            <Rectangle Width="3"
-                                       Height="{Binding ActualHeight, ElementName=content}"
-                                       Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                       Visibility="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
-                        </rubyer:Transition>
+                            <rubyer:Transition HorizontalAlignment="Left"
+                                               IsShow="{TemplateBinding IsSelected}"
+                                               Type="ZoomY">
+                                <Rectangle Width="3"
+                                           Height="{Binding ActualHeight, ElementName=content}"
+                                           Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                           Visibility="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
+                            </rubyer:Transition>
+                        </Grid>
 
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
@@ -78,11 +79,6 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
                             <Setter Property="Icon" Value="{StaticResource itemIcon}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter TargetName="contentColumn" Property="Width" Value="0" />
-                            <Setter TargetName="iconClolumn" Property="Width" Value="Auto" />
-                            <Setter TargetName="Bd" Property="HorizontalAlignment" Value="Center" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
