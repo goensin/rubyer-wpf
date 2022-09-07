@@ -10,6 +10,7 @@ namespace RubyerDemo.ViewModels
     public class InputBoxViewModel : ViewModelBase
     {
         private int? number;
+
         public int? Number
         {
             get => number;
@@ -21,13 +22,14 @@ namespace RubyerDemo.ViewModels
         }
 
         private string testpassword;
+
         public string TestPassword
         {
             get => testpassword;
             set
             {
                 testpassword = value;
-                RaisePropertyChanged("NuTestPasswordmber");
+                RaisePropertyChanged("TestPassword");
                 Debug.WriteLine($"password: {testpassword}");
             }
         }
@@ -35,6 +37,7 @@ namespace RubyerDemo.ViewModels
         public List<int> Heights => Enumerable.Range(0, 100).ToList();
 
         private int intValue;
+
         public int IntValue
         {
             get => intValue;
@@ -46,6 +49,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private int rangeValue = 3;
+
         public int RangeValue
         {
             get => rangeValue;
@@ -57,6 +61,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private int intervalValue;
+
         public int IntervalValue
         {
             get => intervalValue;
@@ -68,6 +73,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private double? nullableValue;
+
         public double? NullableValue
         {
             get => nullableValue;
@@ -79,6 +85,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private double doubleValue = 0.1;
+
         public double DoubleValue
         {
             get => doubleValue;
@@ -90,6 +97,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private double exponentDoubleValue;
+
         public double ExponentDoubleValue
         {
             get => exponentDoubleValue;

@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="RubyerDemo.Views.HamburgerMenuDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:HamburgerMenuViewModel}"
+             mc:Ignorable="d">
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <GroupBox Width="700"
+                  Height="500"
+                  Margin="10"
+                  Header="汉堡包菜单 - HamburgerMenu">
+            <UniformGrid Rows="1">
+                <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick" Header="{Binding Title}">
+
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="用户"
+                                              IconType="UserLine"
+                                              Selected="HamburgerMenuItem_Selected" />
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="文档"
+                                              IconType="FileLine" />
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="图片"
+                                              IconType="ImageLine" />
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="设置"
+                                              IconType="Settings2Line" />
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="自定义">
+                        <rubyer:HamburgerMenuItem.Icon>
+                            <Image Source="..\rubyer.ico" />
+                        </rubyer:HamburgerMenuItem.Icon>
+                    </rubyer:HamburgerMenuItem>
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="无图标" />
+                    <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                              CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                              Content="不可用"
+                                              IconType="EmotionUnhappyLine"
+                                              IsEnabled="False" />
+                </rubyer:HamburgerMenu>
+
+                <rubyer:HamburgerMenu rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
+                                      rubyer:HeaderHelper.Background="{DynamicResource Dark}"
+                                      rubyer:HeaderHelper.FontSize="16"
+                                      rubyer:HeaderHelper.FontWeight="Bold"
+                                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                      rubyer:ItemsControlHelper.ItemMargin="5 2"
+                                      rubyer:ItemsControlHelper.ItemPadding="10"
+                                      BorderThickness="1"
+                                      CollapsedWidth="50"
+                                      ExpandedWidth="300"
+                                      FontSize="14"
+                                      HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                                      Header="{Binding Title}">
+
+                    <rubyer:HamburgerMenuItem Content="用户" IconType="UserLine" />
+                    <rubyer:HamburgerMenuItem Content="文档" IconType="FileLine" />
+                    <rubyer:HamburgerMenuItem Content="图片" IconType="ImageLine" />
+                    <rubyer:HamburgerMenuItem Content="设置" IconType="Settings2Line" />
+                    <rubyer:HamburgerMenuItem Content="自定义">
+                        <rubyer:HamburgerMenuItem.Icon>
+                            <Image Source="..\rubyer.ico" />
+                        </rubyer:HamburgerMenuItem.Icon>
+                    </rubyer:HamburgerMenuItem>
+                    <rubyer:HamburgerMenuItem Content="无图标" />
+                    <rubyer:HamburgerMenuItem Content="不可用"
+                                              IconType="EmotionUnhappyLine"
+                                              IsEnabled="False" />
+                </rubyer:HamburgerMenu>
+            </UniformGrid>
+        </GroupBox>
+    </ScrollViewer>
+</UserControl>

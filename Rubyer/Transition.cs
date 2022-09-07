@@ -218,6 +218,55 @@ namespace Rubyer
             set { SetValue(CloseEasingFunctionProperty, value); }
         }
 
+        /// <summary>
+        /// 动画进度
+        /// 显示完成 = 1
+        /// 隐藏完成 = 0
+        /// </summary>
+        public static readonly DependencyProperty ProgressProperty =
+            DependencyProperty.Register("Progress", typeof(double), typeof(Transition), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 动画进度
+        /// 显示完成 = 1
+        /// 隐藏完成 = 0
+        /// </summary>
+        public double Progress
+        {
+            get { return (double)GetValue(ProgressProperty); }
+            set { SetValue(ProgressProperty, value); }
+        }
+
+        /// <summary>
+        /// 是否淡入淡出
+        /// </summary>
+        public static readonly DependencyProperty IsFadeProperty =
+            DependencyProperty.Register("IsFade", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool), OnIsShwowChanged));
+
+        /// <summary>
+        /// 是否淡入淡出
+        /// </summary>
+        public bool IsFade
+        {
+            get { return (bool)GetValue(IsFadeProperty); }
+            set { SetValue(IsFadeProperty, value); }
+        }
+
+        /// <summary>
+        /// 折叠后的大小
+        /// </summary>
+        public static readonly DependencyProperty CollapsedSizeProperty =
+            DependencyProperty.Register("CollapsedSize", typeof(double), typeof(Transition), new PropertyMetadata(default(double), OnIsShwowChanged));
+
+        /// <summary>
+        /// 折叠后的大小
+        /// </summary>
+        public double CollapsedSize
+        {
+            get { return (double)GetValue(CollapsedSizeProperty); }
+            set { SetValue(CollapsedSizeProperty, value); }
+        }
+
         #endregion 依赖属性
 
         private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -246,7 +295,7 @@ namespace Rubyer
                 transition.ShowedCommand?.Execute(null);
             };
 
-            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 0, 1, transition.ShowEasingFunction);
+            DoubleAnimation progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction);
 
             switch (transition.Type)
             {
@@ -256,31 +305,31 @@ namespace Rubyer
                 case TransitionType.CollapseLeft:
                 case TransitionType.CollapseRight:
                 default:
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeLeft:
                     DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeRight:
                     translateAnimation = GetTranslateXAnimation(transition, -transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeUp:
                     translateAnimation = GetTranslateYAnimation(transition, transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeDown:
                     translateAnimation = GetTranslateYAnimation(transition, -transition.Offset, 0, transition.ShowEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.Zoom:
@@ -288,47 +337,47 @@ namespace Rubyer
                     DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomX:
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomY:
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
                     scaleYAnimation = GetScaleYAnimation(transition, transition.InitialScale, 1, transition.ShowEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
             }
 
@@ -346,7 +395,16 @@ namespace Rubyer
                 transition.ClosedCommand?.Execute(null);
             };
 
-            DoubleAnimation opacityAnimation = GetOpacityAnimation(transition, 1, 0, transition.CloseEasingFunction);
+            DoubleAnimation progressAnimation;
+            if (transition.Type >= TransitionType.CollapseUp && transition.Type <= TransitionType.CollapseRight)
+            {
+                var progress = GetCollapsedProgress(transition);
+                progressAnimation = GetProgressAnimation(transition, progress, transition.CloseEasingFunction);
+            }
+            else
+            {
+                progressAnimation = GetProgressAnimation(transition, 0, transition.CloseEasingFunction);
+            }
 
             switch (transition.Type)
             {
@@ -356,31 +414,31 @@ namespace Rubyer
                 case TransitionType.CollapseLeft:
                 case TransitionType.CollapseRight:
                 default:
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeLeft:
                     DoubleAnimation translateAnimation = GetTranslateXAnimation(transition, 0, transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeRight:
                     translateAnimation = GetTranslateXAnimation(transition, 0, -transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeUp:
                     translateAnimation = GetTranslateYAnimation(transition, 0, transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.FadeDown:
                     translateAnimation = GetTranslateYAnimation(transition, 0, -transition.Offset, transition.CloseEasingFunction);
                     storyboard.Children.Add(translateAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.Zoom:
@@ -388,66 +446,65 @@ namespace Rubyer
                     DoubleAnimation scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomX:
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomY:
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomLeft:
                     transition.RenderTransformOrigin = new Point(0, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomRight:
                     transition.RenderTransformOrigin = new Point(1, 0.5);
                     scaleXAnimation = GetScaleXAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleXAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomUp:
                     transition.RenderTransformOrigin = new Point(0.5, 0);
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
 
                 case TransitionType.ZoomDown:
                     transition.RenderTransformOrigin = new Point(0.5, 1);
                     scaleYAnimation = GetScaleYAnimation(transition, 1, transition.InitialScale, transition.CloseEasingFunction);
                     storyboard.Children.Add(scaleYAnimation);
-                    storyboard.Children.Add(opacityAnimation);
+                    storyboard.Children.Add(progressAnimation);
                     break;
             }
 
             storyboard.Begin();
         }
 
-        private static DoubleAnimation GetOpacityAnimation(Transition transition, double from, double to, IEasingFunction easing)
+        private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing)
         {
-            DoubleAnimation opacityAnimation = new DoubleAnimation()
+            DoubleAnimation progressAnimation = new DoubleAnimation()
             {
-                From = from,
                 To = to,
                 Duration = transition.Duration,
                 EasingFunction = easing,
             };
 
-            Storyboard.SetTargetProperty(opacityAnimation, new PropertyPath(OpacityProperty));
-            Storyboard.SetTarget(opacityAnimation, transition);
-            return opacityAnimation;
+            Storyboard.SetTargetProperty(progressAnimation, new PropertyPath(ProgressProperty));
+            Storyboard.SetTarget(progressAnimation, transition);
+            return progressAnimation;
         }
 
         private static DoubleAnimation GetTranslateXAnimation(Transition transition, double from, double to, IEasingFunction easing)
@@ -508,6 +565,23 @@ namespace Rubyer
             Storyboard.SetTargetProperty(transformAnimation, new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)"));
             Storyboard.SetTarget(transformAnimation, transition);
             return transformAnimation;
+        }
+
+        private static double GetCollapsedProgress(Transition transition)
+        {
+            switch (transition.Type)
+            {
+                case TransitionType.CollapseUp:
+                case TransitionType.CollapseDown:
+                    return transition.ActualHeight == 0 ? 0 : transition.CollapsedSize / transition.ActualHeight;
+
+                case TransitionType.CollapseLeft:
+                case TransitionType.CollapseRight:
+                    return transition.ActualWidth == 0 ? 0 : transition.CollapsedSize / transition.ActualWidth;
+
+                default:
+                    return 0;
+            }
         }
     }
 

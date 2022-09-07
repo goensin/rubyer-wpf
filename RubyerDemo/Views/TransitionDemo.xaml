@@ -228,6 +228,35 @@
                             </rubyer:Card>
                         </rubyer:Transition>
                     </UniformGrid>
+
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:Transition CollapsedSize="50"
+                                           IsFade="False"
+                                           IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}"
+                                           Type="CollapseUp">
+                            <rubyer:Card Width="150"
+                                         Height="100"
+                                         Margin="5"
+                                         Background="{DynamicResource Primary}">
+                                <TextBlock HorizontalAlignment="Center"
+                                           FontSize="20"
+                                           Text="CollapseUp" />
+                            </rubyer:Card>
+                        </rubyer:Transition>
+                        <rubyer:Transition CollapsedSize="50"
+                                           IsFade="False"
+                                           IsShow="{Binding IsChecked, ElementName=CollapseToggle, Mode=TwoWay}"
+                                           Type="CollapseLeft">
+                            <rubyer:Card Width="150"
+                                         Height="100"
+                                         Margin="5"
+                                         Background="{DynamicResource Primary}">
+                                <TextBlock HorizontalAlignment="Center"
+                                           FontSize="20"
+                                           Text="CollapseLeft" />
+                            </rubyer:Card>
+                        </rubyer:Transition>
+                    </StackPanel>
                 </StackPanel>
             </GroupBox>
         </Grid>

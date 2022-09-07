@@ -30,7 +30,7 @@
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualHeight" />
-                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -41,7 +41,7 @@
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualHeight" />
-                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -54,7 +54,7 @@
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualWidth" />
-                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -67,7 +67,7 @@
                     <Setter.Value>
                         <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
                             <Binding ElementName="content" Path="ActualWidth" />
-                            <Binding Path="Opacity" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
+                            <Binding Path="Progress" RelativeSource="{RelativeSource AncestorType=rubyer:Transition}" />
                         </MultiBinding>
                     </Setter.Value>
                 </Setter>
@@ -79,7 +79,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="IsShow" Value="True" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Opacity" Value="0" />
+        <Setter Property="IsFade" Value="True" />
         <Setter Property="RenderTransform">
             <Setter.Value>
                 <TransformGroup>
@@ -118,6 +118,9 @@
             </Trigger>
             <Trigger Property="Type" Value="CollapseRight">
                 <Setter Property="Template" Value="{StaticResource CollapseTransitionTemplate}" />
+            </Trigger>
+            <Trigger Property="IsFade" Value="True">
+                <Setter Property="Opacity" Value="{Binding Progress, RelativeSource={RelativeSource Self}}" />
             </Trigger>
         </Style.Triggers>
     </Style>

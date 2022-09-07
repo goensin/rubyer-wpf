@@ -52,6 +52,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NumericBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Description.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/HamburgerMenu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -100,4 +101,6 @@
     <Style BasedOn="{StaticResource RubyerStepBar}" TargetType="{x:Type rubyer:StepBar}" />
     <Style BasedOn="{StaticResource RubyerDescriptionItem}" TargetType="{x:Type rubyer:DescriptionItem}" />
     <Style BasedOn="{StaticResource RubyerDescription}" TargetType="{x:Type rubyer:Description}" />
+    <Style BasedOn="{StaticResource RubyerHamburgerMenuItem}" TargetType="{x:Type rubyer:HamburgerMenuItem}" />
+    <Style BasedOn="{StaticResource RubyerHamburgerMenu}" TargetType="{x:Type rubyer:HamburgerMenu}" />
 </ResourceDictionary>

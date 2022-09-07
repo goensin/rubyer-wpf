@@ -39,4 +39,5 @@
     <converter:IsEqualConverter x:Key="IsEqualConverter" />
     <converter:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converter:DataGridRowIndexConverter x:Key="DataGridRowIndexConverter" />
+    <converter:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
 </ResourceDictionary>

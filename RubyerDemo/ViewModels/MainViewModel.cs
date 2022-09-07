@@ -46,6 +46,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "加载中-Loading", Content = new LoadingDemo() },
                 new MenuItem{ Name = "步骤条-StepBar", Content = new StepBarDemo{ DataContext = new StepBarViewModel()} },
                 new MenuItem{ Name = "描述列表-Description", Content = new DescriptionDemo{ DataContext = new DescriptionViewModel()} },
+                new MenuItem{ Name = "汉堡包-HamburgerMenu", Content = new HamburgerMenuDemo{ DataContext = new HamburgerMenuViewModel()} },
             };
 
             CurrentMenuItem = MenuItems[0];
