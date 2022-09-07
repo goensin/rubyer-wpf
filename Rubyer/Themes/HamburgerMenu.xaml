@@ -23,6 +23,11 @@
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ListBox}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ToolTipService.Placement" Value="Right" />
+        <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ToolTipService.VerticalOffset" Value="5" />
+        <Setter Property="ToolTipService.ShowDuration" Value="10000" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuItem}">
@@ -49,7 +54,8 @@
                                     <ColumnDefinition x:Name="contentColumn" Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentControl Width="{Binding ActualHeight, ElementName=content}"
+                                <ContentControl x:Name="icon"
+                                                Width="{Binding ActualHeight, ElementName=content}"
                                                 Height="{Binding ActualHeight, ElementName=content}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
@@ -75,6 +81,9 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
                             <Setter Property="Icon" Value="{StaticResource itemIcon}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
+                            <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
