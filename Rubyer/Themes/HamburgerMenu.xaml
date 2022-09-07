@@ -43,11 +43,7 @@
                             </rubyer:Transition>
                         </Grid>
 
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition x:Name="iconClolumn" Width="{Binding CollapsedWidth, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource DoubleToGridLengthConverter}}" />
@@ -58,7 +54,8 @@
                                                 Height="{Binding ActualHeight, ElementName=content}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
-                                                Content="{TemplateBinding Icon}" />
+                                                Content="{TemplateBinding Icon}"
+                                                IsHitTestVisible="False" />
 
                                 <ContentPresenter x:Name="content"
                                                   Grid.Column="1"
@@ -118,6 +115,7 @@
         <Setter Property="CollapsedWidth" Value="40" />
         <Setter Property="ExpandedWidth" Value="200" />
         <Setter Property="IsExpanded" Value="True" />
+        <Setter Property="IsShowHamburgerButton" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
@@ -198,6 +196,9 @@
                             </MultiTrigger.Conditions>
                             <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </MultiTrigger>
+                        <Trigger Property="IsShowHamburgerButton" Value="False">
+                            <Setter TargetName="PART_HamburgerButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

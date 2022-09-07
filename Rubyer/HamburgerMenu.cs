@@ -103,6 +103,22 @@ namespace Rubyer
             get { return (object)GetValue(OptionContentProperty); }
             set { SetValue(OptionContentProperty, value); }
         }
+
+        /// <summary>
+        /// 是否显示汉堡包按钮
+        /// </summary>
+        public static readonly DependencyProperty IsShowHamburgerButtonProperty = DependencyProperty.Register(
+            "IsShowHamburgerButton", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(true));
+
+        /// <summary>
+        /// 是否显示汉堡包按钮
+        /// </summary>
+        public bool IsShowHamburgerButton
+        {
+            get { return (bool)GetValue(IsShowHamburgerButtonProperty); }
+            set { SetValue(IsShowHamburgerButtonProperty, value); }
+        }
+
         #endregion properties
 
         #region events
