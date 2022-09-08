@@ -20,7 +20,6 @@
                                    FontSize="14"
                                    Text="items 方式" />
                         <rubyer:HamburgerMenu HorizontalContentAlignment="Center"
-                                              Background="AliceBlue"
                                               HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
                                               SelectedIndex="0">

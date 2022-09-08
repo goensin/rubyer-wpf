@@ -29,7 +29,7 @@
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
@@ -79,7 +79,7 @@
                             <Setter Property="Icon" Value="{StaticResource optionsItemIcon}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ToolTip" Value="{Binding Name, RelativeSource={RelativeSource Self}}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -159,7 +159,7 @@
                             <Setter Property="Icon" Value="{StaticResource itemIcon}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ToolTip" Value="{Binding Name, RelativeSource={RelativeSource Self}}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
