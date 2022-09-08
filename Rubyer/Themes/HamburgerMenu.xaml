@@ -279,7 +279,7 @@
                                     <rubyer:HamburgerMenuOptions x:Name="PART_OptionsItemsControl"
                                                                  Grid.Row="2"
                                                                  Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
-                                                                 Margin="0 20 0 0"
+                                                                 Margin="0 20"
                                                                  HorizontalAlignment="Left"
                                                                  ItemContainerStyle="{TemplateBinding OptionsItemContainerStyle}"
                                                                  ItemTemplate="{TemplateBinding OptionsItemTemplate}"
