@@ -25,11 +25,12 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenuItem), new FrameworkPropertyMetadata(typeof(HamburgerMenuItem)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
-            this.Selected += (sender, e) => CommandHelpers.ExecuteCommandSource(this); 
+            this.Selected += (sender, e) => CommandHelpers.ExecuteCommandSource(this);
         }
 
         #region commands

@@ -102,5 +102,6 @@
     <Style BasedOn="{StaticResource RubyerDescriptionItem}" TargetType="{x:Type rubyer:DescriptionItem}" />
     <Style BasedOn="{StaticResource RubyerDescription}" TargetType="{x:Type rubyer:Description}" />
     <Style BasedOn="{StaticResource RubyerHamburgerMenuItem}" TargetType="{x:Type rubyer:HamburgerMenuItem}" />
+    <Style BasedOn="{StaticResource RubyerHamburgerMenuOptionsItem}" TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}" />
     <Style BasedOn="{StaticResource RubyerHamburgerMenu}" TargetType="{x:Type rubyer:HamburgerMenu}" />
 </ResourceDictionary>

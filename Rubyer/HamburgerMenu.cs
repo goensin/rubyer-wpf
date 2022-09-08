@@ -18,14 +18,27 @@ namespace Rubyer
     /// <summary>
     /// 汉堡包菜单
     /// </summary>
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(ListBoxItem))]
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HamburgerMenuItem))]
+    [StyleTypedProperty(Property = "OptionsItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     [TemplatePart(Name = HamburgerButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = OptionsItemsControlPartName, Type = typeof(ItemsControl))]
     public class HamburgerMenu : ListBox
     {
         /// <summary>
         /// 汉堡包按钮
         /// </summary>
         public const string HamburgerButtonPartName = "PART_HamburgerButton";
+
+        /// <summary>
+        /// 选项集合控件
+        /// </summary>
+        public const string OptionsItemsControlPartName = "PART_OptionsItemsControl";
+
+        #region fields
+
+        private ItemsControl optionsItemsControl;
+
+        #endregion fields
 
         #region properties
 
@@ -90,21 +103,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 设置子项区域
-        /// </summary>
-        public static readonly DependencyProperty OptionContentProperty = DependencyProperty.Register(
-            "OptionContent", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
-
-        /// <summary>
-        /// 设置子项区域
-        /// </summary>
-        public object OptionContent
-        {
-            get { return (object)GetValue(OptionContentProperty); }
-            set { SetValue(OptionContentProperty, value); }
-        }
-
-        /// <summary>
         /// 是否显示汉堡包按钮
         /// </summary>
         public static readonly DependencyProperty IsShowHamburgerButtonProperty = DependencyProperty.Register(
@@ -119,7 +117,113 @@ namespace Rubyer
             set { SetValue(IsShowHamburgerButtonProperty, value); }
         }
 
+        /// <summary>
+        /// 是否显示小竖条
+        /// </summary>
+        public static readonly DependencyProperty IsShowLittleBarProperty = DependencyProperty.Register(
+            "IsShowLittleBar", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(true));
+
+        /// <summary>
+        /// 是否显示小竖条
+        /// </summary>
+        public bool IsShowLittleBar
+        {
+            get { return (bool)GetValue(IsShowLittleBarProperty); }
+            set { SetValue(IsShowLittleBarProperty, value); }
+        }
+
         #endregion properties
+
+        #region options item
+
+        // form https://github.com/MahApps/MahApps.Metro
+        // MahApps.Metro.Controls.HamburgerMenu
+
+        /// <summary>Identifies the <see cref="OptionsItemsSource"/> dependency property.</summary>
+        public static readonly DependencyProperty OptionsItemsSourceProperty = DependencyProperty.Register(
+            nameof(OptionsItemsSource), typeof(object), typeof(HamburgerMenu), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Gets or sets an object source used to generate the content of the options.
+        /// </summary>
+        public object OptionsItemsSource
+        {
+            get => this.GetValue(OptionsItemsSourceProperty);
+            set => this.SetValue(OptionsItemsSourceProperty, value);
+        }
+
+        /// <summary>Identifies the <see cref="OptionsItemContainerStyle"/> dependency property.</summary>
+        public static readonly DependencyProperty OptionsItemContainerStyleProperty = DependencyProperty.Register(
+            nameof(OptionsItemContainerStyle), typeof(Style), typeof(HamburgerMenu), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Gets or sets the <see cref="Style"/> used for each item in the options.
+        /// </summary>
+        public Style OptionsItemContainerStyle
+        {
+            get => (Style)this.GetValue(OptionsItemContainerStyleProperty);
+            set => this.SetValue(OptionsItemContainerStyleProperty, value);
+        }
+
+        /// <summary>Identifies the <see cref="OptionsItemTemplate"/> dependency property.</summary>
+        public static readonly DependencyProperty OptionsItemTemplateProperty = DependencyProperty.Register(
+            nameof(OptionsItemTemplate), typeof(DataTemplate), typeof(HamburgerMenu), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Gets or sets the <see cref="DataTemplate"/> used to display each item in the options.
+        /// </summary>
+        public DataTemplate OptionsItemTemplate
+        {
+            get => (DataTemplate)this.GetValue(OptionsItemTemplateProperty);
+            set => this.SetValue(OptionsItemTemplateProperty, value);
+        }
+
+        /// <summary>Identifies the <see cref="OptionsItemTemplateSelector"/> dependency property.</summary>
+        public static readonly DependencyProperty OptionsItemTemplateSelectorProperty = DependencyProperty.Register(
+            nameof(OptionsItemTemplateSelector), typeof(DataTemplateSelector), typeof(HamburgerMenu), new PropertyMetadata(null));
+
+        /// <summary>
+        /// Gets or sets the <see cref="DataTemplateSelector"/> used to display each item in the options.
+        /// </summary>
+        public DataTemplateSelector OptionsItemTemplateSelector
+        {
+            get => (DataTemplateSelector)this.GetValue(OptionsItemTemplateSelectorProperty);
+            set => this.SetValue(OptionsItemTemplateSelectorProperty, value);
+        }
+
+        /// <summary>Identifies the <see cref="OptionsVisibility"/> dependency property.</summary>
+        public static readonly DependencyProperty OptionsVisibilityProperty = DependencyProperty.Register(
+            nameof(OptionsVisibility), typeof(Visibility), typeof(HamburgerMenu), new PropertyMetadata(Visibility.Visible));
+
+        /// <summary>
+        /// Gets or sets the <see cref="Visibility"/> of the options menu.
+        /// </summary>
+        public Visibility OptionsVisibility
+        {
+            get => (Visibility)this.GetValue(OptionsVisibilityProperty);
+            set => this.SetValue(OptionsVisibilityProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the collection used to generate the content of the option list.
+        /// </summary>
+        /// <exception cref="Exception">
+        /// Exception thrown if OptionsListView is not yet defined.
+        /// </exception>
+        public ItemCollection OptionsItems
+        {
+            get
+            {
+                if (this.optionsItemsControl is null)
+                {
+                    throw new Exception("OptionsListView is not defined yet. Please use OptionsItemsSource instead.");
+                }
+
+                return this.optionsItemsControl.Items;
+            }
+        }
+
+        #endregion options item
 
         #region events
 
@@ -152,7 +256,21 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Button button = GetTemplateChild(HamburgerButtonPartName) as Button;
-            button.Click += Button_Click; ;
+            button.Click += Button_Click;
+
+            optionsItemsControl = GetTemplateChild(OptionsItemsControlPartName) as ItemsControl;
+        }
+
+        /// <inheritdoc/>
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is HamburgerMenuItem;
+        }
+
+        /// <inheritdoc/>
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new HamburgerMenuItem();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

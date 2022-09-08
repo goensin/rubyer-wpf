@@ -12,16 +12,16 @@ namespace Rubyer
         /// 背景色
         /// </summary>
         public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.RegisterAttached("Background", typeof(SolidColorBrush), typeof(HeaderHelper), new PropertyMetadata(default));
+            DependencyProperty.RegisterAttached("Background", typeof(Brush), typeof(HeaderHelper), new PropertyMetadata(default));
 
         /// <summary>
         /// Gets the background.
         /// </summary>
         /// <param name="obj">The obj.</param>
-        /// <returns>A SolidColorBrush.</returns>
-        public static SolidColorBrush GetBackground(DependencyObject obj)
+        /// <returns>A Brush.</returns>
+        public static Brush GetBackground(DependencyObject obj)
         {
-            return (SolidColorBrush)obj.GetValue(BackgroundProperty);
+            return (Brush)obj.GetValue(BackgroundProperty);
         }
 
         /// <summary>
@@ -29,7 +29,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetBackground(DependencyObject obj, SolidColorBrush value)
+        public static void SetBackground(DependencyObject obj, Brush value)
         {
             obj.SetValue(BackgroundProperty, value);
         }
@@ -38,16 +38,16 @@ namespace Rubyer
         /// 前景色
         /// </summary>
         public static readonly DependencyProperty ForegroundProperty =
-            DependencyProperty.RegisterAttached("Foreground", typeof(SolidColorBrush), typeof(HeaderHelper), new PropertyMetadata(default));
+            DependencyProperty.RegisterAttached("Foreground", typeof(Brush), typeof(HeaderHelper), new PropertyMetadata(default));
 
         /// <summary>
         /// Gets the foreground.
         /// </summary>
         /// <param name="obj">The obj.</param>
-        /// <returns>A SolidColorBrush.</returns>
-        public static SolidColorBrush GetForeground(DependencyObject obj)
+        /// <returns>A Brush.</returns>
+        public static Brush GetForeground(DependencyObject obj)
         {
-            return (SolidColorBrush)obj.GetValue(ForegroundProperty);
+            return (Brush)obj.GetValue(ForegroundProperty);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
-        public static void SetForeground(DependencyObject obj, SolidColorBrush value)
+        public static void SetForeground(DependencyObject obj, Brush value)
         {
             obj.SetValue(ForegroundProperty, value);
         }

@@ -46,10 +46,8 @@
                                            Visibility="{Binding (rubyer:ListBoxHelper.IsShowLittleBar), RelativeSource={RelativeSource AncestorType=ListBox}, Converter={StaticResource BooleanToVisibleConverter}}">
                             <Rectangle Width="3"
                                        Height="{Binding ActualHeight, ElementName=content}"
-                                       Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
-                                       Visibility="{Binding IsSelected, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                       Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                         </rubyer:Transition>
-
 
                         <Border x:Name="Bd"
                                 Background="{TemplateBinding Background}"
@@ -61,7 +59,6 @@
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-
                         </Border>
                     </Grid>
 
@@ -237,6 +234,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
 </ResourceDictionary>
