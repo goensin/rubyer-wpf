@@ -38,34 +38,34 @@
                             </rubyer:HamburgerMenu.OptionsItemsSource>
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="用户"
+                                                      Header="用户"
                                                       IconType="UserLine"
                                                       Selected="HamburgerMenuItem_Selected" />
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="文档"
+                                                      Header="文档"
                                                       IconType="FileLine" />
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="图片"
+                                                      Header="图片"
                                                       IconType="ImageLine" />
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="设置"
+                                                      Header="设置"
                                                       IconType="Settings2Line" />
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="自定义">
+                                                      Header="自定义">
                                 <rubyer:HamburgerMenuItem.Icon>
                                     <Image Source="..\rubyer.ico" />
                                 </rubyer:HamburgerMenuItem.Icon>
                             </rubyer:HamburgerMenuItem>
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="无图标" />
+                                                      Header="无图标" />
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="不可用"
+                                                      Header="不可用"
                                                       IconType="EmotionUnhappyLine"
                                                       IsEnabled="False" />
                         </rubyer:HamburgerMenu>
@@ -94,7 +94,7 @@
                             <rubyer:HamburgerMenu.ItemContainerStyle>
                                 <Style TargetType="rubyer:HamburgerMenuItem">
                                     <Setter Property="IconType" Value="{Binding Icon}" />
-                                    <Setter Property="Content" Value="{Binding Name}" />
+                                    <Setter Property="Header" Value="{Binding Name}" />
                                     <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
                                     <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
                                     <Setter Property="CommandParameter" Value="{Binding Name}" />

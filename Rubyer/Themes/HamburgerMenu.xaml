@@ -116,7 +116,7 @@
                                                Type="ZoomY"
                                                Visibility="{Binding IsShowLittleBar, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource BooleanToVisibleConverter}}">
                                 <Rectangle Width="3"
-                                           Height="{Binding ActualHeight, ElementName=content}"
+                                           Height="{Binding ActualHeight, ElementName=header}"
                                            Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                             </rubyer:Transition>
                         </Grid>
@@ -129,19 +129,20 @@
                                 </Grid.ColumnDefinitions>
 
                                 <ContentControl x:Name="icon"
-                                                Width="{Binding ActualHeight, ElementName=content}"
-                                                Height="{Binding ActualHeight, ElementName=content}"
+                                                Width="{Binding ActualHeight, ElementName=header}"
+                                                Height="{Binding ActualHeight, ElementName=header}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
                                                 IsHitTestVisible="False" />
 
-                                <ContentPresenter x:Name="content"
-                                                  Grid.Column="1"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <ContentControl x:Name="header"
+                                                Grid.Column="1"
+                                                Margin="{TemplateBinding Padding}"
+                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Content="{TemplateBinding Header}"
+                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Grid>
                         </Border>
                     </Grid>

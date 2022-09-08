@@ -174,6 +174,21 @@ namespace Rubyer
             set { SetValue(IconTypeProperty, value); }
         }
 
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
+            "Header", typeof(object), typeof(HamburgerMenuItem), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 标题
+        /// </summary>
+        public object Header
+        {
+            get { return (object)GetValue(HeaderProperty); }
+            set { SetValue(HeaderProperty, value); }
+        }
+
         #endregion properties
     }
 }
