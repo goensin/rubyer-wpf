@@ -93,8 +93,8 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=TabControl}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
@@ -179,8 +179,6 @@
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerHamburgerMenuItem}" />
         <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
