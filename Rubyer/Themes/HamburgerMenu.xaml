@@ -35,7 +35,7 @@
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
         <Setter Property="ToolTipService.ShowDuration" Value="10000" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="1" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
@@ -101,7 +101,7 @@
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
         <Setter Property="ToolTipService.ShowDuration" Value="10000" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="1" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuItem}">
@@ -228,7 +228,10 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Border Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
+                                            Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            HorizontalAlignment="Left"
+                                            Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                         <Button x:Name="PART_HamburgerButton"
                                                 Style="{StaticResource TextButton}"
                                                 Height="Auto"
@@ -237,7 +240,12 @@
                                                 rubyer:ControlHelper.CornerRadius="{Binding (rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 rubyer:ControlHelper.MaskOpacity="{Binding (rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                ToolTipService.InitialShowDelay="100"
+                                                ToolTipService.Placement="Right"
+                                                ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource Self}}"
+                                                ToolTipService.ShowDuration="10000"
+                                                ToolTipService.VerticalOffset="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="{TemplateBinding CollapsedWidth, Converter={StaticResource DoubleToGridLengthConverter}}" />
@@ -320,6 +328,9 @@
                         </MultiTrigger>
                         <Trigger Property="IsShowHamburgerButton" Value="False">
                             <Setter TargetName="PART_HamburgerButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsExpanded" Value="False">
+                            <Setter TargetName="PART_HamburgerButton" Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
