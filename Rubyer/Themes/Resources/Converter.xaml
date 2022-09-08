@@ -40,4 +40,5 @@
     <converter:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converter:DataGridRowIndexConverter x:Key="DataGridRowIndexConverter" />
     <converter:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
+    <converter:EnumGetDescriptionConverter x:Key="EnumGetDescriptionConverter" />
 </ResourceDictionary>
