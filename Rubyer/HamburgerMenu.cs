@@ -22,7 +22,7 @@ namespace Rubyer
     [StyleTypedProperty(Property = "OptionsItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     [TemplatePart(Name = HamburgerButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = OptionsItemsControlPartName, Type = typeof(ItemsControl))]
-    public class HamburgerMenu : ListBox
+    public class HamburgerMenu : TabControl
     {
         /// <summary>
         /// 汉堡包按钮
@@ -61,14 +61,14 @@ namespace Rubyer
         /// 标题
         /// </summary>
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header", typeof(string), typeof(HamburgerMenu), new PropertyMetadata(default(string)));
+            "Header", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
 
         /// <summary>
         /// 标题
         /// </summary>
-        public string Header
+        public object Header
         {
-            get { return (string)GetValue(HeaderProperty); }
+            get { return (object)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
         }
 

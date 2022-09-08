@@ -33,10 +33,5 @@ namespace RubyerDemo.Views
 
             // e.Handled = true; // 取消切换
         }
-
-        private void HamburgerMenuItem_Selected(object sender, RoutedEventArgs e)
-        {
-            Debug.WriteLine($"Selected HamburgerMenuItem:{(sender as HamburgerMenuItem).Content}");
-        }
     }
 }

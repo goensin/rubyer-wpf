@@ -18,7 +18,7 @@ namespace Rubyer
     /// <summary>
     /// 汉堡包菜单子项
     /// </summary>
-    public class HamburgerMenuItem : ListBoxItem, ICommandSource
+    public class HamburgerMenuItem : TabItem, ICommandSource
     {
         static HamburgerMenuItem()
         {
@@ -29,8 +29,14 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+        }
 
-            this.Selected += (sender, e) => CommandHelpers.ExecuteCommandSource(this);
+        /// <inheritdoc/>
+        protected override void OnSelected(RoutedEventArgs e)
+        {
+            base.OnSelected(e);
+
+            CommandHelpers.ExecuteCommandSource(this);
         }
 
         #region commands
@@ -172,21 +178,6 @@ namespace Rubyer
         {
             get { return (IconType?)GetValue(IconTypeProperty); }
             set { SetValue(IconTypeProperty, value); }
-        }
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header", typeof(object), typeof(HamburgerMenuItem), new PropertyMetadata(null));
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public object Header
-        {
-            get { return (object)GetValue(HeaderProperty); }
-            set { SetValue(HeaderProperty, value); }
         }
 
         #endregion properties

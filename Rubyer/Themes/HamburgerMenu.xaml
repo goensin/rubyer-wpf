@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <rubyer:Icon x:Key="itemIcon"
@@ -26,9 +27,9 @@
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
@@ -39,11 +40,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
                     <Grid x:Name="root">
-                        <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ListBox}}"
-                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ListBox}}"
+                        <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TabControl}}"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TabControl}}"
                                             IsActive="{TemplateBinding IsPressed}"
-                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TabControl}}" />
 
                         <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Grid>
@@ -92,9 +93,9 @@
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ListBox}}" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ListBox}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
@@ -105,7 +106,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuItem}">
                     <Grid x:Name="root">
-                        <Grid Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=ListBox}}">
+                        <Grid Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TabControl}}">
                             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 IsActive="{TemplateBinding IsSelected}"
@@ -139,8 +140,8 @@
                                 <ContentControl x:Name="header"
                                                 Grid.Column="1"
                                                 Margin="{TemplateBinding Padding}"
-                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                                 Content="{TemplateBinding Header}"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Grid>
@@ -177,9 +178,9 @@
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="HorizontalAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerHamburgerMenuItem}" />
         <Setter Property="rubyer:ControlHelper.SelectedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
@@ -201,81 +202,110 @@
         <Setter Property="IsShowHamburgerButton" Value="True" />
         <Setter Property="IsShowLittleBar" Value="True" />
         <Setter Property="OptionsItemContainerStyle" Value="{StaticResource RubyerHamburgerMenuOptionsItem}" />
+        <Setter Property="TabStripPlacement" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
-                    <Border x:Name="root"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <rubyer:Transition CollapsedSize="{TemplateBinding CollapsedWidth}"
-                                           IsFade="False"
-                                           IsShow="{TemplateBinding IsExpanded}"
-                                           Type="CollapseLeft">
-                            <Grid Width="{TemplateBinding ExpandedWidth}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
+                    <Grid x:Name="root">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-                                <Border Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                    <Button x:Name="PART_HamburgerButton"
-                                            Style="{StaticResource TextButton}"
-                                            Height="Auto"
-                                            Padding="{Binding (rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            HorizontalContentAlignment="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            rubyer:ControlHelper.CornerRadius="{Binding (rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            rubyer:ControlHelper.MaskOpacity="{Binding (rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="{TemplateBinding CollapsedWidth, Converter={StaticResource DoubleToGridLengthConverter}}" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                        <Border x:Name="menu"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <rubyer:Transition CollapsedSize="{TemplateBinding CollapsedWidth}"
+                                               IsFade="False"
+                                               IsShow="{TemplateBinding IsExpanded}"
+                                               Type="CollapseLeft">
+                                <Grid Width="{TemplateBinding ExpandedWidth}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
 
-                                            <rubyer:Icon Width="{Binding ActualHeight, ElementName=header}"
-                                                         Height="{Binding ActualHeight, ElementName=header}"
-                                                         HorizontalAlignment="Center"
-                                                         VerticalAlignment="Center"
-                                                         Type="MenuLine" />
+                                    <Border Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}" Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <Button x:Name="PART_HamburgerButton"
+                                                Style="{StaticResource TextButton}"
+                                                Height="Auto"
+                                                Padding="{Binding (rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                HorizontalContentAlignment="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                rubyer:ControlHelper.CornerRadius="{Binding (rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                rubyer:ControlHelper.MaskOpacity="{Binding (rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="{TemplateBinding CollapsedWidth, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock x:Name="header"
-                                                       Grid.Column="1"
-                                                       VerticalAlignment="Center"
-                                                       FontSize="{Binding (rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontWeight="{Binding (rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Text="{TemplateBinding Header}" />
-                                        </Grid>
-                                    </Button>
-                                </Border>
+                                                <rubyer:Icon Width="{Binding ActualHeight, ElementName=header}"
+                                                             Height="{Binding ActualHeight, ElementName=header}"
+                                                             HorizontalAlignment="Center"
+                                                             VerticalAlignment="Center"
+                                                             Type="MenuLine" />
 
-                                <Border x:Name="Bd"
-                                        Grid.Row="1"
-                                        Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
-                                        HorizontalAlignment="Left"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                    <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
-                                        <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </ScrollViewer>
-                                </Border>
+                                                <TextBlock x:Name="header"
+                                                           Grid.Column="1"
+                                                           VerticalAlignment="Center"
+                                                           FontSize="{Binding (rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontWeight="{Binding (rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           Text="{TemplateBinding Header}" />
+                                            </Grid>
+                                        </Button>
+                                    </Border>
 
-                                <rubyer:HamburgerMenuOptions x:Name="PART_OptionsItemsControl"
-                                                             Grid.Row="2"
-                                                             Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
-                                                             Margin="0 20 0 0"
-                                                             HorizontalAlignment="Left"
-                                                             ItemContainerStyle="{TemplateBinding OptionsItemContainerStyle}"
-                                                             ItemTemplate="{TemplateBinding OptionsItemTemplate}"
-                                                             ItemTemplateSelector="{TemplateBinding OptionsItemTemplateSelector}"
-                                                             ItemsSource="{TemplateBinding OptionsItemsSource}"
-                                                             ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
-                        </rubyer:Transition>
-                    </Border>
+                                    <Border x:Name="Bd"
+                                            Grid.Row="1"
+                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
+                                            HorizontalAlignment="Left"
+                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        <ScrollViewer Style="{StaticResource OnlyArrowScrollViewer}"
+                                                      rubyer:ScrollViewerHelper.HorizontalDelta="150"
+                                                      rubyer:ScrollViewerHelper.VerticalDelta="75"
+                                                      HorizontalScrollBarVisibility="Disabled"
+                                                      VerticalScrollBarVisibility="Auto">
+                                            <TabPanel Panel.ZIndex="1"
+                                                      IsItemsHost="True"
+                                                      KeyboardNavigation.TabIndex="1" />
+                                        </ScrollViewer>
+                                    </Border>
+
+                                    <rubyer:HamburgerMenuOptions x:Name="PART_OptionsItemsControl"
+                                                                 Grid.Row="2"
+                                                                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
+                                                                 Margin="0 20 0 0"
+                                                                 HorizontalAlignment="Left"
+                                                                 ItemContainerStyle="{TemplateBinding OptionsItemContainerStyle}"
+                                                                 ItemTemplate="{TemplateBinding OptionsItemTemplate}"
+                                                                 ItemTemplateSelector="{TemplateBinding OptionsItemTemplateSelector}"
+                                                                 ItemsSource="{TemplateBinding OptionsItemsSource}"
+                                                                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </Grid>
+                            </rubyer:Transition>
+                        </Border>
+
+                        <Border x:Name="contentPanel"
+                                Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                KeyboardNavigation.DirectionalNavigation="Contained"
+                                KeyboardNavigation.TabIndex="2"
+                                KeyboardNavigation.TabNavigation="Local">
+
+                            <ContentPresenter x:Name="PART_SelectedContentHost"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              ContentSource="SelectedContent"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
