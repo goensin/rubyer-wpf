@@ -79,7 +79,7 @@
                             <Setter Property="Icon" Value="{StaticResource optionsItemIcon}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
