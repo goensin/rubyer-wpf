@@ -341,5 +341,31 @@ namespace Rubyer
         {
             return (bool)element.GetValue(IsOnlyArrowProperty);
         }
+
+        /// <summary>
+        /// 显示箭头按钮
+        /// </summary>
+        public static readonly DependencyProperty ArrowIconSizeProperty = DependencyProperty.RegisterAttached(
+            "ArrowIconSize", typeof(double), typeof(ScrollViewerHelper), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// Sets the show arrow button.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">If true, value.</param>
+        public static void SetArrowIconSize(DependencyObject element, double value)
+        {
+            element.SetValue(ArrowIconSizeProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the show arrow button.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A bool.</returns>
+        public static double GetArrowIconSize(DependencyObject element)
+        {
+            return (double)element.GetValue(ArrowIconSizeProperty);
+        }
     }
 }

@@ -96,6 +96,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.IsOnlyArrow" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.HorizontalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.VerticalDelta" Value="100" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowIconSize" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -125,7 +126,6 @@
                                       Style="{StaticResource ScrollBarArrowButton}"
                                       Grid.Row="1"
                                       Grid.Column="0"
-                                      Width="20"
                                       Height="Auto"
                                       VerticalAlignment="Stretch"
                                       rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
@@ -133,14 +133,16 @@
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
-                            <rubyer:Icon Type="ArrowLeftSLine" />
+
+                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Type="ArrowLeftSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="rightButton"
                                       Style="{StaticResource ScrollBarArrowButton}"
                                       Grid.Row="1"
                                       Grid.Column="2"
-                                      Width="20"
                                       Height="Auto"
                                       VerticalAlignment="Stretch"
                                       rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
@@ -149,7 +151,9 @@
                                       Cursor="Arrow"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
-                            <rubyer:Icon Type="ArrowRightSLine" />
+                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Type="ArrowRightSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="upButton"
@@ -157,14 +161,15 @@
                                       Grid.Row="0"
                                       Grid.Column="1"
                                       Width="Auto"
-                                      Height="20"
                                       VerticalAlignment="Stretch"
                                       rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
-                            <rubyer:Icon Type="ArrowUpSLine" />
+                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Type="ArrowUpSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="downButton"
@@ -172,14 +177,15 @@
                                       Grid.Row="2"
                                       Grid.Column="1"
                                       Width="Auto"
-                                      Height="20"
                                       VerticalAlignment="Stretch"
                                       rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
-                            <rubyer:Icon Type="ArrowDownSLine" />
+                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         Type="ArrowDownSLine" />
                         </RepeatButton>
                     </Grid>
                 </ControlTemplate>
