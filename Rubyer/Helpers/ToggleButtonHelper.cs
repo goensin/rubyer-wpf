@@ -62,24 +62,46 @@ namespace Rubyer
         {
             if (d is ToggleButton toggleButton)
             {
-                SetUncheckedContent(toggleButton, toggleButton.Content);
-
-                if (toggleButton.IsChecked == true)
+                if (toggleButton.IsLoaded)
                 {
-                    CheckAction(toggleButton);
+                    AddCheckedEvents(toggleButton);
                 }
-
-                toggleButton.Checked -= ToggleButton_Checked;
-                toggleButton.Unchecked -= ToggleButton_Checked;
-                toggleButton.Indeterminate -= ToggleButton_Checked;
-
-                if (GetCheckedContent(toggleButton) != null)
+                else
                 {
-                    toggleButton.Checked += ToggleButton_Checked;
-                    toggleButton.Unchecked += ToggleButton_Checked;
-                    toggleButton.Indeterminate += ToggleButton_Checked;
+                    toggleButton.Loaded += ToggleButton_Loaded;
                 }
             }
+        }
+
+        private static void AddCheckedEvents(ToggleButton toggleButton)
+        {
+            if (toggleButton.Content != null)
+            {
+                SetUncheckedContent(toggleButton, toggleButton.Content);
+            }
+
+            if (toggleButton.IsChecked == true)
+            {
+                CheckAction(toggleButton);
+            }
+
+            toggleButton.Checked -= ToggleButton_Checked;
+            toggleButton.Unchecked -= ToggleButton_Checked;
+            toggleButton.Indeterminate -= ToggleButton_Checked;
+
+            if (GetCheckedContent(toggleButton) != null)
+            {
+                toggleButton.Checked += ToggleButton_Checked;
+                toggleButton.Unchecked += ToggleButton_Checked;
+                toggleButton.Indeterminate += ToggleButton_Checked;
+            }
+        }
+
+        private static void ToggleButton_Loaded(object sender, RoutedEventArgs e)
+        {
+            var toggleButton = sender as ToggleButton;
+            AddCheckedEvents(toggleButton);
+            toggleButton.Loaded -= ToggleButton_Loaded;
         }
 
         private static void ToggleButton_Checked(object sender, RoutedEventArgs e)
