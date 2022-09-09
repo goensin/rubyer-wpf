@@ -34,7 +34,6 @@
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
-        <Setter Property="ToolTipService.ShowDuration" Value="10000" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
@@ -100,7 +99,6 @@
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
-        <Setter Property="ToolTipService.ShowDuration" Value="10000" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="100" />
         <Setter Property="Template">
             <Setter.Value>
@@ -242,7 +240,6 @@
                                                 ToolTipService.InitialShowDelay="100"
                                                 ToolTipService.Placement="Right"
                                                 ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource Self}}"
-                                                ToolTipService.ShowDuration="10000"
                                                 ToolTipService.VerticalOffset="5">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
