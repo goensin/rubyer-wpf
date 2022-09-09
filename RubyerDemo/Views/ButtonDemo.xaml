@@ -106,9 +106,12 @@
                             Content="赞" />
                     <Button Style="{StaticResource AccentButton}"
                             Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="35"
                             rubyer:ButtonHelper.Shape="Circle"
                             Content="顶" />
-                    <Button Margin="10 0" rubyer:ButtonHelper.Shape="Circle">
+                    <Button Margin="10 0"
+                            rubyer:ButtonHelper.CircleDiameter="40"
+                            rubyer:ButtonHelper.Shape="Circle">
                         <rubyer:Icon Type="QqFill" />
                     </Button>
                     <Button Margin="10 0"
@@ -128,7 +131,7 @@
                                      Type="WeiboFill" />
                     </Button>
                     <Button Margin="10 0"
-                            rubyer:ButtonHelper.CircleDiameter="45"
+                            rubyer:ButtonHelper.CircleDiameter="55"
                             rubyer:ButtonHelper.Shape="Circle"
                             Background="Gray">
                         <rubyer:Icon Width="45"

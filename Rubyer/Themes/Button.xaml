@@ -119,6 +119,7 @@
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Round">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
+                            <Setter Property="VerticalAlignment" Value="Stretch" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Circle">
                             <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
