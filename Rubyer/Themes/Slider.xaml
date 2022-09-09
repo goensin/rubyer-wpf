@@ -154,7 +154,7 @@
                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Center"
                                Focusable="False"
-                               Foreground="{DynamicResource DefaultBackground}"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"
                                OverridesDefaultStyle="True"
                                Template="{StaticResource SliderThumbHorizontalDefault}" />
                     </Track.Thumb>
@@ -309,7 +309,7 @@
                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Top"
                                Focusable="False"
-                               Foreground="{DynamicResource DefaultBackground}"
+                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"
                                OverridesDefaultStyle="True"
                                Template="{StaticResource SliderThumbVerticalDefault}" />
                     </Track.Thumb>
