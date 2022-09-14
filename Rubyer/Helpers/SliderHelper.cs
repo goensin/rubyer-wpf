@@ -130,7 +130,8 @@ namespace Rubyer
                 {
                     var placement = GetValuePlacement(slider);
                     var offset = GetValueOffset(slider);
-                    adornerLayer.Add(new SliderValueAdorner(grip, slider, placement, offset));
+                    var stringFormat = GetValueStringFormat(slider);
+                    adornerLayer.Add(new SliderValueAdorner(grip, slider, placement, offset, stringFormat));
                 };
 
                 grip.MouseLeave += (a, b) =>
@@ -192,5 +193,25 @@ namespace Rubyer
         {
             return (double)element.GetValue(GripDiameterProperty);
         }
+
+        /// <summary>
+        /// 当前值显示字符串格式
+        /// </summary>
+        public static readonly DependencyProperty ValueStringFormatProperty = DependencyProperty.RegisterAttached(
+           "ValueStringFormat", typeof(string), typeof(SliderHelper), new PropertyMetadata(default(string)));
+
+        /// <summary>
+        /// Sets the value offset.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">The value.</param>
+        public static void SetValueStringFormat(DependencyObject element, string value) => element.SetValue(ValueStringFormatProperty, value);
+
+        /// <summary>
+        /// Gets the value offset.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A double.</returns>
+        public static string GetValueStringFormat(DependencyObject element) => (string)element.GetValue(ValueStringFormatProperty);
     }
 }

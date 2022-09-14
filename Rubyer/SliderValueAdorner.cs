@@ -23,7 +23,8 @@ namespace Rubyer
         /// <param name="slider">Slider 控件</param>
         /// <param name="placement">显示位置</param>
         /// <param name="offset">偏移</param>
-        public SliderValueAdorner(UIElement adornedElement, Slider slider, Dock placement, double offset)
+        /// <param name="stringFormat">字符串格式</param>
+        public SliderValueAdorner(UIElement adornedElement, Slider slider, Dock placement, double offset, string stringFormat)
           : base(adornedElement)
         {
             this.placement = placement;
@@ -32,7 +33,8 @@ namespace Rubyer
             var binding = new Binding
             {
                 Source = slider,
-                Path = new PropertyPath("Value")
+                Path = new PropertyPath("Value"),
+                StringFormat = stringFormat
             };
 
             valueTextBlock = new TextBlock

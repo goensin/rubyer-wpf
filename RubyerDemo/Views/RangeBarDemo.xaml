@@ -92,6 +92,7 @@
                     <StackPanel Width="500" Margin="10">
                         <Slider Margin="0 10"
                                 rubyer:SliderHelper.DraggingShowValue="True"
+                                rubyer:SliderHelper.ValueStringFormat="{}{0} cm"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
