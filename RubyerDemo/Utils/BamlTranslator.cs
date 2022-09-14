@@ -86,135 +86,178 @@ namespace RubyerDemo.Utils
                         int maxAsyncRecords = reader.ReadInt32();
                         bool debugBaml = reader.ReadBoolean();
                         break;
+
                     case BamlRecordType.DocumentEnd:
                         break;
+
                     case BamlRecordType.ElementStart:
                         this.namespaceManager.OnElementStart();
                         this.ReadElementStart(reader);
                         break;
+
                     case BamlRecordType.ElementEnd:
                         this.ReadElementEnd();
                         this.namespaceManager.OnElementEnd();
                         break;
+
                     case BamlRecordType.KeyElementStart:
                         this.ReadKeyElementStart(reader);
                         break;
+
                     case BamlRecordType.KeyElementEnd:
                         this.ReadKeyElementEnd();
                         break;
+
                     case BamlRecordType.XmlnsProperty:
                         this.ReadXmlnsProperty(reader);
                         break;
+
                     case BamlRecordType.PIMapping:
                         this.ReadNamespaceMapping(reader);
                         break;
+
                     case BamlRecordType.PresentationOptionsAttribute:
                         this.ReadPresentationOptionsAttribute(reader);
                         break;
+
                     case BamlRecordType.AssemblyInfo:
                         this.ReadAssemblyInfo(reader);
                         break;
+
                     case BamlRecordType.StringInfo:
                         this.ReadStringInfo(reader);
                         break;
+
                     case BamlRecordType.ConnectionId:
                         reader.ReadInt32(); // ConnectionId
                         break;
+
                     case BamlRecordType.Property:
                         this.ReadPropertyRecord(reader);
                         break;
+
                     case BamlRecordType.PropertyWithConverter:
                         this.ReadPropertyWithConverter(reader);
                         break;
+
                     case BamlRecordType.PropertyWithExtension:
                         this.ReadPropertyWithExtension(reader);
                         break;
+
                     case BamlRecordType.PropertyTypeReference:
                         this.ReadPropertyTypeReference(reader);
                         break;
+
                     case BamlRecordType.PropertyWithStaticResourceId:
                         this.ReadPropertyWithStaticResourceIdentifier(reader);
                         break;
+
                     case BamlRecordType.ContentProperty:
                         this.ReadContentProperty(reader);
                         break;
+
                     case BamlRecordType.TypeInfo:
                         this.ReadTypeInfo(reader);
                         break;
+
                     case BamlRecordType.AttributeInfo:
                         this.ReadAttributeInfo(reader);
                         break;
+
                     case BamlRecordType.DefAttribute:
                         this.ReadDefAttribute(reader);
                         break;
+
                     case BamlRecordType.DefAttributeKeyString:
                         this.ReadDefAttributeKeyString(reader);
                         break;
+
                     case BamlRecordType.DefAttributeKeyType:
                         this.ReadDefAttributeKeyType(reader);
                         break;
+
                     case BamlRecordType.Text:
                         this.ReadText(reader);
                         break;
+
                     case BamlRecordType.TextWithConverter:
                         this.ReadTextWithConverter(reader);
                         break;
+
                     case BamlRecordType.PropertyCustom:
                         this.ReadPropertyCustom(reader);
                         break;
+
                     case BamlRecordType.PropertyListStart:
                         this.ReadPropertyListStart(reader);
                         break;
+
                     case BamlRecordType.PropertyListEnd:
                         this.ReadPropertyListEnd();
                         break;
+
                     case BamlRecordType.PropertyDictionaryStart:
                         this.ReadPropertyDictionaryStart(reader);
                         break;
+
                     case BamlRecordType.PropertyDictionaryEnd:
                         this.ReadPropertyDictionaryEnd();
                         break;
+
                     case BamlRecordType.PropertyComplexStart:
                         this.ReadPropertyComplexStart(reader);
                         break;
+
                     case BamlRecordType.PropertyComplexEnd:
                         this.ReadPropertyComplexEnd();
                         break;
+
                     case BamlRecordType.ConstructorParametersStart:
                         this.ReadConstructorParametersStart();
                         break;
+
                     case BamlRecordType.ConstructorParametersEnd:
                         this.ReadConstructorParametersEnd();
                         break;
+
                     case BamlRecordType.ConstructorParameterType:
                         this.ReadConstructorParameterType(reader);
                         break;
+
                     case BamlRecordType.DeferableContentStart:
                         int contentSize = reader.ReadInt32();
                         break;
+
                     case BamlRecordType.StaticResourceStart:
                         this.ReadStaticResourceStart(reader);
                         break;
+
                     case BamlRecordType.StaticResourceEnd:
                         this.ReadStaticResourceEnd(reader);
                         break;
+
                     case BamlRecordType.StaticResourceId:
                         this.ReadStaticResourceIdentifier(reader);
                         break;
+
                     case BamlRecordType.OptimizedStaticResource:
                         this.ReadOptimizedStaticResource(reader);
                         break;
+
                     case BamlRecordType.LineNumberAndPosition:
                         this.lineNumber = reader.ReadInt32(); // LineNumber
                         this.linePosition = reader.ReadInt32(); // Position
                                                                 // Console.WriteLine(lineNumber.ToString() + "," + linePosition.ToString());
                         break;
+
                     case BamlRecordType.LinePosition:
                         this.linePosition = reader.ReadInt32(); // Position
                         break;
+
                     case BamlRecordType.TextWithId:
                         this.ReadTextWithId(reader);
                         break;
+
                     default:
                         throw new NotSupportedException(recordType.ToString());
                 }
@@ -252,11 +295,13 @@ namespace RubyerDemo.Utils
                     case PropertyType.Dictionary:
                         properties.Add(property);
                         break;
+
                     case PropertyType.Namespace:
                     case PropertyType.Value:
                     case PropertyType.Declaration:
                         attributes.Add(property);
                         break;
+
                     case PropertyType.Complex:
                         if (IsExtension(property.Value))
                         {
@@ -267,6 +312,7 @@ namespace RubyerDemo.Utils
                             properties.Add(property);
                         }
                         break;
+
                     case PropertyType.Content:
                         contentProperty = property;
                         break;
@@ -277,7 +323,7 @@ namespace RubyerDemo.Utils
                 writer.Write(" ");
 
                 bool isAttachProperty = false;
-                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.XmlPrefix != null)
+                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.Namespace == "Rubyer")
                 {
                     isAttachProperty = !element.TypeDeclaration.ToString().Equals(property.PropertyDeclaration.DeclaringType.ToString());
                 }
@@ -290,11 +336,13 @@ namespace RubyerDemo.Utils
                     case PropertyType.Complex:
                         WriteComplexElement((Element)property.Value, writer);
                         break;
+
                     case PropertyType.Namespace:
                     case PropertyType.Declaration:
                     case PropertyType.Value:
                         writer.Write(property.Value.ToString());
                         break;
+
                     default:
                         throw new NotSupportedException();
                 }
@@ -544,9 +592,11 @@ namespace RubyerDemo.Utils
                             IList elements = (IList)property.Value;
                             elements.Add(element);
                             break;
+
                         case PropertyType.Complex:
                             property.Value = element;
                             break;
+
                         default:
                             throw new NotSupportedException();
                     }
@@ -842,18 +892,21 @@ namespace RubyerDemo.Utils
                         }
                     }
                     break;
+
                 case 0x25a:
                     { // Static
                         ResourceName resourceName = (ResourceName)this.GetResourceName(valueIdentifier);
                         element.Arguments.Add(resourceName);
                     }
                     break;
+
                 case 0x027a:
                     { // TemplateBinding
                         PropertyDeclaration propertyName = this.GetPropertyDeclaration(valueIdentifier);
                         element.Arguments.Add(propertyName);
                     }
                     break;
+
                 default:
                     throw new NotSupportedException("Unknown property with extension");
             }
@@ -945,10 +998,12 @@ namespace RubyerDemo.Utils
                         property.Value = this.GetPropertyDeclaration(identifier);
                     }
                     break;
+
                 case 0x002e: // Boolean
                     int value = reader.ReadByte();
                     property.Value = (value == 0x01) ? "true" : "false";
                     break;
+
                 case 0x02e8: // SolidColorBrush
                     switch (reader.ReadByte())
                     {
@@ -959,18 +1014,22 @@ namespace RubyerDemo.Utils
                                 case 0x00ffffff:
                                     property.Value = "Transparent";
                                     break;
+
                                 default:
                                     property.Value = KnownColors.KnownColorFromUInt(color);
                                     break;
                             }
                             break;
+
                         case 0x02: // OtherColor
                             property.Value = reader.ReadString();
                             break;
+
                         default:
                             throw new NotSupportedException();
                     }
                     break;
+
                 case 0x02e9: // IntCollection
                     using (StringWriter writer = new StringWriter())
                     {
@@ -993,6 +1052,7 @@ namespace RubyerDemo.Utils
                                     }
                                 }
                                 break;
+
                             case 0x02: // Byte
                                 for (int i = 0; i < count; i++)
                                 {
@@ -1004,6 +1064,7 @@ namespace RubyerDemo.Utils
                                     writer.Write(number.ToString());
                                 }
                                 break;
+
                             case 0x03: // UInt16
                                 for (int i = 0; i < count; i++)
                                 {
@@ -1015,6 +1076,7 @@ namespace RubyerDemo.Utils
                                     writer.Write(number.ToString());
                                 }
                                 break;
+
                             case 0x04: // UInt32
                                 throw new NotSupportedException();
                             default:
@@ -1023,9 +1085,11 @@ namespace RubyerDemo.Utils
                         property.Value = writer.ToString();
                     }
                     break;
+
                 case 0x02ea: // PathData
                     property.Value = PathDataParser.ParseStreamGeometry(reader);
                     break;
+
                 case 0x02ec: // Point
                     using (StringWriter writer = new StringWriter())
                     {
@@ -1049,6 +1113,7 @@ namespace RubyerDemo.Utils
                         property.Value = writer.ToString();
                     }
                     break;
+
                 case 0x02eb: // Point3D
                 case 0x02f0: // Vector3D
                     using (StringWriter writer = new StringWriter())
@@ -1073,6 +1138,7 @@ namespace RubyerDemo.Utils
                         property.Value = writer.ToString();
                     }
                     break;
+
                 default:
                     throw new NotSupportedException();
             }
@@ -1197,9 +1263,11 @@ namespace RubyerDemo.Utils
                 case -1:
                     property.PropertyDeclaration = new PropertyDeclaration("x:Name");
                     break;
+
                 case -2:
                     property.PropertyDeclaration = new PropertyDeclaration("x:Uid");
                     break;
+
                 default:
                     property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
                     break;
@@ -2807,13 +2875,17 @@ namespace RubyerDemo.Utils
                 {
                     case 0x01:
                         return 0;
+
                     case 0x02:
                         return 1;
+
                     case 0x03:
                         return -1;
+
                     case 0x04:
                         double value = this.ReadInt32();
                         return (value * 1E-06);
+
                     case 0x05:
                         return this.ReadDouble();
                 }
@@ -3252,7 +3324,7 @@ namespace RubyerDemo.Utils
             {
                 if (isAttachProperty)
                 {
-                    return $"{this.DeclaringType}.{this.Name}";
+                    return $"rubyer:{this.DeclaringType}.{this.Name}";
                 }
 
                 if ((this.DeclaringType != null) && (this.DeclaringType.Name == "XmlNamespace") && (this.DeclaringType.Namespace == null) && (this.DeclaringType.Assembly == null))
@@ -3263,7 +3335,7 @@ namespace RubyerDemo.Utils
                     }
                     return "xmlns:" + this.Name;
                 }
-               
+
                 return this.Name;
             }
         }
