@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -141,14 +142,14 @@ namespace Rubyer
 
         /// <summary>Identifies the <see cref="OptionsItemsSource"/> dependency property.</summary>
         public static readonly DependencyProperty OptionsItemsSourceProperty = DependencyProperty.Register(
-            nameof(OptionsItemsSource), typeof(object), typeof(HamburgerMenu), new PropertyMetadata(null));
+            nameof(OptionsItemsSource), typeof(IEnumerable), typeof(HamburgerMenu), new PropertyMetadata(null));
 
         /// <summary>
         /// Gets or sets an object source used to generate the content of the options.
         /// </summary>
-        public object OptionsItemsSource
+        public IEnumerable OptionsItemsSource
         {
-            get => this.GetValue(OptionsItemsSourceProperty);
+            get => (IEnumerable)this.GetValue(OptionsItemsSourceProperty);
             set => this.SetValue(OptionsItemsSourceProperty, value);
         }
 

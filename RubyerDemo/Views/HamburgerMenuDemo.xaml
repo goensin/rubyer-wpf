@@ -19,7 +19,8 @@
                         <TextBlock DockPanel.Dock="Top"
                                    FontSize="14"
                                    Text="items 方式" />
-                        <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                        <rubyer:HamburgerMenu rubyer:ItemsControlHelper.ItemPadding="10"
+                                              HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
                                               SelectedIndex="0">
                             <rubyer:HamburgerMenu.OptionsItemsSource>
@@ -38,6 +39,7 @@
                                                                      IconType="RestartLine" />
                                 </rubyer:HamburgerMenuItemCollection>
                             </rubyer:HamburgerMenu.OptionsItemsSource>
+
                             <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
                                                       CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
                                                       Content="用户"

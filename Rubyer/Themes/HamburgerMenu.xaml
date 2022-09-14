@@ -110,14 +110,16 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="100" />
+        <Setter Property="ToolTipService.IsEnabled" Value="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource BooleanToInverseConverter}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
-                    <Grid x:Name="root">
+                    <Grid x:Name="root" Background="{TemplateBinding Background}">
                         <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TabControl}}"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TabControl}}"
@@ -156,9 +158,6 @@
                         <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
                             <Setter Property="Icon" Value="{StaticResource optionsItemIcon}" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter Property="ToolTip" Value="{Binding Content, RelativeSource={RelativeSource Self}}" />
-                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -187,7 +186,6 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5 8" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="0 10" />
