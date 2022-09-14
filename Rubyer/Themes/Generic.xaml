@@ -83,6 +83,10 @@
     <Style BasedOn="{StaticResource RubyerToolBar}" TargetType="{x:Type ToolBar}" />
     <Style BasedOn="{StaticResource RubyerToolBarTray}" TargetType="{x:Type ToolBarTray}" />
     <Style BasedOn="{StaticResource RubyerStatusBar}" TargetType="{x:Type StatusBar}" />
+    <Style BasedOn="{StaticResource RubyerDataGridCell}" TargetType="{x:Type DataGridCell}" />
+    <Style BasedOn="{StaticResource RubyerDataGridRowHeader}" TargetType="{x:Type DataGridRowHeader}" />
+    <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}" />
+    <Style BasedOn="{StaticResource RubyerDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}" />
     <Style BasedOn="{StaticResource RubyerDataGrid}" TargetType="{x:Type DataGrid}" />
     <Style BasedOn="{StaticResource RubyerPageBar}" TargetType="{x:Type rubyer:PageBar}" />
     <Style BasedOn="{StaticResource RubyerCard}" TargetType="{x:Type rubyer:Card}" />
