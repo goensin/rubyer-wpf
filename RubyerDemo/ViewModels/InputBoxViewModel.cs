@@ -48,7 +48,7 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private int rangeValue = 3;
+        private int rangeValue = 20;
 
         public int RangeValue
         {

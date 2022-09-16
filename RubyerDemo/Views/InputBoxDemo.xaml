@@ -146,7 +146,8 @@
                         <rubyer:NumericBox Width="100"
                                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
                                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
-                                           rubyer:InputBoxHelper.Watermark="-10-10"
+                                           rubyer:InputBoxHelper.Watermark="-10 - 10"
+                                           MaxValue="10"
                                            MinValue="-10"
                                            Value="{Binding RangeValue}" />
 

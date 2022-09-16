@@ -309,7 +309,15 @@ namespace Rubyer
                 var newValue = GetCalculatedValue(numberBox, value);
                 if (numberBox.Value != newValue)
                 {
-                    numberBox.Value = newValue;
+                    if (numberBox.IsLoaded)
+                    {
+                        numberBox.Value = newValue;
+                    }
+                    else
+                    {
+                        numberBox.Loaded += (sender, args) => numberBox.Value = newValue;
+                    }
+
                     return;
                 }
             }
@@ -320,7 +328,7 @@ namespace Rubyer
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var numberBox = d as NumericBox;
-            numberBox.Text = numberBox.Value == null ? null : numberBox.Value.GetValueOrDefault().ToString(numberBox.TextFormat);
+            numberBox.Text = numberBox.Value?.ToString(numberBox.TextFormat);
             numberBox.textBox?.Select(numberBox.textBox.Text.Length, 1);
 
             var args = new RoutedPropertyChangedEventArgs<double?>((double?)e.OldValue, (double?)e.NewValue);
