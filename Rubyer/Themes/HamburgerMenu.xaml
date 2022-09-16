@@ -44,7 +44,8 @@
                                                 IsActive="{TemplateBinding IsSelected}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
 
-                            <rubyer:Transition HorizontalAlignment="Left"
+                            <rubyer:Transition x:Name="littleBar"
+                                               HorizontalAlignment="Left"
                                                IsShow="{TemplateBinding IsSelected}"
                                                Type="ZoomY"
                                                Visibility="{Binding IsShowLittleBar, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource BooleanToVisibleConverter}}">
@@ -92,6 +93,9 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
                             <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="Right">
+                            <Setter TargetName="littleBar" Property="HorizontalAlignment" Value="Right" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -202,8 +206,8 @@
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
                     <Grid x:Name="root">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition x:Name="menuColumn" Width="Auto" />
+                            <ColumnDefinition x:Name="contentColumn" Width="*" />
                         </Grid.ColumnDefinitions>
 
                         <Border x:Name="menu"
@@ -324,6 +328,12 @@
                         </Trigger>
                         <Trigger Property="IsExpanded" Value="False">
                             <Setter TargetName="PART_HamburgerButton" Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="menuColumn" Property="Width" Value="*" />
+                            <Setter TargetName="contentColumn" Property="Width" Value="Auto" />
+                            <Setter TargetName="menu" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

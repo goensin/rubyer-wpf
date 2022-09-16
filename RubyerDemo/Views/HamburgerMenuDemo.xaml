@@ -97,6 +97,7 @@
                                               CollapsedWidth="50"
                                               ExpandedWidth="300"
                                               FontSize="14"
+                                              TabStripPlacement="Right"
                                               HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
                                               ItemsSource="{Binding Models}"
