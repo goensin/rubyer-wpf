@@ -10,6 +10,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <GroupBox Header="加载中-Loading">
                 <StackPanel Margin="10" Orientation="Horizontal">
@@ -39,6 +40,24 @@
                                     Content="loading"
                                     FocusedBrush="{DynamicResource Dark}" />
                     <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                    Margin="10"
+                                    Content="disabled"
+                                    IsEnabled="False" />
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="2" Header="点加载中-DotLoading">
+                <StackPanel Margin="10" Orientation="Horizontal">
+                    <rubyer:Loading Style="{StaticResource DotLoading}" Margin="10" />
+                    <rubyer:Loading Style="{StaticResource DotLoading}"
+                                    Margin="10"
+                                    Diameter="30"
+                                    FocusedBrush="{DynamicResource Accent}"
+                                    StrokeThickness="5" />
+                    <rubyer:Loading Style="{StaticResource DotLoading}"
+                                    Margin="10"
+                                    Content="loading"
+                                    FocusedBrush="{DynamicResource Dark}" />
+                    <rubyer:Loading Style="{StaticResource DotLoading}"
                                     Margin="10"
                                     Content="disabled"
                                     IsEnabled="False" />
