@@ -9,5 +9,6 @@ namespace RubyerDemo.Consts
     public class ConstNames
     {
         public const string MessageDemo = "MessageDemo";
+        public const string NotificationDemo = "NotificationDemo";
     }
 }

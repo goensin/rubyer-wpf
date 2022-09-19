@@ -14,7 +14,7 @@ namespace Rubyer
         /// <summary>
         /// 默认对话框标识
         /// </summary>
-        public const string DefaultDialogIdentifier = "Rubyer.Dialog";
+        public const string DefaultIdentifier = "Rubyer.Dialog";
 
         /// <summary>
         /// 对话框集合
@@ -96,7 +96,7 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<object> Show(object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool showCloseButton = true)
         {
-            return await Show(DefaultDialogIdentifier, content, parameters, title, openHandler, closeHandle, showCloseButton);
+            return await Show(DefaultIdentifier, content, parameters, title, openHandler, closeHandle, showCloseButton);
         }
 
         /// <summary>

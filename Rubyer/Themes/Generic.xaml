@@ -53,6 +53,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/StepBar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Description.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/HamburgerMenu.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NotificationContainer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NotificationCard.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -108,4 +110,5 @@
     <Style BasedOn="{StaticResource RubyerHamburgerMenuItem}" TargetType="{x:Type rubyer:HamburgerMenuItem}" />
     <Style BasedOn="{StaticResource RubyerHamburgerMenuOptionsItem}" TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}" />
     <Style BasedOn="{StaticResource RubyerHamburgerMenu}" TargetType="{x:Type rubyer:HamburgerMenu}" />
+    <Style BasedOn="{StaticResource RubyerNotificationCard}" TargetType="{x:Type rubyer:NotificationCard}" />
 </ResourceDictionary>

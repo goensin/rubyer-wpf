@@ -17,7 +17,7 @@ namespace Rubyer
         /// <summary>
         /// 默认消息框容器标识
         /// </summary>
-        public const string DefaultMessageBoxContainerIdentifier = "Rubyer.MessageBox";
+        public const string DefaultContainerIdentifier = "Rubyer.MessageBox";
 
         private static readonly Brush infoBrush = (Brush)Application.Current.Resources["Info"];
         private static readonly Brush warningBrush = (Brush)Application.Current.Resources["Warning"];
@@ -235,7 +235,7 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<MessageBoxResult> Show(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
         {
-            return await Show(DefaultMessageBoxContainerIdentifier, message, title, button, icon);
+            return await Show(DefaultContainerIdentifier, message, title, button, icon);
         }
 
         /// <summary>

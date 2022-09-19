@@ -21,7 +21,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsShow" Value="True" />
         <Setter Property="IsShwoIcon" Value="False" />
-        <Setter Property="Margin" Value="3" />
+        <Setter Property="Margin" Value="2" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -63,8 +63,8 @@
                                         Effect="{DynamicResource AllDirectionEffect2}" />
 
                                 <rubyer:Icon Grid.Column="0"
-                                             Width="23"
-                                             Height="23"
+                                             Width="25"
+                                             Height="25"
                                              Margin="8 0 0 0"
                                              Foreground="{TemplateBinding ThemeColorBrush}"
                                              Type="{TemplateBinding IconType}"

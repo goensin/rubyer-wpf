@@ -8,7 +8,7 @@ namespace Rubyer
     public partial class MessageWindow : Window
     {
         /// <summary>
-        /// 子控件动画转换时间
+        /// 单例消息窗体
         /// </summary>
         private static MessageWindow messageWindow = null;
 

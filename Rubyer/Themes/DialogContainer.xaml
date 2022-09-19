@@ -33,6 +33,7 @@
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.Margin" Value="0" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="10 5" />
+        <Setter Property="rubyer:HeaderHelper.CornerRadius" Value="{DynamicResource TopContainerCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="rubyer:DialogContainer">
@@ -42,7 +43,6 @@
                                           Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-
 
                         <Grid x:Name="cardRoot" Panel.ZIndex="100">
                             <rubyer:Transition x:Name="Path_Transition" IsShow="{TemplateBinding IsShow}">
@@ -56,7 +56,8 @@
                                         Margin="5"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Background="Transparent"
+                                        Background="{TemplateBinding Background}"
+                                        CornerRadius="{TemplateBinding CornerRadius}"
                                         Effect="{DynamicResource AllDirectionEffect3}">
                                     <Grid>
                                         <Grid.RowDefinitions>
@@ -65,7 +66,7 @@
                                         </Grid.RowDefinitions>
                                         <Border x:Name="titleBar"
                                                 Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                CornerRadius="{DynamicResource TopContainerCornerRadius}">
+                                                CornerRadius="{Binding (rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                                 <Button x:Name="PART_CloseButton"
                                                         Style="{StaticResource TextButton}"
@@ -89,16 +90,12 @@
                                             </DockPanel>
                                         </Border>
 
-                                        <Border x:Name="contentBorder"
-                                                Grid.Row="1"
-                                                Background="{TemplateBinding Background}"
-                                                CornerRadius="{DynamicResource BottomContainerCornerRadius}">
+                                        <Border x:Name="contentBorder" Grid.Row="1">
                                             <ContentControl Margin="{TemplateBinding Padding}"
                                                             Content="{TemplateBinding DialogContent}"
                                                             Focusable="False"
                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                         </Border>
-
                                     </Grid>
                                 </Border>
                             </rubyer:Transition>

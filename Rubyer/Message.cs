@@ -16,7 +16,7 @@ namespace Rubyer
         /// <summary>
         /// 默认 Message 容器标识
         /// </summary>
-        public const string DefaultMessageContainerIdentifier = "Rubyer.Message";
+        public const string DefaultContainerIdentifier = "Rubyer.Message";
 
         /// <summary>
         /// Transition 动画时长
@@ -39,14 +39,14 @@ namespace Rubyer
         /// 全局显示
         /// </summary>
         /// <param name="type">类型</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowGlobal(MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             MessageWindow messageWindow = MessageWindow.GetInstance();
             messageWindow.Dispatcher.VerifyAccess();
-            MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
+            MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
             messageCard.Close += (sender, e) => messageWindow.RemoveMessageCard(messageCard);
@@ -65,123 +65,56 @@ namespace Rubyer
         /// <summary>
         /// 全局显示
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ShowGlobal(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            ShowGlobal(MessageType.None, element, millisecondTimeOut, isClearable);
+            ShowGlobal(MessageType.None, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 全局显示信息
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void InfoGlobal(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void InfoGlobal(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            ShowGlobal(MessageType.Info, element, millisecondTimeOut, isClearable);
+            ShowGlobal(MessageType.Info, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 全局显示成功
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void SuccessGlobal(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void SuccessGlobal(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            ShowGlobal(MessageType.Success, element, millisecondTimeOut, isClearable);
+            ShowGlobal(MessageType.Success, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 全局显示警告
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void WarningGlobal(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void WarningGlobal(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            ShowGlobal(MessageType.Warning, element, millisecondTimeOut, isClearable);
+            ShowGlobal(MessageType.Warning, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 全局显示错误
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ErrorGlobal(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void ErrorGlobal(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            ShowGlobal(MessageType.Error, element, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="type">类型</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示信息
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void InfoGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示成功
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void SuccessGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示警告
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void WarningGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 全局显示错误
-        /// </summary>
-        /// <param name="message">消息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ErrorGlobal(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            ShowGlobal(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            ShowGlobal(MessageType.Error, content, millisecondTimeOut, isClearable);
         }
 
         #endregion 全局
@@ -193,19 +126,19 @@ namespace Rubyer
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
         /// <param name="type">类型</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             if (!Containers.ContainsKey(containerIdentifier))
             {
-                throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
+                throw new NullReferenceException($"The message container Identifier '{containerIdentifier}' could not be found");
             }
 
             MessageContainer container = Containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
-            MessageCard messageCard = GetMessageCard(type, element, millisecondTimeOut, isClearable);
+            MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
             messageCard.Close += (sender, e) => container.RemoveMessageCard(messageCard);
@@ -225,277 +158,131 @@ namespace Rubyer
         /// (默认 RubyerWindow 下 MessageContainer 容器)
         /// </summary>
         /// <param name="type">类型</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(MessageType type, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(DefaultMessageContainerIdentifier, type, element, millisecondTimeOut, isClearable);
+            Show(DefaultContainerIdentifier, type, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(string containerIdentifier, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentifier, MessageType.None, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.None, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Show(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(DefaultMessageContainerIdentifier, MessageType.None, element, millisecondTimeOut, isClearable);
+            Show(DefaultContainerIdentifier, MessageType.None, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示信息
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Info(string containerIdentifier, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentifier, MessageType.Info, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Info, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示信息
         /// (默认 RubyerWindow 下 MessageContainer 容器)
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Info(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(MessageType.Info, element, millisecondTimeOut, isClearable);
+            Show(MessageType.Info, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示成功
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Success(string containerIdentifier, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentifier, MessageType.Success, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Success, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示成功
         /// (默认 RubyerWindow 下 MessageContainer 容器)
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Success(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(MessageType.Success, element, millisecondTimeOut, isClearable);
+            Show(MessageType.Success, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示警告
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Warning(string containerIdentifier, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentifier, MessageType.Warning, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Warning, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示警告
         /// (默认 RubyerWindow 下 MessageContainer 容器)
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Warning(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(MessageType.Warning, element, millisecondTimeOut, isClearable);
+            Show(MessageType.Warning, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示错误
         /// </summary>
         /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(string containerIdentifier, UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Error(string containerIdentifier, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(containerIdentifier, MessageType.Error, element, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, MessageType.Error, content, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
         /// 容器内显示错误
         /// (默认 RubyerWindow 下 MessageContainer 容器)
         /// </summary>
-        /// <param name="element">内容元素</param>
+        /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(UIElement element, int millisecondTimeOut = 3000, bool isClearable = true)
+        public static void Error(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(MessageType.Error, element, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="type">类型</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="type">类型</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(MessageType type, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(type, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(MessageType.None, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示信息
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示信息
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(MessageType.Info, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示成功
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示成功
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(MessageType.Success, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示警告
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示警告
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(MessageType.Warning, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示错误
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(string containerIdentifier, string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(containerIdentifier, MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
-        }
-
-        /// <summary>
-        /// 容器内显示错误
-        /// (默认 RubyerWindow 下 MessageContainer 容器)
-        /// </summary>
-        /// <param name="message">信息</param>
-        /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
-        /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(string message, int millisecondTimeOut = 3000, bool isClearable = true)
-        {
-            Show(MessageType.Error, new TextBlock { Text = message }, millisecondTimeOut, isClearable);
+            Show(MessageType.Error, content, millisecondTimeOut, isClearable);
         }
 
         #endregion 指定容器
@@ -515,12 +302,12 @@ namespace Rubyer
             Containers.Add(identify, container);
         }
 
-        private static MessageCard GetMessageCard(MessageType type, UIElement element, int millisecondTimeOut, bool isClearable)
+        private static MessageCard GetMessageCard(MessageType type, object content, int millisecondTimeOut, bool isClearable)
         {
             isClearable = millisecondTimeOut <= 0 || isClearable;
             MessageCard messageCard = new MessageCard
             {
-                Content = element,
+                Content = content,
                 IsClearable = isClearable,
             };
 

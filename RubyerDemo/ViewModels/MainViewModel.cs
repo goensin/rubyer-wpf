@@ -40,6 +40,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem{ Name = "页码条-PageBar", Content=new PageBarDemo{ DataContext = new PageBarViewModel()} },
                 new MenuItem{ Name = "消息提示-Message", Content=new MessageDemo{} },
                 new MenuItem{ Name = "消息框-MessageBox", Content = new MessageBoxDemo{ DataContext = new MessageBoxViewModel()} },
+                new MenuItem{ Name = "通知-Notification", Content=new NotificationDemo{} },
                 new MenuItem{ Name = "对话框-Dialog", Content = new DialogDemo{ DataContext = new DialogViewModel()} },
                 new MenuItem{ Name = "转换动画-Transition", Content = new TransitionDemo() },
                 new MenuItem{ Name = "标记标签-BadgeTag", Content = new BadgeTagDemo() },

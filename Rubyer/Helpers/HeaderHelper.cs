@@ -241,5 +241,31 @@ namespace Rubyer
         {
             obj.SetValue(VerticalAlignmentProperty, value);
         }
+
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached(
+            "CornerRadius", typeof(CornerRadius), typeof(HeaderHelper), new PropertyMetadata(default(CornerRadius)));
+
+        /// <summary>
+        /// Sets the corner radius.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">The value.</param>
+        public static void SetCornerRadius(DependencyObject element, CornerRadius value)
+        {
+            element.SetValue(CornerRadiusProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the corner radius.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A CornerRadius.</returns>
+        public static CornerRadius GetCornerRadius(DependencyObject element)
+        {
+            return (CornerRadius)element.GetValue(CornerRadiusProperty);
+        }
     }
 }
