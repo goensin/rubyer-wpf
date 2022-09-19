@@ -241,7 +241,7 @@ namespace Rubyer
         /// 是否淡入淡出
         /// </summary>
         public static readonly DependencyProperty IsFadeProperty =
-            DependencyProperty.Register("IsFade", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool), OnIsShwowChanged));
+            DependencyProperty.Register("IsFade", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool)));
 
         /// <summary>
         /// 是否淡入淡出
@@ -271,7 +271,13 @@ namespace Rubyer
 
         private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (d is Transition transition && transition.IsLoaded)
+            var transition = d as Transition;
+            ChangeTransitionVisual(transition);
+        }
+
+        private static void ChangeTransitionVisual(Transition transition)
+        {
+            if (transition.IsLoaded)
             {
                 if (transition.IsShow)
                 {
@@ -282,6 +288,19 @@ namespace Rubyer
                     CloseAnimation(transition);
                 }
             }
+            else
+            {
+                transition.BeginAnimation(Transition.ProgressProperty, null);
+
+                if (transition.IsShow)
+                {
+                    transition.Progress = 1;
+                }
+                else
+                {
+                    transition.Progress = 0;
+                }
+            }
         }
 
         private static void ShowAnimation(Transition transition)
@@ -289,13 +308,21 @@ namespace Rubyer
             Storyboard storyboard = new Storyboard();
             storyboard.Completed += (sender, e) =>
             {
-                var args = new RoutedEventArgs();
+               var args = new RoutedEventArgs();
                 args.RoutedEvent = Transition.ShowedEvent;
                 transition.RaiseEvent(args);
                 transition.ShowedCommand?.Execute(null);
             };
 
-            DoubleAnimation progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction);
+            DoubleAnimation progressAnimation;
+            if (transition.Type >= TransitionType.CollapseUp && transition.Type <= TransitionType.CollapseRight)
+            {
+                progressAnimation = GetProgressAnimation(transition, transition.Progress, 1, transition.ShowEasingFunction);
+            }
+            else
+            {
+                progressAnimation = GetProgressAnimation(transition, 0, 1, transition.ShowEasingFunction);
+            }
 
             switch (transition.Type)
             {
@@ -399,11 +426,11 @@ namespace Rubyer
             if (transition.Type >= TransitionType.CollapseUp && transition.Type <= TransitionType.CollapseRight)
             {
                 var progress = GetCollapsedProgress(transition);
-                progressAnimation = GetProgressAnimation(transition, progress, transition.CloseEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, transition.Progress, progress, transition.CloseEasingFunction);
             }
             else
             {
-                progressAnimation = GetProgressAnimation(transition, 0, transition.CloseEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 1, 0, transition.CloseEasingFunction);
             }
 
             switch (transition.Type)
@@ -493,10 +520,11 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing)
+        private static DoubleAnimation GetProgressAnimation(Transition transition, double from, double to, IEasingFunction easing)
         {
             DoubleAnimation progressAnimation = new DoubleAnimation()
             {
+                From = from,
                 To = to,
                 Duration = transition.Duration,
                 EasingFunction = easing,
@@ -504,6 +532,7 @@ namespace Rubyer
 
             Storyboard.SetTargetProperty(progressAnimation, new PropertyPath(ProgressProperty));
             Storyboard.SetTarget(progressAnimation, transition);
+
             return progressAnimation;
         }
 

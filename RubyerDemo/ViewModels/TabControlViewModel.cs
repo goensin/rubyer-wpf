@@ -8,6 +8,7 @@ namespace RubyerDemo.ViewModels
         private ObservableCollection<Poetry> poetries;
         private Poetry selectedPoetry;
         private RelayCommand addTabItem;
+        private RelayCommand click;
         private int count = 1;
 
         public TabControlViewModel()
@@ -43,8 +44,9 @@ namespace RubyerDemo.ViewModels
                             "人有悲欢离合，月有阴晴圆缺，此事古难全。"
                 }
             };
-        }
 
+            SelectedPoetry = new Poetry();
+        }
 
         public ObservableCollection<Poetry> Poetries
         {
@@ -67,7 +69,8 @@ namespace RubyerDemo.ViewModels
         }
 
         public RelayCommand AddTabItem => addTabItem ?? (addTabItem = new RelayCommand(AddTabItemExecute));
-        void AddTabItemExecute(object obj)
+
+        private void AddTabItemExecute(object obj)
         {
             Poetry poetry = new Poetry
             {
@@ -85,5 +88,6 @@ namespace RubyerDemo.ViewModels
     {
         public string Title { get; set; }
         public string Content { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

@@ -122,6 +122,9 @@
             <Trigger Property="IsFade" Value="True">
                 <Setter Property="Opacity" Value="{Binding Progress, RelativeSource={RelativeSource Self}}" />
             </Trigger>
+            <!--<Trigger Property="Progress" Value="0">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </Trigger>-->
         </Style.Triggers>
     </Style>
 </ResourceDictionary>

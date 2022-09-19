@@ -146,7 +146,8 @@
                     <StackPanel Margin="10">
                         <CheckBox Margin="1"
                                   rubyer:ToggleButtonHelper.CheckedContent="选中"
-                                  Content="未选中" />
+                                  Content="未选中"
+                                  IsChecked="{Binding SelectedPoetry.IsChecked}" />
                         <CheckBox Margin="1" Content="选项二" />
                         <CheckBox Margin="1" Content="选项三" />
                         <CheckBox Margin="1"
