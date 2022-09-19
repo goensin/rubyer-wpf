@@ -9,16 +9,12 @@
     </ResourceDictionary.MergedDictionaries>
 
     <rubyer:Icon x:Key="itemIcon"
-                 Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ContentControl}}"
-                 Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ContentControl}}"
                  x:Shared="False"
                  Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenuItem}}" />
 
     <rubyer:Icon x:Key="optionsItemIcon"
-                 Width="{Binding Width, RelativeSource={RelativeSource AncestorType=ContentControl}}"
-                 Height="{Binding Height, RelativeSource={RelativeSource AncestorType=ContentControl}}"
                  x:Shared="False"
-                 Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=Button}}" />
+                 Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenuOptionsItem}}" />
 
     <!--  HamburgerMenuItem  -->
     <Style x:Key="RubyerHamburgerMenuItem" TargetType="{x:Type rubyer:HamburgerMenuItem}">
@@ -42,7 +38,8 @@
                             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                 IsActive="{TemplateBinding IsSelected}"
-                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                ParentElement="{Binding ElementName=root}" />
 
                             <rubyer:Transition x:Name="littleBar"
                                                HorizontalAlignment="Left"
@@ -50,7 +47,7 @@
                                                Type="ZoomY"
                                                Visibility="{Binding IsShowLittleBar, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource BooleanToVisibleConverter}}">
                                 <Rectangle Width="3"
-                                           Height="{Binding ActualHeight, ElementName=header}"
+                                           Height="{Binding ActualHeight, ElementName=content}"
                                            Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                             </rubyer:Transition>
                         </Grid>
@@ -63,14 +60,14 @@
                                 </Grid.ColumnDefinitions>
 
                                 <ContentControl x:Name="icon"
-                                                Width="{Binding ActualHeight, ElementName=header}"
-                                                Height="{Binding ActualHeight, ElementName=header}"
+                                                Width="{Binding ActualHeight, ElementName=content}"
+                                                Height="{Binding ActualHeight, ElementName=content}"
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
                                                 IsHitTestVisible="False" />
 
-                                <ContentControl x:Name="header"
+                                <ContentControl x:Name="content"
                                                 Grid.Column="1"
                                                 Margin="{TemplateBinding Padding}"
                                                 HorizontalAlignment="Left"

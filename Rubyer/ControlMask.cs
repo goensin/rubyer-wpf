@@ -61,5 +61,20 @@ namespace Rubyer
             get { return (double)GetValue(MaskOpacityProperty); }
             set { SetValue(MaskOpacityProperty, value); }
         }
+
+        /// <summary>
+        /// 父元素 (用于出发 IsMouseOver)
+        /// </summary>
+        public static readonly DependencyProperty ParentElementProperty = DependencyProperty.Register(
+            "ParentElement", typeof(UIElement), typeof(ControlMask), new PropertyMetadata(default(UIElement)));
+
+        /// <summary>
+        /// 父元素 (用于出发 IsMouseOver)
+        /// </summary>
+        public UIElement ParentElement
+        {
+            get { return (UIElement)GetValue(ParentElementProperty); }
+            set { SetValue(ParentElementProperty, value); }
+        }
     }
 }
