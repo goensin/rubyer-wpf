@@ -140,4 +140,36 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <Style x:Key="WarningNotification"
+           BasedOn="{StaticResource RubyerNotificationCard}"
+           TargetType="{x:Type rubyer:NotificationCard}">
+        <Setter Property="IconType" Value="ErrorWarningFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
+    </Style>
+
+    <Style x:Key="SuccessNotification"
+           BasedOn="{StaticResource RubyerNotificationCard}"
+           TargetType="{x:Type rubyer:NotificationCard}">
+        <Setter Property="IconType" Value="CheckboxCircleFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
+    </Style>
+
+    <Style x:Key="ErrorNotification"
+           BasedOn="{StaticResource RubyerNotificationCard}"
+           TargetType="{x:Type rubyer:NotificationCard}">
+        <Setter Property="IconType" Value="CloseCircleFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
+    </Style>
+
+    <Style x:Key="InfoNotification"
+           BasedOn="{StaticResource RubyerNotificationCard}"
+           TargetType="{x:Type rubyer:NotificationCard}">
+        <Setter Property="IconType" Value="InformationFill" />
+        <Setter Property="IsShwoIcon" Value="True" />
+        <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
+    </Style>
 </ResourceDictionary>
