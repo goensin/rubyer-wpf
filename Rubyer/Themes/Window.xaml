@@ -14,6 +14,7 @@
         <Setter Property="Foreground" Value="{Binding TitleForeground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
+        <Setter Property="Height" Value="Auto" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.8" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
