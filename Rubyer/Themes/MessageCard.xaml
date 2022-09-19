@@ -20,7 +20,6 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="IsShow" Value="True" />
-        <Setter Property="IsShwoIcon" Value="False" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="MinWidth" Value="200" />
         <Setter Property="MaxWidth" Value="600" />
@@ -63,13 +62,12 @@
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Effect="{DynamicResource AllDirectionEffect2}" />
 
-                                <rubyer:Icon Grid.Column="0"
+                                <rubyer:Icon x:Name="icon"
+                                             Grid.Column="0"
                                              Width="25"
                                              Height="25"
                                              Margin="8 0 0 0"
-                                             Foreground="{TemplateBinding ThemeColorBrush}"
-                                             Type="{TemplateBinding IconType}"
-                                             Visibility="{TemplateBinding IsShwoIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                             Foreground="{TemplateBinding ThemeColorBrush}" />
                                 <ContentPresenter x:Name="contentPresenter"
                                                   Grid.Column="1"
                                                   Margin="8"
@@ -97,41 +95,29 @@
                             </Grid>
                         </Border>
                     </rubyer:Transition>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Type" Value="None">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Info">
+                            <Setter TargetName="icon" Property="Type" Value="InformationFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Warning">
+                            <Setter TargetName="icon" Property="Type" Value="ErrorWarningFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Success">
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Error">
+                            <Setter TargetName="icon" Property="Type" Value="CloseCircleFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
-
-    <Style x:Key="WarningMessage"
-           BasedOn="{StaticResource RubyerMessageCard}"
-           TargetType="{x:Type rubyer:MessageCard}">
-        <Setter Property="IconType" Value="ErrorWarningFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
-    </Style>
-
-    <Style x:Key="SuccessMessage"
-           BasedOn="{StaticResource RubyerMessageCard}"
-           TargetType="{x:Type rubyer:MessageCard}">
-        <Setter Property="IconType" Value="CheckboxCircleFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
-    </Style>
-
-    <Style x:Key="ErrorMessage"
-           BasedOn="{StaticResource RubyerMessageCard}"
-           TargetType="{x:Type rubyer:MessageCard}">
-        <Setter Property="IconType" Value="CloseCircleFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
-    </Style>
-
-    <Style x:Key="InfoMessage"
-           BasedOn="{StaticResource RubyerMessageCard}"
-           TargetType="{x:Type rubyer:MessageCard}">
-        <Setter Property="IconType" Value="InformationFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
-    </Style>
-
 </ResourceDictionary>

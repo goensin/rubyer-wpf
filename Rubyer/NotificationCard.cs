@@ -106,33 +106,18 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 图标类型
+        /// 通知类型
         /// </summary>
-        public static readonly DependencyProperty IconTypeProperty =
-            DependencyProperty.Register("IconType", typeof(IconType), typeof(NotificationCard), new PropertyMetadata(default(IconType)));
+        public static readonly DependencyProperty TypeProperty =
+            DependencyProperty.Register("Type", typeof(NotificationType), typeof(NotificationCard), new PropertyMetadata(default(NotificationType)));
 
         /// <summary>
-        /// 图标类型
+        /// 通知类型
         /// </summary>
-        public IconType IconType
+        public NotificationType Type
         {
-            get { return (IconType)GetValue(IconTypeProperty); }
-            set { SetValue(IconTypeProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示图标
-        /// </summary>
-        public static readonly DependencyProperty IsShwoIconProperty =
-            DependencyProperty.Register("IsShwoIcon", typeof(bool), typeof(NotificationCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示图标
-        /// </summary>
-        public bool IsShwoIcon
-        {
-            get { return (bool)GetValue(IsShwoIconProperty); }
-            set { SetValue(IsShwoIconProperty, value); }
+            get { return (NotificationType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
         }
 
         /// <summary>

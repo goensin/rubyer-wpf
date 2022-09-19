@@ -59,11 +59,10 @@
                             确认消息
                         </Button>
                         <rubyer:MessageBoxCard Title="提示"
-                                               IconType="QuestionFill"
-                                               IsShowIcon="True"
                                                Message="是否删除改数据?"
                                                MessageBoxButton="OKCancel"
-                                               ThemeColorBrush="{StaticResource Question}" />
+                                               ThemeColorBrush="{StaticResource Question}"
+                                               Type="Question" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
@@ -83,11 +82,10 @@
                             信息
                         </Button>
                         <rubyer:MessageBoxCard Title="标题名称"
-                                               IconType="InformationFill"
-                                               IsShowIcon="True"
                                                Message="消息消息消息消息消息消息"
                                                MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource Info}" />
+                                               ThemeColorBrush="{StaticResource Info}"
+                                               Type="Info" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
@@ -107,11 +105,10 @@
                             警告
                         </Button>
                         <rubyer:MessageBoxCard Title="标题名称"
-                                               IconType="ErrorWarningFill"
-                                               IsShowIcon="True"
                                                Message="警告警告警告警告警告警告"
                                                MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource Warning}" />
+                                               ThemeColorBrush="{StaticResource Warning}"
+                                               Type="Warning" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
@@ -131,11 +128,10 @@
                             成功
                         </Button>
                         <rubyer:MessageBoxCard Title="标题名称"
-                                               IconType="CheckboxCircleFill"
-                                               IsShowIcon="True"
                                                Message="成功成功成功成功成功成功"
                                                MessageBoxButton="OK"
-                                               ThemeColorBrush="{StaticResource Success}" />
+                                               ThemeColorBrush="{StaticResource Success}"
+                                               Type="Success" />
                     </StackPanel>
                     <StackPanel Margin="5"
                                 HorizontalAlignment="Center"
@@ -155,11 +151,10 @@
                             错误
                         </Button>
                         <rubyer:MessageBoxCard Title="标题名称"
-                                               IconType="CloseCircleFill"
-                                               IsShowIcon="True"
                                                Message="错误错误错误错误错误错误"
                                                MessageBoxButton="YesNoCancel"
-                                               ThemeColorBrush="{StaticResource Error}" />
+                                               ThemeColorBrush="{StaticResource Error}"
+                                               Type="Error" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>

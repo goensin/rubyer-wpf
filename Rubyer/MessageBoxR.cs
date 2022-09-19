@@ -19,12 +19,6 @@ namespace Rubyer
         /// </summary>
         public const string DefaultContainerIdentifier = "Rubyer.MessageBox";
 
-        private static readonly Brush infoBrush = (Brush)Application.Current.Resources["Info"];
-        private static readonly Brush warningBrush = (Brush)Application.Current.Resources["Warning"];
-        private static readonly Brush successBrush = (Brush)Application.Current.Resources["Success"];
-        private static readonly Brush errorBrush = (Brush)Application.Current.Resources["Error"];
-        private static readonly Brush questionBrush = (Brush)Application.Current.Resources["Question"];
-
         /// <summary>
         /// 所有容器集合
         /// </summary>
@@ -45,54 +39,15 @@ namespace Rubyer
             Containers.Add(identify, container);
         }
 
-        private static MessageBoxCard GetMessageBoxCard(string message, string title, MessageBoxButton button, MessageBoxIcon icon)
+        private static MessageBoxCard GetMessageBoxCard(string message, string title, MessageBoxButton button, MessageBoxType type)
         {
             MessageBoxCard card = new MessageBoxCard
             {
+                Type = type,
                 Message = message,
                 Title = title,
                 MessageBoxButton = button,
             };
-
-            card.Dispatcher.VerifyAccess();
-
-            switch (icon)
-            {
-                case MessageBoxIcon.None:
-                default:
-                    card.IsShowIcon = false;
-                    break;
-
-                case MessageBoxIcon.Info:
-                    card.IsShowIcon = true;
-                    card.IconType = IconType.InformationFill;
-                    card.ThemeColorBrush = infoBrush;
-                    break;
-
-                case MessageBoxIcon.Success:
-                    card.IsShowIcon = true;
-                    card.IconType = IconType.CheckboxCircleFill;
-                    card.ThemeColorBrush = successBrush;
-                    break;
-
-                case MessageBoxIcon.Warining:
-                    card.IsShowIcon = true;
-                    card.IconType = IconType.ErrorWarningFill;
-                    card.ThemeColorBrush = warningBrush;
-                    break;
-
-                case MessageBoxIcon.Error:
-                    card.IsShowIcon = true;
-                    card.IconType = IconType.CloseCircleFill;
-                    card.ThemeColorBrush = errorBrush;
-                    break;
-
-                case MessageBoxIcon.Question:
-                    card.IsShowIcon = true;
-                    card.IconType = IconType.QuestionFill;
-                    card.ThemeColorBrush = questionBrush;
-                    break;
-            }
 
             return card;
         }
@@ -107,7 +62,7 @@ namespace Rubyer
         /// <param name="button">按钮</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult ShowGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        public static MessageBoxResult ShowGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
         {
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             MessageBoxWindow window = new MessageBoxWindow();
@@ -132,7 +87,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult ConfirmGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static MessageBoxResult ConfirmGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxType icon = MessageBoxType.Question)
         {
             return ShowGlobal(message, title, button, icon);
         }
@@ -145,7 +100,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult InfoGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
+        public static MessageBoxResult InfoGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Info)
         {
             return ShowGlobal(message, title, button, icon);
         }
@@ -158,7 +113,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult WaringGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
+        public static MessageBoxResult WaringGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Warning)
         {
             return ShowGlobal(message, title, button, icon);
         }
@@ -171,7 +126,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult SuccessGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
+        public static MessageBoxResult SuccessGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Success)
         {
             return ShowGlobal(message, title, button, icon);
         }
@@ -184,7 +139,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static MessageBoxResult ErrorGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
+        public static MessageBoxResult ErrorGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Error)
         {
             return ShowGlobal(message, title, button, icon);
         }
@@ -202,7 +157,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Show(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        public static async Task<MessageBoxResult> Show(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
         {
             if (!Containers.ContainsKey(containerIdentifier))
             {
@@ -233,7 +188,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Show(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.None)
+        public static async Task<MessageBoxResult> Show(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
         {
             return await Show(DefaultContainerIdentifier, message, title, button, icon);
         }
@@ -247,7 +202,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Confirm(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static async Task<MessageBoxResult> Confirm(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxType icon = MessageBoxType.Question)
         {
             return await Show(containerIdentifier, message, title, button, icon);
         }
@@ -261,7 +216,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Confirm(string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxIcon icon = MessageBoxIcon.Question)
+        public static async Task<MessageBoxResult> Confirm(string message, string title = "", MessageBoxButton button = MessageBoxButton.YesNo, MessageBoxType icon = MessageBoxType.Question)
         {
             return await Show(message, title, button, icon);
         }
@@ -275,7 +230,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Info(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
+        public static async Task<MessageBoxResult> Info(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Info)
         {
             return await Show(containerIdentifier, message, title, button, icon);
         }
@@ -289,7 +244,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Info(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Info)
+        public static async Task<MessageBoxResult> Info(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Info)
         {
             return await Show(message, title, button, icon);
         }
@@ -303,7 +258,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Waring(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
+        public static async Task<MessageBoxResult> Waring(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Warning)
         {
             return await Show(containerIdentifier, message, title, button, icon);
         }
@@ -317,7 +272,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Waring(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Warining)
+        public static async Task<MessageBoxResult> Waring(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Warning)
         {
             return await Show(message, title, button, icon);
         }
@@ -331,7 +286,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Success(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
+        public static async Task<MessageBoxResult> Success(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Success)
         {
             return await Show(containerIdentifier, message, title, button, icon);
         }
@@ -345,7 +300,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Success(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Success)
+        public static async Task<MessageBoxResult> Success(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Success)
         {
             return await Show(message, title, button, icon);
         }
@@ -359,7 +314,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Error(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
+        public static async Task<MessageBoxResult> Error(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Error)
         {
             return await Show(containerIdentifier, message, title, button, icon);
         }
@@ -373,7 +328,7 @@ namespace Rubyer
         /// <param name="button">按钮类型</param>
         /// <param name="icon">图标</param>
         /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Error(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxIcon icon = MessageBoxIcon.Error)
+        public static async Task<MessageBoxResult> Error(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.Error)
         {
             return await Show(message, title, button, icon);
         }
@@ -384,7 +339,7 @@ namespace Rubyer
     /// <summary>
     /// 按钮图标类型
     /// </summary>
-    public enum MessageBoxIcon
+    public enum MessageBoxType
     {
         /// <summary>
         /// 无
@@ -408,7 +363,7 @@ namespace Rubyer
         /// 警告
         /// </summary>
         [Description("警告")]
-        Warining,
+        Warning,
 
         /// <summary>
         /// 错误

@@ -16,8 +16,6 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="IconType" Value="InformationFill" />
-        <Setter Property="IsShowIcon" Value="False" />
         <Setter Property="Margin" Value="0" />
         <Setter Property="MaxWidth" Value="460" />
         <Setter Property="MessageBoxButton" Value="OK" />
@@ -95,13 +93,12 @@
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
-                                        <rubyer:Icon Grid.Column="0"
+                                        <rubyer:Icon x:Name="icon"
+                                                     Grid.Column="0"
                                                      Width="32"
                                                      Height="32"
                                                      Margin="5"
-                                                     Foreground="{TemplateBinding ThemeColorBrush}"
-                                                     Type="{TemplateBinding IconType}"
-                                                     Visibility="{TemplateBinding IsShowIcon, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                     Foreground="{TemplateBinding ThemeColorBrush}" />
                                         <TextBlock Grid.Column="1"
                                                    Margin="5 0"
                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -178,6 +175,29 @@
                             <Setter TargetName="PART_NoButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="None">
+                            <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Info">
+                            <Setter TargetName="icon" Property="Type" Value="InformationFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Question">
+                            <Setter TargetName="icon" Property="Type" Value="QuestionFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Question}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Warning">
+                            <Setter TargetName="icon" Property="Type" Value="ErrorWarningFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Success">
+                            <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
+                        </Trigger>
+                        <Trigger Property="Type" Value="Error">
+                            <Setter TargetName="icon" Property="Type" Value="CloseCircleFill" />
+                            <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

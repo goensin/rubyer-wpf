@@ -23,11 +23,6 @@ namespace Rubyer
         /// </summary>
         public const int TransitionTime = 300;
 
-        private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoMessage"];
-        private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningMessage"];
-        private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessMessage"];
-        private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorMessage"];
-
         /// <summary>
         /// 所有容器集合
         /// </summary>
@@ -305,36 +300,12 @@ namespace Rubyer
         private static MessageCard GetMessageCard(MessageType type, object content, int millisecondTimeOut, bool isClearable)
         {
             isClearable = millisecondTimeOut <= 0 || isClearable;
-            MessageCard messageCard = new MessageCard
+            return new MessageCard
             {
+                Type = type,
                 Content = content,
                 IsClearable = isClearable,
             };
-
-            switch (type)
-            {
-                default:
-                case MessageType.None:
-                    break;
-
-                case MessageType.Info:
-                    messageCard.Style = infoStyle;
-                    break;
-
-                case MessageType.Warning:
-                    messageCard.Style = warningStyle;
-                    break;
-
-                case MessageType.Success:
-                    messageCard.Style = successStyle;
-                    break;
-
-                case MessageType.Error:
-                    messageCard.Style = errorStyle;
-                    break;
-            }
-
-            return messageCard;
         }
 
         /// <summary>

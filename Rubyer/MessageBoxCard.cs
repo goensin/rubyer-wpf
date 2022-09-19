@@ -214,31 +214,16 @@ namespace Rubyer
         /// <summary>
         /// 图标类型
         /// </summary>
-        public static readonly DependencyProperty IconTypeProperty = DependencyProperty.Register(
-            "IconType", typeof(IconType), typeof(MessageBoxCard), new PropertyMetadata(default(IconType)));
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+            "Type", typeof(MessageBoxType), typeof(MessageBoxCard), new PropertyMetadata(default(MessageBoxType)));
 
         /// <summary>
         /// 图标类型
         /// </summary>
-        public IconType IconType
+        public MessageBoxType Type
         {
-            get { return (IconType)GetValue(IconTypeProperty); }
-            set { SetValue(IconTypeProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示图标
-        /// </summary>
-        public static readonly DependencyProperty IsShowIconProperty = DependencyProperty.Register(
-            "IsShowIcon", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示图标
-        /// </summary>
-        public bool IsShowIcon
-        {
-            get { return (bool)GetValue(IsShowIconProperty); }
-            set { SetValue(IsShowIconProperty, value); }
+            get { return (MessageBoxType)GetValue(TypeProperty); }
+            set { SetValue(TypeProperty, value); }
         }
 
         /// <summary>

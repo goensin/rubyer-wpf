@@ -23,11 +23,6 @@
                 <x:Type TypeName="VerticalAlignment" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
-        <Style x:Shared="false" TargetType="{x:Type rubyer:NotificationCard}" BasedOn="{StaticResource RubyerNotificationCard}">
-            <Setter Property="rubyer:HeaderHelper.FontSize" Value="20" />
-            <Setter Property="Background" Value="{StaticResource Primary}" />
-            <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
-        </Style>
     </UserControl.Resources>
     <rubyer:NotificationContainer Identifier="NotificationDemo">
         <ScrollViewer Style="{StaticResource SmallScrollViewer}"
@@ -88,10 +83,10 @@
                                     Background="{StaticResource Info}"
                                     Click="InfoContainerBtn_Click"
                                     Content="提示消息" />
-                            <rubyer:NotificationCard Style="{StaticResource InfoNotification}"
-                                                     Title="title"
+                            <rubyer:NotificationCard Title="title"
                                                      Content="info"
-                                                     IsClearable="True" />
+                                                     IsClearable="True"
+                                                     Type="Info" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="WaringBtn"
@@ -106,10 +101,10 @@
                                     Background="{StaticResource Warning}"
                                     Click="WaringContainerBtn_Click"
                                     Content="警告消息" />
-                            <rubyer:NotificationCard Style="{StaticResource WarningNotification}"
-                                                     Title="title"
+                            <rubyer:NotificationCard Title="title"
                                                      Content="warning"
-                                                     IsClearable="True" />
+                                                     IsClearable="True"
+                                                     Type="Warning" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="SuccessBtn"
@@ -124,10 +119,10 @@
                                     Background="{StaticResource Success}"
                                     Click="SuccessContainerBtn_Click"
                                     Content="成功消息" />
-                            <rubyer:NotificationCard Style="{StaticResource SuccessNotification}"
-                                                     Title="title"
+                            <rubyer:NotificationCard Title="title"
                                                      Content="success"
-                                                     IsClearable="True" />
+                                                     IsClearable="True"
+                                                     Type="Success" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="ErrorBtn"
@@ -142,10 +137,10 @@
                                     Background="{StaticResource Error}"
                                     Click="ErrorContaionBtn_Click"
                                     Content="错误消息" />
-                            <rubyer:NotificationCard Style="{StaticResource ErrorNotification}"
-                                                     Title="title"
+                            <rubyer:NotificationCard Title="title"
                                                      Content="error"
-                                                     IsClearable="True" />
+                                                     IsClearable="True"
+                                                     Type="Error" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <rubyer:NotificationCard Title="title"

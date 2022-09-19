@@ -79,9 +79,9 @@
                                     Background="{StaticResource Info}"
                                     Click="InfoContainerBtn_Click"
                                     Content="提示消息" />
-                            <rubyer:MessageCard Style="{StaticResource InfoMessage}"
-                                                Content="info"
-                                                IsClearable="True" />
+                            <rubyer:MessageCard Content="info"
+                                                IsClearable="True"
+                                                Type="Info" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="WaringBtn"
@@ -96,9 +96,9 @@
                                     Background="{StaticResource Warning}"
                                     Click="WaringContainerBtn_Click"
                                     Content="警告消息" />
-                            <rubyer:MessageCard Style="{StaticResource WarningMessage}"
-                                                Content="warning"
-                                                IsClearable="True" />
+                            <rubyer:MessageCard Content="warning"
+                                                IsClearable="True"
+                                                Type="Warning" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="SuccessBtn"
@@ -113,9 +113,9 @@
                                     Background="{StaticResource Success}"
                                     Click="SuccessContainerBtn_Click"
                                     Content="成功消息" />
-                            <rubyer:MessageCard Style="{StaticResource SuccessMessage}"
-                                                Content="success"
-                                                IsClearable="True" />
+                            <rubyer:MessageCard Content="success"
+                                                IsClearable="True"
+                                                Type="Success" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="ErrorBtn"
@@ -130,9 +130,9 @@
                                     Background="{StaticResource Error}"
                                     Click="ErrorContaionBtn_Click"
                                     Content="错误消息" />
-                            <rubyer:MessageCard Style="{StaticResource ErrorMessage}"
-                                                Content="error"
-                                                IsClearable="True" />
+                            <rubyer:MessageCard Content="error"
+                                                IsClearable="True"
+                                                Type="Error" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="ControlBtn"

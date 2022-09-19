@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -24,11 +25,6 @@ namespace Rubyer
         /// Transition 动画时长
         /// </summary>
         public const int TransitionTime = 300;
-
-        private static readonly Style infoStyle = (Style)Application.Current.Resources["InfoNotification"];
-        private static readonly Style warningStyle = (Style)Application.Current.Resources["WarningNotification"];
-        private static readonly Style successStyle = (Style)Application.Current.Resources["SuccessNotification"];
-        private static readonly Style errorStyle = (Style)Application.Current.Resources["ErrorNotification"];
 
         /// <summary>
         /// 所有容器集合
@@ -324,38 +320,13 @@ namespace Rubyer
 
         private static NotificationCard GetNotificationCard(NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
         {
-            isClearable = millisecondTimeOut <= 0 || isClearable;
-            NotificationCard messageCard = new NotificationCard
+            return new NotificationCard
             {
+                Type = type,
                 Content = content,
                 IsClearable = isClearable,
                 Title = title,
             };
-
-            switch (type)
-            {
-                default:
-                case NotificationType.None:
-                    break;
-
-                case NotificationType.Info:
-                    messageCard.Style = infoStyle;
-                    break;
-
-                case NotificationType.Warning:
-                    messageCard.Style = warningStyle;
-                    break;
-
-                case NotificationType.Success:
-                    messageCard.Style = successStyle;
-                    break;
-
-                case NotificationType.Error:
-                    messageCard.Style = errorStyle;
-                    break;
-            }
-
-            return messageCard;
         }
 
         /// <summary>
