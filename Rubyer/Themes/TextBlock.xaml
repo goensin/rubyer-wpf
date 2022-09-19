@@ -6,13 +6,13 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="RuyberTextBlock" TargetType="{x:Type TextBlock}">
-        <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />-->
-        <!--<Setter Property="FontSize" Value="13" />-->
-        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="TextWrapping" Value="NoWrap" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-    </Style>
+    <!--<Style x:Key="RuyberTextBlock" TargetType="{x:Type TextBlock}">
+    -->
+    <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />-->
+    <!--<Setter Property="FontSize" Value="13" />-->
+    <!--<Setter Property="VerticalAlignment" Value="Center" />-->
+    <!--
+    </Style>-->
 
     <!--  超小  -->
     <Style x:Key="MiniTextBlock"
@@ -29,9 +29,11 @@
     </Style>
 
     <!--  默认字体大小  -->
-    <Style BasedOn="{StaticResource RuyberTextBlock}" TargetType="{x:Type TextBlock}">
-        <!--<Setter Property="TextBlock.FontSize" Value="13" />-->
-    </Style>
+    <!--<Style BasedOn="{StaticResource RuyberTextBlock}" TargetType="{x:Type TextBlock}">
+    -->
+    <!--<Setter Property="TextBlock.FontSize" Value="13" />-->
+    <!--
+    </Style>-->
 
     <!--  H5  -->
     <Style x:Key="Head5TextBlock"
@@ -78,11 +80,4 @@
         <Setter Property="Margin" Value="2 8" />
     </Style>
 
-    <DataTemplate DataType="{x:Type System:String}">
-        <TextBlock Style="{StaticResource RuyberTextBlock}" Text="{Binding}">
-            <TextBlock.Resources>
-                <Style TargetType="{x:Type TextBlock}" />
-            </TextBlock.Resources>
-        </TextBlock>
-    </DataTemplate>
 </ResourceDictionary>
