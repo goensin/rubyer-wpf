@@ -30,6 +30,13 @@
         <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
+        <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxCard}">
@@ -55,29 +62,38 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <DockPanel Margin="0">
-                                        <TextBlock Margin="10 0"
-                                                   VerticalAlignment="Center"
-                                                   DockPanel.Dock="Left"
-                                                   FontSize="14"
-                                                   Text="{TemplateBinding Title}" />
-                                        <Button x:Name="PART_CloseButton"
-                                                Style="{StaticResource TextButton}"
-                                                Padding="5"
-                                                HorizontalAlignment="Right"
-                                                rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
-                                                Foreground="{DynamicResource DefaultForeground}">
-                                            <rubyer:Icon Type="CloseLine" />
-                                        </Button>
-                                    </DockPanel>
+                                    <Border x:Name="titleBorder"
+                                            Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            CornerRadius="{StaticResource TopContainerCornerRadius}">
+                                        <DockPanel Margin="{Binding (rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                            <Button x:Name="PART_CloseButton"
+                                                    Style="{StaticResource TextButton}"
+                                                    Padding="5"
+                                                    HorizontalAlignment="Right"
+                                                    rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
+                                                    DockPanel.Dock="Right"
+                                                    Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                <rubyer:Icon Type="CloseLine" />
+                                            </Button>
+
+                                            <TextBlock Margin="10 0"
+                                                       HorizontalAlignment="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       VerticalAlignment="{Binding (rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontSize="{Binding (rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       FontWeight="{Binding (rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                       Text="{TemplateBinding Title}" />
+                                        </DockPanel>
+                                    </Border>
+
                                     <Grid Grid.Row="1" Margin="{TemplateBinding Padding}">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <rubyer:Icon Grid.Column="0"
-                                                     Width="28"
-                                                     Height="28"
+                                                     Width="32"
+                                                     Height="32"
                                                      Margin="5"
                                                      Foreground="{TemplateBinding ThemeColorBrush}"
                                                      Type="{TemplateBinding IconType}"
