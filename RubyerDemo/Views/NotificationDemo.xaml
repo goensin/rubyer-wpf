@@ -23,6 +23,11 @@
                 <x:Type TypeName="VerticalAlignment" />
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
+        <Style x:Shared="false" TargetType="{x:Type rubyer:NotificationCard}" BasedOn="{StaticResource RubyerNotificationCard}">
+            <Setter Property="rubyer:HeaderHelper.FontSize" Value="20" />
+            <Setter Property="Background" Value="{StaticResource Primary}" />
+            <Setter Property="Foreground" Value="{StaticResource WhiteForeground}" />
+        </Style>
     </UserControl.Resources>
     <rubyer:NotificationContainer Identifier="NotificationDemo">
         <ScrollViewer Style="{StaticResource SmallScrollViewer}"

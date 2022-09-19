@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rubyer="clr-namespace:Rubyer">
+                    xmlns:rubyer="clr-namespace:Rubyer"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
@@ -23,6 +24,7 @@
         <Setter Property="IsShwoIcon" Value="False" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="MinWidth" Value="250" />
+        <Setter Property="MaxWidth" Value="400" />
         <Setter Property="Padding" Value="10" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
@@ -119,7 +121,13 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   Focusable="False"
                                                   RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
                             </Grid>
                         </Border>
                     </rubyer:Transition>
@@ -131,37 +139,5 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <Style x:Key="WarningNotification"
-           BasedOn="{StaticResource RubyerNotificationCard}"
-           TargetType="{x:Type rubyer:NotificationCard}">
-        <Setter Property="IconType" Value="ErrorWarningFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
-    </Style>
-
-    <Style x:Key="SuccessNotification"
-           BasedOn="{StaticResource RubyerNotificationCard}"
-           TargetType="{x:Type rubyer:NotificationCard}">
-        <Setter Property="IconType" Value="CheckboxCircleFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
-    </Style>
-
-    <Style x:Key="ErrorNotification"
-           BasedOn="{StaticResource RubyerNotificationCard}"
-           TargetType="{x:Type rubyer:NotificationCard}">
-        <Setter Property="IconType" Value="CloseCircleFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
-    </Style>
-
-    <Style x:Key="InfoNotification"
-           BasedOn="{StaticResource RubyerNotificationCard}"
-           TargetType="{x:Type rubyer:NotificationCard}">
-        <Setter Property="IconType" Value="InformationFill" />
-        <Setter Property="IsShwoIcon" Value="True" />
-        <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
     </Style>
 </ResourceDictionary>

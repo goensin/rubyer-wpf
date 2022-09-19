@@ -23,6 +23,7 @@
         <Setter Property="IsShwoIcon" Value="False" />
         <Setter Property="Margin" Value="2" />
         <Setter Property="MinWidth" Value="200" />
+        <Setter Property="MaxWidth" Value="600" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
@@ -76,7 +77,13 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   Focusable="False"
                                                   RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Setter Property="TextWrapping" Value="Wrap" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
                                 <Button x:Name="PART_CloseButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"

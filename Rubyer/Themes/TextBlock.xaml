@@ -6,19 +6,11 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate DataType="{x:Type System:String}">
-        <TextBlock Text="{Binding}">
-            <TextBlock.Resources>
-                <Style TargetType="{x:Type TextBlock}" />
-            </TextBlock.Resources>
-        </TextBlock>
-    </DataTemplate>
-
     <Style x:Key="RuyberTextBlock" TargetType="{x:Type TextBlock}">
-        <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForeground}"/>-->
+        <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />-->
         <!--<Setter Property="FontSize" Value="13" />-->
         <Setter Property="TextTrimming" Value="CharacterEllipsis" />
-        <Setter Property="TextWrapping" Value="NoWrap" />
+        <Setter Property="TextWrapping" Value="Wrap" />
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
@@ -86,4 +78,11 @@
         <Setter Property="Margin" Value="2 8" />
     </Style>
 
+    <DataTemplate DataType="{x:Type System:String}">
+        <TextBlock Style="{StaticResource RuyberTextBlock}" Text="{Binding}">
+            <TextBlock.Resources>
+                <Style TargetType="{x:Type TextBlock}" />
+            </TextBlock.Resources>
+        </TextBlock>
+    </DataTemplate>
 </ResourceDictionary>

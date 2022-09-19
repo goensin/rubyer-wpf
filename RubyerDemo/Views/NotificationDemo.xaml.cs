@@ -49,7 +49,7 @@ namespace RubyerDemo.Views
 
         private void ErrorBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.ErrorGlobal("errooooooooooooooooooooooooo\r\nooooooooooooooooooooooooooooooooooor", "title", millisecondTimeOut: 0);
+            Notification.ErrorGlobal("erroooooooooooooooooooooooooooooooooooooooooooooooooooooooooooor", "title", millisecondTimeOut: 0);
         }
 
         private void NotificationContainerBtn_Click(object sender, RoutedEventArgs e)

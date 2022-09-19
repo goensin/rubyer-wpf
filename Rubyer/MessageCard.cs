@@ -94,14 +94,14 @@ namespace Rubyer
         /// 主题色
         /// </summary>
         public static readonly DependencyProperty ThemeColorBrushProperty =
-            DependencyProperty.Register("ThemeColorBrush", typeof(SolidColorBrush), typeof(MessageCard), new PropertyMetadata(default(SolidColorBrush)));
+            DependencyProperty.Register("ThemeColorBrush", typeof(Brush), typeof(MessageCard), new PropertyMetadata(default(Brush)));
 
         /// <summary>
         /// 主题色
         /// </summary>
-        public SolidColorBrush ThemeColorBrush
+        public Brush ThemeColorBrush
         {
-            get { return (SolidColorBrush)GetValue(ThemeColorBrushProperty); }
+            get { return (Brush)GetValue(ThemeColorBrushProperty); }
             set { SetValue(ThemeColorBrushProperty, value); }
         }
 
