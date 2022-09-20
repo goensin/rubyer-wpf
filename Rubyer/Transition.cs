@@ -288,7 +288,7 @@ namespace Rubyer
                     CloseAnimation(transition);
                 }
             }
-            else
+            else if(transition.IsInitialized)
             {
                 transition.BeginAnimation(Transition.ProgressProperty, null);
 
@@ -308,7 +308,7 @@ namespace Rubyer
             Storyboard storyboard = new Storyboard();
             storyboard.Completed += (sender, e) =>
             {
-               var args = new RoutedEventArgs();
+                var args = new RoutedEventArgs();
                 args.RoutedEvent = Transition.ShowedEvent;
                 transition.RaiseEvent(args);
                 transition.ShowedCommand?.Execute(null);
@@ -317,11 +317,11 @@ namespace Rubyer
             DoubleAnimation progressAnimation;
             if (transition.Type >= TransitionType.CollapseUp && transition.Type <= TransitionType.CollapseRight)
             {
-                progressAnimation = GetProgressAnimation(transition, transition.Progress, 1, transition.ShowEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction);
             }
             else
             {
-                progressAnimation = GetProgressAnimation(transition, 0, 1, transition.ShowEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction);
             }
 
             switch (transition.Type)
@@ -426,11 +426,11 @@ namespace Rubyer
             if (transition.Type >= TransitionType.CollapseUp && transition.Type <= TransitionType.CollapseRight)
             {
                 var progress = GetCollapsedProgress(transition);
-                progressAnimation = GetProgressAnimation(transition, transition.Progress, progress, transition.CloseEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, progress, transition.CloseEasingFunction);
             }
             else
             {
-                progressAnimation = GetProgressAnimation(transition, 1, 0, transition.CloseEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 0, transition.CloseEasingFunction);
             }
 
             switch (transition.Type)
@@ -520,11 +520,10 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static DoubleAnimation GetProgressAnimation(Transition transition, double from, double to, IEasingFunction easing)
+        private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing)
         {
             DoubleAnimation progressAnimation = new DoubleAnimation()
             {
-                From = from,
                 To = to,
                 Duration = transition.Duration,
                 EasingFunction = easing,
