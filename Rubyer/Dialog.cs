@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -73,7 +74,12 @@ namespace Rubyer
                 DialogContainer.OpenDialogCommand.Execute(parameters, dialog);
 
                 var taskCompletionSource = new TaskCompletionSource<object>();
-                DialogContainer.DialogResultRoutedEventHandler handle = (sender, e) => taskCompletionSource.TrySetResult(e.Result);
+                DialogContainer.DialogResultRoutedEventHandler handle = (sender, e) =>
+                {
+                    taskCompletionSource.TrySetResult(e.Result);
+                    dialog.DialogContent = null;
+                };
+
                 dialog.AfterClose -= handle;
                 dialog.AfterClose += handle;
 

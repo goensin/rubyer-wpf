@@ -172,6 +172,7 @@ namespace Rubyer
             {
                 container.IsShow = false;
                 taskCompletionSource.TrySetResult(b.Result);
+                card.Closed += (c, d) => container.DialogContent = null;
             };
 
             container.DialogContent = card;

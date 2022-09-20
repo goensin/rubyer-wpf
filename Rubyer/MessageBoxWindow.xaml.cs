@@ -28,7 +28,7 @@ namespace Rubyer
         internal void AddMessageBoxCard(MessageBoxCard card)
         {
             card.ReturnResult += Card_ReturnResult;
-            card.Close += Card_Close;
+            card.Closed += Card_Close;
             _ = messageBoxPanel.Child = card;
         }
 

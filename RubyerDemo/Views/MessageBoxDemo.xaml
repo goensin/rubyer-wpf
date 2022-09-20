@@ -12,7 +12,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <GroupBox Margin="0 0 0 10" Header="消息框-MessageBoxR">
+            <GroupBox Margin="0 0 0 10" Header="消息框-MessageBoxR" IsHitTestVisible="False" Focusable="False">
                 <StackPanel Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Width="100"

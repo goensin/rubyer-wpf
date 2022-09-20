@@ -153,28 +153,28 @@
                             <Setter TargetName="PART_YesButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_NoButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_OkButton" Property="IsDefault" Value="True" />
+                            <!--<Setter TargetName="PART_OkButton" Property="IsDefault" Value="True" />-->
                         </Trigger>
                         <Trigger Property="MessageBoxButton" Value="OKCancel">
                             <Setter TargetName="PART_OkButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_YesButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_NoButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />
+                            <!--<Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />-->
                         </Trigger>
                         <Trigger Property="MessageBoxButton" Value="YesNo">
                             <Setter TargetName="PART_OkButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_YesButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_NoButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_NoButton" Property="IsDefault" Value="True" />
+                            <!--<Setter TargetName="PART_NoButton" Property="IsDefault" Value="True" />-->
                         </Trigger>
                         <Trigger Property="MessageBoxButton" Value="YesNoCancel">
                             <Setter TargetName="PART_OkButton" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_YesButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_NoButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_CancelButton" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />
+                            <!--<Setter TargetName="PART_CancelButton" Property="IsDefault" Value="True" />-->
                         </Trigger>
                         <Trigger Property="Type" Value="None">
                             <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />

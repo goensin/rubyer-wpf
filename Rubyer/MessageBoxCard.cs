@@ -94,7 +94,7 @@ namespace Rubyer
             {
                 transition.Closed += (sender, e) =>
                 {
-                    RoutedEventArgs eventArgs = new RoutedEventArgs(CloseEvent, this);
+                    RoutedEventArgs eventArgs = new RoutedEventArgs(ClosedEvent, this);
                     this.RaiseEvent(eventArgs);
                 };
             }
@@ -121,15 +121,15 @@ namespace Rubyer
         /// <summary>
         /// 关闭消息事件
         /// </summary>
-        public static readonly RoutedEvent CloseEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
 
         /// <summary>
         /// 关闭消息事件处理
         /// </summary>
-        public event RoutedEventHandler Close
+        public event RoutedEventHandler Closed
         {
-            add { AddHandler(CloseEvent, value); }
-            remove { RemoveHandler(CloseEvent, value); }
+            add { AddHandler(ClosedEvent, value); }
+            remove { RemoveHandler(ClosedEvent, value); }
         }
 
         #endregion 事件
