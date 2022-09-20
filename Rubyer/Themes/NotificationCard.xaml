@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rubyer="clr-namespace:Rubyer"
-                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+                    xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
@@ -68,8 +67,6 @@
                                         Grid.ColumnSpan="3"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
-                                        BorderBrush="{TemplateBinding ThemeColorBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Effect="{DynamicResource AllDirectionEffect2}" />
 
