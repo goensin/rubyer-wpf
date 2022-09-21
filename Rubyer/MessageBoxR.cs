@@ -171,8 +171,12 @@ namespace Rubyer
             card.ReturnResult += (a, b) =>
             {
                 container.IsShow = false;
-                taskCompletionSource.TrySetResult(b.Result);
-                card.Closed += (c, d) => container.DialogContent = null;
+
+                card.Closed += (c, d) =>
+                {
+                    container.DialogContent = null;
+                    taskCompletionSource.TrySetResult(b.Result);
+                };
             };
 
             container.DialogContent = card;
