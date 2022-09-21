@@ -48,7 +48,6 @@
 
     <Style x:Key="TextPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="FontSize" Value="15" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="Padding" Value="3 0" />
@@ -91,7 +90,6 @@
         <Setter Property="Background" Value="{DynamicResource Primary}" />
         <Setter Property="CurrentBackground" Value="{DynamicResource Dark}" />
         <Setter Property="CurrentForeground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
@@ -129,7 +127,7 @@
                                        Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
 
                             <TextBox x:Name="PART_PageSizeTextBox"
-                                     Height="24"
+                                     Height="Auto"
                                      MinWidth="70"
                                      Margin="5 0"
                                      VerticalAlignment="Center"
