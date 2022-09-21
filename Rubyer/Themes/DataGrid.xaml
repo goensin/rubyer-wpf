@@ -512,7 +512,7 @@
                                                              Height="20"
                                                              Margin="5 0"
                                                              Type="DatabaseFill" />
-                                                <TextBlock FontSize="14" Text="{DynamicResource I18N_DataGrid_NoData}" />
+                                                <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
                                             </StackPanel>
                                         </Border>
                                     </Grid>
