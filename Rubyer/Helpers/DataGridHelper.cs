@@ -294,15 +294,22 @@ namespace Rubyer
 
         private static void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var result = e.PropertyName;
-            var p = (e.PropertyDescriptor as PropertyDescriptor).ComponentType.GetProperties().FirstOrDefault(x => x.Name == e.PropertyName);
+            DataGrid dataGrid = sender as DataGrid;
+            var propertyName = e.PropertyName;
 
-            if (p != null)
+            if (dataGrid.Columns.Any(x => x.ClipboardContentBinding != null && ((Binding)x.ClipboardContentBinding).Path.Path == propertyName))
             {
-                var found = p.GetCustomAttribute<DisplayAttribute>();
+                e.Cancel = true;
+                return;
+            }
+
+            var propertyInfo = (e.PropertyDescriptor as PropertyDescriptor).ComponentType.GetProperties().FirstOrDefault(x => x.Name == e.PropertyName);
+            if (propertyInfo != null)
+            {
+                var found = propertyInfo.GetCustomAttribute<DisplayAttribute>();
                 if (found != null)
                 {
-                    result = found.Name;
+                    propertyName = found.Name;
 
                     if (found.GetAutoGenerateField() == false)
                     {
@@ -312,7 +319,7 @@ namespace Rubyer
                 }
             }
 
-            e.Column.Header = result;
+            e.Column.Header = propertyName;
         }
     }
 }

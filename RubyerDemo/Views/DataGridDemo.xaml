@@ -154,6 +154,9 @@
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <rubyer:DataGridDetailToggleButtonColumn Width="30" Header="+" />
+                        <DataGridTextColumn Width="50"
+                                            Binding="{Binding Id}"
+                                            Header="序号" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>
