@@ -172,7 +172,7 @@ namespace Rubyer
         /// 每页数量
         /// </summary>
         public static readonly DependencyProperty PageSizeProperty =
-            DependencyProperty.Register("PageSize", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnPageSizeChanged)));
+            DependencyProperty.Register("PageSize", typeof(int), typeof(PageBar), new FrameworkPropertyMetadata(default(int), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPageSizeChanged)));
 
         private static void OnPageSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -201,7 +201,7 @@ namespace Rubyer
         /// 当前页
         /// </summary>
         public static readonly DependencyProperty PageIndexProperty =
-            DependencyProperty.Register("PageIndex", typeof(int), typeof(PageBar), new PropertyMetadata(1, new PropertyChangedCallback(OnPageIndexChanged)));
+            DependencyProperty.Register("PageIndex", typeof(int), typeof(PageBar), new FrameworkPropertyMetadata(1, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnPageIndexChanged)));
 
         private static void OnPageIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -229,7 +229,7 @@ namespace Rubyer
         /// 总数量
         /// </summary>
         public static readonly DependencyProperty TotalProperty =
-            DependencyProperty.Register("Total", typeof(int), typeof(PageBar), new PropertyMetadata(default(int), new PropertyChangedCallback(OnTotalChanged)));
+            DependencyProperty.Register("Total", typeof(int), typeof(PageBar), new FrameworkPropertyMetadata(default(int), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, new PropertyChangedCallback(OnTotalChanged)));
 
         private static void OnTotalChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
