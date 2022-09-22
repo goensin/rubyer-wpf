@@ -49,7 +49,6 @@
                           SelectionUnit="Cell">
                     <DataGrid.Columns>
                         <rubyer:DataGridSelectCheckBoxColumn Width="80"
-                                                             rubyer:ToggleButtonHelper.CheckedContent="不选"
                                                              Binding="{Binding IsSelected}"
                                                              Header="全选" />
                         <DataGridTextColumn Width="60"
@@ -110,9 +109,11 @@
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                           rubyer:ControlHelper.MaskOpacity="1"
+                          rubyer:HeaderHelper.HorizontalAlignment="Center"
                           AlternationCount="2"
-                          AutoGenerateColumns="False"
+                          AutoGenerateColumns="True"
                           CanUserAddRows="False"
+                          ColumnWidth="70"
                           Foreground="{StaticResource BlackForeground}"
                           GridLinesVisibility="All"
                           HeadersVisibility="All"
@@ -153,22 +154,6 @@
                     </DataGrid.RowStyle>
                     <DataGrid.Columns>
                         <rubyer:DataGridDetailToggleButtonColumn Width="30" Header="+" />
-                        <DataGridCheckBoxColumn Width="50"
-                                                Binding="{Binding IsSelected}"
-                                                Header="选中" />
-                        <DataGridTextColumn Width="60"
-                                            Binding="{Binding Id}"
-                                            Header="序号" />
-                        <DataGridTextColumn Width="70"
-                                            Binding="{Binding Name}"
-                                            Header="姓名" />
-                        <DataGridTextColumn Width="60"
-                                            Binding="{Binding Age}"
-                                            Header="年龄" />
-                        <DataGridComboBoxColumn Width="80"
-                                                Header="性别"
-                                                ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
-                                                SelectedItemBinding="{Binding Gender}" />
                     </DataGrid.Columns>
                 </DataGrid>
             </Grid>

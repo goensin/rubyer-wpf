@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace RubyerDemo.ViewModels
@@ -18,7 +19,6 @@ namespace RubyerDemo.ViewModels
                 new Person{ Id=5,Name="孙七",Age=21,IsSelected=false,Gender=GenderType.男},
                 new Person{ Id=6,Name="周八",Age=22,IsSelected=true,Gender=GenderType.女},
                 new Person{ Id=7,Name="吴九",Age=23,IsSelected=false,Gender=GenderType.男}
-
             };
 
             Catalogs = new ObservableCollection<Catalog>
@@ -54,8 +54,8 @@ namespace RubyerDemo.ViewModels
             };
         }
 
-
         private ObservableCollection<Person> persons;
+
         public ObservableCollection<Person> Persons
         {
             get => persons;
@@ -67,6 +67,7 @@ namespace RubyerDemo.ViewModels
         }
 
         private ObservableCollection<Catalog> catalogs;
+
         public ObservableCollection<Catalog> Catalogs
         {
             get => catalogs;
@@ -81,6 +82,8 @@ namespace RubyerDemo.ViewModels
     public class Person : NotifyPropertyObject
     {
         private int id;
+
+        [Display(Name = "序号", AutoGenerateField = false)]
         public int Id
         {
             get => id;
@@ -92,6 +95,8 @@ namespace RubyerDemo.ViewModels
         }
 
         private string name;
+
+        [Display(Name = "名称")]
         public string Name
         {
             get => name;
@@ -103,6 +108,8 @@ namespace RubyerDemo.ViewModels
         }
 
         private int age;
+
+        [Display(Name = "年龄")]
         public int Age
         {
             get => age;
@@ -114,6 +121,8 @@ namespace RubyerDemo.ViewModels
         }
 
         private bool isSelected;
+
+        [Display(Name = "选择")]
         public bool IsSelected
         {
             get => isSelected;
@@ -125,6 +134,8 @@ namespace RubyerDemo.ViewModels
         }
 
         private GenderType gender;
+
+        [Display(Name = "性别")]
         public GenderType Gender
         {
             get => gender;

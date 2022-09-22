@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
+using System.Reflection;
 
 namespace Rubyer
 {
@@ -20,7 +24,7 @@ namespace Rubyer
         /// <summary>
         /// 是否为表头全选 CheckBox
         /// </summary>
-        public static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
+        internal static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
             "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnIsHeaderSelectCheckBoxChanged));
 
         /// <summary>
@@ -28,7 +32,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="element">The element.</param>
         /// <param name="value">If true, value.</param>
-        public static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
+        internal static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
         {
             element.SetValue(IsHeaderSelectCheckBoxProperty, value);
         }
@@ -38,7 +42,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="element">The element.</param>
         /// <returns>A bool.</returns>
-        public static bool GetIsHeaderSelectCheckBox(DependencyObject element)
+        internal static bool GetIsHeaderSelectCheckBox(DependencyObject element)
         {
             return (bool)element.GetValue(IsHeaderSelectCheckBoxProperty);
         }
@@ -152,6 +156,8 @@ namespace Rubyer
             }
         }
 
+        #region form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
+
         /// <summary>
         /// Allows editing of components inside of a datagrid cell with a single left click.
         /// form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
@@ -258,6 +264,55 @@ namespace Rubyer
             {
                 dataGrid.BeginEdit();
             }
+        }
+
+        #endregion form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
+
+        /// <summary>
+        /// 列标题从 Display 特性 Name 值读取
+        /// </summary>
+        public static readonly DependencyProperty ColumnHeaderFromDisplayNameProperty = DependencyProperty.RegisterAttached(
+            "ColumnHeaderFromDisplayName", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(false, OnColumnHeaderFromDisplayNameChanged));
+
+        public static void SetColumnHeaderFromDisplayName(DependencyObject element, bool value)
+        {
+            element.SetValue(ColumnHeaderFromDisplayNameProperty, value);
+        }
+
+        public static bool GetColumnHeaderFromDisplayName(DependencyObject element)
+        {
+            return (bool)element.GetValue(ColumnHeaderFromDisplayNameProperty);
+        }
+
+        private static void OnColumnHeaderFromDisplayNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid dataGrid)
+            {
+                dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+            }
+        }
+
+        private static void DataGrid_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            var result = e.PropertyName;
+            var p = (e.PropertyDescriptor as PropertyDescriptor).ComponentType.GetProperties().FirstOrDefault(x => x.Name == e.PropertyName);
+
+            if (p != null)
+            {
+                var found = p.GetCustomAttribute<DisplayAttribute>();
+                if (found != null)
+                {
+                    result = found.Name;
+
+                    if (found.GetAutoGenerateField() == false)
+                    {
+                        e.Cancel = true;
+                        return;
+                    }
+                }
+            }
+
+            e.Column.Header = result;
         }
     }
 }
