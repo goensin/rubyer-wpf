@@ -104,7 +104,7 @@
 
                 <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
 
-                <DataGrid Grid.Row="1"
+                <DataGrid Grid.Row="1" IsReadOnly="False"
                           HorizontalContentAlignment="Center"
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"

@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Rubyer.Converters;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
@@ -12,13 +14,13 @@ namespace RubyerDemo.ViewModels
         {
             Persons = new ObservableCollection<Person>
             {
-                new Person{ Id=1,Name="张三",Age=17,IsSelected=false,Gender=GenderType.男},
-                new Person{ Id=2,Name="李四",Age=18,IsSelected=true,Gender=GenderType.男},
-                new Person{ Id=3,Name="王五",Age=19,IsSelected=false,Gender=GenderType.女},
-                new Person{ Id=4,Name="赵六",Age=20,IsSelected=true,Gender=GenderType.男},
-                new Person{ Id=5,Name="孙七",Age=21,IsSelected=false,Gender=GenderType.男},
-                new Person{ Id=6,Name="周八",Age=22,IsSelected=true,Gender=GenderType.女},
-                new Person{ Id=7,Name="吴九",Age=23,IsSelected=false,Gender=GenderType.男}
+                new Person{ Id=1,Name="张三",Age=17,IsSelected=false,Gender=GenderType.Men},
+                new Person{ Id=2,Name="李四",Age=18,IsSelected=true,Gender=GenderType.Men},
+                new Person{ Id=3,Name="王五",Age=19,IsSelected=false,Gender=GenderType.Women},
+                new Person{ Id=4,Name="赵六",Age=20,IsSelected=true,Gender=GenderType.Men},
+                new Person{ Id=5,Name="孙七",Age=21,IsSelected=false,Gender=GenderType.Men},
+                new Person{ Id=6,Name="周八",Age=22,IsSelected=true,Gender=GenderType.Women},
+                new Person{ Id=7,Name="吴九",Age=23,IsSelected=false,Gender=GenderType.Men}
             };
 
             Catalogs = new ObservableCollection<Catalog>
@@ -110,6 +112,7 @@ namespace RubyerDemo.ViewModels
         private int age;
 
         [Display(Name = "年龄")]
+        [DisplayFormat(DataFormatString = "{0}岁")]
         public int Age
         {
             get => age;
@@ -153,9 +156,16 @@ namespace RubyerDemo.ViewModels
         public ObservableCollection<Catalog> Items { get; set; }
     }
 
+    /// <summary>
+    /// 性别
+    /// </summary>
+    [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum GenderType
     {
-        男,
-        女
+        [Description("男")]
+        Men,
+
+        [Description("女")]
+        Women
     }
 }

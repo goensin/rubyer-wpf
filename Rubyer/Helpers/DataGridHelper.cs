@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 using System.Reflection;
+using Rubyer.Converters;
 
 namespace Rubyer
 {
@@ -269,26 +270,33 @@ namespace Rubyer
         #endregion form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
 
         /// <summary>
-        /// 列标题从 Display 特性 Name 值读取
+        /// 应用 DataAnnotations 特性内容
         /// </summary>
-        public static readonly DependencyProperty ColumnHeaderFromDisplayNameProperty = DependencyProperty.RegisterAttached(
-            "ColumnHeaderFromDisplayName", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(false, OnColumnHeaderFromDisplayNameChanged));
+        public static readonly DependencyProperty ApplyDataAnnotationsProperty = DependencyProperty.RegisterAttached(
+            "ApplyDataAnnotations", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(false, OnApplyDataAnnotationsChanged));
 
-        public static void SetColumnHeaderFromDisplayName(DependencyObject element, bool value)
+        public static void SetApplyDataAnnotations(DependencyObject element, bool value)
         {
-            element.SetValue(ColumnHeaderFromDisplayNameProperty, value);
+            element.SetValue(ApplyDataAnnotationsProperty, value);
         }
 
-        public static bool GetColumnHeaderFromDisplayName(DependencyObject element)
+        public static bool GetApplyDataAnnotations(DependencyObject element)
         {
-            return (bool)element.GetValue(ColumnHeaderFromDisplayNameProperty);
+            return (bool)element.GetValue(ApplyDataAnnotationsProperty);
         }
 
-        private static void OnColumnHeaderFromDisplayNameChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnApplyDataAnnotationsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is DataGrid dataGrid)
             {
-                dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+                if (GetApplyDataAnnotations(dataGrid))
+                {
+                    dataGrid.AutoGeneratingColumn += DataGrid_AutoGeneratingColumn;
+                }
+                else
+                {
+                    dataGrid.AutoGeneratingColumn -= DataGrid_AutoGeneratingColumn;
+                }
             }
         }
 
@@ -306,20 +314,31 @@ namespace Rubyer
             var propertyInfo = (e.PropertyDescriptor as PropertyDescriptor).ComponentType.GetProperties().FirstOrDefault(x => x.Name == e.PropertyName);
             if (propertyInfo != null)
             {
-                var found = propertyInfo.GetCustomAttribute<DisplayAttribute>();
-                if (found != null)
+                var displayAttribute = propertyInfo.GetCustomAttribute<DisplayAttribute>();
+                if (displayAttribute != null)
                 {
-                    propertyName = found.Name;
+                    propertyName = displayAttribute.Name;
 
-                    if (found.GetAutoGenerateField() == false)
+                    if (displayAttribute.GetAutoGenerateField() == false)
                     {
                         e.Cancel = true;
                         return;
                     }
+
+                    ApplyDataFormatAttribute(propertyInfo, e.Column);
                 }
             }
 
             e.Column.Header = propertyName;
+        }
+
+        private static void ApplyDataFormatAttribute(PropertyInfo propertyInfo, DataGridColumn column)
+        {
+            var displayFormatAttribute = propertyInfo.GetCustomAttribute<DisplayFormatAttribute>();
+            if (displayFormatAttribute != null)
+            {
+                column.ClipboardContentBinding.StringFormat = displayFormatAttribute.DataFormatString;
+            }
         }
     }
 }
