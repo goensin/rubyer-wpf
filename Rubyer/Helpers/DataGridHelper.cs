@@ -325,19 +325,44 @@ namespace Rubyer
                         return;
                     }
 
-                    ApplyDataFormatAttribute(propertyInfo, e.Column);
+                    var column = e.Column;
+                    Binding binding;
+                    if (e.Column is DataGridBoundColumn boundColumn)
+                    {
+                        binding = boundColumn.Binding as Binding;
+                    }
+                    else if (e.Column is DataGridComboBoxColumn comboBoxColumn)
+                    {
+                        binding = comboBoxColumn.SelectedItemBinding as Binding;
+                    }
+                    else
+                    {
+                        binding = e.Column.ClipboardContentBinding as Binding;
+                    }
+
+                    ApplyDataFormatAttribute(propertyInfo, binding);
+                    ApplyEditableAttribute(propertyInfo, column);
                 }
             }
 
             e.Column.Header = propertyName;
         }
 
-        private static void ApplyDataFormatAttribute(PropertyInfo propertyInfo, DataGridColumn column)
+        private static void ApplyDataFormatAttribute(PropertyInfo propertyInfo, Binding binding)
         {
             var displayFormatAttribute = propertyInfo.GetCustomAttribute<DisplayFormatAttribute>();
             if (displayFormatAttribute != null)
             {
-                column.ClipboardContentBinding.StringFormat = displayFormatAttribute.DataFormatString;
+                binding.StringFormat = displayFormatAttribute.DataFormatString;
+            }
+        }
+
+        private static void ApplyEditableAttribute(PropertyInfo propertyInfo, DataGridColumn column)
+        {
+            var editableAttribute = propertyInfo.GetCustomAttribute<EditableAttribute>();
+            if (editableAttribute != null && !editableAttribute.AllowEdit)
+            {
+                column.IsReadOnly = true;
             }
         }
     }
