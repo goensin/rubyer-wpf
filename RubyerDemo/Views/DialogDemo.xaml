@@ -26,6 +26,8 @@
                 <rubyer:DialogContainer Title="1#对话框"
                                         rubyer:HeaderHelper.FontSize="22"
                                         rubyer:HeaderHelper.FontWeight="Bold"
+                                        BorderBrush="{StaticResource Error}"
+                                        BorderThickness="2"
                                         IsClickBackgroundToClose="True"
                                         IsShow="{Binding Dialog1IsShow}"
                                         IsShowCloseButton="False">
