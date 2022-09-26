@@ -245,6 +245,27 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s1" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s2" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s3" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s4" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="s5" Storyboard.TargetProperty="ScaleY">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
@@ -301,6 +322,15 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="angle" Storyboard.TargetProperty="Angle">
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0" Value="0" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="contentPresenter" Property="Margin" Value="0" />
