@@ -74,7 +74,6 @@
                                                         Style="{StaticResource TextButton}"
                                                         Height="Auto"
                                                         Padding="5"
-                                                        VerticalAlignment="Top"
                                                         rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
                                                         DockPanel.Dock="Right"
                                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
