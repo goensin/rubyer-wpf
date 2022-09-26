@@ -72,6 +72,7 @@
                                             <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                                 <Button x:Name="PART_CloseButton"
                                                         Style="{StaticResource TextButton}"
+                                                        Height="Auto"
                                                         Padding="5"
                                                         VerticalAlignment="Top"
                                                         rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
