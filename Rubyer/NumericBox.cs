@@ -299,12 +299,7 @@ namespace Rubyer
         {
             var numberBox = d as NumericBox;
 
-            if (string.IsNullOrEmpty(numberBox.Text))
-            {
-                numberBox.Value = null;
-                return;
-            }
-            else if (double.TryParse(numberBox.Text, out double value))
+            if (double.TryParse(numberBox.Text, out double value))
             {
                 var newValue = GetCalculatedValue(numberBox, value);
                 if (numberBox.Value != newValue)
@@ -379,10 +374,6 @@ namespace Rubyer
                         textBox.Select(textBox.Text.Length, 0);
                     }
                 }
-            }
-            else if (string.IsNullOrEmpty(textBox.Text))
-            {
-                Value = null;
             }
         }
 
