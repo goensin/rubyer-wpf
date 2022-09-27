@@ -117,7 +117,7 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
                         <ColumnDefinition Width="Auto" />
@@ -187,7 +187,6 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
-
     <!--  SubmenuItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Grid Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}">
@@ -199,10 +198,10 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="24" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
-                        <ColumnDefinition Width="24" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
                     </Grid.ColumnDefinitions>
 
                     <ContentPresenter x:Name="Icon"
@@ -277,7 +276,6 @@
         </Style.Triggers>
     </Style>
 
-
     <Style x:Key="RubyerMenu" TargetType="{x:Type Menu}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -291,6 +289,7 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="10 5" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:MenuHelper.IconWidth" Value="24" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
@@ -306,6 +305,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
-
 </ResourceDictionary>

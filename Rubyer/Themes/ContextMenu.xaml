@@ -20,6 +20,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 1" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="10 5" />
+        <Setter Property="rubyer:MenuHelper.IconWidth" Value="24" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
