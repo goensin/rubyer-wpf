@@ -91,7 +91,6 @@
                                       Margin="{TemplateBinding Padding}"
                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <ScrollViewer x:Name="PART_ContentHost"
-                                                  Padding="0"
                                                   Focusable="false"
                                                   HorizontalScrollBarVisibility="Hidden"
                                                   VerticalScrollBarVisibility="Hidden" />
@@ -190,7 +189,6 @@
         </Style.Triggers>
     </Style>
 
-
     <!--  亮色文本框  -->
     <Style x:Key="LightTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
@@ -224,5 +222,4 @@
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
     </Style>
-
 </ResourceDictionary>
