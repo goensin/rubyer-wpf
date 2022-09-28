@@ -10,7 +10,7 @@
 
     <Style x:Key="RubyerMessageBoxCard" TargetType="{x:Type rubyer:MessageBoxCard}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderBrush" Value="{Binding ThemeColorBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
