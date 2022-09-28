@@ -191,7 +191,6 @@
                                Content="格式化文本:" />
                         <rubyer:NumericBox Width="100"
                                            rubyer:InputBoxHelper.Watermark="NumericType=Double"
-                                           NumericType="Double"
                                            TextFormat="E2"
                                            Value="{Binding ExponentDoubleValue}" />
 
