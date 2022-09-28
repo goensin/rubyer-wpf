@@ -62,6 +62,8 @@
                                 Margin="5"
                                 Padding="0 5"
                                 Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <ScrollViewer Style="{StaticResource MenuScrollViewer}" CanContentScroll="True">
@@ -164,6 +166,8 @@
                                     Margin="5"
                                     Padding="0 5"
                                     Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Effect="{DynamicResource AllDirectionEffect}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
@@ -293,10 +297,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Menu}">
-                    <Border Background="Transparent"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{DynamicResource AllContainerCornerRadius}">
+                    <Border Background="Transparent" CornerRadius="{DynamicResource AllControlCornerRadius}">
                         <StackPanel ClipToBounds="True"
                                     IsItemsHost="True"
                                     Orientation="Horizontal" />
