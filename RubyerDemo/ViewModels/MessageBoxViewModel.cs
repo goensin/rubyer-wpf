@@ -52,24 +52,24 @@ namespace RubyerDemo.ViewModels
                     break;
 
                 case "2":
-                    var result = await MessageBoxR.Confirm("是否删除改数据?", title: "提示");
+                    var result = await MessageBoxR.Confirm("是否删除改数据?");
                     Message.Show($"返回结果为 {result}");
                     break;
 
                 case "3":
-                    await MessageBoxR.Info("消息消息消息消息消息消息", "标题名称", MessageBoxButton.YesNo);
+                    await MessageBoxR.Info("消息消息消息消息消息消息", button: MessageBoxButton.YesNo);
                     break;
 
                 case "4":
-                    await MessageBoxR.Waring("警告警告警告警告警告警告", "标题名称", MessageBoxButton.YesNo);
+                    await MessageBoxR.Waring("警告警告警告警告警告警告", button: MessageBoxButton.YesNo);
                     break;
 
                 case "5":
-                    await MessageBoxR.Success("成功成功成功成功成功成功", "标题名称", MessageBoxButton.OK);
+                    await MessageBoxR.Success("成功成功成功成功成功成功", button: MessageBoxButton.OK);
                     break;
 
                 case "6":
-                    await MessageBoxR.Error("错误错误错误错误错误错误", "标题名称", MessageBoxButton.YesNoCancel);
+                    await MessageBoxR.Error("错误错误错误错误错误错误", button: MessageBoxButton.YesNoCancel);
                     break;
 
                 default:

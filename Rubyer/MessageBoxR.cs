@@ -45,9 +45,13 @@ namespace Rubyer
             {
                 Type = type,
                 Message = message,
-                Title = title,
                 MessageBoxButton = button,
             };
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                card.Title = title;
+            }
 
             return card;
         }

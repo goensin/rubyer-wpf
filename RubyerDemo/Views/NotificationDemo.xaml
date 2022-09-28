@@ -66,8 +66,7 @@
                                     Margin="10"
                                     Click="NotificationContainerBtn_Click"
                                     Content="基础消息" />
-                            <rubyer:NotificationCard Title="title"
-                                                     Content="message"
+                            <rubyer:NotificationCard Content="notice"
                                                      IsClearable="True" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
@@ -83,8 +82,7 @@
                                     Background="{StaticResource Info}"
                                     Click="InfoContainerBtn_Click"
                                     Content="提示消息" />
-                            <rubyer:NotificationCard Title="title"
-                                                     Content="info"
+                            <rubyer:NotificationCard Content="info"
                                                      IsClearable="True"
                                                      Type="Info" />
                         </StackPanel>
@@ -101,8 +99,7 @@
                                     Background="{StaticResource Warning}"
                                     Click="WaringContainerBtn_Click"
                                     Content="警告消息" />
-                            <rubyer:NotificationCard Title="title"
-                                                     Content="warning"
+                            <rubyer:NotificationCard Content="warning"
                                                      IsClearable="True"
                                                      Type="Warning" />
                         </StackPanel>
@@ -119,8 +116,7 @@
                                     Background="{StaticResource Success}"
                                     Click="SuccessContainerBtn_Click"
                                     Content="成功消息" />
-                            <rubyer:NotificationCard Title="title"
-                                                     Content="success"
+                            <rubyer:NotificationCard Content="success"
                                                      IsClearable="True"
                                                      Type="Success" />
                         </StackPanel>
@@ -137,8 +133,7 @@
                                     Background="{StaticResource Error}"
                                     Click="ErrorContaionBtn_Click"
                                     Content="错误消息" />
-                            <rubyer:NotificationCard Title="title"
-                                                     Content="error"
+                            <rubyer:NotificationCard Content="error"
                                                      IsClearable="True"
                                                      Type="Error" />
                         </StackPanel>

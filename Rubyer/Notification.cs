@@ -320,13 +320,19 @@ namespace Rubyer
 
         private static NotificationCard GetNotificationCard(NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
         {
-            return new NotificationCard
+            var notificationCard = new NotificationCard
             {
                 Type = type,
                 Content = content,
                 IsClearable = isClearable,
-                Title = title,
             };
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                notificationCard.Title = title;
+            }
+
+            return notificationCard;
         }
 
         /// <summary>

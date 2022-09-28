@@ -58,8 +58,7 @@
                                 CommandParameter="2">
                             确认消息
                         </Button>
-                        <rubyer:MessageBoxCard Title="提示"
-                                               Message="是否删除改数据?"
+                        <rubyer:MessageBoxCard Message="是否删除改数据?"
                                                MessageBoxButton="OKCancel"
                                                ThemeColorBrush="{StaticResource Question}"
                                                Type="Question" />
@@ -81,8 +80,7 @@
                                 CommandParameter="3">
                             信息
                         </Button>
-                        <rubyer:MessageBoxCard Title="标题名称"
-                                               Message="消息消息消息消息消息消息"
+                        <rubyer:MessageBoxCard Message="消息消息消息消息消息消息"
                                                MessageBoxButton="YesNo"
                                                ThemeColorBrush="{StaticResource Info}"
                                                Type="Info" />
@@ -104,8 +102,7 @@
                                 CommandParameter="4">
                             警告
                         </Button>
-                        <rubyer:MessageBoxCard Title="标题名称"
-                                               Message="警告警告警告警告警告警告"
+                        <rubyer:MessageBoxCard Message="警告警告警告警告警告警告"
                                                MessageBoxButton="YesNo"
                                                ThemeColorBrush="{StaticResource Warning}"
                                                Type="Warning" />
@@ -127,8 +124,7 @@
                                 CommandParameter="5">
                             成功
                         </Button>
-                        <rubyer:MessageBoxCard Title="标题名称"
-                                               Message="成功成功成功成功成功成功"
+                        <rubyer:MessageBoxCard Message="成功成功成功成功成功成功"
                                                MessageBoxButton="OK"
                                                ThemeColorBrush="{StaticResource Success}"
                                                Type="Success" />
@@ -150,8 +146,7 @@
                                 CommandParameter="6">
                             错误
                         </Button>
-                        <rubyer:MessageBoxCard Title="标题名称"
-                                               Message="错误错误错误错误错误错误"
+                        <rubyer:MessageBoxCard Message="错误错误错误错误错误错误"
                                                MessageBoxButton="YesNoCancel"
                                                ThemeColorBrush="{StaticResource Error}"
                                                Type="Error" />

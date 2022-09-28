@@ -21,4 +21,9 @@
     <system:String x:Key="I18N_Clock_Minute">{0} 分</system:String>
     <system:String x:Key="I18N_Clock_Second">{0} 秒</system:String>
 
+    <system:String x:Key="I18N_Info">提示</system:String>
+    <system:String x:Key="I18N_Question">确认</system:String>
+    <system:String x:Key="I18N_Warning">警告</system:String>
+    <system:String x:Key="I18N_Success">成功</system:String>
+    <system:String x:Key="I18N_Error">错误</system:String>
 </ResourceDictionary>

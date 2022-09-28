@@ -23,7 +23,7 @@
         <Setter Property="Margin" Value="2" />
         <Setter Property="MinWidth" Value="250" />
         <Setter Property="MaxWidth" Value="400" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="10 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -55,23 +55,17 @@
                                 </TransformGroup>
                             </Border.RenderTransform>
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition x:Name="iconColumn" Width="40" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
                                 <Border Grid.RowSpan="2"
-                                        Grid.ColumnSpan="3"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
                                         Effect="{DynamicResource AllDirectionEffect2}" />
 
                                 <Border x:Name="titleBorder"
-                                        Grid.ColumnSpan="2"
                                         Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         CornerRadius="{Binding (rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <DockPanel>
@@ -98,31 +92,34 @@
                                     </DockPanel>
                                 </Border>
 
-                                <rubyer:Icon x:Name="icon"
-                                             Grid.Row="1"
-                                             Grid.Column="0"
-                                             Width="32"
-                                             Height="32"
-                                             Margin="0 10"
-                                             HorizontalAlignment="Right"
-                                             VerticalAlignment="Center"
-                                             Foreground="{TemplateBinding ThemeColorBrush}" />
+                                <Grid Grid.Row="1" Margin="0 0 0 10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition x:Name="iconColumn" Width="40" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  Grid.Row="1"
-                                                  Grid.Column="1"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Focusable="False"
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                    <ContentPresenter.Resources>
-                                        <Style TargetType="{x:Type TextBlock}">
-                                            <Setter Property="TextWrapping" Value="Wrap" />
-                                        </Style>
-                                    </ContentPresenter.Resources>
-                                </ContentPresenter>
+                                    <rubyer:Icon x:Name="icon"
+                                                 Width="32"
+                                                 Height="32"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Center"
+                                                 Foreground="{TemplateBinding ThemeColorBrush}" />
+
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      Grid.Column="1"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      Focusable="False"
+                                                      RecognizesAccessKey="True"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        <ContentPresenter.Resources>
+                                            <Style TargetType="{x:Type TextBlock}">
+                                                <Setter Property="TextWrapping" Value="Wrap" />
+                                            </Style>
+                                        </ContentPresenter.Resources>
+                                    </ContentPresenter>
+                                </Grid>
                             </Grid>
                         </Border>
                     </rubyer:Transition>
@@ -134,18 +131,22 @@
                         <Trigger Property="Type" Value="Info">
                             <Setter TargetName="icon" Property="Type" Value="InformationFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
+                            <Setter Property="Title" Value="{StaticResource I18N_Info}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Warning">
                             <Setter TargetName="icon" Property="Type" Value="ErrorWarningFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
+                            <Setter Property="Title" Value="{StaticResource I18N_Warning}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Success">
                             <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
+                            <Setter Property="Title" Value="{StaticResource I18N_Success}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Error">
                             <Setter TargetName="icon" Property="Type" Value="CloseCircleFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
+                            <Setter Property="Title" Value="{StaticResource I18N_Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
