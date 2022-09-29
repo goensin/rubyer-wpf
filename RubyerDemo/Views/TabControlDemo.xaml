@@ -47,7 +47,8 @@
                 <!--  Top  -->
                 <TabControl Grid.RowSpan="2"
                             Grid.Column="1"
-                            Height="150" HorizontalContentAlignment="Center"
+                            Height="150"
+                            HorizontalContentAlignment="Center"
                             ItemsSource="{Binding Poetries}"
                             SelectedItem="{Binding SelectedPoetry}"
                             TabStripPlacement="Top">
@@ -58,7 +59,7 @@
                     </TabControl.ItemTemplate>
                     <TabControl.ContentTemplate>
                         <DataTemplate>
-                            <TextBlock  Text="{Binding Content}" />
+                            <TextBlock Text="{Binding Content}" />
                         </DataTemplate>
                     </TabControl.ContentTemplate>
                 </TabControl>

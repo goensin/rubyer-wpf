@@ -80,6 +80,18 @@ namespace RubyerDemo.ViewModels
                 RaisePropertyChanged("Catalogs");
             }
         }
+
+        private FoodType currentFood;
+
+        public FoodType CurrentFood
+        {
+            get => currentFood;
+            set
+            {
+                currentFood = value;
+                RaisePropertyChanged("CurrentFood");
+            }
+        }
     }
 
     public class Person : NotifyPropertyObject

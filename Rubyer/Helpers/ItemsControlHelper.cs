@@ -5,6 +5,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Controls.Primitives;
 
 namespace Rubyer
 {
@@ -59,6 +60,7 @@ namespace Rubyer
 
         /// <summary>
         /// 绑定 enum 类型所有值给 ItemsSource 赋值
+        /// 必须绑定 SelectedItem
         /// </summary>
         public static readonly DependencyProperty EnumValuesToItemsSourceProperty = DependencyProperty.RegisterAttached(
             "EnumValuesToItemsSource", typeof(bool), typeof(ItemsControlHelper), new PropertyMetadata(default(bool), OnEnumValuesToItemsSourceChanged));
@@ -96,52 +98,66 @@ namespace Rubyer
 
         private static void SetComboBoxItemsSource(ItemsControl itemsControl)
         {
-            var itemsBindingExpression = BindingOperations.GetBinding(itemsControl, ComboBox.ItemsSourceProperty);
+            var itemsBindingExpression = BindingOperations.GetBinding(itemsControl, ItemsControl.ItemsSourceProperty);
             if (itemsBindingExpression != null)
             {
-                throw new InvalidOperationException("When using ComboBoxHelper. EnumValuesToItemsSource, cannot be used ItemsSource at the same time.");
+                throw new InvalidOperationException("When using ItemsControlHelper.EnumValuesToItemsSource, cannot be used ItemsSource at the same time.");
             }
 
-            var bindingExpression = BindingOperations.GetBindingExpression(itemsControl, ComboBox.SelectedItemProperty);
+            if (itemsControl.Items.Count > 0)
+            {
+                throw new InvalidOperationException("When using ItemsControlHelper.EnumValuesToItemsSource, Items Collection must be null");
+            }
+
+            var bindingExpression = BindingOperations.GetBindingExpression(itemsControl, Selector.SelectedItemProperty);
             if (bindingExpression == null)
             {
-                return;
+                throw new InvalidOperationException("ItemsControl must be binding SelectedItem property");
             }
 
             var binding = bindingExpression.ParentBinding;
             var dataType = bindingExpression.DataItem.GetType();
             var propertyInfo = dataType.GetProperty(binding.Path.Path);
             var propertyType = propertyInfo.PropertyType;
-            if (propertyInfo != null && (propertyType.IsEnum || Nullable.GetUnderlyingType(propertyType).IsEnum))
+
+            if (propertyType == null)
             {
-                if (!propertyType.IsEnum)
-                {
-                    propertyType = Nullable.GetUnderlyingType(propertyType);
-                }
-
-                List<object> itemValues = new List<object>();
-                var values = Enum.GetValues(propertyType);
-                for (int i = 0; i < values.Length; i++)
-                {
-                    var value = values.GetValue(i);
-                    FieldInfo fieldInfo = propertyType.GetField(value.ToString());
-                    if (fieldInfo != null)
-                    {
-                        var displayAttribute = fieldInfo.GetCustomAttribute<DisplayAttribute>(inherit: false);
-                        if (displayAttribute != null && !displayAttribute.GetAutoGenerateField().GetValueOrDefault())
-                        {
-                            continue;
-                        }
-
-                        itemValues.Add(value);
-                    }
-                }
-
-                var itemsSourceBinding = new Binding();
-                itemsSourceBinding.Source = itemValues;
-                itemsSourceBinding.Mode = BindingMode.OneWay;
-                itemsControl.SetBinding(ItemsControl.ItemsSourceProperty, itemsSourceBinding);
+                return;
             }
+
+            if (!propertyType.IsEnum)
+            {
+                var underlyingType = Nullable.GetUnderlyingType(propertyType);
+                if (underlyingType == null)
+                {
+                    return;
+                }
+
+                propertyType = underlyingType;
+            }
+
+            List<object> itemValues = new List<object>();
+            var values = Enum.GetValues(propertyType);
+            for (int i = 0; i < values.Length; i++)
+            {
+                var value = values.GetValue(i);
+                FieldInfo fieldInfo = propertyType.GetField(value.ToString());
+                if (fieldInfo != null)
+                {
+                    var displayAttribute = fieldInfo.GetCustomAttribute<DisplayAttribute>(inherit: false);
+                    if (displayAttribute != null && !displayAttribute.GetAutoGenerateField().GetValueOrDefault())
+                    {
+                        continue;
+                    }
+
+                    itemValues.Add(value);
+                }
+            }
+
+            var itemsSourceBinding = new Binding();
+            itemsSourceBinding.Source = itemValues;
+            itemsSourceBinding.Mode = BindingMode.OneWay;
+            itemsControl.SetBinding(ItemsControl.ItemsSourceProperty, itemsSourceBinding);
         }
 
         private static void ComboBox_Loaded(object sender, RoutedEventArgs e)
