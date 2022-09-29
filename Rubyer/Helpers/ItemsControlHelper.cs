@@ -91,7 +91,7 @@ namespace Rubyer
                 }
                 else
                 {
-                    itemsControl.Loaded += ComboBox_Loaded;
+                    itemsControl.Loaded += ItemsControl_Loaded;
                 }
             }
         }
@@ -160,10 +160,10 @@ namespace Rubyer
             itemsControl.SetBinding(ItemsControl.ItemsSourceProperty, itemsSourceBinding);
         }
 
-        private static void ComboBox_Loaded(object sender, RoutedEventArgs e)
+        private static void ItemsControl_Loaded(object sender, RoutedEventArgs e)
         {
             var itemsControl = sender as ItemsControl;
-            itemsControl.Loaded -= ComboBox_Loaded;
+            itemsControl.Loaded -= ItemsControl_Loaded;
             SetComboBoxItemsSource(itemsControl);
         }
     }
