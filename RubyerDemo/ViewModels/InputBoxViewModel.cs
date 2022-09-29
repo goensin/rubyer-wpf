@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -108,9 +111,40 @@ namespace RubyerDemo.ViewModels
             }
         }
 
+        private FoodType currentFood;
+
+        public FoodType CurrentFood
+        {
+            get => currentFood;
+            set
+            {
+                currentFood = value;
+                RaisePropertyChanged("CurrentFood");
+            }
+        }
+
         public InputBoxViewModel()
         {
             TestPassword = "123456";
         }
+    }
+
+    /// <summary>
+    /// 食物类型
+    /// </summary>
+    [TypeConverter(typeof(EnumDescriptionConverter))]
+    public enum FoodType
+    {
+        [Description("面条")]
+        Noodle = 0,
+
+        [Description("面包")]
+        Bread,
+
+        Hamburger,
+
+        [Description("不自动生成")]
+        [Display(AutoGenerateField = false)]
+        Beef,
     }
 }

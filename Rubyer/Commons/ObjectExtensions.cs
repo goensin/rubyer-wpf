@@ -1,21 +1,20 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
 namespace Rubyer.Commons
 {
     /// <summary>
-    /// enum 扩展方法
+    /// bject 扩展方法
     /// </summary>
-    public static class EnumExtensions
+    public static class ObjectExtensions
     {
         /// <summary>
         /// 获取描述
         /// </summary>
-        /// <param name="value">枚举值</param>
+        /// <param name="value">对象</param>
         /// <returns>描述</returns>
-        public static string GetDescription(this Enum value)
+        public static string GetDescription(this object value)
         {
             if (value != null)
             {

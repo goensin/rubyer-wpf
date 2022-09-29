@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace RubyerDemo
+namespace Rubyer.Commons
 {
     /// <summary>
     /// Enum -> Description
@@ -28,20 +23,29 @@ namespace RubyerDemo
         {
             if (destinationType == typeof(string))
             {
-                if (value != null)
+                return value?.GetDescription();
+            }
+
+            return string.Empty;
+        }
+
+        /// <inheritdoc/>
+        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        {
+            if (value is string)
+            {
+                var enumValues = EnumType.GetEnumValues();
+                for (int i = 0; i < enumValues.Length; i++)
                 {
-                    FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
-                    if (fieldInfo != null)
+                    var enumValue = enumValues.GetValue(i);
+                    if (value.Equals(enumValue.GetDescription()))
                     {
-                        var attributes = fieldInfo.GetCustomAttributes<DescriptionAttribute>(inherit: false);
-                        return ((attributes.Count() > 0) && (!string.IsNullOrEmpty(attributes.First().Description)))
-                            ? attributes.First().Description
-                            : value.ToString();
+                        return enumValue;
                     }
                 }
             }
 
-            return string.Empty;
+            return base.ConvertFrom(context, culture, value);
         }
     }
 }

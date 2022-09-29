@@ -221,7 +221,6 @@
                         </rubyer:NumericBox>
                     </StackPanel>
                 </StackPanel>
-
             </GroupBox>
             <GroupBox Grid.Row="5"
                       Grid.ColumnSpan="2"
@@ -327,11 +326,17 @@
                         <ComboBox Width="120"
                                   Margin="0 0 10 0"
                                   rubyer:InputBoxHelper.PreContent="选择"
-                                  IsEditable="True"
                                   IsEnabled="False"
                                   SelectedIndex="0">
                             <ComboBoxItem Content="不可用" />
                         </ComboBox>
+                    </StackPanel>
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <Label HorizontalContentAlignment="Right" Content="ItemsSource 自动绑定 Enum.GetValues" />
+                        <ComboBox Width="120"
+                                  Margin="0 0 10 0"
+                                  rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                                  SelectedItem="{Binding CurrentFood}" />
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
