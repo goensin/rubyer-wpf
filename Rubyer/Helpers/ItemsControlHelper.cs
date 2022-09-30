@@ -116,15 +116,14 @@ namespace Rubyer
             }
 
             var binding = bindingExpression.ParentBinding;
-            var dataType = bindingExpression.DataItem.GetType();
-            var propertyInfo = dataType.GetProperty(binding.Path.Path);
-            var propertyType = propertyInfo.PropertyType;
-
-            if (propertyType == null)
+            var dataType = bindingExpression.DataItem?.GetType();
+            var propertyInfo = dataType?.GetProperty(binding.Path.Path);
+            if (propertyInfo == null)
             {
                 return;
             }
 
+            var propertyType = propertyInfo.PropertyType;
             if (!propertyType.IsEnum)
             {
                 var underlyingType = Nullable.GetUnderlyingType(propertyType);
