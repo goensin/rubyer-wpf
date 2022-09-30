@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -269,6 +260,17 @@ namespace Rubyer
 
         #endregion 依赖属性
 
+        /// <summary>
+        /// 关闭转换器
+        /// </summary>
+        /// <returns>关闭是否完成</returns>
+        public async Task<bool> Close()
+        {
+            var taskCompletionSource = new TaskCompletionSource<bool>();
+            this.Closed += (a, b) => taskCompletionSource.TrySetResult(true);
+            return await taskCompletionSource.Task;
+        }
+
         private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var transition = d as Transition;
@@ -288,7 +290,7 @@ namespace Rubyer
                     CloseAnimation(transition);
                 }
             }
-            else if(transition.IsInitialized)
+            else if (transition.IsInitialized)
             {
                 transition.BeginAnimation(Transition.ProgressProperty, null);
 
