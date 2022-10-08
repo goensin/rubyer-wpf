@@ -312,8 +312,6 @@ namespace Rubyer
                     {
                         numberBox.Loaded += (sender, args) => numberBox.Value = newValue;
                     }
-
-                    return;
                 }
             }
 

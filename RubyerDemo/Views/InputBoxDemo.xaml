@@ -138,7 +138,7 @@
                         <rubyer:NumericBox Width="100"
                                            rubyer:InputBoxHelper.Watermark="绑定 int 值"
                                            ValueChanged="NumericBox_ValueChanged"
-                                           Value="{Binding IntValue}" />
+                                           Value="{Binding IntValue, UpdateSourceTrigger=PropertyChanged}" />
 
                         <Label Width="80"
                                HorizontalContentAlignment="Right"

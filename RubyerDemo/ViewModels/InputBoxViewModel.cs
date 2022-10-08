@@ -46,7 +46,15 @@ namespace RubyerDemo.ViewModels
             get => intValue;
             set
             {
-                intValue = value;
+                if (value > 5)
+                {
+                    intValue = 5;
+                }
+                else
+                {
+                    intValue = value;
+                }
+
                 RaisePropertyChanged("IntValue");
             }
         }
