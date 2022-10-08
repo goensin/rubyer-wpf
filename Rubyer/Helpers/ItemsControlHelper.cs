@@ -87,7 +87,7 @@ namespace Rubyer
             {
                 if (itemsControl.IsLoaded)
                 {
-                    SetComboBoxItemsSource(itemsControl);
+                    SetItemsSource(itemsControl);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ namespace Rubyer
             }
         }
 
-        private static void SetComboBoxItemsSource(ItemsControl itemsControl)
+        private static void SetItemsSource(ItemsControl itemsControl)
         {
             var itemsBindingExpression = BindingOperations.GetBinding(itemsControl, ItemsControl.ItemsSourceProperty);
             if (itemsBindingExpression != null)
@@ -117,30 +117,35 @@ namespace Rubyer
 
             var binding = bindingExpression.ParentBinding;
             var dataType = bindingExpression.DataItem?.GetType();
-            var propertyInfo = dataType?.GetProperty(binding.Path.Path);
-            if (propertyInfo == null)
+            var paths = binding.Path.Path.Split('.');
+            foreach (var path in paths)
             {
-                return;
+                var propertyInfo = dataType?.GetProperty(path);
+                if (propertyInfo == null)
+                {
+                    return;
+                }
+
+                dataType = propertyInfo.PropertyType;
             }
 
-            var propertyType = propertyInfo.PropertyType;
-            if (!propertyType.IsEnum)
+            if (!dataType.IsEnum)
             {
-                var underlyingType = Nullable.GetUnderlyingType(propertyType);
+                var underlyingType = Nullable.GetUnderlyingType(dataType);
                 if (underlyingType == null)
                 {
                     return;
                 }
 
-                propertyType = underlyingType;
+                dataType = underlyingType;
             }
 
             List<object> itemValues = new List<object>();
-            var values = Enum.GetValues(propertyType);
+            var values = Enum.GetValues(dataType);
             for (int i = 0; i < values.Length; i++)
             {
                 var value = values.GetValue(i);
-                FieldInfo fieldInfo = propertyType.GetField(value.ToString());
+                FieldInfo fieldInfo = dataType.GetField(value.ToString());
                 if (fieldInfo != null)
                 {
                     var displayAttribute = fieldInfo.GetCustomAttribute<DisplayAttribute>(inherit: false);
@@ -163,7 +168,7 @@ namespace Rubyer
         {
             var itemsControl = sender as ItemsControl;
             itemsControl.Loaded -= ItemsControl_Loaded;
-            SetComboBoxItemsSource(itemsControl);
+            SetItemsSource(itemsControl);
         }
     }
 }

@@ -33,17 +33,6 @@
                     <ListBoxItem Content="苹果" />
                 </ListBox>
 
-                <StackPanel Margin="5 0">
-                    <TextBlock Text="根据 enum 自动绑定 ItemsSource" />
-                    <ListBox Width="150"
-                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
-                             rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
-                             rubyer:ItemsControlHelper.ItemMargin="4 2"
-                             rubyer:ItemsControlHelper.ItemPadding="8 5"
-                             rubyer:ListBoxHelper.IsShowLittleBar="True"
-                             SelectedItem="{Binding CurrentFood}" />
-                </StackPanel>
-
                 <ListBox Width="150"
                          Margin="0 0 20 0"
                          rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
@@ -91,6 +80,17 @@
                         </StackPanel>
                     </ListBoxItem>
                 </ListBox>
+
+                <StackPanel Margin="5 0">
+                    <TextBlock Text="根据 enum 自动绑定 ItemsSource" />
+                    <ListBox Width="150"
+                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
+                             rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                             rubyer:ItemsControlHelper.ItemMargin="4 2"
+                             rubyer:ItemsControlHelper.ItemPadding="8 5"
+                             rubyer:ListBoxHelper.IsShowLittleBar="True"
+                             SelectedItem="{Binding CurrentFood}" />
+                </StackPanel>
             </StackPanel>
         </GroupBox>
         <GroupBox Grid.Row="1"
