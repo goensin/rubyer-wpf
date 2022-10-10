@@ -314,8 +314,19 @@ namespace Rubyer
                     }
                 }
             }
+            else if (string.IsNullOrEmpty(numberBox.Text))
+            {
+                numberBox.Value = null;
+            }
 
-            numberBox.Text = numberBox.Value.GetValueOrDefault().ToString(numberBox.TextFormat);
+            if (!numberBox.Value.HasValue)
+            {
+                numberBox.Text = null;
+            }
+            else
+            {
+                numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
+            }
         }
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
