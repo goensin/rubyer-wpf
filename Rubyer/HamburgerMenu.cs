@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -22,7 +23,7 @@ namespace Rubyer
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HamburgerMenuItem))]
     [StyleTypedProperty(Property = "OptionsItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     [TemplatePart(Name = HamburgerButtonPartName, Type = typeof(Button))]
-    [TemplatePart(Name = OptionsItemsControlPartName, Type = typeof(ItemsControl))]
+    [TemplatePart(Name = OptionsItemsControlPartName, Type = typeof(MenuBase))]
     public class HamburgerMenu : TabControl
     {
         /// <summary>
@@ -37,7 +38,7 @@ namespace Rubyer
 
         #region fields
 
-        private ItemsControl optionsItemsControl;
+        private MenuBase optionsMenu;
 
         #endregion fields
 
@@ -215,12 +216,12 @@ namespace Rubyer
         {
             get
             {
-                if (this.optionsItemsControl is null)
+                if (this.optionsMenu is null)
                 {
                     throw new Exception("OptionsListView is not defined yet. Please use OptionsItemsSource instead.");
                 }
 
-                return this.optionsItemsControl.Items;
+                return this.optionsMenu.Items;
             }
         }
 
@@ -259,7 +260,7 @@ namespace Rubyer
             Button button = GetTemplateChild(HamburgerButtonPartName) as Button;
             button.Click += Button_Click;
 
-            optionsItemsControl = GetTemplateChild(OptionsItemsControlPartName) as ItemsControl;
+            optionsMenu = GetTemplateChild(OptionsItemsControlPartName) as MenuBase;
         }
 
         /// <inheritdoc/>

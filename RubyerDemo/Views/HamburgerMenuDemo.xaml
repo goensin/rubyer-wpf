@@ -19,24 +19,45 @@
                         <TextBlock DockPanel.Dock="Top"
                                    FontSize="14"
                                    Text="items 方式" />
-                        <rubyer:HamburgerMenu rubyer:ItemsControlHelper.ItemPadding="10"
-                                              HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                        <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
                                               SelectedIndex="0">
                             <rubyer:HamburgerMenu.OptionsItemsSource>
                                 <rubyer:HamburgerMenuItemCollection>
                                     <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                                     Content="睡眠"
+                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                     Header="睡眠"
                                                                      IconType="MoonLine" />
                                     <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                                     Content="关机"
+                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                     Header="关机"
                                                                      IconType="ShutDownLine" />
                                     <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                                     Content="重启"
+                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                     Header="重启"
                                                                      IconType="RestartLine" />
+                                    <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                     Header="更多"
+                                                                     IconType="More2Line">
+                                        <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                         CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                         Header="子项 1"
+                                                                         IconType="RecordCircleFill" />
+                                        <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                         CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                         Header="子项 2"
+                                                                         IconType="RecordCircleFill" />
+                                        <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                         CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                         Header="子项 3"
+                                                                         IconType="RecordCircleFill">
+                                            <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                             CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                             Header="bug"
+                                                                             IconType="BugFill" />
+                                        </rubyer:HamburgerMenuOptionsItem>
+                                    </rubyer:HamburgerMenuOptionsItem>
                                 </rubyer:HamburgerMenuItemCollection>
                             </rubyer:HamburgerMenu.OptionsItemsSource>
 
@@ -114,7 +135,7 @@
                             <rubyer:HamburgerMenu.OptionsItemContainerStyle>
                                 <Style TargetType="rubyer:HamburgerMenuOptionsItem">
                                     <Setter Property="IconType" Value="{Binding Icon}" />
-                                    <Setter Property="Content" Value="{Binding Name}" />
+                                    <Setter Property="Header" Value="{Binding Name}" />
                                     <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
                                     <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
                                     <Setter Property="CommandParameter" Value="{Binding Name}" />

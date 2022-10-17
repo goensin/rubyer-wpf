@@ -31,7 +31,7 @@
     <!--  TopLevelHeader  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=MenuBase}}"
-                BorderBrush="{Binding BorderBrush}"
+                BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
             <Grid>
@@ -87,7 +87,7 @@
     <!--  TopLevelItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.TopLevelItemTemplateKey}" TargetType="{x:Type MenuItem}">
         <Border Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=MenuBase}}"
-                BorderBrush="{Binding BorderBrush}"
+                BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
             <Grid>

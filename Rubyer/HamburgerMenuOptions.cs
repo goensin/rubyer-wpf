@@ -6,11 +6,11 @@ namespace Rubyer
     /// <summary>
     /// 汉堡包菜单选项控件
     /// </summary>
-    public class HamburgerMenuOptions : ItemsControl
+    public class HamburgerMenuOptions : Menu
     {
         static HamburgerMenuOptions()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenuOptions), new FrameworkPropertyMetadata(typeof(ItemsControl)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenuOptions), new FrameworkPropertyMetadata(typeof(HamburgerMenuOptions)));
         }
 
         /// <inheritdoc/>
