@@ -258,18 +258,40 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 是否点击背景关闭弹窗
+        /// 是否 esc 键关闭弹窗 (点击空白关闭)
         /// </summary>
-        public static readonly DependencyProperty IsClickBackgroundToCloseProperty = DependencyProperty.Register(
-            "IsClickBackgroundToClose", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+        public static readonly DependencyProperty IsEscKeyToCloseProperty = DependencyProperty.Register(
+            "IsEscKeyToClose", typeof(bool), typeof(DialogContainer), new PropertyMetadata(default(bool), OnIsEscKeyToCloseChanged));
+
+        private static void OnIsEscKeyToCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DialogContainer dialog)
+            {
+                if (dialog.IsEscKeyToClose)
+                {
+                    var escKeyBinding = new KeyBinding(DialogContainer.CloseDialogCommand, Key.Escape, ModifierKeys.None);
+                    dialog.InputBindings.Add(escKeyBinding);
+                }
+                else
+                {
+                    foreach (var inputBinding in dialog.InputBindings)
+                    {
+                        if (inputBinding is KeyBinding keyBinding && keyBinding.Key == Key.Escape)
+                        {
+                            dialog.InputBindings.Remove(keyBinding);
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
-        /// 是否点击背景关闭弹窗
+        /// 是否 esc 键关闭弹窗 (点击空白关闭)
         /// </summary>
-        public bool IsClickBackgroundToClose
+        public bool IsEscKeyToClose
         {
-            get { return (bool)GetValue(IsClickBackgroundToCloseProperty); }
-            set { SetValue(IsClickBackgroundToCloseProperty, value); }
+            get { return (bool)GetValue(IsEscKeyToCloseProperty); }
+            set { SetValue(IsEscKeyToCloseProperty, value); }
         }
 
         /// <summary>
@@ -345,7 +367,7 @@ namespace Rubyer
         {
             if (e.OriginalSource is Border border)
             {
-                if (IsClickBackgroundToClose && sender.Equals(border))
+                if (IsEscKeyToClose && sender.Equals(border))
                 {
                     closeParameter = null;
                     IsShow = false;

@@ -21,7 +21,7 @@
         <Setter Property="Padding" Value="10" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="IsClickBackgroundToClose" Value="False" />
+        <Setter Property="IsEscKeyToClose" Value="False" />
         <Setter Property="IsShowCloseButton" Value="True" />
         <Setter Property="IsShow" Value="False" />
         <Setter Property="IsClosed" Value="True" />

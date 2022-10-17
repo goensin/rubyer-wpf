@@ -28,7 +28,7 @@
                                         rubyer:HeaderHelper.FontWeight="Bold"
                                         BorderBrush="{StaticResource Error}"
                                         BorderThickness="2"
-                                        IsClickBackgroundToClose="True"
+                                        IsEscKeyToClose="True"
                                         IsShow="{Binding Dialog1IsShow}"
                                         IsShowCloseButton="False">
                     <rubyer:DialogContainer.DialogContent>
@@ -95,7 +95,7 @@
                                         AfterCloseCommand="{Binding AfterDialog3Close}"
                                         BeforeOpen="Dialog3_BeforeOpen"
                                         BeforeOpenCommand="{Binding BeforeDialog3Open}"
-                                        IsClickBackgroundToClose="False">
+                                        IsEscKeyToClose="False">
                     <rubyer:DialogContainer.DialogContent>
                         <Grid>
                             <Grid.ColumnDefinitions>
