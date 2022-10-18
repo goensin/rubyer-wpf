@@ -43,15 +43,16 @@
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
                                                                          Header="子项 1"
-                                                                         IconType="RecordCircleFill" />
+                                                                         IsCheckable="True"
+                                                                         IsChecked="True" />
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
                                                                          Header="子项 2"
-                                                                         IconType="RecordCircleFill" />
+                                                                         IsCheckable="True" />
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
                                                                          Header="子项 3"
-                                                                         IconType="RecordCircleFill">
+                                                                         IconType="AliensLine">
                                             <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                              CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
                                                                              Header="bug"

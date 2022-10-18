@@ -139,6 +139,14 @@
                                                 Content="{TemplateBinding Icon}"
                                                 IsHitTestVisible="False" />
 
+                                <rubyer:Icon x:Name="checkIcon"
+                                             Width="{Binding ActualHeight, ElementName=header}"
+                                             Height="{Binding ActualHeight, ElementName=header}"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"
+                                             Type="CheckFill"
+                                             Visibility="Hidden" />
+
                                 <DockPanel Grid.Column="1">
                                     <rubyer:Icon x:Name="moreIcon"
                                                  Margin="20 0 0 0"
@@ -202,6 +210,20 @@
                         <Trigger Property="Role" Value="SubmenuHeader">
                             <Setter TargetName="moreIcon" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Role" Value="SubmenuItem" />
+                                <Condition Property="IsChecked" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="checkIcon" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Role" Value="SubmenuItem" />
+                                <Condition Property="IsCheckable" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="icon" Property="Visibility" Value="Hidden" />
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
