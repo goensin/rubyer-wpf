@@ -52,6 +52,7 @@
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}"
                                  InputMethod.IsInputMethodEnabled="False"
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"
                                  MaxLength="{TemplateBinding MaxLength}">
                             <rubyer:InputBoxHelper.PostContent>
                                 <StackPanel Orientation="Horizontal">
@@ -125,6 +126,7 @@
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}"
                                  InputMethod.IsInputMethodEnabled="False"
+                                 IsReadOnly="{TemplateBinding IsReadOnly}"
                                  MaxLength="{TemplateBinding MaxLength}" />
                         <RepeatButton x:Name="PART_DecreaseButton"
                                       Height="Auto"
