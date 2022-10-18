@@ -325,7 +325,7 @@ namespace Rubyer
                     }
                     else
                     {
-                        numberBox.Loaded += (sender, args) => numberBox.Value = newValue;
+                        numberBox.Loaded += NumberBox_Loaded;
                     }
                 }
             }
@@ -342,6 +342,21 @@ namespace Rubyer
             {
                 numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
             }
+        }
+
+        private static void NumberBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            var numberBox = sender as NumericBox;
+            if (double.TryParse(numberBox.Text, out double value))
+            {
+                var newValue = GetCalculatedValue(numberBox, value);
+                if (numberBox.Value != newValue)
+                {
+                    numberBox.Value = newValue;
+                }
+            }
+
+            numberBox.Loaded -= NumberBox_Loaded;
         }
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
