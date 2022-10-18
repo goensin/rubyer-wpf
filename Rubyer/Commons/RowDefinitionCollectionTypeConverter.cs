@@ -30,7 +30,7 @@ namespace Rubyer.Commons
             if (strValue != null)
             {
                 var lengths = strValue.Split(',');
-                var converter = new GridLengthTypeConverter();
+                var converter = new GridLengthConverter();
                 var definitions = new RowDefinition[lengths.Length];
                 for (var i = 0; i < lengths.Length; i++)
                     definitions[i] = new RowDefinition { Height = (GridLength)converter.ConvertFromInvariantString(lengths[i]) };
@@ -45,7 +45,7 @@ namespace Rubyer.Commons
         {
             if (!(value is RowDefinitionCollection rdc))
                 throw new NotSupportedException();
-            var converter = new GridLengthTypeConverter();
+            var converter = new GridLengthConverter();
             return string.Join(", ", rdc.Select(rd => converter.ConvertToInvariantString(rd.Height)));
         }
     }

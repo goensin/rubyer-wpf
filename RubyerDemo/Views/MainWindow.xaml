@@ -142,7 +142,8 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      SelectedIndex="0"
                      SelectedItem="{Binding CurrentMenuItem}"
-                     SelectionChanged="ListBox_SelectionChanged">
+                     SelectionChanged="ListBox_SelectionChanged"
+                     VirtualizingPanel.IsVirtualizing="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">

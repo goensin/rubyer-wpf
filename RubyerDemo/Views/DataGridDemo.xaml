@@ -23,6 +23,7 @@
                 <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
 
                 <DataGrid Grid.Row="1"
+                          MinHeight="200"
                           HorizontalContentAlignment="Center"
                           rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                           rubyer:HeaderHelper.Background="{DynamicResource Accent}"
@@ -106,6 +107,9 @@
                           ItemsSource="{Binding Persons}"
                           RowHeaderWidth="40"
                           SelectionMode="Extended">
+                    <rubyer:DataGridHelper.EmptyView>
+                        <TextBlock HorizontalAlignment="Center">自定义无数据内容</TextBlock>
+                    </rubyer:DataGridHelper.EmptyView>
                     <DataGrid.RowHeaderTemplate>
                         <DataTemplate>
                             <Border>

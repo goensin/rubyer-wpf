@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Media3D;
 using System.Reflection;
-using Rubyer.Converters;
+using System;
 
 namespace Rubyer
 {
@@ -364,6 +358,26 @@ namespace Rubyer
             {
                 column.IsReadOnly = true;
             }
+        }
+
+        /// <summary>
+        /// Items 为空时显示视图
+        /// </summary>
+        public static readonly DependencyProperty EmptyViewProperty = DependencyProperty.RegisterAttached(
+            "EmptyView", typeof(object), typeof(DataGridHelper), new PropertyMetadata(null, OnEmptyViewChanged));
+
+        private static void OnEmptyViewChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+        }
+
+        public static void SetEmptyView(DependencyObject element, object value)
+        {
+            element.SetValue(EmptyViewProperty, value);
+        }
+
+        public static object GetEmptyView(DependencyObject element)
+        {
+            return (object)element.GetValue(EmptyViewProperty);
         }
     }
 }

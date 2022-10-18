@@ -444,6 +444,19 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
         <Setter Property="rubyer:DataGridHelper.ClickToEdit" Value="True" />
         <Setter Property="rubyer:DataGridHelper.ApplyDataAnnotations" Value="True" />
+        <Setter Property="rubyer:DataGridHelper.EmptyView">
+            <Setter.Value>
+                <StackPanel HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                    <rubyer:Icon Width="20"
+                                 Height="20"
+                                 Margin="5 0"
+                                 Type="DatabaseFill" />
+                    <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
+                </StackPanel>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -459,7 +472,7 @@
                                       Focusable="False">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                                    <Grid x:Name="DataGrid">
+                                    <Grid x:Name="root">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
@@ -502,28 +515,21 @@
                                                        Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                                        Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                                         </Grid>
-                                        <Border x:Name="noDataBorder"
+                                        <Border x:Name="emptyBorder"
                                                 Grid.Row="1"
                                                 Grid.ColumnSpan="2"
                                                 Visibility="Collapsed">
-                                            <StackPanel HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
-                                                        Orientation="Horizontal">
-                                                <rubyer:Icon Width="20"
-                                                             Height="20"
-                                                             Margin="5 0"
-                                                             Type="DatabaseFill" />
-                                                <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
-                                            </StackPanel>
+                                            <ContentControl x:Name="emptyView" Content="{Binding Path=(rubyer:DataGridHelper.EmptyView), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                                         </Border>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="0">
-                                            <Setter TargetName="noDataBorder" Property="Visibility" Value="Visible" />
+                                            <Setter TargetName="emptyBorder" Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </ScrollViewer.Template>
+
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
                     </Border>
