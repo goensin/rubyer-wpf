@@ -255,6 +255,21 @@ namespace Rubyer
             set { SetValue(NumericPatternProperty, value); }
         }
 
+        /// <summary>
+        /// 只读
+        /// </summary>
+        public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(
+           "IsReadOnly", typeof(bool), typeof(NumericBox), new PropertyMetadata(false));
+
+        /// <summary>
+        /// 只读
+        /// </summary>
+        public bool IsReadOnly
+        {
+            get { return (bool)GetValue(IsReadOnlyProperty); }
+            set { SetValue(IsReadOnlyProperty, value); }
+        }
+
         #endregion propteries
 
         #region methods
