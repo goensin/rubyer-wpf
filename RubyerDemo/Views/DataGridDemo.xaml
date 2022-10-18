@@ -38,6 +38,11 @@
                           GridLinesVisibility="None"
                           ItemsSource="{Binding Persons}"
                           SelectionUnit="Cell">
+                    <rubyer:DataGridHelper.EmptyView>
+                        <Border Background="{DynamicResource Primary}">
+                            <TextBlock HorizontalAlignment="Center" FontSize="22">自定义无数据内容</TextBlock>
+                        </Border>
+                    </rubyer:DataGridHelper.EmptyView>
                     <DataGrid.Columns>
                         <rubyer:DataGridSelectCheckBoxColumn Width="80"
                                                              Binding="{Binding IsSelected}"
@@ -107,9 +112,6 @@
                           ItemsSource="{Binding Persons}"
                           RowHeaderWidth="40"
                           SelectionMode="Extended">
-                    <rubyer:DataGridHelper.EmptyView>
-                        <TextBlock HorizontalAlignment="Center">自定义无数据内容</TextBlock>
-                    </rubyer:DataGridHelper.EmptyView>
                     <DataGrid.RowHeaderTemplate>
                         <DataTemplate>
                             <Border>
