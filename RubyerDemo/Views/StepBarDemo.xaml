@@ -10,12 +10,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:StepBarViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-
+        <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto">
             <StackPanel>
                 <Button Width="100"
                         Margin="10"

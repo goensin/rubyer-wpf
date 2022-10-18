@@ -11,11 +11,7 @@
              mc:Ignorable="d">
     <Grid>
         <GroupBox Header="图标-Icon">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, *">
                 <Border Padding="0 5">
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <TextBlock Margin="10 0"

@@ -6,15 +6,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
             <GroupBox Margin="0 0 0 10" Header="文本块-TextBlock">
                 <StackPanel Margin="10">
                     <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">

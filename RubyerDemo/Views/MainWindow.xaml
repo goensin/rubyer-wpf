@@ -22,11 +22,7 @@
     <!--  可自定义标题栏内容  -->
     <!--  WindowChrome.IsHitTestVisibleInChrome = "True" 才可以点击  -->
     <rubyer:RubyerWindow.TitleBarContent>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *">
             <StackPanel Orientation="Horizontal">
                 <Image Width="22"
                        Height="22"
@@ -135,23 +131,8 @@
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="180" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *">
         <rubyer:Card Margin="5 5 0 5">
-            <!--<TabControl Style="{StaticResource CardTabControl}"
-                        Margin="5"
-                        rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
-                        rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
-                        rubyer:HeaderHelper.FontSize="14"
-                        rubyer:HeaderHelper.FontWeight="Bold"
-                        TabStripPlacement="Top">
-                <TabItem>
-                    <TabItem.Header>
-                        <TextBlock Width="55" Text="Controls" />
-                    </TabItem.Header>-->
             <ListBox Margin="0 5"
                      rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
                      rubyer:ItemsControlHelper.ItemMargin="7 1"
@@ -173,14 +154,6 @@
                     <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
                 </ListBox.Resources>
             </ListBox>
-            <!--</TabItem>
-
-                <TabItem>
-                    <TabItem.Header>
-                        <TextBlock Width="55" Text="Demos" />
-                    </TabItem.Header>
-                </TabItem>
-            </TabControl>-->
         </rubyer:Card>
 
         <rubyer:Card Grid.Column="1" Margin="5">
@@ -189,9 +162,15 @@
                     <TabItem.Header>
                         <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
                     </TabItem.Header>
-                    <ContentControl HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Content="{Binding CurrentMenuItem.Content}" />
+
+                    <rubyer:Transition IsShow="True"
+                                       PlayEveryTime="True"
+                                       Type="FadeLeft"
+                                       Duration="0:0:0.3">
+                        <ContentControl HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Content="{Binding CurrentMenuItem.Content}" />
+                    </rubyer:Transition>
                 </TabItem>
                 <TabItem Width="100">
                     <TabItem.Header>
@@ -202,14 +181,17 @@
                             <TextBlock FontSize="14" Text="Xaml" />
                         </StackPanel>
                     </TabItem.Header>
-                    <Grid>
+                    <rubyer:Transition IsShow="True"
+                                       PlayEveryTime="True"
+                                       Type="FadeRight"
+                                       Duration="0:0:0.3">
                         <avalonEdit:TextEditor x:Name="xamlTextEditor"
                                                FontFamily="Consolas"
                                                FontSize="10pt"
                                                HorizontalScrollBarVisibility="Auto"
                                                ShowLineNumbers="True"
                                                VerticalScrollBarVisibility="Auto" />
-                    </Grid>
+                    </rubyer:Transition>
                 </TabItem>
             </TabControl>
         </rubyer:Card>

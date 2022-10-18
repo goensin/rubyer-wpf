@@ -17,19 +17,9 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
+    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto">
         <GroupBox Margin="0 0 10 10" Header="数据表格-DataGrid">
-            <Grid Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
+            <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                 <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
 
                 <DataGrid Grid.Row="1"
@@ -96,15 +86,10 @@
         <GroupBox Grid.Column="1"
                   Margin="0 0 10 10"
                   Header="数据表格-DataGrid">
-            <Grid Margin="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
+            <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                 <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
 
-                <DataGrid Grid.Row="1" IsReadOnly="False"
+                <DataGrid Grid.Row="1"
                           HorizontalContentAlignment="Center"
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
@@ -117,6 +102,7 @@
                           Foreground="{StaticResource BlackForeground}"
                           GridLinesVisibility="All"
                           HeadersVisibility="All"
+                          IsReadOnly="False"
                           ItemsSource="{Binding Persons}"
                           RowHeaderWidth="40"
                           SelectionMode="Extended">

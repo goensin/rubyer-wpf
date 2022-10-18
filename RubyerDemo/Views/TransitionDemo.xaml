@@ -6,13 +6,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
             <GroupBox MinWidth="800">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">

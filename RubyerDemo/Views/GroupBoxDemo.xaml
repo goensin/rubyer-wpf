@@ -6,17 +6,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.ColumnDefinitions="*, *" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
             <GroupBox Margin="0 0 0 10" Header="默认分组框-GroupBox">
                 <TextBlock>
                     蒹葭苍苍，白露为霜。所谓伊人，在水一方。

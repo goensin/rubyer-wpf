@@ -33,17 +33,8 @@
             <BeginStoryboard Storyboard="{StaticResource OnUnchecked1}" />
         </EventTrigger>
     </UserControl.Triggers>
-    <Grid Margin="50 10 50 30">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+    <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
+        <Grid HorizontalAlignment="Center" rubyer:GridHelper.ColumnDefinitions="Auto, *">
             <Image Grid.Column="0"
                    Width="50"
                    VerticalAlignment="Center"
@@ -61,12 +52,9 @@
                 </TextBlock>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="1" Margin="0 10 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1"
+              Margin="0 10 0 0"
+              rubyer:GridHelper.RowDefinitions="*, *, *">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="反馈和建议" />
                 <Border Width="300"
@@ -86,12 +74,9 @@
                 </Hyperlink>
             </TextBlock>
         </Grid>
-        <Grid Grid.Row="2" Margin="0 10 0 0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="1*" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="2"
+              Margin="0 10 0 0"
+              rubyer:GridHelper.RowDefinitions="*, *, *">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="打赏作者" />
                 <Border Width="300"

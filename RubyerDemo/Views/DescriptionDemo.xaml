@@ -18,14 +18,7 @@
                                Value="{Binding CurrentColumn}" />
 
             <GroupBox Margin="10" Header="默认无边框 - Description">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
+                <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
                     <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
 
                     <rubyer:Description x:Name="item"
@@ -70,14 +63,7 @@
                 </Grid>
             </GroupBox>
             <GroupBox Margin="10" Header="带边框 - BorderDescription">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-
+                <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
                     <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
 
                     <rubyer:Description Style="{StaticResource BorderDescription}"

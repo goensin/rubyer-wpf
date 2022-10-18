@@ -30,7 +30,11 @@ namespace Rubyer
             if (IsShow)
             {
                 ShowAnimation(this);
-                Loaded -= Transition_Loaded;
+
+                if (!PlayEveryTime)
+                {
+                    Loaded -= Transition_Loaded;
+                }
             }
         }
 
@@ -117,6 +121,21 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsShowProperty); }
             set { SetValue(IsShowProperty, value); }
+        }
+
+        /// <summary>
+        /// 每次加载显示动画
+        /// </summary>
+        public static readonly DependencyProperty PlayEveryTimeProperty =
+            DependencyProperty.Register("PlayEveryTime", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool)));
+
+        /// <summary>
+        /// 每次加载显示动画
+        /// </summary>
+        public bool PlayEveryTime
+        {
+            get { return (bool)GetValue(PlayEveryTimeProperty); }
+            set { SetValue(PlayEveryTimeProperty, value); }
         }
 
         /// <summary>
@@ -323,7 +342,7 @@ namespace Rubyer
             }
             else
             {
-                progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 1, transition.ShowEasingFunction, from: 0);
             }
 
             switch (transition.Type)
@@ -432,7 +451,7 @@ namespace Rubyer
             }
             else
             {
-                progressAnimation = GetProgressAnimation(transition, 0, transition.CloseEasingFunction);
+                progressAnimation = GetProgressAnimation(transition, 0, transition.CloseEasingFunction, from: 1);
             }
 
             switch (transition.Type)
@@ -522,7 +541,7 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing)
+        private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing, double? from = null)
         {
             DoubleAnimation progressAnimation = new DoubleAnimation()
             {
@@ -530,6 +549,11 @@ namespace Rubyer
                 Duration = transition.Duration,
                 EasingFunction = easing,
             };
+
+            if (from != null)
+            {
+                progressAnimation.From = from;
+            }
 
             Storyboard.SetTargetProperty(progressAnimation, new PropertyPath(ProgressProperty));
             Storyboard.SetTarget(progressAnimation, transition);

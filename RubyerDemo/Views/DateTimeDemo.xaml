@@ -8,16 +8,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DateTimeViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:GridHelper.ColumnDefinitions="*, *, *">
             <GroupBox Width="Auto"
                       Margin="0 0 10 10"
                       Header="日历-Calendar">

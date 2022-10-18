@@ -8,13 +8,7 @@
     <ScrollViewer Style="{StaticResource SmallScrollViewer}"
                   HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
             <GroupBox Margin="0 0 0 10" Header="Menu-菜单">
                 <StackPanel Margin="5">
                     <Menu>

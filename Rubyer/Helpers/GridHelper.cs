@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -77,7 +78,7 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// Gets the columns.
+        /// Gets the rows.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <returns>A double.</returns>
@@ -87,13 +88,93 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// Sets the columns.
+        /// Sets the rows.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">The value.</param>
         public static void SetRows(DependencyObject obj, int value)
         {
             obj.SetValue(RowsProperty, value);
+        }
+
+        /// <summary>
+        /// 列定义
+        /// </summary>
+        public static readonly DependencyProperty ColumnDefinitionsProperty = DependencyProperty.RegisterAttached(
+            "ColumnDefinitions", typeof(string), typeof(GridHelper), new PropertyMetadata(null, OnColumnDefinitionsChanged));
+
+        private static void OnColumnDefinitionsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Grid grid)
+            {
+                grid.ColumnDefinitions.Clear();
+                var converter = new ColumnDefinitionCollectionTypeConverter();
+                var columnDefinitions = converter.ConvertFromString(GetColumnDefinitions(grid)) as ColumnDefinition[];
+                for (int i = 0; i < columnDefinitions.Length; i++)
+                {
+                    grid.ColumnDefinitions.Add(columnDefinitions[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the columns Definitions.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A double.</returns>
+        public static string GetColumnDefinitions(DependencyObject obj)
+        {
+            return (string)obj.GetValue(ColumnDefinitionsProperty);
+        }
+
+        /// <summary>
+        /// Sets the columns Definitions.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">The value.</param>
+        public static void SetColumnDefinitions(DependencyObject obj, string value)
+        {
+            obj.SetValue(ColumnDefinitionsProperty, value);
+        }
+
+        /// <summary>
+        /// 行定义
+        /// </summary>
+        public static readonly DependencyProperty RowDefinitionsProperty = DependencyProperty.RegisterAttached(
+            "RowDefinitions", typeof(string), typeof(GridHelper), new PropertyMetadata(null, OnRowDefinitionsChanged));
+
+        private static void OnRowDefinitionsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Grid grid)
+            {
+                grid.RowDefinitions.Clear();
+                var converter = new RowDefinitionCollectionTypeConverter();
+                var rowDefinitions = converter.ConvertFromString(GetRowDefinitions(grid)) as RowDefinition[];
+                for (int i = 0; i < rowDefinitions.Length; i++)
+                {
+                    grid.RowDefinitions.Add(rowDefinitions[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the rows Definitions.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <returns>A double.</returns>
+        public static string GetRowDefinitions(DependencyObject obj)
+        {
+            return (string)obj.GetValue(RowDefinitionsProperty);
+        }
+
+        /// <summary>
+        /// Sets the rows Definitions.
+        /// </summary>
+        /// <param name="obj">The obj.</param>
+        /// <param name="value">The value.</param>
+        public static void SetRowDefinitions(DependencyObject obj, string value)
+        {
+            obj.SetValue(RowDefinitionsProperty, value);
         }
     }
 }

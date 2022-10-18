@@ -5,17 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
-    <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-            <RowDefinition Height="40" />
-        </Grid.RowDefinitions>
-
+    <Grid Margin="10"
+          rubyer:GridHelper.ColumnDefinitions="Auto, *"
+          rubyer:GridHelper.RowDefinitions="40, 40, 40">
         <TextBlock Margin="10" Text="用户名" />
         <TextBox x:Name="userName"
                  Grid.Column="1"

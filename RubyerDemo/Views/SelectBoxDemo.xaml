@@ -6,15 +6,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
             <GroupBox Margin="0 0 0 10" Header="单选按钮-RadioButton">
                 <StackPanel Margin="10" Orientation="Horizontal">
                     <RadioButton x:Name="day"
@@ -138,11 +130,7 @@
             <GroupBox Grid.Row="2"
                       Margin="0 0 0 10"
                       Header="多选框-CheckBox">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
+                <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto">
                     <StackPanel Margin="10">
                         <CheckBox Margin="1"
                                   rubyer:ToggleButtonHelper.CheckedContent="选中"

@@ -105,6 +105,7 @@
                 <CubicEase EasingMode="EaseOut" />
             </Setter.Value>
         </Setter>
+        <Setter Property="PlayEveryTime" Value="False" />
         <Setter Property="Template" Value="{StaticResource RubyerTransitionTemplate}" />
         <Style.Triggers>
             <Trigger Property="Type" Value="CollapseUp">

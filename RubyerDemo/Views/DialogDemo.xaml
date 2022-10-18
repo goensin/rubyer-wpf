@@ -9,16 +9,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DialogViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowDefinitions="Auto, Auto">
             <GroupBox Grid.Column="0"
                       Width="250"
                       Height="250"
@@ -97,16 +88,7 @@
                                         BeforeOpenCommand="{Binding BeforeDialog3Open}"
                                         IsEscKeyToClose="False">
                     <rubyer:DialogContainer.DialogContent>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="40" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="40, 40, Auto">
                             <TextBlock Margin="10 0">姓名</TextBlock>
                             <TextBox Grid.Column="1"
                                      Width="120"

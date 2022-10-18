@@ -8,19 +8,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:InputBoxViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto">
             <GroupBox Grid.Row="0"
                       Margin="0 0 0 10"
                       Header="基础文本框-TextBox">
