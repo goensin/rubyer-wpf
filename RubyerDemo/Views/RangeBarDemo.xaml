@@ -108,7 +108,7 @@
                                 TickPlacement="TopLeft"
                                 Value="80" />
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.GripDiameter="30"
+                                rubyer:SliderHelper.GripDiameter="24"
                                 rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Primary}"
                                 Foreground="{DynamicResource Accent}"
                                 IsSelectionRangeEnabled="True"
@@ -158,7 +158,7 @@
                                 TickPlacement="TopLeft"
                                 Value="40" />
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.GripDiameter="26"
+                                rubyer:SliderHelper.GripDiameter="24"
                                 Foreground="{DynamicResource Accent}"
                                 IsSelectionRangeEnabled="True"
                                 Maximum="100"
