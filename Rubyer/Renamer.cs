@@ -47,7 +47,41 @@ namespace Rubyer
 
         #endregion commands
 
+        #region events
+
+        /// <summary>
+        /// 文本改变事件
+        /// </summary>
+        public static readonly RoutedEvent TextChangedEvent =
+            EventManager.RegisterRoutedEvent("TextChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<string>), typeof(Renamer));
+
+        /// <summary>
+        /// 文本改变事件
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<string> TextChanged
+        {
+            add { AddHandler(TextChangedEvent, value); }
+            remove { RemoveHandler(TextChangedEvent, value); }
+        }
+
+        #endregion
+
         #region properties
+
+        /// <summary>
+        /// 文本改变命令
+        /// </summary>
+        public static readonly DependencyProperty TextChangedCommandProperty =
+            DependencyProperty.Register("TextChangedCommand", typeof(ICommand), typeof(Renamer), new PropertyMetadata(default(ICommand)));
+
+        /// <summary>
+        /// 文本改变命令
+        /// </summary>
+        public ICommand TextChangedCommand
+        {
+            get { return (ICommand)GetValue(TextChangedCommandProperty); }
+            set { SetValue(TextChangedCommandProperty, value); }
+        }
 
         /// <summary>
         /// 是否重命名中
@@ -68,7 +102,7 @@ namespace Rubyer
         /// 文本
         /// </summary>
         public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-            "Text", typeof(string), typeof(Renamer), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            "Text", typeof(string), typeof(Renamer), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnTextChanged));
 
         /// <summary>
         /// 文本
@@ -152,5 +186,16 @@ namespace Rubyer
                 renamer.Focus();
             }
         }
+
+        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var renamer = d as Renamer;
+            var args = new RoutedPropertyChangedEventArgs<string>(e.OldValue.ToString(), e.NewValue.ToString());
+            args.RoutedEvent = Renamer.TextChangedEvent;
+            renamer.RaiseEvent(args);
+
+            renamer.TextChangedCommand?.Execute(e.NewValue.ToString());
+        }
+
     }
 }

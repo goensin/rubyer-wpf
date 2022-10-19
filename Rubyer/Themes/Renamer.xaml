@@ -22,7 +22,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Renamer}">
-                    <Grid Background="Transparent">
+                    <Grid>
                         <TextBox x:Name="PART_TextBox"
                                  Style="{StaticResource RubyerTextBox}"
                                  Height="Auto"
