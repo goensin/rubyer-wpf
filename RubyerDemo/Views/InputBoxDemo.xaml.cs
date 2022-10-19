@@ -20,5 +20,10 @@ namespace RubyerDemo.Views
         {
             Debug.WriteLine($"NumericBox ValueChanged: {e.NewValue}");
         }
+
+        private void renamer_TextChanged(object sender, RoutedPropertyChangedEventArgs<string> e)
+        {
+            Debug.WriteLine($"Renamer TextChanged: {e.NewValue}");
+        }
     }
 }

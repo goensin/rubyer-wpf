@@ -143,6 +143,14 @@ namespace RubyerDemo.ViewModels
             }
         }
 
+        private RelayCommand renamerCommand;
+        public RelayCommand RenamerCommand => renamerCommand ?? (renamerCommand = new RelayCommand(RenamerExecute));
+
+        private void RenamerExecute(object text)
+        {
+            Debug.WriteLine($"Renamer TextChangedCommand: {text}");
+        }
+
         public InputBoxViewModel()
         {
             TestPassword = "123456";
