@@ -8,7 +8,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:InputBoxViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
             <GroupBox Grid.Row="0"
                       Margin="0 0 0 10"
                       Header="基础文本框-TextBox">
@@ -115,6 +115,57 @@
             <GroupBox Grid.Row="4"
                       Grid.ColumnSpan="2"
                       Margin="0 0 0 10"
+                      Header="重命名工具-Renamer">
+                <StackPanel Margin="5" HorizontalAlignment="Stretch">
+                    <TextBlock Text="通过 F2 按键、右键菜单、IsRenaming 属性或者 RenameCommand 重命名" />
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <rubyer:Renamer x:Name="renamer"
+                                        Width="150"
+                                        Text="{Binding Name}">
+                            <rubyer:Renamer.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                              CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              Header="重命名"
+                                              InputGestureText="F2" />
+                                </ContextMenu>
+                            </rubyer:Renamer.ContextMenu>
+                        </rubyer:Renamer>
+
+                        <Button Margin="5 0"
+                                Padding="5"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                CommandTarget="{Binding ElementName=renamer}"
+                                Content="重命名" />
+
+                        <TextBlock Text="自定义未编辑显示内容:" Margin="50 0 5 0"/>
+                        <rubyer:Renamer x:Name="renamer2" Width="150" Text="{Binding Name}">
+                            <rubyer:Renamer.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                              CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              Header="重命名"
+                                              InputGestureText="F2" />
+                                </ContextMenu>
+                            </rubyer:Renamer.ContextMenu>
+                            <StackPanel Orientation="Horizontal">
+                                <rubyer:Icon Type="Edit2Line" Margin="5 0"/>
+                                <TextBlock Text="{Binding Name}" />
+                            </StackPanel>
+                        </rubyer:Renamer>
+                        <Button Margin="5 0"
+                                Padding="5"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                CommandTarget="{Binding ElementName=renamer2}"
+                                Content="重命名" />
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+            <GroupBox Grid.Row="5"
+                      Grid.ColumnSpan="2"
+                      Margin="0 0 0 10"
                       Header="数值文本框-NumericBox">
                 <StackPanel>
                     <StackPanel Margin="5"
@@ -210,7 +261,7 @@
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Grid.Row="5"
+            <GroupBox Grid.Row="6"
                       Grid.ColumnSpan="2"
                       Margin="0 0 0 10"
                       Header="下拉框-ComboBox">

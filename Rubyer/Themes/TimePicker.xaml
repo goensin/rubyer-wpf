@@ -13,6 +13,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Height" Value="28" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SelectedTimeFormat" Value="HH:mm:ss" />
@@ -71,5 +72,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

@@ -131,6 +131,18 @@ namespace RubyerDemo.ViewModels
             }
         }
 
+        private string name = "新建文本文档.txt";
+
+        public string Name
+        {
+            get => name;
+            set
+            {
+                name = value;
+                RaisePropertyChanged("Name");
+            }
+        }
+
         public InputBoxViewModel()
         {
             TestPassword = "123456";
