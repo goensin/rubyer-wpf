@@ -64,7 +64,7 @@ namespace Rubyer
             remove { RemoveHandler(TextChangedEvent, value); }
         }
 
-        #endregion
+        #endregion events
 
         #region properties
 
@@ -140,11 +140,11 @@ namespace Rubyer
             textBox.InputBindings.Add(escKeyBinding);
             this.InputBindings.Add(f2KeyBinding);
 
-            this.PreviewMouseDown += (sender, e) =>
+            this.PreviewMouseUp += (sender, e) =>
             {
                 if (!IsRenaming)
                 {
-                    e.Handled = true;
+                    //e.Handled = true;
                     this.Focus();
                 }
             };
@@ -196,6 +196,5 @@ namespace Rubyer
 
             renamer.TextChangedCommand?.Execute(e.NewValue.ToString());
         }
-
     }
 }
