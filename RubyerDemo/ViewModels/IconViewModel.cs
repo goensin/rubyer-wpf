@@ -8,11 +8,18 @@ namespace RubyerDemo.ViewModels
 {
     public class IconViewModel : ViewModelBase
     {
-        public List<IconType> Types => Enum.GetValues(typeof(IconType)).OfType<IconType>().ToList();
+        public IEnumerable<IconInfo> Types
+        {
+            get
+            {
+                var icons = Icon.GetAllIconInfo();
+                return icons.Select(x => new IconInfo(x.type, x.group));
+            }
+        }
 
-        private IEnumerable<IconType> iconTypes;
+        private IEnumerable<IconInfo> iconTypes;
 
-        public IEnumerable<IconType> IconTypes
+        public IEnumerable<IconInfo> IconTypes
         {
             get { return iconTypes ?? (iconTypes = Types); }
             set
@@ -22,9 +29,12 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private IconType currentIcon;
+        private IconInfo currentIcon;
 
-        public IconType CurrentIcon
+        /// <summary>
+        /// 当前图标
+        /// </summary>
+        public IconInfo CurrentIcon
         {
             get => currentIcon;
             set
@@ -36,6 +46,9 @@ namespace RubyerDemo.ViewModels
 
         private string searchText;
 
+        /// <summary>
+        /// 搜索文本
+        /// </summary>
         public string SearchText
         {
             get => searchText;
@@ -47,9 +60,12 @@ namespace RubyerDemo.ViewModels
         }
 
         private RelayCommand search;
+
+        /// <summary>
+        /// 搜索命令
+        /// </summary>
         public RelayCommand Search => search ?? (search = new RelayCommand(SearchExecute));
 
-        // 搜索
         private void SearchExecute(object obj)
         {
             if (string.IsNullOrWhiteSpace(SearchText))
@@ -58,7 +74,29 @@ namespace RubyerDemo.ViewModels
             }
             else
             {
-                IconTypes = Types.Where(i => i.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                IconTypes = Types.Where(i => i.Type.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+            }
+        }
+
+        /// <summary>
+        /// 图标信息
+        /// </summary>
+        public class IconInfo
+        {
+            /// <summary>
+            /// 图标类型
+            /// </summary>
+            public IconType Type { get; set; }
+
+            /// <summary>
+            /// 组
+            /// </summary>
+            public string Group { get; set; }
+
+            public IconInfo(IconType type, string group)
+            {
+                Type = type;
+                Group = group;
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -81,5 +82,11 @@ namespace Rubyer
             Group = icon.group;
             Code = icon.code;
         }
+
+        /// <summary>
+        /// 获取所有图标信息
+        /// </summary>
+        /// <returns>所有图标信息</returns>
+        public static IEnumerable<(IconType type, string group)> GetAllIconInfo() => _codes.Value.Select(x => (x.Key, x.Value.group));
     }
 }

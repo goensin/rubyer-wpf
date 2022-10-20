@@ -11,6 +11,35 @@
              d:DesignHeight="600"
              d:DesignWidth="800"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="iconsSource" Source="{Binding IconTypes}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Group" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+        <Style x:Key="IconGroupItem" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Grid>
+                            <GroupBox Margin="5"
+                                      rubyer:ControlHelper.CornerRadius="0"
+                                      BorderThickness="0 0 0 1">
+                                <GroupBox.Header>
+                                    <Border BorderBrush="{StaticResource Primary}" BorderThickness="3 0 0 0">
+                                        <TextBlock Margin="10 0" Padding="0"
+                                                   FontSize="20"
+                                                   Text="{Binding Name}" />
+                                    </Border>
+                                </GroupBox.Header>
+                                <ItemsPresenter Grid.Row="1" Margin="0 5" />
+                            </GroupBox>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <GroupBox Header="图标-Icon">
             <Grid rubyer:GridHelper.RowDefinitions="Auto, *">
@@ -18,13 +47,13 @@
                     <StackPanel>
                         <TextBlock Margin="10"
                                    HorizontalAlignment="Center"
+                                   FontSize="16"
                                    Foreground="{DynamicResource DefaultForeground}">
                             原图标地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://remixicon.cn/">
                                 REMIX ICON 2.5.0
                             </Hyperlink>
                         </TextBlock>
-                        <StackPanel Orientation="Horizontal">
-
+                        <StackPanel Margin="0 0 0 10" Orientation="Horizontal">
                             <TextBox Width="200"
                                      Margin="10 0"
                                      rubyer:InputBoxHelper.IsClearable="True"
@@ -56,10 +85,14 @@
                          rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                          rubyer:ItemsControlHelper.ItemMargin="0"
                          rubyer:ItemsControlHelper.ItemPadding="0"
-                         ItemsSource="{Binding IconTypes}"
+                         ItemsSource="{Binding Source={StaticResource iconsSource}}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          SelectedItem="{Binding CurrentIcon}"
+                         VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                          VirtualizingPanel.ScrollUnit="Pixel">
+                    <ListBox.GroupStyle>
+                        <GroupStyle ContainerStyle="{StaticResource IconGroupItem}" />
+                    </ListBox.GroupStyle>
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
                             <wpftk:VirtualizingWrapPanel MouseWheelDelta="80" />
@@ -71,15 +104,15 @@
                                         Height="60"
                                         Margin="5"
                                         VerticalAlignment="Center"
-                                        ToolTip="{Binding}">
+                                        ToolTip="{Binding Type}">
                                 <rubyer:Icon Width="28"
                                              Height="28"
                                              Margin="5"
                                              HorizontalAlignment="Center"
-                                             Type="{Binding}" />
+                                             Type="{Binding Type}" />
                                 <TextBlock HorizontalAlignment="Center"
                                            FontSize="11"
-                                           Text="{Binding}"
+                                           Text="{Binding Type}"
                                            TextTrimming="CharacterEllipsis" />
                             </StackPanel>
                         </DataTemplate>
