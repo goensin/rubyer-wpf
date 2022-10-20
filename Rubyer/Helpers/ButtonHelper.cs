@@ -111,5 +111,31 @@ namespace Rubyer
         {
             return (bool)element.GetValue(LoadingProperty);
         }
+
+        /// <summary>
+        /// 加载中内容
+        /// </summary>
+        public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.RegisterAttached(
+            "LoadingContent", typeof(object), typeof(ButtonHelper), new PropertyMetadata(default(object)));
+
+        /// <summary>
+        /// Sets the loading content.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="value">If true, value.</param>
+        public static void SetLoadingContent(DependencyObject element, object value)
+        {
+            element.SetValue(LoadingContentProperty, value);
+        }
+
+        /// <summary>
+        /// Gets the loading content.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A bool.</returns>
+        public static object GetLoadingContent(DependencyObject element)
+        {
+            return (object)element.GetValue(LoadingContentProperty);
+        }
     }
 }

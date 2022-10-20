@@ -25,5 +25,17 @@ namespace RubyerDemo.Views
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (ButtonHelper.GetLoading(loadingButton))
+            {
+                ButtonHelper.SetLoading(loadingButton, false);
+            }
+            else
+            {
+                ButtonHelper.SetLoading(loadingButton, true);
+            }
+        }
     }
 }
