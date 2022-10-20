@@ -27,7 +27,6 @@ namespace RubyerDemo.ViewModels
         /// </summary>
         public ObservableCollection<HamburgerMenuModel> OptionsModels { get; set; }
 
-
         /// <summary>
         /// 下一步命令
         /// </summary>
@@ -53,10 +52,10 @@ namespace RubyerDemo.ViewModels
 
             OptionsModels = new ObservableCollection<HamburgerMenuModel>
             {
-                new HamburgerMenuModel("睡眠",IconType.MoonLine),
+                new HamburgerMenuModel("睡眠",IconType.MoonFill),
                 new HamburgerMenuModel("关机",IconType.ShutDownLine),
                 new HamburgerMenuModel("重启",IconType.RestartLine),
-            };                                                    
+            };
         }
     }
 

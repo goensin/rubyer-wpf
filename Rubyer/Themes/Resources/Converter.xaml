@@ -23,7 +23,7 @@
                                          FalseVisibility="Visible"
                                          TrueVisibility="Hidden" />
 
-    <converter:MathMultipleConverter x:Key="MathAddyConverter" />
+    <converter:MathMultipleConverter x:Key="MathAddConverter" />
     <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract" />
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />

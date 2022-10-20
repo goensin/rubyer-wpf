@@ -8,47 +8,48 @@
              xmlns:wpftk="clr-namespace:WpfToolkit.Controls;assembly=VirtualizingWrapPanel"
              x:Name="IconView"
              d:DataContext="{d:DesignInstance Type=viewModels:IconViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
              mc:Ignorable="d">
     <Grid>
         <GroupBox Header="图标-Icon">
             <Grid rubyer:GridHelper.RowDefinitions="Auto, *">
                 <Border Padding="0 5">
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <TextBlock Margin="10 0"
+                    <StackPanel>
+                        <TextBlock Margin="10"
                                    HorizontalAlignment="Center"
                                    Foreground="{DynamicResource DefaultForeground}">
-                            原图标地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://www.iconfont.cn/collections/detail?spm=a313x.7781069.1998910419.d9df05512&amp;cid=25353">
-                                REMIX ICON
+                            原图标地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://remixicon.cn/">
+                                REMIX ICON 2.5.0
                             </Hyperlink>
                         </TextBlock>
-                        <TextBox Width="200"
-                                 Margin="10 0"
-                                 rubyer:InputBoxHelper.IsClearable="True"
-                                 rubyer:InputBoxHelper.Watermark="搜索图标"
-                                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}">
-                            <rubyer:InputBoxHelper.PreContent>
-                                <Button Style="{DynamicResource TextButton}"
-                                        rubyer:ButtonHelper.Shape="Circle"
-                                        Command="{Binding Search}"
-                                        IsDefault="True"
-                                        ToolTip="搜索">
-                                    <rubyer:Icon Type="SearchLine" />
-                                </Button>
-                            </rubyer:InputBoxHelper.PreContent>
-                        </TextBox>
-                        <TextBox x:Name="currentTextBox"
-                                 MinWidth="200"
-                                 Margin="10 0 0 0"
-                                 rubyer:InputBoxHelper.PreContent="选中"
-                                 BorderThickness="0"
-                                 Text="{Binding CurrentIcon, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
-                        <Button x:Name="copyButton"
-                                Style="{StaticResource TextButton}"
-                                rubyer:ButtonHelper.Shape="Circle"
-                                Click="copyButton_Click"
-                                ToolTip="复制">
-                            <rubyer:Icon Type="FileCopy2Fill" />
-                        </Button>
+                        <StackPanel Orientation="Horizontal">
+
+                            <TextBox Width="200"
+                                     Margin="10 0"
+                                     rubyer:InputBoxHelper.IsClearable="True"
+                                     rubyer:InputBoxHelper.Watermark="{Binding Types.Count, StringFormat='检索图标 {0} 个'}"
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                            <Button Width="80"
+                                    Command="{Binding Search}"
+                                    IsDefault="True"
+                                    ToolTip="搜索">
+                                <rubyer:Icon Type="SearchLine" />
+                            </Button>
+                            <TextBox x:Name="currentTextBox"
+                                     MinWidth="200"
+                                     Margin="10 0 0 0"
+                                     rubyer:InputBoxHelper.PreContent="选中"
+                                     BorderThickness="0"
+                                     Text="{Binding CurrentIcon, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
+                            <Button x:Name="copyButton"
+                                    Style="{StaticResource TextButton}"
+                                    rubyer:ButtonHelper.Shape="Circle"
+                                    Click="copyButton_Click"
+                                    ToolTip="复制">
+                                <rubyer:Icon Type="FileCopy2Fill" />
+                            </Button>
+                        </StackPanel>
                     </StackPanel>
                 </Border>
                 <ListBox Grid.Row="1"
@@ -87,5 +88,4 @@
             </Grid>
         </GroupBox>
     </Grid>
-
 </UserControl>

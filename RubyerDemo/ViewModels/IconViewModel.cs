@@ -8,18 +8,13 @@ namespace RubyerDemo.ViewModels
 {
     public class IconViewModel : ViewModelBase
     {
-        private Lazy<IEnumerable<IconType>> _types;
-
-        public IconViewModel()
-        {
-            _types = new Lazy<IEnumerable<IconType>>(() => Enum.GetValues(typeof(IconType)).OfType<IconType>().OrderBy(x => x.ToString()).ToList());
-        }
+        public List<IconType> Types => Enum.GetValues(typeof(IconType)).OfType<IconType>().ToList();
 
         private IEnumerable<IconType> iconTypes;
 
         public IEnumerable<IconType> IconTypes
         {
-            get { return iconTypes ?? (iconTypes = _types.Value); }
+            get { return iconTypes ?? (iconTypes = Types); }
             set
             {
                 iconTypes = value;
@@ -59,11 +54,11 @@ namespace RubyerDemo.ViewModels
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {
-                IconTypes = _types.Value;
+                IconTypes = Types;
             }
             else
             {
-                IconTypes = _types.Value.Where(i => i.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                IconTypes = Types.Where(i => i.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
             }
         }
     }

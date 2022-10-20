@@ -16,9 +16,9 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Width">
             <Setter.Value>
-                <MultiBinding Converter="{StaticResource MathAddyConverter}">
+                <MultiBinding Converter="{StaticResource MathAddConverter}">
                     <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
-                    <Binding Source="4" />
+                    <Binding Source="3" />
                 </MultiBinding>
             </Setter.Value>
         </Setter>
@@ -29,35 +29,11 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Viewbox>
-                            <Canvas x:Name="canvas"
-                                    Width="1024"
-                                    Height="1024">
-                                <Path x:Name="icon"
-                                      Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
-                                      Fill="{TemplateBinding Foreground}"
-                                      RenderTransformOrigin="0.5 0.5"
-                                      Stretch="Uniform">
-                                    <Canvas.Right>
-                                        <MultiBinding Converter="{StaticResource getCanvasCentre}">
-                                            <Binding ElementName="canvas" Path="ActualWidth" />
-                                            <Binding ElementName="icon" Path="ActualWidth" />
-                                        </MultiBinding>
-                                    </Canvas.Right>
-                                    <Canvas.Top>
-                                        <MultiBinding Converter="{StaticResource getCanvasCentre}">
-                                            <Binding ElementName="canvas" Path="ActualHeight" />
-                                            <Binding ElementName="icon" Path="ActualHeight" />
-                                        </MultiBinding>
-                                    </Canvas.Top>
-                                    <Path.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="-1" ScaleY="1" />
-                                            <RotateTransform Angle="180" />
-                                        </TransformGroup>
-                                    </Path.RenderTransform>
-                                </Path>
-                            </Canvas>
+                        <Viewbox Stretch="Uniform">
+                            <Path x:Name="icon" Margin="2"
+                                  Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
+                                  Fill="{TemplateBinding Foreground}"
+                                  Stretch="Uniform" />
                         </Viewbox>
                     </Border>
                 </ControlTemplate>

@@ -10,7 +10,7 @@ namespace Rubyer
     /// </summary>
     public class Icon : Control
     {
-        private static readonly Lazy<Dictionary<IconType, string>> _codes = new Lazy<Dictionary<IconType, string>>(IconDatas.GetAll);
+        private static readonly Lazy<Dictionary<IconType, (string group, string code)>> _codes = new Lazy<Dictionary<IconType, (string, string)>>(IconDatas.GetAll);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Icon"/> class.
@@ -30,6 +30,14 @@ namespace Rubyer
         /// <summary>
         /// 图标类型
         /// </summary>
+        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
+            "Type", typeof(IconType), typeof(Icon), new PropertyMetadata(default(IconType), TypePropertyChangedCallBack));
+
+        private static void TypePropertyChangedCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((Icon)d).UpdateIcon();
+
+        /// <summary>
+        /// 图标类型
+        /// </summary>
         public IconType Type
         {
             get { return (IconType)GetValue(TypeProperty); }
@@ -37,15 +45,10 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 图标类型
+        /// 图标编码
         /// </summary>
-        public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
-            "Type", typeof(IconType), typeof(Icon), new PropertyMetadata(default(IconType), TypePropertyChangedCallBack));
-
-        private static void TypePropertyChangedCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            ((Icon)d).UpdateIcon();
-        }
+        public static readonly DependencyProperty CodeProperty =
+            DependencyProperty.Register("Code", typeof(string), typeof(Icon), new PropertyMetadata(""));
 
         /// <summary>
         /// 图标编码
@@ -57,16 +60,26 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 图标编码
+        /// 组
         /// </summary>
-        public static readonly DependencyProperty CodeProperty =
-            DependencyProperty.Register("Code", typeof(string), typeof(Icon), new PropertyMetadata(""));
+        public static readonly DependencyProperty GroupProperty =
+            DependencyProperty.Register("Group", typeof(string), typeof(Icon), new PropertyMetadata(""));
+
+        /// <summary>
+        /// 组
+        /// </summary>
+        public string Group
+        {
+            get { return (string)GetValue(GroupProperty); }
+            set { SetValue(GroupProperty, value); }
+        }
 
         private void UpdateIcon()
         {
-            string code = null;
-            _codes.Value?.TryGetValue(Type, out code);
-            Code = code;
+            (string group, string code) icon = (string.Empty, string.Empty);
+            _codes.Value?.TryGetValue(Type, out icon);
+            Group = icon.group;
+            Code = icon.code;
         }
     }
 }

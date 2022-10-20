@@ -14,6 +14,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Settings.XamlStyler = Settings.XamlStyler
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{E6D16AB3-0893-4C32-8EE8-1DAD8A51BEAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemixIconCodeGenerator", "Tools\RemixIconCodeGenerator\RemixIconCodeGenerator.csproj", "{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,11 +32,16 @@ Global
 		{FB8F90B1-3C00-4DEB-9824-890BF86671F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB8F90B1-3C00-4DEB-9824-890BF86671F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB8F90B1-3C00-4DEB-9824-890BF86671F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB8F90B1-3C00-4DEB-9824-890BF86671F8}.Release|x64.ActiveCfg = Release|x64
-		{FB8F90B1-3C00-4DEB-9824-890BF86671F8}.Release|x64.Build.0 = Release|x64
+		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C} = {E6D16AB3-0893-4C32-8EE8-1DAD8A51BEAB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F8F77C95-4604-47DB-B555-D9A61D47FDB3}
