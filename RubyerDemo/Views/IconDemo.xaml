@@ -27,7 +27,8 @@
                                       BorderThickness="0 0 0 1">
                                 <GroupBox.Header>
                                     <Border BorderBrush="{StaticResource Primary}" BorderThickness="3 0 0 0">
-                                        <TextBlock Margin="10 0" Padding="0"
+                                        <TextBlock Margin="10 0"
+                                                   Padding="0"
                                                    FontSize="20"
                                                    Text="{Binding Name}" />
                                     </Border>
@@ -70,7 +71,7 @@
                                      Margin="10 0 0 0"
                                      rubyer:InputBoxHelper.PreContent="选中"
                                      BorderThickness="0"
-                                     Text="{Binding CurrentIcon, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
+                                     Text="{Binding CurrentIcon.Type, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
                             <Button x:Name="copyButton"
                                     Style="{StaticResource TextButton}"
                                     rubyer:ButtonHelper.Shape="Circle"

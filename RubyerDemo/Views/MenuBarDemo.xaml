@@ -83,6 +83,9 @@
                             <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
                                 <rubyer:Icon Type="ArrowLeftCircleFill" />
                             </Button>
+                            <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
+                                向后导航
+                            </Button>
                             <Button Foreground="{DynamicResource Primary}" ToolTip="向前导航(Ctrl+Shift+-)">
                                 <rubyer:Icon Type="ArrowRightCircleFill" />
                             </Button>

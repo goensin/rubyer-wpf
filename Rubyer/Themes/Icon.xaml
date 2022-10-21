@@ -29,11 +29,12 @@
                     <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <Viewbox Stretch="Uniform">
-                            <Path x:Name="icon" Margin="2"
+                        <Viewbox>
+                            <Path x:Name="icon"
+                                  Margin="2"
                                   Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
                                   Fill="{TemplateBinding Foreground}"
-                                  Stretch="Uniform" />
+                                  Stretch="UniformToFill" />
                         </Viewbox>
                     </Border>
                 </ControlTemplate>
