@@ -18,7 +18,7 @@
             <Setter.Value>
                 <MultiBinding Converter="{StaticResource MathAddConverter}">
                     <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
-                    <Binding Source="3" />
+                    <Binding Source="4" />
                 </MultiBinding>
             </Setter.Value>
         </Setter>

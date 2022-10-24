@@ -116,7 +116,7 @@ namespace Rubyer
         /// 加载中内容
         /// </summary>
         public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.RegisterAttached(
-            "LoadingContent", typeof(object), typeof(ButtonHelper), new PropertyMetadata(default(object)));
+            "LoadingContent", typeof(object), typeof(ButtonHelper), new PropertyMetadata(null));
 
         /// <summary>
         /// Sets the loading content.
