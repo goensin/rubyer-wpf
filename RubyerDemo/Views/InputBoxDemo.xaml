@@ -120,9 +120,10 @@
                     <TextBlock Text="通过 F2 按键、右键菜单、IsRenaming 属性或者 RenameCommand 重命名" />
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <rubyer:Renamer x:Name="renamer"
-                                        Width="150" TextChanged="renamer_TextChanged"
-                                        TextChangedCommand="{Binding RenamerCommand}"
-                                        Text="{Binding Name}">
+                                        Width="150"
+                                        Text="{Binding Name}"
+                                        TextChanged="renamer_TextChanged"
+                                        TextChangedCommand="{Binding RenamerCommand}">
                             <rubyer:Renamer.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
@@ -140,8 +141,10 @@
                                 CommandTarget="{Binding ElementName=renamer}"
                                 Content="重命名" />
 
-                        <TextBlock Text="自定义未编辑显示内容:" Margin="50 0 5 0" />
-                        <rubyer:Renamer x:Name="renamer2" Width="150" Text="{Binding Name}">
+                        <TextBlock Margin="50 0 5 0" Text="自定义未编辑显示内容:" />
+                        <rubyer:Renamer x:Name="renamer2"
+                                        Width="150"
+                                        Text="{Binding Name}">
                             <rubyer:Renamer.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
@@ -151,7 +154,7 @@
                                 </ContextMenu>
                             </rubyer:Renamer.ContextMenu>
                             <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="Edit2Line" Margin="5 0" />
+                                <rubyer:Icon Margin="5 0" Type="Edit2Line" />
                                 <TextBlock Text="{Binding Name}" />
                             </StackPanel>
                         </rubyer:Renamer>
@@ -248,7 +251,7 @@
                                HorizontalContentAlignment="Right"
                                Content="前后按钮:" />
                         <rubyer:NumericBox Style="{StaticResource FrontBackNumericBox}"
-                                           Width="100"
+                                           Width="130"
                                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
                                            rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"

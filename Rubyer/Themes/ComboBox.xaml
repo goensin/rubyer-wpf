@@ -126,6 +126,7 @@
                                             BorderThickness="1"
                                             SnapsToDevicePixels="True">
                                         <rubyer:Icon x:Name="arrow"
+                                                     Margin="0 0 5 0"
                                                      HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      Foreground="{DynamicResource SeconarydText}"
@@ -448,7 +449,7 @@
 
                             <ContentControl x:Name="postContent"
                                             Grid.Column="3"
-                                            Margin="3 0"
+                                            Margin="3 0 6 0"
                                             VerticalAlignment="Center"
                                             Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{DynamicResource SeconarydText}"
