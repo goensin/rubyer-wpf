@@ -121,7 +121,7 @@
                         <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
-                                            IsActive="{TemplateBinding IsSubmenuOpen}"
+                                            IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
 
                         <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
