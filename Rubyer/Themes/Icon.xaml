@@ -18,7 +18,7 @@
             <Setter.Value>
                 <MultiBinding Converter="{StaticResource MathAddConverter}">
                     <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
-                    <Binding Source="4" />
+                    <Binding Source="10" />
                 </MultiBinding>
             </Setter.Value>
         </Setter>
@@ -30,11 +30,27 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Viewbox>
-                            <Path x:Name="icon"
-                                  Margin="2"
-                                  Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
-                                  Fill="{TemplateBinding Foreground}"
-                                  Stretch="UniformToFill" />
+                            <Canvas x:Name="canvas"
+                                    Width="32"
+                                    Height="32">
+                                <Path x:Name="icon"
+                                      Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Stretch="Uniform">
+                                    <Canvas.Right>
+                                        <MultiBinding Converter="{StaticResource getCanvasCentre}">
+                                            <Binding ElementName="canvas" Path="ActualWidth" />
+                                            <Binding ElementName="icon" Path="ActualWidth" />
+                                        </MultiBinding>
+                                    </Canvas.Right>
+                                    <Canvas.Top>
+                                        <MultiBinding Converter="{StaticResource getCanvasCentre}">
+                                            <Binding ElementName="canvas" Path="ActualHeight" />
+                                            <Binding ElementName="icon" Path="ActualHeight" />
+                                        </MultiBinding>
+                                    </Canvas.Top>
+                                </Path>
+                            </Canvas>
                         </Viewbox>
                     </Border>
                 </ControlTemplate>

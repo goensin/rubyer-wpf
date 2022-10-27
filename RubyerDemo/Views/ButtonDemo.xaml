@@ -184,8 +184,9 @@
                       Header="加载按钮">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button x:Name="loadingButton"
+                            Width="100"
                             Margin="6 0"
-                            Padding="5 0" Width="100"
+                            Padding="5 0"
                             rubyer:ButtonHelper.Loading="False"
                             rubyer:ButtonHelper.LoadingContent="加载中"
                             Click="Button_Click"
