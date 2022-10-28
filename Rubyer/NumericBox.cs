@@ -331,7 +331,14 @@ namespace Rubyer
             }
             else if (string.IsNullOrEmpty(numberBox.Text))
             {
-                numberBox.Value = null;
+                if (InputBoxHelper.GetIsClearable(numberBox))
+                {
+                    numberBox.Value = null;
+                }
+                else
+                {
+                    numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
+                }
             }
 
             if (!numberBox.Value.HasValue)
