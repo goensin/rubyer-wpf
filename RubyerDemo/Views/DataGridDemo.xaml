@@ -17,7 +17,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto">
+    <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" Width="600">
         <GroupBox Margin="0 0 10 10" Header="数据表格-DataGrid">
             <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                 <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
@@ -66,7 +66,7 @@
                                                 Header="性别"
                                                 ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
                                                 SelectedItemBinding="{Binding Gender}" />
-                        <DataGridTemplateColumn Width="80" Header="操作">
+                        <DataGridTemplateColumn Width="*" Header="操作">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
@@ -89,7 +89,7 @@
                 </DataGrid>
             </Grid>
         </GroupBox>
-        <GroupBox Grid.Column="1"
+        <GroupBox Grid.Row="1"
                   Margin="0 0 10 10"
                   Header="数据表格-DataGrid">
             <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
