@@ -20,7 +20,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid x:Name="root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="25" />
+                            <RowDefinition Height="35" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -38,8 +38,8 @@
                         <Viewbox Grid.Column="1" Focusable="False">
                             <Grid>
                                 <rubyer:Icon x:Name="icon"
-                                             Width="25"
-                                             Height="25"
+                                             Width="35"
+                                             Height="35"
                                              Type="{TemplateBinding IconType}" />
 
                                 <TextBlock x:Name="indexText"
@@ -166,7 +166,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="25" />
+                            <ColumnDefinition Width="35" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -183,8 +183,8 @@
                         <Viewbox Grid.Row="1" Focusable="False">
                             <Grid>
                                 <rubyer:Icon x:Name="icon"
-                                             Width="25"
-                                             Height="25"
+                                             Width="35"
+                                             Height="35"
                                              Type="{TemplateBinding IconType}" />
 
                                 <TextBlock x:Name="indexText"
