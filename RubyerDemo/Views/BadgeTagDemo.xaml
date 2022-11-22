@@ -10,6 +10,17 @@
             <GroupBox Header="标记-Badge">
                 <StackPanel Margin="10">
                     <StackPanel Margin="5" Orientation="Horizontal">
+                        <Button Content="123">
+                            <Button.Background>
+                                <SolidColorBrush Color="SkyBlue" />
+                            </Button.Background>
+                        </Button>
+                        <rubyer:Tag Margin="10" Url="www.baidu.com">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="BaiduFill" />
+                            </rubyer:Tag.Header>
+                            百度
+                        </rubyer:Tag>
                         <rubyer:Badge x:Name="MyBadge"
                                       Margin="10"
                                       Text="1">

@@ -323,7 +323,7 @@ namespace RubyerDemo.Utils
                 writer.Write(" ");
 
                 bool isAttachProperty = false;
-                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.Namespace == "Rubyer")
+                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.Namespace == nameof(Rubyer))
                 {
                     isAttachProperty = !element.TypeDeclaration.ToString().Equals(property.PropertyDeclaration.DeclaringType.ToString());
                 }
@@ -3221,8 +3221,12 @@ namespace RubyerDemo.Utils
 
             public override string ToString()
             {
+                if (this.Namespace == nameof(Rubyer))
+                    return "rubyer:" + this.Name;
+
                 if (null == this.xmlPrefix || 0 == this.xmlPrefix.Length)
                     return this.Name;
+
                 return this.xmlPrefix + ":" + this.Name;
             }
         }
