@@ -40,12 +40,14 @@ namespace RubyerDemo.Utils
         public BamlTranslator(Stream stream)
         {
             BamlBinaryReader reader = new BamlBinaryReader(stream);
+
             int length = reader.ReadInt32();
             string format = new string(new BinaryReader(stream, Encoding.Unicode).ReadChars(length >> 1));
             if (format != "MSBAML")
             {
                 throw new NotSupportedException();
             }
+
             int readerVersion = reader.ReadInt32();
             int updateVersion = reader.ReadInt32();
             int writerVersion = reader.ReadInt32();
@@ -53,11 +55,14 @@ namespace RubyerDemo.Utils
             {
                 throw new NotSupportedException();
             }
+
             while (reader.BaseStream.Position < reader.BaseStream.Length)
             {
                 BamlRecordType recordType = (BamlRecordType)reader.ReadByte();
+
                 long position = reader.BaseStream.Position;
                 int size = 0;
+
                 switch (recordType)
                 {
                     case BamlRecordType.XmlnsProperty:
@@ -78,7 +83,9 @@ namespace RubyerDemo.Utils
                         size = reader.ReadCompressedInt32();
                         break;
                 }
+
                 // Console.WriteLine(recordType.ToString());
+
                 switch (recordType)
                 {
                     case BamlRecordType.DocumentStart:
@@ -261,6 +268,7 @@ namespace RubyerDemo.Utils
                     default:
                         throw new NotSupportedException(recordType.ToString());
                 }
+
                 if (size > 0)
                 {
                     reader.BaseStream.Position = position + size;
@@ -276,6 +284,7 @@ namespace RubyerDemo.Utils
                 {
                     WriteElement(this.rootElement, indentationTextWriter);
                 }
+
                 return stringWriter.ToString();
             }
         }
@@ -284,6 +293,7 @@ namespace RubyerDemo.Utils
         {
             writer.Write("<");
             WriteTypeDeclaration(element.TypeDeclaration, writer);
+
             ArrayList attributes = new ArrayList();
             ArrayList properties = new ArrayList();
             Property contentProperty = null;
@@ -318,19 +328,14 @@ namespace RubyerDemo.Utils
                         break;
                 }
             }
+
             foreach (Property property in attributes)
             {
                 writer.Write(" ");
-
-                bool isAttachProperty = false;
-                if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.Namespace == nameof(Rubyer))
-                {
-                    isAttachProperty = !element.TypeDeclaration.ToString().Equals(property.PropertyDeclaration.DeclaringType.ToString());
-                }
-
-                WritePropertyDeclaration(property.PropertyDeclaration, element.TypeDeclaration, writer, isAttachProperty);
+                WritePropertyDeclaration(property.PropertyDeclaration, element.TypeDeclaration, writer);
                 writer.Write("=");
                 writer.Write("\"");
+
                 switch (property.PropertyType)
                 {
                     case PropertyType.Complex:
@@ -346,21 +351,37 @@ namespace RubyerDemo.Utils
                     default:
                         throw new NotSupportedException();
                 }
+
                 writer.Write("\"");
             }
+
             if ((contentProperty != null) || (properties.Count > 0))
             {
                 writer.Write(">");
+
                 if ((properties.Count > 0) || (contentProperty.Value is IList))
                 {
                     writer.WriteLine();
                 }
+
                 writer.Indentation++;
+
                 foreach (Property property in properties)
                 {
                     writer.Write("<");
-                    WriteTypeDeclaration(element.TypeDeclaration, writer);
-                    writer.Write(".");
+
+                    bool isAttachProperty = false;
+                    if (property.PropertyDeclaration.DeclaringType != null && property.PropertyDeclaration.DeclaringType.XmlPrefix != null)
+                    {
+                        isAttachProperty = !element.TypeDeclaration.ToString().Equals(property.PropertyDeclaration.DeclaringType.ToString());
+                    }
+
+                    if (!isAttachProperty)
+                    {
+                        WriteTypeDeclaration(element.TypeDeclaration, writer);
+                        writer.Write(".");
+                    }
+
                     WritePropertyDeclaration(property.PropertyDeclaration, element.TypeDeclaration, writer);
                     writer.Write(">");
                     writer.WriteLine();
@@ -374,11 +395,14 @@ namespace RubyerDemo.Utils
                     writer.Write(">");
                     writer.WriteLine();
                 }
+
                 if (contentProperty != null)
                 {
                     WritePropertyValue(contentProperty, writer);
                 }
+
                 writer.Indentation--;
+
                 writer.Write("</");
                 WriteTypeDeclaration(element.TypeDeclaration, writer);
                 writer.Write(">");
@@ -387,6 +411,7 @@ namespace RubyerDemo.Utils
             {
                 writer.Write(" />");
             }
+
             writer.WriteLine();
         }
 
@@ -395,17 +420,26 @@ namespace RubyerDemo.Utils
             writer.Write(value.ToString());
         }
 
-        private static void WritePropertyDeclaration(PropertyDeclaration value, TypeDeclaration context, TextWriter writer, bool isAttachProperty = false)
+        private static void WritePropertyDeclaration(PropertyDeclaration value, TypeDeclaration context, TextWriter writer)
         {
-            writer.Write(value.ToString(isAttachProperty));
+            if (value.DeclaringType != null && value.DeclaringType.Assembly != context.Assembly)
+            {
+                writer.Write(value.ToString());
+            }
+            else
+            {
+                writer.Write(value.Name);
+            }
         }
 
         private static void WritePropertyValue(Property property, IndentationTextWriter writer)
         {
             object value = property.Value;
+
             if (value is IList)
             {
                 IList elements = (IList)value;
+
                 if ((property.PropertyDeclaration != null) && (property.PropertyDeclaration.Name == "Resources") && (elements.Count == 1) && (elements[0] is Element))
                 {
                     Element element = (Element)elements[0];
@@ -415,6 +449,7 @@ namespace RubyerDemo.Utils
                         return;
                     }
                 }
+
                 foreach (object child in elements)
                 {
                     if (child is string)
@@ -453,24 +488,31 @@ namespace RubyerDemo.Utils
             {
                 Console.WriteLine();
             }
+
             writer.Write("{");
+
             string name = element.TypeDeclaration.ToString();
+
             if (name.EndsWith("Extension"))
             {
                 name = name.Substring(0, name.Length - 9);
             }
+
             writer.Write(name);
+
             if ((element.Arguments.Count > 0) || (element.Properties.Count > 0))
             {
                 if (element.Arguments.Count > 0)
                 {
                     writer.Write(" ");
+
                     for (int i = 0; i < element.Arguments.Count; i++)
                     {
                         if (i != 0)
                         {
                             writer.Write(", ");
                         }
+
                         if (element.Arguments[i] is string)
                         {
                             writer.Write((string)element.Arguments[i]);
@@ -499,17 +541,21 @@ namespace RubyerDemo.Utils
                         }
                     }
                 }
+
                 if (element.Properties.Count > 0)
                 {
                     writer.Write(" ");
+
                     for (int i = 0; i < element.Properties.Count; i++)
                     {
                         if ((i != 0) || (element.Arguments.Count > 0))
                         {
                             writer.Write(", ");
                         }
+
                         WritePropertyDeclaration(element.Properties[i].PropertyDeclaration, element.TypeDeclaration, writer);
                         writer.Write("=");
+
                         if (element.Properties[i].Value is string)
                         {
                             writer.Write((string)element.Properties[i].Value);
@@ -533,12 +579,14 @@ namespace RubyerDemo.Utils
                     }
                 }
             }
+
             writer.Write("}");
         }
 
         private static bool IsExtension(object value)
         {
             Element element = value as Element;
+
             if (element != null)
             {
                 if (element.Arguments.Count == 0)
@@ -549,10 +597,12 @@ namespace RubyerDemo.Utils
                         {
                             return false;
                         }
+
                         if (!IsExtension(property.Value))
                         {
                             return false;
                         }
+
                         // An element with property content such as the following should
                         // not be considered an extension.
                         //
@@ -562,15 +612,32 @@ namespace RubyerDemo.Utils
                         {
                             return false;
                         }
+
+                        // An element with property content such as the following should
+                        // not be considered an extension.
+                        //
+                        // < Button Content = "123" >
+                        //    < Button.Background >
+                        //        < SolidColorBrush Color = "SkyBlue" />
+                        //    </ Button.Background >
+                        // </ Button >
+                        //
+                        if (property.PropertyType == PropertyType.Value)
+                        {
+                            return false;
+                        }
                     }
                 }
+
                 return true;
             }
+
             IList list = value as IList;
             if (list != null)
             {
                 return false;
             }
+
             return true;
         }
 
@@ -604,15 +671,20 @@ namespace RubyerDemo.Utils
                 else
                 {
                     Element parent = this.elementStack.Peek() as Element;
+
                     if (this.dictionaryKeyPositionTable.Contains(parent))
                     {
                         int currentPosition = (int)(reader.BaseStream.Position - 1);
+
                         if (!this.dictionaryKeyStartTable.Contains(parent))
                         {
                             this.dictionaryKeyStartTable.Add(parent, currentPosition);
                         }
+
                         int startPosition = (int)this.dictionaryKeyStartTable[parent];
+
                         int position = currentPosition - startPosition;
+
                         IDictionary keyPositionTable = (IDictionary)this.dictionaryKeyPositionTable[parent];
                         if ((keyPositionTable != null) && (keyPositionTable.Contains(position)))
                         {
@@ -623,6 +695,7 @@ namespace RubyerDemo.Utils
                             }
                         }
                     }
+
                     if (parent != null)
                     {
                         // The element could be a parameter to a constructor - e.g. the Type
@@ -630,7 +703,7 @@ namespace RubyerDemo.Utils
                         // of that element.
                         //
                         if (this.constructorParameterTable.Count > 0 &&
-                                this.constructorParameterTable[this.constructorParameterTable.Count - 1] == parent)
+                            this.constructorParameterTable[this.constructorParameterTable.Count - 1] == parent)
                         {
                             parent.Arguments.Add(element);
                         }
@@ -656,9 +729,11 @@ namespace RubyerDemo.Utils
         {
             string value = reader.ReadString();
             short nameIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Value);
             property.PropertyDeclaration = new PropertyDeclaration("PresentationOptions:" + this.stringTable[nameIdentifier]);
             property.Value = value;
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -667,12 +742,14 @@ namespace RubyerDemo.Utils
         {
             short stringIdentifier = reader.ReadInt16();
             string value = reader.ReadString();
+
             // This isn't a bug but more of a usability issue. MS tends to use
             // single character identifiers which makes it difficult to find
             // the associated resource.
             //
             if (null != value && value.Length == 1)
                 value = string.Format("[{0}] {1}", stringIdentifier, value);
+
             this.stringTable.Add(stringIdentifier, value);
         }
 
@@ -681,9 +758,12 @@ namespace RubyerDemo.Utils
             short typeIdentifier = reader.ReadInt16();
             short assemblyIdentifier = reader.ReadInt16();
             string typeFullName = reader.ReadString();
+
             assemblyIdentifier = (short)(assemblyIdentifier & 0x0fff);
             string assembly = (string)this.assemblyTable[assemblyIdentifier];
+
             TypeDeclaration typeDeclaration = null;
+
             int index = typeFullName.LastIndexOf('.');
             if (index != -1)
             {
@@ -695,6 +775,7 @@ namespace RubyerDemo.Utils
             {
                 typeDeclaration = new TypeDeclaration(typeFullName, string.Empty, assembly);
             }
+
             this.typeTable.Add(typeIdentifier, typeDeclaration);
         }
 
@@ -704,6 +785,7 @@ namespace RubyerDemo.Utils
             short ownerTypeIdentifier = reader.ReadInt16();
             BamlAttributeUsage attributeUsage = (BamlAttributeUsage)reader.ReadByte();
             string attributeName = reader.ReadString();
+
             TypeDeclaration declaringType = this.GetTypeDeclaration(ownerTypeIdentifier);
             PropertyDeclaration propertyName = new PropertyDeclaration(attributeName, declaringType);
             this.propertyTable.Add(attributeIdentifier, propertyName);
@@ -713,9 +795,12 @@ namespace RubyerDemo.Utils
         {
             short typeIdentifier = reader.ReadInt16();
             byte flags = reader.ReadByte(); // 1 = CreateUsingTypeConverter, 2 = Injected
+
             Element element = new Element();
             element.TypeDeclaration = this.GetTypeDeclaration(typeIdentifier);
+
             this.AddElementToTree(element, reader);
+
             this.elementStack.Push(element);
         }
 
@@ -729,14 +814,17 @@ namespace RubyerDemo.Utils
             else
             {
                 Element element = (Element)this.elementStack.Pop();
+
                 Property contentProperty = this.GetContentProperty(element);
                 if ((contentProperty != null) && (contentProperty.Value == null))
                 {
                     element.Properties.Remove(contentProperty);
                 }
+
                 if (element.TypeDeclaration == this.GetTypeDeclaration(-0x0078))
                 {
                     bool removeKey = false;
+
                     for (int i = element.Properties.Count - 1; i >= 0; i--)
                     {
                         if ((element.Properties[i].PropertyDeclaration != null) && (element.Properties[i].PropertyDeclaration.Name == "DataType"))
@@ -745,6 +833,7 @@ namespace RubyerDemo.Utils
                             break;
                         }
                     }
+
                     if (removeKey)
                     {
                         for (int i = element.Properties.Count - 1; i >= 0; i--)
@@ -763,9 +852,12 @@ namespace RubyerDemo.Utils
         {
             short typeIdentifier = reader.ReadInt16();
             byte flags = reader.ReadByte(); // 1 = CreateUsingTypeConverter, 2 = Injected
+
             Element element = new Element();
             element.TypeDeclaration = this.GetTypeDeclaration(typeIdentifier);
+
             this.elementStack.Push(element);
+
             this.staticResourceTable.Add(element);
         }
 
@@ -777,12 +869,15 @@ namespace RubyerDemo.Utils
         private void ReadKeyElementStart(BamlBinaryReader reader)
         {
             short typeIdentifier = reader.ReadInt16();
+
             byte flags = reader.ReadByte();
             bool createUsingTypeConverter = ((flags & 1) != 0);
             bool injected = ((flags & 2) != 0);
+
             int position = reader.ReadInt32();
             bool shared = reader.ReadBoolean();
             bool sharedSet = reader.ReadBoolean();
+
             Property keyProperty = new Property(PropertyType.Complex);
             keyProperty.PropertyDeclaration = new PropertyDeclaration("x:Key");
             // At least for the case where we are processing the key of a dictionary,
@@ -791,6 +886,7 @@ namespace RubyerDemo.Utils
             //
             //keyProperty.Value = this.CreateTypeExtension(typeIdentifier);
             keyProperty.Value = this.CreateTypeExtension(typeIdentifier, false);
+
             Element dictionary = (Element)this.elementStack.Peek();
             this.AddDictionaryEntry(dictionary, position, keyProperty);
             this.elementStack.Push(keyProperty.Value);
@@ -816,7 +912,9 @@ namespace RubyerDemo.Utils
         private void ReadConstructorParameterType(BamlBinaryReader reader)
         {
             short typeIdentifier = reader.ReadInt16();
+
             TypeDeclaration elementName = this.GetTypeDeclaration(typeIdentifier);
+
             Element element = (Element)this.elementStack.Peek();
             element.Arguments.Add(elementName);
         }
@@ -825,9 +923,12 @@ namespace RubyerDemo.Utils
         {
             byte extension = reader.ReadByte(); // num1
             short valueIdentifier = reader.ReadInt16();
+
             bool typeExtension = ((extension & 1) == 1);
             bool staticExtension = ((extension & 2) == 2);
+
             object element = null;
+
             if (typeExtension)
             {
                 Element innerElement = this.CreateTypeExtension(valueIdentifier);
@@ -838,8 +939,10 @@ namespace RubyerDemo.Utils
                 Element innerElement = new Element();
                 innerElement.TypeDeclaration = new TypeDeclaration("x:Static");
                 // innerElement.TypeDeclaration = new TypeDeclaration("StaticExtension", "System.Windows.Markup);
+
                 ResourceName resourceName = (ResourceName)this.GetResourceName(valueIdentifier);
                 innerElement.Arguments.Add(resourceName);
+
                 element = innerElement;
             }
             else
@@ -847,30 +950,38 @@ namespace RubyerDemo.Utils
                 string value = (string)this.stringTable[valueIdentifier];
                 element = value;
             }
+
             this.staticResourceTable.Add(element);
         }
 
         private void ReadPropertyWithExtension(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             // 0x025b StaticResource
             // 0x027a TemplateBinding
             // 0x00bd DynamicResource
             short extension = reader.ReadInt16();
             short valueIdentifier = reader.ReadInt16();
+
             bool typeExtension = ((extension & 0x4000) == 0x4000);
             bool staticExtension = ((extension & 0x2000) == 0x2000);
+
             extension = (short)(extension & 0x0fff);
+
             Property property = new Property(PropertyType.Complex);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
+
             short typeIdentifier = (short)-(extension & 0x0fff);
+
             Element element = new Element();
             element.TypeDeclaration = this.GetTypeDeclaration(typeIdentifier);
+
             switch (extension)
             {
                 case 0x00bd: // DynamicResource
-                case 0x025b:
-                    { // StaticResource
+                case 0x025b: // StaticResource
+                    {
                         if (typeExtension)
                         {
                             Element innerElement = this.CreateTypeExtension(valueIdentifier);
@@ -881,8 +992,10 @@ namespace RubyerDemo.Utils
                             Element innerElement = new Element();
                             innerElement.TypeDeclaration = new TypeDeclaration("x:Static");
                             // innerElement.TypeDeclaration = new TypeDeclaration("StaticExtension", "System.Windows.Markup);
+
                             ResourceName resourceName = (ResourceName)this.GetResourceName(valueIdentifier);
                             innerElement.Arguments.Add(resourceName);
+
                             element.Arguments.Add(innerElement);
                         }
                         else
@@ -893,15 +1006,15 @@ namespace RubyerDemo.Utils
                     }
                     break;
 
-                case 0x25a:
-                    { // Static
+                case 0x25a: // Static
+                    {
                         ResourceName resourceName = (ResourceName)this.GetResourceName(valueIdentifier);
                         element.Arguments.Add(resourceName);
                     }
                     break;
 
-                case 0x027a:
-                    { // TemplateBinding
+                case 0x027a: // TemplateBinding
+                    {
                         PropertyDeclaration propertyName = this.GetPropertyDeclaration(valueIdentifier);
                         element.Arguments.Add(propertyName);
                     }
@@ -910,7 +1023,9 @@ namespace RubyerDemo.Utils
                 default:
                     throw new NotSupportedException("Unknown property with extension");
             }
+
             property.Value = element;
+
             Element parent = (Element)this.elementStack.Peek();
             parent.Properties.Add(property);
         }
@@ -922,20 +1037,25 @@ namespace RubyerDemo.Utils
             Element staticResourceElement = new Element();
             staticResourceElement.TypeDeclaration = this.GetTypeDeclaration(-0x25b);
             staticResourceElement.Arguments.Add(staticResource);
+
             this.AddElementToTree(staticResourceElement, reader);
         }
 
         private void ReadPropertyWithStaticResourceIdentifier(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             short staticResourceIdentifier = reader.ReadInt16();
             object staticResource = this.GetStaticResource(staticResourceIdentifier);
+
             Element staticResourcEelement = new Element();
             staticResourcEelement.TypeDeclaration = this.GetTypeDeclaration(-0x25b);
             staticResourcEelement.Arguments.Add(staticResource);
+
             Property property = new Property(PropertyType.Complex);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
             property.Value = staticResourcEelement;
+
             Element parent = (Element)this.elementStack.Peek();
             parent.Properties.Add(property);
         }
@@ -944,9 +1064,11 @@ namespace RubyerDemo.Utils
         {
             short attributeIdentifier = reader.ReadInt16();
             short typeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Complex);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
             property.Value = this.CreateTypeExtension(typeIdentifier);
+
             Element parent = (Element)this.elementStack.Peek();
             parent.Properties.Add(property);
         }
@@ -955,9 +1077,11 @@ namespace RubyerDemo.Utils
         {
             short attributeIdentifier = reader.ReadInt16();
             string value = reader.ReadString();
+
             Property property = new Property(PropertyType.Value);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
             property.Value = value;
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -967,9 +1091,11 @@ namespace RubyerDemo.Utils
             short attributeIdentifier = reader.ReadInt16();
             string value = reader.ReadString();
             short converterTypeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Value);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
             property.Value = value;
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -980,8 +1106,10 @@ namespace RubyerDemo.Utils
             short serializerTypeIdentifier = reader.ReadInt16();
             bool typeIdentifier = (serializerTypeIdentifier & 0x4000) == 0x4000;
             serializerTypeIdentifier = (short)(serializerTypeIdentifier & ~0x4000);
+
             Property property = new Property(PropertyType.Value);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
+
             switch (serializerTypeIdentifier)
             {
                 // PropertyReference
@@ -1035,6 +1163,7 @@ namespace RubyerDemo.Utils
                     {
                         byte format = reader.ReadByte();
                         int count = reader.ReadInt32();
+
                         switch (format)
                         {
                             case 0x01: // Consecutive
@@ -1044,6 +1173,7 @@ namespace RubyerDemo.Utils
                                     {
                                         writer.Write(",");
                                     }
+
                                     int number = reader.ReadInt32();
                                     writer.Write(number.ToString());
                                     if (number > count)
@@ -1060,6 +1190,7 @@ namespace RubyerDemo.Utils
                                     {
                                         writer.Write(",");
                                     }
+
                                     int number = reader.ReadByte();
                                     writer.Write(number.ToString());
                                 }
@@ -1072,6 +1203,7 @@ namespace RubyerDemo.Utils
                                     {
                                         writer.Write(",");
                                     }
+
                                     int number = reader.ReadUInt16();
                                     writer.Write(number.ToString());
                                 }
@@ -1079,9 +1211,11 @@ namespace RubyerDemo.Utils
 
                             case 0x04: // UInt32
                                 throw new NotSupportedException();
+
                             default:
                                 throw new NotSupportedException();
                         }
+
                         property.Value = writer.ToString();
                     }
                     break;
@@ -1100,16 +1234,19 @@ namespace RubyerDemo.Utils
                             {
                                 writer.Write(" ");
                             }
+
                             for (int j = 0; j < 2; j++)
                             {
                                 if (j != 0)
                                 {
                                     writer.Write(",");
                                 }
+
                                 double number = reader.ReadCompressedDouble();
                                 writer.Write(number.ToString());
                             }
                         }
+
                         property.Value = writer.ToString();
                     }
                     break;
@@ -1125,16 +1262,19 @@ namespace RubyerDemo.Utils
                             {
                                 writer.Write(" ");
                             }
+
                             for (int j = 0; j < 3; j++)
                             {
                                 if (j != 0)
                                 {
                                     writer.Write(",");
                                 }
+
                                 double number = reader.ReadCompressedDouble();
                                 writer.Write(number.ToString());
                             }
                         }
+
                         property.Value = writer.ToString();
                     }
                     break;
@@ -1142,6 +1282,7 @@ namespace RubyerDemo.Utils
                 default:
                     throw new NotSupportedException();
             }
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -1149,29 +1290,36 @@ namespace RubyerDemo.Utils
         private void ReadContentProperty(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             Element element = (Element)this.elementStack.Peek();
+
             Property contentProperty = this.GetContentProperty(element);
             if (contentProperty == null)
             {
                 contentProperty = new Property(PropertyType.Content);
                 element.Properties.Add(contentProperty);
             }
+
             PropertyDeclaration propertyName = this.GetPropertyDeclaration(attributeIdentifier);
             if ((contentProperty.PropertyDeclaration != null) && (contentProperty.PropertyDeclaration != propertyName))
             {
                 throw new NotSupportedException();
             }
+
             contentProperty.PropertyDeclaration = propertyName;
         }
 
         private void ReadPropertyListStart(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.List);
             property.Value = new ArrayList();
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
+
             this.elementStack.Push(property);
         }
 
@@ -1187,11 +1335,14 @@ namespace RubyerDemo.Utils
         private void ReadPropertyDictionaryStart(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Dictionary);
             property.Value = new ArrayList();
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
+
             this.elementStack.Push(property);
         }
 
@@ -1207,14 +1358,18 @@ namespace RubyerDemo.Utils
         private void ReadPropertyComplexStart(BamlBinaryReader reader)
         {
             short attributeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Complex);
             property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
+
             if (property.PropertyDeclaration.Name == "RelativeTransform")
             {
                 Console.WriteLine();
             }
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
+
             this.elementStack.Push(property);
         }
 
@@ -1231,15 +1386,19 @@ namespace RubyerDemo.Utils
         {
             string prefix = reader.ReadString();
             string xmlNamespace = reader.ReadString();
+
             string[] assemblies = new string[reader.ReadInt16()];
             for (int i = 0; i < assemblies.Length; i++)
             {
                 assemblies[i] = (string)this.assemblyTable[reader.ReadInt16()];
             }
+
             Property property = new Property(PropertyType.Namespace);
             property.PropertyDeclaration = new PropertyDeclaration(prefix, new TypeDeclaration("XmlNamespace", null, null));
             property.Value = xmlNamespace;
+
             this.namespaceManager.AddMapping(prefix, xmlNamespace);
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -1250,6 +1409,7 @@ namespace RubyerDemo.Utils
             string clrNamespace = reader.ReadString();
             short assemblyIdentifier = reader.ReadInt16();
             string assembly = (string)this.assemblyTable[assemblyIdentifier];
+
             this.namespaceManager.AddNamespaceMapping(xmlNamespace, clrNamespace, assembly);
         }
 
@@ -1257,7 +1417,9 @@ namespace RubyerDemo.Utils
         {
             string value = reader.ReadString();
             short attributeIdentifier = reader.ReadInt16();
+
             Property property = new Property(PropertyType.Declaration);
+
             switch (attributeIdentifier)
             {
                 case -1:
@@ -1272,7 +1434,9 @@ namespace RubyerDemo.Utils
                     property.PropertyDeclaration = this.GetPropertyDeclaration(attributeIdentifier);
                     break;
             }
+
             property.Value = value;
+
             Element element = (Element)this.elementStack.Peek();
             element.Properties.Add(property);
         }
@@ -1283,15 +1447,19 @@ namespace RubyerDemo.Utils
             int position = reader.ReadInt32();
             bool shared = reader.ReadBoolean();
             bool sharedSet = reader.ReadBoolean();
+
             string key = (string)this.stringTable[valueIdentifier];
             if (key == null)
             {
                 throw new NotSupportedException();
             }
+
             Property keyProperty = new Property(PropertyType.Value);
             keyProperty.PropertyDeclaration = new PropertyDeclaration("x:Key");
             keyProperty.Value = key;
+
             Element dictionary = (Element)this.elementStack.Peek();
+
             this.AddDictionaryEntry(dictionary, position, keyProperty);
         }
 
@@ -1302,10 +1470,13 @@ namespace RubyerDemo.Utils
             int position = reader.ReadInt32();
             bool shared = reader.ReadBoolean();
             bool sharedSet = reader.ReadBoolean();
+
             Property keyProperty = new Property(PropertyType.Complex);
             keyProperty.PropertyDeclaration = new PropertyDeclaration("x:Key");
             keyProperty.Value = this.CreateTypeExtension(typeIdentifier);
+
             Element dictionary = (Element)this.elementStack.Peek();
+
             this.AddDictionaryEntry(dictionary, position, keyProperty);
         }
 
@@ -1348,12 +1519,14 @@ namespace RubyerDemo.Utils
             {
                 throw new ArgumentNullException();
             }
+
             Property contentProperty = this.GetContentProperty(parent);
             if (contentProperty == null)
             {
                 contentProperty = new Property(PropertyType.Content);
                 parent.Properties.Add(contentProperty);
             }
+
             if (contentProperty.Value != null)
             {
                 if (contentProperty.Value is string)
@@ -1362,6 +1535,7 @@ namespace RubyerDemo.Utils
                     value.Add(contentProperty.Value);
                     contentProperty.Value = value;
                 }
+
                 if (contentProperty.Value is IList)
                 {
                     IList value = (IList)contentProperty.Value;
@@ -1395,12 +1569,14 @@ namespace RubyerDemo.Utils
                 table = new Hashtable();
                 this.dictionaryKeyPositionTable.Add(dictionary, table);
             }
+
             IList list = (IList)table[position];
             if (list == null)
             {
                 list = new ArrayList();
                 table.Add(position, list);
             }
+
             list.Add(keyProperty);
         }
 
@@ -1414,15 +1590,18 @@ namespace RubyerDemo.Utils
             Element element = new Element();
             element.TypeDeclaration = new TypeDeclaration("x:Type");
             // element.TypeDeclaration = new TypeDeclaration("TypeExtension", "System.Windows.Markup");
+
             TypeDeclaration typeDeclaration = this.GetTypeDeclaration(typeIdentifier);
             if (typeDeclaration == null)
             {
                 throw new NotSupportedException();
             }
+
             if (false == wrapInType)
                 element.TypeDeclaration = typeDeclaration;
             else
                 element.Arguments.Add(typeDeclaration);
+
             return element;
         }
 
@@ -1435,12 +1614,14 @@ namespace RubyerDemo.Utils
                     return property;
                 }
             }
+
             return null;
         }
 
         private TypeDeclaration GetTypeDeclaration(short identifier)
         {
             TypeDeclaration typeDeclaration = null;
+
             if (identifier >= 0)
             {
                 typeDeclaration = (TypeDeclaration)this.typeTable[identifier];
@@ -1451,28 +1632,43 @@ namespace RubyerDemo.Utils
                 {
                     this.Initialize();
                 }
+
                 typeDeclaration = this.knownTypeTable[-identifier];
             }
+
             // if an xml namespace prefix has been mapped for the specified assembly/clrnamespace
             // use its prefix in the returned type declaration. we have to do this here because
             // later on we may not have access to the mapping information
             string xmlNs = this.namespaceManager.GetXmlNamespace(typeDeclaration);
+
             if (null != xmlNs)
             {
                 string prefix = this.namespaceManager.GetPrefix(xmlNs);
+
                 if (null != prefix)
                     typeDeclaration = typeDeclaration.Copy(prefix);
             }
+            else
+            {
+                // 添加 rubyer 控件前缀
+                if (typeDeclaration.Namespace == nameof(Rubyer))
+                {
+                    typeDeclaration = typeDeclaration.Copy(nameof(Rubyer).ToLower());
+                }
+            }
+
             if (typeDeclaration == null)
             {
                 throw new NotSupportedException();
             }
+
             return typeDeclaration;
         }
 
         private PropertyDeclaration GetPropertyDeclaration(short identifier)
         {
             PropertyDeclaration propertyDeclaration = null;
+
             if (identifier >= 0)
             {
                 propertyDeclaration = (PropertyDeclaration)this.propertyTable[identifier];
@@ -1483,12 +1679,15 @@ namespace RubyerDemo.Utils
                 {
                     this.Initialize();
                 }
+
                 propertyDeclaration = this.knownPropertyTable[-identifier];
             }
+
             if (propertyDeclaration == null)
             {
                 throw new NotSupportedException();
             }
+
             return propertyDeclaration;
         }
 
@@ -1511,11 +1710,13 @@ namespace RubyerDemo.Utils
                 {
                     this.Initialize();
                 }
+
                 identifier = (short)-identifier;
                 if (identifier > 0x00e8)
                 {
                     identifier -= 0x00e8;
                 }
+
                 ResourceName resourceName = (ResourceName)this.knownResourceTable[(int)identifier];
                 return resourceName;
             }
@@ -2289,6 +2490,7 @@ namespace RubyerDemo.Utils
             knownTypeTable[0x02f5] = new TypeDeclaration("XmlLanguageConverter", "System.Windows.Markup", this.GetAssembly("PresentationCore"));
             knownTypeTable[0x02f6] = new TypeDeclaration("XmlNamespaceMapping", "System.Windows.Data", this.GetAssembly("PresentationFramework"));
             knownTypeTable[0x02f7] = new TypeDeclaration("ZoomPercentageConverter", "System.Windows.Documents", this.GetAssembly("PresentationFramework"));
+
             knownPropertyTable = new PropertyDeclaration[0x010d];
             knownPropertyTable[0x0001] = new PropertyDeclaration("Text", knownTypeTable[0x0001]); // AccessText
             knownPropertyTable[0x0002] = new PropertyDeclaration("Storyboard", knownTypeTable[0x0011]); // BeginStoryboard
@@ -2557,6 +2759,7 @@ namespace RubyerDemo.Utils
             knownPropertyTable[0x010a] = new PropertyDeclaration("Content", knownTypeTable[0x02e3]); // Window
             knownPropertyTable[0x010b] = new PropertyDeclaration("Children", knownTypeTable[0x02e6]); // WrapPanel
             knownPropertyTable[0x010c] = new PropertyDeclaration("XmlSerializer", knownTypeTable[0x02f2]); // XmlDataProvider
+
             knownResourceTable.Add(0x1, new ResourceName("ActiveBorderBrush"));
             knownResourceTable.Add(0x1f, new ResourceName("ActiveBorderColor"));
             knownResourceTable.Add(0x2, new ResourceName("ActiveCaptionBrush"));
@@ -2889,6 +3092,7 @@ namespace RubyerDemo.Utils
                     case 0x05:
                         return this.ReadDouble();
                 }
+
                 throw new NotSupportedException();
             }
 
@@ -2918,6 +3122,7 @@ namespace RubyerDemo.Utils
                     {
                         this.writer.Write(this.indentText);
                     }
+
                     this.indentationPending = false;
                 }
             }
@@ -3104,6 +3309,7 @@ namespace RubyerDemo.Utils
                 {
                     return this.indentation;
                 }
+
                 set
                 {
                     this.indentation = value;
@@ -3131,6 +3337,7 @@ namespace RubyerDemo.Utils
                 {
                     return this.typeDeclaration;
                 }
+
                 set
                 {
                     this.typeDeclaration = value;
@@ -3155,6 +3362,18 @@ namespace RubyerDemo.Utils
 
             public override string ToString()
             {
+                /*
+				using (StringWriter stringWriter = new StringWriter())
+				{
+					using (IndentationTextWriter indentationTextWriter = new IndentationTextWriter(stringWriter))
+					{
+						WriteElement(this, indentationTextWriter);
+					}
+
+					return stringWriter.ToString();
+				}
+				*/
+
                 return "<" + this.TypeDeclaration.ToString() + ">";
             }
         }
@@ -3213,17 +3432,11 @@ namespace RubyerDemo.Utils
 
             public string XmlPrefix
             {
-                get
-                {
-                    return this.xmlPrefix;
-                }
+                get { return this.xmlPrefix; }
             }
 
             public override string ToString()
             {
-                if (this.Namespace == nameof(Rubyer))
-                    return "rubyer:" + this.Name;
-
                 if (null == this.xmlPrefix || 0 == this.xmlPrefix.Length)
                     return this.Name;
 
@@ -3267,6 +3480,7 @@ namespace RubyerDemo.Utils
                 {
                     return this.propertyDeclaration;
                 }
+
                 set
                 {
                     this.propertyDeclaration = value;
@@ -3279,6 +3493,7 @@ namespace RubyerDemo.Utils
                 {
                     return this.value;
                 }
+
                 set
                 {
                     this.value = value;
@@ -3287,6 +3502,21 @@ namespace RubyerDemo.Utils
 
             public override string ToString()
             {
+                /*
+				using (StringWriter stringWriter = new StringWriter())
+				{
+					using (IndentationTextWriter indentationTextWriter = new IndentationTextWriter(stringWriter))
+					{
+						indentationTextWriter.Write(this.PropertyDeclaration.Name);
+						indentationTextWriter.Write("=");
+						indentationTextWriter.WriteLine();
+						WritePropertyValue(this, indentationTextWriter);
+					}
+
+					return stringWriter.ToString();
+				}
+				*/
+
                 return this.PropertyDeclaration.Name;
             }
         }
@@ -3324,20 +3554,21 @@ namespace RubyerDemo.Utils
                 }
             }
 
-            public string ToString(bool isAttachProperty = false)
+            public override string ToString()
             {
-                if (isAttachProperty)
-                {
-                    return $"rubyer:{this.DeclaringType}.{this.Name}";
-                }
-
                 if ((this.DeclaringType != null) && (this.DeclaringType.Name == "XmlNamespace") && (this.DeclaringType.Namespace == null) && (this.DeclaringType.Assembly == null))
                 {
                     if ((this.Name == null) || (this.Name.Length == 0))
                     {
                         return "xmlns";
                     }
+
                     return "xmlns:" + this.Name;
+                }
+
+                if (this.DeclaringType != null && this.DeclaringType.XmlPrefix != null)
+                {
+                    return this.DeclaringType + "." + this.Name;
                 }
 
                 return this.Name;
@@ -3453,6 +3684,7 @@ namespace RubyerDemo.Utils
                             return (string)element.MappingTable[xmlNamespace];
                     }
                 }
+
                 return null;
             }
 
@@ -3462,10 +3694,7 @@ namespace RubyerDemo.Utils
 
                 internal bool HasMappingTable
                 {
-                    get
-                    {
-                        return null != this.mappingTable;
-                    }
+                    get { return null != this.mappingTable; }
                 }
 
                 internal HybridDictionary MappingTable
@@ -3474,6 +3703,7 @@ namespace RubyerDemo.Utils
                     {
                         if (null == this.mappingTable)
                             this.mappingTable = new HybridDictionary();
+
                         return this.mappingTable;
                     }
                 }
@@ -3656,6 +3886,7 @@ namespace RubyerDemo.Utils
                 StringBuilder sb = new StringBuilder();
                 bool shouldClose = false;
                 char lastChar = '\0';
+
                 while (true)
                 {
                     byte b = reader.ReadByte();
@@ -3663,48 +3894,51 @@ namespace RubyerDemo.Utils
                     bool bit2 = (b & 0x20) == 0x20;
                     bool bit3 = (b & 0x40) == 0x40;
                     bool bit4 = (b & 0x80) == 0x80;
+
                     switch (b & 0xF)
                     {
-                        case 0x0:
-                            { //Begin
+                        case 0x0: //Begin
+                            {
                                 shouldClose = bit2;
+
                                 AddPathCommand('M', ref lastChar, sb);
                                 AddPathPoint(reader, sb, bit3, bit4);
                                 break;
                             }
-                        case 0x1:
-                            { //LineTo
+                        case 0x1: //LineTo
+                            {
                                 AddPathCommand('L', ref lastChar, sb);
                                 AddPathPoint(reader, sb, bit3, bit4);
                                 break;
                             }
-                        case 0x2:
-                            { //QuadraticBezierTo
+                        case 0x2: //QuadraticBezierTo
+                            {
                                 AddPathCommand('Q', ref lastChar, sb);
                                 AddPathPoint(reader, sb, bit3, bit4);
                                 AddPathPoint(reader, sb);
                                 break;
                             }
-                        case 0x3:
-                            { //BezierTo
+                        case 0x3: //BezierTo
+                            {
                                 AddPathCommand('C', ref lastChar, sb);
                                 AddPathPoint(reader, sb, bit3, bit4);
                                 AddPathPoint(reader, sb);
                                 AddPathPoint(reader, sb);
                                 break;
                             }
-                        case 0x4:
-                            { //PolyLineTo
+                        case 0x4: //PolyLineTo
+                            {
                                 bool isStroked = bit1;
                                 bool isSmooth = bit2;
                                 AddPathCommand('L', ref lastChar, sb);
                                 int count = reader.ReadInt32();
+
                                 for (int i = 0; i < count; i++)
                                     AddPathPoint(reader, sb);
                                 break;
                             }
-                        case 0x5:
-                            { //PolyQuadraticBezierTo
+                        case 0x5: //PolyQuadraticBezierTo
+                            {
                                 AddPathCommand('Q', ref lastChar, sb);
                                 int count = reader.ReadInt32();
                                 System.Diagnostics.Debug.Assert(count % 2 == 0);
@@ -3712,8 +3946,8 @@ namespace RubyerDemo.Utils
                                     AddPathPoint(reader, sb);
                                 break;
                             }
-                        case 0x6:
-                            { //PolyBezierTo
+                        case 0x6: //PolyBezierTo
+                            {
                                 AddPathCommand('C', ref lastChar, sb);
                                 int count = reader.ReadInt32();
                                 System.Diagnostics.Debug.Assert(count % 3 == 0);
@@ -3721,8 +3955,8 @@ namespace RubyerDemo.Utils
                                     AddPathPoint(reader, sb);
                                 break;
                             }
-                        case 0x7:
-                            { //ArcTo
+                        case 0x7: //ArcTo
+                            {
                                 double endPtX = ReadPathDouble(reader, bit3);
                                 double endPtY = ReadPathDouble(reader, bit4);
                                 byte arcInfo = reader.ReadByte();
@@ -3735,8 +3969,8 @@ namespace RubyerDemo.Utils
                                 lastChar = 'A';
                                 break;
                             }
-                        case 0x8:
-                            { //Closed
+                        case 0x8: //Closed
+                            {
                                 if (shouldClose)
                                 {
                                     sb.Append("Z");
@@ -3746,10 +3980,11 @@ namespace RubyerDemo.Utils
                                     // trim off the ending space
                                     sb.Remove(sb.Length - 1, 0);
                                 }
+
                                 return sb.ToString();
                             }
-                        case 0x9:
-                            { //FillRule
+                        case 0x9: //FillRule
+                            {
                                 sb.Insert(0, bit1 ? "F1 " : "F0 ");
                                 lastChar = 'F';
                                 break;
@@ -3784,6 +4019,7 @@ namespace RubyerDemo.Utils
             {
                 if (isInt)
                     return reader.ReadInt32() * 1E-06;
+
                 return reader.ReadCompressedDouble();
             }
         }

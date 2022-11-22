@@ -21,7 +21,7 @@
                                    Text="items 方式" />
                         <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
-                                              SelectedIndex="0" Height="400">
+                                              SelectedIndex="0">
                             <rubyer:HamburgerMenu.OptionsItemsSource>
                                 <rubyer:HamburgerMenuItemCollection>
                                     <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
