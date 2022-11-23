@@ -146,19 +146,19 @@
                                   IsEnabled="False" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="20 10">
-                        <CheckBox Height="30"
-                                  Margin="1"
+                        <CheckBox Margin="1"
                                   Content="默认"
+                                  FontSize="30"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource LightCheckBox}"
-                                  Height="25"
                                   Margin="1"
                                   Content="亮色"
+                                  FontSize="25"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource DarkCheckBox}"
-                                  Height="20"
                                   Margin="1"
                                   Content="暗色"
+                                  FontSize="20"
                                   IsChecked="True" />
                         <CheckBox Style="{DynamicResource AccentCheckBox}"
                                   Margin="1"

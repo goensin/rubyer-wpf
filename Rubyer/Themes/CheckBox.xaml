@@ -36,7 +36,6 @@
     <!--  默认多选框  -->
     <Style x:Key="RubyerCheckBox" TargetType="{x:Type CheckBox}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="Height" Value="16" />
         <Setter Property="BorderBrush" Value="{StaticResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
@@ -51,6 +50,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Grid x:Name="templateRoot"
+                          Height="{Binding ActualHeight, ElementName=contentPresenter}"
                           Background="Transparent"
                           SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
@@ -71,29 +71,27 @@
                                         CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </rubyer:Transition>
 
-                            <Viewbox>
-                                <Grid x:Name="markGrid">
-                                    <rubyer:Icon x:Name="checkedMark"
-                                                 Foreground="{TemplateBinding Background}"
-                                                 RenderTransformOrigin="0.5,0.5"
-                                                 Type="CheckFill">
-                                        <rubyer:Icon.RenderTransform>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="0" ScaleY="0" />
-                                                <SkewTransform />
-                                                <RotateTransform />
-                                                <TranslateTransform />
-                                            </TransformGroup>
-                                        </rubyer:Icon.RenderTransform>
-                                    </rubyer:Icon>
+                            <Grid x:Name="markGrid" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
+                                <rubyer:Icon x:Name="checkedMark"
+                                             Foreground="{TemplateBinding Background}"
+                                             RenderTransformOrigin="0.5,0.5"
+                                             Type="CheckFill">
+                                    <rubyer:Icon.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform ScaleX="0" ScaleY="0" />
+                                            <SkewTransform />
+                                            <RotateTransform />
+                                            <TranslateTransform />
+                                        </TransformGroup>
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
 
-                                    <rubyer:Icon x:Name="nullMark"
-                                                 Foreground="{TemplateBinding Background}"
-                                                 RenderTransformOrigin="0.5,0.5"
-                                                 Type="SubtractLine"
-                                                 Visibility="Collapsed" />
-                                </Grid>
-                            </Viewbox>
+                                <rubyer:Icon x:Name="nullMark"
+                                             Foreground="{TemplateBinding Background}"
+                                             RenderTransformOrigin="0.5,0.5"
+                                             Type="SubtractLine"
+                                             Visibility="Collapsed" />
+                            </Grid>
                         </Grid>
 
                         <ContentPresenter x:Name="contentPresenter"

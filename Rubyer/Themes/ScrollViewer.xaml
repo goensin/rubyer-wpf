@@ -85,8 +85,6 @@
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.99" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
@@ -134,9 +132,7 @@
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
 
-                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Type="ArrowLeftSLine" />
+                            <rubyer:Icon Type="ArrowLeftSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="rightButton"
@@ -151,9 +147,7 @@
                                       Cursor="Arrow"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
-                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Type="ArrowRightSLine" />
+                            <rubyer:Icon Type="ArrowRightSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="upButton"
@@ -167,9 +161,7 @@
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
-                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Type="ArrowUpSLine" />
+                            <rubyer:Icon Type="ArrowUpSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="downButton"
@@ -183,9 +175,7 @@
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
-                            <rubyer:Icon Width="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Height="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                         Type="ArrowDownSLine" />
+                            <rubyer:Icon Type="ArrowDownSLine" />
                         </RepeatButton>
                     </Grid>
                 </ControlTemplate>

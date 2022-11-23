@@ -99,11 +99,16 @@
                                     </Grid.ColumnDefinitions>
 
                                     <rubyer:Icon x:Name="icon"
-                                                 Width="32"
-                                                 Height="32"
                                                  HorizontalAlignment="Right"
                                                  VerticalAlignment="Center"
-                                                 Foreground="{TemplateBinding ThemeColorBrush}" />
+                                                 Foreground="{TemplateBinding ThemeColorBrush}">
+                                        <rubyer:Icon.Width>
+                                            <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                                <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
+                                                <Binding Source="18" />
+                                            </MultiBinding>
+                                        </rubyer:Icon.Width>
+                                    </rubyer:Icon>
 
                                     <ContentPresenter x:Name="contentPresenter"
                                                       Grid.Column="1"

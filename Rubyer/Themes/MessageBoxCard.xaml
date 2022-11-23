@@ -95,10 +95,15 @@
                                         </Grid.ColumnDefinitions>
                                         <rubyer:Icon x:Name="icon"
                                                      Grid.Column="0"
-                                                     Width="32"
-                                                     Height="32"
                                                      Margin="5"
-                                                     Foreground="{TemplateBinding ThemeColorBrush}" />
+                                                     Foreground="{TemplateBinding ThemeColorBrush}">
+                                            <rubyer:Icon.Width>
+                                                <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                                    <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
+                                                    <Binding Source="18" />
+                                                </MultiBinding>
+                                            </rubyer:Icon.Width>
+                                        </rubyer:Icon>
                                         <TextBlock Grid.Column="1"
                                                    Margin="5 0"
                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

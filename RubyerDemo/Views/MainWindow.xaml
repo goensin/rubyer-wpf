@@ -11,6 +11,7 @@
                      Width="1100"
                      Height="700"
                      d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
+                     FontSize="13"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
                      TitleShadow="True"
@@ -97,7 +98,8 @@
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.Header>
-                        <ToggleButton x:Name="darkToggleButton" Height="Auto"
+                        <ToggleButton x:Name="darkToggleButton"
+                                      Height="Auto"
                                       Padding="0"
                                       rubyer:ControlHelper.FocusedBrush="Transparent"
                                       Background="Transparent"

@@ -58,32 +58,35 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Border x:Name="radioButtonBorder"
-                                Margin="1 1 2 1"
+                                Margin="0 0 1 0"
                                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HalfOfDoubleConverter}}">
-                            <Viewbox>
-                                <Border x:Name="littleDot"
-                                        MinWidth="12"
-                                        MinHeight="12"
-                                        Background="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                        BorderBrush="Transparent"
-                                        BorderThickness="2"
-                                        CornerRadius="{TemplateBinding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}}"
-                                        RenderTransformOrigin="0.5,0.5">
-                                    <Border.RenderTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform ScaleX="0" ScaleY="0" />
-                                            <SkewTransform />
-                                            <RotateTransform />
-                                            <TranslateTransform />
-                                        </TransformGroup>
-                                    </Border.RenderTransform>
-                                </Border>
-                            </Viewbox>
+                            <rubyer:Icon x:Name="littleDot"
+                                         Margin="0"
+                                         Padding="0"
+                                         BorderBrush="Transparent"
+                                         Foreground="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                         RenderTransformOrigin="0.5,0.5"
+                                         Type="CheckboxBlankCircleFill">
+                                <rubyer:Icon.Width>
+                                    <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                        <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Source="1" />
+                                    </MultiBinding>
+                                </rubyer:Icon.Width>
+                                <rubyer:Icon.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0" ScaleY="0" />
+                                        <SkewTransform />
+                                        <RotateTransform />
+                                        <TranslateTransform />
+                                    </TransformGroup>
+                                </rubyer:Icon.RenderTransform>
+                            </rubyer:Icon>
                         </Border>
 
                         <ContentPresenter x:Name="contentPresenter"

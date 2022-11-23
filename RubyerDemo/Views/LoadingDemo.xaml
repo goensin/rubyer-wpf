@@ -45,7 +45,7 @@
                     <rubyer:Loading Style="{StaticResource DotLoading}" Margin="10" />
                     <rubyer:Loading Style="{StaticResource DotLoading}"
                                     Margin="10"
-                                    Diameter="30"
+                                    Diameter="50"
                                     FocusedBrush="{DynamicResource Accent}"
                                     StrokeThickness="5" />
                     <rubyer:Loading Style="{StaticResource DotLoading}"
