@@ -66,8 +66,6 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HalfOfDoubleConverter}}">
                             <rubyer:Icon x:Name="littleDot"
-                                         Margin="0"
-                                         Padding="0"
                                          BorderBrush="Transparent"
                                          Foreground="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                          RenderTransformOrigin="0.5,0.5"
@@ -75,7 +73,7 @@
                                 <rubyer:Icon.Width>
                                     <MultiBinding Converter="{StaticResource MathAddConverter}">
                                         <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
-                                        <Binding Source="1" />
+                                        <Binding Source="2" />
                                     </MultiBinding>
                                 </rubyer:Icon.Width>
                                 <rubyer:Icon.RenderTransform>

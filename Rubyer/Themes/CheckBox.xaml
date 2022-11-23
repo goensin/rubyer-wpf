@@ -50,9 +50,14 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CheckBox}">
                     <Grid x:Name="templateRoot"
-                          Height="{Binding ActualHeight, ElementName=contentPresenter}"
                           Background="Transparent"
                           SnapsToDevicePixels="True">
+                        <Grid.Height>
+                            <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                <Binding Path="FontSize" RelativeSource="{RelativeSource AncestorType=CheckBox}" />
+                                <Binding Source="5" />
+                            </MultiBinding>
+                        </Grid.Height>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />

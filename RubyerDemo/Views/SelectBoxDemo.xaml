@@ -23,12 +23,6 @@
                     <RadioButton x:Name="night"
                                  Margin="10 0"
                                  GroupName="selete">
-                        <RadioButton.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="MoonFill" />
-                                <TextBlock Text="黑夜" />
-                            </StackPanel>
-                        </RadioButton.Content>
                     </RadioButton>
                     <RadioButton Margin="10 0"
                                  GroupName="selete"
@@ -136,7 +130,7 @@
                                   rubyer:ToggleButtonHelper.CheckedContent="选中"
                                   Content="未选中"
                                   IsChecked="{Binding SelectedPoetry.IsChecked}" />
-                        <CheckBox Margin="1" Content="选项二" />
+                        <CheckBox Margin="1" />
                         <CheckBox Margin="1" Content="选项三" />
                         <CheckBox Margin="1"
                                   Content="未选择"
