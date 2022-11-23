@@ -97,7 +97,7 @@
                 </MenuItem>
                 <MenuItem>
                     <MenuItem.Header>
-                        <ToggleButton Height="Auto"
+                        <ToggleButton x:Name="darkToggleButton" Height="Auto"
                                       Padding="0"
                                       rubyer:ControlHelper.FocusedBrush="Transparent"
                                       Background="Transparent"
