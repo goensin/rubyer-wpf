@@ -28,14 +28,7 @@ namespace RubyerDemo.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (ButtonHelper.GetLoading(loadingButton))
-            {
-                ButtonHelper.SetLoading(loadingButton, false);
-            }
-            else
-            {
-                ButtonHelper.SetLoading(loadingButton, true);
-            }
+            ButtonHelper.SetLoading(loadingButton, !ButtonHelper.GetLoading(loadingButton));
         }
     }
 }

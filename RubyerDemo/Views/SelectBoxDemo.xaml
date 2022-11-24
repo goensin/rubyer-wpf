@@ -13,16 +13,18 @@
                                  Margin="10 0"
                                  GroupName="selete"
                                  IsChecked="{Binding IsChecked, ElementName=nightMode, Converter={StaticResource BooleanToInverseConverter}}">
-                        <RadioButton.Content>
-                            <StackPanel Orientation="Horizontal">
-                                <rubyer:Icon Type="SunFill" />
-                                <TextBlock Text="白天" />
-                            </StackPanel>
-                        </RadioButton.Content>
+                        <StackPanel Orientation="Horizontal">
+                            <rubyer:Icon Type="SunFill" />
+                            <TextBlock Text="白天" />
+                        </StackPanel>
                     </RadioButton>
                     <RadioButton x:Name="night"
                                  Margin="10 0"
                                  GroupName="selete">
+                        <StackPanel Orientation="Horizontal">
+                            <rubyer:Icon Type="MoonFill" />
+                            <TextBlock Text="夜晚" />
+                        </StackPanel>
                     </RadioButton>
                     <RadioButton Margin="10 0"
                                  GroupName="selete"

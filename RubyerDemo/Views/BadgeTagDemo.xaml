@@ -20,7 +20,9 @@
                                 经验+1
                             </Button>
                         </rubyer:Badge>
-                        <rubyer:Badge Margin="10" Text="11">
+                        <rubyer:Badge Margin="10"
+                                      BadgeFontSize="20"
+                                      Text="20">
                             <Button Style="{DynamicResource TextButton}"
                                     Width="60"
                                     BorderThickness="1">
@@ -36,12 +38,12 @@
                         </rubyer:Badge>
                     </StackPanel>
                     <StackPanel Margin="5" Orientation="Horizontal">
-                        <rubyer:Badge Margin="10" IsShowLittleDot="True">
+                        <rubyer:Badge Margin="10">
                             <Button Width="100">更新版本</Button>
                         </rubyer:Badge>
                         <rubyer:Badge Margin="10"
-                                      Background="{StaticResource Success}"
-                                      IsShowLittleDot="True">
+                                      BadgeBrush="{StaticResource Success}"
+                                      BadgeSize="30">
                             <Button Style="{DynamicResource TextButton}"
                                     Width="100"
                                     BorderThickness="1">

@@ -13,8 +13,10 @@ namespace Rubyer.Converters
         /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            double verOffset = ((double)values[0] - 10) * -1;
-            double horOffset = ((double)values[1] - 10) * -1;
+            var height = (double)values[0];
+            var width = (double)values[1];
+            double verOffset = (height / 2) * -1;
+            double horOffset = (width - (height / 2)) * -1;
             return new Thickness(0, verOffset, horOffset, 0);
         }
 

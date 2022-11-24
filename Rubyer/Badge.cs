@@ -28,6 +28,21 @@ namespace Rubyer
         #region 属性
 
         /// <summary>
+        /// 标记颜色
+        /// </summary>
+        public static readonly DependencyProperty BadgeBrushProperty =
+            DependencyProperty.Register("BadgeBrush", typeof(Brush), typeof(Badge), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// 标记颜色
+        /// </summary>
+        public Brush BadgeBrush
+        {
+            get { return (Brush)GetValue(BadgeBrushProperty); }
+            set { SetValue(BadgeBrushProperty, value); }
+        }
+
+        /// <summary>
         /// 显示文本
         /// </summary>
         public static readonly DependencyProperty TextProperty =
@@ -43,18 +58,33 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 只显示点
+        /// 标记尺寸
         /// </summary>
-        public static readonly DependencyProperty IsShowLittleDotProperty =
-            DependencyProperty.Register("IsShowLittleDot", typeof(bool), typeof(Badge), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty BadgeSizeProperty =
+            DependencyProperty.Register("BadgeSize", typeof(double), typeof(Badge), new PropertyMetadata(default(double)));
 
         /// <summary>
-        /// 只显示点
+        /// 标记尺寸
         /// </summary>
-        public bool IsShowLittleDot
+        public double BadgeSize
         {
-            get { return (bool)GetValue(IsShowLittleDotProperty); }
-            set { SetValue(IsShowLittleDotProperty, value); }
+            get { return (double)GetValue(BadgeSizeProperty); }
+            set { SetValue(BadgeSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标记字体尺寸
+        /// </summary>
+        public static readonly DependencyProperty BadgeFontSizeProperty =
+            DependencyProperty.Register("BadgeFontSize", typeof(double), typeof(Badge), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 标记字体尺寸
+        /// </summary>
+        public double BadgeFontSize
+        {
+            get { return (double)GetValue(BadgeFontSizeProperty); }
+            set { SetValue(BadgeFontSizeProperty, value); }
         }
 
         /// <summary>

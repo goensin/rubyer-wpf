@@ -3,7 +3,6 @@
                     xmlns:converter="clr-namespace:Rubyer.Converters"
                     xmlns:rubyer="clr-namespace:Rubyer">
 
-
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
             <converter:BadgeOffsetConverter x:Key="BadgeOffsetConverter" />
@@ -12,24 +11,26 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerBadge" TargetType="{x:Type rubyer:Badge}">
-        <Setter Property="Background" Value="{DynamicResource Error}" />
+        <Setter Property="BadgeBrush" Value="{DynamicResource Error}" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BadgeFontSize" Value="11" />
+        <Setter Property="BadgeSize" Value="20" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Badge}">
                     <Grid>
                         <Border x:Name="border"
-                                Height="20"
-                                MinWidth="20"
+                                MinWidth="{TemplateBinding BadgeSize}"
+                                MinHeight="{TemplateBinding BadgeSize}"
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
                                 Panel.ZIndex="1"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="10"
+                                Background="{TemplateBinding BadgeBrush}"
+                                CornerRadius="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}"
                                 RenderTransformOrigin="0.5 0.5">
                             <Border.RenderTransform>
                                 <ScaleTransform />
@@ -40,35 +41,24 @@
                                     <Binding ElementName="border" Path="ActualWidth" />
                                 </MultiBinding>
                             </Border.Margin>
-                            <TextBlock Margin="5 2"
+                            <TextBlock x:Name="text"
+                                       Margin="5 2"
                                        HorizontalAlignment="Center"
-                                       FontSize="11"
+                                       FontSize="{TemplateBinding BadgeFontSize}"
                                        Text="{TemplateBinding Text}" />
                         </Border>
-
-                        <Border x:Name="littleDot"
-                                Width="10"
-                                Height="10"
-                                Margin="0 -3 -3 0"
-                                HorizontalAlignment="Right"
-                                VerticalAlignment="Top"
-                                Panel.ZIndex="1"
-                                Background="{TemplateBinding Background}"
-                                CornerRadius="5"
-                                Visibility="Collapsed" />
 
                         <ContentPresenter Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsShowLittleDot" Value="True">
-                            <Setter TargetName="border" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="littleDot" Property="Visibility" Value="Visible" />
-                        </Trigger>
+                        <DataTrigger Binding="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
+                            <Setter TargetName="text" Property="Visibility" Value="Collapsed" />
+                            <Setter Property="BadgeSize" Value="10" />
+                        </DataTrigger>
                         <Trigger Property="IsHidden" Value="True">
                             <Setter TargetName="border" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="littleDot" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                         <EventTrigger RoutedEvent="TextChanged">
                             <BeginStoryboard>
