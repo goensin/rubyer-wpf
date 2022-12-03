@@ -146,24 +146,25 @@ namespace Rubyer
                     }
                 };
 
-                control.Loaded += (sender, arg) =>
+
+                if (control.IsLoaded)
                 {
-                    if (control.Template.FindName("clearButton", control) is Button clearButton)
+                    var clearButton = GetClearButton(control);
+                    SetClickToClear(control, handle, clearButton);
+                }
+                else
+                {
+                    control.Loaded += (sender, arg) =>
                     {
-                        if (GetIsClearable(control))
-                        {
-                            clearButton.Click += handle;
-                        }
-                        else
-                        {
-                            clearButton.Click -= handle;
-                        }
-                    }
-                };
+                        var clearButton = GetClearButton(control);
+                        SetClickToClear(control, handle, clearButton);
+                    };
+                }
 
                 control.Unloaded += (sender, arg) =>
                 {
-                    if (control.Template.FindName("clearButton", control) is Button clearButton)
+                    Button clearButton = GetClearButton(control);
+                    if (clearButton != null)
                     {
                         if (GetIsClearable(control))
                         {
@@ -171,6 +172,24 @@ namespace Rubyer
                         }
                     }
                 };
+            }
+        }
+
+        private static Button GetClearButton(Control control)
+            => control.Template.FindName("clearButton", control) as Button;
+
+        private static void SetClickToClear(Control control, RoutedEventHandler handle, Button clearButton)
+        {
+            if (clearButton != null)
+            {
+                if (GetIsClearable(control))
+                {
+                    clearButton.Click += handle;
+                }
+                else
+                {
+                    clearButton.Click -= handle;
+                }
             }
         }
     }

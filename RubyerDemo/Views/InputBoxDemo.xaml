@@ -27,7 +27,7 @@
                     <TextBox Style="{DynamicResource AccentTextBox}"
                              Width="150"
                              rubyer:ControlHelper.CornerRadius="14"
-                             rubyer:InputBoxHelper.IsClearable="True"
+                             rubyer:InputBoxHelper.IsClearable="False"
                              rubyer:InputBoxHelper.Watermark="可清除" />
                 </StackPanel>
             </GroupBox>
