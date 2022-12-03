@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -94,7 +95,7 @@ namespace Rubyer
         /// 显示箭头按钮
         /// </summary>
         public static readonly DependencyProperty ShowArrowButtonProperty = DependencyProperty.RegisterAttached(
-            "ShowArrowButton", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(default(bool)));
+            "ShowArrowButton", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Sets the show arrow button.
@@ -103,7 +104,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetShowArrowButton(DependencyObject element, bool value)
         {
-            element.SetValue(ShowArrowButtonProperty, value);
+            element.SetValue(ShowArrowButtonProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -240,7 +241,7 @@ namespace Rubyer
         /// 是否显示动画
         /// </summary>
         public static readonly DependencyProperty IsOnlyArrowProperty = DependencyProperty.RegisterAttached(
-            "IsOnlyArrow", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(default(bool), OnIsOnlyArrowChanged));
+            "IsOnlyArrow", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsOnlyArrowChanged));
 
         private static void OnIsOnlyArrowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -329,7 +330,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsOnlyArrow(DependencyObject element, bool value)
         {
-            element.SetValue(IsOnlyArrowProperty, value);
+            element.SetValue(IsOnlyArrowProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -343,26 +344,16 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 显示箭头按钮
+        /// 箭头按钮大小
         /// </summary>
         public static readonly DependencyProperty ArrowIconSizeProperty = DependencyProperty.RegisterAttached(
             "ArrowIconSize", typeof(double), typeof(ScrollViewerHelper), new PropertyMetadata(default(double)));
 
-        /// <summary>
-        /// Sets the show arrow button.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="value">If true, value.</param>
         public static void SetArrowIconSize(DependencyObject element, double value)
         {
             element.SetValue(ArrowIconSizeProperty, value);
         }
 
-        /// <summary>
-        /// Gets the show arrow button.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns>A bool.</returns>
         public static double GetArrowIconSize(DependencyObject element)
         {
             return (double)element.GetValue(ArrowIconSizeProperty);

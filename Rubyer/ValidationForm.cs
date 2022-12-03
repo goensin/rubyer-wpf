@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -19,7 +20,7 @@ namespace Rubyer
         }
 
         internal static readonly DependencyPropertyKey IsValidPropertyKey = DependencyProperty.RegisterReadOnly(
-             "IsValid", typeof(bool), typeof(ValidationForm), new FrameworkPropertyMetadata(true));
+             "IsValid", typeof(bool), typeof(ValidationForm), new FrameworkPropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
         /// 是否有效
@@ -32,7 +33,7 @@ namespace Rubyer
         public bool IsValid
         {
             get { return (bool)GetValue(IsValidProperty); }
-            private set { SetValue(IsValidPropertyKey, value); }
+            private set { SetValue(IsValidPropertyKey, BooleanBoxes.Box(value)); }
         }
 
         internal static readonly DependencyPropertyKey ErrorsPropertyKey = DependencyProperty.RegisterReadOnly(

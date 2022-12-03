@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -100,7 +101,7 @@ namespace Rubyer
         /// 拖拽时显示当前值
         /// </summary>
         public static readonly DependencyProperty DraggingShowValueProperty = DependencyProperty.RegisterAttached(
-            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(default(bool), OnDraggingShowValueChanged));
+            "DraggingShowValue", typeof(bool), typeof(SliderHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnDraggingShowValueChanged));
 
         private static void OnDraggingShowValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -155,7 +156,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetDraggingShowValue(DependencyObject element, bool value)
         {
-            element.SetValue(DraggingShowValueProperty, value);
+            element.SetValue(DraggingShowValueProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,7 +113,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool), OnIsShwowChanged));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(Transition), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShwowChanged));
 
         /// <summary>
         /// 是否显示
@@ -120,14 +121,14 @@ namespace Rubyer
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
+            set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 每次加载显示动画
         /// </summary>
         public static readonly DependencyProperty PlayEveryTimeProperty =
-            DependencyProperty.Register("PlayEveryTime", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("PlayEveryTime", typeof(bool), typeof(Transition), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 每次加载显示动画
@@ -135,7 +136,7 @@ namespace Rubyer
         public bool PlayEveryTime
         {
             get { return (bool)GetValue(PlayEveryTimeProperty); }
-            set { SetValue(PlayEveryTimeProperty, value); }
+            set { SetValue(PlayEveryTimeProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
@@ -251,7 +252,7 @@ namespace Rubyer
         /// 是否淡入淡出
         /// </summary>
         public static readonly DependencyProperty IsFadeProperty =
-            DependencyProperty.Register("IsFade", typeof(bool), typeof(Transition), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsFade", typeof(bool), typeof(Transition), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否淡入淡出
@@ -259,7 +260,7 @@ namespace Rubyer
         public bool IsFade
         {
             get { return (bool)GetValue(IsFadeProperty); }
-            set { SetValue(IsFadeProperty, value); }
+            set { SetValue(IsFadeProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Rubyer
@@ -88,7 +89,7 @@ namespace Rubyer
         /// 是否第一个
         /// </summary>
         public static readonly DependencyProperty IsFirstProperty =
-            DependencyProperty.Register("IsFirst", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsFirst", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否第一个
@@ -96,14 +97,14 @@ namespace Rubyer
         public bool IsFirst
         {
             get { return (bool)GetValue(IsFirstProperty); }
-            set { SetValue(IsFirstProperty, value); }
+            set { SetValue(IsFirstProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否最后一个
         /// </summary>
         public static readonly DependencyProperty IsLastProperty =
-            DependencyProperty.Register("IsLast", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsLast", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否最后一个
@@ -111,14 +112,14 @@ namespace Rubyer
         public bool IsLast
         {
             get { return (bool)GetValue(IsLastProperty); }
-            set { SetValue(IsLastProperty, value); }
+            set { SetValue(IsLastProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否等待状态
         /// </summary>
         public static readonly DependencyProperty IsWaitingProperty =
-            DependencyProperty.Register("IsWaiting", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsWaiting", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否等待状态
@@ -126,14 +127,14 @@ namespace Rubyer
         public bool IsWaiting
         {
             get { return (bool)GetValue(IsWaitingProperty); }
-            set { SetValue(IsWaitingProperty, value); }
+            set { SetValue(IsWaitingProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否进行中状态
         /// </summary>
         public static readonly DependencyProperty IsUnderwayProperty =
-            DependencyProperty.Register("IsUnderway", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsUnderway", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否进行中状态
@@ -141,14 +142,14 @@ namespace Rubyer
         public bool IsUnderway
         {
             get { return (bool)GetValue(IsUnderwayProperty); }
-            set { SetValue(IsUnderwayProperty, value); }
+            set { SetValue(IsUnderwayProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否已完成状态
         /// </summary>
         public static readonly DependencyProperty IsCompletedProperty =
-            DependencyProperty.Register("IsCompleted", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsCompleted", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否已完成状态
@@ -156,14 +157,14 @@ namespace Rubyer
         public bool IsCompleted
         {
             get { return (bool)GetValue(IsCompletedProperty); }
-            set { SetValue(IsCompletedProperty, value); }
+            set { SetValue(IsCompletedProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否结束状态
         /// </summary>
         public static readonly DependencyProperty IsFinishedProperty =
-            DependencyProperty.Register("IsFinished", typeof(bool), typeof(StepBarItem), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsFinished", typeof(bool), typeof(StepBarItem), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否结束成状态
@@ -171,7 +172,7 @@ namespace Rubyer
         public bool IsFinished
         {
             get { return (bool)GetValue(IsFinishedProperty); }
-            set { SetValue(IsFinishedProperty, value); }
+            set { SetValue(IsFinishedProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

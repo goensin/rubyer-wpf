@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -87,7 +88,7 @@ namespace Rubyer
         /// 是否重命名中
         /// </summary>
         public static readonly DependencyProperty IsRenamingProperty = DependencyProperty.Register(
-            "IsRenaming", typeof(bool), typeof(Renamer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsRenamingChanged));
+            "IsRenaming", typeof(bool), typeof(Renamer), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsRenamingChanged));
 
         /// <summary>
         /// 是否重命名中
@@ -95,7 +96,7 @@ namespace Rubyer
         public bool IsRenaming
         {
             get { return (bool)GetValue(IsRenamingProperty); }
-            set { SetValue(IsRenamingProperty, value); }
+            set { SetValue(IsRenamingProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

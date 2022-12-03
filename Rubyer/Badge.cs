@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -91,7 +92,7 @@ namespace Rubyer
         /// 是否隐藏
         /// </summary>
         public static readonly DependencyProperty IsHiddenProperty =
-            DependencyProperty.Register("IsHidden", typeof(bool), typeof(Badge), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsHidden", typeof(bool), typeof(Badge), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否隐藏
@@ -99,7 +100,7 @@ namespace Rubyer
         public bool IsHidden
         {
             get { return (bool)GetValue(IsHiddenProperty); }
-            set { SetValue(IsHiddenProperty, value); }
+            set { SetValue(IsHiddenProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion 属性

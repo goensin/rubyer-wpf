@@ -8,6 +8,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Reflection;
 using System;
+using Rubyer.Commons.KnownBoxes;
 
 namespace Rubyer
 {
@@ -20,7 +21,7 @@ namespace Rubyer
         /// 是否为表头全选 CheckBox
         /// </summary>
         internal static readonly DependencyProperty IsHeaderSelectCheckBoxProperty = DependencyProperty.RegisterAttached(
-            "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnIsHeaderSelectCheckBoxChanged));
+            "IsHeaderSelectCheckBox", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsHeaderSelectCheckBoxChanged));
 
         /// <summary>
         /// Sets the is header select check box.
@@ -29,7 +30,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         internal static void SetIsHeaderSelectCheckBox(DependencyObject element, bool value)
         {
-            element.SetValue(IsHeaderSelectCheckBoxProperty, value);
+            element.SetValue(IsHeaderSelectCheckBoxProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace Rubyer
         /// 单击直接编辑
         /// </summary>
         public static readonly DependencyProperty ClickToEditProperty = DependencyProperty.RegisterAttached(
-            "ClickToEdit", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(default(bool), OnClickToEditChanged));
+            "ClickToEdit", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnClickToEditChanged));
 
         /// <summary>
         /// Sets the click to edit.
@@ -116,7 +117,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetClickToEdit(DependencyObject element, bool value)
         {
-            element.SetValue(ClickToEditProperty, value);
+            element.SetValue(ClickToEditProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -267,11 +268,11 @@ namespace Rubyer
         /// 应用 DataAnnotations 特性内容
         /// </summary>
         public static readonly DependencyProperty ApplyDataAnnotationsProperty = DependencyProperty.RegisterAttached(
-            "ApplyDataAnnotations", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(false, OnApplyDataAnnotationsChanged));
+            "ApplyDataAnnotations", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnApplyDataAnnotationsChanged));
 
         public static void SetApplyDataAnnotations(DependencyObject element, bool value)
         {
-            element.SetValue(ApplyDataAnnotationsProperty, value);
+            element.SetValue(ApplyDataAnnotationsProperty, BooleanBoxes.Box(value));
         }
 
         public static bool GetApplyDataAnnotations(DependencyObject element)

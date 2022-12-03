@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using Rubyer.Commons.KnownBoxes;
 
 namespace Rubyer
 {
@@ -124,7 +125,7 @@ namespace Rubyer
         /// 是否可清除
         /// </summary>
         public static readonly DependencyProperty IsClearableProperty =
-            DependencyProperty.Register("IsClearable", typeof(bool), typeof(NotificationCard), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsClearable", typeof(bool), typeof(NotificationCard), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否可清除
@@ -132,14 +133,14 @@ namespace Rubyer
         public bool IsClearable
         {
             get { return (bool)GetValue(IsClearableProperty); }
-            set { SetValue(IsClearableProperty, value); }
+            set { SetValue(IsClearableProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(NotificationCard), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(NotificationCard), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示
@@ -147,7 +148,7 @@ namespace Rubyer
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
+            set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

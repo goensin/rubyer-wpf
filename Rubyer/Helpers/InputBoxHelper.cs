@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Rubyer
@@ -64,7 +65,7 @@ namespace Rubyer
         /// 是否显示清除按钮
         /// </summary>
         public static readonly DependencyProperty IsClearableProperty =
-            DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(InputBoxHelper), new PropertyMetadata(false, OnIsClearbleChanged));
+            DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(InputBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsClearbleChanged));
 
         /// <summary>
         /// Gets the is clearable.
@@ -83,7 +84,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsClearable(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsClearableProperty, value);
+            obj.SetValue(IsClearableProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>

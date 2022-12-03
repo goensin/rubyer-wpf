@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Windows;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -220,7 +221,7 @@ namespace Rubyer
         /// 是否聚焦
         /// </summary>
         public static readonly DependencyProperty IsKeyBoardFocusedProperty = DependencyProperty.RegisterAttached(
-            "IsKeyBoardFocused", typeof(bool), typeof(ControlHelper), new PropertyMetadata(false));
+            "IsKeyBoardFocused", typeof(bool), typeof(ControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Gets the is key board focused.
@@ -239,7 +240,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsKeyBoardFocused(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsKeyBoardFocusedProperty, value);
+            obj.SetValue(IsKeyBoardFocusedProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>

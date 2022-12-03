@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +16,7 @@ namespace Rubyer
         /// 是否可以绑定密码
         /// </summary>
         public static readonly DependencyProperty IsBindableProperty = DependencyProperty.RegisterAttached(
-            "IsBindable", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(default(bool), OnIsBindableChanaged));
+            "IsBindable", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsBindableChanaged));
 
         /// <summary>
         /// Gets the is bindable.
@@ -34,7 +35,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsBindable(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsBindableProperty, value);
+            obj.SetValue(IsBindableProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Rubyer
         /// 是否显示切换密码可见按钮
         /// </summary>
         public static readonly DependencyProperty ShowSwitchButtonProperty = DependencyProperty.RegisterAttached(
-            "ShowSwitchButton", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(false, SwitchPasswordShow));
+            "ShowSwitchButton", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, SwitchPasswordShow));
 
         /// <summary>
         /// Gets the show switch button.
@@ -86,14 +87,14 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetShowSwitchButton(DependencyObject obj, bool value)
         {
-            obj.SetValue(ShowSwitchButtonProperty, value);
+            obj.SetValue(ShowSwitchButtonProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
         /// 显示密码
         /// </summary>
         public static readonly DependencyProperty ShowPasswordProperty = DependencyProperty.RegisterAttached(
-            "ShowPassword", typeof(bool), typeof(PasswordBoxHelper));
+            "ShowPassword", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Gets the show password.
@@ -112,7 +113,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetShowPassword(DependencyObject obj, bool value)
         {
-            obj.SetValue(ShowPasswordProperty, value);
+            obj.SetValue(ShowPasswordProperty, BooleanBoxes.Box(value));
         }
 
         private static void OnIsBindableChanaged(DependencyObject d, DependencyPropertyChangedEventArgs e)

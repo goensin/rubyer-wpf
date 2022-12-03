@@ -26,7 +26,7 @@ namespace Rubyer
             // see "https://www.addictivetips.com/windows-tips/how-to-enable-the-dark-theme-in-windows-10/"
             object registryValueObject = Registry.CurrentUser.OpenSubKey(RegistryKeyPath)?.GetValue(RegistryValueName);
             if (registryValueObject is null) return false;
-            return (int)registryValueObject > 0 ? false : true;
+            return (int)registryValueObject <= 0;
         }
 
         private static void ApplyTheme(bool isDark)

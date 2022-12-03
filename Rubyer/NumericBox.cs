@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -184,7 +185,7 @@ namespace Rubyer
         /// 是否显示增减按钮
         /// </summary>
         public static readonly DependencyProperty ShowButtonProperty = DependencyProperty.Register(
-           "ShowButton", typeof(bool), typeof(NumericBox), new PropertyMetadata(default(bool)));
+           "ShowButton", typeof(bool), typeof(NumericBox), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示增减按钮
@@ -192,7 +193,7 @@ namespace Rubyer
         public bool ShowButton
         {
             get { return (bool)GetValue(ShowButtonProperty); }
-            set { SetValue(ShowButtonProperty, value); }
+            set { SetValue(ShowButtonProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
@@ -259,7 +260,7 @@ namespace Rubyer
         /// 只读
         /// </summary>
         public static readonly DependencyProperty IsReadOnlyProperty = DependencyProperty.Register(
-           "IsReadOnly", typeof(bool), typeof(NumericBox), new PropertyMetadata(false));
+           "IsReadOnly", typeof(bool), typeof(NumericBox), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 只读
@@ -267,7 +268,7 @@ namespace Rubyer
         public bool IsReadOnly
         {
             get { return (bool)GetValue(IsReadOnlyProperty); }
-            set { SetValue(IsReadOnlyProperty, value); }
+            set { SetValue(IsReadOnlyProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion propteries

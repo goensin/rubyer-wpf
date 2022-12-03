@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -246,7 +247,7 @@ namespace Rubyer
         /// 是否显示关闭按钮
         /// </summary>
         public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(
-            "IsShowCloseButton", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            "IsShowCloseButton", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// 是否显示关闭按钮
@@ -254,14 +255,14 @@ namespace Rubyer
         public bool IsShowCloseButton
         {
             get { return (bool)GetValue(IsShowCloseButtonProperty); }
-            set { SetValue(IsShowCloseButtonProperty, value); }
+            set { SetValue(IsShowCloseButtonProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否 esc 键关闭弹窗 (点击空白关闭)
         /// </summary>
         public static readonly DependencyProperty IsEscKeyToCloseProperty = DependencyProperty.Register(
-            "IsEscKeyToClose", typeof(bool), typeof(DialogContainer), new PropertyMetadata(default(bool), OnIsEscKeyToCloseChanged));
+            "IsEscKeyToClose", typeof(bool), typeof(DialogContainer), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsEscKeyToCloseChanged));
 
         private static void OnIsEscKeyToCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -291,14 +292,14 @@ namespace Rubyer
         public bool IsEscKeyToClose
         {
             get { return (bool)GetValue(IsEscKeyToCloseProperty); }
-            set { SetValue(IsEscKeyToCloseProperty, value); }
+            set { SetValue(IsEscKeyToCloseProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty = DependencyProperty.Register(
-            "IsShow", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(default(bool), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
+            "IsShow", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
 
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -316,7 +317,7 @@ namespace Rubyer
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
+            set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
@@ -338,7 +339,7 @@ namespace Rubyer
         /// 关闭完成
         /// </summary>
         public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
-            "IsClosed", typeof(bool), typeof(DialogContainer), new PropertyMetadata(default(bool)));
+            "IsClosed", typeof(bool), typeof(DialogContainer), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 关闭完成
@@ -346,7 +347,7 @@ namespace Rubyer
         public bool IsClosed
         {
             get { return (bool)GetValue(IsClosedProperty); }
-            set { SetValue(IsClosedProperty, value); }
+            set { SetValue(IsClosedProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion 依赖属性

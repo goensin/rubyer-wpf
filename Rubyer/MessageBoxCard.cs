@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -140,7 +141,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示
@@ -148,7 +149,7 @@ namespace Rubyer
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
+            set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
@@ -230,7 +231,7 @@ namespace Rubyer
         /// 是否显示阴影
         /// </summary>
         public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.Register(
-            "ShowShadow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(default(bool)));
+            "ShowShadow", typeof(bool), typeof(MessageBoxCard), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示阴影
@@ -238,7 +239,7 @@ namespace Rubyer
         public bool ShowShadow
         {
             get { return (bool)GetValue(ShowShadowProperty); }
-            set { SetValue(ShowShadowProperty, value); }
+            set { SetValue(ShowShadowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

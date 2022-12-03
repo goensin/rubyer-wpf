@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,7 +19,7 @@ namespace Rubyer
         /// 是否显示清除按钮
         /// </summary>
         public static readonly DependencyProperty IsClearableProperty =
-            DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsClearbleChanged));
+            DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsClearbleChanged));
 
         /// <summary>
         /// Gets the is clearable.
@@ -37,7 +38,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsClearable(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsClearableProperty, value);
+            obj.SetValue(IsClearableProperty, BooleanBoxes.Box(value));
         }
 
         private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -131,7 +132,7 @@ namespace Rubyer
         /// 选中动画
         /// </summary>
         public static readonly DependencyProperty IsAnimationProperty =
-            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(false, OnIsAnimationChanged));
+            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsAnimationChanged));
 
         /// <summary>
         /// Gets the is animation.
@@ -150,7 +151,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsAnimation(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsAnimationProperty, value);
+            obj.SetValue(IsAnimationProperty, BooleanBoxes.Box(value));
         }
 
         private static void OnIsAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

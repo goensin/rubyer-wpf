@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -103,7 +104,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(default(bool)));
+           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示
@@ -111,14 +112,14 @@ namespace Rubyer
         public bool IsShow
         {
             get { return (bool)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
+            set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否关闭后
         /// </summary>
         public static readonly DependencyProperty IsClosedProperty =
-           DependencyProperty.Register("IsClosed", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(default(bool)));
+           DependencyProperty.Register("IsClosed", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否关闭后
@@ -126,7 +127,7 @@ namespace Rubyer
         public bool IsClosed
         {
             get { return (bool)GetValue(IsClosedProperty); }
-            set { SetValue(IsClosedProperty, value); }
+            set { SetValue(IsClosedProperty, BooleanBoxes.Box(value)); }
         }
 
         private void ContentPresenter_PreviewKeyDown(object sender, KeyEventArgs e)

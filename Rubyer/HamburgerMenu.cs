@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,7 +49,7 @@ namespace Rubyer
         /// 是否展开菜单
         /// </summary>
         public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(
-            "IsExpanded", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(default(bool)));
+            "IsExpanded", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否展开菜单
@@ -56,7 +57,7 @@ namespace Rubyer
         public bool IsExpanded
         {
             get { return (bool)GetValue(IsExpandedProperty); }
-            set { SetValue(IsExpandedProperty, value); }
+            set { SetValue(IsExpandedProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
@@ -108,7 +109,7 @@ namespace Rubyer
         /// 是否显示汉堡包按钮
         /// </summary>
         public static readonly DependencyProperty IsShowHamburgerButtonProperty = DependencyProperty.Register(
-            "IsShowHamburgerButton", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(true));
+            "IsShowHamburgerButton", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
         /// 是否显示汉堡包按钮
@@ -116,14 +117,14 @@ namespace Rubyer
         public bool IsShowHamburgerButton
         {
             get { return (bool)GetValue(IsShowHamburgerButtonProperty); }
-            set { SetValue(IsShowHamburgerButtonProperty, value); }
+            set { SetValue(IsShowHamburgerButtonProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否显示小竖条
         /// </summary>
         public static readonly DependencyProperty IsShowLittleBarProperty = DependencyProperty.Register(
-            "IsShowLittleBar", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(true));
+            "IsShowLittleBar", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
         /// 是否显示小竖条
@@ -131,7 +132,7 @@ namespace Rubyer
         public bool IsShowLittleBar
         {
             get { return (bool)GetValue(IsShowLittleBarProperty); }
-            set { SetValue(IsShowLittleBarProperty, value); }
+            set { SetValue(IsShowLittleBarProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion properties

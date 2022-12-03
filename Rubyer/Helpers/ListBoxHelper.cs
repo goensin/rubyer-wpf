@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -15,7 +16,7 @@ namespace Rubyer
         /// 选中动画
         /// </summary>
         public static readonly DependencyProperty IsAnimationProperty =
-            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(false, OnIsAnimationChanged));
+            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsAnimationChanged));
 
         private static void OnIsAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -97,14 +98,14 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsAnimation(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsAnimationProperty, value);
+            obj.SetValue(IsAnimationProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
         /// 选中动画
         /// </summary>
         public static readonly DependencyProperty IsShowLittleBarProperty =
-            DependencyProperty.RegisterAttached("IsShowLittleBar", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("IsShowLittleBar", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Gets the is ShowLittleBar.
@@ -123,7 +124,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsShowLittleBar(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsShowLittleBarProperty, value);
+            obj.SetValue(IsShowLittleBarProperty, BooleanBoxes.Box(value));
         }
     }
 }

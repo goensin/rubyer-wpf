@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Rubyer
@@ -21,7 +22,7 @@ namespace Rubyer
         /// 是否激活
         /// </summary>
         public static readonly DependencyProperty IsActiveProperty = DependencyProperty.Register(
-            "IsActive", typeof(bool), typeof(ControlMask), new PropertyMetadata(default(bool)));
+            "IsActive", typeof(bool), typeof(ControlMask), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否激活
@@ -29,7 +30,7 @@ namespace Rubyer
         public bool IsActive
         {
             get { return (bool)GetValue(IsActiveProperty); }
-            set { SetValue(IsActiveProperty, value); }
+            set { SetValue(IsActiveProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

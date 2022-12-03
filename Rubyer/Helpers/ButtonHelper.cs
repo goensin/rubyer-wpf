@@ -1,4 +1,5 @@
 ﻿using Rubyer;
+using Rubyer.Commons.KnownBoxes;
 using System.Windows;
 
 namespace Rubyer
@@ -12,7 +13,7 @@ namespace Rubyer
         /// 显示阴影
         /// </summary>
         public static readonly DependencyProperty ShowShadowProperty = DependencyProperty.RegisterAttached(
-            "ShowShadow", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(default(bool)));
+            "ShowShadow", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Sets the show shadow.
@@ -21,7 +22,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetShowShadow(DependencyObject element, bool value)
         {
-            element.SetValue(ShowShadowProperty, value);
+            element.SetValue(ShowShadowProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
@@ -90,7 +91,7 @@ namespace Rubyer
         /// 加载中
         /// </summary>
         public static readonly DependencyProperty LoadingProperty = DependencyProperty.RegisterAttached(
-            "Loading", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(default(bool)));
+            "Loading", typeof(bool), typeof(ButtonHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Sets the loading.
@@ -99,7 +100,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetLoading(DependencyObject element, bool value)
         {
-            element.SetValue(LoadingProperty, value);
+            element.SetValue(LoadingProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>

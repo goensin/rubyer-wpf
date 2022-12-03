@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Windows;
 
 namespace Rubyer
 {
@@ -37,7 +38,7 @@ namespace Rubyer
         /// 是否显示百分比
         /// </summary>
         public static readonly DependencyProperty ShowPercentProperty =
-            DependencyProperty.RegisterAttached("ShowPercent", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(false));
+            DependencyProperty.RegisterAttached("ShowPercent", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// Gets the show percent.
@@ -56,14 +57,14 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetShowPercent(DependencyObject obj, bool value)
         {
-            obj.SetValue(ShowPercentProperty, value);
+            obj.SetValue(ShowPercentProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
         /// 是否显示背景
         /// </summary>
         public static readonly DependencyProperty IsShowBackgroundProperty =
-            DependencyProperty.RegisterAttached("IsShowBackground", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(true));
+            DependencyProperty.RegisterAttached("IsShowBackground", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
         /// Gets the is show background.
@@ -82,7 +83,7 @@ namespace Rubyer
         /// <param name="value">If true, value.</param>
         public static void SetIsShowBackground(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsShowBackgroundProperty, value);
+            obj.SetValue(IsShowBackgroundProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>

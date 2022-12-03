@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -155,7 +156,7 @@ namespace Rubyer
         /// 是否下拉打开
         /// </summary>
         public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register(
-            "IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(false, OnIsDropDownOpenChanged));
+            "IsDropDownOpen", typeof(bool), typeof(DateTimePicker), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsDropDownOpenChanged));
 
         /// <summary>
         /// 是否下拉打开
@@ -163,7 +164,7 @@ namespace Rubyer
         public bool IsDropDownOpen
         {
             get { return (bool)GetValue(IsDropDownOpenProperty); }
-            set { SetValue(IsDropDownOpenProperty, value); }
+            set { SetValue(IsDropDownOpenProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>

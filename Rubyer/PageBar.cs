@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -250,7 +251,7 @@ namespace Rubyer
         /// 是否显示总数量
         /// </summary>
         public static readonly DependencyProperty IsShowTotalProperty =
-            DependencyProperty.Register("IsShowTotal", typeof(bool), typeof(PageBar), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsShowTotal", typeof(bool), typeof(PageBar), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示总数量
@@ -258,14 +259,14 @@ namespace Rubyer
         public bool IsShowTotal
         {
             get { return (bool)GetValue(IsShowTotalProperty); }
-            set { SetValue(IsShowTotalProperty, value); }
+            set { SetValue(IsShowTotalProperty, BooleanBoxes.Box(value)); }
         }
 
         /// <summary>
         /// 是否显示每页数量
         /// </summary>
         public static readonly DependencyProperty IsShowPageSizeProperty =
-            DependencyProperty.Register("IsShowPageSize", typeof(bool), typeof(PageBar), new PropertyMetadata(default(bool)));
+            DependencyProperty.Register("IsShowPageSize", typeof(bool), typeof(PageBar), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
         /// 是否显示每页数量
@@ -273,7 +274,7 @@ namespace Rubyer
         public bool IsShowPageSize
         {
             get { return (bool)GetValue(IsShowPageSizeProperty); }
-            set { SetValue(IsShowPageSizeProperty, value); }
+            set { SetValue(IsShowPageSizeProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion 依赖属性

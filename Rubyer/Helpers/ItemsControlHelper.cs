@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Controls.Primitives;
+using Rubyer.Commons.KnownBoxes;
 
 namespace Rubyer
 {
@@ -63,14 +64,14 @@ namespace Rubyer
         /// 必须绑定 SelectedItem
         /// </summary>
         public static readonly DependencyProperty EnumValuesToItemsSourceProperty = DependencyProperty.RegisterAttached(
-            "EnumValuesToItemsSource", typeof(bool), typeof(ItemsControlHelper), new PropertyMetadata(default(bool), OnEnumValuesToItemsSourceChanged));
+            "EnumValuesToItemsSource", typeof(bool), typeof(ItemsControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnEnumValuesToItemsSourceChanged));
 
         /// <summary>
         /// set 绑定 enum 类型所有值给 ItemsSource 赋值
         /// </summary>
         public static void SetEnumValuesToItemsSource(DependencyObject element, bool value)
         {
-            element.SetValue(EnumValuesToItemsSourceProperty, value);
+            element.SetValue(EnumValuesToItemsSourceProperty, BooleanBoxes.Box(value));
         }
 
         /// <summary>
