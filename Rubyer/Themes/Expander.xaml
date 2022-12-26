@@ -31,14 +31,10 @@
                         <Border Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
+                            <DockPanel>
                                 <rubyer:Icon x:Name="arrow"
                                              Grid.Column="1"
+                                             DockPanel.Dock="{Binding Path=(rubyer:ExpanderHelper.ExpandIconDock), RelativeSource={RelativeSource AncestorType=Expander}}"
                                              Foreground="{TemplateBinding Foreground}"
                                              RenderTransformOrigin="0.5 0.5"
                                              Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
@@ -52,7 +48,7 @@
                                                   VerticalAlignment="Center"
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="True" />
-                            </Grid>
+                            </DockPanel>
                         </Border>
 
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
@@ -104,14 +100,10 @@
                         <Border Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
+                            <DockPanel>
                                 <rubyer:Icon x:Name="arrow"
                                              Grid.Column="1"
+                                             DockPanel.Dock="{Binding Path=(rubyer:ExpanderHelper.ExpandIconDock), RelativeSource={RelativeSource AncestorType=Expander}}"
                                              Foreground="{TemplateBinding Foreground}"
                                              RenderTransformOrigin="0.5 0.5"
                                              Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
@@ -125,7 +117,7 @@
                                                   VerticalAlignment="Center"
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="True" />
-                            </Grid>
+                            </DockPanel>
                         </Border>
 
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
@@ -177,14 +169,10 @@
                         <Border Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
+                            <DockPanel>
                                 <rubyer:Icon x:Name="arrow"
                                              Grid.Row="1"
+                                             DockPanel.Dock="{Binding Path=(rubyer:ExpanderHelper.ExpandIconDock), RelativeSource={RelativeSource AncestorType=Expander}}"
                                              Foreground="{TemplateBinding Foreground}"
                                              RenderTransformOrigin="0.5 0.5"
                                              Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
@@ -198,7 +186,7 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="True" />
-                            </Grid>
+                            </DockPanel>
                         </Border>
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
@@ -249,14 +237,10 @@
                         <Border Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-
+                            <DockPanel>
                                 <rubyer:Icon x:Name="arrow"
                                              Grid.Row="1"
+                                             DockPanel.Dock="{Binding Path=(rubyer:ExpanderHelper.ExpandIconDock), RelativeSource={RelativeSource AncestorType=Expander}}"
                                              Foreground="{TemplateBinding Foreground}"
                                              RenderTransformOrigin="0.5 0.5"
                                              Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
@@ -270,7 +254,7 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   RecognizesAccessKey="True"
                                                   SnapsToDevicePixels="True" />
-                            </Grid>
+                            </DockPanel>
                         </Border>
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=Expander}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Expander}}"
@@ -410,6 +394,7 @@
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Left" />
                             <Setter TargetName="HeaderSite" Property="Style" Value="{StaticResource ExpanderRightHeaderStyle}" />
                             <Setter TargetName="Transition" Property="Type" Value="CollapseLeft" />
+                            <Setter Property="rubyer:ExpanderHelper.ExpandIconDock" Value="Bottom" />
                         </Trigger>
                         <Trigger Property="ExpandDirection" Value="Up">
                             <Setter TargetName="ExpandSite" Property="DockPanel.Dock" Value="Top" />
@@ -421,6 +406,7 @@
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Right" />
                             <Setter TargetName="HeaderSite" Property="Style" Value="{StaticResource ExpanderLeftHeaderStyle}" />
                             <Setter TargetName="Transition" Property="Type" Value="CollapseLeft" />
+                            <Setter Property="rubyer:ExpanderHelper.ExpandIconDock" Value="Bottom" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
