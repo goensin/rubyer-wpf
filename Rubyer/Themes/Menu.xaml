@@ -147,7 +147,7 @@
                                  Margin="20 0 0 0"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
-                                 Type="ArrowDropRightLine" />
+                                 Type="ArrowRightSLine" />
 
                     <Popup x:Name="Popup"
                            AllowsTransparency="True"
