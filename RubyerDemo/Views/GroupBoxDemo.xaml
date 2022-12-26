@@ -84,6 +84,7 @@
                         </Expander>
                         <Expander MaxWidth="300"
                                   Margin="5"
+                                  rubyer:ExpanderHelper.ExpandIconType="ArrowDownSFill"
                                   rubyer:HeaderHelper.Background="{DynamicResource Accent}"
                                   rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                                   rubyer:HeaderHelper.HorizontalAlignment="Center"
@@ -113,6 +114,7 @@
                             溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
                     </Expander>
                     <Expander Margin="5"
+                              rubyer:ExpanderHelper.ExpandIconType="ArrowDownLine"
                               rubyer:HeaderHelper.Background="{DynamicResource Dark}"
                               rubyer:HeaderHelper.FontSize="17"
                               rubyer:HeaderHelper.FontWeight="Bold"

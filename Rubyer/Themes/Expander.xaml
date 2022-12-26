@@ -34,26 +34,19 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="19" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="1">
-                                    <Grid.LayoutTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <TransformCollection>
-                                                    <RotateTransform x:Name="arrowAngle" Angle="0" />
-                                                </TransformCollection>
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Grid.LayoutTransform>
-                                    <Path x:Name="arrow"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                          SnapsToDevicePixels="false"
-                                          Stroke="{TemplateBinding Foreground}"
-                                          StrokeThickness="2" />
-                                </Grid>
+
+                                <rubyer:Icon x:Name="arrow"
+                                             Grid.Column="1"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             RenderTransformOrigin="0.5 0.5"
+                                             Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
+                                    <rubyer:Icon.RenderTransform>
+                                        <RotateTransform x:Name="arrowAngle" Angle="0" />
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
+
                                 <ContentPresenter Margin="4 0 0 0"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="Center"
@@ -114,26 +107,19 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="19" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="1">
-                                    <Grid.LayoutTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <TransformCollection>
-                                                    <RotateTransform x:Name="arrowAngle" Angle="180" />
-                                                </TransformCollection>
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Grid.LayoutTransform>
-                                    <Path x:Name="arrow"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                          SnapsToDevicePixels="false"
-                                          Stroke="{TemplateBinding Foreground}"
-                                          StrokeThickness="2" />
-                                </Grid>
+
+                                <rubyer:Icon x:Name="arrow"
+                                             Grid.Column="1"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             RenderTransformOrigin="0.5 0.5"
+                                             Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
+                                    <rubyer:Icon.RenderTransform>
+                                        <RotateTransform x:Name="arrowAngle" Angle="0" />
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
+
                                 <ContentPresenter Margin="4 0 0 0"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="Center"
@@ -194,26 +180,19 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="19" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="1">
-                                    <Grid.LayoutTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <TransformCollection>
-                                                    <RotateTransform x:Name="arrowAngle" Angle="90" />
-                                                </TransformCollection>
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Grid.LayoutTransform>
-                                    <Path x:Name="arrow"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                          SnapsToDevicePixels="false"
-                                          Stroke="{TemplateBinding Foreground}"
-                                          StrokeThickness="2" />
-                                </Grid>
+
+                                <rubyer:Icon x:Name="arrow"
+                                             Grid.Row="1"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             RenderTransformOrigin="0.5 0.5"
+                                             Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
+                                    <rubyer:Icon.RenderTransform>
+                                        <RotateTransform x:Name="arrowAngle" Angle="90" />
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
+
                                 <ContentPresenter Margin="0 4 0 0"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -273,26 +252,19 @@
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
-                                    <RowDefinition Height="19" />
+                                    <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
-                                <Grid Grid.Row="1">
-                                    <Grid.LayoutTransform>
-                                        <TransformGroup>
-                                            <TransformGroup.Children>
-                                                <TransformCollection>
-                                                    <RotateTransform x:Name="arrowAngle" Angle="-90" />
-                                                </TransformCollection>
-                                            </TransformGroup.Children>
-                                        </TransformGroup>
-                                    </Grid.LayoutTransform>
-                                    <Path x:Name="arrow"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"
-                                          Data="M 1,1.5 L 4.5,5 L 8,1.5"
-                                          SnapsToDevicePixels="false"
-                                          Stroke="{TemplateBinding Foreground}"
-                                          StrokeThickness="2" />
-                                </Grid>
+
+                                <rubyer:Icon x:Name="arrow"
+                                             Grid.Row="1"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             RenderTransformOrigin="0.5 0.5"
+                                             Type="{Binding Path=(rubyer:ExpanderHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=Expander}}">
+                                    <rubyer:Icon.RenderTransform>
+                                        <RotateTransform x:Name="arrowAngle" Angle="-90" />
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
+
                                 <ContentPresenter Margin="0 4 0 0"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -360,6 +332,7 @@
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
+        <Setter Property="rubyer:ExpanderHelper.ExpandIconType" Value="ArrowDownSLine" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Expander}">
