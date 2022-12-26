@@ -25,7 +25,7 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 展开图标类型
+        /// 展开图标停靠方向
         /// </summary>
         public static readonly DependencyProperty ExpandIconDockProperty = DependencyProperty.RegisterAttached(
             "ExpandIconDock", typeof(Dock), typeof(ExpanderHelper), new PropertyMetadata(Dock.Right));

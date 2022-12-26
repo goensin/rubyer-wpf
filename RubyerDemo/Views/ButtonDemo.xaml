@@ -12,10 +12,11 @@
     </UserControl.Resources>
 
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
-        <Grid rubyer:GridHelper.ColumnDefinitions="*, *" rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-            <GroupBox Grid.ColumnSpan="2"
-                      Margin="0 0 0 10"
-                      Header="普通按钮-Button">
+        <Grid rubyer:GridHelper.ColumnDefinitions="*, *"
+              rubyer:GridHelper.ColumnSpacing="10"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
+              rubyer:GridHelper.RowSpacing="10">
+            <GroupBox Grid.ColumnSpan="2" Header="普通按钮-Button">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button Width="80"
                             Margin="5"
@@ -56,9 +57,7 @@
                             IsEnabled="False" />
                 </StackPanel>
             </GroupBox>
-            <GroupBox Grid.Row="1"
-                      Margin="0 0 10 10"
-                      Header="圆角按钮-Button">
+            <GroupBox Grid.Row="1" Header="圆角按钮-Button">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button Width="80"
                             Margin="5"
@@ -86,7 +85,6 @@
 
             <GroupBox Grid.Row="1"
                       Grid.Column="1"
-                      Margin="0 0 0 10"
                       Header="圆型按钮-Button">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button Margin="10 0"
@@ -128,9 +126,8 @@
                     </Button>
                 </StackPanel>
             </GroupBox>
-            <GroupBox Grid.Row="2"
-                      Margin="0 0 10 10"
-                      Header="文字按钮-Button">
+
+            <GroupBox Grid.Row="2" Header="文字按钮-Button">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button Style="{StaticResource TextButton}"
                             Width="80"
@@ -178,9 +175,9 @@
                     </Button>
                 </StackPanel>
             </GroupBox>
+
             <GroupBox Grid.Row="2"
                       Grid.Column="1"
-                      Margin="0 0 10 10"
                       Header="加载按钮">
                 <StackPanel Margin="5" Orientation="Horizontal">
                     <Button x:Name="loadingButton"
@@ -210,27 +207,27 @@
                             rubyer:ButtonHelper.Shape="Circle" />
                 </StackPanel>
             </GroupBox>
-            <GroupBox Grid.Row="3"
-                      Margin="0 0 10 10"
-                      Header="阴影按钮">
-                <StackPanel Margin="5" Orientation="Horizontal">
+            
+            <GroupBox Grid.Row="3" Header="阴影按钮">
+                <Grid Margin="5"
+                      rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
+                      rubyer:GridHelper.ColumnSpacing="15">
                     <Button Width="80"
-                            Margin="5 0"
                             rubyer:ButtonHelper.ShowShadow="True"
                             Content="默认按钮" />
                     <Button Style="{DynamicResource AccentButton}"
+                            Grid.Column="1"
                             Width="80"
-                            Margin="5 0"
                             rubyer:ButtonHelper.Shape="Round"
                             rubyer:ButtonHelper.ShowShadow="True"
                             Content="强调按钮" />
                     <Button Style="{StaticResource SuccessButton}"
-                            Margin="5 0"
+                            Grid.Column="2"
                             rubyer:ButtonHelper.Shape="Circle"
                             rubyer:ButtonHelper.ShowShadow="True">
                         <rubyer:Icon Type="SearchLine" />
                     </Button>
-                    <Button Margin="5 0"
+                    <Button Grid.Column="3"
                             rubyer:ButtonHelper.CircleDiameter="35"
                             rubyer:ButtonHelper.Shape="Circle"
                             rubyer:ButtonHelper.ShowShadow="True">
@@ -238,12 +235,12 @@
                                      Height="25"
                                      Type="AndroidFill" />
                     </Button>
-                    <Button Width="80"
-                            Margin="5 0"
+                    <Button Grid.Column="4"
+                            Width="80"
                             rubyer:ButtonHelper.ShowShadow="True"
                             Content="不可用"
                             IsEnabled="False" />
-                </StackPanel>
+                </Grid>
             </GroupBox>
         </Grid>
     </ScrollViewer>

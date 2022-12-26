@@ -1,21 +1,19 @@
 ﻿using Rubyer.Commons;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Xml.Linq;
 
 namespace Rubyer
 {
     /// <summary>
-    /// Grid 助手
+    /// Grid 帮助类
     /// </summary>
     public static class GridHelper
     {
         /// <summary>
         /// 列数
+        /// (最后一列填充)
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty = DependencyProperty.RegisterAttached(
             "Columns", typeof(int), typeof(GridHelper), new PropertyMetadata(default(int), OnColumnsChanged));
@@ -58,6 +56,7 @@ namespace Rubyer
 
         /// <summary>
         /// 行数
+        /// (最后一行填充)
         /// </summary>
         public static readonly DependencyProperty RowsProperty = DependencyProperty.RegisterAttached(
             "Rows", typeof(int), typeof(GridHelper), new PropertyMetadata(default(int), OnRowsChanged));
@@ -175,6 +174,109 @@ namespace Rubyer
         public static void SetRowDefinitions(DependencyObject obj, string value)
         {
             obj.SetValue(RowDefinitionsProperty, value);
+        }
+
+        /// <summary>
+        /// 列间距
+        /// </summary>
+        public static readonly DependencyProperty ColumnSpacingProperty = DependencyProperty.RegisterAttached(
+            "ColumnSpacing", typeof(double), typeof(GridHelper), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure, OnColumnSpacingChanged));
+
+        private static void OnColumnSpacingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Grid grid)
+            {
+                if (grid.IsLoaded)
+                {
+                    SetGridChildrenColumnSpacing(grid, null);
+                }
+                else
+                {
+                    grid.Loaded += SetGridChildrenColumnSpacing;
+                }
+            }
+        }
+
+        private static void SetGridChildrenColumnSpacing(object sender, RoutedEventArgs e)
+        {
+            var grid = (Grid)sender;
+            grid.Loaded -= SetGridChildrenColumnSpacing;
+
+            var count = grid.Children.Count;
+            var index = 1;
+            foreach (FrameworkElement element in grid.Children)
+            {
+                var column = Grid.GetColumn(element);
+                var columnSpan = Grid.GetColumnSpan(element);
+                var gridColumns = grid.ColumnDefinitions.Count;
+
+                var oldMargin = element.Margin;
+                var spacing = GetColumnSpacing(grid);
+                element.Margin = (column + columnSpan == gridColumns) ?
+                                 new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom) :
+                                 new Thickness(0, oldMargin.Top, spacing, oldMargin.Bottom);
+            }
+        }
+
+        public static double GetColumnSpacing(DependencyObject obj)
+        {
+            return (double)obj.GetValue(ColumnSpacingProperty);
+        }
+
+        public static void SetColumnSpacing(DependencyObject obj, double value)
+        {
+            obj.SetValue(ColumnSpacingProperty, value);
+        }
+
+        /// <summary>
+        /// 行间距
+        /// </summary>
+        public static readonly DependencyProperty RowSpacingProperty = DependencyProperty.RegisterAttached(
+            "RowSpacing", typeof(double), typeof(GridHelper), new FrameworkPropertyMetadata(0d, FrameworkPropertyMetadataOptions.AffectsMeasure, OnRowSpacingChanged));
+
+        private static void OnRowSpacingChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is Grid grid)
+            {
+                if (grid.IsLoaded)
+                {
+                    SetGridChildrenRowSpacing(grid, null);
+                }
+                else
+                {
+                    grid.Loaded += SetGridChildrenRowSpacing;
+                }
+            }
+        }
+
+        private static void SetGridChildrenRowSpacing(object sender, RoutedEventArgs e)
+        {
+            var grid = (Grid)sender;
+            grid.Loaded -= SetGridChildrenRowSpacing;
+
+            var count = grid.Children.Count;
+            foreach (FrameworkElement element in grid.Children)
+            {
+                var row = Grid.GetRow(element);
+                var rowSpan = Grid.GetRowSpan(element);
+                var gridRows = grid.RowDefinitions.Count;
+
+                var oldMargin = element.Margin;
+                var spacing = GetRowSpacing(grid);
+                element.Margin = (row + rowSpan == gridRows) ?
+                                 new Thickness(oldMargin.Left, 0, oldMargin.Right, 0) :
+                                 new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing);
+            }
+        }
+
+        public static double GetRowSpacing(DependencyObject obj)
+        {
+            return (double)obj.GetValue(RowSpacingProperty);
+        }
+
+        public static void SetRowSpacing(DependencyObject obj, double value)
+        {
+            obj.SetValue(RowSpacingProperty, value);
         }
     }
 }
