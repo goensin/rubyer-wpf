@@ -6,8 +6,8 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto">
-            <GroupBox Margin="0 0 0 10" Header="进度条-ProgressBar">
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <GroupBox Header="进度条-ProgressBar">
                 <StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <StackPanel VerticalAlignment="Center">

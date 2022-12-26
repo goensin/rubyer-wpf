@@ -201,9 +201,7 @@ namespace Rubyer
         {
             var grid = (Grid)sender;
             grid.Loaded -= SetGridChildrenColumnSpacing;
-
             var count = grid.Children.Count;
-            var index = 1;
             foreach (FrameworkElement element in grid.Children)
             {
                 var column = Grid.GetColumn(element);
@@ -212,7 +210,7 @@ namespace Rubyer
 
                 var oldMargin = element.Margin;
                 var spacing = GetColumnSpacing(grid);
-                element.Margin = (column + columnSpan == gridColumns) ?
+                element.Margin = (gridColumns == 0) || (column + columnSpan == gridColumns) ?
                                  new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom) :
                                  new Thickness(0, oldMargin.Top, spacing, oldMargin.Bottom);
             }
@@ -253,7 +251,6 @@ namespace Rubyer
         {
             var grid = (Grid)sender;
             grid.Loaded -= SetGridChildrenRowSpacing;
-
             var count = grid.Children.Count;
             foreach (FrameworkElement element in grid.Children)
             {
@@ -263,7 +260,7 @@ namespace Rubyer
 
                 var oldMargin = element.Margin;
                 var spacing = GetRowSpacing(grid);
-                element.Margin = (row + rowSpan == gridRows) ?
+                element.Margin = (gridRows == 0) || (row + rowSpan == gridRows) ?
                                  new Thickness(oldMargin.Left, 0, oldMargin.Right, 0) :
                                  new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing);
             }

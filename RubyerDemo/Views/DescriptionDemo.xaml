@@ -8,16 +8,15 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DescriptionViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <StackPanel>
+        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
             <rubyer:NumericBox Width="120"
-                               Margin="5 20 5 5"
                                HorizontalAlignment="Center"
                                rubyer:InputBoxHelper.PreContent="显示列数:"
                                MaxValue="3"
                                MinValue="1"
                                Value="{Binding CurrentColumn}" />
 
-            <GroupBox Margin="10" Header="默认无边框 - Description">
+            <GroupBox Header="默认无边框 - Description" Grid.Row="1">
                 <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
                     <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
 
@@ -26,9 +25,9 @@
                                         Margin="5"
                                         Columns="{Binding CurrentColumn}"
                                         HorizontalDescriptionAlignment="Right">
-                        <rubyer:DescriptionItem >
+                        <rubyer:DescriptionItem>
                             <rubyer:DescriptionItem.Description>
-                                <CheckBox Content="列数"/>
+                                <CheckBox Content="列数" />
                             </rubyer:DescriptionItem.Description>
                             <rubyer:DescriptionItem.Content>
                                 <Button Padding="10 5" Content="Columns" />
@@ -62,7 +61,8 @@
 
                 </Grid>
             </GroupBox>
-            <GroupBox Margin="10" Header="带边框 - BorderDescription">
+            
+            <GroupBox Header="带边框 - BorderDescription" Grid.Row="2">
                 <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
                     <TextBlock Style="{StaticResource Head4TextBlock}" Text="DescriptionItem 方式:" />
 
@@ -103,7 +103,7 @@
                                         ItemsSource="{Binding Models}" />
                 </Grid>
             </GroupBox>
-        </StackPanel>
+        </Grid>
 
     </ScrollViewer>
 </UserControl>

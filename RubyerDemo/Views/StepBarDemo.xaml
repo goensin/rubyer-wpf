@@ -10,7 +10,8 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:StepBarViewModel}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto">
+        <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto"
+              rubyer:GridHelper.ColumnSpacing="10">
             <StackPanel>
                 <Button Width="100"
                         Margin="10"
@@ -18,7 +19,7 @@
                         Command="{Binding NextStep}"
                         Content="下一步" />
 
-                <GroupBox Margin="10" Header="垂直步骤条 - StepBar">
+                <GroupBox Header="垂直步骤条 - StepBar">
                     <StackPanel>
                         <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
                             <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>

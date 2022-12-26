@@ -9,7 +9,10 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:DialogViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowDefinitions="Auto, Auto">
+        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto"
+              rubyer:GridHelper.ColumnSpacing="10"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto"
+              rubyer:GridHelper.RowSpacing="10">
             <GroupBox Grid.Column="0"
                       Width="250"
                       Height="250"
@@ -41,7 +44,6 @@
             <GroupBox Grid.Column="1"
                       Width="250"
                       Height="250"
-                      Margin="10 0"
                       Header="2#对话框-DialogContainer">
                 <rubyer:DialogContainer x:Name="Dialog2"
                                         Title="2#对话框"
@@ -75,7 +77,6 @@
             <GroupBox Grid.Column="2"
                       Width="250"
                       Height="250"
-                      Margin="10 0"
                       Header="3#对话框-DialogContainer">
                 <rubyer:DialogContainer x:Name="Dialog3"
                                         Title="添加用户"
@@ -135,7 +136,6 @@
             <GroupBox Grid.Row="1"
                       Width="250"
                       Height="250"
-                      Margin="10 0"
                       Header="4#对话框-DialogContainer">
                 <Grid>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -151,7 +151,6 @@
                       Grid.Column="1"
                       Width="250"
                       Height="250"
-                      Margin="10 0"
                       Header="5#对话框-DialogContainer">
                 <Grid>
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">

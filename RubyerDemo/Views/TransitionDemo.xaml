@@ -6,14 +6,16 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
+        <Grid rubyer:GridHelper.ColumnSpacing="10"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
+              rubyer:GridHelper.RowSpacing="10">
             <GroupBox MinWidth="800">
                 <GroupBox.Header>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock FontSize="16" Text="淡入淡出-Fade" />
                         <ToggleButton x:Name="FadeToggle"
                                       Style="{StaticResource SwitchToggleButton}"
-                                      Margin="10"
+                                      Margin="10 0"
                                       IsChecked="True" />
                     </StackPanel>
                 </GroupBox.Header>
@@ -81,7 +83,7 @@
                         <TextBlock FontSize="16" Text="缩放-Zoom" />
                         <ToggleButton x:Name="ZoomToggle"
                                       Style="{StaticResource SwitchToggleButton}"
-                                      Margin="10"
+                                      Margin="10 0"
                                       IsChecked="True" />
                     </StackPanel>
                 </GroupBox.Header>
@@ -171,7 +173,7 @@
                         <TextBlock FontSize="16" Text="折叠-Collapse" />
                         <ToggleButton x:Name="CollapseToggle"
                                       Style="{StaticResource SwitchToggleButton}"
-                                      Margin="10"
+                                      Margin="10 0"
                                       IsChecked="True" />
                     </StackPanel>
                 </GroupBox.Header>

@@ -18,8 +18,11 @@
         </ObjectDataProvider>
     </UserControl.Resources>
     <ScrollViewer>
-        <Grid Width="600" rubyer:GridHelper.RowDefinitions="Auto, Auto">
-            <GroupBox Margin="0 0 10 10" Header="数据表格-DataGrid">
+        <Grid Width="600"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto"
+              rubyer:GridHelper.RowSpacing="10"
+              rubyer:GridHelper.ColumnSpacing="1">
+            <GroupBox Header="数据表格-DataGrid">
                 <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                     <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
 
@@ -90,9 +93,7 @@
                     </DataGrid>
                 </Grid>
             </GroupBox>
-            <GroupBox Grid.Row="1"
-                      Margin="0 0 10 10"
-                      Header="数据表格-DataGrid">
+            <GroupBox Grid.Row="1" Header="数据表格-DataGrid">
                 <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                     <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
 

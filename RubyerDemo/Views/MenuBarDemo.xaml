@@ -8,8 +8,10 @@
     <ScrollViewer Style="{StaticResource SmallScrollViewer}"
                   HorizontalScrollBarVisibility="Auto"
                   VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
-            <GroupBox Margin="0 0 0 10" Header="Menu-菜单">
+        <Grid rubyer:GridHelper.ColumnSpacing="20"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
+              rubyer:GridHelper.RowSpacing="10">
+            <GroupBox Header="Menu-菜单">
                 <StackPanel Margin="5">
                     <Menu>
                         <MenuItem Header="文件">
@@ -74,9 +76,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Grid.Row="1"
-                      Margin="0 0 0 10"
-                      Header="ToolBar-工具栏">
+            <GroupBox Grid.Row="1" Header="ToolBar-工具栏">
                 <StackPanel Margin="5">
                     <ToolBarTray>
                         <ToolBar>
@@ -189,9 +189,7 @@
                 </StackPanel>
             </GroupBox>
 
-            <GroupBox Grid.Row="2"
-                      Margin="0 0 0 10"
-                      Header="StatusBar-状态栏">
+            <GroupBox Grid.Row="2" Header="StatusBar-状态栏">
                 <StatusBar Background="{DynamicResource Accent}" Foreground="{DynamicResource WhiteForeground}">
                     <StatusBarItem HorizontalAlignment="Left">
                         <rubyer:Icon Type="TerminalBoxLine" />

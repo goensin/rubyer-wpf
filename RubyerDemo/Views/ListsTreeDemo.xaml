@@ -7,10 +7,11 @@
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ListsViewModel}"
              mc:Ignorable="d">
-    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
-        <GroupBox Grid.ColumnSpan="2"
-                  Margin="0 0 10 10"
-                  Header="列表框-ListBox">
+    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *"
+          rubyer:GridHelper.ColumnSpacing="10"
+          rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+          rubyer:GridHelper.RowSpacing="10">
+        <GroupBox Grid.ColumnSpan="2" Header="列表框-ListBox">
             <StackPanel Margin="5" Orientation="Horizontal">
                 <ListBox x:Name="listBox"
                          Width="150"
@@ -81,9 +82,7 @@
                 </StackPanel>
             </StackPanel>
         </GroupBox>
-        <GroupBox Grid.Row="1"
-                  Margin="0 0 0 10"
-                  Header="列表视图-ListView">
+        <GroupBox Grid.Row="1" Header="列表视图-ListView">
             <StackPanel Margin="5">
                 <ListView Height="100"
                           Margin="0 0 0 10"
@@ -129,7 +128,6 @@
         </GroupBox>
         <GroupBox Grid.Row="1"
                   Grid.Column="1"
-                  Margin="10 0 10 10"
                   Header="树状视图-TreeView">
             <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto">
                 <TreeView Width="200" ItemsSource="{Binding Catalogs}">
