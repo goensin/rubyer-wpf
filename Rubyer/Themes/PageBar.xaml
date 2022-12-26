@@ -5,6 +5,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NumericBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
@@ -78,6 +79,7 @@
                                 </MultiBinding>
                             </DataTrigger.Binding>
                             <Setter TargetName="pageButton" Property="Foreground" Value="{DynamicResource Primary}" />
+                            <Setter Property="FontWeight" Value="Bold" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -95,6 +97,9 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="ItemsDock" Value="Right" />
+        <Setter Property="IsShowPageSize" Value="True" />
+        <Setter Property="IsShowTotal" Value="True" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
@@ -106,36 +111,43 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
                     <DockPanel Margin="{TemplateBinding Padding}">
-                        <ItemsPresenter Margin="10 0"
-                                        DockPanel.Dock="Right"
+                        <ItemsPresenter x:Name="items"
+                                        DockPanel.Dock="{TemplateBinding ItemsDock}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
-                            <TextBlock Margin="5 0"
-                                       VerticalAlignment="Center"
+                        <StackPanel x:Name="pageInfo"
+                                    Margin="0 5"
+                                    Orientation="Horizontal">
+                            <TextBlock VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="{DynamicResource I18N_PageBar_Total}"
                                        Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
-                            <TextBlock VerticalAlignment="Center"
+                            <TextBlock Margin="5 0 0 0"
+                                       VerticalAlignment="Center"
+                                       FontWeight="Bold"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="{Binding Total, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
                                        Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
-                            <TextBlock Margin="5 0"
+                            <TextBlock Margin="5 0 10 0"
                                        VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
                                        Text="{DynamicResource I18N_PageBar_Piece}"
                                        Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
 
-                            <TextBox x:Name="PART_PageSizeTextBox"
-                                     Height="Auto"
-                                     MinWidth="70"
-                                     Margin="5 0"
-                                     VerticalAlignment="Center"
-                                     rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
-                                     Text="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
-                                     Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />
+                            <rubyer:NumericBox x:Name="PART_PageSizeTextBox"
+                                               MinWidth="80"
+                                               VerticalAlignment="Center"
+                                               rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
+                                               MinValue="1"
+                                               Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}"
+                                               Value="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
                         </StackPanel>
                     </DockPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ItemsDock" Value="Left">
+                            <Setter TargetName="pageInfo" Property="HorizontalAlignment" Value="Right" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

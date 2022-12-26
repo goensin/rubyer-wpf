@@ -277,6 +277,21 @@ namespace Rubyer
             set { SetValue(IsShowPageSizeProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 子项停靠方向
+        /// </summary>
+        public static readonly DependencyProperty ItemsDockProperty =
+            DependencyProperty.Register("ItemsDock", typeof(Dock), typeof(PageBar), new PropertyMetadata(Dock.Right));
+
+        /// <summary>
+        /// 子项停靠方向
+        /// </summary>
+        public Dock ItemsDock
+        {
+            get { return (Dock)GetValue(ItemsDockProperty); }
+            set { SetValue(ItemsDockProperty, value); }
+        }
+
         #endregion 依赖属性
 
         #region 方法
