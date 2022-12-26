@@ -5,30 +5,27 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <PathGeometry x:Key="TreeArrow" Figures="M0,0 L0,6 L6,0 z" />
 
     <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type TreeView}}}" />
+        <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Height" Value="16" />
-        <Setter Property="Width" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border Width="16"
-                            Height="16"
-                            Padding="5 5 5 5"
-                            Background="Transparent">
-                        <Path x:Name="ExpandPath"
-                              Data="{StaticResource TreeArrow}"
-                              Fill="{TemplateBinding Foreground}"
-                              Stroke="{TemplateBinding Foreground}">
-                            <Path.RenderTransform>
-                                <RotateTransform x:Name="transform" Angle="135" CenterX="3" CenterY="3" />
-                            </Path.RenderTransform>
-                        </Path>
+                    <Border Background="Transparent">
+                        <rubyer:Icon x:Name="ExpandPath"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     RenderTransformOrigin="0.5 0.5"
+                                     Type="{Binding Path=(rubyer:TreeViewHelper.ExpandIconType), RelativeSource={RelativeSource AncestorType=TreeView}}">
+                            <rubyer:Icon.RenderTransform>
+                                <RotateTransform x:Name="transform" Angle="0" />
+                            </rubyer:Icon.RenderTransform>
+                        </rubyer:Icon>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
@@ -37,8 +34,12 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="transform"
                                                          Storyboard.TargetProperty="Angle"
-                                                         To="180"
-                                                         Duration="0:0:0.15" />
+                                                         To="45"
+                                                         Duration="0:0:0.15">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
@@ -47,17 +48,21 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="transform"
                                                          Storyboard.TargetProperty="Angle"
-                                                         To="135"
-                                                         Duration="0:0:0.15" />
+                                                         To="0"
+                                                         Duration="0:0:0.15">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="ExpandPath" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
-                            <Setter TargetName="ExpandPath" Property="Stroke" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+                            <!--<Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />-->
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ExpandPath" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
-                            <Setter TargetName="ExpandPath" Property="Stroke" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+                            <!--<Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />-->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
