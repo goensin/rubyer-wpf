@@ -46,14 +46,12 @@
             <Grid rubyer:GridHelper.RowDefinitions="Auto, *">
                 <Border Padding="0 5">
                     <StackPanel>
-                        <TextBlock Margin="10"
-                                   HorizontalAlignment="Center"
-                                   FontSize="16"
-                                   Foreground="{DynamicResource DefaultForeground}">
-                            原图标地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://remixicon.cn/">
-                                REMIX ICON 2.5.0
-                            </Hyperlink>
-                        </TextBlock>
+                        <rubyer:Tag Margin="10"
+                                    Padding="10 5"
+                                    HorizontalAlignment="Center"
+                                    Content="REMIX ICON 2.5.0"
+                                    Header="图标"
+                                    Url="https://remixicon.cn/" />
                         <StackPanel Margin="0 0 0 10" Orientation="Horizontal">
                             <TextBox Width="200"
                                      Margin="10 0"
@@ -103,7 +101,6 @@
                         <DataTemplate>
                             <StackPanel Width="80"
                                         Height="60"
-                                        Margin="5"
                                         VerticalAlignment="Center"
                                         ToolTip="{Binding Type}">
                                 <rubyer:Icon Width="28"
