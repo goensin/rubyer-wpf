@@ -101,6 +101,7 @@
                         <DataTemplate>
                             <StackPanel Width="80"
                                         Height="60"
+                                        Margin="5"
                                         VerticalAlignment="Center"
                                         ToolTip="{Binding Type}">
                                 <rubyer:Icon Width="28"
