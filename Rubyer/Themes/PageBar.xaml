@@ -116,7 +116,7 @@
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                         <StackPanel x:Name="pageInfo"
-                                    Margin="0 5"
+                                    VerticalAlignment="Center"
                                     Orientation="Horizontal">
                             <TextBlock VerticalAlignment="Center"
                                        Foreground="{DynamicResource DefaultForeground}"
