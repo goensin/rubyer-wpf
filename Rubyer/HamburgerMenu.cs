@@ -1,20 +1,9 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -25,6 +14,7 @@ namespace Rubyer
     [StyleTypedProperty(Property = "OptionsItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     [TemplatePart(Name = HamburgerButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = OptionsItemsControlPartName, Type = typeof(MenuBase))]
+    [TemplatePart(Name = ContentTransitionPartName, Type = typeof(Transition))]
     public class HamburgerMenu : TabControl
     {
         /// <summary>
@@ -37,9 +27,15 @@ namespace Rubyer
         /// </summary>
         public const string OptionsItemsControlPartName = "PART_OptionsItemsControl";
 
+        /// <summary>
+        /// 内容转换
+        /// </summary>
+        public const string ContentTransitionPartName = "PART_ContentTransition";
+
         #region fields
 
         private MenuBase optionsMenu;
+        private Transition contentTransition;
 
         #endregion fields
 
@@ -133,6 +129,36 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsShowLittleBarProperty); }
             set { SetValue(IsShowLittleBarProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public static readonly DependencyProperty TransitionTypeProperty =
+            DependencyProperty.Register("TransitionType", typeof(TransitionType), typeof(HamburgerMenu), new PropertyMetadata(default(TransitionType)));
+
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public TransitionType TransitionType
+        {
+            get { return (TransitionType)GetValue(TransitionTypeProperty); }
+            set { SetValue(TransitionTypeProperty, value); }
+        }
+
+        /// <summary>
+        /// 动画时长
+        /// </summary>
+        public static readonly DependencyProperty TransitionDurationProperty =
+            DependencyProperty.Register("TransitionDuration", typeof(Duration), typeof(HamburgerMenu), new PropertyMetadata(default(Duration)));
+
+        /// <summary>
+        /// 动画时长
+        /// </summary>
+        public Duration TransitionDuration
+        {
+            get { return (Duration)GetValue(TransitionDurationProperty); }
+            set { SetValue(TransitionDurationProperty, value); }
         }
 
         #endregion properties
@@ -262,6 +288,15 @@ namespace Rubyer
             button.Click += Button_Click;
 
             optionsMenu = GetTemplateChild(OptionsItemsControlPartName) as MenuBase;
+
+            contentTransition = GetTemplateChild(ContentTransitionPartName) as Transition;
+
+            SelectionChanged += HamburgerMenu_SelectionChanged;
+        }
+
+        private void HamburgerMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Transition.ShowAnimation(contentTransition);
         }
 
         /// <inheritdoc/>

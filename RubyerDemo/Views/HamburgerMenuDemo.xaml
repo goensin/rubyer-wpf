@@ -21,7 +21,8 @@
                                    Text="items 方式" />
                         <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
-                                              SelectedIndex="0">
+                                              SelectedIndex="0"
+                                              TransitionType="None">
                             <rubyer:HamburgerMenu.OptionsItemsSource>
                                 <rubyer:HamburgerMenuItemCollection>
                                     <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
@@ -123,7 +124,9 @@
                                               Header="开始"
                                               ItemsSource="{Binding Models}"
                                               OptionsItemsSource="{Binding OptionsModels}"
-                                              SelectedIndex="0">
+                                              SelectedIndex="0"
+                                              TransitionDuration="0:0:1"
+                                              TransitionType="ZoomLeft">
                             <rubyer:HamburgerMenu.ItemContainerStyle>
                                 <Style TargetType="rubyer:HamburgerMenuItem">
                                     <Setter Property="IconType" Value="{Binding Icon}" />
@@ -144,7 +147,7 @@
                             </rubyer:HamburgerMenu.OptionsItemContainerStyle>
                             <rubyer:HamburgerMenu.ContentTemplate>
                                 <DataTemplate>
-                                    <Border>
+                                    <Border Background="{DynamicResource Light}">
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <rubyer:Icon Type="{Binding Icon}" />
                                             <TextBlock Text="{Binding Name}" />

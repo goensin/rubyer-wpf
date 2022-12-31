@@ -296,6 +296,8 @@
         <Setter Property="IsShowLittleBar" Value="True" />
         <Setter Property="OptionsItemContainerStyle" Value="{StaticResource RubyerHamburgerMenuOptionsItem}" />
         <Setter Property="TabStripPlacement" Value="Left" />
+        <Setter Property="TransitionType" Value="Fade" />
+        <Setter Property="TransitionDuration" Value="0:0:0.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
@@ -395,13 +397,16 @@
                                 KeyboardNavigation.DirectionalNavigation="Contained"
                                 KeyboardNavigation.TabIndex="2"
                                 KeyboardNavigation.TabNavigation="Local">
-
-                            <ContentPresenter x:Name="PART_SelectedContentHost"
-                                              Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              ContentSource="SelectedContent"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <rubyer:Transition x:Name="PART_ContentTransition"
+                                               Type="{TemplateBinding TransitionType}"
+                                               Duration="{TemplateBinding TransitionDuration}">
+                                <ContentPresenter x:Name="PART_SelectedContentHost"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  ContentSource="SelectedContent"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </rubyer:Transition>
                         </Border>
                     </Grid>
 
