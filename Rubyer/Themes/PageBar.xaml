@@ -112,6 +112,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
                     <DockPanel Margin="{TemplateBinding Padding}">
                         <ItemsPresenter x:Name="items"
+                                        Margin="5 0"
                                         DockPanel.Dock="{TemplateBinding ItemsDock}"
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
