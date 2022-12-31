@@ -28,7 +28,7 @@ namespace Rubyer
 
         private void Transition_Loaded(object sender, RoutedEventArgs e)
         {
-            if (IsShow)
+            if (IsShow && Type != TransitionType.None)
             {
                 ShowAnimation(this);
 
@@ -299,7 +299,7 @@ namespace Rubyer
 
         private static void ChangeTransitionVisual(Transition transition)
         {
-            if (transition.IsLoaded)
+            if (transition.IsLoaded && transition.Type != TransitionType.None)
             {
                 if (transition.IsShow)
                 {
@@ -310,7 +310,7 @@ namespace Rubyer
                     CloseAnimation(transition);
                 }
             }
-            else if (transition.IsInitialized)
+            else if (transition.IsInitialized || transition.Type == TransitionType.None)
             {
                 transition.BeginAnimation(Transition.ProgressProperty, null);
 
@@ -325,8 +325,17 @@ namespace Rubyer
             }
         }
 
-        private static void ShowAnimation(Transition transition)
+        /// <summary>
+        /// 开始显示动画
+        /// </summary>
+        /// <param name="transition">转换</param>
+        public static void ShowAnimation(Transition transition)
         {
+            if (transition.Type == TransitionType.None)
+            {
+                return;
+            }
+
             Storyboard storyboard = new Storyboard();
             storyboard.Completed += (sender, e) =>
             {
@@ -433,8 +442,17 @@ namespace Rubyer
             storyboard.Begin();
         }
 
-        private static void CloseAnimation(Transition transition)
+        /// <summary>
+        /// 开始关闭动画
+        /// </summary>
+        /// <param name="transition">转换</param>
+        public static void CloseAnimation(Transition transition)
         {
+            if (transition.Type == TransitionType.None)
+            {
+                return;
+            }
+
             Storyboard storyboard = new Storyboard();
             storyboard.Completed += (sender, e) =>
             {
@@ -646,9 +664,14 @@ namespace Rubyer
     public enum TransitionType
     {
         /// <summary>
+        /// 无
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// 淡入
         /// </summary>
-        Fade = 0,
+        Fade,
 
         /// <summary>
         /// 向左淡入
