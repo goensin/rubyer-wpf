@@ -79,8 +79,15 @@ namespace Rubyer
         {
             var icon = new IconInfo(string.Empty, string.Empty);
             _codes.Value?.TryGetValue(Type, out icon);
-            Group = icon.Group;
-            Code = icon.Data;
+            if (icon != null)
+            {
+                Group = icon.Group;
+                Code = icon.Data;
+            }
+            else
+            {
+
+            }
         }
 
         /// <summary>

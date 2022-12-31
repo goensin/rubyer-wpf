@@ -1,6 +1,7 @@
 ﻿using Rubyer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -18,7 +19,7 @@ namespace RubyerDemo.ViewModels
             set
             {
                 iconInfos = value;
-                RaisePropertyChanged("IconTypes");
+                RaisePropertyChanged(nameof(IconInfos));
             }
         }
 
@@ -33,7 +34,7 @@ namespace RubyerDemo.ViewModels
             set
             {
                 currentIcon = value;
-                RaisePropertyChanged("CurrentIcon");
+                RaisePropertyChanged(nameof(CurrentIcon));
             }
         }
 
@@ -48,7 +49,7 @@ namespace RubyerDemo.ViewModels
             set
             {
                 searchText = value;
-                RaisePropertyChanged("SearchText");
+                RaisePropertyChanged(nameof(SearchText));
             }
         }
 
