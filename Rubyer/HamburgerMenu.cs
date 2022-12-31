@@ -296,7 +296,10 @@ namespace Rubyer
 
         private void HamburgerMenu_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Transition.ShowAnimation(contentTransition);
+            if (e.OriginalSource.GetHashCode() == GetHashCode())
+            {
+                Transition.ShowAnimation(contentTransition);
+            }
         }
 
         /// <inheritdoc/>
