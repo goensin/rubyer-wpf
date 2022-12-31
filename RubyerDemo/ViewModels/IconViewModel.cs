@@ -8,23 +8,16 @@ namespace RubyerDemo.ViewModels
 {
     public class IconViewModel : ViewModelBase
     {
-        public IEnumerable<IconInfo> Types
-        {
-            get
-            {
-                var icons = Icon.GetAllIconInfo();
-                return icons.Select(x => new IconInfo(x.type, x.group));
-            }
-        }
+        public IEnumerable<IconInfo> AllIconInfo => Icon.GetAllIconInfo();
 
-        private IEnumerable<IconInfo> iconTypes;
+        private IEnumerable<IconInfo> iconInfos;
 
-        public IEnumerable<IconInfo> IconTypes
+        public IEnumerable<IconInfo> IconInfos
         {
-            get { return iconTypes ?? (iconTypes = Types); }
+            get { return iconInfos ?? (iconInfos = AllIconInfo); }
             set
             {
-                iconTypes = value;
+                iconInfos = value;
                 RaisePropertyChanged("IconTypes");
             }
         }
@@ -70,33 +63,11 @@ namespace RubyerDemo.ViewModels
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {
-                IconTypes = Types;
+                IconInfos = AllIconInfo;
             }
             else
             {
-                IconTypes = Types.Where(i => i.Type.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
-            }
-        }
-
-        /// <summary>
-        /// 图标信息
-        /// </summary>
-        public class IconInfo
-        {
-            /// <summary>
-            /// 图标类型
-            /// </summary>
-            public IconType Type { get; set; }
-
-            /// <summary>
-            /// 组
-            /// </summary>
-            public string Group { get; set; }
-
-            public IconInfo(IconType type, string group)
-            {
-                Type = type;
-                Group = group;
+                IconInfos = AllIconInfo.Where(i => i.Type.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
             }
         }
     }

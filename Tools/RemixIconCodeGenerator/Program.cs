@@ -39,7 +39,7 @@ namespace RemixIconCodeGenerator
                             }
 
                             var group = new DirectoryInfo(directory).Name;
-                            dataStringBuilder.AppendLine($"{{ IconType.{name}, (\"{group}\", {match.Groups[1]})}},");
+                            dataStringBuilder.AppendLine($"{{ IconType.{name}, new IconInfo(\"{group}\", {match.Groups[1]})}},");
                             typeStringBuilder.AppendLine($"{name},");
                         }
                     }

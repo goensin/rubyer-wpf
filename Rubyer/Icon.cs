@@ -11,7 +11,7 @@ namespace Rubyer
     /// </summary>
     public class Icon : Control
     {
-        private static readonly Lazy<Dictionary<IconType, (string group, string code)>> _codes = new Lazy<Dictionary<IconType, (string, string)>>(IconDatas.GetAll);
+        private static readonly Lazy<Dictionary<IconType, IconInfo>> _codes = new Lazy<Dictionary<IconType, IconInfo>>(IconDatas.GetAll);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Icon"/> class.
@@ -77,16 +77,60 @@ namespace Rubyer
 
         private void UpdateIcon()
         {
-            (string group, string code) icon = (string.Empty, string.Empty);
+            var icon = new IconInfo(string.Empty, string.Empty);
             _codes.Value?.TryGetValue(Type, out icon);
-            Group = icon.group;
-            Code = icon.code;
+            Group = icon.Group;
+            Code = icon.Data;
         }
 
         /// <summary>
         /// 获取所有图标信息
         /// </summary>
         /// <returns>所有图标信息</returns>
-        public static IEnumerable<(IconType type, string group)> GetAllIconInfo() => _codes.Value.Select(x => (x.Key, x.Value.group));
+        public static IEnumerable<IconInfo> GetAllIconInfo() => _codes.Value.Select(x => new IconInfo(x.Key, x.Value.Group, x.Value.Data));
+    }
+
+    /// <summary>
+    /// 图标信息
+    /// </summary>
+    public class IconInfo
+    {
+        /// <summary>
+        /// 图标组
+        /// </summary>
+        public string Group { get; set; }
+
+        /// <summary>
+        /// 图标数据
+        /// </summary>
+        public string Data { get; set; }
+
+        /// <summary>
+        /// 图标类型
+        /// </summary>
+        public IconType Type { get; set; }
+
+        /// <summary>
+        /// 图标信息
+        /// </summary>
+        /// <param name="group">图标组</param>
+        /// <param name="data">图标数据</param>
+        public IconInfo(string group, string data)
+        {
+            Group = group;
+            Data = data;
+        }
+
+        /// <summary>
+        /// 图标信息
+        /// </summary>
+        /// <param name="type">图标类型</param>
+        /// <param name="group">图标组</param>
+        /// <param name="data">图标数据</param>
+        public IconInfo(IconType type, string group, string data)
+            : this(group, data)
+        {
+            Type = type;
+        }
     }
 }

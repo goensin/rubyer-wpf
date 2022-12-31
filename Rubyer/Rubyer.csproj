@@ -32,7 +32,4 @@
   <ItemGroup>
     <Folder Include="Themes\Resources\Colors\" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
-  </ItemGroup>
 </Project>

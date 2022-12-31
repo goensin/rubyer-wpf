@@ -12,7 +12,7 @@
              d:DesignWidth="800"
              mc:Ignorable="d">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="iconsSource" Source="{Binding IconTypes}">
+        <CollectionViewSource x:Key="iconsSource" Source="{Binding IconInfos}">
             <CollectionViewSource.GroupDescriptions>
                 <PropertyGroupDescription PropertyName="Group" />
             </CollectionViewSource.GroupDescriptions>
@@ -56,7 +56,7 @@
                             <TextBox Width="200"
                                      Margin="10 0"
                                      rubyer:InputBoxHelper.IsClearable="True"
-                                     rubyer:InputBoxHelper.Watermark="{Binding Types.Count, StringFormat='检索图标 {0} 个'}"
+                                     rubyer:InputBoxHelper.Watermark="{Binding AllIconInfo.Count, StringFormat='检索图标 {0} 个'}"
                                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                             <Button Width="80"
                                     Command="{Binding Search}"
