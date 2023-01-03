@@ -61,21 +61,6 @@ namespace Rubyer
             set { SetValue(ValueProperty, value); }
         }
 
-        /// <summary>
-        /// 当前颜色
-        /// </summary>
-        public static readonly DependencyProperty CurrentBrushProperty =
-            DependencyProperty.Register("CurrentBrush", typeof(Brush), typeof(PageBarItem), new PropertyMetadata(default(Brush)));
-
-        /// <summary>
-        /// 当前颜色
-        /// </summary>
-        public Brush CurrentBrush
-        {
-            get { return (Brush)GetValue(CurrentBrushProperty); }
-            set { SetValue(CurrentBrushProperty, value); }
-        }
-
         #endregion 依赖属性
     }
 }

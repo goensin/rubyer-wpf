@@ -23,23 +23,23 @@
                                 MinWidth="{TemplateBinding MinWidth}"
                                 Margin="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
-                                Command="{TemplateBinding PageNumberCommand}"
-                                CommandParameter="{TemplateBinding Value}"
-                                Content="{TemplateBinding Content}"
+                                Command="{Binding Command}"
+                                CommandParameter="{Binding Value}"
+                                Content="{Binding Content}"
                                 Foreground="{TemplateBinding Foreground}"
-                                IsEnabled="{TemplateBinding IsEnabled}"
-                                ToolTip="{TemplateBinding ToolTip}" />
+                                IsEnabled="{Binding IsEnabled}"
+                                ToolTip="{Binding ToolTip}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
                                 <MultiBinding Converter="{StaticResource IsEqualConverter}">
-                                    <Binding Path="Value" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Value" />
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter TargetName="pageButton" Property="Background" Value="{Binding CurrentBackground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-                            <Setter TargetName="pageButton" Property="Foreground" Value="{Binding CurrentForeground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+                            <Setter Property="Background" Value="{Binding CurrentBackground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+                            <Setter Property="Foreground" Value="{Binding CurrentForeground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -62,23 +62,23 @@
                                 MinWidth="{TemplateBinding MinWidth}"
                                 Margin="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
-                                Command="{TemplateBinding PageNumberCommand}"
-                                CommandParameter="{TemplateBinding Value}"
-                                Content="{TemplateBinding Content}"
+                                Command="{Binding Command}"
+                                CommandParameter="{Binding Value}"
+                                Content="{Binding Content}"
                                 FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
-                                IsEnabled="{TemplateBinding IsEnabled}"
-                                ToolTip="{TemplateBinding ToolTip}" />
+                                IsEnabled="{Binding IsEnabled}"
+                                ToolTip="{Binding ToolTip}" />
                     </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True">
                             <DataTrigger.Binding>
                                 <MultiBinding Converter="{StaticResource IsEqualConverter}">
-                                    <Binding Path="Value" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="Value" />
                                     <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
                                 </MultiBinding>
                             </DataTrigger.Binding>
-                            <Setter TargetName="pageButton" Property="Foreground" Value="{DynamicResource Primary}" />
+                            <Setter Property="Foreground" Value="{Binding CurrentBackground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
                             <Setter Property="FontWeight" Value="Bold" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -141,13 +141,6 @@
                                       ItemsSource="{TemplateBinding PageSizeCollection}"
                                       SelectedItem="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
                                       Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />
-                            <!--<rubyer:NumericBox x:Name="PART_PageSizeTextBox"
-                                               MinWidth="80"
-                                               VerticalAlignment="Center"
-                                               rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
-                                               MinValue="1"
-                                               Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}"
-                                               Value="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />-->
                         </StackPanel>
                     </DockPanel>
                     <ControlTemplate.Triggers>

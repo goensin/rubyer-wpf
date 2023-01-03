@@ -1,21 +1,14 @@
 ﻿using Rubyer.Commons;
 using Rubyer.Commons.KnownBoxes;
+using Rubyer.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -31,12 +24,6 @@ namespace Rubyer
         }
 
         /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-        }
-
-        /// <inheritdoc/>
         protected override bool IsItemItsOwnContainerOverride(object item)
         {
             return item is PageBarItem;
@@ -46,12 +33,6 @@ namespace Rubyer
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new PageBarItem();
-        }
-
-        /// <inheritdoc/>
-        protected override void PrepareContainerForItemOverride(DependencyObject element, object item)
-        {
-            base.PrepareContainerForItemOverride(element, item);
         }
 
         #region 命令
@@ -318,7 +299,7 @@ namespace Rubyer
         // 刷新页码条
         private void ReFreshPageBar()
         {
-            this.Items.Clear();
+            List<PageItemModel> models = new List<PageItemModel>();
 
             if (PageSize == 0 || Total == 0)
             {
@@ -327,23 +308,21 @@ namespace Rubyer
 
             int pageCount = (int)Math.Ceiling(Total / (PageSize * 1.0));    // 总共多少页
 
-            var previousPage = new PageBarItem
+            models.Add(new PageItemModel
             {
                 Content = "<",
+                ToolTip = Application.Current.Resources["I18N_PageBar_PreviousPage"].ToString(),
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
-                PageNumberCommand = new RubyerCommand(PageNumberChanged)
-            };
+                Command = new RubyerCommand(PageNumberChanged)
+            });
 
-            previousPage.SetResourceReference(ToolTipProperty, "I18N_PageBar_PreviousPage");
-            this.Items.Add(previousPage);
-
-            this.Items.Add(new PageBarItem
+            models.Add(new PageItemModel
             {
-                Content = "1",
+                Content = 1,
                 Value = 1,
                 IsEnabled = true,
-                PageNumberCommand = new RubyerCommand(PageNumberChanged)
+                Command = new RubyerCommand(PageNumberChanged)
             });
 
             int begin;
@@ -368,62 +347,61 @@ namespace Rubyer
 
             for (int i = begin; i <= end; i++)
             {
-                PageBarItem info = new PageBarItem()
+                var model = new PageItemModel
                 {
                     Value = i,
-                    Content = i.ToString(),
+                    Content = i,
                     IsEnabled = true,
-                    PageNumberCommand = new RubyerCommand(PageNumberChanged)
+                    Command = new RubyerCommand(PageNumberChanged)
                 };
 
                 if (pageCount > 9)
                 {
                     if (i == begin && PageIndex - begin >= 3 && PageIndex > 5)
                     {
-                        info.Value = PageIndex - 5;
-                        info.Content = "...";
-                        info.SetResourceReference(ToolTipProperty, "I18N_PageBar_Forward5Pages");
+                        model.Value = PageIndex - 5;
+                        model.Content = "...";
+                        model.ToolTip = Application.Current.Resources["I18N_PageBar_Forward5Pages"].ToString();
                     }
                     else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                     {
-                        info.Value = PageIndex + 5;
-                        info.Content = "...";
-                        info.SetResourceReference(ToolTipProperty, "I18N_PageBar_Backwards5Pages");
+                        model.Value = PageIndex + 5;
+                        model.Content = "...";
+                        model.ToolTip = Application.Current.Resources["I18N_PageBar_Backwards5Pages"].ToString();
                     }
                 }
 
-                this.Items.Add(info);
+                models.Add(model);
             }
 
             // 最后一页
             if (pageCount > 1)
             {
-                this.Items.Add(new PageBarItem()
+                models.Add(new PageItemModel
                 {
-                    Content = pageCount.ToString(),
+                    Content = pageCount,
                     Value = pageCount,
                     IsEnabled = true,
-                    PageNumberCommand = new RubyerCommand(PageNumberChanged)
+                    Command = new RubyerCommand(PageNumberChanged)
                 });
             }
 
             // 下一页
-            var nextPage = new PageBarItem()
+            models.Add(new PageItemModel
             {
                 Content = ">",
+                ToolTip = Application.Current.Resources["I18N_PageBar_NextPage"].ToString(),
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
-                PageNumberCommand = new RubyerCommand(PageNumberChanged)
-            };
+                Command = new RubyerCommand(PageNumberChanged)
+            });
 
-            nextPage.SetResourceReference(ToolTipProperty, "I18N_PageBar_NextPage");
-            this.Items.Add(nextPage);
+            this.ItemsSource = models;
         }
 
-        private void PageNumberChanged(object obj)
+        private void PageNumberChanged(object index)
         {
-            int num = (int)obj;
-            this.PageIndex = num;
+            PageIndex = (int)index;
         }
 
         #endregion 方法
