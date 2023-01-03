@@ -126,6 +126,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="DetailsVisibility" Value="Collapsed" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
@@ -392,10 +393,7 @@
                                               Command="DataGrid.SelectAllCommand"
                                               Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
                             <Viewbox>
-                                <Path HorizontalAlignment="Right"
-                                      VerticalAlignment="Bottom"
-                                      Data="M20,8 L20,20 L8,20Z"
-                                      Fill="Black" />
+                                <ContentControl Content="{Binding Path=(rubyer:DataGridHelper.RowHeaderTitle), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                             </Viewbox>
                         </DataGridColumnHeader>
 
@@ -452,6 +450,11 @@
                     <rubyer:Icon Margin="5 0" Type="DatabaseFill" />
                     <TextBlock Text="{DynamicResource I18N_DataGrid_NoData}" />
                 </StackPanel>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="rubyer:DataGridHelper.RowHeaderTitle">
+            <Setter.Value>
+                <rubyer:Icon Type="GridFill" />
             </Setter.Value>
         </Setter>
         <Setter Property="Template">

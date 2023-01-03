@@ -1,11 +1,13 @@
 ﻿using Rubyer.Commons;
 using Rubyer.Converters;
+using Rubyer.DataAnnotations;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Windows.Controls;
 
 namespace RubyerDemo.ViewModels
 {
@@ -112,6 +114,7 @@ namespace RubyerDemo.ViewModels
         private string name;
 
         [Display(Name = "名称")]
+        [ColumnWidth("*")]
         public string Name
         {
             get => name;
@@ -126,6 +129,7 @@ namespace RubyerDemo.ViewModels
 
         [Display(Name = "年龄")]
         [DisplayFormat(DataFormatString = "{0}岁")]
+        [ColumnWidth("120")]
         public int Age
         {
             get => age;
@@ -139,6 +143,7 @@ namespace RubyerDemo.ViewModels
         private bool isSelected;
 
         [Display(Name = "选择")]
+        [ColumnWidth("80")]
         public bool IsSelected
         {
             get => isSelected;
@@ -152,6 +157,7 @@ namespace RubyerDemo.ViewModels
         private GenderType gender;
 
         [Display(Name = "性别")]
+        [ColumnWidth("80")]
         public GenderType Gender
         {
             get => gender;

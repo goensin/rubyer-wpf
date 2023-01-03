@@ -18,7 +18,7 @@ namespace Rubyer.Converters
         /// <inheritdoc/>
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return VisibilityToBooleanConverter.ConvertVisibilityToBool(value);
+            return ConvertVisibilityToBool(value);
         }
 
         internal static bool ConvertVisibilityToBool(object value)

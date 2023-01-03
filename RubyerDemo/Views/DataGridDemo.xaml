@@ -114,6 +114,9 @@
                               ItemsSource="{Binding Persons}"
                               RowHeaderWidth="40"
                               SelectionMode="Extended">
+                        <rubyer:DataGridHelper.RowHeaderTitle>
+                            <rubyer:Icon Type="AppsFill" />
+                        </rubyer:DataGridHelper.RowHeaderTitle>
                         <DataGrid.RowHeaderTemplate>
                             <DataTemplate>
                                 <Border>
@@ -147,7 +150,9 @@
                             </Style>
                         </DataGrid.RowStyle>
                         <DataGrid.Columns>
-                            <rubyer:DataGridDetailToggleButtonColumn Width="30" Header="+" />
+                            <rubyer:DataGridDetailToggleButtonColumn Width="60"
+                                                                     rubyer:DataGridHelper.ColumnPosition="End"
+                                                                     Header="详细" />
                             <DataGridTextColumn Width="50"
                                                 Binding="{Binding Id}"
                                                 Header="序号" />
