@@ -361,6 +361,7 @@ namespace Rubyer
             }
         }
 
+            var editableAttribute = propertyInfo.GetCustomAttribute<ColumnWidthAttribute>();
         /// <summary>
         /// Items 为空时显示视图
         /// </summary>
