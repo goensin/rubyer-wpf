@@ -30,38 +30,37 @@
                                     IsShowPageSize="False"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="{Binding PageSize}"
+                                    PageSize="1"
                                     PageSizeChanged="PageBar_PageSizeChanged"
                                     PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="{Binding Total}" />
+                                    Total="100" />
                     <rubyer:PageBar Margin="10"
                                     CurrentBackground="{DynamicResource Accent}"
                                     CurrentForeground="{DynamicResource WhiteForeground}"
                                     IsShowTotal="False"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="{Binding PageSize}"
                                     PageSizeChanged="PageBar_PageSizeChanged"
                                     PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="{Binding Total}" />
+                                    PageSizeCollection="1,2,3,4,5"
+                                    Total="100" />
                     <rubyer:PageBar Margin="10"
                                     IsShowPageSize="False"
                                     IsShowTotal="False"
                                     ItemsDock="Left"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="{Binding PageSize}"
                                     PageSizeChanged="PageBar_PageSizeChanged"
                                     PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="{Binding Total}" />
-                    <rubyer:PageBar Margin="10"
-                                    ItemContainerStyle="{StaticResource TextPageBarItem}"
+                                    Total="100" />
+                    <rubyer:PageBar Style="{StaticResource TextPageBar}"
+                                    Margin="10"
                                     PageIndexChanged="PageBar_PageIndexChanged"
                                     PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="{Binding PageSize}"
                                     PageSizeChanged="PageBar_PageSizeChanged"
                                     PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="{Binding Total}" />
+                                    PageSizeCollection="10, 20, 30, 40, 50"
+                                    Total="100" />
                 </StackPanel>
 
             </GroupBox>

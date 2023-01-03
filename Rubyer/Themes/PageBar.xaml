@@ -135,13 +135,19 @@
                                        Text="{DynamicResource I18N_PageBar_Piece}"
                                        Visibility="{TemplateBinding IsShowTotal, Converter={StaticResource BooleanToVisibleConverter}}" />
 
-                            <rubyer:NumericBox x:Name="PART_PageSizeTextBox"
+                            <ComboBox MinWidth="90"
+                                      VerticalAlignment="Center"
+                                      rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
+                                      ItemsSource="{TemplateBinding PageSizeCollection}"
+                                      SelectedItem="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
+                                      Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />
+                            <!--<rubyer:NumericBox x:Name="PART_PageSizeTextBox"
                                                MinWidth="80"
                                                VerticalAlignment="Center"
                                                rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
                                                MinValue="1"
                                                Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}"
-                                               Value="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+                                               Value="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />-->
                         </StackPanel>
                     </DockPanel>
                     <ControlTemplate.Triggers>
@@ -152,6 +158,10 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <Style x:Key="TextPageBar" TargetType="{x:Type rubyer:PageBar}">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource TextPageBarItem}" />
     </Style>
 
 </ResourceDictionary>

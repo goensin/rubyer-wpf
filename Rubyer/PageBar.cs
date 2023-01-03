@@ -1,7 +1,9 @@
-﻿using Rubyer.Commons.KnownBoxes;
+﻿using Rubyer.Commons;
+using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,15 +22,9 @@ namespace Rubyer
     /// <summary>
     /// 页码条
     /// </summary>
-    [TemplatePart(Name = PageSizePartName, Type = typeof(TextBox))]
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(PageBarItem))]
     public class PageBar : ItemsControl
     {
-        /// <summary>
-        /// 每页条数文本框
-        /// </summary>
-        public const string PageSizePartName = "PART_PageSizeTextBox";
-
         static PageBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PageBar), new FrameworkPropertyMetadata(typeof(PageBar)));
@@ -38,17 +34,6 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            if (GetTemplateChild(PageSizePartName) is TextBox pageSizeTextBox)
-            {
-                pageSizeTextBox.KeyDown += (sender, e) =>
-                {
-                    if (e.Key == Key.Enter)
-                    {
-                        this.Focus();
-                    }
-                };
-            }
         }
 
         /// <inheritdoc/>
@@ -178,6 +163,8 @@ namespace Rubyer
         private static void OnPageSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PageBar pageBar = (PageBar)d;
+            CheckPageSize(pageBar);
+
             pageBar.PageIndex = 1;
             pageBar.ReFreshPageBar();
 
@@ -189,6 +176,14 @@ namespace Rubyer
             pageBar.PageSizeChangedCommand?.Execute(newValue);
         }
 
+        private static void CheckPageSize(PageBar pageBar)
+        {
+            if (!pageBar.PageSizeCollection.Contains(pageBar.PageSize))
+            {
+                pageBar.PageSize = pageBar.PageSizeCollection.FirstOrDefault();
+            }
+        }
+
         /// <summary>
         /// 每页数量
         /// </summary>
@@ -196,6 +191,30 @@ namespace Rubyer
         {
             get { return (int)GetValue(PageSizeProperty); }
             set { SetValue(PageSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// 每页数量集合
+        /// </summary>
+        public static readonly DependencyProperty PageSizeCollectionProperty = DependencyProperty.Register(
+            "PageSizeCollection",
+            typeof(IEnumerable<int>),
+            typeof(PageBar),
+            new FrameworkPropertyMetadata(Enumerable.Range(1, 4).Select(x => x * 5), FrameworkPropertyMetadataOptions.AffectsParentMeasure, OnPageSizeCollectionChanged));
+
+        private static void OnPageSizeCollectionChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            CheckPageSize(d as PageBar);
+        }
+
+        /// <summary>
+        /// 每页数量集合
+        /// </summary>
+        [TypeConverter(typeof(PageSizeCollectionConverter))]
+        public IEnumerable<int> PageSizeCollection
+        {
+            get { return (IEnumerable<int>)GetValue(PageSizeCollectionProperty); }
+            set { SetValue(PageSizeCollectionProperty, value); }
         }
 
         /// <summary>
