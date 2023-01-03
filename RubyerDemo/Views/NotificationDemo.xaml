@@ -66,8 +66,7 @@
                                     Margin="10"
                                     Click="NotificationContainerBtn_Click"
                                     Content="基础消息" />
-                            <rubyer:NotificationCard Content="notice"
-                                                     IsClearable="True" />
+                            <rubyer:NotificationCard Content="notice" IsClearable="True" />
                         </StackPanel>
                         <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <Button x:Name="InfoBtn"
