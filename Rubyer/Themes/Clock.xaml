@@ -127,7 +127,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
