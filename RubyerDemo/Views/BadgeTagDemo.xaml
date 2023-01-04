@@ -4,104 +4,106 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
-              rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Header="标记-Badge">
-                <StackPanel Margin="10">
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <rubyer:Badge x:Name="MyBadge"
-                                      Margin="10"
-                                      Text="1">
-                            <Button Style="{DynamicResource TextButton}"
-                                    Width="60"
-                                    BorderThickness="1"
-                                    Click="Button_Click">
-                                经验+1
-                            </Button>
-                        </rubyer:Badge>
-                        <rubyer:Badge Margin="10"
-                                      BadgeFontSize="20"
-                                      Text="20">
-                            <Button Style="{DynamicResource TextButton}"
-                                    Width="60"
-                                    BorderThickness="1">
-                                回复
-                            </Button>
-                        </rubyer:Badge>
-                        <rubyer:Badge Margin="10" Text="99+">
-                            <Button Style="{DynamicResource TextButton}"
-                                    Width="60"
-                                    BorderThickness="1">
-                                评论
-                            </Button>
-                        </rubyer:Badge>
+    <smtx:XamlDisplay UniqueKey="BadgeTagDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <GroupBox Header="标记-Badge">
+                    <StackPanel Margin="10">
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <rubyer:Badge x:Name="MyBadge"
+                                          Margin="10"
+                                          Text="1">
+                                <Button Style="{DynamicResource TextButton}"
+                                        Width="60"
+                                        BorderThickness="1"
+                                        Click="Button_Click">
+                                    经验+1
+                                </Button>
+                            </rubyer:Badge>
+                            <rubyer:Badge Margin="10"
+                                          BadgeFontSize="20"
+                                          Text="20">
+                                <Button Style="{DynamicResource TextButton}"
+                                        Width="60"
+                                        BorderThickness="1">
+                                    回复
+                                </Button>
+                            </rubyer:Badge>
+                            <rubyer:Badge Margin="10" Text="99+">
+                                <Button Style="{DynamicResource TextButton}"
+                                        Width="60"
+                                        BorderThickness="1">
+                                    评论
+                                </Button>
+                            </rubyer:Badge>
+                        </StackPanel>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <rubyer:Badge Margin="10">
+                                <Button Width="100">更新版本</Button>
+                            </rubyer:Badge>
+                            <rubyer:Badge Margin="10"
+                                          BadgeBrush="{StaticResource Success}"
+                                          BadgeSize="30">
+                                <Button Style="{DynamicResource TextButton}"
+                                        Width="100"
+                                        BorderThickness="1">
+                                    更新版本
+                                </Button>
+                            </rubyer:Badge>
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <rubyer:Badge Margin="10">
-                            <Button Width="100">更新版本</Button>
-                        </rubyer:Badge>
-                        <rubyer:Badge Margin="10"
-                                      BadgeBrush="{StaticResource Success}"
-                                      BadgeSize="30">
-                            <Button Style="{DynamicResource TextButton}"
-                                    Width="100"
-                                    BorderThickness="1">
-                                更新版本
-                            </Button>
-                        </rubyer:Badge>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="标签-Tag">
+                    <StackPanel>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <rubyer:Tag Margin="10"
+                                        Background="#07C160"
+                                        Url="https://weixin.qq.com/">
+                                <rubyer:Tag.Header>
+                                    <rubyer:Icon Type="WechatFill" />
+                                </rubyer:Tag.Header>
+                                Wechat
+                            </rubyer:Tag>
+                            <rubyer:Tag Margin="10" Url="www.baidu.com">
+                                <rubyer:Tag.Header>
+                                    <rubyer:Icon Type="BaiduFill" />
+                                </rubyer:Tag.Header>
+                                百度
+                            </rubyer:Tag>
+                            <rubyer:Tag Margin="10"
+                                        Background="{DynamicResource DefaultForeground}"
+                                        Foreground="{DynamicResource DefaultBackground}"
+                                        HeadBackground="#C71D23"
+                                        HeadForeground="#FFFFFF"
+                                        Url="https://gitee.com/wuyanxin1028">
+                                <rubyer:Tag.Header>
+                                    Gitee
+                                </rubyer:Tag.Header>
+                                Rubyer
+                            </rubyer:Tag>
+                        </StackPanel>
+                        <StackPanel Margin="5" Orientation="Horizontal">
+                            <rubyer:Tag Margin="10">
+                                <rubyer:Tag.Header>
+                                    <rubyer:Icon Type="CloudOffLine" />
+                                </rubyer:Tag.Header>
+                                无 url
+                            </rubyer:Tag>
+                            <rubyer:Tag Margin="10">
+                                无 header
+                            </rubyer:Tag>
+                            <rubyer:Tag Margin="10" Url="C:\">
+                                <rubyer:Tag.Header>
+                                    <rubyer:Icon Type="ServerFill" />
+                                </rubyer:Tag.Header>
+                                C 盘
+                            </rubyer:Tag>
+                        </StackPanel>
                     </StackPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Header="标签-Tag">
-                <StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <rubyer:Tag Margin="10"
-                                    Background="#07C160"
-                                    Url="https://weixin.qq.com/">
-                            <rubyer:Tag.Header>
-                                <rubyer:Icon Type="WechatFill" />
-                            </rubyer:Tag.Header>
-                            Wechat
-                        </rubyer:Tag>
-                        <rubyer:Tag Margin="10" Url="www.baidu.com">
-                            <rubyer:Tag.Header>
-                                <rubyer:Icon Type="BaiduFill" />
-                            </rubyer:Tag.Header>
-                            百度
-                        </rubyer:Tag>
-                        <rubyer:Tag Margin="10"
-                                    Background="{DynamicResource DefaultForeground}"
-                                    Foreground="{DynamicResource DefaultBackground}"
-                                    HeadBackground="#C71D23"
-                                    HeadForeground="#FFFFFF"
-                                    Url="https://gitee.com/wuyanxin1028">
-                            <rubyer:Tag.Header>
-                                Gitee
-                            </rubyer:Tag.Header>
-                            Rubyer
-                        </rubyer:Tag>
-                    </StackPanel>
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <rubyer:Tag Margin="10">
-                            <rubyer:Tag.Header>
-                                <rubyer:Icon Type="CloudOffLine" />
-                            </rubyer:Tag.Header>
-                            无 url
-                        </rubyer:Tag>
-                        <rubyer:Tag Margin="10">
-                            无 header
-                        </rubyer:Tag>
-                        <rubyer:Tag Margin="10" Url="C:\">
-                            <rubyer:Tag.Header>
-                                <rubyer:Icon Type="ServerFill" />
-                            </rubyer:Tag.Header>
-                            C 盘
-                        </rubyer:Tag>
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

@@ -4,66 +4,69 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewModels:PageBarViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
-    <ScrollViewer Style="{StaticResource SmallScrollViewer}"
-                  HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto">
-            <GroupBox Margin="0 0 0 10" Header="页码条-PageBar">
-                <StackPanel Width="650">
-                    <TextBlock Margin="10"
-                               HorizontalAlignment="Center"
-                               Text="{Binding PageBarMessage}" />
+    <smtx:XamlDisplay UniqueKey="PageBarDemo">
+        <ScrollViewer Style="{StaticResource SmallScrollViewer}"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto">
+                <GroupBox Margin="0 0 0 10" Header="页码条-PageBar">
+                    <StackPanel Width="650">
+                        <TextBlock Margin="10"
+                                   HorizontalAlignment="Center"
+                                   Text="{Binding PageBarMessage}" />
 
-                    <rubyer:PageBar Margin="10"
-                                    CurrentBackground="{DynamicResource Light}"
-                                    CurrentForeground="{DynamicResource BlackForeground}"
-                                    PageIndexChanged="PageBar_PageIndexChanged"
-                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="{Binding PageSize}"
-                                    PageSizeChanged="PageBar_PageSizeChanged"
-                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="{Binding Total}" />
-                    <rubyer:PageBar Margin="10"
-                                    IsShowPageSize="False"
-                                    PageIndexChanged="PageBar_PageIndexChanged"
-                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSize="1"
-                                    PageSizeChanged="PageBar_PageSizeChanged"
-                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="100" />
-                    <rubyer:PageBar Margin="10"
-                                    CurrentBackground="{DynamicResource Accent}"
-                                    CurrentForeground="{DynamicResource WhiteForeground}"
-                                    IsShowTotal="False"
-                                    PageIndexChanged="PageBar_PageIndexChanged"
-                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSizeChanged="PageBar_PageSizeChanged"
-                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    PageSizeCollection="1,2,3,4,5"
-                                    Total="100" />
-                    <rubyer:PageBar Margin="10"
-                                    IsShowPageSize="False"
-                                    IsShowTotal="False"
-                                    ItemsDock="Left"
-                                    PageIndexChanged="PageBar_PageIndexChanged"
-                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSizeChanged="PageBar_PageSizeChanged"
-                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    Total="100" />
-                    <rubyer:PageBar Style="{StaticResource TextPageBar}"
-                                    Margin="10"
-                                    PageIndexChanged="PageBar_PageIndexChanged"
-                                    PageIndexChangedCommand="{Binding PageIndexChanged}"
-                                    PageSizeChanged="PageBar_PageSizeChanged"
-                                    PageSizeChangedCommand="{Binding PageSizeChanged}"
-                                    PageSizeCollection="10, 20, 30, 40, 50"
-                                    Total="100" />
-                </StackPanel>
+                        <rubyer:PageBar Margin="10"
+                                        CurrentBackground="{DynamicResource Light}"
+                                        CurrentForeground="{DynamicResource BlackForeground}"
+                                        PageIndexChanged="PageBar_PageIndexChanged"
+                                        PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                        PageSize="{Binding PageSize}"
+                                        PageSizeChanged="PageBar_PageSizeChanged"
+                                        PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                        Total="{Binding Total}" />
+                        <rubyer:PageBar Margin="10"
+                                        IsShowPageSize="False"
+                                        PageIndexChanged="PageBar_PageIndexChanged"
+                                        PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                        PageSize="1"
+                                        PageSizeChanged="PageBar_PageSizeChanged"
+                                        PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                        Total="100" />
+                        <rubyer:PageBar Margin="10"
+                                        CurrentBackground="{DynamicResource Accent}"
+                                        CurrentForeground="{DynamicResource WhiteForeground}"
+                                        IsShowTotal="False"
+                                        PageIndexChanged="PageBar_PageIndexChanged"
+                                        PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                        PageSizeChanged="PageBar_PageSizeChanged"
+                                        PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                        PageSizeCollection="1,2,3,4,5"
+                                        Total="100" />
+                        <rubyer:PageBar Margin="10"
+                                        IsShowPageSize="False"
+                                        IsShowTotal="False"
+                                        ItemsDock="Left"
+                                        PageIndexChanged="PageBar_PageIndexChanged"
+                                        PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                        PageSizeChanged="PageBar_PageSizeChanged"
+                                        PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                        Total="100" />
+                        <rubyer:PageBar Style="{StaticResource TextPageBar}"
+                                        Margin="10"
+                                        PageIndexChanged="PageBar_PageIndexChanged"
+                                        PageIndexChangedCommand="{Binding PageIndexChanged}"
+                                        PageSizeChanged="PageBar_PageSizeChanged"
+                                        PageSizeChangedCommand="{Binding PageSizeChanged}"
+                                        PageSizeCollection="10, 20, 30, 40, 50"
+                                        Total="100" />
+                    </StackPanel>
 
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

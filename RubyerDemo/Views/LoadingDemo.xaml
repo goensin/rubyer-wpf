@@ -4,61 +4,63 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
-              rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Header="加载中-Loading">
-                <StackPanel Margin="10" Orientation="Horizontal">
-                    <rubyer:Loading Margin="10" />
-                    <rubyer:Loading Margin="10"
-                                    Diameter="50"
-                                    FocusedBrush="{DynamicResource Accent}"
-                                    StrokeThickness="8" />
-                    <rubyer:Loading Margin="10"
-                                    Content="loading"
-                                    FocusedBrush="{DynamicResource Dark}" />
-                    <rubyer:Loading Margin="10"
-                                    Content="disabled"
-                                    IsEnabled="False" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Header="波形加载中-WaveLoading">
-                <StackPanel Margin="10" Orientation="Horizontal">
-                    <rubyer:Loading Style="{StaticResource WaveLoading}" Margin="10" />
-                    <rubyer:Loading Style="{StaticResource WaveLoading}"
-                                    Margin="10"
-                                    Diameter="30"
-                                    FocusedBrush="{DynamicResource Accent}"
-                                    StrokeThickness="5" />
-                    <rubyer:Loading Style="{StaticResource WaveLoading}"
-                                    Margin="10"
-                                    Content="loading"
-                                    FocusedBrush="{DynamicResource Dark}" />
-                    <rubyer:Loading Style="{StaticResource WaveLoading}"
-                                    Margin="10"
-                                    Content="disabled"
-                                    IsEnabled="False" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="2" Header="点加载中-DotLoading">
-                <StackPanel Margin="10" Orientation="Horizontal">
-                    <rubyer:Loading Style="{StaticResource DotLoading}" Margin="10" />
-                    <rubyer:Loading Style="{StaticResource DotLoading}"
-                                    Margin="10"
-                                    Diameter="50"
-                                    FocusedBrush="{DynamicResource Accent}"
-                                    StrokeThickness="5" />
-                    <rubyer:Loading Style="{StaticResource DotLoading}"
-                                    Margin="10"
-                                    Content="loading"
-                                    FocusedBrush="{DynamicResource Dark}" />
-                    <rubyer:Loading Style="{StaticResource DotLoading}"
-                                    Margin="10"
-                                    Content="disabled"
-                                    IsEnabled="False" />
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+    <smtx:XamlDisplay UniqueKey="LoadingDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <GroupBox Header="加载中-Loading">
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <rubyer:Loading Margin="10" />
+                        <rubyer:Loading Margin="10"
+                                        Diameter="50"
+                                        FocusedBrush="{DynamicResource Accent}"
+                                        StrokeThickness="8" />
+                        <rubyer:Loading Margin="10"
+                                        Content="loading"
+                                        FocusedBrush="{DynamicResource Dark}" />
+                        <rubyer:Loading Margin="10"
+                                        Content="disabled"
+                                        IsEnabled="False" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="波形加载中-WaveLoading">
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <rubyer:Loading Style="{StaticResource WaveLoading}" Margin="10" />
+                        <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                        Margin="10"
+                                        Diameter="30"
+                                        FocusedBrush="{DynamicResource Accent}"
+                                        StrokeThickness="5" />
+                        <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                        Margin="10"
+                                        Content="loading"
+                                        FocusedBrush="{DynamicResource Dark}" />
+                        <rubyer:Loading Style="{StaticResource WaveLoading}"
+                                        Margin="10"
+                                        Content="disabled"
+                                        IsEnabled="False" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Row="2" Header="点加载中-DotLoading">
+                    <StackPanel Margin="10" Orientation="Horizontal">
+                        <rubyer:Loading Style="{StaticResource DotLoading}" Margin="10" />
+                        <rubyer:Loading Style="{StaticResource DotLoading}"
+                                        Margin="10"
+                                        Diameter="50"
+                                        FocusedBrush="{DynamicResource Accent}"
+                                        StrokeThickness="5" />
+                        <rubyer:Loading Style="{StaticResource DotLoading}"
+                                        Margin="10"
+                                        Content="loading"
+                                        FocusedBrush="{DynamicResource Dark}" />
+                        <rubyer:Loading Style="{StaticResource DotLoading}"
+                                        Margin="10"
+                                        Content="disabled"
+                                        IsEnabled="False" />
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

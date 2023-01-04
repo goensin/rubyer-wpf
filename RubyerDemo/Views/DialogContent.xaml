@@ -4,31 +4,34 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <Grid Margin="10"
-          rubyer:GridHelper.ColumnDefinitions="Auto, *"
-          rubyer:GridHelper.RowDefinitions="40, 40, 40">
-        <TextBlock Margin="10" Text="用户名" />
-        <TextBox x:Name="userName"
-                 Grid.Column="1"
-                 Width="200"
-                 Margin="10 0"
-                 Text="{Binding User.Name}" />
-
-        <TextBlock Grid.Row="1"
-                   Margin="10"
-                   Text="密码" />
-        <PasswordBox x:Name="password"
-                     Grid.Row="1"
+    <smtx:XamlDisplay UniqueKey="DialogContent">
+        <Grid Margin="10"
+              rubyer:GridHelper.ColumnDefinitions="Auto, *"
+              rubyer:GridHelper.RowDefinitions="40, 40, 40">
+            <TextBlock Margin="10" Text="用户名" />
+            <TextBox x:Name="userName"
                      Grid.Column="1"
                      Width="200"
-                     rubyer:PasswordBoxHelper.BindablePassword="{Binding User.Password}"
-                     rubyer:PasswordBoxHelper.ShowSwitchButton="True" />
+                     Margin="10 0"
+                     Text="{Binding User.Name}" />
 
-        <Button Grid.Row="2"
-                Grid.ColumnSpan="2"
-                Margin="10 0"
-                Command="{Binding Login}"
-                Content="登录" />
-    </Grid>
+            <TextBlock Grid.Row="1"
+                       Margin="10"
+                       Text="密码" />
+            <PasswordBox x:Name="password"
+                         Grid.Row="1"
+                         Grid.Column="1"
+                         Width="200"
+                         rubyer:PasswordBoxHelper.BindablePassword="{Binding User.Password}"
+                         rubyer:PasswordBoxHelper.ShowSwitchButton="True" />
+
+            <Button Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="10 0"
+                    Command="{Binding Login}"
+                    Content="登录" />
+        </Grid>
+    </smtx:XamlDisplay>
 </UserControl>

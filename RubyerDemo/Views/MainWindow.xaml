@@ -167,7 +167,6 @@
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      SelectedIndex="0"
                      SelectedItem="{Binding CurrentMenuItem}"
-                     SelectionChanged="ListBox_SelectionChanged"
                      VirtualizingPanel.IsVirtualizing="False">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -183,43 +182,7 @@
         </rubyer:Card>
 
         <rubyer:Card Grid.Column="1" Margin="5">
-            <TabControl x:Name="Tab" Style="{StaticResource LineTabControl}">
-                <TabItem Width="200">
-                    <TabItem.Header>
-                        <TextBlock FontSize="14" Text="{Binding CurrentMenuItem.Name}" />
-                    </TabItem.Header>
-
-                    <rubyer:Transition IsShow="True"
-                                       PlayEveryTime="True"
-                                       Type="FadeLeft"
-                                       Duration="0:0:0.3">
-                        <ContentControl HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Content="{Binding CurrentMenuItem.Content}" />
-                    </rubyer:Transition>
-                </TabItem>
-                <TabItem Width="100">
-                    <TabItem.Header>
-                        <StackPanel Margin="0" Orientation="Horizontal">
-                            <rubyer:Icon Margin="0 0 8 0"
-                                         FontSize="14"
-                                         Type="CodeSSlashFill" />
-                            <TextBlock FontSize="14" Text="Xaml" />
-                        </StackPanel>
-                    </TabItem.Header>
-                    <rubyer:Transition IsShow="True"
-                                       PlayEveryTime="True"
-                                       Type="FadeRight"
-                                       Duration="0:0:0.3">
-                        <avalonEdit:TextEditor x:Name="xamlTextEditor"
-                                               FontFamily="Consolas"
-                                               FontSize="10pt"
-                                               HorizontalScrollBarVisibility="Auto"
-                                               ShowLineNumbers="True"
-                                               VerticalScrollBarVisibility="Auto" />
-                    </rubyer:Transition>
-                </TabItem>
-            </TabControl>
+            <ContentControl Content="{Binding CurrentMenuItem.Content}" />
         </rubyer:Card>
     </Grid>
 </rubyer:RubyerWindow>

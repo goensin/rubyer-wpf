@@ -1,15 +1,75 @@
 ﻿<Application x:Class="RubyerDemo.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:avalonEdit="clr-namespace:ShowMeTheXAML.AvalonEdit;assembly=ShowMeTheXAML.AvalonEdit"
+             xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/Default.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
+
+            <Style BasedOn="{StaticResource {x:Type smtx:XamlDisplay}}" TargetType="smtx:XamlDisplay">
+                <Style.Resources>
+                    <avalonEdit:TextDocumentValueConverter x:Key="TextDocumentValueConverter" />
+                </Style.Resources>
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="smtx:XamlDisplay">
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                <TabControl Style="{StaticResource LineTabControl}" rubyer:HeaderHelper.FontSize="20">
+                                    <TabItem MinWidth="{Binding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                        <TabItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <rubyer:Icon Margin="0 0 8 0" Type="FunctionLine" />
+                                                <TextBlock Height="Auto"
+                                                           FontSize="14"
+                                                           Text="{Binding CurrentMenuItem.Name}" />
+                                            </StackPanel>
+                                        </TabItem.Header>
+
+                                        <rubyer:Transition IsShow="True"
+                                                           PlayEveryTime="True"
+                                                           Type="FadeLeft"
+                                                           Duration="0:0:0.3">
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                        </rubyer:Transition>
+                                    </TabItem>
+                                    <TabItem MinWidth="{Binding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                        <TabItem.Header>
+                                            <StackPanel Orientation="Horizontal">
+                                                <rubyer:Icon Margin="0 0 8 0" Type="CodeSSlashFill" />
+                                                <TextBlock FontSize="14" Text="Xaml" />
+                                            </StackPanel>
+                                        </TabItem.Header>
+
+                                        <rubyer:Transition IsShow="True"
+                                                           PlayEveryTime="True"
+                                                           Type="FadeRight"
+                                                           Duration="0:0:0.3">
+                                            <avalonedit:TextEditor Style="{StaticResource AvalonTextEditorXamlDisplay}"
+                                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                                   Document="{Binding Xaml, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TextDocumentValueConverter}}" />
+                                        </rubyer:Transition>
+                                    </TabItem>
+                                </TabControl>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,4 +1,5 @@
 ﻿using RubyerDemo.ViewModels;
+using ShowMeTheXAML;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,7 +17,10 @@ namespace RubyerDemo
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            XamlDisplay.Init();
+
             base.OnStartup(e);
+            
             MainWindow window = new MainWindow { DataContext = new MainViewModel() };
             window.Show();
         }

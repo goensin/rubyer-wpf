@@ -2,7 +2,6 @@
 using Microsoft.Win32;
 using Rubyer;
 using Rubyer.Enums;
-using RubyerDemo.Utils;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -35,27 +34,6 @@ namespace RubyerDemo
             contrainerSlider.Value = ((CornerRadius)App.Current.Resources["AllContainerCornerRadius"]).TopLeft;
             ThemeManager.SwitchThemeMode(ThemeMode.System);
             darkToggleButton.IsChecked = ThemeManager.GetIsAppDarkMode();
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            try
-            {
-                ListBox listBox = sender as ListBox;
-                var viewNames = (listBox.SelectedItem as ViewModels.MenuItem).Content.ToString().Split('.');
-                string name = $"Views/{viewNames.Last()}.xaml";
-                var uri = new Uri($"{name}", UriKind.Relative);
-                var resourceInfo = Application.GetResourceStream(uri);
-                var bamlTranslator = new BamlTranslator(resourceInfo.Stream);
-                xamlTextEditor.SyntaxHighlighting = HighlightingManager.Instance.GetDefinitionByExtension(".xaml");
-                xamlTextEditor.Encoding = Encoding.Default;
-                xamlTextEditor.Text = bamlTranslator.ToString();
-                Tab.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex);
-            }
         }
 
         private void controlSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

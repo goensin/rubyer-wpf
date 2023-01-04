@@ -4,37 +4,40 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
-            <GroupBox Margin="0 0 0 10" Header="文本块-TextBlock">
-                <StackPanel Margin="10">
-                    <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">
-                        标题一标题一标题一标题一标题一标题一标题一标题一
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource Head2TextBlock}">
-                        标题二标题二标题二标题二标题二标题二标题二标题二
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource Head3TextBlock}">
-                        标题三标题三标题三标题三标题三标题三标题三标题三
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource Head4TextBlock}">
-                        标题四标题四标题四标题四标题四标题四标题四标题四
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource Head5TextBlock}">
-                        标题五标题五标题五标题五标题五标题五标题五标题五
-                    </TextBlock>
-                    <TextBlock>
-                        内容内容内容内容内容内容内容内容内容内容内容
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource SmallTextBlock}">
-                        小文本小文本小文本小文本小文本小文本小文本
-                    </TextBlock>
-                    <TextBlock Style="{StaticResource MiniTextBlock}">
-                        超小文本超小文本超小文本超小文本超小文本
-                    </TextBlock>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+    <smtx:XamlDisplay UniqueKey="TextBlockDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto">
+                <GroupBox Margin="0 0 0 10" Header="文本块-TextBlock">
+                    <StackPanel Margin="10">
+                        <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">
+                            标题一标题一标题一标题一标题一标题一标题一标题一
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource Head2TextBlock}">
+                            标题二标题二标题二标题二标题二标题二标题二标题二
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource Head3TextBlock}">
+                            标题三标题三标题三标题三标题三标题三标题三标题三
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource Head4TextBlock}">
+                            标题四标题四标题四标题四标题四标题四标题四标题四
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource Head5TextBlock}">
+                            标题五标题五标题五标题五标题五标题五标题五标题五
+                        </TextBlock>
+                        <TextBlock>
+                            内容内容内容内容内容内容内容内容内容内容内容
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource SmallTextBlock}">
+                            小文本小文本小文本小文本小文本小文本小文本
+                        </TextBlock>
+                        <TextBlock Style="{StaticResource MiniTextBlock}">
+                            超小文本超小文本超小文本超小文本超小文本
+                        </TextBlock>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

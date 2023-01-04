@@ -4,152 +4,155 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewModels:MessageBoxViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <GroupBox Margin="0 0 0 10" Header="消息框-MessageBoxR">
-                <StackPanel Margin="5">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Width="100"
-                                   Margin="10"
-                                   HorizontalAlignment="Center"
-                                   Text="全局弹出" />
-                        <TextBlock Width="100"
-                                   Margin="10"
-                                   HorizontalAlignment="Center"
-                                   Text="指定容器弹出" />
+    <smtx:XamlDisplay UniqueKey="MessageBoxDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <GroupBox Margin="0 0 0 10" Header="消息框-MessageBoxR">
+                    <StackPanel Margin="5">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Width="100"
+                                       Margin="10"
+                                       HorizontalAlignment="Center"
+                                       Text="全局弹出" />
+                            <TextBlock Width="100"
+                                       Margin="10"
+                                       HorizontalAlignment="Center"
+                                       Text="指定容器弹出" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Style="{StaticResource LightButton}"
+                                    Width="100"
+                                    Margin="10"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="1">
+                                消息提示
+                            </Button>
+                            <Button Style="{StaticResource LightButton}"
+                                    Width="100"
+                                    Margin="10"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="1">
+                                消息提示
+                            </Button>
+                            <rubyer:MessageBoxCard Message="有消息消息消息消息消息" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Width="100"
+                                    Margin="10"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="2">
+                                确认消息
+                            </Button>
+                            <Button Width="100"
+                                    Margin="10"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="2">
+                                确认消息
+                            </Button>
+                            <rubyer:MessageBoxCard Message="是否删除改数据?"
+                                                   MessageBoxButton="OKCancel"
+                                                   ThemeColorBrush="{StaticResource Question}"
+                                                   Type="Question" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Info}"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="3">
+                                信息
+                            </Button>
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Info}"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="3">
+                                信息
+                            </Button>
+                            <rubyer:MessageBoxCard Message="消息消息消息消息消息消息"
+                                                   MessageBoxButton="YesNo"
+                                                   ThemeColorBrush="{StaticResource Info}"
+                                                   Type="Info" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Warning}"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="4">
+                                警告
+                            </Button>
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Warning}"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="4">
+                                警告
+                            </Button>
+                            <rubyer:MessageBoxCard Message="警告警告警告警告警告警告"
+                                                   MessageBoxButton="YesNo"
+                                                   ThemeColorBrush="{StaticResource Warning}"
+                                                   Type="Warning" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Success}"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="5">
+                                成功
+                            </Button>
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Success}"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="5">
+                                成功
+                            </Button>
+                            <rubyer:MessageBoxCard Message="成功成功成功成功成功成功"
+                                                   MessageBoxButton="OK"
+                                                   ThemeColorBrush="{StaticResource Success}"
+                                                   Type="Success" />
+                        </StackPanel>
+                        <StackPanel Margin="5"
+                                    HorizontalAlignment="Center"
+                                    Orientation="Horizontal">
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Error}"
+                                    Command="{Binding MessageBoxShow}"
+                                    CommandParameter="6">
+                                错误
+                            </Button>
+                            <Button Width="100"
+                                    Margin="10"
+                                    Background="{StaticResource Error}"
+                                    Command="{Binding MessageBoxShowContainer}"
+                                    CommandParameter="6">
+                                错误
+                            </Button>
+                            <rubyer:MessageBoxCard Message="错误错误错误错误错误错误"
+                                                   MessageBoxButton="YesNoCancel"
+                                                   ThemeColorBrush="{StaticResource Error}"
+                                                   Type="Error" />
+                        </StackPanel>
                     </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Style="{StaticResource LightButton}"
-                                Width="100"
-                                Margin="10"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="1">
-                            消息提示
-                        </Button>
-                        <Button Style="{StaticResource LightButton}"
-                                Width="100"
-                                Margin="10"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="1">
-                            消息提示
-                        </Button>
-                        <rubyer:MessageBoxCard Message="有消息消息消息消息消息" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Width="100"
-                                Margin="10"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="2">
-                            确认消息
-                        </Button>
-                        <Button Width="100"
-                                Margin="10"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="2">
-                            确认消息
-                        </Button>
-                        <rubyer:MessageBoxCard Message="是否删除改数据?"
-                                               MessageBoxButton="OKCancel"
-                                               ThemeColorBrush="{StaticResource Question}"
-                                               Type="Question" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Info}"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="3">
-                            信息
-                        </Button>
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Info}"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="3">
-                            信息
-                        </Button>
-                        <rubyer:MessageBoxCard Message="消息消息消息消息消息消息"
-                                               MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource Info}"
-                                               Type="Info" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Warning}"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="4">
-                            警告
-                        </Button>
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Warning}"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="4">
-                            警告
-                        </Button>
-                        <rubyer:MessageBoxCard Message="警告警告警告警告警告警告"
-                                               MessageBoxButton="YesNo"
-                                               ThemeColorBrush="{StaticResource Warning}"
-                                               Type="Warning" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Success}"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="5">
-                            成功
-                        </Button>
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Success}"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="5">
-                            成功
-                        </Button>
-                        <rubyer:MessageBoxCard Message="成功成功成功成功成功成功"
-                                               MessageBoxButton="OK"
-                                               ThemeColorBrush="{StaticResource Success}"
-                                               Type="Success" />
-                    </StackPanel>
-                    <StackPanel Margin="5"
-                                HorizontalAlignment="Center"
-                                Orientation="Horizontal">
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Error}"
-                                Command="{Binding MessageBoxShow}"
-                                CommandParameter="6">
-                            错误
-                        </Button>
-                        <Button Width="100"
-                                Margin="10"
-                                Background="{StaticResource Error}"
-                                Command="{Binding MessageBoxShowContainer}"
-                                CommandParameter="6">
-                            错误
-                        </Button>
-                        <rubyer:MessageBoxCard Message="错误错误错误错误错误错误"
-                                               MessageBoxButton="YesNoCancel"
-                                               ThemeColorBrush="{StaticResource Error}"
-                                               Type="Error" />
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

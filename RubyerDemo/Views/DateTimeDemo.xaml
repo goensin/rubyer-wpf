@@ -4,58 +4,61 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:DateTimeViewModel}"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="*, *, *"
-              rubyer:GridHelper.ColumnSpacing="10"
-              rubyer:GridHelper.RowDefinitions="Auto,Auto"
-              rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Width="Auto" Header="日历-Calendar">
-                <Calendar Margin="5" />
-            </GroupBox>
-            <GroupBox Grid.Column="1"
-                      Grid.ColumnSpan="2"
-                      Width="Auto"
-                      Header="时钟-Clock">
-                <StackPanel Margin="5" Orientation="Horizontal">
-                    <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged" />
-                    <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="10 0 0 0" />
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1"
-                      Width="Auto"
-                      Header="日期选择框-DatePicker">
-                <DatePicker Width="140"
-                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
-                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
-                            rubyer:InputBoxHelper.IsClearable="True"
-                            rubyer:InputBoxHelper.Watermark="请选择日期"
-                            SelectedDate="{Binding Date}" />
-            </GroupBox>
+    <smtx:XamlDisplay UniqueKey="DateTimeDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.ColumnDefinitions="*, *, *"
+                  rubyer:GridHelper.ColumnSpacing="10"
+                  rubyer:GridHelper.RowDefinitions="Auto,Auto"
+                  rubyer:GridHelper.RowSpacing="10">
+                <GroupBox Width="Auto" Header="日历-Calendar">
+                    <Calendar Margin="5" />
+                </GroupBox>
+                <GroupBox Grid.Column="1"
+                          Grid.ColumnSpan="2"
+                          Width="Auto"
+                          Header="时钟-Clock">
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged" />
+                        <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="10 0 0 0" />
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Grid.Row="1"
+                          Width="Auto"
+                          Header="日期选择框-DatePicker">
+                    <DatePicker Width="140"
+                                rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                                rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                                rubyer:InputBoxHelper.IsClearable="True"
+                                rubyer:InputBoxHelper.Watermark="请选择日期"
+                                SelectedDate="{Binding Date}" />
+                </GroupBox>
 
-            <GroupBox Grid.Row="1"
-                      Grid.Column="1"
-                      Width="Auto"
-                      Header="时间选择框-TimePicker">
-                <rubyer:TimePicker Width="140"
-                                   rubyer:InputBoxHelper.IsClearable="True"
-                                   rubyer:InputBoxHelper.Watermark="请选择时间"
-                                   SelectedTime="{Binding Time}"
-                                   SelectedTimeChanged="TimePicker_SelectedTimeChanged"
-                                   SelectedTimeFormat="HH:mm:ss" />
-            </GroupBox>
-
-            <GroupBox Grid.Row="1"
-                      Grid.Column="2"
-                      Width="Auto"
-                      Header="日期时间选择框-DateTimePicker">
-                <rubyer:DateTimePicker Width="200"
+                <GroupBox Grid.Row="1"
+                          Grid.Column="1"
+                          Width="Auto"
+                          Header="时间选择框-TimePicker">
+                    <rubyer:TimePicker Width="140"
                                        rubyer:InputBoxHelper.IsClearable="True"
-                                       rubyer:InputBoxHelper.PreContent="##"
-                                       SelectedDateTime="{Binding DateTime}" />
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                                       rubyer:InputBoxHelper.Watermark="请选择时间"
+                                       SelectedTime="{Binding Time}"
+                                       SelectedTimeChanged="TimePicker_SelectedTimeChanged"
+                                       SelectedTimeFormat="HH:mm:ss" />
+                </GroupBox>
+
+                <GroupBox Grid.Row="1"
+                          Grid.Column="2"
+                          Width="Auto"
+                          Header="日期时间选择框-DateTimePicker">
+                    <rubyer:DateTimePicker Width="200"
+                                           rubyer:InputBoxHelper.IsClearable="True"
+                                           rubyer:InputBoxHelper.PreContent="##"
+                                           SelectedDateTime="{Binding DateTime}" />
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

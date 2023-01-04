@@ -3,36 +3,38 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="*, *"
+    <smtx:XamlDisplay UniqueKey="GroupBoxDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.ColumnDefinitions="*, *"
               rubyer:GridHelper.ColumnSpacing="10"
               rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
               rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Header="默认分组框-GroupBox">
-                <TextBlock>
+                <GroupBox Header="默认分组框-GroupBox">
+                    <TextBlock>
                     蒹葭苍苍，白露为霜。所谓伊人，在水一方。
-                </TextBlock>
-            </GroupBox>
-            <GroupBox Grid.Column="1"
+                    </TextBlock>
+                </GroupBox>
+                <GroupBox Grid.Column="1"
                       rubyer:HeaderHelper.FontSize="16"
                       rubyer:HeaderHelper.FontWeight="Bold"
                       rubyer:HeaderHelper.HorizontalAlignment="Center"
                       Header="默认分组框-GroupBox">
-                <TextBlock>
+                    <TextBlock>
                     溯洄从之，道阻且长。溯游从之，宛在水中央。
-                </TextBlock>
-            </GroupBox>
+                    </TextBlock>
+                </GroupBox>
 
-            <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
+                <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
                       Grid.Row="1"
                       Header="色彩分组框-GroupBox">
-                <TextBlock>
+                    <TextBlock>
                     蒹葭萋萋，白露未晞。所谓伊人，在水之湄。
-                </TextBlock>
-            </GroupBox>
-            <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
+                    </TextBlock>
+                </GroupBox>
+                <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
                       Grid.Row="1"
                       Grid.Column="1"
                       rubyer:HeaderHelper.Background="{DynamicResource Accent}"
@@ -43,27 +45,27 @@
                       BorderThickness="0"
                       Foreground="{DynamicResource WhiteForeground}"
                       Header="色彩分组框-GroupBox">
-                <TextBlock>
+                    <TextBlock>
                     溯洄从之，道阻且跻。溯游从之，宛在水中坻。
-                </TextBlock>
-            </GroupBox>
+                    </TextBlock>
+                </GroupBox>
 
-            <GroupBox Style="{StaticResource ClassicGroupBox}"
+                <GroupBox Style="{StaticResource ClassicGroupBox}"
                       Grid.Row="2"
                       Grid.ColumnSpan="2"
                       Width="Auto"
                       Header="经典分组框-GroupBox">
-                <TextBlock>
+                    <TextBlock>
                     蒹葭采采，白露未已。所谓伊人，在水之涘。 溯洄从之，道阻且右。溯游从之，宛在水中沚。
-                </TextBlock>
-            </GroupBox>
+                    </TextBlock>
+                </GroupBox>
 
-            <GroupBox Grid.Row="3"
+                <GroupBox Grid.Row="3"
                       Grid.ColumnSpan="2"
                       Header="折叠面板-Expander">
-                <StackPanel Margin="5" Orientation="Horizontal">
-                    <StackPanel Margin="5">
-                        <Expander x:Name="expander"
+                    <StackPanel Margin="5" Orientation="Horizontal">
+                        <StackPanel Margin="5">
+                            <Expander x:Name="expander"
                                   Width="300"
                                   Margin="5"
                                   rubyer:HeaderHelper.FontFamily="隶书"
@@ -72,15 +74,15 @@
                                   FontSize="13"
                                   Header="《蒹葭》"
                                   IsExpanded="True">
-                            <TextBlock>
+                                <TextBlock>
                                 蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
                                 溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
                                 蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
                                 溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
                                 蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
                                 溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
-                        </Expander>
-                        <Expander MaxWidth="300"
+                            </Expander>
+                            <Expander MaxWidth="300"
                                   Margin="5"
                                   rubyer:ExpanderHelper.ExpandIconDock="Left"
                                   rubyer:ExpanderHelper.ExpandIconType="ArrowDownSFill"
@@ -89,30 +91,30 @@
                                   rubyer:HeaderHelper.HorizontalAlignment="Center"
                                   ExpandDirection="Up"
                                   Header="《蒹葭》">
-                            <TextBlock>
+                                <TextBlock>
                                 蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
                                 溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
                                 蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
                                 溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
                                 蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
                                 溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
-                        </Expander>
-                    </StackPanel>
-                    <Expander Margin="5"
+                            </Expander>
+                        </StackPanel>
+                        <Expander Margin="5"
                               rubyer:ControlHelper.CornerRadius="0"
                               rubyer:HeaderHelper.Background="#88BDBDBD"
                               BorderThickness="1 0"
                               ExpandDirection="Left"
                               Header="《蒹葭》">
-                        <TextBlock>
+                            <TextBlock>
                             蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
                             溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
                             蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
                             溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
                             蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
                             溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
-                    </Expander>
-                    <Expander Margin="5"
+                        </Expander>
+                        <Expander Margin="5"
                               rubyer:ExpanderHelper.ExpandIconDock="Top"
                               rubyer:ExpanderHelper.ExpandIconType="ArrowDownLine"
                               rubyer:HeaderHelper.Background="{DynamicResource Dark}"
@@ -124,16 +126,17 @@
                               BorderThickness="0"
                               ExpandDirection="Right"
                               Header="《蒹葭》">
-                        <TextBlock>
+                            <TextBlock>
                             蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
                             溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
                             蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
                             溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
                             蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
                             溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
-                    </Expander>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                        </Expander>
+                    </StackPanel>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

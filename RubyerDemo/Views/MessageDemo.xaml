@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:system="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d">
     <UserControl.Resources>
@@ -22,139 +23,142 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <rubyer:MessageContainer Identifier="MessageDemo">
-        <ScrollViewer Style="{StaticResource SmallScrollViewer}"
-                      HorizontalScrollBarVisibility="Auto"
-                      VerticalScrollBarVisibility="Auto">
-            <Grid>
-                <GroupBox Margin="0 0 0 10" Header="消息-Message">
-                    <StackPanel Margin="5">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Width="100"
-                                       Margin="10"
-                                       HorizontalAlignment="Center"
-                                       Text="全局弹出" />
-                            <TextBlock Width="100"
-                                       Margin="10"
-                                       HorizontalAlignment="Center"
-                                       Text="指定容器弹出" />
+
+    <smtx:XamlDisplay UniqueKey="MessageDemo">
+        <rubyer:MessageContainer Identifier="MessageDemo">
+            <ScrollViewer Style="{StaticResource SmallScrollViewer}"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
+                <Grid>
+                    <GroupBox Margin="0 0 0 10" Header="消息-Message">
+                        <StackPanel Margin="5">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Width="100"
+                                           Margin="10"
+                                           HorizontalAlignment="Center"
+                                           Text="全局弹出" />
+                                <TextBlock Width="100"
+                                           Margin="10"
+                                           HorizontalAlignment="Center"
+                                           Text="指定容器弹出" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Content="HorizontalAlignment:" />
+                                <ComboBox Width="100"
+                                          Margin="5 0 10 0"
+                                          ItemsSource="{Binding Source={StaticResource HorizontalAlignmentValues}}"
+                                          SelectedItem="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:MessageContainer}}" />
+                                <Label Content="VerticalAlignment:" />
+                                <ComboBox Width="100"
+                                          Margin="5 0 10 0"
+                                          ItemsSource="{Binding Source={StaticResource VerticalAlignmentValues}}"
+                                          SelectedItem="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:MessageContainer}}" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="MessageBtn"
+                                        Style="{StaticResource LightButton}"
+                                        Width="100"
+                                        Margin="10"
+                                        Click="MessageBtn_Click"
+                                        Content="基础消息" />
+                                <Button x:Name="MessageContainerBtn"
+                                        Style="{StaticResource LightButton}"
+                                        Width="100"
+                                        Margin="10"
+                                        Click="MessageContainerBtn_Click"
+                                        Content="基础消息" />
+                                <rubyer:MessageCard Content="message" IsClearable="True" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="InfoBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Info}"
+                                        Click="InfoBtn_Click"
+                                        Content="提示消息" />
+                                <Button x:Name="InfoContainerBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Info}"
+                                        Click="InfoContainerBtn_Click"
+                                        Content="提示消息" />
+                                <rubyer:MessageCard Content="info"
+                                                    IsClearable="True"
+                                                    Type="Info" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="WaringBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Warning}"
+                                        Click="WaringBtn_Click"
+                                        Content="警告消息" />
+                                <Button x:Name="WaringContainerBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Warning}"
+                                        Click="WaringContainerBtn_Click"
+                                        Content="警告消息" />
+                                <rubyer:MessageCard Content="warning"
+                                                    IsClearable="True"
+                                                    Type="Warning" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="SuccessBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Success}"
+                                        Click="SuccessBtn_Click"
+                                        Content="成功消息" />
+                                <Button x:Name="SuccessContainerBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Success}"
+                                        Click="SuccessContainerBtn_Click"
+                                        Content="成功消息" />
+                                <rubyer:MessageCard Content="success"
+                                                    IsClearable="True"
+                                                    Type="Success" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="ErrorBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Error}"
+                                        Click="ErrorBtn_Click"
+                                        Content="错误消息" />
+                                <Button x:Name="ErrorContaionBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Background="{StaticResource Error}"
+                                        Click="ErrorContaionBtn_Click"
+                                        Content="错误消息" />
+                                <rubyer:MessageCard Content="error"
+                                                    IsClearable="True"
+                                                    Type="Error" />
+                            </StackPanel>
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                                <Button x:Name="ControlBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Click="ControlBtn_Click"
+                                        Content="自定义" />
+                                <Button x:Name="ControlContaionBtn"
+                                        Width="100"
+                                        Margin="10"
+                                        Click="ControlContaionBtn_Click"
+                                        Content="自定义" />
+                                <rubyer:MessageCard IsClearable="True">
+                                    <StackPanel x:Name="CustomContent" Margin="5">
+                                        <TextBlock Style="{StaticResource Head4TextBlock}" Text="标题" />
+                                        <TextBlock Text="自定义控件内容" />
+                                    </StackPanel>
+                                </rubyer:MessageCard>
+                            </StackPanel>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="HorizontalAlignment:" />
-                            <ComboBox Width="100"
-                                      Margin="5 0 10 0"
-                                      ItemsSource="{Binding Source={StaticResource HorizontalAlignmentValues}}"
-                                      SelectedItem="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:MessageContainer}}" />
-                            <Label Content="VerticalAlignment:" />
-                            <ComboBox Width="100"
-                                      Margin="5 0 10 0"
-                                      ItemsSource="{Binding Source={StaticResource VerticalAlignmentValues}}"
-                                      SelectedItem="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:MessageContainer}}" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="MessageBtn"
-                                    Style="{StaticResource LightButton}"
-                                    Width="100"
-                                    Margin="10"
-                                    Click="MessageBtn_Click"
-                                    Content="基础消息" />
-                            <Button x:Name="MessageContainerBtn"
-                                    Style="{StaticResource LightButton}"
-                                    Width="100"
-                                    Margin="10"
-                                    Click="MessageContainerBtn_Click"
-                                    Content="基础消息" />
-                            <rubyer:MessageCard Content="message" IsClearable="True" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="InfoBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Info}"
-                                    Click="InfoBtn_Click"
-                                    Content="提示消息" />
-                            <Button x:Name="InfoContainerBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Info}"
-                                    Click="InfoContainerBtn_Click"
-                                    Content="提示消息" />
-                            <rubyer:MessageCard Content="info"
-                                                IsClearable="True"
-                                                Type="Info" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="WaringBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Warning}"
-                                    Click="WaringBtn_Click"
-                                    Content="警告消息" />
-                            <Button x:Name="WaringContainerBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Warning}"
-                                    Click="WaringContainerBtn_Click"
-                                    Content="警告消息" />
-                            <rubyer:MessageCard Content="warning"
-                                                IsClearable="True"
-                                                Type="Warning" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="SuccessBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Success}"
-                                    Click="SuccessBtn_Click"
-                                    Content="成功消息" />
-                            <Button x:Name="SuccessContainerBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Success}"
-                                    Click="SuccessContainerBtn_Click"
-                                    Content="成功消息" />
-                            <rubyer:MessageCard Content="success"
-                                                IsClearable="True"
-                                                Type="Success" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="ErrorBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Error}"
-                                    Click="ErrorBtn_Click"
-                                    Content="错误消息" />
-                            <Button x:Name="ErrorContaionBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Background="{StaticResource Error}"
-                                    Click="ErrorContaionBtn_Click"
-                                    Content="错误消息" />
-                            <rubyer:MessageCard Content="error"
-                                                IsClearable="True"
-                                                Type="Error" />
-                        </StackPanel>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                            <Button x:Name="ControlBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Click="ControlBtn_Click"
-                                    Content="自定义" />
-                            <Button x:Name="ControlContaionBtn"
-                                    Width="100"
-                                    Margin="10"
-                                    Click="ControlContaionBtn_Click"
-                                    Content="自定义" />
-                            <rubyer:MessageCard IsClearable="True">
-                                <StackPanel x:Name="CustomContent" Margin="5">
-                                    <TextBlock Style="{StaticResource Head4TextBlock}" Text="标题" />
-                                    <TextBlock Text="自定义控件内容" />
-                                </StackPanel>
-                            </rubyer:MessageCard>
-                        </StackPanel>
-                    </StackPanel>
-                </GroupBox>
-            </Grid>
-        </ScrollViewer>
-    </rubyer:MessageContainer>
+                    </GroupBox>
+                </Grid>
+            </ScrollViewer>
+        </rubyer:MessageContainer>
+    </smtx:XamlDisplay>
 </UserControl>

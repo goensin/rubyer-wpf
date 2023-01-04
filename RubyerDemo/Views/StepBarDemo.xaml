@@ -4,24 +4,57 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              MinWidth="900"
              MinHeight="600"
              d:DataContext="{d:DesignInstance Type=viewmodels:StepBarViewModel}"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto"
-              rubyer:GridHelper.ColumnSpacing="10">
-            <StackPanel>
-                <Button Width="100"
-                        Margin="10"
-                        HorizontalAlignment="Center"
-                        Command="{Binding NextStep}"
-                        Content="下一步" />
+    <smtx:XamlDisplay UniqueKey="StepBarDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto" rubyer:GridHelper.ColumnSpacing="10">
+                <StackPanel>
+                    <Button Width="100"
+                            Margin="10"
+                            HorizontalAlignment="Center"
+                            Command="{Binding NextStep}"
+                            Content="下一步" />
 
-                <GroupBox Header="垂直步骤条 - StepBar">
-                    <StackPanel>
-                        <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                    <GroupBox Header="垂直步骤条 - StepBar">
+                        <StackPanel>
+                            <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                                <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="description 3">Step 3</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="description 4">Step 4</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="description 5">Step 5</rubyer:StepBarItem>
+                            </rubyer:StepBar>
+
+                            <rubyer:StepBar Margin="10"
+                                            HorizontalContentAlignment="Left"
+                                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                                            CurrentIndex="{Binding CurrentIndex}"
+                                            DescriptionStringFormat="时间: {0}"
+                                            DisplayDescriptionPath="Description"
+                                            DisplayMemberPath="Content"
+                                            ItemsSource="{Binding Models}" />
+
+                            <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                                <rubyer:StepBarItem IconType="BikeFill">脚踏车</rubyer:StepBarItem>
+                                <rubyer:StepBarItem IconType="EBike2Fill">电动车</rubyer:StepBarItem>
+                                <rubyer:StepBarItem IconType="MotorbikeFill">摩托车</rubyer:StepBarItem>
+                                <rubyer:StepBarItem IconType="CarFill">小汽车</rubyer:StepBarItem>
+                                <rubyer:StepBarItem IconType="TruckFill">货车</rubyer:StepBarItem>
+                            </rubyer:StepBar>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+
+                <GroupBox Grid.Column="1" Header="垂直步骤条 - StepBar">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:StepBar Margin="10"
+                                        CurrentIndex="{Binding CurrentIndex}"
+                                        Orientation="Vertical">
                             <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
                             <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
                             <rubyer:StepBarItem Description="description 3">Step 3</rubyer:StepBarItem>
@@ -30,57 +63,26 @@
                         </rubyer:StepBar>
 
                         <rubyer:StepBar Margin="10"
-                                        HorizontalContentAlignment="Left"
-                                        rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                                        VerticalContentAlignment="Bottom"
                                         CurrentIndex="{Binding CurrentIndex}"
-                                        DescriptionStringFormat="时间: {0}"
                                         DisplayDescriptionPath="Description"
                                         DisplayMemberPath="Content"
-                                        ItemsSource="{Binding Models}" />
+                                        ItemsSource="{Binding Models}"
+                                        Orientation="Vertical" />
 
-                        <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
-                            <rubyer:StepBarItem IconType="BikeFill">脚踏车</rubyer:StepBarItem>
-                            <rubyer:StepBarItem IconType="EBike2Fill">电动车</rubyer:StepBarItem>
-                            <rubyer:StepBarItem IconType="MotorbikeFill">摩托车</rubyer:StepBarItem>
-                            <rubyer:StepBarItem IconType="CarFill">小汽车</rubyer:StepBarItem>
-                            <rubyer:StepBarItem IconType="TruckFill">货车</rubyer:StepBarItem>
+                        <rubyer:StepBar Margin="10"
+                                        rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                        CurrentIndex="{Binding CurrentIndex}"
+                                        Orientation="Vertical">
+                            <rubyer:StepBarItem IconType="SunFill">晴</rubyer:StepBarItem>
+                            <rubyer:StepBarItem IconType="CloudyFill">多云</rubyer:StepBarItem>
+                            <rubyer:StepBarItem IconType="ThunderstormsFill">雷阵雨</rubyer:StepBarItem>
+                            <rubyer:StepBarItem IconType="HeavyShowersFill">大雨</rubyer:StepBarItem>
+                            <rubyer:StepBarItem IconType="RainbowFill">彩虹</rubyer:StepBarItem>
                         </rubyer:StepBar>
                     </StackPanel>
                 </GroupBox>
-            </StackPanel>
-
-            <GroupBox Grid.Column="1" Header="垂直步骤条 - StepBar">
-                <StackPanel Orientation="Horizontal">
-                    <rubyer:StepBar Margin="10"
-                                    CurrentIndex="{Binding CurrentIndex}"
-                                    Orientation="Vertical">
-                        <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
-                        <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
-                        <rubyer:StepBarItem Description="description 3">Step 3</rubyer:StepBarItem>
-                        <rubyer:StepBarItem Description="description 4">Step 4</rubyer:StepBarItem>
-                        <rubyer:StepBarItem Description="description 5">Step 5</rubyer:StepBarItem>
-                    </rubyer:StepBar>
-
-                    <rubyer:StepBar Margin="10"
-                                    VerticalContentAlignment="Bottom"
-                                    CurrentIndex="{Binding CurrentIndex}"
-                                    DisplayDescriptionPath="Description"
-                                    DisplayMemberPath="Content"
-                                    ItemsSource="{Binding Models}"
-                                    Orientation="Vertical" />
-
-                    <rubyer:StepBar Margin="10"
-                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                    CurrentIndex="{Binding CurrentIndex}"
-                                    Orientation="Vertical">
-                        <rubyer:StepBarItem IconType="SunFill">晴</rubyer:StepBarItem>
-                        <rubyer:StepBarItem IconType="CloudyFill">多云</rubyer:StepBarItem>
-                        <rubyer:StepBarItem IconType="ThunderstormsFill">雷阵雨</rubyer:StepBarItem>
-                        <rubyer:StepBarItem IconType="HeavyShowersFill">大雨</rubyer:StepBarItem>
-                        <rubyer:StepBarItem IconType="RainbowFill">彩虹</rubyer:StepBarItem>
-                    </rubyer:StepBar>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

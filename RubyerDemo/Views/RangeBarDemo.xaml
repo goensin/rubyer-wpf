@@ -4,182 +4,185 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Header="进度条-ProgressBar">
-                <StackPanel>
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel VerticalAlignment="Center">
-                            <ProgressBar Width="150"
-                                         Margin="5"
+    <smtx:XamlDisplay UniqueKey="RangeBarDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <GroupBox Header="进度条-ProgressBar">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel VerticalAlignment="Center">
+                                <ProgressBar Width="150"
+                                             Margin="5"
+                                             rubyer:ProgressBarHelper.ShowPercent="True"
+                                             Value="70" />
+                                <ProgressBar Width="150"
+                                             Margin="10"
+                                             IsIndeterminate="True" />
+                            </StackPanel>
+                            <ProgressBar Height="150"
+                                         Margin="10"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
+                                         Orientation="Vertical"
+                                         Value="70" />
+                            <ProgressBar Width="5"
+                                         Height="150"
+                                         Margin="10"
+                                         IsIndeterminate="True"
+                                         Orientation="Vertical" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Margin="10"
+                                         ClipToBounds="True"
+                                         Value="60" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Margin="10"
                                          rubyer:ProgressBarHelper.ShowPercent="True"
                                          Value="70" />
-                            <ProgressBar Width="150"
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="20"
+                                         Height="20"
                                          Margin="10"
-                                         IsIndeterminate="True" />
+                                         Value="80" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="50"
+                                         Height="50"
+                                         Margin="10"
+                                         rubyer:ProgressBarHelper.Thickness="8"
+                                         Value="90" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="20"
+                                         Height="20"
+                                         Margin="10"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
+                                         rubyer:ProgressBarHelper.IsShowBackground="False"
+                                         Value="70" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="50"
+                                         Height="50"
+                                         Margin="10"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                                         rubyer:ProgressBarHelper.IsShowBackground="False"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
+                                         rubyer:ProgressBarHelper.Thickness="8"
+                                         Value="70" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="41"
+                                         Height="41"
+                                         Margin="10"
+                                         ClipToBounds="True"
+                                         IsIndeterminate="True"
+                                         Orientation="Vertical" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Margin="10"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                         rubyer:ProgressBarHelper.IsShowBackground="False"
+                                         IsIndeterminate="True"
+                                         Orientation="Vertical"
+                                         Value="70" />
                         </StackPanel>
-                        <ProgressBar Height="150"
-                                     Margin="10"
-                                     rubyer:ProgressBarHelper.ShowPercent="True"
-                                     Orientation="Vertical"
-                                     Value="70" />
-                        <ProgressBar Width="5"
-                                     Height="150"
-                                     Margin="10"
-                                     IsIndeterminate="True"
-                                     Orientation="Vertical" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Margin="10"
-                                     ClipToBounds="True"
-                                     Value="60" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Margin="10"
-                                     rubyer:ProgressBarHelper.ShowPercent="True"
-                                     Value="70" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Width="20"
-                                     Height="20"
-                                     Margin="10"
-                                     Value="80" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Width="50"
-                                     Height="50"
-                                     Margin="10"
-                                     rubyer:ProgressBarHelper.Thickness="8"
-                                     Value="90" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Width="20"
-                                     Height="20"
-                                     Margin="10"
-                                     rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
-                                     rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     Value="70" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Width="50"
-                                     Height="50"
-                                     Margin="10"
-                                     rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
-                                     rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     rubyer:ProgressBarHelper.ShowPercent="True"
-                                     rubyer:ProgressBarHelper.Thickness="8"
-                                     Value="70" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Width="41"
-                                     Height="41"
-                                     Margin="10"
-                                     ClipToBounds="True"
-                                     IsIndeterminate="True"
-                                     Orientation="Vertical" />
-                        <ProgressBar Style="{StaticResource CircleProgressBar}"
-                                     Margin="10"
-                                     rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                     rubyer:ProgressBarHelper.IsShowBackground="False"
-                                     IsIndeterminate="True"
-                                     Orientation="Vertical"
-                                     Value="70" />
                     </StackPanel>
-                </StackPanel>
-            </GroupBox>
-            <GroupBox Grid.Row="1" Header="滑块-Slider">
-                <StackPanel Orientation="Horizontal">
-                    <!--  水平  -->
-                    <StackPanel Width="500" Margin="10">
-                        <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValueStringFormat="{}{0} cm"
-                                IsSelectionRangeEnabled="True"
-                                IsSnapToTickEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                SelectionEnd="70"
-                                SelectionStart="30"
-                                TickFrequency="5"
-                                TickPlacement="Both"
-                                Value="20" />
-                        <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValuePlacement="Bottom"
-                                Foreground="{DynamicResource Dark}"
-                                IsSelectionRangeEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                TickFrequency="5"
-                                TickPlacement="TopLeft"
-                                Value="80" />
-                        <Slider Margin="0 10"
-                                rubyer:SliderHelper.GripDiameter="24"
-                                rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Primary}"
-                                Foreground="{DynamicResource Accent}"
-                                IsSelectionRangeEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                SelectionEnd="90"
-                                SelectionStart="70"
-                                TickFrequency="5"
-                                TickPlacement="BottomRight"
-                                Value="50" />
-                        <Slider Margin="0 10"
-                                IsEnabled="False"
-                                IsSelectionRangeEnabled="True"
-                                IsSnapToTickEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                SelectionEnd="70"
-                                SelectionStart="30"
-                                TickFrequency="5"
-                                TickPlacement="Both"
-                                Value="20" />
+                </GroupBox>
+                <GroupBox Grid.Row="1" Header="滑块-Slider">
+                    <StackPanel Orientation="Horizontal">
+                        <!--  水平  -->
+                        <StackPanel Width="500" Margin="10">
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.ValueStringFormat="{}{0} cm"
+                                    IsSelectionRangeEnabled="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="5"
+                                    TickPlacement="Both"
+                                    Value="20" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.ValuePlacement="Bottom"
+                                    Foreground="{DynamicResource Dark}"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    TickFrequency="5"
+                                    TickPlacement="TopLeft"
+                                    Value="80" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.GripDiameter="24"
+                                    rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Primary}"
+                                    Foreground="{DynamicResource Accent}"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    SelectionEnd="90"
+                                    SelectionStart="70"
+                                    TickFrequency="5"
+                                    TickPlacement="BottomRight"
+                                    Value="50" />
+                            <Slider Margin="0 10"
+                                    IsEnabled="False"
+                                    IsSelectionRangeEnabled="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="5"
+                                    TickPlacement="Both"
+                                    Value="20" />
+                        </StackPanel>
+                        <!--  垂直  -->
+                        <StackPanel Margin="20 10 0 10" Orientation="Horizontal">
+                            <Slider Margin="20 0"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    Foreground="{DynamicResource Light}"
+                                    IsSelectionRangeEnabled="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="10"
+                                    TickPlacement="Both"
+                                    Value="20" />
+                            <Slider Margin="20 0"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.ValuePlacement="Left"
+                                    Foreground="{DynamicResource Dark}"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    TickFrequency="20"
+                                    TickPlacement="TopLeft"
+                                    Value="40" />
+                            <Slider Margin="20 0"
+                                    rubyer:SliderHelper.GripDiameter="24"
+                                    Foreground="{DynamicResource Accent}"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    TickFrequency="20"
+                                    TickPlacement="BottomRight"
+                                    Value="80" />
+                            <Slider Margin="20 0"
+                                    IsEnabled="False"
+                                    IsSelectionRangeEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="10"
+                                    Value="20" />
+                        </StackPanel>
                     </StackPanel>
-                    <!--  垂直  -->
-                    <StackPanel Margin="20 10 0 10" Orientation="Horizontal">
-                        <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                Foreground="{DynamicResource Light}"
-                                IsSelectionRangeEnabled="True"
-                                IsSnapToTickEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                Orientation="Vertical"
-                                SelectionEnd="70"
-                                SelectionStart="30"
-                                TickFrequency="10"
-                                TickPlacement="Both"
-                                Value="20" />
-                        <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValuePlacement="Left"
-                                Foreground="{DynamicResource Dark}"
-                                IsSelectionRangeEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                Orientation="Vertical"
-                                TickFrequency="20"
-                                TickPlacement="TopLeft"
-                                Value="40" />
-                        <Slider Margin="20 0"
-                                rubyer:SliderHelper.GripDiameter="24"
-                                Foreground="{DynamicResource Accent}"
-                                IsSelectionRangeEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                Orientation="Vertical"
-                                TickFrequency="20"
-                                TickPlacement="BottomRight"
-                                Value="80" />
-                        <Slider Margin="20 0"
-                                IsEnabled="False"
-                                IsSelectionRangeEnabled="True"
-                                Maximum="100"
-                                Minimum="0"
-                                Orientation="Vertical"
-                                SelectionEnd="70"
-                                SelectionStart="30"
-                                TickFrequency="10"
-                                Value="20" />
-                    </StackPanel>
-                </StackPanel>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

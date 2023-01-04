@@ -5,160 +5,163 @@
              xmlns:local="clr-namespace:RubyerDemo.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:HamburgerMenuViewModel}"
              mc:Ignorable="d">
-    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-        <Grid>
-            <GroupBox Width="800"
-                      Height="600"
-                      Margin="10"
-                      Header="汉堡包菜单 - HamburgerMenu">
-                <UniformGrid Rows="1">
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontSize="14"
-                                   Text="items 方式" />
-                        <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
-                                              Header="开始"
-                                              SelectedIndex="0"
-                                              TransitionType="None">
-                            <rubyer:HamburgerMenu.OptionsItemsSource>
-                                <rubyer:HamburgerMenuItemCollection>
-                                    <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                     Header="睡眠"
-                                                                     IconType="MoonLine" />
-                                    <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                     Header="关机"
-                                                                     IconType="ShutDownLine" />
-                                    <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                     Header="重启"
-                                                                     IconType="RestartLine" />
-                                    <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
-                                                                     CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                     Header="更多"
-                                                                     IconType="More2Line">
+    <smtx:XamlDisplay UniqueKey="HamburgerMenuDemo">
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <GroupBox Width="800"
+                          Height="600"
+                          Margin="10"
+                          Header="汉堡包菜单 - HamburgerMenu">
+                    <UniformGrid Rows="1">
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="14"
+                                       Text="items 方式" />
+                            <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                                                  Header="开始"
+                                                  SelectedIndex="0"
+                                                  TransitionType="None">
+                                <rubyer:HamburgerMenu.OptionsItemsSource>
+                                    <rubyer:HamburgerMenuItemCollection>
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                         Header="子项 1"
-                                                                         IsCheckable="True"
-                                                                         IsChecked="True" />
+                                                                         Header="睡眠"
+                                                                         IconType="MoonLine" />
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                         Header="子项 2"
-                                                                         IsCheckable="True" />
+                                                                         Header="关机"
+                                                                         IconType="ShutDownLine" />
                                         <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                          CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                         Header="子项 3"
-                                                                         IconType="AliensLine">
+                                                                         Header="重启"
+                                                                         IconType="RestartLine" />
+                                        <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                         CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                         Header="更多"
+                                                                         IconType="More2Line">
                                             <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                              CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
-                                                                             Header="bug"
-                                                                             IconType="BugFill" />
+                                                                             Header="子项 1"
+                                                                             IsCheckable="True"
+                                                                             IsChecked="True" />
+                                            <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                             CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                             Header="子项 2"
+                                                                             IsCheckable="True" />
+                                            <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                             CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                             Header="子项 3"
+                                                                             IconType="AliensLine">
+                                                <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
+                                                                                 CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
+                                                                                 Header="bug"
+                                                                                 IconType="BugFill" />
+                                            </rubyer:HamburgerMenuOptionsItem>
                                         </rubyer:HamburgerMenuOptionsItem>
-                                    </rubyer:HamburgerMenuOptionsItem>
-                                </rubyer:HamburgerMenuItemCollection>
-                            </rubyer:HamburgerMenu.OptionsItemsSource>
+                                    </rubyer:HamburgerMenuItemCollection>
+                                </rubyer:HamburgerMenu.OptionsItemsSource>
 
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="用户"
-                                                      Header="用户"
-                                                      IconType="UserLine" />
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="文档"
-                                                      Header="文档"
-                                                      IconType="FileLine" />
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="图片"
-                                                      Header="图片"
-                                                      IconType="ImageLine" />
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="设置"
-                                                      Header="设置"
-                                                      IconType="Settings2Line" />
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="自定义"
-                                                      Header="自定义">
-                                <rubyer:HamburgerMenuItem.Icon>
-                                    <Image Source="..\rubyer.ico" />
-                                </rubyer:HamburgerMenuItem.Icon>
-                            </rubyer:HamburgerMenuItem>
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="无图标"
-                                                      Header="无图标" />
-                            <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
-                                                      CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
-                                                      Content="不可用"
-                                                      Header="不可用"
-                                                      IconType="EmotionUnhappyLine"
-                                                      IsEnabled="False" />
-                        </rubyer:HamburgerMenu>
-                    </DockPanel>
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="用户"
+                                                          Header="用户"
+                                                          IconType="UserLine" />
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="文档"
+                                                          Header="文档"
+                                                          IconType="FileLine" />
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="图片"
+                                                          Header="图片"
+                                                          IconType="ImageLine" />
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="设置"
+                                                          Header="设置"
+                                                          IconType="Settings2Line" />
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="自定义"
+                                                          Header="自定义">
+                                    <rubyer:HamburgerMenuItem.Icon>
+                                        <Image Source="..\rubyer.ico" />
+                                    </rubyer:HamburgerMenuItem.Icon>
+                                </rubyer:HamburgerMenuItem>
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="无图标"
+                                                          Header="无图标" />
+                                <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
+                                                          CommandParameter="{Binding Content, RelativeSource={RelativeSource Self}}"
+                                                          Content="不可用"
+                                                          Header="不可用"
+                                                          IconType="EmotionUnhappyLine"
+                                                          IsEnabled="False" />
+                            </rubyer:HamburgerMenu>
+                        </DockPanel>
 
-                    <DockPanel>
-                        <TextBlock DockPanel.Dock="Top"
-                                   FontSize="14"
-                                   Text="binding 方式" />
-                        <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
-                                              rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
-                                              rubyer:HeaderHelper.Background="{DynamicResource Dark}"
-                                              rubyer:HeaderHelper.FontSize="16"
-                                              rubyer:HeaderHelper.FontWeight="Bold"
-                                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                                              rubyer:ItemsControlHelper.ItemMargin="5 2"
-                                              rubyer:ItemsControlHelper.ItemPadding="10"
-                                              BorderThickness="1"
-                                              CollapsedWidth="50"
-                                              ExpandedWidth="300"
-                                              FontSize="14"
-                                              HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
-                                              Header="开始"
-                                              ItemsSource="{Binding Models}"
-                                              OptionsItemsSource="{Binding OptionsModels}"
-                                              SelectedIndex="0"
-                                              TransitionDuration="0:0:1"
-                                              TransitionType="ZoomLeft">
-                            <rubyer:HamburgerMenu.ItemContainerStyle>
-                                <Style TargetType="rubyer:HamburgerMenuItem">
-                                    <Setter Property="IconType" Value="{Binding Icon}" />
-                                    <Setter Property="Header" Value="{Binding Name}" />
-                                    <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
-                                    <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
-                                    <Setter Property="CommandParameter" Value="{Binding Name}" />
-                                </Style>
-                            </rubyer:HamburgerMenu.ItemContainerStyle>
-                            <rubyer:HamburgerMenu.OptionsItemContainerStyle>
-                                <Style TargetType="rubyer:HamburgerMenuOptionsItem">
-                                    <Setter Property="IconType" Value="{Binding Icon}" />
-                                    <Setter Property="Header" Value="{Binding Name}" />
-                                    <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
-                                    <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
-                                    <Setter Property="CommandParameter" Value="{Binding Name}" />
-                                </Style>
-                            </rubyer:HamburgerMenu.OptionsItemContainerStyle>
-                            <rubyer:HamburgerMenu.ContentTemplate>
-                                <DataTemplate>
-                                    <Border Background="{DynamicResource Light}">
-                                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <rubyer:Icon Type="{Binding Icon}" />
-                                            <TextBlock Text="{Binding Name}" />
-                                        </StackPanel>
-                                    </Border>
-                                </DataTemplate>
-                            </rubyer:HamburgerMenu.ContentTemplate>
-                        </rubyer:HamburgerMenu>
-                    </DockPanel>
-                </UniformGrid>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                        <DockPanel>
+                            <TextBlock DockPanel.Dock="Top"
+                                       FontSize="14"
+                                       Text="binding 方式" />
+                            <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
+                                                  rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
+                                                  rubyer:HeaderHelper.Background="{DynamicResource Dark}"
+                                                  rubyer:HeaderHelper.FontSize="16"
+                                                  rubyer:HeaderHelper.FontWeight="Bold"
+                                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                                  rubyer:ItemsControlHelper.ItemMargin="5 2"
+                                                  rubyer:ItemsControlHelper.ItemPadding="10"
+                                                  BorderThickness="1"
+                                                  CollapsedWidth="50"
+                                                  ExpandedWidth="300"
+                                                  FontSize="14"
+                                                  HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
+                                                  Header="开始"
+                                                  ItemsSource="{Binding Models}"
+                                                  OptionsItemsSource="{Binding OptionsModels}"
+                                                  SelectedIndex="0"
+                                                  TransitionDuration="0:0:1"
+                                                  TransitionType="ZoomLeft">
+                                <rubyer:HamburgerMenu.ItemContainerStyle>
+                                    <Style TargetType="rubyer:HamburgerMenuItem">
+                                        <Setter Property="IconType" Value="{Binding Icon}" />
+                                        <Setter Property="Header" Value="{Binding Name}" />
+                                        <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
+                                        <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+                                    </Style>
+                                </rubyer:HamburgerMenu.ItemContainerStyle>
+                                <rubyer:HamburgerMenu.OptionsItemContainerStyle>
+                                    <Style TargetType="rubyer:HamburgerMenuOptionsItem">
+                                        <Setter Property="IconType" Value="{Binding Icon}" />
+                                        <Setter Property="Header" Value="{Binding Name}" />
+                                        <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
+                                        <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
+                                        <Setter Property="CommandParameter" Value="{Binding Name}" />
+                                    </Style>
+                                </rubyer:HamburgerMenu.OptionsItemContainerStyle>
+                                <rubyer:HamburgerMenu.ContentTemplate>
+                                    <DataTemplate>
+                                        <Border Background="{DynamicResource Light}">
+                                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <rubyer:Icon Type="{Binding Icon}" />
+                                                <TextBlock Text="{Binding Name}" />
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </rubyer:HamburgerMenu.ContentTemplate>
+                            </rubyer:HamburgerMenu>
+                        </DockPanel>
+                    </UniformGrid>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>

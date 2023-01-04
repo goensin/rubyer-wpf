@@ -4,207 +4,210 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              mc:Ignorable="d">
-    <ScrollViewer Style="{StaticResource SmallScrollViewer}"
-                  HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Auto">
-        <Grid rubyer:GridHelper.ColumnSpacing="20"
-              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
-              rubyer:GridHelper.RowSpacing="10">
-            <GroupBox Header="Menu-菜单">
-                <StackPanel Margin="5">
-                    <Menu>
-                        <MenuItem Header="文件">
-                            <MenuItem Header="新建">
-                                <MenuItem Header="文件" InputGestureText="Ctrl+N" />
-                                <MenuItem Header="项目" />
+    <smtx:XamlDisplay UniqueKey="MenuBarDemo">
+        <ScrollViewer Style="{StaticResource SmallScrollViewer}"
+                      HorizontalScrollBarVisibility="Auto"
+                      VerticalScrollBarVisibility="Auto">
+            <Grid rubyer:GridHelper.ColumnSpacing="20"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
+                  rubyer:GridHelper.RowSpacing="10">
+                <GroupBox Header="Menu-菜单">
+                    <StackPanel Margin="5">
+                        <Menu>
+                            <MenuItem Header="文件">
+                                <MenuItem Header="新建">
+                                    <MenuItem Header="文件" InputGestureText="Ctrl+N" />
+                                    <MenuItem Header="项目" />
+                                </MenuItem>
+                                <MenuItem Header="打开" />
                             </MenuItem>
-                            <MenuItem Header="打开" />
-                        </MenuItem>
-                        <MenuItem Header="编辑">
-                            <MenuItem Header="查找和替换"
-                                      IsCheckable="True"
-                                      IsChecked="True" />
-                            <Separator />
-                            <MenuItem Command="Cut" Header="剪切">
-                                <MenuItem.Icon>
-                                    <rubyer:Icon Type="Scissors2Line" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Command="Copy" Header="复制">
-                                <MenuItem.Icon>
-                                    <rubyer:Icon Type="FileCopyLine" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <MenuItem Command="Paste" Header="粘贴">
-                                <MenuItem.Icon>
-                                    <rubyer:Icon Type="SurveyLine" />
-                                </MenuItem.Icon>
-                            </MenuItem>
-                            <Separator />
-                            <MenuItem Header="高级">
-                                <MenuItem Header="转换为大写" />
-                            </MenuItem>
-                        </MenuItem>
-                        <MenuItem Header="视图">
-                            <MenuItem Header="工具栏">
-                                <MenuItem Header="文本编辑器"
+                            <MenuItem Header="编辑">
+                                <MenuItem Header="查找和替换"
                                           IsCheckable="True"
                                           IsChecked="True" />
-                                <MenuItem Header="查看设计器" IsCheckable="true" />
-                                <MenuItem Header="布局"
-                                          IsCheckable="true"
-                                          IsChecked="True" />
-                                <MenuItem Header="调试" IsCheckable="true" />
-                            </MenuItem>
-                        </MenuItem>
-                        <Separator />
-                        <MenuItem Header="无内容" />
-                    </Menu>
-                    <TextBox Style="{StaticResource BigTextBox}"
-                             Height="75"
-                             Margin="0 10"
-                             Text="这是一段测试文字,右击调出菜单。">
-                        <TextBox.ContextMenu>
-                            <ContextMenu Background="{DynamicResource DefaultBackground}">
-                                <MenuItem Command="{x:Static ApplicationCommands.Copy}" />
-                                <MenuItem Command="Cut" />
-                                <MenuItem Command="Paste" />
-                            </ContextMenu>
-                        </TextBox.ContextMenu>
-                    </TextBox>
-                </StackPanel>
-            </GroupBox>
-
-            <GroupBox Grid.Row="1" Header="ToolBar-工具栏">
-                <StackPanel Margin="5">
-                    <ToolBarTray>
-                        <ToolBar>
-                            <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
-                                <rubyer:Icon Type="ArrowLeftCircleFill" />
-                            </Button>
-                            <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
-                                向后导航
-                            </Button>
-                            <Button Foreground="{DynamicResource Primary}" ToolTip="向前导航(Ctrl+Shift+-)">
-                                <rubyer:Icon Type="ArrowRightCircleFill" />
-                            </Button>
-                            <Separator />
-                            <Button ToolTip="新建项目(Ctrl+Shift+N)">
-                                <rubyer:Icon Type="FileAddFill" />
-                            </Button>
-                            <Button Foreground="#FB8C00" ToolTip="打开文件(Ctrl+O)">
-                                <rubyer:Icon Type="FolderOpenFill" />
-                            </Button>
-                            <Button Foreground="{DynamicResource Primary}" ToolTip="保存(Ctrl+S)">
-                                <rubyer:Icon Type="Save2Fill" />
-                            </Button>
-                        </ToolBar>
-                        <ToolBar Foreground="{DynamicResource Dark}">
-                            <RadioButton Checked="RadioButton_Checked"
-                                         GroupName="Align"
-                                         Tag="left">
-                                <rubyer:Icon Type="AlignLeft" />
-                            </RadioButton>
-                            <RadioButton Checked="RadioButton_Checked"
-                                         GroupName="Align"
-                                         Tag="center">
-                                <rubyer:Icon Type="AlignCenter" />
-                            </RadioButton>
-                            <RadioButton Checked="RadioButton_Checked"
-                                         GroupName="Align"
-                                         Tag="right">
-                                <rubyer:Icon Type="AlignRight" />
-                            </RadioButton>
-                        </ToolBar>
-                        <ToolBar>
-                            <ToggleButton x:Name="ItalicToggle"
-                                          Checked="ItalicToggle_Checked"
-                                          IsChecked="{Binding IsItalic}"
-                                          Unchecked="ItalicToggle_Unchecked">
-                                <rubyer:Icon Type="Italic" />
-                            </ToggleButton>
-                            <ToggleButton x:Name="UnderlineToggle"
-                                          Checked="UnderlineToggle_Checked"
-                                          IsChecked="{Binding IsUnderline}"
-                                          Unchecked="UnderlineToggle_Unchecked">
-                                <rubyer:Icon Type="Underline" />
-                            </ToggleButton>
-                            <ToggleButton x:Name="BoldToggle"
-                                          Checked="BoldToggle_Checked"
-                                          IsChecked="{Binding IsBold}"
-                                          Unchecked="BoldToggle_Unchecked">
-                                <rubyer:Icon Type="Bold" />
-                            </ToggleButton>
-                        </ToolBar>
-                        <ToolBar>
-                            <TextBox Width="150"
-                                     rubyer:InputBoxHelper.IsClearable="True"
-                                     rubyer:InputBoxHelper.Watermark="搜索">
-                                <rubyer:InputBoxHelper.PreContent>
-                                    <rubyer:Icon Type="SearchLine" />
-                                </rubyer:InputBoxHelper.PreContent>
-                            </TextBox>
-                        </ToolBar>
-                    </ToolBarTray>
-                    <TextBox x:Name="TestText"
-                             Style="{StaticResource BigTextBox}"
-                             Height="75"
-                             Margin="0 10"
-                             Text="这是一段测试文字，右击调出菜单">
-                        <TextBox.ContextMenu>
-                            <ContextMenu Background="{DynamicResource DefaultBackground}">
-                                <MenuItem Command="Copy">
-                                    <MenuItem.Icon>
-                                        <rubyer:Icon Type="FileCopyLine" />
-                                    </MenuItem.Icon>
-                                </MenuItem>
-                                <MenuItem Command="Cut">
+                                <Separator />
+                                <MenuItem Command="Cut" Header="剪切">
                                     <MenuItem.Icon>
                                         <rubyer:Icon Type="Scissors2Line" />
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Command="Paste">
+                                <MenuItem Command="Copy" Header="复制">
+                                    <MenuItem.Icon>
+                                        <rubyer:Icon Type="FileCopyLine" />
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Command="Paste" Header="粘贴">
                                     <MenuItem.Icon>
                                         <rubyer:Icon Type="SurveyLine" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                                 <Separator />
-                                <MenuItem Header="斜体"
-                                          IsCheckable="True"
-                                          IsChecked="{Binding IsItalic}" />
-                                <MenuItem Header="下划线"
-                                          IsCheckable="True"
-                                          IsChecked="{Binding IsUnderline}" />
-                                <MenuItem Header="加粗"
-                                          IsCheckable="True"
-                                          IsChecked="{Binding IsBold}" />
-                                <Separator />
-                                <MenuItem Header="更多">
-                                    <MenuItem Header="..." />
+                                <MenuItem Header="高级">
+                                    <MenuItem Header="转换为大写" />
                                 </MenuItem>
-                            </ContextMenu>
-                        </TextBox.ContextMenu>
-                    </TextBox>
-                </StackPanel>
-            </GroupBox>
+                            </MenuItem>
+                            <MenuItem Header="视图">
+                                <MenuItem Header="工具栏">
+                                    <MenuItem Header="文本编辑器"
+                                              IsCheckable="True"
+                                              IsChecked="True" />
+                                    <MenuItem Header="查看设计器" IsCheckable="true" />
+                                    <MenuItem Header="布局"
+                                              IsCheckable="true"
+                                              IsChecked="True" />
+                                    <MenuItem Header="调试" IsCheckable="true" />
+                                </MenuItem>
+                            </MenuItem>
+                            <Separator />
+                            <MenuItem Header="无内容" />
+                        </Menu>
+                        <TextBox Style="{StaticResource BigTextBox}"
+                                 Height="75"
+                                 Margin="0 10"
+                                 Text="这是一段测试文字,右击调出菜单。">
+                            <TextBox.ContextMenu>
+                                <ContextMenu Background="{DynamicResource DefaultBackground}">
+                                    <MenuItem Command="{x:Static ApplicationCommands.Copy}" />
+                                    <MenuItem Command="Cut" />
+                                    <MenuItem Command="Paste" />
+                                </ContextMenu>
+                            </TextBox.ContextMenu>
+                        </TextBox>
+                    </StackPanel>
+                </GroupBox>
 
-            <GroupBox Grid.Row="2" Header="StatusBar-状态栏">
-                <StatusBar Background="{DynamicResource Accent}" Foreground="{DynamicResource WhiteForeground}">
-                    <StatusBarItem HorizontalAlignment="Left">
-                        <rubyer:Icon Type="TerminalBoxLine" />
-                    </StatusBarItem>
-                    <Separator BorderBrush="{DynamicResource WhiteForeground}" />
-                    <StatusBarItem HorizontalAlignment="Left" Content="就绪" />
-                    <StatusBarItem HorizontalAlignment="Right">
-                        <StackPanel Orientation="Horizontal">
-                            <rubyer:Icon Margin="5 0" Type="UploadLine" />
-                            <TextBlock Margin="5 0" Text="添加到源代码管理" />
-                            <rubyer:Icon Margin="5 0" Type="Notification3Fill" />
-                        </StackPanel>
-                    </StatusBarItem>
-                </StatusBar>
-            </GroupBox>
-        </Grid>
-    </ScrollViewer>
+                <GroupBox Grid.Row="1" Header="ToolBar-工具栏">
+                    <StackPanel Margin="5">
+                        <ToolBarTray>
+                            <ToolBar>
+                                <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
+                                    <rubyer:Icon Type="ArrowLeftCircleFill" />
+                                </Button>
+                                <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
+                                    向后导航
+                                </Button>
+                                <Button Foreground="{DynamicResource Primary}" ToolTip="向前导航(Ctrl+Shift+-)">
+                                    <rubyer:Icon Type="ArrowRightCircleFill" />
+                                </Button>
+                                <Separator />
+                                <Button ToolTip="新建项目(Ctrl+Shift+N)">
+                                    <rubyer:Icon Type="FileAddFill" />
+                                </Button>
+                                <Button Foreground="#FB8C00" ToolTip="打开文件(Ctrl+O)">
+                                    <rubyer:Icon Type="FolderOpenFill" />
+                                </Button>
+                                <Button Foreground="{DynamicResource Primary}" ToolTip="保存(Ctrl+S)">
+                                    <rubyer:Icon Type="Save2Fill" />
+                                </Button>
+                            </ToolBar>
+                            <ToolBar Foreground="{DynamicResource Dark}">
+                                <RadioButton Checked="RadioButton_Checked"
+                                             GroupName="Align"
+                                             Tag="left">
+                                    <rubyer:Icon Type="AlignLeft" />
+                                </RadioButton>
+                                <RadioButton Checked="RadioButton_Checked"
+                                             GroupName="Align"
+                                             Tag="center">
+                                    <rubyer:Icon Type="AlignCenter" />
+                                </RadioButton>
+                                <RadioButton Checked="RadioButton_Checked"
+                                             GroupName="Align"
+                                             Tag="right">
+                                    <rubyer:Icon Type="AlignRight" />
+                                </RadioButton>
+                            </ToolBar>
+                            <ToolBar>
+                                <ToggleButton x:Name="ItalicToggle"
+                                              Checked="ItalicToggle_Checked"
+                                              IsChecked="{Binding IsItalic}"
+                                              Unchecked="ItalicToggle_Unchecked">
+                                    <rubyer:Icon Type="Italic" />
+                                </ToggleButton>
+                                <ToggleButton x:Name="UnderlineToggle"
+                                              Checked="UnderlineToggle_Checked"
+                                              IsChecked="{Binding IsUnderline}"
+                                              Unchecked="UnderlineToggle_Unchecked">
+                                    <rubyer:Icon Type="Underline" />
+                                </ToggleButton>
+                                <ToggleButton x:Name="BoldToggle"
+                                              Checked="BoldToggle_Checked"
+                                              IsChecked="{Binding IsBold}"
+                                              Unchecked="BoldToggle_Unchecked">
+                                    <rubyer:Icon Type="Bold" />
+                                </ToggleButton>
+                            </ToolBar>
+                            <ToolBar>
+                                <TextBox Width="150"
+                                         rubyer:InputBoxHelper.IsClearable="True"
+                                         rubyer:InputBoxHelper.Watermark="搜索">
+                                    <rubyer:InputBoxHelper.PreContent>
+                                        <rubyer:Icon Type="SearchLine" />
+                                    </rubyer:InputBoxHelper.PreContent>
+                                </TextBox>
+                            </ToolBar>
+                        </ToolBarTray>
+                        <TextBox x:Name="TestText"
+                                 Style="{StaticResource BigTextBox}"
+                                 Height="75"
+                                 Margin="0 10"
+                                 Text="这是一段测试文字，右击调出菜单">
+                            <TextBox.ContextMenu>
+                                <ContextMenu Background="{DynamicResource DefaultBackground}">
+                                    <MenuItem Command="Copy">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="FileCopyLine" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Command="Cut">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="Scissors2Line" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Command="Paste">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="SurveyLine" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem Header="斜体"
+                                              IsCheckable="True"
+                                              IsChecked="{Binding IsItalic}" />
+                                    <MenuItem Header="下划线"
+                                              IsCheckable="True"
+                                              IsChecked="{Binding IsUnderline}" />
+                                    <MenuItem Header="加粗"
+                                              IsCheckable="True"
+                                              IsChecked="{Binding IsBold}" />
+                                    <Separator />
+                                    <MenuItem Header="更多">
+                                        <MenuItem Header="..." />
+                                    </MenuItem>
+                                </ContextMenu>
+                            </TextBox.ContextMenu>
+                        </TextBox>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Grid.Row="2" Header="StatusBar-状态栏">
+                    <StatusBar Background="{DynamicResource Accent}" Foreground="{DynamicResource WhiteForeground}">
+                        <StatusBarItem HorizontalAlignment="Left">
+                            <rubyer:Icon Type="TerminalBoxLine" />
+                        </StatusBarItem>
+                        <Separator BorderBrush="{DynamicResource WhiteForeground}" />
+                        <StatusBarItem HorizontalAlignment="Left" Content="就绪" />
+                        <StatusBarItem HorizontalAlignment="Right">
+                            <StackPanel Orientation="Horizontal">
+                                <rubyer:Icon Margin="5 0" Type="UploadLine" />
+                                <TextBlock Margin="5 0" Text="添加到源代码管理" />
+                                <rubyer:Icon Margin="5 0" Type="Notification3Fill" />
+                            </StackPanel>
+                        </StatusBarItem>
+                    </StatusBar>
+                </GroupBox>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
 </UserControl>
