@@ -13,6 +13,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Icon.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToggleButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Loading.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--  Style and template for the DataGridCell.  -->
@@ -442,6 +443,7 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
         <Setter Property="rubyer:DataGridHelper.ClickToEdit" Value="True" />
         <Setter Property="rubyer:DataGridHelper.ApplyDataAnnotations" Value="True" />
+        <Setter Property="rubyer:DataGridHelper.LoadingContent" Value="加载中" />
         <Setter Property="rubyer:DataGridHelper.EmptyView">
             <Setter.Value>
                 <StackPanel HorizontalAlignment="Center"
@@ -521,10 +523,27 @@
                                                 Visibility="Collapsed">
                                             <ContentControl x:Name="emptyView" Content="{Binding Path=(rubyer:DataGridHelper.EmptyView), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                                         </Border>
+
+                                        <Border x:Name="loadingBorder"
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                Background="{DynamicResource DialogBackground}"
+                                                Visibility="Collapsed">
+                                            <rubyer:Card Padding="10"
+                                                         HorizontalAlignment="Center"
+                                                         VerticalAlignment="Center">
+                                                <rubyer:Loading x:Name="loading"
+                                                                Background="Transparent"
+                                                                Content="{Binding Path=(rubyer:DataGridHelper.LoadingContent), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                            </rubyer:Card>
+                                        </Border>
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <DataTrigger Binding="{Binding Items.Count, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="0">
                                             <Setter TargetName="emptyBorder" Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding Path=(rubyer:DataGridHelper.Loading), RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="True">
+                                            <Setter TargetName="loadingBorder" Property="Visibility" Value="Visible" />
                                         </DataTrigger>
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>

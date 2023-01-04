@@ -42,6 +42,9 @@
                               GridLinesVisibility="None"
                               ItemsSource="{Binding Persons}"
                               SelectionUnit="Cell">
+                        <DataGrid.Resources>
+                            <Style BasedOn="{StaticResource WaveLoading}" TargetType="rubyer:Loading" />
+                        </DataGrid.Resources>
                         <rubyer:DataGridHelper.EmptyView>
                             <Border Background="{DynamicResource Primary}">
                                 <TextBlock HorizontalAlignment="Center" FontSize="22">自定义无数据内容</TextBlock>
@@ -153,10 +156,6 @@
                             <rubyer:DataGridDetailToggleButtonColumn Width="60"
                                                                      rubyer:DataGridHelper.ColumnPosition="End"
                                                                      Header="详细" />
-                            <!--<DataGridTextColumn Width="50"
-                                                rubyer:DataGridHelper.ColumnPosition="End"
-                                                Binding="{Binding Id}"
-                                                Header="序号" />-->
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

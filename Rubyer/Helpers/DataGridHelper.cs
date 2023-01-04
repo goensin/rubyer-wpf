@@ -426,7 +426,7 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 航头标题
+        /// 行头标题
         /// </summary>
         public static readonly DependencyProperty RowHeaderTitleProperty = DependencyProperty.RegisterAttached(
             "RowHeaderTitle", typeof(object), typeof(DataGridHelper), new PropertyMetadata(null));
@@ -439,6 +439,38 @@ namespace Rubyer
         public static object GetRowHeaderTitle(DependencyObject element)
         {
             return (object)element.GetValue(RowHeaderTitleProperty);
+        }
+
+        /// <summary>
+        /// 加载中
+        /// </summary>
+        public static readonly DependencyProperty LoadingProperty = DependencyProperty.RegisterAttached(
+            "Loading", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public static void SetLoading(DependencyObject element, bool value)
+        {
+            element.SetValue(LoadingProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetLoading(DependencyObject element)
+        {
+            return (bool)element.GetValue(LoadingProperty);
+        }
+
+        /// <summary>
+        /// 加载中内容
+        /// </summary>
+        public static readonly DependencyProperty LoadingContentProperty = DependencyProperty.RegisterAttached(
+            "LoadingContent", typeof(object), typeof(DataGridHelper), new PropertyMetadata(null));
+
+        public static void SetLoadingContent(DependencyObject element, object value)
+        {
+            element.SetValue(LoadingContentProperty, value);
+        }
+
+        public static object GetLoadingContent(DependencyObject element)
+        {
+            return (object)element.GetValue(LoadingContentProperty);
         }
     }
 }

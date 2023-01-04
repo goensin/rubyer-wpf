@@ -35,6 +35,18 @@ namespace RubyerDemo.ViewModels
             }
         }
 
+        private bool loading;
+
+        public bool Loading
+        {
+            get => loading;
+            set
+            {
+                loading = value;
+                RaisePropertyChanged("Loading");
+            }
+        }
+
         private RelayCommand delete;
         public RelayCommand Delete => delete ?? (delete = new RelayCommand(DeleteExecute));
 
