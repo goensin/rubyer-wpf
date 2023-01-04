@@ -121,12 +121,10 @@
                                             Orientation="Horizontal">
                                     <Border x:Name="splitBorder"
                                             Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
-                                            Margin="0"
                                             BorderBrush="Transparent"
                                             BorderThickness="1"
                                             SnapsToDevicePixels="True">
                                         <rubyer:Icon x:Name="arrow"
-                                                     Margin="0 0 5 0"
                                                      HorizontalAlignment="Center"
                                                      VerticalAlignment="Center"
                                                      Foreground="{DynamicResource SeconarydText}"
