@@ -216,19 +216,15 @@
                                     <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
-                                <Polygon x:Name="arrow"
-                                         Margin="3 0"
-                                         HorizontalAlignment="Center"
-                                         VerticalAlignment="Center"
-                                         Fill="{TemplateBinding Foreground}"
-                                         Points="4,6 0,0 8,0"
-                                         RenderTransformOrigin="0.5,0.5"
-                                         StrokeThickness="0"
-                                         Visibility="Collapsed">
-                                    <Polygon.RenderTransform>
+                                <rubyer:Icon x:Name="arrow"
+                                             Foreground="{TemplateBinding Foreground}"
+                                             RenderTransformOrigin="0.5,0.5"
+                                             Type="ArrowDownFill"
+                                             Visibility="Collapsed">
+                                    <rubyer:Icon.RenderTransform>
                                         <RotateTransform x:Name="arrowTransform" Angle="0" />
-                                    </Polygon.RenderTransform>
-                                </Polygon>
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
                                 <ContentPresenter Grid.Column="1"
                                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -254,16 +250,6 @@
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SortDirection, RelativeSource={RelativeSource Self}}" Value="Descending">
                             <Setter TargetName="arrow" Property="Visibility" Value="Visible" />
-                            <DataTrigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="arrowTransform"
-                                                         Storyboard.TargetProperty="Angle"
-                                                         To="0"
-                                                         Duration="0:0:0.25" />
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </DataTrigger.EnterActions>
                         </DataTrigger>
                         <DataTrigger Binding="{Binding SortDirection, RelativeSource={RelativeSource Self}}" Value="Ascending">
                             <Setter TargetName="arrow" Property="Visibility" Value="Visible" />
@@ -272,8 +258,9 @@
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="arrowTransform"
                                                          Storyboard.TargetProperty="Angle"
+                                                         From="0"
                                                          To="180"
-                                                         Duration="0:0:0.25" />
+                                                         Duration="0:0:0.35" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -283,7 +270,7 @@
                                         <DoubleAnimation Storyboard.TargetName="arrowTransform"
                                                          Storyboard.TargetProperty="Angle"
                                                          To="0"
-                                                         Duration="0:0:0.25" />
+                                                         Duration="0:0:0.35" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>
