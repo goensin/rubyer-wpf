@@ -13,9 +13,7 @@
               rubyer:GridHelper.RowDefinitions="Auto,Auto"
               rubyer:GridHelper.RowSpacing="10">
             <GroupBox Width="Auto" Header="日历-Calendar">
-                <StackPanel Margin="5" Orientation="Horizontal">
-                    <Calendar />
-                </StackPanel>
+                <Calendar Margin="5" />
             </GroupBox>
             <GroupBox Grid.Column="1"
                       Grid.ColumnSpan="2"
