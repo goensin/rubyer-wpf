@@ -404,7 +404,7 @@ namespace Rubyer
                 {
                     var oldIndex = columns.IndexOf(column);
                     var newIndex = columns.Count - 1;
-                    columns.Move(oldIndex, newIndex);
+                    columns[oldIndex].DisplayIndex = newIndex;
                 }
             }
         }
