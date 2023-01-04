@@ -40,6 +40,29 @@
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                            <TextBlock Text="字体" />
+                            <rubyer:Icon Margin="5 0 0 0" Type="FontSize2" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem>
+                        <MenuItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Margin="0 0 10 0" Text="字体大小: " />
+                                <Slider Width="120"
+                                        rubyer:SliderHelper.DraggingShowValue="True"
+                                        rubyer:SliderHelper.ValuePlacement="Right"
+                                        IsSnapToTickEnabled="True"
+                                        Maximum="20"
+                                        Minimum="10"
+                                        TickFrequency="1"
+                                        Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </MenuItem>
+                <MenuItem>
+                    <MenuItem.Header>
+                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                             <TextBlock Text="圆角" />
                             <rubyer:Icon Margin="5 0 0 0" Type="RoundedCorner" />
                         </StackPanel>
