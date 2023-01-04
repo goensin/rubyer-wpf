@@ -13,12 +13,11 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=Calendar}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="30" />
-        <Setter Property="Margin" Value="1" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -197,9 +196,7 @@
                                         Grid.Column="0"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
-                                    <rubyer:Icon Width="20"
-                                                 Height="20"
-                                                 Type="ArrowLeftSLine" />
+                                    <rubyer:Icon Type="ArrowLeftSLine" />
                                 </Button>
 
                                 <Button x:Name="PART_HeaderButton"
@@ -215,9 +212,7 @@
                                         Grid.Column="2"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
-                                    <rubyer:Icon Width="20"
-                                                 Height="20"
-                                                 Type="ArrowRightSLine" />
+                                    <rubyer:Icon Type="ArrowRightSLine" />
                                 </Button>
                             </Grid>
                         </Border>
@@ -292,6 +287,7 @@
         <Setter Property="CalendarItemStyle" Value="{StaticResource RubyerCalendarItemStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
