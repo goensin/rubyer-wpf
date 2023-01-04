@@ -56,23 +56,19 @@
                                                                  Header="全选" />
                             <DataGridTextColumn Width="60"
                                                 Binding="{Binding Id}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"
                                                 Header="序号" />
                             <DataGridTextColumn Width="70"
                                                 Binding="{Binding Name}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"
                                                 Header="姓名" />
                             <DataGridTextColumn Width="60"
                                                 Binding="{Binding Age}"
-                                                EditingElementStyle="{StaticResource RubyerDataGridTextColumn}"
                                                 Header="年龄" />
 
                             <DataGridComboBoxColumn Width="80"
-                                                    EditingElementStyle="{StaticResource RubyerDataGridComboBoxColumnEditting}"
-                                                    ElementStyle="{StaticResource RubyerDataGridComboBoxColumn}"
                                                     Header="性别"
                                                     ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
                                                     SelectedItemBinding="{Binding Gender}" />
+
                             <DataGridTemplateColumn Width="*" Header="操作">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

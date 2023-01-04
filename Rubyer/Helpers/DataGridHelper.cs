@@ -472,5 +472,70 @@ namespace Rubyer
         {
             return (object)element.GetValue(LoadingContentProperty);
         }
+
+        private static void ApplyDefaultElementStyle(DataGrid dataGrid)
+        {
+            if (GetApplyColumnElementStyle(dataGrid))
+            {
+                foreach (var column in dataGrid.Columns)
+                {
+                    if (column is DataGridTextColumn textColumn)
+                    {
+                        textColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
+                    }
+                    else if (column is DataGridComboBoxColumn comboBoxColumn)
+                    {
+                        comboBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
+                        comboBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
+                    }
+                    else if (column is DataGridCheckBoxColumn checkBoxColumn)
+                    {
+                        checkBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
+                        checkBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 应用 rubyer Element Style
+        /// </summary>
+        public static readonly DependencyProperty ApplyColumnElementStyleProperty = DependencyProperty.RegisterAttached(
+            "ApplyColumnElementStyle", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnApplyColumnElementStyleChanged));
+
+        private static void OnApplyColumnElementStyleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid dataGrid)
+            {
+                if (GetApplyColumnElementStyle(dataGrid))
+                {
+                    if (dataGrid.IsLoaded)
+                    {
+                        ApplyDefaultElementStyle(dataGrid);
+                    }
+                    else
+                    {
+                        dataGrid.Loaded += DataGrid_Loaded;
+                    }
+                }
+            }
+        }
+
+        private static void DataGrid_Loaded(object sender, RoutedEventArgs e)
+        {
+            var dataGrid = (DataGrid)sender;
+            dataGrid.Loaded -= DataGrid_Loaded;
+            ApplyDefaultElementStyle(dataGrid);
+        }
+
+        public static void SetApplyColumnElementStyle(DependencyObject element, bool value)
+        {
+            element.SetValue(ApplyColumnElementStyleProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetApplyColumnElementStyle(DependencyObject element)
+        {
+            return (bool)element.GetValue(ApplyColumnElementStyleProperty);
+        }
     }
 }

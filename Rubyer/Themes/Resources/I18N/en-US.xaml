@@ -8,6 +8,7 @@
     <system:String x:Key="I18N_MessageBox_No">No</system:String>
 
     <system:String x:Key="I18N_DataGrid_NoData">No Data</system:String>
+    <system:String x:Key="I18N_DataGrid_LoadingContent">Loading</system:String>
 
     <system:String x:Key="I18N_PageBar_Total">Total</system:String>
     <system:String x:Key="I18N_PageBar_Piece">|</system:String>
