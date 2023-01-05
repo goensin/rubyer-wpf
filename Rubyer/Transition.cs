@@ -113,7 +113,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(Transition), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShwowChanged));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(Transition), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowChanged));
 
         /// <summary>
         /// 是否显示
@@ -267,7 +267,7 @@ namespace Rubyer
         /// 折叠后的大小
         /// </summary>
         public static readonly DependencyProperty CollapsedSizeProperty =
-            DependencyProperty.Register("CollapsedSize", typeof(double), typeof(Transition), new PropertyMetadata(default(double), OnIsShwowChanged));
+            DependencyProperty.Register("CollapsedSize", typeof(double), typeof(Transition), new PropertyMetadata(default(double), OnIsShowChanged));
 
         /// <summary>
         /// 折叠后的大小
@@ -291,7 +291,7 @@ namespace Rubyer
             return await taskCompletionSource.Task;
         }
 
-        private static void OnIsShwowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var transition = d as Transition;
             ChangeTransitionVisual(transition);
