@@ -8,7 +8,6 @@ namespace RubyerDemo.ViewModels
         private ObservableCollection<Poetry> poetries;
         private Poetry selectedPoetry;
         private RelayCommand addTabItem;
-        private RelayCommand click;
         private int count = 1;
 
         public TabControlViewModel()

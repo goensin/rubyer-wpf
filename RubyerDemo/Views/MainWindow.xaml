@@ -156,11 +156,12 @@
     </rubyer:RubyerWindow.TitleBarContent>
     <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *">
         <rubyer:Card CornerRadius="0">
-            <ListBox Margin="0 5"
-                     rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
-                     rubyer:ItemsControlHelper.ItemMargin="7 1"
-                     rubyer:ItemsControlHelper.ItemPadding="7"
-                     rubyer:ListBoxHelper.IsShowLittleBar="True"
+            <ListBox rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}"
+                     rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
+                     rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                     rubyer:ControlHelper.MaskOpacity="1"
+                     rubyer:ItemsControlHelper.ItemMargin="5 1"
+                     rubyer:ItemsControlHelper.ItemPadding="5"
                      ItemsSource="{Binding MenuItems}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      SelectedIndex="0"
@@ -174,13 +175,13 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
                 <ListBox.Resources>
-                    <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer" />
+                    <Style BasedOn="{StaticResource OnlyArrowScrollViewer}" TargetType="ScrollViewer" />
                 </ListBox.Resources>
             </ListBox>
         </rubyer:Card>
 
         <ContentControl Grid.Column="1"
-                        Margin="5"
+                        Margin="5 5 5 0"
                         Content="{Binding CurrentMenuItem.Content}" />
     </Grid>
 </rubyer:RubyerWindow>

@@ -28,8 +28,8 @@
                             <Border Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
-                                <TabControl Style="{StaticResource LineTabControl}" rubyer:HeaderHelper.FontSize="20">
-                                    <TabItem MinWidth="{Binding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                <TabControl Style="{StaticResource CardTabControl}" rubyer:HeaderHelper.FontSize="20">
+                                    <TabItem MinWidth="200">
                                         <TabItem.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <rubyer:Icon Margin="0 0 8 0" Type="FunctionLine" />
@@ -46,7 +46,7 @@
                                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                         </rubyer:Transition>
                                     </TabItem>
-                                    <TabItem MinWidth="{Binding ActualWidth, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource AncestorType=TabControl}}">
+                                    <TabItem MinWidth="200">
                                         <TabItem.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <rubyer:Icon Margin="0 0 8 0" Type="CodeSSlashFill" />

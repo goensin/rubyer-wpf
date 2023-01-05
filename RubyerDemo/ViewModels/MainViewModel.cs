@@ -99,15 +99,6 @@ namespace RubyerDemo.ViewModels
                     Accent = new SolidColorBrush(Color.FromRgb(0x73,0xC9,0xE5)),
                     IsSeleted =false
                 },
-                new ThemeColor
-                {
-                    Name = "高端黑",
-                    Primary = new SolidColorBrush(Color.FromRgb(0x26,0x32,0x38)),
-                    Light = new SolidColorBrush(Color.FromRgb(0x4F,0x5B,0x62)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0x00,0x0A,0x12)),
-                    Accent = new SolidColorBrush(Color.FromRgb(0xAD,0x14,0x57)),
-                    IsSeleted =false
-                },
             };
         }
 

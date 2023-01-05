@@ -13,6 +13,7 @@
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <rubyer:Loading Margin="10" />
                         <rubyer:Loading Margin="10"
+                                        Background="Transparent"
                                         Diameter="50"
                                         FocusedBrush="{DynamicResource Accent}"
                                         StrokeThickness="8" />
