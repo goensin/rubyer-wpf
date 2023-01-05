@@ -1,9 +1,11 @@
 # Rebuild all solutions
-dotnet restore
+#dotnet restore
 
 $currentPath=Get-Location
+Write-Output $currentPath
 # Create publish folder
-$publishFolder="Publish"
+$publishFolder= Join-Path $currentPath "Publish"
+Write-Output "publish folder" $publishFolder
 if(!(Test-Path $publishFolder)){
 	mkdir $publishFolder
     Write-Output "Create publish folder"
@@ -15,12 +17,12 @@ cd $publishFolder
 del *.nupkg
 cd ..
 
-# Create nuget pack
-$projectName="Rubyer"
-$publishPath=Join-Path $currentPath $publishFolder
+# move rubyer folder
+$projectName=Join-Path $currentPath "Rubyer"
+cd $projectName
 
-dotnet clean
+# pack
 dotnet pack -o $publishFolder -c Release
-
+cd ..
 Write-Output "Publish success"
 	
