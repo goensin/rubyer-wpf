@@ -4,9 +4,21 @@ using System.Text;
 
 namespace RubyerDemo.ViewModels
 {
-    public class MenuItem
+    public class MenuItem : NotifyPropertyObject
     {
-        public string Name { get; set; }
-        public object Content { get; set; }
+        private string name;
+
+        public string Name
+        {
+            get => name;
+            set => SetProperty(ref name, value);
+        }
+
+        private object content;
+        public object Content
+        {
+            get => content;
+            set => SetProperty(ref content, value);
+        }
     }
 }

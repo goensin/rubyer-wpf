@@ -102,7 +102,7 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 选中动画
+        /// 小滚动条
         /// </summary>
         public static readonly DependencyProperty IsShowLittleBarProperty =
             DependencyProperty.RegisterAttached("IsShowLittleBar", typeof(bool), typeof(ListBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
