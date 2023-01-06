@@ -12,6 +12,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/RubyerDemo;component/Themes/Generic.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/ShowMeTheXAML.AvalonEdit;component/Themes/Default.xaml" />
                 <!--<ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />-->
             </ResourceDictionary.MergedDictionaries>
@@ -20,7 +21,7 @@
                 <Style.Resources>
                     <avalonEdit:TextDocumentValueConverter x:Key="TextDocumentValueConverter" />
                 </Style.Resources>
-                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
                 <Setter Property="Template">
                     <Setter.Value>

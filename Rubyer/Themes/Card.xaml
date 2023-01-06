@@ -17,7 +17,7 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="BorderEffect" Value="{DynamicResource AllDirectionEffect}" />
+        <Setter Property="BorderEffect" Value="{DynamicResource AllDirectionEffect3}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Card}">
@@ -46,8 +46,8 @@
         </Setter>
     </Style>
 
-    <Style x:Key="NoShadowCard" TargetType="{x:Type rubyer:Card}">
-        <Setter Property="BorderEffect" Value="{DynamicResource AllDirectionEffect}" />
+    <Style x:Key="OutLineCard" TargetType="{x:Type rubyer:Card}">
+        <Setter Property="BorderEffect" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 </ResourceDictionary>

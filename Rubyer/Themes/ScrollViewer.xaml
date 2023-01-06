@@ -81,6 +81,12 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
     </Style>
 
+    <Style x:Key="ScrollViewerArrowButton"
+           BasedOn="{StaticResource ScrollBarArrowButton}"
+           TargetType="RepeatButton">
+        <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+    </Style>
+
     <!--  只有箭头，没有滚动条  -->
     <Style x:Key="OnlyArrowScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="Background" Value="Transparent" />
@@ -123,7 +129,7 @@
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
 
                         <RepeatButton x:Name="leftButton"
-                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Style="{StaticResource ScrollViewerArrowButton}"
                                       Grid.Row="1"
                                       Grid.Column="0"
                                       Height="Auto"
@@ -138,7 +144,7 @@
                         </RepeatButton>
 
                         <RepeatButton x:Name="rightButton"
-                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Style="{StaticResource ScrollViewerArrowButton}"
                                       Grid.Row="1"
                                       Grid.Column="2"
                                       Height="Auto"
@@ -146,14 +152,13 @@
                                       rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                       rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      Cursor="Arrow"
                                       Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
                             <rubyer:Icon Type="ArrowRightSLine" />
                         </RepeatButton>
 
                         <RepeatButton x:Name="upButton"
-                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Style="{StaticResource ScrollViewerArrowButton}"
                                       Grid.Row="0"
                                       Grid.Column="1"
                                       Width="Auto"
@@ -167,7 +172,7 @@
                         </RepeatButton>
 
                         <RepeatButton x:Name="downButton"
-                                      Style="{StaticResource ScrollBarArrowButton}"
+                                      Style="{StaticResource ScrollViewerArrowButton}"
                                       Grid.Row="2"
                                       Grid.Column="1"
                                       Width="Auto"

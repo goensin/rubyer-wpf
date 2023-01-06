@@ -33,6 +33,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
                 new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),
                 new MenuItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
+                new MenuItem("Grid", "网格", new GridDemo(), IconType.GridLine),
                 new MenuItem("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
                 new MenuItem("ListsTree", "列表与树", new ListsTreeDemo(), IconType.ListCheck),
                 new MenuItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
