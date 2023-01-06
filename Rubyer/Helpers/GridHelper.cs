@@ -213,6 +213,23 @@ namespace Rubyer
                 element.Margin = (gridColumns == 0) || (column + columnSpan == gridColumns) ?
                                  new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom) :
                                  new Thickness(0, oldMargin.Top, spacing, oldMargin.Bottom);
+
+                if (gridColumns == 0)
+                {
+                    element.Margin = new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom);
+                }
+                else if (column == 0)
+                {
+                    element.Margin = new Thickness(0, oldMargin.Top, spacing / 2, oldMargin.Bottom);
+                }
+                else if (column + columnSpan == gridColumns)
+                {
+                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, 0, oldMargin.Bottom);
+                }
+                else
+                {
+                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, spacing / 2, oldMargin.Bottom);
+                }
             }
         }
 
@@ -251,6 +268,7 @@ namespace Rubyer
         {
             var grid = (Grid)sender;
             grid.Loaded -= SetGridChildrenRowSpacing;
+
             var count = grid.Children.Count;
             foreach (FrameworkElement element in grid.Children)
             {
@@ -260,9 +278,23 @@ namespace Rubyer
 
                 var oldMargin = element.Margin;
                 var spacing = GetRowSpacing(grid);
-                element.Margin = (gridRows == 0) || (row + rowSpan == gridRows) ?
-                                 new Thickness(oldMargin.Left, 0, oldMargin.Right, 0) :
-                                 new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing);
+
+                if (gridRows == 0)
+                {
+                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, 0);
+                }
+                else if (row == 0)
+                {
+                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing / 2);
+                }
+                else if (row + rowSpan == gridRows)
+                {
+                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, 0);
+                }
+                else
+                {
+                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, spacing / 2);
+                }
             }
         }
 
