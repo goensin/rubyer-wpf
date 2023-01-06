@@ -1,17 +1,17 @@
-﻿using Rubyer;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using RubyerDemo.Consts;
 using System.Windows;
 
 namespace RubyerDemo.ViewModels
 {
-    public class MessageBoxViewModel : ViewModelBase
+    public partial class MessageBoxViewModel : ObservableObject
     {
-        private RelayCommand messageBoxShow;
-        public RelayCommand MessageBoxShow => messageBoxShow ?? (messageBoxShow = new RelayCommand(MessageBoxShowExecute));
-
-        private void MessageBoxShowExecute(object obj)
+        [RelayCommand]
+        private void MessageBoxShow(string num)
         {
-            switch (obj.ToString())
+            switch (num)
             {
                 case "1":
                     MessageBoxR.ShowGlobal("有消息消息消息消息消息", "标题名称");
@@ -40,12 +40,10 @@ namespace RubyerDemo.ViewModels
             }
         }
 
-        private RelayCommand messageBoxShowContainer;
-        public RelayCommand MessageBoxShowContainer => messageBoxShowContainer ?? (messageBoxShowContainer = new RelayCommand(MessageBoxShowContainerExecute));
-
-        private async void MessageBoxShowContainerExecute(object obj)
+        [RelayCommand]
+        private async void MessageBoxShowContainer(string num)
         {
-            switch (obj.ToString())
+            switch (num)
             {
                 case "1":
                     await MessageBoxR.Show("有消息消息消息消息消息");

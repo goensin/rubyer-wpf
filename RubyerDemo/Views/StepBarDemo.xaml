@@ -17,7 +17,7 @@
                     <Button Width="100"
                             Margin="10"
                             HorizontalAlignment="Center"
-                            Command="{Binding NextStep}"
+                            Command="{Binding NextStepCommand}"
                             Content="下一步" />
 
                     <GroupBox Header="垂直步骤条 - StepBar">

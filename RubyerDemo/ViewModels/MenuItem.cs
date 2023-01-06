@@ -1,24 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Rubyer;
 
 namespace RubyerDemo.ViewModels
 {
-    public class MenuItem : NotifyPropertyObject
+    /// <summary>
+    /// 菜单项
+    /// </summary>
+    [INotifyPropertyChanged]
+    public partial class MenuItem
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
+        [ObservableProperty]
         private string name;
 
-        public string Name
-        {
-            get => name;
-            set => SetProperty(ref name, value);
-        }
+        /// <summary>
+        /// 描述
+        /// </summary>
+        [ObservableProperty]
+        private string description;
 
+        /// <summary>
+        /// 图标类型
+        /// </summary>
+        [ObservableProperty]
+        private IconType? iconType;
+
+        /// <summary>
+        /// 内容
+        /// </summary>
+        [ObservableProperty]
         private object content;
-        public object Content
+
+        public MenuItem(string name, string description, object content, IconType? iconType = null)
         {
-            get => content;
-            set => SetProperty(ref content, value);
+            Name = name;
+            Description = description;
+            Content = content;
+            IconType = iconType;
         }
     }
 }

@@ -1,78 +1,38 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace RubyerDemo.ViewModels
 {
-    public class PageBarViewModel : ViewModelBase
+    public partial class PageBarViewModel : ObservableObject
     {
         public PageBarViewModel()
         {
             Total = 100;
-            PageSize = 1;
-            //PageIndex = 1;
+            PageSize = 10;
         }
 
+        [ObservableProperty]
         private int total;
-        public int Total
-        {
-            get => total;
-            set
-            {
-                total = value;
-                RaisePropertyChanged("Total");
-            }
-        }
 
+        [ObservableProperty]
         private int pageSize;
-        public int PageSize
-        {
-            get => pageSize;
-            set
-            {
-                pageSize = value;
-                RaisePropertyChanged("PageSize");
-            }
-        }
 
-        //private int pageIndex;
-        //public int PageIndex
-        //{
-        //    get => pageIndex;
-        //    set
-        //    {
-        //        pageIndex = value;
-        //        RaisePropertyChanged("PageIndex");
-        //    }
-        //}
-
+        [ObservableProperty]
         private string pageBarMessage;
-        public string PageBarMessage
+
+        [RelayCommand]
+        private void PageIndexChanged(int index)
         {
-            get => pageBarMessage;
-            set
-            {
-                pageBarMessage = value;
-                RaisePropertyChanged("PageBarMessage");
-            }
+            PageBarMessage = $"当前页：{index}";
         }
 
-
-
-        private RelayCommand pageIndexChanged;
-        public RelayCommand PageIndexChanged => pageIndexChanged ?? (pageIndexChanged = new RelayCommand(PageIndexChangedExecute));
-
-        private void PageIndexChangedExecute(object index)
+        [RelayCommand]
+        private void PageSizeChanged(int size)
         {
-            PageBarMessage = $"当前页：{(int)index}";
-        }
-
-        private RelayCommand pageSizeChanged;
-        public RelayCommand PageSizeChanged => pageSizeChanged ?? (pageSizeChanged = new RelayCommand(PageSizeChangedExecute));
-
-        private void PageSizeChangedExecute(object size)
-        {
-            PageBarMessage = $"每页条数：{(int)size}";
+            PageBarMessage = $"每页条数：{size}";
         }
     }
 }

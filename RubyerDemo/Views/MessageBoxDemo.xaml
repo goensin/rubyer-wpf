@@ -29,14 +29,14 @@
                             <Button Style="{StaticResource LightButton}"
                                     Width="100"
                                     Margin="10"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="1">
                                 消息提示
                             </Button>
                             <Button Style="{StaticResource LightButton}"
                                     Width="100"
                                     Margin="10"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="1">
                                 消息提示
                             </Button>
@@ -47,13 +47,13 @@
                                     Orientation="Horizontal">
                             <Button Width="100"
                                     Margin="10"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="2">
                                 确认消息
                             </Button>
                             <Button Width="100"
                                     Margin="10"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="2">
                                 确认消息
                             </Button>
@@ -68,14 +68,14 @@
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Info}"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="3">
                                 信息
                             </Button>
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Info}"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="3">
                                 信息
                             </Button>
@@ -90,14 +90,14 @@
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Warning}"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="4">
                                 警告
                             </Button>
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Warning}"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="4">
                                 警告
                             </Button>
@@ -112,14 +112,14 @@
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Success}"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="5">
                                 成功
                             </Button>
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Success}"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="5">
                                 成功
                             </Button>
@@ -134,14 +134,14 @@
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Error}"
-                                    Command="{Binding MessageBoxShow}"
+                                    Command="{Binding MessageBoxShowCommand}"
                                     CommandParameter="6">
                                 错误
                             </Button>
                             <Button Width="100"
                                     Margin="10"
                                     Background="{StaticResource Error}"
-                                    Command="{Binding MessageBoxShowContainer}"
+                                    Command="{Binding MessageBoxShowContainerCommand}"
                                     CommandParameter="6">
                                 错误
                             </Button>

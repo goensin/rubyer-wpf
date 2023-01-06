@@ -1,4 +1,6 @@
-﻿using Rubyer.Commons;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer.Commons;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,34 +12,16 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    public class InputBoxViewModel : ViewModelBase
+    public partial class InputBoxViewModel : ObservableObject
     {
+        [ObservableProperty]
         private int? number;
 
-        public int? Number
-        {
-            get => number;
-            set
-            {
-                number = value;
-                RaisePropertyChanged("Number");
-            }
-        }
-
-        private string testpassword;
-
-        public string TestPassword
-        {
-            get => testpassword;
-            set
-            {
-                testpassword = value;
-                RaisePropertyChanged("TestPassword");
-                Debug.WriteLine($"password: {testpassword}");
-            }
-        }
+        [ObservableProperty]
+        private string testPassword;
 
         public List<int> Heights => Enumerable.Range(0, 100).ToList();
+
 
         private int intValue;
 
@@ -48,105 +32,38 @@ namespace RubyerDemo.ViewModels
             {
                 if (value > 5)
                 {
-                    intValue = 5;
+                    SetProperty(ref intValue, 5);
                 }
                 else
                 {
-                    intValue = value;
+                    SetProperty(ref intValue, value);
                 }
-
-                RaisePropertyChanged("IntValue");
             }
         }
 
+        [ObservableProperty]
         private int rangeValue = 20;
 
-        public int RangeValue
-        {
-            get => rangeValue;
-            set
-            {
-                rangeValue = value;
-                RaisePropertyChanged("RangeValue");
-            }
-        }
-
+        [ObservableProperty]
         private int intervalValue;
 
-        public int IntervalValue
-        {
-            get => intervalValue;
-            set
-            {
-                intervalValue = value;
-                RaisePropertyChanged("IntervalValue");
-            }
-        }
-
+        [ObservableProperty]
         private double? nullableValue;
 
-        public double? NullableValue
-        {
-            get => nullableValue;
-            set
-            {
-                nullableValue = value;
-                RaisePropertyChanged("NullableIntValue");
-            }
-        }
-
+        [ObservableProperty]
         private double doubleValue = 0.1;
 
-        public double DoubleValue
-        {
-            get => doubleValue;
-            set
-            {
-                doubleValue = value;
-                RaisePropertyChanged("DoubleValue");
-            }
-        }
-
+        [ObservableProperty]
         private double exponentDoubleValue;
 
-        public double ExponentDoubleValue
-        {
-            get => exponentDoubleValue;
-            set
-            {
-                exponentDoubleValue = value;
-                RaisePropertyChanged("ExponentDoubleValue");
-            }
-        }
-
+        [ObservableProperty]
         private FoodType currentFood;
 
-        public FoodType CurrentFood
-        {
-            get => currentFood;
-            set
-            {
-                currentFood = value;
-                RaisePropertyChanged("CurrentFood");
-            }
-        }
-
+        [ObservableProperty]
         private string name = "新建文本文档.txt";
 
-        public string Name
-        {
-            get => name;
-            set
-            {
-                name = value;
-                RaisePropertyChanged("Name");
-            }
-        }
-
-        private RelayCommand renamerCommand;
-        public RelayCommand RenamerCommand => renamerCommand ?? (renamerCommand = new RelayCommand(RenamerExecute));
-
-        private void RenamerExecute(object text)
+        [RelayCommand]
+        private void Renamer(object text)
         {
             Debug.WriteLine($"Renamer TextChangedCommand: {text}");
         }

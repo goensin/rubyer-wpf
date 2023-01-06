@@ -16,6 +16,9 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />

@@ -1,4 +1,6 @@
-﻿using Rubyer;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,10 +15,8 @@ namespace RubyerDemo.ViewModels
     /// <summary>
     /// The hamburger menu view model.
     /// </summary>
-    public class HamburgerMenuViewModel : ViewModelBase
+    public partial class HamburgerMenuViewModel : ObservableObject
     {
-        private RelayCommand selecteCommand;
-
         /// <summary>
         /// 子项集合
         /// </summary>
@@ -30,9 +30,8 @@ namespace RubyerDemo.ViewModels
         /// <summary>
         /// 下一步命令
         /// </summary>
-        public RelayCommand SelecteCommand => selecteCommand ?? (selecteCommand = new RelayCommand(SelecteExecute));
-
-        private void SelecteExecute(object message)
+        [RelayCommand]
+        private void Selecte(object message)
         {
             Debug.WriteLine($"HamburgerMenuItem Command: {message}");
         }
@@ -62,22 +61,25 @@ namespace RubyerDemo.ViewModels
     /// <summary>
     /// 汉堡包菜单模型
     /// </summary>
-    public class HamburgerMenuModel
+    public partial class HamburgerMenuModel : ObservableObject
     {
         /// <summary>
         /// 名称
         /// </summary>
-        public string Name { get; set; }
+        [ObservableProperty]
+        private string name;
 
         /// <summary>
         /// 图标
         /// </summary>
-        public IconType? Icon { get; set; }
+        [ObservableProperty]
+        private IconType? icon;
 
         /// <summary>
         /// 是否可用
         /// </summary>
-        public bool IsEnable { get; set; }
+        [ObservableProperty]
+        private bool isEnable;
 
         public HamburgerMenuModel(string name, IconType? icon, bool isEnable = true)
         {

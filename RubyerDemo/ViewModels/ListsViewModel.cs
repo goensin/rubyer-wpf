@@ -1,4 +1,5 @@
-﻿using Rubyer.Commons;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Rubyer.Commons;
 using Rubyer.Converters;
 using Rubyer.DataAnnotations;
 using System;
@@ -11,7 +12,7 @@ using System.Windows.Controls;
 
 namespace RubyerDemo.ViewModels
 {
-    public class ListsViewModel : ViewModelBase
+    public partial class ListsViewModel : ObservableObject
     {
         public ListsViewModel()
         {
@@ -59,44 +60,17 @@ namespace RubyerDemo.ViewModels
             };
         }
 
+        [ObservableProperty]
         private ObservableCollection<Person> persons;
 
-        public ObservableCollection<Person> Persons
-        {
-            get => persons;
-            set
-            {
-                persons = value;
-                RaisePropertyChanged("Persons");
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<Catalog> catalogs;
 
-        public ObservableCollection<Catalog> Catalogs
-        {
-            get => catalogs;
-            set
-            {
-                catalogs = value;
-                RaisePropertyChanged("Catalogs");
-            }
-        }
-
+        [ObservableProperty]
         private FoodType currentFood;
-
-        public FoodType CurrentFood
-        {
-            get => currentFood;
-            set
-            {
-                currentFood = value;
-                RaisePropertyChanged("CurrentFood");
-            }
-        }
     }
 
-    public class Person : NotifyPropertyObject
+    public class Person : ObservableObject
     {
         private int id;
 
@@ -104,11 +78,7 @@ namespace RubyerDemo.ViewModels
         public int Id
         {
             get => id;
-            set
-            {
-                id = value;
-                RaisePropertyChanged("Id");
-            }
+            set => SetProperty(ref id, value);
         }
 
         private string name;
@@ -118,11 +88,7 @@ namespace RubyerDemo.ViewModels
         public string Name
         {
             get => name;
-            set
-            {
-                name = value;
-                RaisePropertyChanged("Name");
-            }
+            set => SetProperty(ref name, value);
         }
 
         private int age;
@@ -133,11 +99,7 @@ namespace RubyerDemo.ViewModels
         public int Age
         {
             get => age;
-            set
-            {
-                age = value;
-                RaisePropertyChanged("Age");
-            }
+            set => SetProperty(ref age, value);
         }
 
         private bool isSelected;
@@ -147,11 +109,7 @@ namespace RubyerDemo.ViewModels
         public bool IsSelected
         {
             get => isSelected;
-            set
-            {
-                isSelected = value;
-                RaisePropertyChanged("IsSelected");
-            }
+            set => SetProperty(ref isSelected, value);
         }
 
         private GenderType gender;
@@ -161,18 +119,17 @@ namespace RubyerDemo.ViewModels
         public GenderType Gender
         {
             get => gender;
-            set
-            {
-                gender = value;
-                RaisePropertyChanged("Gender");
-            }
+            set => SetProperty(ref gender, value);
         }
     }
 
-    public class Catalog
+    public partial class Catalog : ObservableObject
     {
-        public string Name { get; set; }
-        public ObservableCollection<Catalog> Items { get; set; }
+        [ObservableProperty]
+        private string name;
+
+        [ObservableProperty]
+        private ObservableCollection<Catalog> items;
     }
 
     /// <summary>

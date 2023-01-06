@@ -1,4 +1,6 @@
-﻿using Rubyer;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Rubyer;
+using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,6 +27,8 @@ namespace RubyerDemo.Views
         public HamburgerMenuDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<HamburgerMenuViewModel>();
         }
 
         private void HamburgerMenu_HamburgerButtonClick(object sender, RoutedEventArgs e)

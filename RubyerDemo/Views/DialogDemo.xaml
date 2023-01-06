@@ -30,7 +30,7 @@
                         <rubyer:DialogContainer.DialogContent>
                             <StackPanel>
                                 <TextBlock Text="对话框内容" />
-                                <Button Margin="10" Command="{Binding CloseDialog1}">关闭</Button>
+                                <Button Margin="10" Command="{Binding CloseDialog1Command}">关闭</Button>
                             </StackPanel>
                         </rubyer:DialogContainer.DialogContent>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -38,7 +38,7 @@
                                 修改标题字体大小<LineBreak />
                                 绑定 IsShow 控制开关对话框<LineBreak />
                                 点击背景关闭</TextBlock>
-                            <Button Margin="10" Command="{Binding OpenDialog1}">打开</Button>
+                            <Button Margin="10" Command="{Binding OpenDialog1Command}">打开</Button>
                         </StackPanel>
                     </rubyer:DialogContainer>
                 </GroupBox>
@@ -84,9 +84,9 @@
                                             Title="添加用户"
                                             rubyer:HeaderHelper.HorizontalAlignment="Center"
                                             AfterClose="Dialog3_AfterClose"
-                                            AfterCloseCommand="{Binding AfterDialog3Close}"
+                                            AfterCloseCommand="{Binding AfterDialog3CloseCommand}"
                                             BeforeOpen="Dialog3_BeforeOpen"
-                                            BeforeOpenCommand="{Binding BeforeDialog3Open}"
+                                            BeforeOpenCommand="{Binding BeforeDialog3OpenCommand}"
                                             IsEscKeyToClose="False">
                         <rubyer:DialogContainer.DialogContent>
                             <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="40, 40, Auto">
@@ -144,7 +144,7 @@
                             <TextBlock TextWrapping="Wrap">
                                 通过 view model 代码设置对话框内容，弹出关闭
                             </TextBlock>
-                            <Button Margin="10" Command="{Binding OpenDialog4}">打开</Button>
+                            <Button Margin="10" Command="{Binding OpenDialog4Command}">打开</Button>
                         </StackPanel>
                     </Grid>
                 </GroupBox>
@@ -159,7 +159,7 @@
                             <TextBlock TextWrapping="Wrap">
                                 显示加载中对话框
                             </TextBlock>
-                            <Button Margin="10" Command="{Binding OpenDialog5}">Loading</Button>
+                            <Button Margin="10" Command="{Binding OpenDialog5Command}">Loading</Button>
                         </StackPanel>
                     </Grid>
                 </GroupBox>

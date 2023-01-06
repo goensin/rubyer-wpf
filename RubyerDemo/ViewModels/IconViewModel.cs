@@ -1,4 +1,6 @@
-﻿using Rubyer;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,7 +9,7 @@ using System.Text;
 
 namespace RubyerDemo.ViewModels
 {
-    public class IconViewModel : ViewModelBase
+    public partial class IconViewModel : ObservableObject
     {
         public IEnumerable<IconInfo> AllIconInfo => Icon.GetAllIconInfo();
 
@@ -15,52 +17,30 @@ namespace RubyerDemo.ViewModels
 
         public IEnumerable<IconInfo> IconInfos
         {
-            get { return iconInfos ?? (iconInfos = AllIconInfo); }
+            get { return iconInfos ??= AllIconInfo; }
             set
             {
-                iconInfos = value;
-                RaisePropertyChanged(nameof(IconInfos));
+                SetProperty(ref iconInfos, value);
             }
         }
-
-        private IconInfo currentIcon;
 
         /// <summary>
         /// 当前图标
         /// </summary>
-        public IconInfo CurrentIcon
-        {
-            get => currentIcon;
-            set
-            {
-                currentIcon = value;
-                RaisePropertyChanged(nameof(CurrentIcon));
-            }
-        }
-
-        private string searchText;
+        [ObservableProperty]
+        private IconInfo currentIcon;
 
         /// <summary>
         /// 搜索文本
         /// </summary>
-        public string SearchText
-        {
-            get => searchText;
-            set
-            {
-                searchText = value;
-                RaisePropertyChanged(nameof(SearchText));
-            }
-        }
-
-        private RelayCommand search;
+        [ObservableProperty]
+        private string searchText;
 
         /// <summary>
         /// 搜索命令
         /// </summary>
-        public RelayCommand Search => search ?? (search = new RelayCommand(SearchExecute));
-
-        private void SearchExecute(object obj)
+        [RelayCommand]
+        private void Search()
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {

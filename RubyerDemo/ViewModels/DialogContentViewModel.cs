@@ -1,20 +1,18 @@
-﻿using Rubyer;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using Rubyer.Commons;
 using Rubyer.Models;
 using System;
 
 namespace RubyerDemo.ViewModels
 {
-    public class DialogContentViewModel : ViewModelBase, IDialogViewModel
+    public partial class DialogContentViewModel : ObservableObject, IDialogViewModel
     {
-        public DialogContentViewModel()
-        {
-
-        }
-
         public string Title => "登录";
 
-        public User User { get; set; }
+        [ObservableProperty]
+        public User user;
 
         public event Action<object> RequestClose;
 
@@ -24,10 +22,8 @@ namespace RubyerDemo.ViewModels
             User = parameters.GetValue<User>("User");
         }
 
-        private RelayCommand login;
-        public RelayCommand Login => login ?? (login = new RelayCommand(LoginExecute));
-
-        private void LoginExecute(object obj)
+        [RelayCommand]
+        private void Login(object obj)
         {
             var parameters = new Parameters();
             parameters.Add("User", User.Clone());

@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RubyerDemo.ViewModels;
+using System.Windows.Controls;
 
 namespace RubyerDemo.Views
 {
@@ -10,6 +12,8 @@ namespace RubyerDemo.Views
         public TabControlDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<TabControlViewModel>();
         }
     }
 }

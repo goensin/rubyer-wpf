@@ -140,6 +140,20 @@ namespace Rubyer
             set { SetValue(TitleForegroundProperty, value); }
         }
 
+        /// <summary>
+        /// Window 非活动边框颜色
+        /// </summary>
+        public static readonly DependencyProperty InactiveBorderBrushProperty =
+            DependencyProperty.Register("InactiveBorderBrush", typeof(Brush), typeof(RubyerWindow), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// Window 非活动边框颜色
+        /// </summary>
+        public Brush InactiveBorderBrush
+        {
+            get { return (Brush)GetValue(InactiveBorderBrushProperty); }
+            set { SetValue(InactiveBorderBrushProperty, value); }
+        }
         #endregion 属性
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -7,41 +8,35 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    public class DateTimeViewModel : ViewModelBase
+    public partial class DateTimeViewModel : ObservableObject
     {
+        [ObservableProperty]
         private DateTime? time;
 
-        public DateTime? Time
-        {
-            get => time;
-            set
-            {
-                SetProperty(ref time, value);
-                Debug.WriteLine($"TimePicker Selected: {time}");
-            }
-        }
-
+        [ObservableProperty]
         private DateTime? date;
 
-        public DateTime? Date
-        {
-            get => date;
-            set
-            {
-                SetProperty(ref date, value);
-                Debug.WriteLine($"DatePicker Selected: {date}");
-            }
-        }
-
+        [ObservableProperty]
         private DateTime? dateTime;
 
-        public DateTime? DateTime
+        public DateTimeViewModel()
         {
-            get => dateTime;
-            set
+            this.PropertyChanged += DateTimeViewModel_PropertyChanged;
+        }
+
+        private void DateTimeViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(Time))
             {
-                SetProperty(ref dateTime, value);
-                Debug.WriteLine($"DateTimePicker Selected: {dateTime}");
+                Debug.WriteLine($"TimePicker Selected: {Time}");
+            }
+            else if (e.PropertyName == nameof(Date))
+            {
+                Debug.WriteLine($"DatePicker Selected: {Date}");
+            }
+            else if (e.PropertyName == nameof(DateTime))
+            {
+                Debug.WriteLine($"DateTimePicker Selected: {DateTime}");
             }
         }
     }

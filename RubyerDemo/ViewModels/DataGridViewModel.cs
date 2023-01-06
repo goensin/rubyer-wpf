@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    public class DataGridViewModel : ViewModelBase
+    public partial class DataGridViewModel : ObservableObject
     {
         public DataGridViewModel()
         {
@@ -23,36 +25,15 @@ namespace RubyerDemo.ViewModels
             };
         }
 
+        [ObservableProperty]
         private ObservableCollection<Person> persons;
 
-        public ObservableCollection<Person> Persons
-        {
-            get => persons;
-            set
-            {
-                persons = value;
-                RaisePropertyChanged("Persons");
-            }
-        }
-
+        [ObservableProperty]
         private bool loading;
 
-        public bool Loading
+        [RelayCommand]
+        private void Delete(Person person)
         {
-            get => loading;
-            set
-            {
-                loading = value;
-                RaisePropertyChanged("Loading");
-            }
-        }
-
-        private RelayCommand delete;
-        public RelayCommand Delete => delete ?? (delete = new RelayCommand(DeleteExecute));
-
-        private void DeleteExecute(object obj)
-        {
-            var person = obj as Person;
             Persons.Remove(person);
         }
     }

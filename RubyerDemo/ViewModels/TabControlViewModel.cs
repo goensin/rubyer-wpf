@@ -1,13 +1,18 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.ObjectModel;
 
 namespace RubyerDemo.ViewModels
 {
-    public class TabControlViewModel : ViewModelBase
+    public partial class TabControlViewModel : ObservableObject
     {
+        [ObservableProperty]
         private ObservableCollection<Poetry> poetries;
+        [ObservableProperty]
         private Poetry selectedPoetry;
-        private RelayCommand addTabItem;
+
+        [ObservableProperty]
         private int count = 1;
 
         public TabControlViewModel()
@@ -47,29 +52,8 @@ namespace RubyerDemo.ViewModels
             SelectedPoetry = new Poetry();
         }
 
-        public ObservableCollection<Poetry> Poetries
-        {
-            get => poetries;
-            set
-            {
-                poetries = value;
-                RaisePropertyChanged("Poetries");
-            }
-        }
-
-        public Poetry SelectedPoetry
-        {
-            get => selectedPoetry;
-            set
-            {
-                selectedPoetry = value;
-                RaisePropertyChanged("SelectedPoetry");
-            }
-        }
-
-        public RelayCommand AddTabItem => addTabItem ?? (addTabItem = new RelayCommand(AddTabItemExecute));
-
-        private void AddTabItemExecute(object obj)
+        [RelayCommand]
+        private void AddTabItem()
         {
             Poetry poetry = new Poetry
             {
@@ -83,10 +67,15 @@ namespace RubyerDemo.ViewModels
         }
     }
 
-    public class Poetry
+    public partial class Poetry : ObservableObject
     {
-        public string Title { get; set; }
-        public string Content { get; set; }
-        public bool IsChecked { get; set; }
+        [ObservableProperty]
+        private string title;
+
+        [ObservableProperty]
+        private string content;
+
+        [ObservableProperty]
+        private bool isChecked;
     }
 }

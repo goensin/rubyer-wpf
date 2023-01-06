@@ -49,48 +49,48 @@
                     <Border Padding="0 5">
                         <StackPanel>
                             <rubyer:Tag Margin="10"
-                                    Padding="10 5"
-                                    HorizontalAlignment="Center"
-                                    Content="REMIX ICON 2.5.0"
-                                    Header="图标"
-                                    Url="https://remixicon.cn/" />
+                                        Padding="10 5"
+                                        HorizontalAlignment="Center"
+                                        Content="REMIX ICON 2.5.0"
+                                        Header="图标"
+                                        Url="https://remixicon.cn/" />
                             <StackPanel Margin="0 0 0 10" Orientation="Horizontal">
                                 <TextBox Width="200"
-                                     Margin="10 0"
-                                     rubyer:InputBoxHelper.IsClearable="True"
-                                     rubyer:InputBoxHelper.Watermark="{Binding AllIconInfo.Count, StringFormat='检索图标 {0} 个'}"
-                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                                         Margin="10 0"
+                                         rubyer:InputBoxHelper.IsClearable="True"
+                                         rubyer:InputBoxHelper.Watermark="{Binding AllIconInfo.Count, StringFormat='检索图标 {0} 个'}"
+                                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
                                 <Button Width="80"
-                                    Command="{Binding Search}"
-                                    IsDefault="True"
-                                    ToolTip="搜索">
+                                        Command="{Binding SearchCommand}"
+                                        IsDefault="True"
+                                        ToolTip="搜索">
                                     <rubyer:Icon Type="SearchLine" />
                                 </Button>
                                 <TextBox x:Name="currentTextBox"
-                                     MinWidth="200"
-                                     Margin="10 0 0 0"
-                                     rubyer:InputBoxHelper.PreContent="选中"
-                                     BorderThickness="0"
-                                     Text="{Binding CurrentIcon.Type, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
+                                         MinWidth="200"
+                                         Margin="10 0 0 0"
+                                         rubyer:InputBoxHelper.PreContent="选中"
+                                         BorderThickness="0"
+                                         Text="{Binding CurrentIcon.Type, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
                                 <Button x:Name="copyButton"
-                                    Style="{StaticResource TextButton}"
-                                    rubyer:ButtonHelper.Shape="Circle"
-                                    Click="copyButton_Click"
-                                    ToolTip="复制">
+                                        Style="{StaticResource TextButton}"
+                                        rubyer:ButtonHelper.Shape="Circle"
+                                        Click="copyButton_Click"
+                                        ToolTip="复制">
                                     <rubyer:Icon Type="FileCopy2Fill" />
                                 </Button>
                             </StackPanel>
                         </StackPanel>
                     </Border>
                     <ListBox Grid.Row="1"
-                         rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                         rubyer:ItemsControlHelper.ItemMargin="0"
-                         rubyer:ItemsControlHelper.ItemPadding="0"
-                         ItemsSource="{Binding Source={StaticResource iconsSource}}"
-                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                         SelectedItem="{Binding CurrentIcon}"
-                         VirtualizingPanel.IsVirtualizingWhenGrouping="True"
-                         VirtualizingPanel.ScrollUnit="Pixel">
+                             rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                             rubyer:ItemsControlHelper.ItemMargin="0"
+                             rubyer:ItemsControlHelper.ItemPadding="0"
+                             ItemsSource="{Binding Source={StaticResource iconsSource}}"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             SelectedItem="{Binding CurrentIcon}"
+                             VirtualizingPanel.IsVirtualizingWhenGrouping="True"
+                             VirtualizingPanel.ScrollUnit="Pixel">
                         <ListBox.GroupStyle>
                             <GroupStyle ContainerStyle="{StaticResource IconGroupItem}" />
                         </ListBox.GroupStyle>
@@ -102,19 +102,19 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="80"
-                                        Height="60"
-                                        Margin="5"
-                                        VerticalAlignment="Center"
-                                        ToolTip="{Binding Type}">
+                                            Height="60"
+                                            Margin="5"
+                                            VerticalAlignment="Center"
+                                            ToolTip="{Binding Type}">
                                     <rubyer:Icon Width="28"
-                                             Height="28"
-                                             Margin="5"
-                                             HorizontalAlignment="Center"
-                                             Type="{Binding Type}" />
+                                                 Height="28"
+                                                 Margin="5"
+                                                 HorizontalAlignment="Center"
+                                                 Type="{Binding Type}" />
                                     <TextBlock HorizontalAlignment="Center"
-                                           FontSize="11"
-                                           Text="{Binding Type}"
-                                           TextTrimming="CharacterEllipsis" />
+                                               FontSize="11"
+                                               Text="{Binding Type}"
+                                               TextTrimming="CharacterEllipsis" />
                                 </StackPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

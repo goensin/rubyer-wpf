@@ -1,4 +1,6 @@
-﻿using Rubyer;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using RubyerDemo.Consts;
 using RubyerDemo.Views;
 using System;
@@ -12,7 +14,8 @@ using System.Windows.Media.Animation;
 
 namespace RubyerDemo.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    [INotifyPropertyChanged]
+    public partial class MainViewModel
     {
         private static readonly Brush primary = (Brush)Application.Current.Resources["Primary"];
         private static readonly Brush light = (Brush)Application.Current.Resources["Light"];
@@ -25,32 +28,32 @@ namespace RubyerDemo.ViewModels
 
             MenuItems = new ObservableCollection<MenuItem>
             {
-                new MenuItem{ Name = "按钮-Button", Content=new ButtonDemo()},
-                new MenuItem{ Name = "输入框-InputBox", Content=new InputBoxDemo{ DataContext = new InputBoxViewModel()} },
-                new MenuItem{ Name = "选择框-SelectBox", Content=new SelectBoxDemo() { DataContext = new TabControlViewModel()} },
-                new MenuItem{ Name = "范围条-RangeBar", Content=new RangeBarDemo()},
-                new MenuItem{ Name = "图标-Icon", Content=new IconDemo{ DataContext = new IconViewModel()} },
-                new MenuItem{ Name = "分组框-GroupBox", Content=new GroupBoxDemo() },
-                new MenuItem{ Name = "列表与树-ListsTree", Content=new ListsTreeDemo{ DataContext = new ListsViewModel()} },
-                new MenuItem{ Name = "数据表格-DataGrid", Content=new DataGridDemo{ DataContext = new DataGridViewModel()} },
-                new MenuItem{ Name = "选项卡-TabControl", Content=new TabControlDemo{ DataContext = new TabControlViewModel()} },
-                new MenuItem{ Name = "日期时间-DateTime", Content=new DateTimeDemo{ DataContext = new DateTimeViewModel() } },
-                new MenuItem{ Name = "菜单栏-MenuBar", Content=new MenuBarDemo{} },
-                new MenuItem{ Name = "文本块-TextBlock", Content=new TextBlockDemo{} },
-                new MenuItem{ Name = "页码条-PageBar", Content=new PageBarDemo{ DataContext = new PageBarViewModel()} },
-                new MenuItem{ Name = "消息提示-Message", Content=new MessageDemo{} },
-                new MenuItem{ Name = "消息框-MessageBox", Content = new MessageBoxDemo{ DataContext = new MessageBoxViewModel()} },
-                new MenuItem{ Name = "通知-Notification", Content=new NotificationDemo{} },
-                new MenuItem{ Name = "对话框-Dialog", Content = new DialogDemo{ DataContext = new DialogViewModel()} },
-                new MenuItem{ Name = "转换动画-Transition", Content = new TransitionDemo() },
-                new MenuItem{ Name = "标记标签-BadgeTag", Content = new BadgeTagDemo() },
-                new MenuItem{ Name = "加载中-Loading", Content = new LoadingDemo() },
-                new MenuItem{ Name = "步骤条-StepBar", Content = new StepBarDemo{ DataContext = new StepBarViewModel()} },
-                new MenuItem{ Name = "描述列表-Description", Content = new DescriptionDemo{ DataContext = new DescriptionViewModel()} },
-                new MenuItem{ Name = "汉堡包-HamburgerMenu", Content = new HamburgerMenuDemo{ DataContext = new HamburgerMenuViewModel()} },
+                new MenuItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
+                new MenuItem("InputBox", "输入框", new InputBoxDemo(), IconType.EditBoxLine),
+                new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
+                new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),
+                new MenuItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
+                new MenuItem("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
+                new MenuItem("ListsTree", "列表与树", new ListsTreeDemo(), IconType.ListCheck),
+                new MenuItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
+                new MenuItem("TabControl", "选项卡", new TabControlDemo(), IconType.LayoutTopLine),
+                new MenuItem("DateTime", "日期时间", new DateTimeDemo(), IconType.TimeLine),
+                new MenuItem("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),
+                new MenuItem("TextBlock", "文本块", new TextBlockDemo(), IconType.Text),
+                new MenuItem("PageBar", "页码条", new PageBarDemo(), IconType.MoreLine),
+                new MenuItem("Message", "消息提示", new MessageDemo(), IconType.DiscussLine),
+                new MenuItem("MessageBox", "消息框", new MessageBoxDemo(), IconType.ChatCheckLine),
+                new MenuItem("Notification", "通知", new NotificationDemo(), IconType.QuestionAnswerLine),
+                new MenuItem("Dialog", "对话框", new DialogDemo(), IconType.PictureInPictureLine),
+                new MenuItem("Transition", "转换动画", new TransitionDemo(), IconType.ClockwiseLine),
+                new MenuItem("BadgeTag", "标记标签", new BadgeTagDemo(), IconType.NotificationBadgeLine),
+                new MenuItem("Loading", "加载中", new LoadingDemo(), IconType.Loader2Fill),
+                new MenuItem("StepBar", "步骤条", new StepBarDemo(), IconType.ListOrdered),
+                new MenuItem("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
+                new MenuItem("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
             };
 
-            CurrentMenuItem = MenuItems[0];
+            CurrentMenuItem = MenuItems.First();
 
             ThemeColors = new ObservableCollection<ThemeColor>
             {
@@ -102,61 +105,21 @@ namespace RubyerDemo.ViewModels
             };
         }
 
+        [ObservableProperty]
         private string title;
 
-        public string Title
-        {
-            get => title;
-            set
-            {
-                title = value;
-                RaisePropertyChanged("Title");
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<MenuItem> menuItems;
 
-        public ObservableCollection<MenuItem> MenuItems
-        {
-            get => menuItems;
-            set
-            {
-                menuItems = value;
-                RaisePropertyChanged("MenuItems");
-            }
-        }
-
+        [ObservableProperty]
         private MenuItem currentMenuItem;
 
-        public MenuItem CurrentMenuItem
-        {
-            get => currentMenuItem;
-            set
-            {
-                currentMenuItem = value;
-                RaisePropertyChanged("CurrentMenuItem");
-            }
-        }
-
+        [ObservableProperty]
         private ObservableCollection<ThemeColor> themeColors;
 
-        public ObservableCollection<ThemeColor> ThemeColors
+        [RelayCommand]
+        private void ChangeThemeColor(ThemeColor themeColor)
         {
-            get => themeColors;
-            set
-            {
-                themeColors = value;
-                RaisePropertyChanged("ThemeColors");
-            }
-        }
-
-        private RelayCommand changeThemeColor;
-        public RelayCommand ChangeThemeColor => changeThemeColor ?? (changeThemeColor = new RelayCommand(ChangeThemeColorExecute));
-
-        private void ChangeThemeColorExecute(object obj)
-        {
-            ThemeColor themeColor = obj as ThemeColor;
-
             if (themeColor.IsSeleted)
             {
                 return;
@@ -175,10 +138,8 @@ namespace RubyerDemo.ViewModels
             themeColor.IsSeleted = true;
         }
 
-        private RelayCommand openAboutDialog;
-        public RelayCommand OpenAboutDialog => openAboutDialog ?? (openAboutDialog = new RelayCommand(OpenAboutDialogExecute));
-
-        private async void OpenAboutDialogExecute(object obj)
+        [RelayCommand]
+        private async void OpenAboutDialog()
         {
             var content = new About();
             await Dialog.Show(content, title: "关于");

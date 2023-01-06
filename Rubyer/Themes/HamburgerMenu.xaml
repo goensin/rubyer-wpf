@@ -249,14 +249,20 @@
     <Style x:Key="RubyerHamburgerMenuOptions"
            BasedOn="{StaticResource RubyerMenu}"
            TargetType="rubyer:HamburgerMenuOptions">
-        <Setter Property="Margin" Value="0 20" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptions}">
-                    <Border Background="Transparent" CornerRadius="{DynamicResource AllControlCornerRadius}">
+                    <Border x:Name="border"
+                            Background="Transparent"
+                            CornerRadius="{DynamicResource AllControlCornerRadius}">
                         <StackPanel ClipToBounds="True" IsItemsHost="True" />
                     </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="HasItems" Value="True">
+                            <Setter TargetName="border" Property="Margin" Value="0 20" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -323,7 +329,8 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Border Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
+                                    <Border x:Name="headerBorder"
+                                            Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
                                             Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             HorizontalAlignment="Left"
                                             Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -367,7 +374,9 @@
                                             Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
                                             HorizontalAlignment="Left"
                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                        <ScrollViewer Style="{StaticResource OnlyArrowScrollViewer}"
+                                        <ScrollViewer x:Name="itemsScroll"
+                                                      Style="{StaticResource OnlyArrowScrollViewer}"
+                                                      rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                                       rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                                       rubyer:ScrollViewerHelper.VerticalDelta="75"
                                                       HorizontalScrollBarVisibility="Disabled"
@@ -432,6 +441,9 @@
                             <Setter TargetName="contentColumn" Property="Width" Value="Auto" />
                             <Setter TargetName="menu" Property="Grid.Column" Value="1" />
                             <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
+                        </Trigger>
+                        <Trigger SourceName="itemsScroll" Property="ComputedVerticalScrollBarVisibility" Value="Visible">
+                            <Setter TargetName="headerBorder" Property="Margin" Value="0" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

@@ -101,9 +101,9 @@ namespace Rubyer
 
         private void Tag_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!string.IsNullOrEmpty(this.Url))
+            if (!string.IsNullOrEmpty(Url))
             {
-                System.Diagnostics.Process.Start(this.Url);
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(Url) { UseShellExecute = true });
             }
         }
 

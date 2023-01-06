@@ -1,4 +1,6 @@
-﻿using RubyerDemo.ViewModels;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,6 +22,7 @@ namespace RubyerDemo.Views
     /// <summary>
     /// Transition.xaml 的交互逻辑
     /// </summary>
+    [INotifyPropertyChanged]
     public partial class TransitionDemo : UserControl
     {
         public TransitionDemo()
@@ -38,18 +41,14 @@ namespace RubyerDemo.Views
             Debug.WriteLine("transition closed event");
         }
 
-        private RelayCommand showedCommand;
-        public RelayCommand ShowedCommand => showedCommand ?? (showedCommand = new RelayCommand(ShowedExecute));
-
-        private void ShowedExecute(object obj)
+        [RelayCommand]
+        private void Showed()
         {
             Debug.WriteLine("transition showed command");
         }
 
-        private RelayCommand closedCommand;
-        public RelayCommand ClosedCommand => closedCommand ?? (closedCommand = new RelayCommand(ClosedExecute));
-
-        private void ClosedExecute(object obj)
+        [RelayCommand]
+        private void Closed(object obj)
         {
             Debug.WriteLine("transition closed command");
         }

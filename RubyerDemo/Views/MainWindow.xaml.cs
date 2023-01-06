@@ -1,7 +1,9 @@
 ﻿using ICSharpCode.AvalonEdit.Highlighting;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Win32;
 using Rubyer;
 using Rubyer.Enums;
+using RubyerDemo.ViewModels;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -24,6 +26,8 @@ namespace RubyerDemo
         public MainWindow()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
 
             Loaded += MainWindow_Loaded;
         }

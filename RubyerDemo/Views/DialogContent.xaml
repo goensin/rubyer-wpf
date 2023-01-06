@@ -5,6 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DialogContentViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="DialogContent">
         <Grid Margin="10"
@@ -30,7 +32,7 @@
             <Button Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Margin="10 0"
-                    Command="{Binding Login}"
+                    Command="{Binding LoginCommand}"
                     Content="登录" />
         </Grid>
     </smtx:XamlDisplay>

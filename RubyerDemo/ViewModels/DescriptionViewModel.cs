@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,10 +8,7 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    /// <summary>
-    /// The description view model.
-    /// </summary>
-    public class DescriptionViewModel : ViewModelBase
+    public partial class DescriptionViewModel : ObservableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DescriptionViewModel"/> class.
@@ -29,50 +27,28 @@ namespace RubyerDemo.ViewModels
             CurrentColumn = 2;
         }
 
+        [ObservableProperty]
         private ObservableCollection<DescriptionModel> models;
 
-        /// <summary>
-        /// 所有步骤
-        /// </summary>
-        public ObservableCollection<DescriptionModel> Models
-        {
-            get => models;
-            set
-            {
-                models = value;
-                RaisePropertyChanged("Models");
-            }
-        }
-
+        [ObservableProperty]
         private int currentColumn;
-
-        /// <summary>
-        /// 当前列数
-        /// </summary>
-        public int CurrentColumn
-        {
-            get => currentColumn;
-            set
-            {
-                currentColumn = value;
-                RaisePropertyChanged("CurrentColumn");
-            }
-        }
     }
 
     /// <summary>
     /// 描述模型
     /// </summary>
-    public class DescriptionModel
+    public partial class DescriptionModel : ObservableObject
     {
         /// <summary>
         /// 描述
         /// </summary>
-        public string Description { get; set; }
+        [ObservableProperty]
+        private string description;
 
         /// <summary>
         /// 内容
         /// </summary>
-        public string Content { get; set; }
+        [ObservableProperty]
+        private string content;
     }
 }

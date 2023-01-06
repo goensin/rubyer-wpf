@@ -17,7 +17,7 @@
                     VerticalAlignment="Center"
                     Orientation="Vertical">
                 <Button Padding="10 0"
-                    Command="{Binding AddTabItem}"
+                    Command="{Binding AddTabItemCommand}"
                     Content="添加 TabItem" />
             </StackPanel>
 

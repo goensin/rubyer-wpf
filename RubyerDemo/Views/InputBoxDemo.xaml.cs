@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RubyerDemo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
@@ -14,6 +16,8 @@ namespace RubyerDemo.Views
         public InputBoxDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<InputBoxViewModel>();
         }
 
         private void NumericBox_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double?> e)

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RubyerDemo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -22,6 +24,8 @@ namespace RubyerDemo.Views
         public PageBarDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<PageBarViewModel>();
         }
 
         private void PageBar_PageIndexChanged(object sender, RoutedPropertyChangedEventArgs<int> e)

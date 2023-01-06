@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RubyerDemo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,8 @@ namespace RubyerDemo.Views
         public StepBarDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<StepBarViewModel>();
         }
     }
 }

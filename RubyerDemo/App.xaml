@@ -35,7 +35,7 @@
                                                 <rubyer:Icon Margin="0 0 8 0" Type="FunctionLine" />
                                                 <TextBlock Height="Auto"
                                                            FontSize="14"
-                                                           Text="{Binding DataContext.CurrentMenuItem.Name, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
+                                                           Text="{Binding DataContext.CurrentMenuItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
                                             </StackPanel>
                                         </TabItem.Header>
 

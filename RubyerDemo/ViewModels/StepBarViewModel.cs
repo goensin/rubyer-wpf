@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -7,10 +9,7 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    /// <summary>
-    /// The step bar view model.
-    /// </summary>
-    public class StepBarViewModel : ViewModelBase
+    public partial class StepBarViewModel : ObservableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="StepBarViewModel"/> class.
@@ -27,44 +26,23 @@ namespace RubyerDemo.ViewModels
             };
         }
 
-        private int currentIndex = 0;
-
         /// <summary>
         /// 当前步骤
         /// </summary>
-        public int CurrentIndex
-        {
-            get => currentIndex;
-            set
-            {
-                currentIndex = value;
-                RaisePropertyChanged("CurrentIndex");
-            }
-        }
-
-        private ObservableCollection<StepModel> models;
+        [ObservableProperty]
+        private int currentIndex = 0;
 
         /// <summary>
         /// 所有步骤
         /// </summary>
-        public ObservableCollection<StepModel> Models
-        {
-            get => models;
-            set
-            {
-                models = value;
-                RaisePropertyChanged("Models");
-            }
-        }
-
-        private RelayCommand nextStep;
+        [ObservableProperty]
+        private ObservableCollection<StepModel> models;
 
         /// <summary>
         /// 下一步命令
         /// </summary>
-        public RelayCommand NextStep => nextStep ?? (nextStep = new RelayCommand(NextStepExecute));
-
-        private void NextStepExecute(object obj)
+        [RelayCommand]
+        private void NextStep()
         {
             CurrentIndex++;
             if (CurrentIndex > 5)
@@ -77,7 +55,7 @@ namespace RubyerDemo.ViewModels
     /// <summary>
     /// 步骤模型
     /// </summary>
-    public class StepModel
+    public class StepModel : ObservableObject
     {
         /// <summary>
         /// 内容

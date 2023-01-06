@@ -45,6 +45,7 @@
         <Setter Property="TitleHeight" Value="24" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />
         <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome CaptionHeight="{Binding TitleHeight, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
@@ -153,7 +154,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+                            <Setter Property="BorderBrush" Value="{Binding InactiveBorderBrush, RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />

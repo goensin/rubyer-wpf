@@ -1,5 +1,7 @@
-﻿using Rubyer;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Rubyer;
 using RubyerDemo.Consts;
+using RubyerDemo.ViewModels;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -16,6 +18,8 @@ namespace RubyerDemo.Views
         public IconDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<IconViewModel>();
         }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)

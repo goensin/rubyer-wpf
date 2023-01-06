@@ -1,4 +1,5 @@
-﻿using Rubyer;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Rubyer;
 using Rubyer.Models;
 using RubyerDemo.ViewModels;
 using System;
@@ -28,6 +29,8 @@ namespace RubyerDemo.Views
         public DialogDemo()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetService<DialogViewModel>();
         }
 
         private void Dialog3_BeforeOpen(object sender, RoutedEventArgs e)
