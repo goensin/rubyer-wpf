@@ -14,9 +14,7 @@
             <Grid Margin="0 10 0 0"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
                   rubyer:GridHelper.RowSpacing="10">
-                <controls:ControlDisplay Title="GridHelper.RowDefinitions, GridHelper.ColumnDefinitions"
-                                         Description="通过附加属性更简便设置 RowDefinitions 和 ColumnDefinitions"
-                                         Foreground="Black">
+                <controls:ControlDisplay Title="GridHelper.RowDefinitions, GridHelper.ColumnDefinitions" Description="通过附加属性更简便设置 RowDefinitions 和 ColumnDefinitions">
                     <Grid Height="100"
                           rubyer:GridHelper.ColumnDefinitions="*, *"
                           rubyer:GridHelper.RowDefinitions="*, *">
@@ -31,8 +29,7 @@
 
                 <controls:ControlDisplay Title="GridHelper.RowSpacing, GridHelper.ColumnSpacing"
                                          Grid.Row="1"
-                                         Description="通过 RowSpacing 和 ColumnSpacing 设置间隔, 实际设置 Child 的 Margin"
-                                         Foreground="Black">
+                                         Description="通过 RowSpacing 和 ColumnSpacing 设置间隔, 实际设置 Child 的 Margin">
                     <StackPanel>
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"
@@ -64,8 +61,7 @@
 
                 <controls:ControlDisplay Title="GridHelper.Rows, GridHelper.Columns"
                                          Grid.Row="2"
-                                         Description="根据行数和列数自动设置 RowDefinitions 和 ColumnDefinitions，前面 GridLength 都为 Auto，最后一个为 * "
-                                         Foreground="Black">
+                                         Description="根据行数和列数自动设置 RowDefinitions 和 ColumnDefinitions，前面 GridLength 都为 Auto，最后一个为 * ">
                     <Grid Height="200"
                           rubyer:GridHelper.Columns="3"
                           rubyer:GridHelper.Rows="3">

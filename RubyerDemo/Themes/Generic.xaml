@@ -13,7 +13,6 @@
                         <TextBlock Style="{StaticResource Head3TextBlock}" Text="{TemplateBinding Title}" />
                         <TextBlock Grid.Row="1"
                                    Margin="5"
-                                   Foreground="{StaticResource RegularText}"
                                    Text="{TemplateBinding Description}"
                                    TextWrapping="Wrap" />
                         <rubyer:Card Grid.Row="2"
