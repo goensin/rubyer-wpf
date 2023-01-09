@@ -14,7 +14,9 @@
             <Grid Margin="0 10 0 0"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
                   rubyer:GridHelper.RowSpacing="10">
-                <controls:ControlDisplay Title="GridHelper.RowDefinitions, GridHelper.ColumnDefinitions" Description="通过附加属性更简便设置 RowDefinitions 和 ColumnDefinitions">
+                <controls:ControlDisplay Title="GridHelper.RowDefinitions, GridHelper.ColumnDefinitions"
+                                         HorizontalContentAlignment="Stretch"
+                                         Description="通过附加属性更简便设置 RowDefinitions 和 ColumnDefinitions">
                     <Grid Height="100"
                           rubyer:GridHelper.ColumnDefinitions="*, *"
                           rubyer:GridHelper.RowDefinitions="*, *">
@@ -29,6 +31,7 @@
 
                 <controls:ControlDisplay Title="GridHelper.RowSpacing, GridHelper.ColumnSpacing"
                                          Grid.Row="1"
+                                         HorizontalContentAlignment="Stretch"
                                          Description="通过 RowSpacing 和 ColumnSpacing 设置间隔, 实际设置 Child 的 Margin">
                     <StackPanel>
                         <StackPanel Margin="0 0 0 20"
@@ -61,6 +64,7 @@
 
                 <controls:ControlDisplay Title="GridHelper.Rows, GridHelper.Columns"
                                          Grid.Row="2"
+                                         HorizontalContentAlignment="Stretch"
                                          Description="根据行数和列数自动设置 RowDefinitions 和 ColumnDefinitions，前面 GridLength 都为 Auto，最后一个为 * ">
                     <Grid Height="200"
                           rubyer:GridHelper.Columns="3"

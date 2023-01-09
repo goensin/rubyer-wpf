@@ -61,6 +61,7 @@ namespace RubyerDemo
             services.AddSingleton<StepBarViewModel>();
             services.AddSingleton<DescriptionViewModel>();
             services.AddSingleton<HamburgerMenuViewModel>();
+            services.AddSingleton<TextBoxViewModel>();
 
             return services.BuildServiceProvider();
         }

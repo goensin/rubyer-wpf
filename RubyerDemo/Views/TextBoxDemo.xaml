@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="RubyerDemo.Views.TextBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="TextBoxDemo">
+        <ScrollViewer>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <controls:ControlDisplay Title="Default TextBox">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="150" Text="默认" />
+                        <TextBox Style="{StaticResource LightTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="亮色" />
+                        <TextBox Style="{StaticResource DarkTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="暗色" />
+                        <TextBox Style="{StaticResource AccentTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="强调色" />
+                        <TextBox Width="150"
+                                 Margin="10 0 0 0"
+                                 IsEnabled="False"
+                                 Text="不可用" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Filled TextBox"
+                                         Grid.Row="1"
+                                         Description="FilledTextBox Style">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Style="{StaticResource FilledTextBox}"
+                                 Width="150"
+                                 Text="默认" />
+                        <TextBox Style="{StaticResource FilledLightTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="亮色" />
+                        <TextBox Style="{StaticResource FilledDarkTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="暗色" />
+                        <TextBox Style="{StaticResource FilledAccentTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 Text="强调色" />
+                        <TextBox Style="{StaticResource FilledTextBox}"
+                                 Width="150"
+                                 Margin="10 0 0 0"
+                                 IsEnabled="False"
+                                 Text="不可用" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Watermark、Clearable、Round TextBox"
+                                         Grid.Row="2"
+                                         Description="通过 InputBoxHelper.Watermark 设置水印 &#x000A;通过 InputBoxHelper.IsClearable 设置可清除文本 &#x000A;通过 InputBoxHelper.IsRound 设置圆角边框">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox Width="150" rubyer:InputBoxHelper.Watermark="水印" />
+
+                            <TextBox Style="{StaticResource AccentTextBox}"
+                                     Width="150"
+                                     Margin="10 0 0 0"
+                                     rubyer:InputBoxHelper.IsClearable="True"
+                                     rubyer:InputBoxHelper.Watermark="可清除" />
+
+                            <TextBox Width="150"
+                                     Margin="10 0 0 0"
+                                     rubyer:InputBoxHelper.IsRound="True"
+                                     rubyer:InputBoxHelper.Watermark="边框圆角" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                            <TextBox Style="{StaticResource FilledTextBox}"
+                                     Width="150"
+                                     rubyer:InputBoxHelper.Watermark="水印" />
+
+                            <TextBox Style="{StaticResource FilledTextBox}"
+                                     Width="150"
+                                     Margin="10 0 0 0"
+                                     rubyer:InputBoxHelper.IsClearable="True"
+                                     rubyer:InputBoxHelper.Watermark="可清除" />
+
+                            <TextBox Style="{StaticResource FilledTextBox}"
+                                     Width="150"
+                                     Margin="10 0 0 0"
+                                     rubyer:InputBoxHelper.IsRound="True"
+                                     rubyer:InputBoxHelper.Watermark="边框圆角" />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="ErrorTemplate"
+                                         Grid.Row="3"
+                                         Description="异常内容提示">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox x:Name="errorTextBox"
+                                 Width="150"
+                                 Margin="5 10"
+                                 HorizontalAlignment="Left"
+                                 rubyer:InputBoxHelper.Watermark="绑定了 int 类型"
+                                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}" />
+
+                        <TextBox x:Name="errorTextBox2"
+                                 Width="150"
+                                 Margin="5 10"
+                                 HorizontalAlignment="Left"
+                                 rubyer:InputBoxHelper.Watermark="绑定了 int 类型"
+                                 Text="{Binding Number, UpdateSourceTrigger=PropertyChanged}"
+                                 Validation.ErrorTemplate="{StaticResource MouseOverValidationErrorTemplate}" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="PreContent 、PostContent"
+                                         Grid.Row="4"
+                                         Description="通过设置 InputBoxHelper.PreContent 和 InputBoxHelper.PostContent，让文本框内显示前后缀内容">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Width="150">
+                            <rubyer:InputBoxHelper.PreContent>
+                                <rubyer:Icon Type="QqFill" />
+                            </rubyer:InputBoxHelper.PreContent>
+                        </TextBox>
+
+                        <TextBox Width="200"
+                                 Margin="10 5"
+                                 rubyer:InputBoxHelper.PostContent=".com"
+                                 rubyer:InputBoxHelper.PreContent="http://" />
+                        <TextBox Width="150">
+                            <rubyer:InputBoxHelper.PostContent>
+                                <Button Style="{StaticResource TextButton}" rubyer:ButtonHelper.Shape="Circle">
+                                    <rubyer:Icon Type="Search2Line" />
+                                </Button>
+                            </rubyer:InputBoxHelper.PostContent>
+                        </TextBox>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Big TextBox"
+                                         Grid.Row="5"
+                                         Description="大文本框样式 BigTextBox, 自动换行显示多行文本">
+                    <TextBox Style="{StaticResource BigTextBox}"
+                             Width="600"
+                             Height="150"
+                             rubyer:InputBoxHelper.IsClearable="True"
+                             rubyer:InputBoxHelper.Watermark="大文本框" />
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

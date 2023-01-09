@@ -7,6 +7,7 @@
     <Style TargetType="{x:Type controls:ControlDisplay}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="0 5 0 10" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ControlDisplay}">
@@ -24,7 +25,7 @@
                                      Margin="3 5"
                                      Padding="10">
                             <ContentPresenter x:Name="contentPresenter"
-                                              HorizontalAlignment="Center"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Focusable="False"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
