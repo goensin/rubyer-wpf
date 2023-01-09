@@ -219,6 +219,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.5" />
+        <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
     </Style>
 
     <Style x:Key="TextLightButton"
@@ -259,6 +260,55 @@
 
     <Style x:Key="TextErrorButton"
            BasedOn="{StaticResource TextButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Error}" />
+    </Style>
+
+    <!--  Outline 按钮  -->
+    <Style x:Key="OutlineButton"
+           BasedOn="{StaticResource TextButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <Style x:Key="OutlineLightButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Light}" />
+    </Style>
+
+    <Style x:Key="OutlineDarkButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Dark}" />
+    </Style>
+
+    <Style x:Key="OutlineAccentButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Accent}" />
+    </Style>
+
+    <Style x:Key="OutlineSuccessButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Success}" />
+    </Style>
+
+    <Style x:Key="OutlineInfoButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Info}" />
+    </Style>
+
+    <Style x:Key="OutlineWarningButton"
+           BasedOn="{StaticResource OutlineButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="{DynamicResource Warning}" />
+    </Style>
+
+    <Style x:Key="OutlineErrorButton"
+           BasedOn="{StaticResource OutlineButton}"
            TargetType="{x:Type Button}">
         <Setter Property="Foreground" Value="{DynamicResource Error}" />
     </Style>
