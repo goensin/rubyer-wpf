@@ -416,6 +416,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="Collapsed" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource MouseOverValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />

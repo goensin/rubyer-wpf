@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!--  错误验证  -->
-    <ControlTemplate x:Key="ValidationErrorTemplate">
+    <ControlTemplate x:Key="RubyerValidationErrorTemplate">
         <StackPanel>
             <AdornedElementPlaceholder Name="Placeholder" />
             <Border x:Name="DefaultErrorViewer"
@@ -27,6 +27,17 @@
         </StackPanel>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="MouseOverValidationErrorTemplate">
+        <Grid>
+            <AdornedElementPlaceholder Name="Placeholder" />
+            <Polygon HorizontalAlignment="Right"
+                     VerticalAlignment="Top"
+                     Fill="{DynamicResource Error}"
+                     Points="0,0 15,0 15,15"
+                     ToolTip="{Binding CurrentItem.ErrorContent}"
+                     ToolTipService.InitialShowDelay="1" />
+        </Grid>
+    </ControlTemplate>
     <!--  默认文本框  -->
     <Style x:Key="RubyerTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
@@ -44,7 +55,7 @@
         <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Cursor" Value="IBeam" />
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -174,6 +185,9 @@
                             <Setter TargetName="effectBorder" Property="BorderBrush" Value="{DynamicResource Error}" />
                             <Setter TargetName="border" Property="BorderBrush" Value="{DynamicResource Error}" />
                         </Trigger>
+                        <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -189,25 +203,52 @@
         </Style.Triggers>
     </Style>
 
-    <!--  亮色文本框  -->
     <Style x:Key="LightTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Light}" />
     </Style>
 
-    <!--  暗色文本框  -->
     <Style x:Key="DarkTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Dark}" />
     </Style>
 
-    <!--  强调色文本框  -->
     <Style x:Key="AccentTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Accent}" />
+    </Style>
+
+    <!--  Filled TextBox  -->
+    <Style x:Key="FilledTextBox"
+           BasedOn="{StaticResource RubyerTextBox}"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource BorderLight}" />
+    </Style>
+
+    <Style x:Key="FilledLightTextBox"
+           BasedOn="{StaticResource FilledTextBox}"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Light}" />
+    </Style>
+
+    <Style x:Key="FilledDarkTextBox"
+           BasedOn="{StaticResource FilledTextBox}"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Dark}" />
+    </Style>
+
+    <Style x:Key="FilledAccentTextBox"
+           BasedOn="{StaticResource FilledTextBox}"
+           TargetType="{x:Type TextBox}">
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Accent}" />
     </Style>
 
     <!--  大文本框  -->

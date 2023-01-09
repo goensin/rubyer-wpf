@@ -19,7 +19,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
-        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ValidationErrorTemplate}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="ShowButton" Value="True" />
         <Setter Property="MaxLength" Value="{x:Static system:Int32.MaxValue}" />
         <Setter Property="Interval" Value="1" />

@@ -114,6 +114,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 是否边框圆角
+        /// </summary>
+        public static readonly DependencyProperty IsRoundProperty =
+            DependencyProperty.RegisterAttached("IsRound", typeof(bool), typeof(InputBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public static bool GetIsRound(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsRoundProperty);
+        }
+
+        public static void SetIsRound(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsRoundProperty, BooleanBoxes.Box(value));
+        }
+
+        /// <summary>
         /// Ons the is clearble changed.
         /// </summary>
         /// <param name="d">The d.</param>
