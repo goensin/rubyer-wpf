@@ -6,24 +6,35 @@
 
     <Style TargetType="{x:Type controls:ControlDisplay}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Margin" Value="0 5 0 10" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type controls:ControlDisplay}">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, *" rubyer:GridHelper.RowSpacing="10">
                         <TextBlock Style="{StaticResource Head3TextBlock}" Text="{TemplateBinding Title}" />
-                        <TextBlock Grid.Row="1"
-                                   Margin="5"
-                                   Text="{TemplateBinding Description}"
-                                   TextWrapping="Wrap" />
+                        <TextBox x:Name="descriptionText"
+                                 Grid.Row="1"
+                                 Height="Auto"
+                                 Margin="3"
+                                 BorderThickness="0"
+                                 IsReadOnly="True"
+                                 Text="{TemplateBinding Description}"
+                                 TextWrapping="Wrap" />
                         <rubyer:Card Grid.Row="2"
-                                     Margin="5"
+                                     Margin="3 5"
                                      Padding="10">
                             <ContentPresenter x:Name="contentPresenter"
+                                              HorizontalAlignment="Center"
                                               Focusable="False"
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </rubyer:Card>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Description" Value="{x:Null}">
+                            <Setter TargetName="descriptionText" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -311,7 +311,7 @@ namespace Rubyer
         /// <summary>
         /// 延期关闭消息卡片
         /// </summary>
-        /// <param name="millisecondTimeOut">显示时间，为 0 时不自动关闭</param>
+        /// <param name="millisecondTimeOut">显示时间，小于 0 时不自动关闭</param>
         /// <param name="messageCard">消息卡片</param>
         /// <param name="token">取消令牌</param>
         private static void DelayCloseMessageCard(int millisecondTimeOut, MessageCard messageCard, CancellationToken token)

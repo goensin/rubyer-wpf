@@ -154,6 +154,7 @@
             </Menu>
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
+
     <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
                           rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"
                           rubyer:HeaderHelper.Background="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
@@ -162,7 +163,7 @@
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                           Background="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
                           BorderThickness="0 0 1 0"
-                          ExpandedWidth="200"
+                          ExpandedWidth="170"
                           Foreground="{DynamicResource WhiteForeground}"
                           Header="Controls"
                           ItemsSource="{Binding MenuItems}"

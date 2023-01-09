@@ -55,7 +55,7 @@
            TargetType="{x:Type TextBlock}">
         <Setter Property="FontSize" Value="16" />
         <Setter Property="FontWeight" Value="Bold" />
-        <Setter Property="Margin" Value="2 6" />
+        <Setter Property="Margin" Value="3 6" />
     </Style>
 
     <!--  H2  -->
