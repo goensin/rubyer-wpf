@@ -30,6 +30,7 @@ namespace RubyerDemo.ViewModels
             {
                 new MenuItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
                 new MenuItem("TextBox", "文本框", new TextBoxDemo(), IconType.EditBoxLine),
+                new MenuItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
                 new MenuItem("InputBox", "输入框", new InputBoxDemo(), IconType.EditBoxLine),
                 new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
                 new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),

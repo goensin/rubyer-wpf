@@ -38,6 +38,7 @@
                      ToolTipService.InitialShowDelay="1" />
         </Grid>
     </ControlTemplate>
+    
     <!--  默认文本框  -->
     <Style x:Key="RubyerTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
@@ -228,6 +229,7 @@
     <Style x:Key="FilledTextBox"
            BasedOn="{StaticResource RubyerTextBox}"
            TargetType="{x:Type TextBox}">
+        <Setter Property="Foreground" Value="{StaticResource BlackForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource BorderLight}" />

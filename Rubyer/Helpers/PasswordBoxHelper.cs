@@ -93,8 +93,13 @@ namespace Rubyer
         /// <summary>
         /// 显示密码
         /// </summary>
-        public static readonly DependencyProperty ShowPasswordProperty = DependencyProperty.RegisterAttached(
+        internal static readonly DependencyPropertyKey ShowPasswordPropertyKey = DependencyProperty.RegisterAttachedReadOnly(
             "ShowPassword", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 行数
+        /// </summary>
+        public static readonly DependencyProperty ShowPasswordProperty = ShowPasswordPropertyKey.DependencyProperty;
 
         /// <summary>
         /// Gets the show password.
@@ -111,18 +116,23 @@ namespace Rubyer
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">If true, value.</param>
-        public static void SetShowPassword(DependencyObject obj, bool value)
+        internal static void SetShowPassword(DependencyObject obj, bool value)
         {
-            obj.SetValue(ShowPasswordProperty, BooleanBoxes.Box(value));
+            obj.SetValue(ShowPasswordPropertyKey, BooleanBoxes.Box(value));
         }
 
         private static void OnIsBindableChanaged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is PasswordBox passwordBox)
             {
-                RoutedEventHandler handler = (a, b) => SetBindablePassword(passwordBox, passwordBox.Password);
+                RoutedEventHandler handler = (a, b) =>
+                {
+                    SetBindablePassword(passwordBox, passwordBox.Password);
+                };
+
                 if (GetIsBindable(passwordBox))
                 {
+                    SetBindablePassword(passwordBox, passwordBox.Password);
                     passwordBox.PasswordChanged += handler;
                 }
                 else
@@ -158,17 +168,39 @@ namespace Rubyer
         {
             if (d is PasswordBox passwordBox)
             {
-                MouseButtonEventHandler handleDown = (sender, args) => SetShowPassword(passwordBox, true);
-                MouseButtonEventHandler handleUp = (sender, args) => SetShowPassword(passwordBox, false);
+                MouseButtonEventHandler handleDown = (sender, args) =>
+                {
+                    SetShowPassword(passwordBox, !GetShowPassword(passwordBox));
+                    passwordBox.Focus();
+                };
 
-                passwordBox.Loaded += (sender, arg) =>
+                MouseButtonEventHandler handleUp = (sender, args) =>
+                {
+                    SetShowPassword(passwordBox, false);
+                    passwordBox.GetType()
+                                .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
+                                .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 1 });
+                };
+
+                if (passwordBox.IsLoaded)
                 {
                     if (passwordBox.Template.FindName("switchVisibilityButton", passwordBox) is Button switchButton)
                     {
                         switchButton.AddHandler(UIElement.MouseDownEvent, handleDown, true);
                         switchButton.AddHandler(UIElement.MouseUpEvent, handleUp, true);
                     }
-                };
+                }
+                else
+                {
+                    passwordBox.Loaded += (sender, arg) =>
+                    {
+                        if (passwordBox.Template.FindName("switchVisibilityButton", passwordBox) is Button switchButton)
+                        {
+                            switchButton.AddHandler(UIElement.MouseDownEvent, handleDown, true);
+                            switchButton.AddHandler(UIElement.MouseUpEvent, handleUp, true);
+                        }
+                    };
+                }
 
                 passwordBox.Unloaded += (sender, arg) =>
                 {

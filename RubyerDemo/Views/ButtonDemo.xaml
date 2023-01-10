@@ -167,14 +167,14 @@
                         <Button x:Name="loadingButton"
                                 Width="100"
                                 Margin="10 0"
-                                Padding="5 0"
+                                Padding="10 0"
                                 rubyer:ButtonHelper.Loading="False"
                                 rubyer:ButtonHelper.LoadingContent="加载中"
                                 Click="Button_Click"
                                 Content="点我" />
                         <Button Style="{DynamicResource AccentButton}"
                                 Margin="10 0"
-                                Padding="5 0"
+                                Padding="10 0"
                                 rubyer:ButtonHelper.Loading="True"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="强调按钮" />
