@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,6 +22,11 @@ namespace RubyerDemo.Views
         public RangeBarDemo()
         {
             InitializeComponent();
+        }
+
+        private void renamer_TextChanged(object sender, RoutedPropertyChangedEventArgs<string> e)
+        {
+            Debug.WriteLine($"Renamer TextChanged: {e.NewValue}");
         }
     }
 }

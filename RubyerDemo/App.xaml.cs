@@ -49,7 +49,6 @@ namespace RubyerDemo
 
             // View models
             services.AddSingleton<MainViewModel>();
-            services.AddSingleton<InputBoxViewModel>();
             services.AddSingleton<IconViewModel>();
             services.AddSingleton<ListsViewModel>();
             services.AddSingleton<DataGridViewModel>();
@@ -65,6 +64,7 @@ namespace RubyerDemo
             services.AddSingleton<PasswordBoxViewModel>();
             services.AddSingleton<NumericBoxViewModel>();
             services.AddSingleton<ComboBoxViewModel>();
+            services.AddSingleton<RenamerViewModel>();
 
             return services.BuildServiceProvider();
         }

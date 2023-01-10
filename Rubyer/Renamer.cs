@@ -191,7 +191,9 @@ namespace Rubyer
         private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var renamer = d as Renamer;
-            var args = new RoutedPropertyChangedEventArgs<string>(e.OldValue.ToString(), e.NewValue.ToString());
+            var oldString = e.OldValue == null ? string.Empty : e.OldValue.ToString();
+            var newString = e.NewValue == null ? string.Empty : e.NewValue.ToString();
+            var args = new RoutedPropertyChangedEventArgs<string>(oldString, newString);
             args.RoutedEvent = Renamer.TextChangedEvent;
             renamer.RaiseEvent(args);
 

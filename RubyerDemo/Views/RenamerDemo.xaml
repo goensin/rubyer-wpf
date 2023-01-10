@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="RubyerDemo.Views.RenamerDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:RenamerViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="RenamerDemo">
+        <ScrollViewer>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <controls:ControlDisplay Title="Renamer" Description="通过 F2 按键、右键菜单、IsRenaming 属性或者 RenameCommand 重命名">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:Renamer x:Name="renamer"
+                                        Width="150"
+                                        Text="{Binding FileName}"
+                                        TextChanged="renamer_TextChanged"
+                                        TextChangedCommand="{Binding RenamerCommand}">
+                            <rubyer:Renamer.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                              CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              Header="重命名"
+                                              InputGestureText="F2" />
+                                </ContextMenu>
+                            </rubyer:Renamer.ContextMenu>
+                        </rubyer:Renamer>
+
+                        <Button Margin="5 0"
+                                Padding="5"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                CommandTarget="{Binding ElementName=renamer}"
+                                Content="重命名" />
+
+                        <TextBlock Margin="50 0 5 0" Text="自定义显示内容:" />
+                        <rubyer:Renamer x:Name="renamer2"
+                                        Width="150"
+                                        Text="{Binding FileName}">
+                            <rubyer:Renamer.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                              CommandTarget="{Binding PlacementTarget, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                              Header="重命名"
+                                              InputGestureText="F2" />
+                                </ContextMenu>
+                            </rubyer:Renamer.ContextMenu>
+                            <StackPanel Orientation="Horizontal">
+                                <rubyer:Icon Margin="5 0" Type="Edit2Line" />
+                                <TextBlock Text="{Binding FileName}" />
+                            </StackPanel>
+                        </rubyer:Renamer>
+                        <Button Margin="5 0"
+                                Padding="5"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Command="{x:Static rubyer:Renamer.RenameCommand}"
+                                CommandTarget="{Binding ElementName=renamer2}"
+                                Content="重命名" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

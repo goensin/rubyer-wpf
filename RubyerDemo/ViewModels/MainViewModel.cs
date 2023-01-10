@@ -33,7 +33,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
                 new MenuItem("NumericBox", "数值框", new NumericBoxDemo(), IconType.AddBoxLine),
                 new MenuItem("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
-                new MenuItem("InputBox", "输入框", new InputBoxDemo(), IconType.EditBoxLine),
+                new MenuItem("Renamer", "重命名", new RenamerDemo(), IconType.Edit2Line),
                 new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
                 new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),
                 new MenuItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
