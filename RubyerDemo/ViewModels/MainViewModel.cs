@@ -8,14 +8,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace RubyerDemo.ViewModels
 {
-    [INotifyPropertyChanged]
-    public partial class MainViewModel
+    public partial class MainViewModel : ObservableObject
     {
         private static readonly Brush primary = (Brush)Application.Current.Resources["Primary"];
         private static readonly Brush light = (Brush)Application.Current.Resources["Light"];
@@ -144,7 +144,7 @@ namespace RubyerDemo.ViewModels
         }
 
         [RelayCommand]
-        private async void OpenAboutDialog()
+        private async Task OpenAboutDialog()
         {
             var content = new About();
             await Dialog.Show(content, title: "关于");

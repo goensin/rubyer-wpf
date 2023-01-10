@@ -11,7 +11,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="DateTimePickerDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
                 <controls:ControlDisplay Title="DateTime Control">
                     <StackPanel Orientation="Horizontal">
                         <Calendar Margin="5" />
@@ -39,6 +39,7 @@
                         <rubyer:DateTimePicker Width="170"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.IsClearable="True"
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
                                                SelectedDateTime="{Binding DateTime}" />
                     </StackPanel>
                 </controls:ControlDisplay>
@@ -57,6 +58,53 @@
 
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
+                                               SelectedDateTime="{Binding DateTime}"
+                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Round" Grid.Row="3">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="150"
+                                    rubyer:InputBoxHelper.IsRound="True"
+                                    rubyer:InputBoxHelper.Watermark="请选择日期"
+                                    SelectedDateFormat="Long" />
+
+                        <rubyer:TimePicker Width="150"
+                                           Margin="10 0 0 0"
+                                           rubyer:InputBoxHelper.IsRound="True"
+                                           rubyer:InputBoxHelper.Watermark="请选择时间"
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged"
+                                           SelectedTimeFormat="HH:mm:ss.fff" />
+
+                        <rubyer:DateTimePicker Width="200"
+                                               Margin="10 0 0 0"
+                                               rubyer:InputBoxHelper.IsRound="True"
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
+                                               SelectedDateTime="{Binding DateTime}"
+                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Filled" Grid.Row="4">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Style="{StaticResource FilledDatePicker}"
+                                    Width="150"
+                                    rubyer:InputBoxHelper.Watermark="请选择日期"
+                                    SelectedDateFormat="Long" />
+
+                        <rubyer:TimePicker Style="{StaticResource FilledTimePicker}"
+                                           Width="150"
+                                           Margin="10 0 0 0"
+                                           rubyer:InputBoxHelper.Watermark="请选择时间"
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged"
+                                           SelectedTimeFormat="HH:mm:ss.fff" />
+
+                        <rubyer:DateTimePicker Style="{StaticResource FilledDateTimePicker}"
+                                               Width="200"
+                                               Margin="10 0 0 0"
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
                                                SelectedDateTime="{Binding DateTime}"
                                                SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
                     </StackPanel>
