@@ -18,9 +18,9 @@
     <system:String x:Key="I18N_PageBar_Forward5Pages">Forward 5 Pages</system:String>
     <system:String x:Key="I18N_PageBar_Backwards5Pages">Backwards 5 Pages</system:String>
 
-    <system:String x:Key="I18N_Clock_Hour">{0} h</system:String>
-    <system:String x:Key="I18N_Clock_Minute">{0} min</system:String>
-    <system:String x:Key="I18N_Clock_Second">{0} s</system:String>
+    <system:String x:Key="I18N_Clock_Hour">h</system:String>
+    <system:String x:Key="I18N_Clock_Minute">min</system:String>
+    <system:String x:Key="I18N_Clock_Second">s</system:String>
 
     <system:String x:Key="I18N_Info">Info</system:String>
     <system:String x:Key="I18N_Question">Confirm</system:String>

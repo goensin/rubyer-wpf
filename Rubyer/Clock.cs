@@ -11,7 +11,6 @@ namespace Rubyer
     /// </summary>
     [TemplatePart(Name = HourListPartName, Type = typeof(Selector))]
     [TemplatePart(Name = MinuteListPartName, Type = typeof(Selector))]
-    [TemplatePart(Name = SecondListPartName, Type = typeof(Selector))]
     [TemplatePart(Name = ConfirmPartName, Type = typeof(Button))]
     [TemplatePart(Name = SelectTimePartName, Type = typeof(TextBlock))]
     public class Clock : Control
@@ -25,11 +24,6 @@ namespace Rubyer
         /// 分钟列表名称
         /// </summary>
         public const string MinuteListPartName = "PART_MinuteList";
-
-        /// <summary>
-        /// 秒列表名称
-        /// </summary>
-        public const string SecondListPartName = "PART_SecondList";
 
         /// <summary>
         /// 确认按钮名称
@@ -59,7 +53,7 @@ namespace Rubyer
                 var binding = new Binding("DisplayTime");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
-                binding.StringFormat = "{0:HH : mm : ss}";
+                binding.StringFormat = "{0:HH : mm}";
                 selectTimeText.SetBinding(TextBlock.TextProperty, binding);
             }
 
@@ -83,16 +77,6 @@ namespace Rubyer
                 minuteList.SetBinding(Selector.SelectedItemProperty, binding);
 
                 AddItemSource(minuteList, 60, now.Minute);
-            }
-
-            if (GetTemplateChild(SecondListPartName) is Selector secondList)
-            {
-                var binding = new Binding("Second");
-                binding.Source = this;
-                binding.Mode = BindingMode.TwoWay;
-                secondList.SetBinding(Selector.SelectedItemProperty, binding);
-
-                AddItemSource(secondList, 60, now.Second);
             }
 
             if (GetTemplateChild(ConfirmPartName) is Button confirmButton)
@@ -167,21 +151,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 秒
-        /// </summary>
-        public static readonly DependencyProperty SecondProperty = DependencyProperty.Register(
-           "Second", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
-
-        /// <summary>
-        /// 秒
-        /// </summary>
-        public int? Second
-        {
-            get { return (int?)GetValue(SecondProperty); }
-            set { SetValue(SecondProperty, value); }
-        }
-
-        /// <summary>
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
@@ -228,13 +197,13 @@ namespace Rubyer
             }
 
             itemsControl.ItemsSource = array;
-            itemsControl.SelectedIndex = index;
+            itemsControl.SelectedIndex = 0;
 
-            if (itemsControl is ListBox listBox)
-            {
-                int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
-                listBox.ScrollIntoView(array[scrollIndex]);
-            }
+            //if (itemsControl is ListBox listBox)
+            //{
+            //    int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
+            //    listBox.ScrollIntoView(array[scrollIndex]);
+            //}
         }
 
         /// <summary>
@@ -243,11 +212,17 @@ namespace Rubyer
         private static void OnListSeletedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var clock = d as Clock;
-            clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}:{clock.Second}");
+
+            if (!clock.IsLoaded)
+            {
+                return;
+            }
+
+            clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
 
             if (e.NewValue != null)
             {
-                RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.DisplayTime);
+                var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.DisplayTime);
                 args.RoutedEvent = Clock.CurrentTimeChangedEvent;
                 clock.RaiseEvent(args);
             }
@@ -261,7 +236,6 @@ namespace Rubyer
         {
             var oldTime = SelectedTime;
             var newTime = DisplayTime;
-
             SelectedTime = DisplayTime;
 
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);

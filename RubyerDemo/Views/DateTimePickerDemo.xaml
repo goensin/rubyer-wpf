@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="RubyerDemo.Views.DateTimePickerDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DateTimePickerViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="DateTimePickerDemo">
+        <ScrollViewer>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <controls:ControlDisplay Title="DateTime Control">
+                    <StackPanel Orientation="Horizontal">
+                        <Calendar Margin="5" />
+                        <rubyer:Clock Margin="10 0 0 0" SelectedTimeChanged="Clock_SelectedTimeChanged" />
+                        <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="10 0 0 0" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="DatePicker、TimePicker、DateTimePicker" Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="150"
+                                    rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                                    rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                                    rubyer:InputBoxHelper.IsClearable="True"
+                                    rubyer:InputBoxHelper.Watermark="请选择日期"
+                                    SelectedDate="{Binding Date}" />
+
+                        <rubyer:TimePicker Width="150"
+                                           Margin="10 0 0 0"
+                                           rubyer:InputBoxHelper.IsClearable="True"
+                                           rubyer:InputBoxHelper.Watermark="请选择时间"
+                                           SelectedTime="{Binding Time}"
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
+
+                        <rubyer:DateTimePicker Width="170"
+                                               Margin="10 0 0 0"
+                                               rubyer:InputBoxHelper.IsClearable="True"
+                                               SelectedDateTime="{Binding DateTime}" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Format" Grid.Row="2">
+                    <StackPanel Orientation="Horizontal">
+                        <DatePicker Width="150"
+                                    rubyer:InputBoxHelper.Watermark="请选择日期"
+                                    SelectedDateFormat="Long" />
+
+                        <rubyer:TimePicker Width="150"
+                                           Margin="10 0 0 0"
+                                           rubyer:InputBoxHelper.Watermark="请选择时间"
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged"
+                                           SelectedTimeFormat="HH:mm:ss.fff" />
+
+                        <rubyer:DateTimePicker Width="200"
+                                               Margin="10 0 0 0"
+                                               SelectedDateTime="{Binding DateTime}"
+                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

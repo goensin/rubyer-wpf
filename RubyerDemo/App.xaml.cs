@@ -53,7 +53,6 @@ namespace RubyerDemo
             services.AddSingleton<ListsViewModel>();
             services.AddSingleton<DataGridViewModel>();
             services.AddSingleton<TabControlViewModel>();
-            services.AddSingleton<DateTimeViewModel>();
             services.AddSingleton<PageBarViewModel>();
             services.AddSingleton<MessageBoxViewModel>();
             services.AddSingleton<DialogViewModel>();
@@ -65,6 +64,7 @@ namespace RubyerDemo
             services.AddSingleton<NumericBoxViewModel>();
             services.AddSingleton<ComboBoxViewModel>();
             services.AddSingleton<RenamerViewModel>();
+            services.AddSingleton<DateTimePickerViewModel>();
 
             return services.BuildServiceProvider();
         }

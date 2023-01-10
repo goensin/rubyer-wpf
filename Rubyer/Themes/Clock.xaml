@@ -18,12 +18,12 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="8 1" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="2" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 0" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="2 4" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Visible" />
         <Style.Resources>
             <Style BasedOn="{StaticResource SmallScrollViewer}" TargetType="ScrollViewer">
-                <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="6" />
+                <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="5" />
             </Style>
         </Style.Resources>
     </Style>
@@ -35,7 +35,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="FontSize" Value="13" />
-        <Setter Property="Height" Value="230" />
+        <Setter Property="Height" Value="220" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
@@ -87,32 +87,23 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
                                             <ColumnDefinition />
-                                            <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
 
                                         <ListBox x:Name="PART_HourList"
                                                  Style="{StaticResource ClockListBox}"
-                                                 Grid.Column="0"
-                                                 BorderThickness="0 0 1 0" />
+                                                 Grid.Column="0" />
 
                                         <ListBox x:Name="PART_MinuteList"
                                                  Style="{StaticResource ClockListBox}"
-                                                 Grid.Column="1"
-                                                 BorderThickness="0 0 1 0" />
-
-                                        <ListBox x:Name="PART_SecondList"
-                                                 Style="{StaticResource ClockListBox}"
-                                                 Grid.Column="2" />
+                                                 Grid.Column="1" />
                                     </Grid>
                                 </Border>
 
                                 <Button x:Name="PART_ConfirmButton"
-                                        Style="{StaticResource RubyerButton}"
+                                        Style="{StaticResource TextButton}"
                                         Grid.Row="2"
-                                        Width="Auto"
-                                        Margin="0 1 0 0"
-                                        rubyer:ControlHelper.CornerRadius="{DynamicResource BottomContainerCornerRadius}"
-                                        ClipToBounds="True"
+                                        Margin="5"
+                                        Padding="20 5"
                                         Content="确认" />
                             </Grid>
                         </Border>
@@ -144,29 +135,22 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                             <UniformGrid Margin="{TemplateBinding Padding}"
-                                         Columns="3"
+                                         Columns="2"
                                          Rows="1">
                                 <ComboBox x:Name="PART_HourList"
                                           Grid.Column="0"
                                           Margin="0 0 2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          rubyer:ItemsControlHelper.ItemPadding="5 2"
-                                          ItemStringFormat="{DynamicResource I18N_Clock_Hour}" />
+                                          rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Hour}"
+                                          rubyer:ItemsControlHelper.ItemPadding="5 2" />
                                 <ComboBox x:Name="PART_MinuteList"
                                           Grid.Column="1"
                                           Margin="2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          rubyer:ItemsControlHelper.ItemPadding="5 2"
-                                          ItemStringFormat="{DynamicResource I18N_Clock_Minute}" />
-                                <ComboBox x:Name="PART_SecondList"
-                                          Grid.Column="2"
-                                          Margin="2 0 0 0"
-                                          rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          rubyer:ItemsControlHelper.ItemPadding="5 2"
-                                          ItemStringFormat="{DynamicResource I18N_Clock_Second}" />
+                                          rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Minute}"
+                                          rubyer:ItemsControlHelper.ItemPadding="5 2" />
                             </UniformGrid>
                         </Border>
                     </Grid>

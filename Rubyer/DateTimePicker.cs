@@ -112,8 +112,8 @@ namespace Rubyer
 
             _currentTextBlock = GetTemplateChild(CurrentTextBoxPartName) as TextBlock;
 
-            currentDateTime = SelectedDateTime == null ? DateTime.Now : SelectedDateTime.Value;
-            _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
+            //currentDateTime = SelectedDateTime == null ? DateTime.Now : SelectedDateTime.Value;
+            //_currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
         }
 
         #region 路由事件
@@ -305,6 +305,8 @@ namespace Rubyer
             }
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
+
+            SelectedDateTime = currentDateTime;
         }
 
         /// <summary>
@@ -325,10 +327,12 @@ namespace Rubyer
             }
             else
             {
-                currentDateTime = (DateTime)_calendar.SelectedDate + ((DateTime)_clock.DisplayTime).TimeOfDay;
+                var time= _clock.DisplayTime == null ? TimeSpan.Zero : _clock.DisplayTime.Value.TimeOfDay;
+                currentDateTime = (DateTime)_calendar.SelectedDate + time;
             }
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
+            SelectedDateTime = currentDateTime;
             Mouse.Capture(null);
         }
 

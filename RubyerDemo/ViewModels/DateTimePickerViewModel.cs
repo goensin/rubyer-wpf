@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
-    public partial class DateTimeViewModel : ObservableObject
+    /// <summary>
+    /// 日期时间选择器
+    /// </summary>
+    public partial class DateTimePickerViewModel : ObservableObject
     {
         [ObservableProperty]
         private DateTime? time;
@@ -19,7 +22,7 @@ namespace RubyerDemo.ViewModels
         [ObservableProperty]
         private DateTime? dateTime;
 
-        public DateTimeViewModel()
+        public DateTimePickerViewModel()
         {
             this.PropertyChanged += DateTimeViewModel_PropertyChanged;
         }

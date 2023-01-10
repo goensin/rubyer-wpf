@@ -18,9 +18,9 @@
     <system:String x:Key="I18N_PageBar_Forward5Pages">向前 5 页</system:String>
     <system:String x:Key="I18N_PageBar_Backwards5Pages">向后 5 页</system:String>
 
-    <system:String x:Key="I18N_Clock_Hour">{0} 时</system:String>
-    <system:String x:Key="I18N_Clock_Minute">{0} 分</system:String>
-    <system:String x:Key="I18N_Clock_Second">{0} 秒</system:String>
+    <system:String x:Key="I18N_Clock_Hour">时</system:String>
+    <system:String x:Key="I18N_Clock_Minute">分</system:String>
+    <system:String x:Key="I18N_Clock_Second">秒</system:String>
 
     <system:String x:Key="I18N_Info">提示</system:String>
     <system:String x:Key="I18N_Question">确认</system:String>

@@ -19,7 +19,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SelectedDateTimeFormat" Value="yyyy-MM-dd HH:mm:ss" />
+        <Setter Property="SelectedDateTimeFormat" Value="yyyy-MM-dd HH:mm" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -98,9 +98,7 @@
                                                        Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </Border>
 
-                                        <Border Grid.Row="1"
-                                                BorderBrush="{TemplateBinding BorderBrush}"
-                                                BorderThickness="0">
+                                        <Border Grid.Row="1">
                                             <StackPanel>
                                                 <Calendar x:Name="PART_Calendar"
                                                           Margin="0"
@@ -110,15 +108,15 @@
                                                 <rubyer:Clock x:Name="PART_Clock"
                                                               Style="{StaticResource ComboBoxClock}"
                                                               Margin="0"
-                                                              Padding="5 8"
                                                               rubyer:ControlHelper.CornerRadius="0"
-                                                              BorderThickness="0 1 0 0" />
+                                                              BorderThickness="0" />
                                             </StackPanel>
                                         </Border>
 
                                         <Button x:Name="PART_ConfirmButton"
+                                                Style="{StaticResource TextButton}"
                                                 Grid.Row="2"
-                                                rubyer:ControlHelper.CornerRadius="{DynamicResource BottomContainerCornerRadius}"
+                                                Margin="5"
                                                 Content="确认" />
                                     </Grid>
                                 </rubyer:Card>

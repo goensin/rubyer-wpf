@@ -55,6 +55,7 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Clock clock = GetTemplateChild(ClockPartName) as Clock;
+            clock.CurrentTimeChanged += Clock_CurrentTimeChanged; ;
             clock.SelectedTimeChanged += Clock_SelectedTimeChanged;
             this._clock = clock;
 
@@ -75,12 +76,6 @@ namespace Rubyer
 
             Button button = GetTemplateChild(ButtonPartName) as Button;
             button.Click += Button_Click;
-        }
-
-        private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            textBox.Focus();
         }
 
         #region 路由事件
@@ -214,6 +209,12 @@ namespace Rubyer
 
         #region 方法
 
+        private void TextBox_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            textBox.Focus();
+        }
+
         /// <summary>
         /// 选择时间改变
         /// </summary>
@@ -226,6 +227,14 @@ namespace Rubyer
             RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>((DateTime?)e.OldValue, (DateTime?)e.NewValue);
             args.RoutedEvent = TimePicker.SelectedTimeChangedEvent;
             timePicker.RaiseEvent(args);
+        }
+
+        private void Clock_CurrentTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
+        {
+            if (SelectedTime != e.NewValue)
+            {
+                SelectedTime = e.NewValue;
+            }
         }
 
         /// <summary>
