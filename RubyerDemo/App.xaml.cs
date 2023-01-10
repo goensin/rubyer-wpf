@@ -63,6 +63,7 @@ namespace RubyerDemo
             services.AddSingleton<HamburgerMenuViewModel>();
             services.AddSingleton<TextBoxViewModel>();
             services.AddSingleton<PasswordBoxViewModel>();
+            services.AddSingleton<NumericBoxViewModel>();
 
             return services.BuildServiceProvider();
         }

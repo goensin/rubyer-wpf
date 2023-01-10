@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="RubyerDemo.Views.NumericBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:NumericBoxViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="NumericBoxDemo">
+        <ScrollViewer>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <controls:ControlDisplay Title="Default NumericBox" Description="数值框会自动限制数值外的字符输入和粘贴等">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:NumericBox Width="120"
+                                           ValueChanged="NumericBox_ValueChanged"
+                                           Value="1" />
+                        <rubyer:NumericBox Width="120"
+                                           Margin="20 0 0 0"
+                                           NumericType="Double"
+                                           Value="0.1" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="MaxValue、MinValue、Interval"
+                                         Grid.Row="1"
+                                         Description="通过 MaxValue 和 MinValue 设置最大最小值 &#x000A;通过 Interval 设置加减间隔 &#x000A;通过 ShowButton 设置加减按钮显示">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="-10 ~ 10:" />
+                        <rubyer:NumericBox Width="120"
+                                           rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
+                                           rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
+                                           MaxValue="10"
+                                           MinValue="-10"
+                                           Value="1" />
+
+                        <Label Margin="15 0 0 0" Content="加减间隔 2:" />
+                        <rubyer:NumericBox Width="120"
+                                           rubyer:InputBoxHelper.Watermark="Interval=2"
+                                           Interval="2"
+                                           Value="0" />
+                        <Label Margin="15 0 0 0" Content="不显示按钮:" />
+                        <rubyer:NumericBox Width="120"
+                                           ShowButton="False"
+                                           Value="1" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Binding" Grid.Row="2">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:NumericBox Width="120" Value="{Binding IntValue}" />
+                        <TextBlock Margin="10 0" Text="{Binding IntValue, StringFormat='int 值:{0}'}" />
+
+                        <rubyer:NumericBox MinWidth="120"
+                                           Interval="0.1"
+                                           NumericType="Double"
+                                           Value="{Binding DoubleValue}" />
+                        <TextBlock Margin="10 0 0 0" Text="{Binding DoubleValue, StringFormat='double 值:{0}'}" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="TextFormat" Grid.Row="3">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:NumericBox MinWidth="150"
+                                           TextFormat="E2"
+                                           Value="1" />
+
+                        <rubyer:NumericBox MinWidth="120"
+                                           Margin="20 0 0 0"
+                                           TextFormat="0cm"
+                                           Value="177" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Style" Grid.Row="4">
+                    <StackPanel Orientation="Horizontal">
+
+
+                        <rubyer:NumericBox Style="{StaticResource FrontBackNumericBox}"
+                                           MinWidth="120"
+                                           Value="1" />
+
+                        <rubyer:NumericBox Style="{StaticResource FilledNumericBox}"
+                                           MinWidth="120"
+                                           Margin="20 0 0 0"
+                                           Value="1" />
+
+                        <rubyer:NumericBox MinWidth="120"
+                                           Margin="20 0 0 0"
+                                           rubyer:InputBoxHelper.IsRound="True"
+                                           Value="1" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>
