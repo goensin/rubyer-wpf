@@ -32,6 +32,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),
                 new MenuItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
                 new MenuItem("NumericBox", "数值框", new NumericBoxDemo(), IconType.AddBoxLine),
+                new MenuItem("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
                 new MenuItem("InputBox", "输入框", new InputBoxDemo(), IconType.EditBoxLine),
                 new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
                 new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),
@@ -81,7 +82,7 @@ namespace RubyerDemo.ViewModels
                 },
                 new ThemeColor
                 {
-                    Name = "姨妈红",
+                    Name = "网易红",
                     Primary = new SolidColorBrush(Color.FromRgb(0xE5,0x39,0x35)),
                     Light = new SolidColorBrush(Color.FromRgb(0xFF,0x6F,0x60)),
                     Dark = new SolidColorBrush(Color.FromRgb(0xAB,0x00,0x0D)),

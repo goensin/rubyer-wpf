@@ -1,0 +1,133 @@
+﻿<UserControl x:Class="RubyerDemo.Views.ComboBoxDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ComboBoxViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="ComboBoxDemo">
+        <ScrollViewer>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <controls:ControlDisplay Title="Style ComboBox">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Width="150" ItemsSource="{Binding Items}" />
+                            <ComboBox Width="150"
+                                      Margin="10 0 0 0"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding Items}" />
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="150"
+                                      Margin="10 0 0 0"
+                                      ItemsSource="{Binding Items}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                            <ComboBox Width="150"
+                                      IsEnabled="False"
+                                      SelectedIndex="0">
+                                <ComboBoxItem>不可用</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox Width="150"
+                                      Margin="10 0 0 0"
+                                      IsEditable="True"
+                                      IsEnabled="False"
+                                      SelectedIndex="0">
+                                <ComboBoxItem>可编辑</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="150"
+                                      Margin="10 0 0 0"
+                                      IsEnabled="False"
+                                      SelectedIndex="0">
+                                <ComboBoxItem>不可用</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Watermark、Clearable、Round ComboBox"
+                                         Grid.Row="1"
+                                         Description="通过 InputBoxHelper.Watermark 设置水印 &#x000A;通过 InputBoxHelper.IsClearable 设置可清除文本 &#x000A;通过 InputBoxHelper.IsRound 设置圆角边框">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox Width="150"
+                                      rubyer:InputBoxHelper.Watermark="水印"
+                                      ItemsSource="{Binding Items}" />
+
+                            <ComboBox Width="150"
+                                      Margin="10 0 0 0"
+                                      rubyer:InputBoxHelper.IsClearable="True"
+                                      rubyer:InputBoxHelper.Watermark="可清除"
+                                      ItemsSource="{Binding Items}" />
+
+                            <ComboBox Width="150"
+                                      Margin="10 0 0 0"
+                                      rubyer:InputBoxHelper.IsRound="True"
+                                      rubyer:InputBoxHelper.Watermark="边框圆角"
+                                      ItemsSource="{Binding Items}" />
+                        </StackPanel>
+
+                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="150"
+                                      rubyer:InputBoxHelper.Watermark="水印"
+                                      ItemsSource="{Binding Items}" />
+
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="150"
+                                      Margin="10 0 0 0"
+                                      rubyer:InputBoxHelper.IsClearable="True"
+                                      rubyer:InputBoxHelper.Watermark="可清除"
+                                      ItemsSource="{Binding Items}" />
+
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="150"
+                                      Margin="10 0 0 0"
+                                      rubyer:InputBoxHelper.IsRound="True"
+                                      rubyer:InputBoxHelper.Watermark="边框圆角"
+                                      ItemsSource="{Binding Items}" />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="PreContent 、PostContent"
+                                         Grid.Row="2"
+                                         Description="通过设置 InputBoxHelper.PreContent 和 InputBoxHelper.PostContent，让下拉框内显示前后缀内容">
+                    <StackPanel Orientation="Horizontal">
+                        <ComboBox Width="150" ItemsSource="{Binding Items}">
+                            <rubyer:InputBoxHelper.PreContent>
+                                <rubyer:Icon Type="BugFill" />
+                            </rubyer:InputBoxHelper.PreContent>
+                        </ComboBox>
+
+                        <ComboBox Style="{StaticResource FilledComboBox}"
+                                  Width="150"
+                                  Margin="10 5"
+                                  rubyer:InputBoxHelper.PostContent=".com"
+                                  rubyer:InputBoxHelper.PreContent="http://">
+                            <ComboBoxItem>baidu</ComboBoxItem>
+                            <ComboBoxItem>gitee</ComboBoxItem>
+                            <ComboBoxItem>github</ComboBoxItem>
+                        </ComboBox>
+
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Enum to ItemsSource"
+                                         Grid.Row="3"
+                                         Description="通过 ItemsControlHelper.EnumValuesToItemsSource 设置，根据 SelectedItem 绑定 enum 值，自动设置 ItemsSource">
+                    <ComboBox Width="120"
+                              rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
+                              rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                              rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                              SelectedItem="{Binding CurrentFood}" />
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

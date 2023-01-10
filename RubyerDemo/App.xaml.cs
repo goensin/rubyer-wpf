@@ -64,6 +64,7 @@ namespace RubyerDemo
             services.AddSingleton<TextBoxViewModel>();
             services.AddSingleton<PasswordBoxViewModel>();
             services.AddSingleton<NumericBoxViewModel>();
+            services.AddSingleton<ComboBoxViewModel>();
 
             return services.BuildServiceProvider();
         }

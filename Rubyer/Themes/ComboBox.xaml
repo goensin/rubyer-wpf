@@ -486,6 +486,9 @@
                         <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </DataTrigger>
+                        <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -502,5 +505,15 @@
                 <Setter Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <!--  Filled ComboBox  -->
+    <Style x:Key="FilledComboBox"
+           BasedOn="{StaticResource RubyerComboBox}"
+           TargetType="{x:Type ComboBox}">
+        <Setter Property="Foreground" Value="{StaticResource BlackForeground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Border}" />
     </Style>
 </ResourceDictionary>

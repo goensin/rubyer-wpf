@@ -43,6 +43,7 @@
                                            Value="0" />
                         <Label Margin="15 0 0 0" Content="不显示按钮:" />
                         <rubyer:NumericBox Width="120"
+                                           rubyer:InputBoxHelper.IsClearable="True"
                                            ShowButton="False"
                                            Value="1" />
                     </StackPanel>
@@ -61,7 +62,9 @@
                     </StackPanel>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="TextFormat" Grid.Row="3">
+                <controls:ControlDisplay Title="TextFormat"
+                                         Grid.Row="3"
+                                         Description="通过 TextFormat 属性格式化显示文本">
                     <StackPanel Orientation="Horizontal">
                         <rubyer:NumericBox MinWidth="150"
                                            TextFormat="E2"
@@ -69,6 +72,7 @@
 
                         <rubyer:NumericBox MinWidth="120"
                                            Margin="20 0 0 0"
+                                           rubyer:InputBoxHelper.PreContent="身高"
                                            TextFormat="0cm"
                                            Value="177" />
                     </StackPanel>

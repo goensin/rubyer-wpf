@@ -131,6 +131,7 @@
                                     </Button>
                                 </StackPanel>
                             </Grid>
+
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
                                 <rubyer:NotificationContainer Identifier="{x:Static rubyer:Notification.DefaultContainerIdentifier}">
                                     <rubyer:MessageContainer Identifier="{x:Static rubyer:Message.DefaultContainerIdentifier}">
@@ -142,6 +143,7 @@
                                     </rubyer:MessageContainer>
                                 </rubyer:NotificationContainer>
                             </AdornerDecorator>
+
                             <ResizeGrip x:Name="ResizeGrip"
                                         Grid.Row="1"
                                         HorizontalAlignment="Right"
