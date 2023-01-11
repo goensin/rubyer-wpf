@@ -171,20 +171,23 @@
     <Style x:Key="LightRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  暗色单选框  -->
     <Style x:Key="DarkRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Dark}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  强调色单选框  -->
     <Style x:Key="AccentRadioButton"
            BasedOn="{StaticResource RubyerRadioButton}"
            TargetType="{x:Type RadioButton}">
-        <Setter Property="BorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Accent}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Accent}" />
     </Style>
 </ResourceDictionary>

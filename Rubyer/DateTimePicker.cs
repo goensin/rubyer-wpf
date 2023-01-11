@@ -327,7 +327,7 @@ namespace Rubyer
             }
             else
             {
-                var time= _clock.DisplayTime == null ? TimeSpan.Zero : _clock.DisplayTime.Value.TimeOfDay;
+                var time = _clock.DisplayTime == null ? TimeSpan.Zero : _clock.DisplayTime.Value.TimeOfDay;
                 currentDateTime = (DateTime)_calendar.SelectedDate + time;
             }
 

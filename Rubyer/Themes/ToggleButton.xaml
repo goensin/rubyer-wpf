@@ -117,34 +117,6 @@
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
-    <!--  默认圆形开关  -->
-    <Style x:Key="CircleToggleButton"
-           BasedOn="{StaticResource RubyerToggleButton}"
-           TargetType="{x:Type ToggleButton}">
-        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
-    </Style>
-
-    <!--  圆形亮色开关  -->
-    <Style x:Key="CircleLightToggleButton"
-           BasedOn="{StaticResource LightToggleButton}"
-           TargetType="{x:Type ToggleButton}">
-        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
-    </Style>
-
-    <!--  圆形暗色开关  -->
-    <Style x:Key="CircleDarkToggleButton"
-           BasedOn="{StaticResource DarkToggleButton}"
-           TargetType="{x:Type ToggleButton}">
-        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
-    </Style>
-
-    <!--  圆形强调色开关  -->
-    <Style x:Key="CircleAccentToggleButton"
-           BasedOn="{StaticResource AccentToggleButton}"
-           TargetType="{x:Type ToggleButton}">
-        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
-    </Style>
-
     <!--  切换开关默认  -->
     <Style x:Key="SwitchToggleButton" TargetType="{x:Type ToggleButton}">
         <Setter Property="Background" Value="{DynamicResource Border}" />

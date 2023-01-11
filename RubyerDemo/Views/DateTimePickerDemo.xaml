@@ -68,22 +68,19 @@
                     <StackPanel Orientation="Horizontal">
                         <DatePicker Width="150"
                                     rubyer:InputBoxHelper.IsRound="True"
-                                    rubyer:InputBoxHelper.Watermark="请选择日期"
-                                    SelectedDateFormat="Long" />
+                                    rubyer:InputBoxHelper.Watermark="请选择日期" />
 
                         <rubyer:TimePicker Width="150"
                                            Margin="10 0 0 0"
                                            rubyer:InputBoxHelper.IsRound="True"
                                            rubyer:InputBoxHelper.Watermark="请选择时间"
-                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged"
-                                           SelectedTimeFormat="HH:mm:ss.fff" />
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
 
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.IsRound="True"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTime="{Binding DateTime}"
-                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                                               SelectedDateTime="{Binding DateTime}" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
@@ -91,22 +88,19 @@
                     <StackPanel Orientation="Horizontal">
                         <DatePicker Style="{StaticResource FilledDatePicker}"
                                     Width="150"
-                                    rubyer:InputBoxHelper.Watermark="请选择日期"
-                                    SelectedDateFormat="Long" />
+                                    rubyer:InputBoxHelper.Watermark="请选择日期" />
 
                         <rubyer:TimePicker Style="{StaticResource FilledTimePicker}"
                                            Width="150"
                                            Margin="10 0 0 0"
                                            rubyer:InputBoxHelper.Watermark="请选择时间"
-                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged"
-                                           SelectedTimeFormat="HH:mm:ss.fff" />
+                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
 
                         <rubyer:DateTimePicker Style="{StaticResource FilledDateTimePicker}"
                                                Width="200"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTime="{Binding DateTime}"
-                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                                               SelectedDateTime="{Binding DateTime}" />
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>

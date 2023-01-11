@@ -29,13 +29,13 @@ namespace RubyerDemo.ViewModels
             MenuItems = new ObservableCollection<MenuItem>
             {
                 new MenuItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
+                new MenuItem("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
                 new MenuItem("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),
                 new MenuItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
                 new MenuItem("NumericBox", "数值框", new NumericBoxDemo(), IconType.AddBoxLine),
                 new MenuItem("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
                 new MenuItem("DateTimePicker", "日期时间选择", new DateTimePickerDemo(), IconType.TimeLine),
                 new MenuItem("Renamer", "重命名", new RenamerDemo(), IconType.Edit2Line),
-                new MenuItem("SelectBox", "选择框", new SelectBoxDemo(), IconType.ToggleLine),
                 new MenuItem("RangeBar", "范围条", new RangeBarDemo(), IconType.EqualizerLine),
                 new MenuItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
                 new MenuItem("Grid", "网格", new GridDemo(), IconType.GridLine),

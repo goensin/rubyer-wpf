@@ -17,9 +17,9 @@ namespace RubyerDemo.Views
     /// <summary>
     /// SelectBox.xaml 的交互逻辑
     /// </summary>
-    public partial class SelectBoxDemo : UserControl
+    public partial class ToggleButtonDemo : UserControl
     {
-        public SelectBoxDemo()
+        public ToggleButtonDemo()
         {
             InitializeComponent();
         }
