@@ -172,7 +172,7 @@
                                     Minimum="1"
                                     Value="30" />
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                             <ProgressBar Style="{StaticResource CircleProgressBar}"
                                          Margin="10"
                                          rubyer:ProgressBarHelper.IndeterminateValue="{Binding Value, ElementName=indeterminateSlider}"

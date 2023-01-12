@@ -1,16 +1,9 @@
 ﻿using Rubyer.Commons.KnownBoxes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -193,6 +186,22 @@ namespace Rubyer
         public static double GetGripDiameter(DependencyObject element)
         {
             return (double)element.GetValue(GripDiameterProperty);
+        }
+
+        /// <summary>
+        /// 轨道厚度
+        /// </summary>
+        public static readonly DependencyProperty TrackThicknessProperty = DependencyProperty.RegisterAttached(
+            "TrackThickness", typeof(double), typeof(SliderHelper), new PropertyMetadata(default(double)));
+
+        public static void SetTrackThickness(DependencyObject element, double value)
+        {
+            element.SetValue(TrackThicknessProperty, value);
+        }
+
+        public static double GetTrackThickness(DependencyObject element)
+        {
+            return (double)element.GetValue(TrackThicknessProperty);
         }
 
         /// <summary>

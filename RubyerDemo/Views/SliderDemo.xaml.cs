@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace RubyerDemo.Views
 {
     /// <summary>
-    /// DataBar.xaml 的交互逻辑
+    /// SliderDemo.xaml 的交互逻辑
     /// </summary>
-    public partial class RangeBarDemo : UserControl
+    public partial class SliderDemo : UserControl
     {
-        public RangeBarDemo()
+        public SliderDemo()
         {
             InitializeComponent();
         }
