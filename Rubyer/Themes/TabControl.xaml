@@ -76,13 +76,13 @@
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Left" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
@@ -290,13 +290,13 @@
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="HorizontalAlignment" Value="Left" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
@@ -380,13 +380,13 @@
                             <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
                             <Setter Property="HorizontalAlignment" Value="Left" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="False">
+                        <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="True" />
+                                <Condition Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
