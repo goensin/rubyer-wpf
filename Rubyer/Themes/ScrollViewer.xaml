@@ -19,6 +19,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource BorderLight}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="16" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -85,6 +86,10 @@
            BasedOn="{StaticResource ScrollBarArrowButton}"
            TargetType="RepeatButton">
         <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Foreground" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
     </Style>
 
     <!--  只有箭头，没有滚动条  -->
@@ -103,6 +108,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.HorizontalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.VerticalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconSize" Value="16" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -134,10 +140,6 @@
                                       Grid.Column="0"
                                       Height="Auto"
                                       VerticalAlignment="Stretch"
-                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
 
                             <rubyer:Icon Type="ArrowLeftSLine" />
@@ -149,10 +151,6 @@
                                       Grid.Column="2"
                                       Height="Auto"
                                       VerticalAlignment="Stretch"
-                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
                             <rubyer:Icon Type="ArrowRightSLine" />
                         </RepeatButton>
@@ -163,10 +161,6 @@
                                       Grid.Column="1"
                                       Width="Auto"
                                       VerticalAlignment="Stretch"
-                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
                             <rubyer:Icon Type="ArrowUpSLine" />
                         </RepeatButton>
@@ -177,10 +171,6 @@
                                       Grid.Column="1"
                                       Width="Auto"
                                       VerticalAlignment="Stretch"
-                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
-                                      Foreground="{TemplateBinding Foreground}"
                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}">
                             <rubyer:Icon Type="ArrowDownSLine" />
                         </RepeatButton>

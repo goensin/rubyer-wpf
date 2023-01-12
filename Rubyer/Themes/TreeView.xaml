@@ -57,12 +57,10 @@
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.ExitActions>
-                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
-                            <!--<Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />-->
+                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:TreeViewHelper.IconFocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
-                            <!--<Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />-->
+                            <Setter TargetName="ExpandPath" Property="Foreground" Value="{Binding Path=(rubyer:TreeViewHelper.IconFocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -216,13 +214,13 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTreeViewItem}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
-        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
+        <Setter Property="rubyer:TreeViewHelper.IconFocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">

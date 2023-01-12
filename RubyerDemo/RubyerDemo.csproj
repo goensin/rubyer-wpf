@@ -51,6 +51,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="city.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
 		<Page Update="Views\About.xaml">
 			<XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
 		</Page>

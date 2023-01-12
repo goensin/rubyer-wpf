@@ -50,38 +50,6 @@
                         </ListView.View>
                     </ListView>
                 </controls:ControlDisplay>
-
-                <GroupBox Grid.Row="2" Header="树状视图-TreeView">
-                    <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto">
-                        <TreeView Width="200" ItemsSource="{Binding Catalogs}">
-                            <TreeView.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </HierarchicalDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-
-                        <TreeView Grid.Column="1"
-                                  Width="200"
-                                  rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                  rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"
-                                  rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                  rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
-                                  rubyer:ControlHelper.MaskOpacity="1"
-                                  rubyer:ItemsControlHelper.ItemMargin="0 2 5 2"
-                                  rubyer:ItemsControlHelper.ItemPadding="8"
-                                  rubyer:TreeViewHelper.ExpandIconType="ArrowRightSLine"
-                                  Background="{DynamicResource Dark}"
-                                  Foreground="{DynamicResource WhiteForeground}"
-                                  ItemsSource="{Binding Catalogs}">
-                            <TreeView.ItemTemplate>
-                                <HierarchicalDataTemplate ItemsSource="{Binding Items}">
-                                    <TextBlock Text="{Binding Name}" />
-                                </HierarchicalDataTemplate>
-                            </TreeView.ItemTemplate>
-                        </TreeView>
-                    </Grid>
-                </GroupBox>
             </Grid>
         </ScrollViewer>
     </smtx:XamlDisplay>

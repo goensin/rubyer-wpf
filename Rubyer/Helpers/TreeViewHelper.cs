@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -21,6 +22,22 @@ namespace Rubyer
         public static IconType GetExpandIconType(DependencyObject element)
         {
             return (IconType)element.GetValue(ExpandIconTypeProperty);
+        }
+
+        /// <summary>
+        /// 选中时图标颜色
+        /// </summary>
+        public static readonly DependencyProperty IconFocusedBrushProperty = DependencyProperty.RegisterAttached(
+            "IconFocusedBrush", typeof(Brush), typeof(TreeViewHelper), new PropertyMetadata(default(Brush)));
+
+        public static void SetIconFocusedBrush(DependencyObject element, Brush value)
+        {
+            element.SetValue(IconFocusedBrushProperty, value);
+        }
+
+        public static Brush GetIconFocusedBrush(DependencyObject element)
+        {
+            return (Brush)element.GetValue(IconFocusedBrushProperty);
         }
     }
 }

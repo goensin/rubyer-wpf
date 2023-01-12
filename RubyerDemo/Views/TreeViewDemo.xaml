@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="RubyerDemo.Views.TreeViewDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TreeViewViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="TreeViewDemo">
+        <Grid rubyer:GridHelper.ColumnDefinitions="1*, 2*" rubyer:GridHelper.ColumnSpacing="10">
+            <controls:ControlDisplay Title="Default TreeView"
+                                     VerticalAlignment="Top"
+                                     HorizontalContentAlignment="Stretch">
+                <TreeView ItemsSource="{Binding Cities}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </controls:ControlDisplay>
+
+            <controls:ControlDisplay Title="Configure TreeView"
+                                     Grid.Column="1"
+                                     VerticalAlignment="Top"
+                                     HorizontalContentAlignment="Stretch"
+                                     Description="通过 TreeViewHelper.ExpandIconType 设置展开图标 &#x000A;通过 TreeViewHelper.IconFocusedBrush 设置选中展开图标颜色 &#x000A;通过 ControlHelper.FocusedBrush 和 ControlHelper.FocusedForegroundBrush 设置标题颜色 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙">
+                <TreeView rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                          rubyer:ControlHelper.MaskOpacity="0.8"
+                          rubyer:ItemsControlHelper.ItemMargin="0 1 5 1"
+                          rubyer:ItemsControlHelper.ItemPadding="8 6"
+                          rubyer:TreeViewHelper.ExpandIconType="ArrowRightSLine"
+                          rubyer:TreeViewHelper.IconFocusedBrush="{DynamicResource Accent}"
+                          Background="{DynamicResource Dark}"
+                          Foreground="{DynamicResource WhiteForeground}"
+                          ItemsSource="{Binding Cities}">
+                    <TreeView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                            <TextBlock Text="{Binding Name}" />
+                        </HierarchicalDataTemplate>
+                    </TreeView.ItemTemplate>
+                </TreeView>
+            </controls:ControlDisplay>
+        </Grid>
+    </smtx:XamlDisplay>
+</UserControl>

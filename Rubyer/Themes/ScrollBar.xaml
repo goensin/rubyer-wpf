@@ -80,7 +80,7 @@
                           Width="{TemplateBinding Width}"
                           Height="{TemplateBinding Width}"
                           Command="ScrollBar.LineUpCommand"
-                          Foreground="{TemplateBinding Foreground}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                 <rubyer:Icon Type="ArrowUpSLine" />
             </RepeatButton>
 
@@ -104,7 +104,7 @@
                           Width="{TemplateBinding Width}"
                           Height="{TemplateBinding Width}"
                           Command="ScrollBar.LineDownCommand"
-                          Foreground="{TemplateBinding Foreground}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                 <rubyer:Icon Type="ArrowDownSLine" />
             </RepeatButton>
         </Grid>
@@ -133,7 +133,7 @@
                           Width="{TemplateBinding Height}"
                           Height="{TemplateBinding Height}"
                           Command="ScrollBar.LineLeftCommand"
-                          Foreground="{TemplateBinding Foreground}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                 <rubyer:Icon Type="ArrowLeftSLine" />
             </RepeatButton>
 
@@ -158,7 +158,7 @@
                           Height="{TemplateBinding Height}"
                           Command="ScrollBar.LineRightCommand"
                           Cursor="Arrow"
-                          Foreground="{TemplateBinding Foreground}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                 <rubyer:Icon Type="ArrowRightSLine" />
             </RepeatButton>
         </Grid>
@@ -171,7 +171,6 @@
     </ControlTemplate>
 
     <Style x:Key="RubyerScrollBar" TargetType="{x:Type ScrollBar}">
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Background" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarBackground), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -180,6 +179,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarForeground), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Height" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />

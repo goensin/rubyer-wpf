@@ -68,6 +68,7 @@ namespace RubyerDemo
             services.AddSingleton<GroupBoxViewModel>();
             services.AddSingleton<ExpanderViewModel>();
             services.AddSingleton<ListBoxViewModel>();
+            services.AddSingleton<TreeViewViewModel>();
 
             return services.BuildServiceProvider();
         }

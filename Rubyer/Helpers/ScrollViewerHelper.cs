@@ -358,5 +358,21 @@ namespace Rubyer
         {
             return (double)element.GetValue(ArrowIconSizeProperty);
         }
+
+        /// <summary>
+        /// 箭头图标颜色
+        /// </summary>
+        public static readonly DependencyProperty ArrowIconBrushProperty = DependencyProperty.RegisterAttached(
+            "ArrowIconBrush", typeof(Brush), typeof(ScrollViewerHelper), new PropertyMetadata(default(Brush)));
+
+        public static void SetArrowIconBrush(DependencyObject element, Brush value)
+        {
+            element.SetValue(ArrowIconBrushProperty, value);
+        }
+
+        public static Brush GetArrowIconBrush(DependencyObject element)
+        {
+            return (Brush)element.GetValue(ArrowIconBrushProperty);
+        }
     }
 }
