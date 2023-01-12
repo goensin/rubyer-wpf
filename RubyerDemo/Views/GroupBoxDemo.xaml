@@ -1,138 +1,192 @@
 ﻿<UserControl x:Class="RubyerDemo.Views.GroupBoxDemo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:GroupBoxViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="GroupBoxDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.ColumnDefinitions="*, *"
-              rubyer:GridHelper.ColumnSpacing="10"
-              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
-              rubyer:GridHelper.RowSpacing="10">
-                <GroupBox Header="默认分组框-GroupBox">
-                    <TextBlock>
-                    蒹葭苍苍，白露为霜。所谓伊人，在水一方。
-                    </TextBlock>
-                </GroupBox>
-                <GroupBox Grid.Column="1"
-                      rubyer:HeaderHelper.FontSize="16"
-                      rubyer:HeaderHelper.FontWeight="Bold"
-                      rubyer:HeaderHelper.HorizontalAlignment="Center"
-                      Header="默认分组框-GroupBox">
-                    <TextBlock>
-                    溯洄从之，道阻且长。溯游从之，宛在水中央。
-                    </TextBlock>
-                </GroupBox>
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+                <rubyer:Description Style="{StaticResource BorderDescription}" Columns="3">
+                    <rubyer:DescriptionItem Description="标题对齐">
+                        <ComboBox Width="150"
+                                  rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                                  SelectedItem="{Binding HorizontalAlignment}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题前景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding Foreground}"
+                                  Validation.ErrorTemplate="{StaticResource RubyerValidationErrorTemplate}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题背景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding Background}"
+                                  Validation.ErrorTemplate="{StaticResource RubyerValidationErrorTemplate}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllFontFamilys}"
+                                  SelectedItem="{Binding FontFamily}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体大小">
+                        <rubyer:NumericBox x:Name="fontSizeNumBox"
+                                           Width="150"
+                                           MaxValue="40"
+                                           MinValue="8"
+                                           Value="14" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体粗细">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllFontWeights}"
+                                  SelectedItem="{Binding FontWeight}" />
+                    </rubyer:DescriptionItem>
+                </rubyer:Description>
 
-                <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
-                      Grid.Row="1"
-                      Header="色彩分组框-GroupBox">
-                    <TextBlock>
-                    蒹葭萋萋，白露未晞。所谓伊人，在水之湄。
-                    </TextBlock>
-                </GroupBox>
-                <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
-                      Grid.Row="1"
-                      Grid.Column="1"
-                      rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                      rubyer:HeaderHelper.FontWeight="Bold"
-                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                      rubyer:HeaderHelper.HorizontalAlignment="Right"
-                      Background="{DynamicResource Primary}"
-                      BorderThickness="0"
-                      Foreground="{DynamicResource WhiteForeground}"
-                      Header="色彩分组框-GroupBox">
-                    <TextBlock>
-                    溯洄从之，道阻且跻。溯游从之，宛在水中坻。
-                    </TextBlock>
-                </GroupBox>
+                <controls:ControlDisplay Title="Default GroupBox" Grid.Row="1">
+                    <GroupBox rubyer:HeaderHelper.Background="{Binding Background}"
+                              rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                              rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                              rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                              rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                              rubyer:HeaderHelper.HorizontalAlignment="{Binding HorizontalAlignment}"
+                              Header="GroupBox">
+                        <TextBlock>
+                            蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
+                            溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
+                        </TextBlock>
+                    </GroupBox>
+                </controls:ControlDisplay>
 
-                <GroupBox Style="{StaticResource ClassicGroupBox}"
-                      Grid.Row="2"
-                      Grid.ColumnSpan="2"
-                      Width="Auto"
-                      Header="经典分组框-GroupBox">
-                    <TextBlock>
-                    蒹葭采采，白露未已。所谓伊人，在水之涘。 溯洄从之，道阻且右。溯游从之，宛在水中沚。
-                    </TextBlock>
-                </GroupBox>
+                <controls:ControlDisplay Title="ColorHeader Style GroupBox" Grid.Row="2">
+                    <GroupBox Style="{StaticResource ColorHeaderGroupBox}"
+                              rubyer:HeaderHelper.Background="{Binding Background}"
+                              rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                              rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                              rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                              rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                              rubyer:HeaderHelper.HorizontalAlignment="{Binding HorizontalAlignment}"
+                              Header="ColorHeaderGroupBox">
+                        <TextBlock>
+                            蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
+                            溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
+                        </TextBlock>
+                    </GroupBox>
+                </controls:ControlDisplay>
 
-                <GroupBox Grid.Row="3"
-                      Grid.ColumnSpan="2"
-                      Header="折叠面板-Expander">
+                <controls:ControlDisplay Title="Classic Style GroupBox" Grid.Row="3">
+                    <GroupBox Style="{StaticResource ClassicGroupBox}"
+                              rubyer:HeaderHelper.Background="{Binding Background}"
+                              rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                              rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                              rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                              rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                              rubyer:HeaderHelper.HorizontalAlignment="{Binding HorizontalAlignment}"
+                              Header="ClassicGroupBox">
+                        <TextBlock>
+                            蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
+                            溯洄从之，道阻且右。溯游从之，宛在水中沚。<LineBreak />
+                        </TextBlock>
+                    </GroupBox>
+                </controls:ControlDisplay>
+
+                <GroupBox Grid.Row="4"
+                          Grid.ColumnSpan="2"
+                          Header="折叠面板-Expander">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <StackPanel Margin="5">
                             <Expander x:Name="expander"
-                                  Width="300"
-                                  Margin="5"
-                                  rubyer:HeaderHelper.FontFamily="隶书"
-                                  rubyer:HeaderHelper.FontSize="18"
-                                  FontFamily="隶书"
-                                  FontSize="13"
-                                  Header="《蒹葭》"
-                                  IsExpanded="True">
+                                      Width="300"
+                                      Margin="5"
+                                      rubyer:HeaderHelper.FontFamily="隶书"
+                                      rubyer:HeaderHelper.FontSize="18"
+                                      FontFamily="隶书"
+                                      FontSize="13"
+                                      Header="《蒹葭》"
+                                      IsExpanded="True">
                                 <TextBlock>
-                                蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
-                                溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
-                                蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
-                                溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
-                                蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
-                                溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
+                                    蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
+                                    溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
+                                    蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
+                                    溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
+                                    蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
+                                    溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
                             </Expander>
                             <Expander MaxWidth="300"
-                                  Margin="5"
-                                  rubyer:ExpanderHelper.ExpandIconDock="Left"
-                                  rubyer:ExpanderHelper.ExpandIconType="ArrowDownSFill"
-                                  rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                                  rubyer:HeaderHelper.HorizontalAlignment="Center"
-                                  ExpandDirection="Up"
-                                  Header="《蒹葭》">
+                                      Margin="5"
+                                      rubyer:ExpanderHelper.ExpandIconDock="Left"
+                                      rubyer:ExpanderHelper.ExpandIconType="ArrowDownSFill"
+                                      rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                                      rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                      rubyer:HeaderHelper.HorizontalAlignment="Center"
+                                      ExpandDirection="Up"
+                                      Header="《蒹葭》">
                                 <TextBlock>
-                                蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
-                                溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
-                                蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
-                                溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
-                                蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
-                                溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
+                                    蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
+                                    溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
+                                    蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
+                                    溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
+                                    蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
+                                    溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
                             </Expander>
                         </StackPanel>
                         <Expander Margin="5"
-                              rubyer:ControlHelper.CornerRadius="0"
-                              rubyer:HeaderHelper.Background="#88BDBDBD"
-                              BorderThickness="1 0"
-                              ExpandDirection="Left"
-                              Header="《蒹葭》">
+                                  rubyer:ControlHelper.CornerRadius="0"
+                                  rubyer:HeaderHelper.Background="#88BDBDBD"
+                                  BorderThickness="1 0"
+                                  ExpandDirection="Left"
+                                  Header="《蒹葭》">
                             <TextBlock>
-                            蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
-                            溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
-                            蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
-                            溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
-                            蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
-                            溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
+                                蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
+                                溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
+                                蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
+                                溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
+                                蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
+                                溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
                         </Expander>
                         <Expander Margin="5"
-                              rubyer:ExpanderHelper.ExpandIconDock="Top"
-                              rubyer:ExpanderHelper.ExpandIconType="ArrowDownLine"
-                              rubyer:HeaderHelper.Background="{DynamicResource Dark}"
-                              rubyer:HeaderHelper.FontSize="17"
-                              rubyer:HeaderHelper.FontWeight="Bold"
-                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                              rubyer:HeaderHelper.VerticalAlignment="Bottom"
-                              Background="{DynamicResource Light}"
-                              BorderThickness="0"
-                              ExpandDirection="Right"
-                              Header="《蒹葭》">
+                                  rubyer:ExpanderHelper.ExpandIconDock="Top"
+                                  rubyer:ExpanderHelper.ExpandIconType="ArrowDownLine"
+                                  rubyer:HeaderHelper.Background="{DynamicResource Dark}"
+                                  rubyer:HeaderHelper.FontSize="17"
+                                  rubyer:HeaderHelper.FontWeight="Bold"
+                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                  rubyer:HeaderHelper.VerticalAlignment="Bottom"
+                                  Background="{DynamicResource Light}"
+                                  BorderThickness="0"
+                                  ExpandDirection="Right"
+                                  Header="《蒹葭》">
                             <TextBlock>
-                            蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
-                            溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
-                            蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
-                            溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
-                            蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
-                            溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
+                                蒹葭苍苍，白露为霜。所谓伊人，在水一方。<LineBreak />
+                                溯洄从之，道阻且长。溯游从之，宛在水中央。<LineBreak />
+                                蒹葭萋萋，白露未晞。所谓伊人，在水之湄。<LineBreak />
+                                溯洄从之，道阻且跻。溯游从之，宛在水中坻。<LineBreak />
+                                蒹葭采采，白露未已。所谓伊人，在水之涘。<LineBreak />
+                                溯洄从之，道阻且右。溯游从之，宛在水中沚。</TextBlock>
                         </Expander>
                     </StackPanel>
                 </GroupBox>

@@ -36,7 +36,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
                 new MenuItem("DateTimePicker", "日期时间选择", new DateTimePickerDemo(), IconType.TimeLine),
                 new MenuItem("Renamer", "重命名", new RenamerDemo(), IconType.Edit2Line),
-                new MenuItem("Slider", "滑动条", new SliderDemo(), IconType.EqualizerLine),
+                new MenuItem("Slider", "滑动条", new SliderDemo(), IconType.GitCommitFill),
                 new MenuItem("ProgressBar", "进度条", new ProgressBarDemo(), IconType.Loader4Line),
                 new MenuItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
                 new MenuItem("Grid", "网格", new GridDemo(), IconType.GridLine),

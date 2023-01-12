@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using RubyerDemo.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -21,6 +23,8 @@ namespace RubyerDemo.Views
         public GroupBoxDemo()
         {
             InitializeComponent();
+
+            DataContext = App.Current.Services.GetService<GroupBoxViewModel>();
         }
     }
 }
