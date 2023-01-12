@@ -23,6 +23,7 @@
                 </Style.Resources>
                 <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                 <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
                 <Setter Property="Template">
                     <Setter.Value>
                         <ControlTemplate TargetType="smtx:XamlDisplay">

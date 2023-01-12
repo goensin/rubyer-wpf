@@ -3,7 +3,6 @@
                     xmlns:controls="clr-namespace:RubyerDemo.Controls"
                     xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit">
 
-
     <Style TargetType="{x:Type controls:ControlDisplay}">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

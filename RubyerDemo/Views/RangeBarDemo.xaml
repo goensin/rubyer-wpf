@@ -55,14 +55,12 @@
                                          Height="20"
                                          Margin="10"
                                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
-                                         rubyer:ProgressBarHelper.IsShowBackground="False"
                                          Value="70" />
                             <ProgressBar Style="{StaticResource CircleProgressBar}"
                                          Width="50"
                                          Height="50"
                                          Margin="10"
                                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
-                                         rubyer:ProgressBarHelper.IsShowBackground="False"
                                          rubyer:ProgressBarHelper.ShowPercent="True"
                                          rubyer:ProgressBarHelper.Thickness="8"
                                          Value="70" />
@@ -76,7 +74,6 @@
                             <ProgressBar Style="{StaticResource CircleProgressBar}"
                                          Margin="10"
                                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                         rubyer:ProgressBarHelper.IsShowBackground="False"
                                          IsIndeterminate="True"
                                          Orientation="Vertical"
                                          Value="70" />

@@ -61,32 +61,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 是否显示背景
-        /// </summary>
-        public static readonly DependencyProperty IsShowBackgroundProperty =
-            DependencyProperty.RegisterAttached("IsShowBackground", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(BooleanBoxes.TrueBox));
-
-        /// <summary>
-        /// Gets the is show background.
-        /// </summary>
-        /// <param name="obj">The obj.</param>
-        /// <returns>A bool.</returns>
-        public static bool GetIsShowBackground(DependencyObject obj)
-        {
-            return (bool)obj.GetValue(IsShowBackgroundProperty);
-        }
-
-        /// <summary>
-        /// Sets the is show background.
-        /// </summary>
-        /// <param name="obj">The obj.</param>
-        /// <param name="value">If true, value.</param>
-        public static void SetIsShowBackground(DependencyObject obj, bool value)
-        {
-            obj.SetValue(IsShowBackgroundProperty, BooleanBoxes.Box(value));
-        }
-
-        /// <summary>
         /// 不确定进度值
         /// </summary>
         public static readonly DependencyProperty IndeterminateValueProperty =

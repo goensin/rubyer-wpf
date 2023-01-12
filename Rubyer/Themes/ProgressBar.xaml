@@ -64,7 +64,7 @@
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)">
                                             <EasingDoubleKeyFrame KeyTime="0" Value="0.3" />
-                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="0.3" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.75" Value="0.4" />
                                             <EasingDoubleKeyFrame KeyTime="0:0:1.5" Value="0.3" />
                                         </DoubleAnimationUsingKeyFrames>
                                         <PointAnimationUsingKeyFrames Storyboard.TargetName="Animation" Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)">
@@ -85,7 +85,7 @@
                                 </Setter.Value>
                             </Setter>
                         </Trigger>
-                        <Trigger Property="IsIndeterminate" Value="true">
+                        <Trigger Property="IsIndeterminate" Value="True">
                             <Setter TargetName="Indicator" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
@@ -115,8 +115,7 @@
                             <Path x:Name="Background"
                                   RenderTransformOrigin="0, 0"
                                   Stroke="{TemplateBinding Background}"
-                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                  Visibility="{Binding Path=(rubyer:ProgressBarHelper.IsShowBackground), RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource BooleanToVisibleConverter}}">
+                                  StrokeThickness="{Binding Path=(rubyer:ProgressBarHelper.Thickness), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                 <Path.Data>
                                     <GeometryGroup>
                                         <PathGeometry>
