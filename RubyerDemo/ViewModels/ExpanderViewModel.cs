@@ -1,15 +1,18 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media;
+using System.Windows;
 
 namespace RubyerDemo.ViewModels
 {
     /// <summary>
-    /// 分组框
+    /// 扩展框
     /// </summary>
-    public partial class GroupBoxViewModel : ObservableObject
+    public partial class ExpanderViewModel : ObservableObject
     {
         public List<Brush> AllBrushes => new List<Brush>
         {
@@ -50,10 +53,19 @@ namespace RubyerDemo.ViewModels
         private HorizontalAlignment horizontalAlignment;
 
         [ObservableProperty]
+        private VerticalAlignment verticalAlignment;
+
+        [ObservableProperty]
         private Brush foreground;
 
         [ObservableProperty]
         private Brush background;
+
+        [ObservableProperty]
+        private Brush contentForeground;
+
+        [ObservableProperty] 
+        private Brush contentBackground;
 
         [ObservableProperty]
         private FontWeight fontWeight;
@@ -61,12 +73,14 @@ namespace RubyerDemo.ViewModels
         [ObservableProperty]
         private FontFamily fontFamily;
 
-        public GroupBoxViewModel()
+        public ExpanderViewModel()
         {
-            Foreground = AllBrushes[0];
-            Background = AllBrushes[1];
+            Foreground = AllBrushes[1];
+            ContentForeground = AllBrushes[0];
+            Background = AllBrushes[2];
+            ContentBackground = AllBrushes[1];
             FontWeight = FontWeights.Normal;
-            fontFamily = AllFontFamilys.FirstOrDefault(x=>x.Source.Contains("YaHei"));
+            fontFamily = AllFontFamilys.FirstOrDefault(x => x.Source.Contains("YaHei"));
         }
     }
 }

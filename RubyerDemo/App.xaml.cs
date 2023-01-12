@@ -66,6 +66,7 @@ namespace RubyerDemo
             services.AddSingleton<RenamerViewModel>();
             services.AddSingleton<DateTimePickerViewModel>();
             services.AddSingleton<GroupBoxViewModel>();
+            services.AddSingleton<ExpanderViewModel>();
 
             return services.BuildServiceProvider();
         }
