@@ -43,7 +43,7 @@ namespace RubyerDemo.ViewModels
                 new MenuItem("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
                 new MenuItem("Expander", "展开框", new ExpanderDemo(), IconType.LayoutTopLine),
                 new MenuItem("ListBox", "列表框", new ListBoxDemo(), IconType.ListUnordered),
-                new MenuItem("ListsTree", "列表与树", new ListsTreeDemo(), IconType.ListCheck2),
+                new MenuItem("ListView", "列表视图", new ListViewDemo(), IconType.ListCheck2),
                 new MenuItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
                 new MenuItem("TabControl", "选项卡", new TabControlDemo(), IconType.Layout4Line),
                 new MenuItem("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),

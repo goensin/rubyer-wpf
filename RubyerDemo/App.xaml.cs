@@ -50,7 +50,7 @@ namespace RubyerDemo
             // View models
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<IconViewModel>();
-            services.AddSingleton<ListsViewModel>();
+            services.AddSingleton<ListViewModel>();
             services.AddSingleton<DataGridViewModel>();
             services.AddSingleton<TabControlViewModel>();
             services.AddSingleton<PageBarViewModel>();

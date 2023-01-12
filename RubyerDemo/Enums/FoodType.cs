@@ -10,16 +10,16 @@ namespace RubyerDemo
     [TypeConverter(typeof(EnumDescriptionConverter))]
     public enum FoodType
     {
-        [Description("面条")]
-        Noodle = 0,
+        [Description("牛肉丸")]
+        BeefMeatballs = 0,
 
-        [Description("面包")]
-        Bread,
+        [Description("蚝烙")]
+        OysterOmelette,
 
-        Hamburger,
+        KwayChap,
 
         [Description("不自动生成")]
         [Display(AutoGenerateField = false)]
-        Beef,
+        Chicken,
     }
 }
