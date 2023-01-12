@@ -123,7 +123,8 @@
                                       Height="Auto"
                                       Padding="0"
                                       rubyer:ControlHelper.FocusedBrush="Transparent"
-                                      Background="Transparent"
+                                      rubyer:ControlHelper.MaskOpacity="0"
+                                      Background="Yellow"
                                       Click="BlackSwitch_Click">
                             <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
                                 <TextBlock Text="夜间模式" />
