@@ -30,7 +30,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:MessageCard}">
                     <rubyer:Transition x:Name="Path_Transition"
                                        IsShow="{TemplateBinding IsShow}"
-                                       Type="FadeDown">
+                                       Type="CollapseDown">
                         <rubyer:Transition.CloseEasingFunction>
                             <CubicEase EasingMode="EaseIn" />
                         </rubyer:Transition.CloseEasingFunction>

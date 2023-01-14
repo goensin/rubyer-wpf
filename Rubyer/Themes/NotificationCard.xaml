@@ -38,7 +38,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:NotificationCard}">
                     <rubyer:Transition x:Name="Path_Transition"
                                        IsShow="{TemplateBinding IsShow}"
-                                       Type="FadeUp"
+                                       Type="CollapseUp"
                                        Duration="0:0:0.5">
                         <Border x:Name="rootBorder"
                                 Margin="{TemplateBinding Margin}"

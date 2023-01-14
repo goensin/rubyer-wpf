@@ -562,8 +562,10 @@ namespace Rubyer
 
         private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing, double? from = null)
         {
+
             DoubleAnimation progressAnimation = new DoubleAnimation()
             {
+                From = transition.Progress == to ? (to > 0 ? 0 : 1) : from,
                 To = to,
                 Duration = transition.Duration,
                 EasingFunction = easing,
