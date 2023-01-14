@@ -106,33 +106,48 @@ namespace Rubyer
         #region 依赖属性
 
         /// <summary>
-        /// 当前页背景色
+        /// 未选中颜色
         /// </summary>
-        public static readonly DependencyProperty CurrentBackgroundProperty =
-            DependencyProperty.Register("CurrentBackground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
+        public static readonly DependencyProperty UnselectedBrushProperty =
+            DependencyProperty.Register("UnselectedBrush", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
 
         /// <summary>
-        /// 当前页背景色
+        /// 未选中颜色
         /// </summary>
-        public Brush CurrentBackground
+        public Brush UnselectedBrush
         {
-            get { return (Brush)GetValue(CurrentBackgroundProperty); }
-            set { SetValue(CurrentBackgroundProperty, value); }
+            get { return (Brush)GetValue(UnselectedBrushProperty); }
+            set { SetValue(UnselectedBrushProperty, value); }
         }
 
         /// <summary>
-        /// 当前页前景色
+        /// 选中颜色
         /// </summary>
-        public static readonly DependencyProperty CurrentForegroundProperty =
-            DependencyProperty.Register("CurrentForeground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
+        public static readonly DependencyProperty SelectedBrushProperty =
+            DependencyProperty.Register("SelectedBrush", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
 
         /// <summary>
-        /// 当前页前景色
+        /// 选中颜色
         /// </summary>
-        public Brush CurrentForeground
+        public Brush SelectedBrush
         {
-            get { return (Brush)GetValue(CurrentForegroundProperty); }
-            set { SetValue(CurrentForegroundProperty, value); }
+            get { return (Brush)GetValue(SelectedBrushProperty); }
+            set { SetValue(SelectedBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 当前前景色
+        /// </summary>
+        public static readonly DependencyProperty SelectedForegroundProperty =
+            DependencyProperty.Register("SelectedForeground", typeof(Brush), typeof(PageBar), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// 当前前景色
+        /// </summary>
+        public Brush SelectedForeground
+        {
+            get { return (Brush)GetValue(SelectedForegroundProperty); }
+            set { SetValue(SelectedForegroundProperty, value); }
         }
 
         /// <summary>
@@ -290,6 +305,36 @@ namespace Rubyer
         {
             get { return (Dock)GetValue(ItemsDockProperty); }
             set { SetValue(ItemsDockProperty, value); }
+        }
+
+        /// <summary>
+        /// 子项内边距
+        /// </summary>
+        public static readonly DependencyProperty ItemsPaddingProperty =
+            DependencyProperty.Register("ItemsPadding", typeof(Thickness), typeof(PageBar), new PropertyMetadata(default(Thickness)));
+
+        /// <summary>
+        /// 子项内边距
+        /// </summary>
+        public Thickness ItemsPadding
+        {
+            get { return (Thickness)GetValue(ItemsPaddingProperty); }
+            set { SetValue(ItemsPaddingProperty, value); }
+        }
+
+        /// <summary>
+        /// 是否圆角
+        /// </summary>
+        public static readonly DependencyProperty IsRoundProperty =
+            DependencyProperty.Register("IsRound", typeof(bool), typeof(PageBar), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 是否圆角
+        /// </summary>
+        public bool IsRound
+        {
+            get { return (bool)GetValue(IsRoundProperty); }
+            set { SetValue(IsRoundProperty, BooleanBoxes.Box(value)); }
         }
 
         #endregion 依赖属性

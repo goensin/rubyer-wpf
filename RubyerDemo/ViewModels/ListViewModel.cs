@@ -38,45 +38,10 @@ namespace RubyerDemo.ViewModels
                 new Person{ Id=6,Name="周八",Age=22,IsSelected=true,Gender=GenderType.Women},
                 new Person{ Id=7,Name="吴九",Age=23,IsSelected=false,Gender=GenderType.Men}
             };
-
-            Catalogs = new ObservableCollection<Catalog>
-            {
-                new Catalog
-                {
-                    Name = "乐器",
-                    Items = new ObservableCollection<Catalog>
-                    {
-                        new Catalog{ Name = "钢琴" },
-                        new Catalog
-                        {
-                            Name = "吉他",
-                            Items = new ObservableCollection<Catalog>
-                            {
-                            new Catalog{ Name = "木吉他"},
-                            new Catalog{ Name = "电吉他"}
-                            }
-                        },
-                        new Catalog{ Name = "二胡" }
-                    }
-                },
-                new Catalog
-                {
-                    Name = "运动",
-                    Items = new ObservableCollection<Catalog>
-                    {
-                        new Catalog{ Name = "跑步" },
-                        new Catalog{ Name = "篮球" },
-                        new Catalog{ Name = "跑步" },
-                    }
-                }
-            };
         }
 
         [ObservableProperty]
         private ObservableCollection<Person> persons;
-
-        [ObservableProperty]
-        private ObservableCollection<Catalog> catalogs;
     }
 
     public class Person : ObservableObject
@@ -130,15 +95,6 @@ namespace RubyerDemo.ViewModels
             get => gender;
             set => SetProperty(ref gender, value);
         }
-    }
-
-    public partial class Catalog : ObservableObject
-    {
-        [ObservableProperty]
-        private string name;
-
-        [ObservableProperty]
-        private ObservableCollection<Catalog> items;
     }
 
     /// <summary>

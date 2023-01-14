@@ -19,7 +19,8 @@
                 <controls:ControlDisplay Title="GridView ListView"
                                          Grid.Row="1"
                                          Description="通过 HeaderHelper.Foreground 和 HeaderHelper.Background 设置标题颜色 &#x000A;通过 HeaderHelper.FontSize 和 HeaderHelper.FontWeight 设置标题字体 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙">
-                    <ListView rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                    <ListView VerticalContentAlignment="Center"
+                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                               rubyer:HeaderHelper.Background="{DynamicResource Primary}"
                               rubyer:HeaderHelper.FontSize="15"
                               rubyer:HeaderHelper.FontWeight="Bold"
@@ -39,6 +40,9 @@
                                 <GridViewColumn Width="100"
                                                 DisplayMemberBinding="{Binding Age}"
                                                 Header="年龄" />
+                                <GridViewColumn Width="100"
+                                                DisplayMemberBinding="{Binding Gender}"
+                                                Header="性别" />
                                 <GridViewColumn Width="50" Header="选中">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
