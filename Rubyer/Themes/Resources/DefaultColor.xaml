@@ -24,19 +24,19 @@
     <SolidColorBrush x:Key="Success" Color="#43A047" />
     <SolidColorBrush x:Key="Question" Color="#2196F3" />
 
-    <SolidColorBrush x:Key="PrimaryText" Color="#212121" />
-    <SolidColorBrush x:Key="RegularText" Color="#484848" />
     <SolidColorBrush x:Key="SeconarydText" Color="#CC9E9E9E" />
     <SolidColorBrush x:Key="WatermarkText" Color="#BB6D6D6D" />
 
     <SolidColorBrush x:Key="Border" Color="#9E9E9E" />
     <SolidColorBrush x:Key="BorderLight" Color="#CFCFCF" />
     <SolidColorBrush x:Key="BorderLighter" Color="#E0E0E0" />
+    <SolidColorBrush x:Key="BorderDark" Color="#6D6D6D" />
 
     <Color x:Key="EffectColor">#BDBDBD</Color>
     <SolidColorBrush x:Key="Mask" Color="#9E9E9E" />
     <SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
     <SolidColorBrush x:Key="DialogBackground" Color="#AA424242" />
+    <SolidColorBrush x:Key="DialogBackgroundDark" Color="#AA373737" />
     <SolidColorBrush x:Key="HeaderBackground" Color="#CFCFCF" />
-    <SolidColorBrush x:Key="FunctionBarBackground" Color="#889E9E9E" />
+    <SolidColorBrush x:Key="HeaderBackgroundDark" Color="#373737" />
 </ResourceDictionary>

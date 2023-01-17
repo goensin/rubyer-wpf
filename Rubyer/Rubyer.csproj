@@ -14,13 +14,17 @@
 	</PropertyGroup>
 	<ItemGroup>
 	  <Compile Remove="Assets\**" />
+	  <Compile Remove="Publish\**" />
 	  <EmbeddedResource Remove="Assets\**" />
+	  <EmbeddedResource Remove="Publish\**" />
 	  <None Remove="Assets\**" />
+	  <None Remove="Publish\**" />
 	  <None Include="rubyer.png">
 	    <Pack>True</Pack>
 	    <PackagePath></PackagePath>
 	  </None>
 	  <Page Remove="Assets\**" />
+	  <Page Remove="Publish\**" />
 	</ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" Link=".editorconfig" />

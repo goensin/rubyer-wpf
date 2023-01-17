@@ -33,16 +33,15 @@ namespace RubyerDemo
             ThemeManager.ThemeModeChanged += OnThemeModeChanged;
         }
 
-        private void OnThemeModeChanged(object sender, ThemeMode mode)
+        private void OnThemeModeChanged(object sender, ThemeModeChangedArgs e)
         {
-            switch (mode)
+            if (e.IsDarkMode)
             {
-                case ThemeMode.Light:
-                    this.BorderBrush = (Brush)Application.Current.Resources["Primary"];
-                    break;
-                case ThemeMode.Black:
-                    this.BorderBrush = (Brush)Application.Current.Resources["Dark"];
-                    break;
+                this.BorderBrush = (Brush)Application.Current.Resources["Dark"];
+            }
+            else
+            {
+                this.BorderBrush = (Brush)Application.Current.Resources["Primary"];
             }
         }
 
