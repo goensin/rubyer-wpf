@@ -30,6 +30,20 @@ namespace RubyerDemo
             this.DataContext = App.Current.Services.GetRequiredService<MainViewModel>();
 
             Loaded += MainWindow_Loaded;
+            ThemeManager.ThemeModeChanged += OnThemeModeChanged;
+        }
+
+        private void OnThemeModeChanged(object sender, ThemeMode mode)
+        {
+            switch (mode)
+            {
+                case ThemeMode.Light:
+                    this.BorderBrush = (Brush)Application.Current.Resources["Primary"];
+                    break;
+                case ThemeMode.Black:
+                    this.BorderBrush = (Brush)Application.Current.Resources["Dark"];
+                    break;
+            }
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

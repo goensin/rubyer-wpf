@@ -31,7 +31,6 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}">
                                 <TabControl Style="{StaticResource CardTabControl}"
-                                            Padding="10"
                                             rubyer:ControlHelper.CornerRadius="0"
                                             rubyer:HeaderHelper.FontSize="20">
                                     <TabItem MinWidth="200" rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}">

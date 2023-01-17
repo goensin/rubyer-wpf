@@ -15,6 +15,11 @@ namespace Rubyer
         private static bool themeApplying = false;
 
         /// <summary>
+        /// 主题改变事件
+        /// </summary>
+        public static EventHandler<ThemeMode> ThemeModeChanged;
+
+        /// <summary>
         /// 获取当前应用模式是否为暗色
         /// </summary>
         /// <returns>是否为暗色</returns>
@@ -67,6 +72,8 @@ namespace Rubyer
 
             Application.Current.Resources["DefaultForeground"] = foreground;
             Application.Current.Resources["DefaultBackground"] = background;
+
+            ThemeModeChanged?.Invoke(Application.Current, isDark ? ThemeMode.Black : ThemeMode.Light);
         }
 
         /// <summary>
