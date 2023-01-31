@@ -173,7 +173,6 @@
     <Style x:Key="FilledNumericBox"
            BasedOn="{StaticResource RubyerNumericBox}"
            TargetType="{x:Type rubyer:NumericBox}">
-        <Setter Property="Foreground" Value="{StaticResource BlackForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource BorderLight}" />

@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows;
 using Microsoft.Win32;
 using Rubyer.Models;
+using System.Linq;
 
 namespace Rubyer
 {
@@ -13,6 +14,28 @@ namespace Rubyer
     /// </summary>
     public class ThemeManager
     {
+        /// <summary>
+        /// 所有颜色 key
+        /// </summary>
+        public static string[] ColorKeys = new string[]
+        {
+            "DefaultForeground",
+            "DefaultBackground",
+            "Primary",
+            "Accent",
+            "Light",
+            "Dark",
+            "Border",
+            "BorderLight",
+            "BorderLighter",
+            "SeconarydText",
+            "WatermarkText",
+            "Mask",
+            "MaskDark",
+            "DialogBackground",
+            "HeaderBackground",
+        };
+
         private static bool themeApplying = false;
 
         /// <summary>
@@ -42,45 +65,35 @@ namespace Rubyer
             return (int)registryValueObject <= 0;
         }
 
-        private static void ApplyTheme(bool isDark)
+        private static void ApplyColor(bool isDark, string colorName)
         {
-            Color lightForegroundColor = (Color)Application.Current.FindResource("LightForegroundColor");
-            Color lightBackgroundColor = (Color)Application.Current.FindResource("LightBackgroundColor");
-            Color darkForegroundColor = (Color)Application.Current.FindResource("DarkForegroundColor");
-            Color darkBackgroundColor = (Color)Application.Current.FindResource("DarkBackgroundColor");
+            Color lightColor = (Color)Application.Current.FindResource($"Light{colorName}Color");
+            Color darkColor = (Color)Application.Current.FindResource($"Dark{colorName}Color");
 
-            if (!(Application.Current.Resources["DefaultBackground"] is Brush background) || !(Application.Current.Resources["DefaultForeground"] is Brush foreground))
+            if (!(Application.Current.Resources[colorName] is Brush brush))
             {
                 return;
             }
 
             themeApplying = true;
 
-            var backgroundAnimation = new ColorAnimation
+            var animation = new ColorAnimation
             {
                 Duration = TimeSpan.FromMilliseconds(600),
-                To = isDark ? darkBackgroundColor : lightBackgroundColor,
+                To = isDark ? darkColor : lightColor,
                 EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
             };
 
-            backgroundAnimation.Completed += (sender, e) => themeApplying = false;
+            animation.Completed += (sender, e) => themeApplying = false;
 
-            var foregroundAnimation = new ColorAnimation
+            if (brush.IsFrozen)
             {
-                Duration = TimeSpan.FromMilliseconds(600),
-                To = isDark ? darkForegroundColor : lightForegroundColor,
-                EasingFunction = new CubicEase { EasingMode = EasingMode.EaseInOut }
-            };
+                brush = brush.CloneCurrentValue();
+            }
 
-            background.BeginAnimation(SolidColorBrush.ColorProperty, backgroundAnimation);
-            foreground.BeginAnimation(SolidColorBrush.ColorProperty, foregroundAnimation);
+            brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
 
-            Application.Current.Resources["DefaultForeground"] = foreground;
-            Application.Current.Resources["DefaultBackground"] = background;
-
-            var currentThemeColor = GetCurrentThemeColor(Application.Current);
-            var args = new ThemeModeChangedArgs(currentThemeColor, isDark);
-            ThemeModeChanged?.Invoke(Application.Current, args);
+            Application.Current.Resources[colorName] = brush;
         }
 
         private static ThemeColor GetCurrentThemeColor(Application application)
@@ -92,6 +105,19 @@ namespace Rubyer
                 Dark = (Brush)application.Resources["Dark"],
                 Accent = (Brush)application.Resources["Accent"],
             };
+        }
+
+
+        private static void ApplyTheme(bool isDark)
+        {
+            foreach (var colorKey in ColorKeys)
+            {
+                ApplyColor(isDark, colorKey);
+            }
+
+            var currentThemeColor = GetCurrentThemeColor(Application.Current);
+            var args = new ThemeModeChangedArgs(currentThemeColor, isDark);
+            ThemeModeChanged?.Invoke(Application.Current, args);
         }
 
         /// <summary>
@@ -160,14 +186,6 @@ namespace Rubyer
             Application.Current.Resources["BottomControlCornerRadius"] = new CornerRadius(0, 0, cornerRadius, cornerRadius);
         }
 
-        private static void SetBrush(Brush brush, string resourceName)
-        {
-            if (brush != null)
-            {
-                Application.Current.Resources[resourceName] = brush;
-            }
-        }
-
         private static bool CheckIsDark(Brush brush)
         {
             if (brush is SolidColorBrush color)
@@ -181,17 +199,27 @@ namespace Rubyer
         /// <summary>
         /// 应用主题配色
         /// </summary>
-        /// <param name="themeColor">主题配色</param>
-        public static void ApplyThemeColor(ThemeColor themeColor)
+        /// <param name="colorUrl">颜色配置文件路径</param>
+        public static void ApplyThemeColor(string colorUrl)
         {
-            SetBrush(themeColor.Primary, nameof(themeColor.Primary));
-            SetBrush(themeColor.Light, nameof(themeColor.Light));
-            SetBrush(themeColor.Dark, nameof(themeColor.Dark));
-            SetBrush(themeColor.Accent, nameof(themeColor.Accent));
+            var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
+
+            var resourceDictionary = new ResourceDictionary();
+            resourceDictionary.Source = new Uri(colorUrl, UriKind.RelativeOrAbsolute);
+
+            if (resourceDictionaries.Any(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
+            {
+                var oldColorResource = resourceDictionaries.First(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri);
+                resourceDictionaries.Remove(oldColorResource);
+            }
+
+            resourceDictionaries.Add(resourceDictionary);
 
             var currentBackground = (Brush)Application.Current.Resources["DefaultBackground"];
             var currentThemeColor = GetCurrentThemeColor(Application.Current);
             var isDarkMode = CheckIsDark(currentBackground);
+            ApplyTheme(isDarkMode);
+
             var args = new ThemeModeChangedArgs(currentThemeColor, isDarkMode);
             ThemeModeChanged?.Invoke(Application.Current, args);
         }

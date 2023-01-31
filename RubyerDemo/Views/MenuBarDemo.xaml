@@ -192,11 +192,11 @@
                 </GroupBox>
 
                 <GroupBox Grid.Row="2" Header="StatusBar-状态栏">
-                    <StatusBar Background="{DynamicResource Accent}" Foreground="{DynamicResource WhiteForeground}">
+                    <StatusBar >
                         <StatusBarItem HorizontalAlignment="Left">
                             <rubyer:Icon Type="TerminalBoxLine" />
                         </StatusBarItem>
-                        <Separator BorderBrush="{DynamicResource WhiteForeground}" />
+                        <Separator  />
                         <StatusBarItem HorizontalAlignment="Left" Content="就绪" />
                         <StatusBarItem HorizontalAlignment="Right">
                             <StackPanel Orientation="Horizontal">

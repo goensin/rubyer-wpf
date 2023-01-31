@@ -18,11 +18,6 @@ namespace RubyerDemo.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        private static readonly Brush primary = (Brush)Application.Current.Resources["Primary"];
-        private static readonly Brush light = (Brush)Application.Current.Resources["Light"];
-        private static readonly Brush dark = (Brush)Application.Current.Resources["Dark"];
-        private static readonly Brush accent = (Brush)Application.Current.Resources["Accent"];
-
         public MainViewModel()
         {
             Title = "Rubyer UI";
@@ -70,46 +65,36 @@ namespace RubyerDemo.ViewModels
                 new ThemeColorInfo
                 {
                     Name = "默认蓝",
-                    Primary = primary,
-                    Light = light,
-                    Dark = dark,
-                    Accent = accent,
+                    Url = @"pack://application:,,,/RubyerDemo;component/Themes/BlueColor.xaml",
+                    Primary = new SolidColorBrush(Color.FromRgb(0x21,0x96,0xF3)),
                     IsSeleted =true
                 },
                 new ThemeColorInfo
                 {
                     Name = "酷安绿",
+                    Url = @"pack://application:,,,/RubyerDemo;component/Themes/GreenColor.xaml",
                     Primary = new SolidColorBrush(Color.FromRgb(0x0B,0xA3,0x61)),
-                    Light = new SolidColorBrush(Color.FromRgb(0x56,0xD5,0x8F)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0x00,0x73,0x36)),
-                    Accent = new SolidColorBrush(Color.FromRgb(0x79,0x55,0x48)),
-                    IsSeleted =false
+                    IsSeleted = false
                 },
                 new ThemeColorInfo
                 {
                     Name = "网易红",
                     Primary = new SolidColorBrush(Color.FromRgb(0xE5,0x39,0x35)),
-                    Light = new SolidColorBrush(Color.FromRgb(0xFF,0x6F,0x60)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0xAB,0x00,0x0D)),
-                    Accent = new SolidColorBrush(Color.FromRgb(0x39,0x49,0xAB)),
+                    Url = @"pack://application:,,,/RubyerDemo;component/Themes/RedColor.xaml",
                     IsSeleted =false
                 },
                 new ThemeColorInfo
                 {
                     Name = "基佬紫",
-                    Primary = new SolidColorBrush(Color.FromRgb(0x6A,0x1B,0x9A)),
-                    Light = new SolidColorBrush(Color.FromRgb(0x9C,0x4D,0xCC)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0x38,0x00,0x6B)),
-                    Accent = new SolidColorBrush(Color.FromRgb(0xE6,0x51,0x00)),
+                    Primary =new SolidColorBrush( Color.FromRgb(0x6A,0x1B,0x9A)),
+                    Url = @"pack://application:,,,/RubyerDemo;component/Themes/PurpleColor.xaml",
                     IsSeleted =false
                 },
                 new ThemeColorInfo
                 {
                     Name = "哔哩粉",
                     Primary = new SolidColorBrush(Color.FromRgb(0xFB,0x72,0x99)),
-                    Light = new SolidColorBrush(Color.FromRgb(0xFF,0xA4,0xCA)),
-                    Dark = new SolidColorBrush(Color.FromRgb(0xC4,0x40,0x6B)),
-                    Accent = new SolidColorBrush(Color.FromRgb(0x73,0xC9,0xE5)),
+                    Url = @"pack://application:,,,/RubyerDemo;component/Themes/PinkColor.xaml",
                     IsSeleted =false
                 },
             };
@@ -135,15 +120,7 @@ namespace RubyerDemo.ViewModels
                 return;
             }
 
-            var themeColor = new ThemeColor
-            {
-                Primary = info.Primary,
-                Light = info.Light,
-                Dark = info.Dark,
-                Accent = info.Accent,
-            };
-
-            ThemeManager.ApplyThemeColor(themeColor);
+            ThemeManager.ApplyThemeColor(info.Url);
 
             foreach (var item in ThemeColors)
             {

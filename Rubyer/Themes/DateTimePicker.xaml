@@ -104,8 +104,7 @@
                                                 <Calendar x:Name="PART_Calendar"
                                                           Margin="0"
                                                           rubyer:ControlHelper.CornerRadius="0"
-                                                          rubyer:HeaderHelper.Background="{TemplateBinding Background}"
-                                                          rubyer:HeaderHelper.Foreground="{TemplateBinding Foreground}" />
+                                                          rubyer:HeaderHelper.Background="Transparent" />
                                                 <rubyer:Clock x:Name="PART_Clock"
                                                               Style="{StaticResource ComboBoxClock}"
                                                               Margin="0"
@@ -138,7 +137,6 @@
     <Style x:Key="FilledDateTimePicker"
            BasedOn="{StaticResource RubyerDateTimePicker}"
            TargetType="{x:Type rubyer:DateTimePicker}">
-        <Setter Property="Foreground" Value="{StaticResource BlackForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource BorderLight}" />

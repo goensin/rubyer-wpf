@@ -159,7 +159,6 @@
                                   rubyer:HeaderHelper.Foreground="{Binding Foreground}"
                                   rubyer:HeaderHelper.VerticalAlignment="{Binding VerticalAlignment}"
                                   Background="{Binding ContentBackground}"
-                                  BorderThickness="1 0"
                                   ExpandDirection="Left"
                                   Foreground="{Binding ContentForeground}"
                                   Header="《蒹葭》"

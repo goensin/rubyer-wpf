@@ -17,7 +17,15 @@ namespace RubyerDemo.ViewModels
 
         public IEnumerable<IconInfo> IconInfos
         {
-            get { return iconInfos ??= AllIconInfo; }
+            get
+            {
+                if (iconInfos == null)
+                {
+                    iconInfos = AllIconInfo;
+                }
+
+                return iconInfos;
+            }
             set
             {
                 SetProperty(ref iconInfos, value);

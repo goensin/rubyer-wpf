@@ -511,7 +511,6 @@
     <Style x:Key="FilledComboBox"
            BasedOn="{StaticResource RubyerComboBox}"
            TargetType="{x:Type ComboBox}">
-        <Setter Property="Foreground" Value="{StaticResource BlackForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
         <Setter Property="Background" Value="{DynamicResource BorderLighter}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Border}" />

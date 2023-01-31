@@ -412,7 +412,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource CardTabItem}" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="10 5" />
         <Setter Property="rubyer:HeaderHelper.Margin" Value="2 1" />
-        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />
+        <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="Template">
             <Setter.Value>

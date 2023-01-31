@@ -98,7 +98,6 @@
            BasedOn="{StaticResource RubyerDescription}"
            TargetType="{x:Type rubyer:Description}">
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="DescriptionForeground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="DescriptionBackground" Value="{DynamicResource HeaderBackground}" />
     </Style>
 </ResourceDictionary>
