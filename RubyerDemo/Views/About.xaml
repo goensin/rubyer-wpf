@@ -4,35 +4,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             Background="{DynamicResource DefaultBackground}"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <Storyboard x:Key="OnChecked1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PlayTourPanel" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="250">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="OnUnchecked1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PlayTourPanel" Storyboard.TargetProperty="(FrameworkElement.Height)">
-                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0">
-                    <EasingDoubleKeyFrame.EasingFunction>
-                        <CubicEase EasingMode="EaseOut" />
-                    </EasingDoubleKeyFrame.EasingFunction>
-                </EasingDoubleKeyFrame>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-    </UserControl.Resources>
-    <UserControl.Triggers>
-        <EventTrigger RoutedEvent="ToggleButton.Checked" SourceName="toggleButton">
-            <BeginStoryboard Storyboard="{StaticResource OnChecked1}" />
-        </EventTrigger>
-        <EventTrigger RoutedEvent="ToggleButton.Unchecked" SourceName="toggleButton">
-            <BeginStoryboard Storyboard="{StaticResource OnUnchecked1}" />
-        </EventTrigger>
-    </UserControl.Triggers>
     <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
         <Grid HorizontalAlignment="Center" rubyer:GridHelper.ColumnDefinitions="Auto, *">
             <Image Grid.Column="0"
@@ -105,37 +78,39 @@
                     </StackPanel>
                 </ToggleButton>
             </StackPanel>
-            <StackPanel x:Name="PlayTourPanel"
-                        Grid.Row="2"
-                        Height="0"
-                        Orientation="Horizontal">
-                <rubyer:Card Margin="10" Background="#07C160">
-                    <StackPanel>
-                        <TextBlock Margin="10"
-                                   HorizontalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="#FFFFFF">
-                            微信
-                        </TextBlock>
-                        <Image Width="150"
-                               Margin="10"
-                               Source="../Assets/wechat.jpg" />
-                    </StackPanel>
-                </rubyer:Card>
-                <rubyer:Card Margin="0 10 10 10" Background="#1677FF">
-                    <StackPanel>
-                        <TextBlock Margin="10"
-                                   HorizontalAlignment="Center"
-                                   FontSize="15"
-                                   Foreground="#FFFFFF">
-                            支付宝
-                        </TextBlock>
-                        <Image Width="150"
-                               Margin="10"
-                               Source="../Assets/ali.jpg" />
-                    </StackPanel>
-                </rubyer:Card>
-            </StackPanel>
+            <rubyer:Transition Grid.Row="2"
+                               IsShow="{Binding IsChecked, ElementName=toggleButton}"
+                               Type="CollapseDown">
+                <StackPanel Orientation="Horizontal">
+                    <rubyer:Card Margin="10" Background="#07C160">
+                        <StackPanel>
+                            <TextBlock Margin="10"
+                                       HorizontalAlignment="Center"
+                                       FontSize="15"
+                                       Foreground="#FFFFFF">
+                                微信
+                            </TextBlock>
+                            <Image Width="150"
+                                   Margin="10"
+                                   Source="../Assets/wechat.jpg" />
+                        </StackPanel>
+                    </rubyer:Card>
+                    <rubyer:Card Margin="0 10 10 10" Background="#1677FF">
+                        <StackPanel>
+                            <TextBlock Margin="10"
+                                       HorizontalAlignment="Center"
+                                       FontSize="15"
+                                       Foreground="#FFFFFF">
+                                支付宝
+                            </TextBlock>
+                            <Image Width="150"
+                                   Margin="10"
+                                   Source="../Assets/ali.jpg" />
+                        </StackPanel>
+                    </rubyer:Card>
+                </StackPanel>
+            </rubyer:Transition>
+
         </Grid>
     </Grid>
 </UserControl>
