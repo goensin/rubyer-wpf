@@ -28,43 +28,76 @@ Install-Package Rubyer 添加引用，
 根据需要可自定义整体主题颜色：
 
 ```
-<Color x:Key="LightForegroundColor">#252526</Color>
-<Color x:Key="LightBackgroundColor">#FFFFFF</Color>
-<Color x:Key="DarkForegroundColor">#E6E6E6</Color>
-<Color x:Key="DarkBackgroundColor">#1E1E1E</Color>
-<SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightForegroundColor}" />
-<SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightBackgroundColor}" />
+    <SolidColorBrush x:Key="WhiteForeground" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="BlackForeground" Color="#000000" />
 
-<SolidColorBrush x:Key="WhiteForeground" Color="#FFFFFF" />
-<SolidColorBrush x:Key="BlackForeground" Color="#000000" />
-<SolidColorBrush x:Key="Primary" Color="#2196F3" />
-<SolidColorBrush x:Key="Accent" Color="#F50057" />
-<SolidColorBrush x:Key="Light" Color="#6EC6FF" />
-<SolidColorBrush x:Key="Lighter" Color="#9BE7FF" />
-<SolidColorBrush x:Key="Dark" Color="#0069C0" />
-<SolidColorBrush x:Key="Darker" Color="#004BA0" />
+    <Color x:Key="LightDefaultForegroundColor">#252526</Color>
+    <Color x:Key="DarkDefaultForegroundColor">#E6E6E6</Color>
+    <SolidColorBrush x:Key="DefaultForeground" Color="{DynamicResource LightDefaultForegroundColor}" />
 
-<SolidColorBrush x:Key="Error" Color="#E63935" />
-<SolidColorBrush x:Key="Info" Color="#909399" />
-<SolidColorBrush x:Key="Warning" Color="#F57C00" />
-<SolidColorBrush x:Key="Success" Color="#43A047" />
-<SolidColorBrush x:Key="Question" Color="#2196F3" />
+    <Color x:Key="LightDefaultBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkDefaultBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightDefaultBackgroundColor}" />
 
-<SolidColorBrush x:Key="PrimaryText" Color="#212121" />
-<SolidColorBrush x:Key="RegularText" Color="#484848" />
-<SolidColorBrush x:Key="SeconarydText" Color="#6D6D6D" />
-<SolidColorBrush x:Key="WatermarkText" Color="#AA6D6D6D" />
+    <Color x:Key="LightPrimaryColor">#2196F3</Color>
+    <Color x:Key="DarkPrimaryColor">#2196F3</Color>
+    <SolidColorBrush x:Key="Primary" Color="{DynamicResource LightPrimaryColor}" />
 
-<SolidColorBrush x:Key="Border" Color="#9E9E9E" />
-<SolidColorBrush x:Key="BorderLight" Color="#CFCFCF" />
-<SolidColorBrush x:Key="BorderLighter" Color="#E0E0E0" />
+    <Color x:Key="LightAccentColor">#F50057</Color>
+    <Color x:Key="DarkAccentColor">#F50057</Color>
+    <SolidColorBrush x:Key="Accent" Color="{DynamicResource LightAccentColor}" />
 
-<Color x:Key="EffectColor">#BDBDBD</Color>
-<SolidColorBrush x:Key="Mask" Color="#9E9E9E" />
-<SolidColorBrush x:Key="MaskDark" Color="#6D6D6D" />
-<SolidColorBrush x:Key="DialogBackground" Color="#AA424242" />
-<SolidColorBrush x:Key="HeaderBackground" Color="#CFCFCF" />
-<SolidColorBrush x:Key="FunctionBarBackground" Color="#889E9E9E" />
+    <Color x:Key="LightLightColor">#6EC6FF</Color>
+    <Color x:Key="DarkLightColor">#6EC6FF</Color>
+    <SolidColorBrush x:Key="Light" Color="{DynamicResource LightLightColor}" />
+
+    <Color x:Key="LightDarkColor">#0069C0</Color>
+    <Color x:Key="DarkDarkColor">#0069C0</Color>
+    <SolidColorBrush x:Key="Dark" Color="{DynamicResource LightDarkColor}" />
+
+    <Color x:Key="LightBorderColor">#9E9E9E</Color>
+    <Color x:Key="DarkBorderColor">#CFCFCF</Color>
+    <SolidColorBrush x:Key="Border" Color="{DynamicResource LightBorderColor}" />
+
+    <Color x:Key="LightBorderLightColor">#CFCFCF</Color>
+    <Color x:Key="DarkBorderLightColor">#616161</Color>
+    <SolidColorBrush x:Key="BorderLight" Color="{DynamicResource LightBorderLightColor}" />
+
+    <Color x:Key="LightBorderLighterColor">#E0E0E0</Color>
+    <Color x:Key="DarkBorderLighterColor">#424242</Color>
+    <SolidColorBrush x:Key="BorderLighter" Color="{DynamicResource LightBorderLighterColor}" />
+
+    <Color x:Key="LightSeconarydTextColor">#CC9E9E9E</Color>
+    <Color x:Key="DarkSeconarydTextColor">#CCBDBDBD</Color>
+    <SolidColorBrush x:Key="SeconarydText" Color="{DynamicResource LightSeconarydTextColor}" />
+
+    <Color x:Key="LightWatermarkTextColor">#BB6D6D6D</Color>
+    <Color x:Key="DarkWatermarkTextColor">#BBE0E0E0</Color>
+    <SolidColorBrush x:Key="WatermarkText" Color="{DynamicResource LightWatermarkTextColor}" />
+
+    <Color x:Key="EffectColor">#BDBDBD</Color>
+
+    <Color x:Key="LightMaskColor">#9E9E9E</Color>
+    <Color x:Key="DarkMaskColor">#9E9E9E</Color>
+    <SolidColorBrush x:Key="Mask" Color="{DynamicResource LightMaskColor}" />
+
+    <Color x:Key="LightMaskDarkColor">#6D6D6D</Color>
+    <Color x:Key="DarkMaskDarkColor">#6D6D6D</Color>
+    <SolidColorBrush x:Key="MaskDark" Color="{DynamicResource LightMaskDarkColor}" />
+
+    <Color x:Key="LightDialogBackgroundColor">#99373737</Color>
+    <Color x:Key="DarkDialogBackgroundColor">#BB373737</Color>
+    <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
+
+    <Color x:Key="LightHeaderBackgroundColor">#CFCFCF</Color>
+    <Color x:Key="DarkHeaderBackgroundColor">#757575</Color>
+    <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
+
+    <SolidColorBrush x:Key="Error" Color="#E63935" />
+    <SolidColorBrush x:Key="Info" Color="#909399" />
+    <SolidColorBrush x:Key="Warning" Color="#F57C00" />
+    <SolidColorBrush x:Key="Success" Color="#43A047" />
+    <SolidColorBrush x:Key="Question" Color="#2196F3" />
 
 ```
 
@@ -74,22 +107,18 @@ Install-Package Rubyer 添加引用，
  <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/en-US.xaml" />
 
 ```
+主题亮暗模式切换，默认跟随系统：
 
+```
+ThemeManager.SwitchThemeMode(ThemeMode.Black | ThemeMode.Light);
+
+```
 可自定义控件和容器的圆角半径大小：
 
 ```
-<!--  CornerRadius  -->
-<CornerRadius x:Key="AllControlCornerRadius">3</CornerRadius>
-<CornerRadius x:Key="LeftControlCornerRadius">3 0 0 3</CornerRadius>
-<CornerRadius x:Key="RightControlCornerRadius">0 3 3 0</CornerRadius>
-<CornerRadius x:Key="TopControlCornerRadius">3 3 0 0</CornerRadius>
-<CornerRadius x:Key="BottomControlCornerRadius">0 0 3 3</CornerRadius>
+ThemeManager.SwitchControlCornerRadius(控件圆角半径值);
+ThemeManager.SwitchContainerCornerRadius(容器圆角半径值);
 
-<CornerRadius x:Key="AllContainerCornerRadius">5</CornerRadius>
-<CornerRadius x:Key="LeftContainerCornerRadius">5 0 0 5</CornerRadius>
-<CornerRadius x:Key="RightContainerCornerRadius">0 5 5 0</CornerRadius>
-<CornerRadius x:Key="TopContainerCornerRadius">5 5 0 0</CornerRadius>
-<CornerRadius x:Key="BottomContainerCornerRadius">0 0 5 5</CornerRadius>
 ```
 
 #### Demo 截图
