@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,9 @@ namespace Rubyer
         /// </summary>
         static DataGridSelectCheckBoxColumn()
         {
-            var elementStyle = Application.Current.FindResource("RubyerDataGridCheckBoxColumnEditting");
-            DataGridBoundColumn.ElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(elementStyle));
-            DataGridBoundColumn.EditingElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(elementStyle));
+            //var elementStyle = Application.Current.FindResource("RubyerDataGridCheckBoxColumnEditting");
+            //DataGridBoundColumn.ElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(null));
+            //DataGridBoundColumn.EditingElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(elementStyle));
         }
 
         /// <summary>
@@ -50,12 +51,17 @@ namespace Rubyer
 
         private CheckBox GenerateCheckBox(bool isEditing, DataGridCell cell)
         {
-            CheckBox checkBox = ((cell != null) ? (cell.Content as CheckBox) : null);
+            CheckBox checkBox = (cell != null) ? (cell.Content as CheckBox) : null;
             if (checkBox == null)
             {
                 checkBox = new CheckBox();
-                checkBox.Checked += CheckBox_Checked;
-                checkBox.Unchecked += CheckBox_Checked;
+
+                if (isEditing)
+                {
+                    checkBox.Loaded += CheckBox_Checked;
+                    checkBox.Checked += CheckBox_Checked;
+                    checkBox.Unchecked += CheckBox_Checked;
+                }
             }
 
             checkBox.IsThreeState = IsThreeState;
@@ -67,18 +73,38 @@ namespace Rubyer
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox checkBox)
-            {
+            { 
                 var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
                 var columnHeader = GetHeader(this, dataGrid);
                 var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
-                var rows = dataGrid.VisualDepthFirstTraversal().OfType<DataGridRow>();
+ 
+                var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
+                if (bindingPath == null)
+                {
+                    Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 路径");
+                    return;
+                }
 
-                var isCheckeds = rows.Select((x => ((CheckBox)columnHeader.Column.GetCellContent(x)).IsChecked));
-                if (isCheckeds.All(x => x == true))
+                var allValues = new List<bool?>();
+                foreach (var item in dataGrid.Items)
+                {
+                    var propertyInfo = item.GetType().GetProperty(bindingPath);
+                    if (propertyInfo != null)
+                    {
+                        var value = propertyInfo.GetValue(item) as bool?;
+                        allValues.Add(value);
+                    }
+                    else
+                    {
+                        Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 属性");
+                    }
+                }
+
+                if (allValues.All(x => x == true))
                 {
                     headerCheckBox.IsChecked = true;
                 }
-                else if (isCheckeds.All(x => x == false))
+                else if (allValues.All(x => x == false))
                 {
                     headerCheckBox.IsChecked = false;
                 }

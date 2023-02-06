@@ -11,6 +11,8 @@ using System;
 using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Rubyer
 {
@@ -83,27 +85,25 @@ namespace Rubyer
         /// <param name="isChecked">If true, is checked.</param>
         private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked)
         {
-            var rows = dataGrid.VisualDepthFirstTraversal().OfType<DataGridRow>();
-
-            if (!rows.Any())
+            var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
+            if (bindingPath == null)
             {
+                Debug.WriteLine("DataGridSelectCheckBoxColumn  全选切换找不到 Binding 路径");
                 return;
             }
 
-            foreach (var row in rows)
+            foreach (var item in dataGrid.Items)
             {
-                var cellContent = columnHeader.Column.GetCellContent(row);
-                var cell = cellContent.TryGetParentFromVisualTree<DataGridCell>();
-                if (cellContent is CheckBox checkBox)
+                var propertyInfo = item.GetType().GetProperty(bindingPath);
+                if (propertyInfo != null)
                 {
-                    dataGrid.BeginEdit();
-                    dataGrid.CurrentCell = new DataGridCellInfo(cell);
-                    checkBox.IsChecked = isChecked;
+                    propertyInfo.SetValue(item, isChecked);
+                }
+                else
+                {
+                    Debug.WriteLine("DataGridSelectCheckBoxColumn  全选切换找不到 Binding 属性");
                 }
             }
-
-            dataGrid.BeginEdit();
-            dataGrid.CurrentCell = new DataGridCellInfo();
         }
 
         /// <summary>
@@ -267,7 +267,7 @@ namespace Rubyer
         #endregion form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
 
         /// <summary>
-        /// 单击直接编辑
+        /// 列位置
         /// </summary>
         public static readonly DependencyProperty ColumnPositionProperty = DependencyProperty.RegisterAttached(
             "ColumnPosition", typeof(ColumnPosition), typeof(DataGridHelper), new PropertyMetadata(ColumnPosition.Start));

@@ -430,7 +430,7 @@
         <Setter Property="rubyer:HeaderHelper.Padding" Value="10 8" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
         <Setter Property="rubyer:DataGridHelper.ApplyColumnElementStyle" Value="True" />
-        <Setter Property="rubyer:DataGridHelper.ClickToEdit" Value="True" />
+        <Setter Property="rubyer:DataGridHelper.ClickToEdit" Value="False" />
         <Setter Property="rubyer:DataGridHelper.ApplyDataAnnotations" Value="True" />
         <Setter Property="rubyer:DataGridHelper.LoadingContent" Value="{DynamicResource I18N_DataGrid_LoadingContent}" />
         <Setter Property="rubyer:DataGridHelper.EmptyView">

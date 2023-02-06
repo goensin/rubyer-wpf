@@ -29,7 +29,7 @@
                         <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
 
                         <DataGrid Grid.Row="1"
-                                  MinHeight="200"
+                                  Height="200"
                                   HorizontalContentAlignment="Center"
                                   rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                                   rubyer:HeaderHelper.Background="{DynamicResource Accent}"
@@ -59,6 +59,9 @@
                                 <DataGridTextColumn Width="60"
                                                     Binding="{Binding Id}"
                                                     Header="序号" />
+                                <DataGridCheckBoxColumn Width="60"
+                                                    Binding="{Binding IsSelected}"
+                                                    Header="选择" />
                                 <DataGridTextColumn Width="70"
                                                     Binding="{Binding Name}"
                                                     Header="姓名" />
@@ -97,8 +100,47 @@
                 <GroupBox Grid.Row="1" Header="数据表格-DataGrid">
                     <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                         <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
-
-                        <DataGrid Grid.Row="1"
+                        <ListView VerticalContentAlignment="Center" Grid.Row="1"
+                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                              rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                              rubyer:HeaderHelper.FontSize="15"
+                              rubyer:HeaderHelper.FontWeight="Bold"
+                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                              rubyer:HeaderHelper.Padding="5 8"
+                              rubyer:ItemsControlHelper.ItemMargin="2 1"
+                              rubyer:ItemsControlHelper.ItemPadding="5"
+                              ItemsSource="{Binding Persons}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Width="80"
+                                                DisplayMemberBinding="{Binding Id}"
+                                                Header="序号" />
+                                    <GridViewColumn Width="100"
+                                                DisplayMemberBinding="{Binding Name}"
+                                                Header="名字" />
+                                    <GridViewColumn Width="100"
+                                                DisplayMemberBinding="{Binding Age}"
+                                                Header="年龄" />
+                                    <GridViewColumn Width="100"
+                                                Header="性别" >
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <ComboBox rubyer:ItemsControlHelper.EnumValuesToItemsSource="True" SelectedItem="{Binding Gender}">
+                                                </ComboBox>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Width="50" Header="选中">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <CheckBox IsChecked="{Binding IsSelected}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                        <!--<DataGrid Height="200" Grid.Row="1"
                                   HorizontalContentAlignment="Center"
                                   rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                   rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
@@ -155,7 +197,7 @@
                                                                          rubyer:DataGridHelper.ColumnPosition="End"
                                                                          Header="详细" />
                             </DataGrid.Columns>
-                        </DataGrid>
+                        </DataGrid>-->
                     </Grid>
                 </GroupBox>
             </Grid>
