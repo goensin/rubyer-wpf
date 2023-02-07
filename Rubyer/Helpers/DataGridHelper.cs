@@ -88,7 +88,7 @@ namespace Rubyer
             var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
             if (bindingPath == null)
             {
-                Debug.WriteLine("DataGridSelectCheckBoxColumn  全选切换找不到 Binding 路径");
+                Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 路径");
                 return;
             }
 
@@ -485,7 +485,7 @@ namespace Rubyer
                     }
                     else if (column is DataGridComboBoxColumn comboBoxColumn)
                     {
-                        comboBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
+                        //comboBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
                         comboBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
                     }
                     else if (column is DataGridCheckBoxColumn checkBoxColumn)

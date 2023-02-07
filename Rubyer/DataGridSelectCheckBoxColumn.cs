@@ -22,9 +22,6 @@ namespace Rubyer
         /// </summary>
         static DataGridSelectCheckBoxColumn()
         {
-            //var elementStyle = Application.Current.FindResource("RubyerDataGridCheckBoxColumnEditting");
-            //DataGridBoundColumn.ElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(null));
-            //DataGridBoundColumn.EditingElementStyleProperty.OverrideMetadata(typeof(DataGridSelectCheckBoxColumn), new FrameworkPropertyMetadata(elementStyle));
         }
 
         /// <summary>
@@ -56,7 +53,7 @@ namespace Rubyer
             {
                 checkBox = new CheckBox();
 
-                if (isEditing)
+                if (!isEditing)
                 {
                     checkBox.Loaded += CheckBox_Checked;
                     checkBox.Checked += CheckBox_Checked;
@@ -73,11 +70,11 @@ namespace Rubyer
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
             if (sender is CheckBox checkBox)
-            { 
+            {
                 var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
                 var columnHeader = GetHeader(this, dataGrid);
                 var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
- 
+
                 var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
                 if (bindingPath == null)
                 {
@@ -88,6 +85,13 @@ namespace Rubyer
                 var allValues = new List<bool?>();
                 foreach (var item in dataGrid.Items)
                 {
+                    // 因为当前 Checked 事件比 binding 值改变快，所有当前 check box 使用 IsChecked 判断
+                    if (checkBox.DataContext == item) 
+                    {
+                        allValues.Add(checkBox.IsChecked);
+                        continue;
+                    }
+
                     var propertyInfo = item.GetType().GetProperty(bindingPath);
                     if (propertyInfo != null)
                     {
@@ -126,8 +130,7 @@ namespace Rubyer
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(reference); i++)
             {
                 DependencyObject child = VisualTreeHelper.GetChild(reference, i);
-                DataGridColumnHeader colHeader = child as DataGridColumnHeader;
-                if ((colHeader != null) && (colHeader.Column == column))
+                if ((child is DataGridColumnHeader colHeader) && (colHeader.Column == column))
                 {
                     return colHeader;
                 }
