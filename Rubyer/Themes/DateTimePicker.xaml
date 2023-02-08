@@ -104,7 +104,8 @@
                                                 <Calendar x:Name="PART_Calendar"
                                                           Margin="0"
                                                           rubyer:ControlHelper.CornerRadius="0"
-                                                          rubyer:HeaderHelper.Background="Transparent" />
+                                                          rubyer:HeaderHelper.Background="Transparent"
+                                                          rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}" />
                                                 <rubyer:Clock x:Name="PART_Clock"
                                                               Style="{StaticResource ComboBoxClock}"
                                                               Margin="0"
