@@ -35,6 +35,9 @@ namespace Rubyer
         /// </summary>
         public const string SelectTimePartName = "PART_SelectTime";
 
+        private Selector _hourList;
+        private Selector _minuteList;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Clock"/> class.
         /// </summary>
@@ -50,7 +53,7 @@ namespace Rubyer
 
             if (GetTemplateChild(SelectTimePartName) is TextBlock selectTimeText)
             {
-                var binding = new Binding("DisplayTime");
+                var binding = new Binding("CurrentTime");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
                 binding.StringFormat = "{0:HH : mm}";
@@ -61,6 +64,8 @@ namespace Rubyer
 
             if (GetTemplateChild(HourListPartName) is Selector hourList)
             {
+                _hourList = hourList;
+
                 var binding = new Binding("Hour");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
@@ -71,6 +76,8 @@ namespace Rubyer
 
             if (GetTemplateChild(MinuteListPartName) is Selector minuteList)
             {
+                _minuteList = minuteList;
+
                 var binding = new Binding("Minute");
                 binding.Source = this;
                 binding.Mode = BindingMode.TwoWay;
@@ -124,14 +131,14 @@ namespace Rubyer
         /// 时
         /// </summary>
         public static readonly DependencyProperty HourProperty = DependencyProperty.Register(
-           "Hour", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+           "Hour", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
 
         /// <summary>
         /// 时
         /// </summary>
-        public int? Hour
+        public int Hour
         {
-            get { return (int?)GetValue(HourProperty); }
+            get { return (int)GetValue(HourProperty); }
             set { SetValue(HourProperty, value); }
         }
 
@@ -139,14 +146,14 @@ namespace Rubyer
         /// 分
         /// </summary>
         public static readonly DependencyProperty MinuteProperty = DependencyProperty.Register(
-           "Minute", typeof(int?), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+           "Minute", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
 
         /// <summary>
         /// 分
         /// </summary>
-        public int? Minute
+        public int Minute
         {
-            get { return (int?)GetValue(MinuteProperty); }
+            get { return (int)GetValue(MinuteProperty); }
             set { SetValue(MinuteProperty, value); }
         }
 
@@ -154,7 +161,12 @@ namespace Rubyer
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
-           "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime)));
+           "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime), OnSelectTimeChanged));
+
+        private static void OnSelectTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            ((Clock)d).SetValueToClock();
+        }
 
         /// <summary>
         /// 选中时间
@@ -166,18 +178,18 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 显示时间
+        /// 当前时间
         /// </summary>
-        public static readonly DependencyProperty DisplayTimeProperty =
-            DependencyProperty.Register("DisplayTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime?)));
+        public static readonly DependencyProperty CurrentTimeProperty =
+            DependencyProperty.Register("CurrentTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime?)));
 
         /// <summary>
-        /// 显示时间
+        /// 当前时间
         /// </summary>
-        public DateTime? DisplayTime
+        public DateTime? CurrentTime
         {
-            get { return (DateTime?)GetValue(DisplayTimeProperty); }
-            set { SetValue(DisplayTimeProperty, value); }
+            get { return (DateTime?)GetValue(CurrentTimeProperty); }
+            set { SetValue(CurrentTimeProperty, value); }
         }
 
         #endregion
@@ -206,6 +218,12 @@ namespace Rubyer
             //}
         }
 
+        private void SetValueToClock()
+        {
+            _hourList.SelectedIndex = SelectedTime == null ? 0 : SelectedTime.Value.Hour;
+            _minuteList.SelectedIndex = SelectedTime == null ? 0 : SelectedTime.Value.Minute;
+        }
+
         /// <summary>
         /// 时间选择改变
         /// </summary>
@@ -218,11 +236,11 @@ namespace Rubyer
                 return;
             }
 
-            clock.DisplayTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
+            clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
 
             if (e.NewValue != null)
             {
-                var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.DisplayTime);
+                var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.CurrentTime);
                 args.RoutedEvent = Clock.CurrentTimeChangedEvent;
                 clock.RaiseEvent(args);
             }
@@ -235,8 +253,8 @@ namespace Rubyer
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
             var oldTime = SelectedTime;
-            var newTime = DisplayTime;
-            SelectedTime = DisplayTime;
+            var newTime = CurrentTime;
+            SelectedTime = CurrentTime;
 
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);
             args.RoutedEvent = Clock.SelectedTimeChangedEvent;

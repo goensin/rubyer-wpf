@@ -63,7 +63,7 @@ namespace Rubyer
         private Button _confirmButton;
         private TextBlock _currentTextBlock;
 
-        private bool isInited;
+        private bool isInternalSetting = true;
         private DateTime currentDateTime;
 
         /// <summary>
@@ -112,8 +112,8 @@ namespace Rubyer
 
             _currentTextBlock = GetTemplateChild(CurrentTextBoxPartName) as TextBlock;
 
-            //currentDateTime = SelectedDateTime == null ? DateTime.Now : SelectedDateTime.Value;
-            //_currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
+            currentDateTime = SelectedDateTime == null ? DateTime.Now.Date : SelectedDateTime.Value;
+            _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
         }
 
         #region 路由事件
@@ -217,6 +217,7 @@ namespace Rubyer
                 if (DateTime.TryParse(dateTimePicker.Text, out DateTime result))
                 {
                     dateTimePicker.SelectedDateTime = result;
+                    dateTimePicker.currentDateTime = result;
                 }
                 else if (string.IsNullOrEmpty(dateTimePicker.Text))
                 {
@@ -288,7 +289,7 @@ namespace Rubyer
         /// </summary>
         private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
         {
-            if (!isInited)
+            if (isInternalSetting)
             {
                 return;
             }
@@ -314,7 +315,7 @@ namespace Rubyer
         /// </summary>
         private void Calendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (!isInited)
+            if (isInternalSetting)
             {
                 return;
             }
@@ -327,7 +328,7 @@ namespace Rubyer
             }
             else
             {
-                var time = _clock.DisplayTime == null ? TimeSpan.Zero : _clock.DisplayTime.Value.TimeOfDay;
+                var time = _clock.CurrentTime == null ? TimeSpan.Zero : _clock.CurrentTime.Value.TimeOfDay;
                 currentDateTime = (DateTime)_calendar.SelectedDate + time;
             }
 
@@ -339,14 +340,25 @@ namespace Rubyer
         /// <summary>
         /// 点击时间按钮
         /// </summary>
-        private void Button_Click(object sender, RoutedEventArgs e) => IsDropDownOpen = !IsDropDownOpen;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Text = _textBox.Text;
+            IsDropDownOpen = !IsDropDownOpen;
+        }
 
         /// <summary>
         /// popup 打开后
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Popup_Opened(object sender, EventArgs e) => isInited = true;
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            isInternalSetting = true;
+            _calendar.SelectedDate = currentDateTime.Date;
+            _calendar.DisplayDate = currentDateTime.Date;
+            _clock.SelectedTime = currentDateTime;
+            isInternalSetting = false;
+        }
 
         /// <summary>
         ///  popup 关闭

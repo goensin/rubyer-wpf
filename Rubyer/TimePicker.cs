@@ -67,6 +67,7 @@ namespace Rubyer
             this._textBox = textBox;
 
             Popup popup = GetTemplateChild(PopupPartName) as Popup;
+            popup.Opened += Popup_Opened;
             popup.Closed += Popup_Closed;
             if (this.IsDropDownOpen)
             {
@@ -258,7 +259,13 @@ namespace Rubyer
         /// </summary>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Text = _textBox.Text;
             IsDropDownOpen = !IsDropDownOpen;
+        }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            _clock.SelectedTime = SelectedTime;
         }
 
         /// <summary>
