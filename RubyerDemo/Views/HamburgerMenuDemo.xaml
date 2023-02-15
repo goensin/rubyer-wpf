@@ -23,6 +23,7 @@
                                        Text="items 方式" />
                             <rubyer:HamburgerMenu HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                                   Header="开始"
+                                                  IsExpanded="False"
                                                   SelectedIndex="0"
                                                   TransitionType="None">
                                 <rubyer:HamburgerMenu.OptionsItemsSource>

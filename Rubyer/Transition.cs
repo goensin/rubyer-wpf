@@ -37,6 +37,15 @@ namespace Rubyer
                     Loaded -= Transition_Loaded;
                 }
             }
+            else if (Type >= TransitionType.CollapseUp && Type <= TransitionType.CollapseRight && CollapsedSize > 0)
+            {
+                if (Content is FrameworkElement element)
+                {
+                    Progress = CollapsedSize / element.ActualWidth;
+                }
+            }
+
+            Loaded -= Transition_Loaded;
         }
 
         #region 命令
@@ -562,7 +571,6 @@ namespace Rubyer
 
         private static DoubleAnimation GetProgressAnimation(Transition transition, double to, IEasingFunction easing, double? from = null)
         {
-
             DoubleAnimation progressAnimation = new DoubleAnimation()
             {
                 From = transition.Progress == to ? (to > 0 ? 0 : 1) : from,

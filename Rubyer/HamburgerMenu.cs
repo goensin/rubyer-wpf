@@ -45,7 +45,7 @@ namespace Rubyer
         /// 是否展开菜单
         /// </summary>
         public static readonly DependencyProperty IsExpandedProperty = DependencyProperty.Register(
-            "IsExpanded", typeof(bool), typeof(HamburgerMenu), new PropertyMetadata(BooleanBoxes.FalseBox));
+            "IsExpanded", typeof(bool), typeof(HamburgerMenu), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// 是否展开菜单
