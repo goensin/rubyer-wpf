@@ -279,6 +279,8 @@ namespace Rubyer
                 args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
                 dateTimePicker.RaiseEvent(args);
 
+                dateTimePicker.currentDateTime = dateTimePicker.SelectedDateTime.GetValueOrDefault();
+
                 dateTimePicker._textBox?.Focus();
                 dateTimePicker._textBox?.SelectAll();
             }
@@ -388,6 +390,6 @@ namespace Rubyer
             this.RaiseEvent(args);
         }
 
-        #endregion
+        #endregion 方法
     }
 }

@@ -88,7 +88,7 @@
                                         Margin="10 0 0 0"
                                         rubyer:SliderHelper.DraggingShowValue="True"
                                         IsSnapToTickEnabled="True"
-                                        Maximum="30"
+                                        Maximum="40"
                                         Minimum="10"
                                         Value="22" />
                             </StackPanel>
@@ -114,7 +114,6 @@
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel Width="80"
-                                            Height="60"
                                             Margin="5"
                                             VerticalAlignment="Center"
                                             ToolTip="{Binding Type}">
