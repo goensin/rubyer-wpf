@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
         MinWidth="270"
         MinHeight="150"
         Margin="10"
@@ -16,6 +17,14 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Border x:Name="messageBoxPanel"
             HorizontalAlignment="Center"
             VerticalAlignment="Center" />

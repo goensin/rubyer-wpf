@@ -29,7 +29,7 @@ namespace Rubyer
         {
             card.ReturnResult += Card_ReturnResult;
             card.Closed += Card_Close;
-            _ = messageBoxPanel.Child = card;
+            messageBoxPanel.Child = card;
         }
 
         private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArgs e)

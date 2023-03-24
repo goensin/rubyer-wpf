@@ -45,7 +45,7 @@ namespace Rubyer
         /// <param name="messageCard">消息卡片</param>
         internal void AddMessageCard(MessageCard messageCard)
         {
-            _ = messageStackPanel.Children.Add(messageCard);
+            messageStackPanel.Children.Add(messageCard);
         }
 
         /// <summary>
