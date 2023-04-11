@@ -3,8 +3,6 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Calendar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -27,7 +25,6 @@
                 <ControlTemplate TargetType="{x:Type DatePicker}">
                     <Grid x:Name="PART_Root">
                         <DatePickerTextBox x:Name="PART_TextBox"
-                                           Style="{StaticResource RubyerTextBox}"
                                            Grid.Row="0"
                                            Grid.Column="0"
                                            Height="Auto"

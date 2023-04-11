@@ -4,7 +4,6 @@
                     xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/RepeatButton.xaml" />
     </ResourceDictionary.MergedDictionaries>

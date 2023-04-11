@@ -18,8 +18,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{E6D16AB3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RemixIconCodeGenerator", "Tools\RemixIconCodeGenerator\RemixIconCodeGenerator.csproj", "{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfApp2", "..\WpfApp2\WpfApp2\WpfApp2.csproj", "{1A169199-3E11-4134-8484-343B406E50E2}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,10 +36,6 @@ Global
 		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9CAA4BB-44FC-4B56-9489-98CAA5F2E18C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1A169199-3E11-4134-8484-343B406E50E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1A169199-3E11-4134-8484-343B406E50E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1A169199-3E11-4134-8484-343B406E50E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1A169199-3E11-4134-8484-343B406E50E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -75,6 +75,7 @@
     <Style BasedOn="{StaticResource RubyerExpander}" TargetType="{x:Type Expander}" />
     <Style BasedOn="{StaticResource RubyerTabControl}" TargetType="{x:Type TabControl}" />
     <Style BasedOn="{StaticResource RubyerCalendar}" TargetType="{x:Type Calendar}" />
+    <Style BasedOn="{StaticResource RubyerTextBox}" TargetType="{x:Type DatePickerTextBox}" />
     <Style BasedOn="{StaticResource RubyerDatePicker}" TargetType="{x:Type DatePicker}" />
     <Style BasedOn="{StaticResource RubyerClock}" TargetType="{x:Type rubyer:Clock}" />
     <Style BasedOn="{StaticResource RubyerTimePicker}" TargetType="{x:Type rubyer:TimePicker}" />
