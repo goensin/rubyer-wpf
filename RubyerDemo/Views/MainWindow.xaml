@@ -15,6 +15,7 @@
                      FontSize="13"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
+                     TitleHeight="32"
                      WindowStartupLocation="CenterScreen"
                      mc:Ignorable="d">
     <rubyer:RubyerWindow.Resources>

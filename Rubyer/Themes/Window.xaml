@@ -48,7 +48,7 @@
         <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="{Binding TitleHeight, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
+                <WindowChrome CaptionHeight="{Binding TitleHeight, FallbackValue=30, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
                               CornerRadius="0"
                               GlassFrameThickness="1"
                               NonClientFrameEdges="None"

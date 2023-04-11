@@ -186,6 +186,7 @@
                                 Margin="10 0"
                                 Padding="10 0"
                                 rubyer:ButtonHelper.Loading="True"
+                                rubyer:ButtonHelper.LoadingContent="强调按钮"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="强调按钮" />
                         <Button Margin="10 0"
