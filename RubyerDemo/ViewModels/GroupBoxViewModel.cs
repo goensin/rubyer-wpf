@@ -64,7 +64,7 @@ namespace RubyerDemo.ViewModels
         public GroupBoxViewModel()
         {
             Foreground = AllBrushes[0];
-            Background = AllBrushes[1];
+            Background = AllBrushes[2];
             FontWeight = FontWeights.Normal;
             fontFamily = AllFontFamilys.FirstOrDefault(x=>x.Source.Contains("YaHei"));
         }

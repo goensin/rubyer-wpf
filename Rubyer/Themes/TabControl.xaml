@@ -44,7 +44,8 @@
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                        <StackPanel Margin="{TemplateBinding Padding}"
+                        <StackPanel x:Name="contentPanel"
+                                    Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                     Orientation="Horizontal">
@@ -67,12 +68,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
-                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPanel" Property="HorizontalAlignment" Value="Right" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
-                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -348,7 +348,8 @@
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                        <StackPanel Margin="{TemplateBinding Padding}"
+                        <StackPanel x:Name="contentPanel"
+                                    Margin="{TemplateBinding Padding}"
                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                     Orientation="Horizontal">
@@ -371,12 +372,11 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
-                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPanel" Property="HorizontalAlignment" Value="Right" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
-                            <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=TabPanel}}" />
-                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -437,7 +437,7 @@
                             <ScrollViewer Style="{StaticResource OnlyArrowScrollViewer}"
                                           rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                           rubyer:ScrollViewerHelper.VerticalDelta="75"
-                                          Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Background="Transparent"
                                           Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           HorizontalScrollBarVisibility="Auto"
                                           VerticalScrollBarVisibility="Auto">
