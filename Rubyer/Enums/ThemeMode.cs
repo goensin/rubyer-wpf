@@ -17,7 +17,7 @@ namespace Rubyer.Enums
         /// 暗色
         /// </summary>
         [Description("暗色")]
-        Black,
+        Dark,
 
         /// <summary>
         /// 跟随系统

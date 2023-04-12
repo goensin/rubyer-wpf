@@ -65,7 +65,7 @@ namespace RubyerDemo
 
         private void BlackSwitch_Click(object sender, RoutedEventArgs e)
         {
-            ThemeManager.SwitchThemeMode(darkToggleButton.IsChecked.GetValueOrDefault() ? ThemeMode.Black : ThemeMode.Light);
+            ThemeManager.SwitchThemeMode(darkToggleButton.IsChecked.GetValueOrDefault() ? ThemeMode.Dark : ThemeMode.Light);
         }
     }
 }

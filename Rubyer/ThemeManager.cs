@@ -138,7 +138,7 @@ namespace Rubyer
                 default:
                     break;
 
-                case ThemeMode.Black:
+                case ThemeMode.Dark:
                     isDark = true;
                     break;
 
