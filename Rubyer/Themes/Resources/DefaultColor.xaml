@@ -59,7 +59,7 @@
     <SolidColorBrush x:Key="MaskDark" Color="{DynamicResource LightMaskDarkColor}" />
 
     <Color x:Key="LightDialogBackgroundColor">#99373737</Color>
-    <Color x:Key="DarkDialogBackgroundColor">#BB373737</Color>
+    <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
     <Color x:Key="LightHeaderBackgroundColor">#CFCFCF</Color>
