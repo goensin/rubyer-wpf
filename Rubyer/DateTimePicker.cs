@@ -80,7 +80,7 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Clock clock = GetTemplateChild(ClockPartName) as Clock;
-            clock.SelectedTimeChanged += Clock_SelectedTimeChanged;
+            clock.CurrentTimeChanged += Clock_SelectedTimeChanged;
             this._clock = clock;
 
             Calendar calendar = GetTemplateChild(CalendarPartName) as Calendar;
@@ -97,11 +97,11 @@ namespace Rubyer
             Popup popup = GetTemplateChild(PopupPartName) as Popup;
             popup.Closed += Popup_Closed;
             popup.Opened += Popup_Opened;
-            if (this.IsDropDownOpen)
+            if (IsDropDownOpen)
             {
-                this._popup.IsOpen = true;
+                _popup.IsOpen = true;
             }
-            this._popup = popup;
+            _popup = popup;
 
             Button button = GetTemplateChild(ButtonPartName) as Button;
             button.Click += Button_Click;
@@ -112,7 +112,7 @@ namespace Rubyer
 
             _currentTextBlock = GetTemplateChild(CurrentTextBoxPartName) as TextBlock;
 
-            currentDateTime = SelectedDateTime == null ? DateTime.Now.Date : SelectedDateTime.Value;
+            currentDateTime = SelectedDateTime == null ? DateTime.Now : SelectedDateTime.Value;
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
         }
 
@@ -279,7 +279,7 @@ namespace Rubyer
                 args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
                 dateTimePicker.RaiseEvent(args);
 
-                dateTimePicker.currentDateTime = dateTimePicker.SelectedDateTime.GetValueOrDefault();
+                dateTimePicker.currentDateTime = dateTimePicker.SelectedDateTime == null ? DateTime.Now : dateTimePicker.SelectedDateTime.Value;
 
                 dateTimePicker._textBox?.Focus();
                 dateTimePicker._textBox?.SelectAll();
@@ -309,7 +309,7 @@ namespace Rubyer
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
 
-            SelectedDateTime = currentDateTime;
+            //SelectedDateTime = currentDateTime;
         }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace Rubyer
             }
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
-            SelectedDateTime = currentDateTime;
+            //SelectedDateTime = currentDateTime;
             Mouse.Capture(null);
         }
 
@@ -367,13 +367,13 @@ namespace Rubyer
         /// </summary>
         private void Popup_Closed(object sender, EventArgs e)
         {
-            if (this._confirmButton.IsKeyboardFocusWithin)
+            if (_confirmButton.IsKeyboardFocusWithin)
             {
-                this._textBox.Focus();
+                _textBox.Focus();
             }
             else
             {
-                this.IsDropDownOpen = false;
+                IsDropDownOpen = false;
             }
         }
 
@@ -387,7 +387,7 @@ namespace Rubyer
 
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(SelectedDateTime, SelectedDateTime);
             args.RoutedEvent = DateTimePicker.SelectedTimeChangedEvent;
-            this.RaiseEvent(args);
+            RaiseEvent(args);
         }
 
         #endregion 方法

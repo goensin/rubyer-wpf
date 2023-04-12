@@ -91,6 +91,7 @@ namespace Rubyer
             {
                 confirmButton.Click += ConfirmButton_Click;
             }
+
         }
 
         #region 路由事件
@@ -110,6 +111,20 @@ namespace Rubyer
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
         }
 
+        /// <summary>
+        /// 当前事件改变事件
+        /// </summary>
+        public static readonly RoutedEvent CurrentTimeChangedEvent = EventManager.RegisterRoutedEvent(
+            "CurrentTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(Clock));
+
+        /// <summary>
+        /// 当前事件改变事件处理
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<DateTime?> CurrentTimeChanged
+        {
+            add { AddHandler(CurrentTimeChangedEvent, value); }
+            remove { RemoveHandler(CurrentTimeChangedEvent, value); }
+        }
         #endregion
 
         #region 依赖属性
@@ -197,12 +212,6 @@ namespace Rubyer
 
             itemsControl.ItemsSource = array;
             itemsControl.SelectedIndex = index;
-
-            if (itemsControl is ListBox listBox)
-            {
-                int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
-                listBox.ScrollIntoView(array[scrollIndex]);
-            }
         }
 
         private void SetValueToClock()
@@ -212,7 +221,21 @@ namespace Rubyer
                 _hourList.SelectedIndex =  SelectedTime.Value.Hour;
                 _minuteList.SelectedIndex = SelectedTime.Value.Minute;
             }
-           
+
+            ScrollToCurrentItem();
+        }
+
+        private void ScrollToCurrentItem()
+        {
+            if (_hourList is ListBox hourList)
+            {
+                hourList.ScrollIntoView(hourList.Items[hourList.SelectedIndex]);
+            }
+
+            if (_minuteList is ListBox minuteList)
+            {
+                minuteList.ScrollIntoView(minuteList.Items[minuteList.SelectedIndex]);
+            }
         }
 
         /// <summary>
@@ -228,6 +251,14 @@ namespace Rubyer
             }
 
             clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
+            clock.ScrollToCurrentItem();
+
+            if (e.NewValue != null)
+            {
+                var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.CurrentTime);
+                args.RoutedEvent = Clock.CurrentTimeChangedEvent;
+                clock.RaiseEvent(args);
+            }
         }
 
 
