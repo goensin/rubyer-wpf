@@ -51,7 +51,13 @@
                     <rubyer:DescriptionItem Description="标题字体">
                         <ComboBox Width="150"
                                   ItemsSource="{Binding AllFontFamilys}"
-                                  SelectedItem="{Binding FontFamily}" />
+                                  SelectedItem="{Binding FontFamily}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock FontFamily="{Binding}" Text="{Binding}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </rubyer:DescriptionItem>
                     <rubyer:DescriptionItem Description="标题字体大小">
                         <rubyer:NumericBox x:Name="fontSizeNumBox"

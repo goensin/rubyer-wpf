@@ -17,11 +17,17 @@
                            MaxWidth="{Binding ElementName=Placeholder, Path=ActualWidth}"
                            Margin="1 -1"
                            HorizontalAlignment="Left"
-                           FontSize="10"
                            Foreground="{DynamicResource Error}"
                            Text="{Binding CurrentItem.ErrorContent}"
                            TextTrimming="WordEllipsis"
-                           ToolTip="{Binding CurrentItem.ErrorContent}" />
+                           ToolTip="{Binding CurrentItem.ErrorContent}">
+                    <TextBlock.FontSize>
+                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                            <Binding Path="FontSize" RelativeSource="{RelativeSource AncestorType=Control}" />
+                            <Binding Source="3" />
+                        </MultiBinding>
+                    </TextBlock.FontSize>
+                </TextBlock>
             </Border>
         </StackPanel>
     </ControlTemplate>
