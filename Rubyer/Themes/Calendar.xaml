@@ -185,32 +185,33 @@
                                   HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                   VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=Calendar}}">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Button x:Name="PART_PreviousButton"
-                                        Style="{StaticResource TextButton}"
-                                        Grid.Column="0"
-                                        Focusable="False"
-                                        Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
-                                    <rubyer:Icon Type="ArrowLeftSLine" />
-                                </Button>
 
                                 <Button x:Name="PART_HeaderButton"
                                         Style="{StaticResource TextButton}"
-                                        Grid.Column="1"
+                                        Grid.Column="0"
                                         Margin="10 0"
-                                        VerticalAlignment="Center"
+                                        HorizontalContentAlignment="Left"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}" />
+
+                                <Button x:Name="PART_PreviousButton"
+                                        Style="{StaticResource TextButton}"
+                                        Grid.Column="1"
+                                        Focusable="False"
+                                        Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
+                                    <rubyer:Icon Type="ArrowUpSLine" />
+                                </Button>
 
                                 <Button x:Name="PART_NextButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
-                                    <rubyer:Icon Type="ArrowRightSLine" />
+                                    <rubyer:Icon Type="ArrowDownSLine" />
                                 </Button>
                             </Grid>
                         </Border>
@@ -285,15 +286,15 @@
         <Setter Property="CalendarItemStyle" Value="{StaticResource RubyerCalendarItemStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="17" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="18" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
-        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Stretch" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
         <Setter Property="Template">

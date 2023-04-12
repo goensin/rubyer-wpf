@@ -31,14 +31,14 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
-        <Setter Property="FontSize" Value="13" />
-        <Setter Property="Height" Value="265" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Height" Value="270" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="17" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="18" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
@@ -115,7 +115,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />

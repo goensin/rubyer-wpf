@@ -21,40 +21,13 @@ namespace Rubyer
     [TemplatePart(Name = ConfirmButtonPartName, Type = typeof(Button))]
     public class DateTimePicker : Control
     {
-        /// <summary>
-        /// 文本框名称
-        /// </summary>
-        public const string TextBoxPartName = "PART_TextBox";
-
-        /// <summary>
-        /// 弹窗名称
-        /// </summary>
-        public const string PopupPartName = "PART_Popup";
-
-        /// <summary>
-        /// 选择按钮名称
-        /// </summary>
-        public const string ButtonPartName = "PART_Button";
-
-        /// <summary>
-        /// 时钟名称
-        /// </summary>
-        public const string ClockPartName = "PART_Clock";
-
-        /// <summary>
-        /// 日历名称
-        /// </summary>
-        public const string CalendarPartName = "PART_Calendar";
-
-        /// <summary>
-        /// 确认按钮名称
-        /// </summary>
-        public const string ConfirmButtonPartName = "PART_ConfirmButton";
-
-        /// <summary>
-        /// 当前日期时间文本框名称
-        /// </summary>
-        public const string CurrentTextBoxPartName = "PART_CurrentTextBox";
+        const string TextBoxPartName = "PART_TextBox";
+        const string PopupPartName = "PART_Popup";
+        const string ButtonPartName = "PART_Button";
+        const string ClockPartName = "PART_Clock";
+        const string CalendarPartName = "PART_Calendar";
+        const string ConfirmButtonPartName = "PART_ConfirmButton";
+        const string CurrentTextBoxPartName = "PART_CurrentTextBox";
 
         private TextBox _textBox;
         private Popup _popup;
@@ -308,8 +281,6 @@ namespace Rubyer
             }
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
-
-            //SelectedDateTime = currentDateTime;
         }
 
         /// <summary>
@@ -335,7 +306,6 @@ namespace Rubyer
             }
 
             _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
-            //SelectedDateTime = currentDateTime;
             Mouse.Capture(null);
         }
 
