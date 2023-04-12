@@ -4,9 +4,9 @@ using System;
 namespace Rubyer
 {
     /// <summary>
-    /// 对话框 view model 接口
+    /// 对话框适配接口
     /// </summary>
-    public interface IDialogViewModel
+    public interface IDialogDataContext
     {
         /// <summary>
         /// 标题

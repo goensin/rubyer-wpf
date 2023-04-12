@@ -7,7 +7,7 @@ using System;
 
 namespace RubyerDemo.ViewModels
 {
-    public partial class DialogContentViewModel : ObservableObject, IDialogViewModel
+    public partial class DialogContentViewModel : ObservableObject, IDialogDataContext
     {
         public string Title => "登录";
 

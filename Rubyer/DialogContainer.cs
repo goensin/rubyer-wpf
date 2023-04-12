@@ -395,7 +395,7 @@ namespace Rubyer
 
             _ = dialog.Focus();
 
-            if (dialog.DialogContent is FrameworkElement element && element.DataContext is IDialogViewModel dialogContext)
+            if (dialog.DialogContent is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
             {
                 dialogContext.OnDialogOpened(dialog.openParameter);
             }

@@ -37,7 +37,7 @@ namespace Rubyer
         {
             dialog.Dispatcher.VerifyAccess();
 
-            if (content is FrameworkElement element && element.DataContext is IDialogViewModel dialogContext)
+            if (content is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
             {
                 dialog.Title = string.IsNullOrEmpty(dialogContext.Title) ? title : dialogContext.Title;
                 dialogContext.RequestClose += (param) =>
