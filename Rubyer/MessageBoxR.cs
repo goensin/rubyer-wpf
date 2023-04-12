@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,11 +15,6 @@ namespace Rubyer
     /// </summary>
     public class MessageBoxR
     {
-        /// <summary>
-        /// 默认消息框容器标识
-        /// </summary>
-        public const string DefaultContainerIdentifier = "Rubyer.MessageBox";
-
         /// <summary>
         /// 所有容器集合
         /// </summary>
@@ -152,24 +148,9 @@ namespace Rubyer
 
         #region 指定容器
 
-        /// <summary>
-        /// 容器内显示信息
-        /// </summary>
-        /// <param name="containerIdentifier">容器 ID</param>
-        /// <param name="message">信息</param>
-        /// <param name="title">标题</param>
-        /// <param name="button">按钮类型</param>
-        /// <param name="icon">图标</param>
-        /// <returns>结果</returns>
-        public static async Task<MessageBoxResult> Show(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
+        private static async Task<MessageBoxResult> ShowInternal(MessageBoxContainer container, string message, string title, MessageBoxButton button, MessageBoxType icon)
         {
-            if (!Containers.ContainsKey(containerIdentifier))
-            {
-                throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
-            }
-
             TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
-            MessageBoxContainer container = Containers[containerIdentifier];
             container.Dispatcher.VerifyAccess();
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             card.ReturnResult += (a, b) =>
@@ -190,7 +171,28 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示信息
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// </summary>
+        /// <param name="containerIdentifier">容器 ID</param>
+        /// <param name="message">信息</param>
+        /// <param name="title">标题</param>
+        /// <param name="button">按钮类型</param>
+        /// <param name="icon">图标</param>
+        /// <returns>结果</returns>
+        public static async Task<MessageBoxResult> Show(string containerIdentifier, string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
+        {
+            if (!Containers.ContainsKey(containerIdentifier))
+            {
+                throw new NullReferenceException($"The container Identifier '{containerIdentifier}' could not be found");
+            }
+
+            MessageBoxContainer container = Containers[containerIdentifier];
+            return await ShowInternal(container, message, title, button, icon);
+        }
+
+
+        /// <summary>
+        /// 容器内显示信息
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
@@ -199,7 +201,9 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<MessageBoxResult> Show(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
         {
-            return await Show(DefaultContainerIdentifier, message, title, button, icon);
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            MessageBoxContainer container = activedWindow.TryGetChildFromVisualTree<MessageBoxContainer>(null) ?? throw new NullReferenceException("Can't Find the MessageBoxContainer");
+            return await ShowInternal(container, message, title, button, icon);
         }
 
         /// <summary>
@@ -218,7 +222,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示确认框
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
@@ -246,7 +250,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示信息框
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
@@ -274,7 +278,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示警告框
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
@@ -302,7 +306,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示成功框
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>
@@ -330,7 +334,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示错误框
-        /// (默认 RubyerWindow 下 MessageBoxContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="message">信息</param>
         /// <param name="title">标题</param>

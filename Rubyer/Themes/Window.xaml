@@ -131,10 +131,10 @@
                             </Grid>
 
                             <AdornerDecorator Grid.Row="1" KeyboardNavigation.IsTabStop="False">
-                                <rubyer:NotificationContainer Identifier="{x:Static rubyer:Notification.DefaultContainerIdentifier}">
-                                    <rubyer:MessageContainer Identifier="{x:Static rubyer:Message.DefaultContainerIdentifier}">
-                                        <rubyer:MessageBoxContainer Identifier="{x:Static rubyer:MessageBoxR.DefaultContainerIdentifier}">
-                                            <rubyer:DialogContainer Identifier="{x:Static rubyer:Dialog.DefaultIdentifier}">
+                                <rubyer:NotificationContainer>
+                                    <rubyer:MessageContainer>
+                                        <rubyer:MessageBoxContainer>
+                                            <rubyer:DialogContainer>
                                                 <ContentPresenter x:Name="MainContentPresenter" KeyboardNavigation.TabNavigation="Cycle" />
                                             </rubyer:DialogContainer>
                                         </rubyer:MessageBoxContainer>

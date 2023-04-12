@@ -3,6 +3,8 @@ using RubyerDemo.Consts;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -86,7 +88,7 @@ namespace RubyerDemo.Views
         {
             string xaml = System.Windows.Markup.XamlWriter.Save(CustomContent);
             UIElement element = System.Windows.Markup.XamlReader.Parse(xaml) as UIElement;
-            Message.Show(ConstNames.MessageDemo, element);
+            Message.Show(element);
         }
     }
 }

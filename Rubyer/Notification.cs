@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using Rubyer.Commons;
 
 namespace Rubyer
 {
@@ -17,11 +18,6 @@ namespace Rubyer
     public class Notification
     {
         /// <summary>
-        /// 默认 Notification 容器标识
-        /// </summary>
-        public const string DefaultContainerIdentifier = "Rubyer.Notification";
-
-        /// <summary>
         /// Transition 动画时长
         /// </summary>
         public const int TransitionTime = 300;
@@ -30,6 +26,59 @@ namespace Rubyer
         /// 所有容器集合
         /// </summary>
         internal static Dictionary<string, NotificationContainer> Containers = new Dictionary<string, NotificationContainer>();
+
+        /// <summary>
+        /// 更新容器
+        /// </summary>
+        /// <param name="container">容器</param>
+        /// <param name="identify">标识</param>
+        internal static void UpdateContainer(NotificationContainer container, string identify)
+        {
+            if (Containers.ContainsKey(identify))
+            {
+                _ = Containers.Remove(identify);
+            }
+
+            Containers.Add(identify, container);
+        }
+
+        private static NotificationCard GetNotificationCard(NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
+        {
+            var notificationCard = new NotificationCard
+            {
+                Type = type,
+                Content = content,
+                IsClearable = isClearable,
+            };
+
+            if (!string.IsNullOrEmpty(title))
+            {
+                notificationCard.Title = title;
+            }
+
+            return notificationCard;
+        }
+
+        /// <summary>
+        /// 延期关闭通知卡片
+        /// </summary>
+        /// <param name="millisecondTimeOut">显示时间，为 0 时不自动关闭</param>
+        /// <param name="notificationCard">通知卡片</param>
+        /// <param name="token">取消令牌</param>
+        private static void DelayCloseNotificationCard(int millisecondTimeOut, NotificationCard notificationCard, CancellationToken token)
+        {
+            if (millisecondTimeOut > 0)
+            {
+                _ = Task.Run(async () =>
+                {
+                    await Task.Delay(millisecondTimeOut + TransitionTime, token);
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        notificationCard.IsShow = false;
+                    });
+                }, token);
+            }
+        }
 
         #region 全局
 
@@ -142,6 +191,11 @@ namespace Rubyer
             }
 
             NotificationContainer container = Containers[containerIdentifier];
+            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable);
+        }
+
+        private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
+        {
             container.Dispatcher.VerifyAccess();
             NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
@@ -160,7 +214,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示
-        /// (默认 RubyerWindow 下 NotificationContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="type">类型</param>
         /// <param name="content">内容</param>
@@ -169,7 +223,9 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(NotificationType type, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(DefaultContainerIdentifier, type, content, title, millisecondTimeOut, isClearable);
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            NotificationContainer container = activedWindow.TryGetChildFromVisualTree<NotificationContainer>(null) ?? throw new NullReferenceException("Can't Find the NotificationContainer");
+            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
@@ -194,7 +250,7 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            Show(DefaultContainerIdentifier, NotificationType.None, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.None, content, title, millisecondTimeOut, isClearable);
         }
 
         /// <summary>
@@ -212,7 +268,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示信息
-        /// (默认 RubyerWindow 下 NotificationContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="content">内容</param>
         /// <param name="title">标题</param>
@@ -238,7 +294,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示成功
-        /// (默认 RubyerWindow 下 NotificationContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="content">内容</param>
         /// <param name="title">标题</param>
@@ -264,7 +320,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示警告
-        /// (默认 RubyerWindow 下 NotificationContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="content">内容</param>
         /// <param name="title">标题</param>
@@ -290,7 +346,7 @@ namespace Rubyer
 
         /// <summary>
         /// 容器内显示错误
-        /// (默认 RubyerWindow 下 NotificationContainer 容器)
+        /// (默认 Actived Window 下顶层 MessageContainer 容器)
         /// </summary>
         /// <param name="content">内容</param>
         /// <param name="title">标题</param>
@@ -302,59 +358,6 @@ namespace Rubyer
         }
 
         #endregion 指定容器
-
-        /// <summary>
-        /// 更新容器
-        /// </summary>
-        /// <param name="container">容器</param>
-        /// <param name="identify">标识</param>
-        internal static void UpdateContainer(NotificationContainer container, string identify)
-        {
-            if (Containers.ContainsKey(identify))
-            {
-                _ = Containers.Remove(identify);
-            }
-
-            Containers.Add(identify, container);
-        }
-
-        private static NotificationCard GetNotificationCard(NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
-        {
-            var notificationCard = new NotificationCard
-            {
-                Type = type,
-                Content = content,
-                IsClearable = isClearable,
-            };
-
-            if (!string.IsNullOrEmpty(title))
-            {
-                notificationCard.Title = title;
-            }
-
-            return notificationCard;
-        }
-
-        /// <summary>
-        /// 延期关闭通知卡片
-        /// </summary>
-        /// <param name="millisecondTimeOut">显示时间，为 0 时不自动关闭</param>
-        /// <param name="notificationCard">通知卡片</param>
-        /// <param name="token">取消令牌</param>
-        private static void DelayCloseNotificationCard(int millisecondTimeOut, NotificationCard notificationCard, CancellationToken token)
-        {
-            if (millisecondTimeOut > 0)
-            {
-                _ = Task.Run(async () =>
-                {
-                    await Task.Delay(millisecondTimeOut + TransitionTime, token);
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        notificationCard.IsShow = false;
-                    });
-                }, token);
-            }
-        }
     }
 
     /// <summary>

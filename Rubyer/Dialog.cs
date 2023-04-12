@@ -1,4 +1,5 @@
-﻿using Rubyer.Models;
+﻿using Rubyer.Commons;
+using Rubyer.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -12,11 +13,6 @@ namespace Rubyer
     /// </summary>
     public class Dialog
     {
-        /// <summary>
-        /// 默认对话框标识
-        /// </summary>
-        public const string DefaultIdentifier = "Rubyer.Dialog";
-
         /// <summary>
         /// 对话框集合
         /// </summary>
@@ -37,6 +33,42 @@ namespace Rubyer
             Dialogs.Add(identifier, dialog);
         }
 
+        private static async Task<object> ShowInternal(DialogContainer dialog, object content, object parameters, string title, Action<DialogContainer> openHandler, Action<DialogContainer, object> closeHandle, bool showCloseButton)
+        {
+            dialog.Dispatcher.VerifyAccess();
+
+            if (content is FrameworkElement element && element.DataContext is IDialogViewModel dialogContext)
+            {
+                dialog.Title = string.IsNullOrEmpty(dialogContext.Title) ? title : dialogContext.Title;
+                dialogContext.RequestClose += (param) =>
+                {
+                    DialogContainer.CloseDialogCommand.Execute(param, dialog);
+                };
+            }
+            else
+            {
+                dialog.Title = title;
+            }
+
+            dialog.DialogContent = content;
+            dialog.IsShowCloseButton = showCloseButton;
+            dialog.BeforeOpenHandler = openHandler;
+            dialog.AfterCloseHandler = closeHandle;
+            DialogContainer.OpenDialogCommand.Execute(parameters, dialog);
+
+            var taskCompletionSource = new TaskCompletionSource<object>();
+            DialogContainer.DialogResultRoutedEventHandler handle = (sender, e) =>
+            {
+                taskCompletionSource.TrySetResult(e.Result);
+                dialog.DialogContent = null;
+            };
+
+            dialog.AfterClose -= handle;
+            dialog.AfterClose += handle;
+
+            return await taskCompletionSource.Task;
+        }
+
         /// <summary>
         /// 显示指定对话框
         /// </summary>
@@ -50,43 +82,12 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<object> Show(string identifier, object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool showCloseButton = true)
         {
-            if (Dialogs.TryGetValue(identifier, out DialogContainer dialog))
+            if (Dialogs.TryGetValue(identifier, out DialogContainer container))
             {
-                dialog.Dispatcher.VerifyAccess();
-
-                if (content is FrameworkElement element && element.DataContext is IDialogViewModel dialogContext)
-                {
-                    dialog.Title = string.IsNullOrEmpty(dialogContext.Title) ? title : dialogContext.Title;
-                    dialogContext.RequestClose += (param) =>
-                    {
-                        DialogContainer.CloseDialogCommand.Execute(param, dialog);
-                    };
-                }
-                else
-                {
-                    dialog.Title = title;
-                }
-
-                dialog.DialogContent = content;
-                dialog.IsShowCloseButton = showCloseButton;
-                dialog.BeforeOpenHandler = openHandler;
-                dialog.AfterCloseHandler = closeHandle;
-                DialogContainer.OpenDialogCommand.Execute(parameters, dialog);
-
-                var taskCompletionSource = new TaskCompletionSource<object>();
-                DialogContainer.DialogResultRoutedEventHandler handle = (sender, e) =>
-                {
-                    taskCompletionSource.TrySetResult(e.Result);
-                    dialog.DialogContent = null;
-                };
-
-                dialog.AfterClose -= handle;
-                dialog.AfterClose += handle;
-
-                return await taskCompletionSource.Task;
+                return await ShowInternal(container, content, parameters, title, openHandler, closeHandle, showCloseButton);
             }
 
-            return default;
+            throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
         }
 
         /// <summary>
@@ -102,7 +103,9 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static async Task<object> Show(object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool showCloseButton = true)
         {
-            return await Show(DefaultIdentifier, content, parameters, title, openHandler, closeHandle, showCloseButton);
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            return await ShowInternal(container, content, parameters, title, openHandler, closeHandle, showCloseButton);
         }
 
         /// <summary>
