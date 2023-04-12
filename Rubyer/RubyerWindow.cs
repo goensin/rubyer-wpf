@@ -126,6 +126,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 标题背景色
+        /// </summary>
+        public static readonly DependencyProperty TitleBackgroundProperty =
+            DependencyProperty.Register("TitleBackground", typeof(Brush), typeof(RubyerWindow), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// 标题背景色
+        /// </summary>
+        public Brush TitleBackground
+        {
+            get { return (Brush)GetValue(TitleBackgroundProperty); }
+            set { SetValue(TitleBackgroundProperty, value); }
+        }
+
+        /// <summary>
         /// 标题前景色
         /// </summary>
         public static readonly DependencyProperty TitleForegroundProperty =

@@ -31,8 +31,8 @@
 
     <Style TargetType="{x:Type rubyer:RubyerWindow}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="ResizeMode" Value="CanResizeWithGrip" />
@@ -43,6 +43,7 @@
         <Setter Property="TitleHeight" Value="24" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />
         <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="TitleBackground" Value="{DynamicResource Primary}" />
         <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -67,7 +68,7 @@
                             <Grid x:Name="PART_WindowTitleGrid"
                                   Grid.Row="0"
                                   Height="Auto"
-                                  Background="{TemplateBinding BorderBrush}">
+                                  Background="{TemplateBinding TitleBackground}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
