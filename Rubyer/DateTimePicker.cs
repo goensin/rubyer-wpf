@@ -80,7 +80,7 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Clock clock = GetTemplateChild(ClockPartName) as Clock;
-            clock.CurrentTimeChanged += Clock_SelectedTimeChanged;
+            clock.SelectedTimeChanged += Clock_SelectedTimeChanged;
             this._clock = clock;
 
             Calendar calendar = GetTemplateChild(CalendarPartName) as Calendar;

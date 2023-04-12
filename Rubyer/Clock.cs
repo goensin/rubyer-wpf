@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
@@ -59,8 +60,8 @@ namespace Rubyer
                 binding.StringFormat = "{0:HH : mm}";
                 selectTimeText.SetBinding(TextBlock.TextProperty, binding);
             }
-
-            DateTime now = DateTime.Now;
+            var now = DateTime.Now;
+            CurrentTime = Convert.ToDateTime($"{now.Hour}:{now.Minute}");
 
             if (GetTemplateChild(HourListPartName) is Selector hourList)
             {
@@ -71,7 +72,7 @@ namespace Rubyer
                 binding.Mode = BindingMode.TwoWay;
                 hourList.SetBinding(Selector.SelectedItemProperty, binding);
 
-                AddItemSource(hourList, 24, now.Hour);
+                AddItemsSource(hourList, 24, now.Hour);
             }
 
             if (GetTemplateChild(MinuteListPartName) is Selector minuteList)
@@ -83,7 +84,7 @@ namespace Rubyer
                 binding.Mode = BindingMode.TwoWay;
                 minuteList.SetBinding(Selector.SelectedItemProperty, binding);
 
-                AddItemSource(minuteList, 60, now.Minute);
+                AddItemsSource(minuteList, 60, now.Minute);
             }
 
             if (GetTemplateChild(ConfirmPartName) is Button confirmButton)
@@ -109,20 +110,6 @@ namespace Rubyer
             remove { RemoveHandler(SelectedTimeChangedEvent, value); }
         }
 
-        /// <summary>
-        /// 当前事件改变事件
-        /// </summary>
-        public static readonly RoutedEvent CurrentTimeChangedEvent = EventManager.RegisterRoutedEvent(
-            "CurrentTimeChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<DateTime?>), typeof(Clock));
-
-        /// <summary>
-        /// 当前事件改变事件处理
-        /// </summary>
-        public event RoutedPropertyChangedEventHandler<DateTime?> CurrentTimeChanged
-        {
-            add { AddHandler(CurrentTimeChangedEvent, value); }
-            remove { RemoveHandler(CurrentTimeChangedEvent, value); }
-        }
         #endregion
 
         #region 依赖属性
@@ -200,7 +187,7 @@ namespace Rubyer
         /// <param name="itemsControl">列表控件</param>
         /// <param name="count">总数</param>
         /// <param name="index">当前索引</param>
-        private void AddItemSource(Selector itemsControl, int count, int index)
+        private void AddItemsSource(Selector itemsControl, int count, int index)
         {
             string[] array = new string[count];
             for (int i = 0; i < array.Length; i++)
@@ -209,19 +196,23 @@ namespace Rubyer
             }
 
             itemsControl.ItemsSource = array;
-            itemsControl.SelectedIndex = 0;
+            itemsControl.SelectedIndex = index;
 
-            //if (itemsControl is ListBox listBox)
-            //{
-            //    int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
-            //    listBox.ScrollIntoView(array[scrollIndex]);
-            //}
+            if (itemsControl is ListBox listBox)
+            {
+                int scrollIndex = index + 2 > array.Length - 1 ? array.Length - 1 : index + 2;
+                listBox.ScrollIntoView(array[scrollIndex]);
+            }
         }
 
         private void SetValueToClock()
         {
-            _hourList.SelectedIndex = SelectedTime == null ? 0 : SelectedTime.Value.Hour;
-            _minuteList.SelectedIndex = SelectedTime == null ? 0 : SelectedTime.Value.Minute;
+            if (SelectedTime != null)
+            {
+                _hourList.SelectedIndex =  SelectedTime.Value.Hour;
+                _minuteList.SelectedIndex = SelectedTime.Value.Minute;
+            }
+           
         }
 
         /// <summary>
@@ -237,13 +228,6 @@ namespace Rubyer
             }
 
             clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
-
-            if (e.NewValue != null)
-            {
-                var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.CurrentTime);
-                args.RoutedEvent = Clock.CurrentTimeChangedEvent;
-                clock.RaiseEvent(args);
-            }
         }
 
 

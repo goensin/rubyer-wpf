@@ -174,6 +174,24 @@ namespace Rubyer
 
         #region 指定容器
 
+        private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
+        {
+            container.Dispatcher.VerifyAccess();
+            NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            notificationCard.Close += (sender, e) => container.RemoveCard(notificationCard);
+            notificationCard.MouseEnter += (sender, e) => cts.Cancel();
+            notificationCard.MouseLeave += (sender, e) =>
+            {
+                cts = new CancellationTokenSource();
+                DelayCloseNotificationCard(millisecondTimeOut, notificationCard, cts.Token);
+            };
+
+            container.AddCard(notificationCard);
+            DelayCloseNotificationCard(millisecondTimeOut, notificationCard, cts.Token);
+        }
+
         /// <summary>
         /// 容器内显示
         /// </summary>
@@ -192,24 +210,6 @@ namespace Rubyer
 
             NotificationContainer container = Containers[containerIdentifier];
             ShowInternal(container, type, content, title, millisecondTimeOut, isClearable);
-        }
-
-        private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
-        {
-            container.Dispatcher.VerifyAccess();
-            NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
-            CancellationTokenSource cts = new CancellationTokenSource();
-
-            notificationCard.Close += (sender, e) => container.RemoveCard(notificationCard);
-            notificationCard.MouseEnter += (sender, e) => cts.Cancel();
-            notificationCard.MouseLeave += (sender, e) =>
-            {
-                cts = new CancellationTokenSource();
-                DelayCloseNotificationCard(millisecondTimeOut, notificationCard, cts.Token);
-            };
-
-            container.AddCard(notificationCard);
-            DelayCloseNotificationCard(millisecondTimeOut, notificationCard, cts.Token);
         }
 
         /// <summary>

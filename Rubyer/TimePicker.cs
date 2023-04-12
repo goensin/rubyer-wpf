@@ -55,25 +55,24 @@ namespace Rubyer
             base.OnApplyTemplate();
 
             Clock clock = GetTemplateChild(ClockPartName) as Clock;
-            clock.CurrentTimeChanged += Clock_CurrentTimeChanged; ;
             clock.SelectedTimeChanged += Clock_SelectedTimeChanged;
-            this._clock = clock;
+            _clock = clock;
 
             TextBox textBox = GetTemplateChild(TextBoxPartName) as TextBox;
             var binding1 = new Binding("Text");
             binding1.Source = this;
             binding1.Mode = BindingMode.TwoWay;
             textBox.SetBinding(TextBox.TextProperty, binding1);
-            this._textBox = textBox;
+            _textBox = textBox;
 
             Popup popup = GetTemplateChild(PopupPartName) as Popup;
             popup.Opened += Popup_Opened;
             popup.Closed += Popup_Closed;
-            if (this.IsDropDownOpen)
+            if (IsDropDownOpen)
             {
-                this._popup.IsOpen = true;
+                _popup.IsOpen = true;
             }
-            this._popup = popup;
+            _popup = popup;
 
             Button button = GetTemplateChild(ButtonPartName) as Button;
             button.Click += Button_Click;
@@ -228,14 +227,6 @@ namespace Rubyer
             RoutedPropertyChangedEventArgs<DateTime?> args = new RoutedPropertyChangedEventArgs<DateTime?>((DateTime?)e.OldValue, (DateTime?)e.NewValue);
             args.RoutedEvent = TimePicker.SelectedTimeChangedEvent;
             timePicker.RaiseEvent(args);
-        }
-
-        private void Clock_CurrentTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
-        {
-            if (SelectedTime != e.NewValue)
-            {
-                SelectedTime = e.NewValue;
-            }
         }
 
         /// <summary>
