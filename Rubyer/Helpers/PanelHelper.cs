@@ -230,4 +230,3 @@ internal enum SpacingType
     /// </summary>
     All,
 }
-}
