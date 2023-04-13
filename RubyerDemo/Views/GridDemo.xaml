@@ -28,10 +28,10 @@
                     </Grid>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="PanelHelper.Spacing, PanelHelper.Spacing"
+                <controls:ControlDisplay Title="PanelHelper.Spacing"
                                          Grid.Row="1"
                                          HorizontalContentAlignment="Stretch"
-                                         Description="通过 RowSpacing 和 ColumnSpacing 设置间隔, 实际设置 Child 的 Margin">
+                                         Description="通过 Row 和 Column 设置间隔, 实际设置 Child 的 Margin">
                     <StackPanel>
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"
