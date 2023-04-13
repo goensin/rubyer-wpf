@@ -13,6 +13,8 @@
 
     <!--  Style and template for the DataGridCell.  -->
     <Style x:Key="RubyerDataGridCell" TargetType="{x:Type DataGridCell}">
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -27,7 +29,7 @@
 
                         <Border x:Name="border"
                                 Background="Transparent"
-                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="0"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
@@ -78,7 +80,7 @@
                     <Grid>
                         <Border x:Name="rowHeaderBorder"
                                 Background="{TemplateBinding Background}"
-                                BorderBrush="{DynamicResource Border}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}">
                             <StackPanel Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                         HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -103,10 +105,10 @@
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="All">
                             <Setter Property="BorderThickness" Value="0 0 1 1" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Horizontal">
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
                             <Setter Property="BorderThickness" Value="0 0 1 0" />
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Horizontal">
                             <Setter Property="BorderThickness" Value="0 0 0 1" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
@@ -403,13 +405,13 @@
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource Border}" />
+        <Setter Property="HorizontalGridLinesBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="VerticalGridLinesBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource Border}" />
         <Setter Property="RowDetailsVisibilityMode" Value="Collapsed" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource MouseOverValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />

@@ -107,7 +107,7 @@
                                   CanUserAddRows="False"
                                   ColumnWidth="70"
                                   Foreground="{StaticResource BlackForeground}"
-                                  GridLinesVisibility="All"
+                                  GridLinesVisibility="Horizontal"
                                   HeadersVisibility="All"
                                   IsReadOnly="False"
                                   ItemsSource="{Binding Persons}"
