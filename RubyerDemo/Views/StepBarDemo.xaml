@@ -12,7 +12,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="StepBarDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto" rubyer:GridHelper.ColumnSpacing="10">
+            <Grid rubyer:GridHelper.ColumnDefinitions="*, Auto" rubyer:PanelHelper.Spacing="10">
                 <StackPanel>
                     <Button Width="100"
                             Margin="10"

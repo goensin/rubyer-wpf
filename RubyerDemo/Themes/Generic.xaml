@@ -11,7 +11,7 @@
                 <ControlTemplate TargetType="{x:Type controls:ControlDisplay}">
                     <Grid Margin="0 5 0 0"
                           rubyer:GridHelper.RowDefinitions="Auto, Auto, *"
-                          rubyer:GridHelper.RowSpacing="10">
+                          rubyer:PanelHelper.Spacing="10">
                         <TextBlock Style="{StaticResource Head3TextBlock}" Text="{TemplateBinding Title}" />
                         <TextBox x:Name="descriptionText"
                                  Grid.Row="1"

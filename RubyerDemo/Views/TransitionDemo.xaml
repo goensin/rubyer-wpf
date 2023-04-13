@@ -13,9 +13,8 @@
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="TransitionDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Hidden">
-            <Grid rubyer:GridHelper.ColumnSpacing="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
-                  rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:PanelHelper.Spacing="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto">
                 <GroupBox MinWidth="800">
                     <GroupBox.Header>
                         <StackPanel Orientation="Horizontal">

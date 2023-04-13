@@ -11,7 +11,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="ListBoxDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default ListBox">
                     <ListBox Width="200"
                              ItemsSource="{Binding Items}"

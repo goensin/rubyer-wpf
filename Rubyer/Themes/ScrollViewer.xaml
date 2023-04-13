@@ -77,7 +77,7 @@
     <Style x:Key="SmallScrollViewer"
            BasedOn="{StaticResource RubyerScrollViewer}"
            TargetType="{x:Type ScrollViewer}">
-        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="10" />
+        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="8" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
     </Style>
 

@@ -21,9 +21,8 @@
     <smtx:XamlDisplay UniqueKey="DataGridDemo">
         <ScrollViewer>
             <Grid Width="600"
-                  rubyer:GridHelper.ColumnSpacing="1"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto"
-                  rubyer:GridHelper.RowSpacing="10">
+                  rubyer:PanelHelper.Spacing="10">
                 <GroupBox Header="数据表格-DataGrid">
                     <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                         <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />

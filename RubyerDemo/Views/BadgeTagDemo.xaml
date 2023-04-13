@@ -8,7 +8,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="BadgeTagDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
                 <GroupBox Header="标记-Badge">
                     <StackPanel Margin="10">
                         <StackPanel Margin="5" Orientation="Horizontal">

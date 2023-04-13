@@ -10,7 +10,7 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:TreeViewViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TreeViewDemo">
-        <Grid rubyer:GridHelper.ColumnDefinitions="1*, 2*" rubyer:GridHelper.ColumnSpacing="10">
+        <Grid rubyer:GridHelper.ColumnDefinitions="1*, 2*" rubyer:PanelHelper.Spacing="10">
             <controls:ControlDisplay Title="Default TreeView"
                                      VerticalAlignment="Top"
                                      HorizontalContentAlignment="Stretch">

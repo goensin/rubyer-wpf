@@ -2,37 +2,36 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewModels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewModels:TabControlViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TabControlDemo">
         <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *"
-          rubyer:GridHelper.ColumnSpacing="10"
-          rubyer:GridHelper.RowDefinitions="Auto, *, *, *"
-          rubyer:GridHelper.RowSpacing="10">
+              rubyer:GridHelper.RowDefinitions="Auto, *, *, *"
+              rubyer:PanelHelper.Spacing="10">
             <StackPanel Grid.RowSpan="4"
-                    VerticalAlignment="Center"
-                    Orientation="Vertical">
+                        VerticalAlignment="Center"
+                        Orientation="Vertical">
                 <Button Padding="10 0"
-                    Command="{Binding AddTabItemCommand}"
-                    Content="添加 TabItem" />
+                        Command="{Binding AddTabItemCommand}"
+                        Content="添加 TabItem" />
             </StackPanel>
 
             <GroupBox Grid.Row="1"
-                  Grid.Column="1"
-                  Header="默认选项卡-TabControl">
+                      Grid.Column="1"
+                      Header="默认选项卡-TabControl">
                 <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
                     <!--  Top  -->
                     <TabControl Grid.RowSpan="2"
-                            Grid.Column="1"
-                            Height="150"
-                            HorizontalContentAlignment="Center"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Top">
+                                Grid.Column="1"
+                                Height="150"
+                                HorizontalContentAlignment="Center"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Top">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -47,12 +46,12 @@
 
                     <!--  Bottom  -->
                     <TabControl Grid.Row="2"
-                            Grid.Column="1"
-                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Bottom">
+                                Grid.Column="1"
+                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Bottom">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -65,11 +64,11 @@
 
                     <!--  Left  -->
                     <TabControl Grid.RowSpan="3"
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Left">
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Left">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -82,12 +81,12 @@
 
                     <!--  Right  -->
                     <TabControl Grid.RowSpan="3"
-                            Grid.Column="2"
-                            VerticalAlignment="Center"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Right">
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Right">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -101,19 +100,19 @@
             </GroupBox>
 
             <GroupBox Grid.Row="2"
-                  Grid.Column="1"
-                  Header="卡片选项卡-LineTabControl">
+                      Grid.Column="1"
+                      Header="卡片选项卡-LineTabControl">
                 <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
                     <!--  Top  -->
                     <TabControl Style="{StaticResource LineTabControl}"
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            rubyer:HeaderHelper.Background="AliceBlue"
-                            rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Top">
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                rubyer:HeaderHelper.Background="AliceBlue"
+                                rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Top">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -126,11 +125,11 @@
 
                     <!--  Bottom  -->
                     <TabControl Style="{StaticResource LineTabControl}"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Accent}"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Bottom">
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Accent}"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Bottom">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -143,13 +142,13 @@
 
                     <!--  Left  -->
                     <TabControl Style="{StaticResource LineTabControl}"
-                            Grid.RowSpan="3"
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Success}"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Left">
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Success}"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Left">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -162,12 +161,12 @@
 
                     <!--  Right  -->
                     <TabControl Style="{StaticResource LineTabControl}"
-                            Grid.RowSpan="3"
-                            Grid.Column="2"
-                            VerticalAlignment="Center"
-                            rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Warning}"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Right">
+                                Grid.RowSpan="3"
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Warning}"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Right">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -181,17 +180,17 @@
             </GroupBox>
 
             <GroupBox Grid.Row="3"
-                  Grid.Column="1"
-                  Header="线条选项卡-CardTabControl">
+                      Grid.Column="1"
+                      Header="线条选项卡-CardTabControl">
                 <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
                     <!--  Top  -->
                     <TabControl Style="{StaticResource CardTabControl}"
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            SelectedItem="{Binding SelectedPoetry}"
-                            TabStripPlacement="Top">
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                SelectedItem="{Binding SelectedPoetry}"
+                                TabStripPlacement="Top">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -204,13 +203,13 @@
 
                     <!--  Bottom  -->
                     <TabControl Style="{StaticResource CardTabControl}"
-                            Grid.Row="2"
-                            Grid.Column="1"
-                            rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
-                            rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
-                            rubyer:HeaderHelper.Background="{DynamicResource BorderLighter}"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Bottom">
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
+                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
+                                rubyer:HeaderHelper.Background="{DynamicResource BorderLighter}"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Bottom">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -223,15 +222,15 @@
 
                     <!--  Left  -->
                     <TabControl Style="{StaticResource CardTabControl}"
-                            Grid.RowSpan="3"
-                            Grid.Column="0"
-                            VerticalAlignment="Center"
-                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
-                            rubyer:HeaderHelper.Background="Transparent"
-                            rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}"
-                            rubyer:TabControlHelper.IsClearable="True"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Left">
+                                Grid.RowSpan="3"
+                                Grid.Column="0"
+                                VerticalAlignment="Center"
+                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
+                                rubyer:HeaderHelper.Background="Transparent"
+                                rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}"
+                                rubyer:TabControlHelper.IsClearable="True"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Left">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
@@ -244,12 +243,12 @@
 
                     <!--  Right  -->
                     <TabControl Style="{StaticResource CardTabControl}"
-                            Grid.RowSpan="3"
-                            Grid.Column="2"
-                            VerticalAlignment="Center"
-                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Warning}"
-                            ItemsSource="{Binding Poetries}"
-                            TabStripPlacement="Right">
+                                Grid.RowSpan="3"
+                                Grid.Column="2"
+                                VerticalAlignment="Center"
+                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Warning}"
+                                ItemsSource="{Binding Poetries}"
+                                TabStripPlacement="Right">
                         <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />

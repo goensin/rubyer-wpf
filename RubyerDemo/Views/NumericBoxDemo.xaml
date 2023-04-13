@@ -11,7 +11,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="NumericBoxDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default NumericBox" Description="数值框会自动限制数值外的字符输入和粘贴等">
                     <StackPanel Orientation="Horizontal">
                         <rubyer:NumericBox Width="120"

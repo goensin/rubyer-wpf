@@ -14,46 +14,36 @@
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="ButtonDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default Button">
-                    <StackPanel Margin="5" Orientation="Horizontal">
+                    <StackPanel Margin="5"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
                         <Button Width="80"
-                                Margin="5"
                                 Content="默认按钮"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />
                         <Button Style="{DynamicResource LightButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="亮色按钮" />
                         <Button Style="{DynamicResource DarkButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="暗色按钮" />
                         <Button Style="{DynamicResource AccentButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="强调按钮" />
                         <Button Style="{DynamicResource InfoButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="消息按钮" />
                         <Button Style="{DynamicResource SuccessButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="成功按钮" />
                         <Button Style="{DynamicResource WaringButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="警告按钮" />
                         <Button Style="{DynamicResource ErrorButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="错误按钮" />
-                        <Button Width="80"
-                                Margin="5"
-                                Content="不可用"
-                                IsEnabled="False" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
@@ -118,26 +108,22 @@
                 <controls:ControlDisplay Title="Text Button"
                                          Grid.Row="3"
                                          Description="TextButton Style">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                         <Button Style="{StaticResource TextButton}"
                                 Width="80"
-                                Margin="5"
                                 Content="默认按钮" />
                         <Button Style="{DynamicResource TextAccentButton}"
                                 Width="80"
-                                Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                 Content="强调按钮" />
                         <Button Style="{DynamicResource TextButton}"
-                                Margin="5"
                                 Padding="5"
                                 rubyer:ControlHelper.FocusedBrush="Pink"
                                 Foreground="Pink">
                             <rubyer:Icon Type="TvFill" />
                         </Button>
                         <Button Style="{DynamicResource TextSuccessButton}"
-                                Margin="5"
                                 Padding="5"
                                 rubyer:ButtonHelper.CircleDiameter="40"
                                 rubyer:ButtonHelper.Shape="Circle"
@@ -208,7 +194,7 @@
                                          Description="通过 ButtonHelper.ShowShadow 设置是否显示按钮阴影">
                     <Grid Margin="5"
                           rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
-                          rubyer:GridHelper.ColumnSpacing="15">
+                          rubyer:PanelHelper.Spacing="15">
                         <Button Width="80"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="默认按钮" />

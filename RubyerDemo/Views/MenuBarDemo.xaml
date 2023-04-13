@@ -10,9 +10,8 @@
         <ScrollViewer Style="{StaticResource SmallScrollViewer}"
                       HorizontalScrollBarVisibility="Auto"
                       VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.ColumnSpacing="20"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
-                  rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <GroupBox Header="Menu-菜单">
                     <StackPanel Margin="5">
                         <Menu>

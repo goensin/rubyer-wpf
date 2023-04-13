@@ -12,9 +12,8 @@
     <smtx:XamlDisplay UniqueKey="DialogDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
             <Grid rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto"
-                  rubyer:GridHelper.ColumnSpacing="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto"
-                  rubyer:GridHelper.RowSpacing="10">
+                  rubyer:PanelHelper.Spacing="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto">
                 <GroupBox Grid.Column="0"
                           Width="250"
                           Height="250"

@@ -10,7 +10,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="DescriptionDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:GridHelper.RowSpacing="10">
+            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
                 <rubyer:NumericBox Width="120"
                                    HorizontalAlignment="Center"
                                    rubyer:InputBoxHelper.PreContent="显示列数:"
