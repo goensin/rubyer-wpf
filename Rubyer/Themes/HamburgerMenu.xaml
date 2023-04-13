@@ -288,7 +288,7 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5 8" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="0 10" />

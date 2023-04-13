@@ -23,7 +23,7 @@
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="17" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="18" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />

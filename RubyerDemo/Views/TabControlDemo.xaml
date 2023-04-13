@@ -39,7 +39,7 @@
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Content}" />
+                                <TextBlock Text="{Binding Content}" TextAlignment="Center" />
                             </DataTemplate>
                         </TabControl.ContentTemplate>
                     </TabControl>

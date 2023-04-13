@@ -19,7 +19,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="15" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
@@ -63,7 +63,7 @@
         <Setter Property="Padding" Value="5" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
@@ -144,7 +144,7 @@
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="14" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />

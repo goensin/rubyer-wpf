@@ -28,6 +28,9 @@
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontFamily" Value="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -85,8 +88,7 @@
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="contentPresenter" Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
-                            <Setter TargetName="clearButton" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
@@ -117,6 +119,7 @@
         <Setter Property="rubyer:HeaderHelper.Margin" Value="0" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="Transparent" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconSize" Value="16" />
         <Setter Property="Template">
             <Setter.Value>
@@ -252,6 +255,9 @@
         <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontFamily" Value="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
@@ -300,12 +306,10 @@
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
                         <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="contentPresenter" Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
-                            <Setter TargetName="clearButton" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="contentPresenter" Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
-                            <Setter TargetName="clearButton" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
@@ -333,7 +337,9 @@
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
-        <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="FontFamily" Value="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=TabControl}}" /><Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -392,8 +398,7 @@
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter TargetName="contentPresenter" Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
-                            <Setter TargetName="clearButton" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />

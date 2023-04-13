@@ -32,14 +32,12 @@
                                     BorderThickness="{TemplateBinding BorderThickness}">
                                 <TabControl Style="{StaticResource CardTabControl}"
                                             rubyer:ControlHelper.CornerRadius="0"
-                                            rubyer:HeaderHelper.FontSize="20">
+                                            rubyer:HeaderHelper.FontSize="16">
                                     <TabItem MinWidth="200" rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}">
                                         <TabItem.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <rubyer:Icon Margin="0 0 8 0" Type="FunctionLine" />
-                                                <TextBlock Height="Auto"
-                                                           FontSize="14"
-                                                           Text="{Binding DataContext.CurrentMenuItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                                <TextBlock Height="Auto" Text="{Binding DataContext.CurrentMenuItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
                                             </StackPanel>
                                         </TabItem.Header>
 
@@ -56,7 +54,7 @@
                                         <TabItem.Header>
                                             <StackPanel Orientation="Horizontal">
                                                 <rubyer:Icon Margin="0 0 8 0" Type="CodeSSlashFill" />
-                                                <TextBlock FontSize="14" Text="Xaml" />
+                                                <TextBlock Text="Xaml" />
                                             </StackPanel>
                                         </TabItem.Header>
 
@@ -67,7 +65,8 @@
                                             <avalonedit:TextEditor Style="{StaticResource AvalonTextEditorXamlDisplay}"
                                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                                   Document="{Binding Xaml, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TextDocumentValueConverter}}" />
+                                                                   Document="{Binding Xaml, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource TextDocumentValueConverter}}"
+                                                                   FontSize="14" />
                                         </rubyer:Transition>
                                     </TabItem>
                                 </TabControl>
