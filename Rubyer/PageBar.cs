@@ -348,6 +348,7 @@ namespace Rubyer
 
             if (PageSize == 0 || Total == 0)
             {
+                this.ItemsSource = models;
                 return;
             }
 

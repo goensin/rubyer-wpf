@@ -14,11 +14,10 @@
     <smtx:XamlDisplay UniqueKey="PageBarDemo">
         <ScrollViewer Style="{StaticResource SmallScrollViewer}">
             <controls:ControlDisplay Title="Default PageBar" Margin="10">
-                <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:PanelHelper.Spacing="10">
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel>
-                            <StackPanel Margin="10"
-                                        HorizontalAlignment="Center"
+                <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto">
+                    <StackPanel Orientation="Horizontal" rubyer:PanelHelper.Spacing="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="10">
+                            <StackPanel HorizontalAlignment="Center" rubyer:PanelHelper.Spacing="10"
                                         Orientation="Horizontal">
                                 <CheckBox x:Name="totleCheckBox"
                                           Content="显示总页数"
@@ -27,7 +26,7 @@
                                           Margin="20 0 0 0"
                                           Content="显示每页数量"
                                           IsChecked="True" />
-                                <TextBlock Margin="20 0 0 0" Text="选中前景色:" />
+                                <TextBlock Text="选中前景色:" />
                                 <ComboBox Width="100"
                                           Margin="5 0 0 0"
                                           ItemsSource="{Binding AllBrushes}"
@@ -41,9 +40,8 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <TextBlock Margin="20 0 0 0" Text="选中色:" />
+                                <TextBlock Text="选中色:" />
                                 <ComboBox Width="100"
-                                          Margin="5 0 0 0"
                                           ItemsSource="{Binding AllBrushes}"
                                           SelectedItem="{Binding SelectedBrush}">
                                     <ComboBox.ItemTemplate>
@@ -55,9 +53,8 @@
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                 </ComboBox>
-                                <TextBlock Margin="20 0 0 0" Text="未选中色:" />
+                                <TextBlock Text="未选中色:" />
                                 <ComboBox Width="100"
-                                          Margin="5 0 0 0"
                                           ItemsSource="{Binding AllBrushes}"
                                           SelectedItem="{Binding UnselectedBrush}">
                                     <ComboBox.ItemTemplate>
@@ -71,17 +68,16 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <StackPanel Margin="10"
+                            <StackPanel rubyer:PanelHelper.Spacing="10"
                                         HorizontalAlignment="Left"
                                         Orientation="Horizontal">
                                 <CheckBox x:Name="roundCheckBox"
                                           Content="圆角"
                                           IsChecked="False" />
 
-                                <TextBlock Margin="20 0 0 0" Text="按钮位置:" />
+                                <TextBlock Text="按钮位置:" />
                                 <ComboBox x:Name="dockComboBox"
                                           Width="100"
-                                          Margin="5 0 0 0"
                                           SelectedIndex="0">
                                     <ComboBoxItem>
                                         <system:Dock>Right</system:Dock>
@@ -91,11 +87,12 @@
                                     </ComboBoxItem>
                                 </ComboBox>
 
-                                <TextBlock Margin="20 0 0 0" Text="按钮间隔:" />
+                                <TextBlock Text="按钮间隔:" />
                                 <TextBox x:Name="paddingTextBox"
                                          Width="100"
-                                         Margin="5 0 0 0"
                                          Text="3 0" />
+
+                                <TextBox Text="{Binding Total}" />
                             </StackPanel>
 
                             <!--  默认页码条  -->
