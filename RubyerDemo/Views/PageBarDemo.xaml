@@ -13,7 +13,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="PageBarDemo">
         <ScrollViewer Style="{StaticResource SmallScrollViewer}">
-            <controls:ControlDisplay Title="Default PageBar">
+            <controls:ControlDisplay Title="Default PageBar" Margin="10">
                 <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:PanelHelper.Spacing="10">
                     <StackPanel Orientation="Horizontal">
                         <StackPanel>

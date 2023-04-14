@@ -11,7 +11,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="DateTimePickerDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="DateTime Control">
                     <StackPanel Orientation="Horizontal">
                         <Calendar Margin="5" />

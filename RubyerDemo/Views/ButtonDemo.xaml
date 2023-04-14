@@ -14,7 +14,9 @@
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="ButtonDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default Button">
                     <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"

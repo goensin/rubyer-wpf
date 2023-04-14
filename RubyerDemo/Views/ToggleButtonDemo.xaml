@@ -9,7 +9,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="ToggleButtonDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Radio Button">
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <RadioButton Margin="10 0"

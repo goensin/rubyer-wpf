@@ -10,7 +10,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="MessageBoxDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid>
+            <Grid Margin="10">
                 <GroupBox Margin="0 0 0 10" Header="消息框-MessageBoxR">
                     <StackPanel Margin="5">
                         <StackPanel Orientation="Horizontal">

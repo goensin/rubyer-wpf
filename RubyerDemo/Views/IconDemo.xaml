@@ -44,7 +44,7 @@
         </Style>
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="IconDemo">
-        <Grid>
+        <Grid Margin="10">
             <controls:ControlDisplay Title="Icons">
                 <Grid rubyer:GridHelper.RowDefinitions="Auto, *">
                     <Border Padding="0 5">

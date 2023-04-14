@@ -30,7 +30,7 @@
             <ScrollViewer Style="{StaticResource SmallScrollViewer}"
                           HorizontalScrollBarVisibility="Auto"
                           VerticalScrollBarVisibility="Auto">
-                <Grid>
+                <Grid Margin="10">
                     <GroupBox Margin="0 0 0 10" Header="通知-Notification">
                         <StackPanel Margin="5">
                             <StackPanel Orientation="Horizontal">

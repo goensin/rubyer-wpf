@@ -12,7 +12,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TextBoxDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default TextBox">
                     <StackPanel Orientation="Horizontal">
                         <TextBox Width="150" Text="默认" />

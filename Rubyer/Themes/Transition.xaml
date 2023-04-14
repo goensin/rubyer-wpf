@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="RubyerTransitionTemplate" TargetType="{x:Type rubyer:Transition}">
-        <Border>
+        <Border Padding="{TemplateBinding Padding}">
             <ContentPresenter x:Name="content"
                               Focusable="False"
                               RecognizesAccessKey="True"
@@ -16,7 +16,9 @@
     </ControlTemplate>
 
     <ControlTemplate x:Key="CollapseTransitionTemplate" TargetType="{x:Type rubyer:Transition}">
-        <Border x:Name="root" VerticalAlignment="Top">
+        <Border x:Name="root"
+                Padding="{TemplateBinding Padding}"
+                VerticalAlignment="Top">
             <StackPanel x:Name="rootStackPanel">
                 <ContentPresenter x:Name="content"
                                   Focusable="False"

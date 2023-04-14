@@ -9,7 +9,8 @@
              d:DataContext="{d:DesignInstance Type=viewModels:TabControlViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TabControlDemo">
-        <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *"
+        <Grid Margin="10"
+              rubyer:GridHelper.ColumnDefinitions="Auto, *"
               rubyer:GridHelper.RowDefinitions="Auto, *, *, *"
               rubyer:PanelHelper.Spacing="10">
             <StackPanel Grid.RowSpan="4"

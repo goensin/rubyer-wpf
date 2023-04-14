@@ -9,7 +9,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="ProgressBarDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <StackPanel Margin="10 10 10 0"
                             HorizontalAlignment="Center"
                             Orientation="Horizontal">

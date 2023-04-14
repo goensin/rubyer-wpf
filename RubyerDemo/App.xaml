@@ -45,9 +45,7 @@
                                                            PlayEveryTime="True"
                                                            Type="FadeLeft"
                                                            Duration="0:0:0.3">
-                                            <ContentPresenter Margin="10"
-                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                         </rubyer:Transition>
                                     </TabItem>
                                     <TabItem MinWidth="200" rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}">

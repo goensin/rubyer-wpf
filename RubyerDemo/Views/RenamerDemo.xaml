@@ -11,7 +11,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="RenamerDemo">
         <ScrollViewer>
-            <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Renamer" Description="通过 F2 按键、右键菜单、IsRenaming 属性或者 RenameCommand 重命名">
                     <StackPanel Orientation="Horizontal">
                         <rubyer:Renamer x:Name="renamer"

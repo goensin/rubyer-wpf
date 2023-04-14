@@ -21,6 +21,7 @@
     <smtx:XamlDisplay UniqueKey="DataGridDemo">
         <ScrollViewer>
             <Grid Width="600"
+                  Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <GroupBox Header="数据表格-DataGrid">
