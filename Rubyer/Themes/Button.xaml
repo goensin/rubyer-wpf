@@ -63,7 +63,7 @@
                                                 IsActive="{TemplateBinding IsPressed}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                            <StackPanel Margin="{TemplateBinding Padding}"
+                            <StackPanel Margin="{TemplateBinding Padding}" 
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         Orientation="Horizontal">
@@ -74,14 +74,13 @@
                                                 FocusedBrush="{TemplateBinding Foreground}"
                                                 StrokeThickness="2"
                                                 Visibility="Collapsed" />
-                                <Grid>
-                                    <ContentPresenter x:Name="contentPresenter"
-                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                      Focusable="False"
-                                                      RecognizesAccessKey="True"
-                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                </Grid>
+
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Focusable="False"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </StackPanel>
                         </Grid>
                     </Border>

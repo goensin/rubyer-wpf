@@ -130,6 +130,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 内部元素间隔
+        /// </summary>
+        public static readonly DependencyProperty InternalSpacingProperty =
+            DependencyProperty.RegisterAttached("InternalSpacing", typeof(double), typeof(InputBoxHelper), new PropertyMetadata(3D));
+
+        public static double GetInternalSpacing(DependencyObject obj)
+        {
+            return (double)obj.GetValue(InternalSpacingProperty);
+        }
+
+        public static void SetInternalSpacing(DependencyObject obj, double value)
+        {
+            obj.SetValue(InternalSpacingProperty, value);
+        }
+
+        /// <summary>
         /// Ons the is clearble changed.
         /// </summary>
         /// <param name="d">The d.</param>

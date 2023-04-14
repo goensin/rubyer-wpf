@@ -13,7 +13,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="Padding" Value="0 5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -44,6 +43,7 @@
                                  rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:InputBoxHelper.IsClearable="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                  rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"

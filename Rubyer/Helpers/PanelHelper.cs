@@ -111,9 +111,10 @@ namespace Rubyer
         // StackPanel
         private static void SetStackPanelSpacing(StackPanel stackPanel)
         {
-            var count = stackPanel.Children.Count;
+            var children = stackPanel.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
+            var count = children.Count;
             var index = 0;
-            foreach (FrameworkElement element in stackPanel.Children)
+            foreach (FrameworkElement element in children)
             {
                 var spacing = GetSpacing(stackPanel);
                 var oldMargin = element.Margin;
@@ -147,7 +148,8 @@ namespace Rubyer
         // Grid
         private static void SetGridSpacing(Grid grid)
         {
-            foreach (FrameworkElement element in grid.Children)
+            var children = grid.Children.OfType<FrameworkElement>().Where(x=>x.Visibility != Visibility.Collapsed).ToList();
+            foreach (FrameworkElement element in children)
             {
                 var spacing = GetSpacing(grid);
                 var oldMargin = element.Margin;

@@ -41,4 +41,8 @@
     <converter:DataGridRowIndexConverter x:Key="DataGridRowIndexConverter" />
     <converter:DoubleToGridLengthConverter x:Key="DoubleToGridLengthConverter" />
     <converter:EnumGetDescriptionConverter x:Key="EnumGetDescriptionConverter" />
+
+    <converter:DoubleToThicknessConverter x:Key="DoubleToAllThicknessConverter" Mode="All" />
+    <converter:DoubleToThicknessConverter x:Key="DoubleToLeftAndRightThicknessConverter" Mode="LeftAndRight" />
+    <converter:DoubleToThicknessConverter x:Key="DoubleToTopAndBottomThicknessConverter" Mode="TopAndBottom" />
 </ResourceDictionary>

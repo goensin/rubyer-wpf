@@ -271,6 +271,7 @@
                      Padding="{TemplateBinding Padding}"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                     rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                      rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -331,7 +332,6 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MaxDropDownHeight" Value="400" />
@@ -354,7 +354,7 @@
                           SnapsToDevicePixels="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="12" />
+                            <ColumnDefinition Width="22" />
                         </Grid.ColumnDefinitions>
 
                         <Popup x:Name="PART_Popup"
@@ -397,17 +397,12 @@
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
                                       IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <Grid Margin="0 0 5 0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
+                        <Grid Margin="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), Converter={StaticResource DoubleToLeftAndRightThicknessConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                              rubyer:GridHelper.ColumnDefinitions="Auto,*,Auto,Auto"
+                              rubyer:PanelHelper.Spacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}">
 
                             <ContentControl x:Name="preContent"
                                             Grid.Column="0"
-                                            Margin="3 0"
                                             VerticalAlignment="Center"
                                             Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{DynamicResource SeconarydText}"
@@ -446,7 +441,6 @@
 
                             <ContentControl x:Name="postContent"
                                             Grid.Column="3"
-                                            Margin="3 0 6 0"
                                             VerticalAlignment="Center"
                                             Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{DynamicResource SeconarydText}"

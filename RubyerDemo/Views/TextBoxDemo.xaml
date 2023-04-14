@@ -116,11 +116,12 @@
                     <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                         <TextBox Width="150">
                             <rubyer:InputBoxHelper.PreContent>
-                                <rubyer:Icon Margin="0" Type="QqFill" />
+                                <rubyer:Icon Type="QqFill" />
                             </rubyer:InputBoxHelper.PreContent>
                         </TextBox>
 
                         <TextBox Width="200"
+                                 rubyer:InputBoxHelper.InternalSpacing="6"
                                  rubyer:InputBoxHelper.PostContent=".com"
                                  rubyer:InputBoxHelper.PreContent="http://" />
                         <TextBox Width="150">

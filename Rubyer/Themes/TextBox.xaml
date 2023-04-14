@@ -57,7 +57,6 @@
         <Setter Property="AllowDrop" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Cursor" Value="IBeam" />
@@ -89,28 +88,23 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 SnapsToDevicePixels="True">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
+                            <Grid Margin="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), Converter={StaticResource DoubleToLeftAndRightThicknessConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  rubyer:GridHelper.ColumnDefinitions="Auto,*,Auto,Auto"
+                                  rubyer:PanelHelper.Spacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}">
 
                                 <ContentControl x:Name="preContent"
                                                 Grid.Column="0"
-                                                Margin="2 0"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
 
                                 <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <ScrollViewer x:Name="PART_ContentHost"
+                                                  Margin="-2 0 0 0"
                                                   Padding="{TemplateBinding Padding}"
                                                   Focusable="false"
                                                   HorizontalScrollBarVisibility="Hidden"
                                                   VerticalScrollBarVisibility="Hidden" />
                                     <TextBlock x:Name="watermark"
-                                               Margin="3 0"
                                                Foreground="{DynamicResource WatermarkText}"
                                                Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Grid>
@@ -128,7 +122,6 @@
 
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
-                                                Margin="2 0"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
                             </Grid>
