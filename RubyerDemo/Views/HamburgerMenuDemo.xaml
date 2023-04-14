@@ -115,6 +115,7 @@
                                               rubyer:ControlHelper.MaskOpacity="1"
                                               rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
                                               rubyer:HeaderHelper.FontSize="16"
+                                              rubyer:HeaderHelper.Padding="0 13"
                                               rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
                                               rubyer:ItemsControlHelper.ItemMargin="5 2"
                                               rubyer:ItemsControlHelper.ItemPadding="10 13"
