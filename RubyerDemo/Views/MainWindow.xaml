@@ -8,7 +8,7 @@
                      xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
                      Title="{Binding Title}"
                      Width="1100"
-                     Height="800"
+                     Height="750"
                      MinWidth="600"
                      MinHeight="400"
                      d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
@@ -49,14 +49,11 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="0 0 10 0" Text="字体大小: " />
-                                <Slider Width="120"
-                                        rubyer:SliderHelper.DraggingShowValue="True"
-                                        rubyer:SliderHelper.ValuePlacement="Right"
-                                        IsSnapToTickEnabled="True"
-                                        Maximum="20"
-                                        Minimum="10"
-                                        TickFrequency="1"
-                                        Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
+                                <rubyer:NumericBox Width="120"
+                                                   Interval="1"
+                                                   MaxValue="20"
+                                                   MinValue="10"
+                                                   Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
@@ -165,13 +162,12 @@
                           rubyer:HeaderHelper.FontSize="{Binding FontSize, RelativeSource={RelativeSource Self}}"
                           rubyer:HeaderHelper.FontWeight="Bold"
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                          Background="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
                           ExpandedWidth="170"
                           Foreground="{DynamicResource WhiteForeground}"
                           Header="Controls"
                           ItemsSource="{Binding MenuItems}"
-                          SelectedItem="{Binding CurrentMenuItem}"
-                          TransitionType="None">
+                          PaneBackground="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
+                          SelectedItem="{Binding CurrentMenuItem}">
         <rubyer:HamburgerMenu.ItemContainerStyle>
             <Style TargetType="rubyer:HamburgerMenuItem">
                 <Setter Property="DataContext" Value="{Binding}" />
