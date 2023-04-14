@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Rubyer
@@ -39,7 +41,11 @@ namespace Rubyer
 
             if (content is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
             {
-                dialog.Title = string.IsNullOrEmpty(dialogContext.Title) ? title : dialogContext.Title;
+                var binding = new Binding(nameof(dialog.Title));
+                binding.Source = dialogContext;
+                binding.Mode = BindingMode.OneWay;
+                dialog.SetBinding(DialogContainer.TitleProperty, binding);
+
                 dialogContext.RequestClose += (param) =>
                 {
                     DialogContainer.CloseDialogCommand.Execute(param, dialog);
