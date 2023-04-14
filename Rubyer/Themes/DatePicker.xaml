@@ -12,7 +12,8 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Height" Value="28" />
+        <!--<Setter Property="Height" Value="28" />-->
+        <Setter Property="Padding" Value="0 5" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
@@ -28,6 +29,7 @@
                                            Grid.Row="0"
                                            Grid.Column="0"
                                            Height="Auto"
+                                           Padding="{TemplateBinding Padding}"
                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                            rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"

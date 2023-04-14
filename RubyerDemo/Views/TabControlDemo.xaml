@@ -16,9 +16,7 @@
             <StackPanel Grid.RowSpan="4"
                         VerticalAlignment="Center"
                         Orientation="Vertical">
-                <Button Padding="10 0"
-                        Command="{Binding AddTabItemCommand}"
-                        Content="添加 TabItem" />
+                <Button Command="{Binding AddTabItemCommand}" Content="添加 TabItem" />
             </StackPanel>
 
             <GroupBox Grid.Row="1"

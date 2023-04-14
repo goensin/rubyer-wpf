@@ -12,29 +12,29 @@
     <smtx:XamlDisplay UniqueKey="ComboBoxDemo">
         <ScrollViewer>
             <Grid Margin="10"
-                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Style ComboBox">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                    <StackPanel rubyer:PanelHelper.Spacing="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                             <ComboBox Width="150" ItemsSource="{Binding Items}" />
                             <ComboBox Width="150"
-                                      Margin="10 0 0 0"
                                       IsEditable="True"
                                       ItemsSource="{Binding Items}" />
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"
-                                      Margin="10 0 0 0"
                                       ItemsSource="{Binding Items}" />
                         </StackPanel>
 
-                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                        <StackPanel Margin="0 10 0 0"
+                                    rubyer:PanelHelper.Spacing="10"
+                                    Orientation="Horizontal">
                             <ComboBox Width="150"
                                       IsEnabled="False"
                                       SelectedIndex="0">
                                 <ComboBoxItem>不可用</ComboBoxItem>
                             </ComboBox>
                             <ComboBox Width="150"
-                                      Margin="10 0 0 0"
                                       IsEditable="True"
                                       IsEnabled="False"
                                       SelectedIndex="0">
@@ -42,7 +42,6 @@
                             </ComboBox>
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"
-                                      Margin="10 0 0 0"
                                       IsEnabled="False"
                                       SelectedIndex="0">
                                 <ComboBoxItem>不可用</ComboBoxItem>
@@ -54,26 +53,24 @@
                 <controls:ControlDisplay Title="Watermark、Clearable、Round ComboBox"
                                          Grid.Row="1"
                                          Description="通过 InputBoxHelper.Watermark 设置水印 &#x000A;通过 InputBoxHelper.IsClearable 设置可清除文本 &#x000A;通过 InputBoxHelper.IsRound 设置圆角边框">
-                    <StackPanel>
-                        <StackPanel Orientation="Horizontal">
+                    <StackPanel rubyer:PanelHelper.Spacing="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                             <ComboBox Width="150"
                                       rubyer:InputBoxHelper.Watermark="水印"
                                       ItemsSource="{Binding Items}" />
 
                             <ComboBox Width="150"
-                                      Margin="10 0 0 0"
                                       rubyer:InputBoxHelper.IsClearable="True"
                                       rubyer:InputBoxHelper.Watermark="可清除"
                                       ItemsSource="{Binding Items}" />
 
                             <ComboBox Width="150"
-                                      Margin="10 0 0 0"
                                       rubyer:InputBoxHelper.IsRound="True"
                                       rubyer:InputBoxHelper.Watermark="边框圆角"
                                       ItemsSource="{Binding Items}" />
                         </StackPanel>
 
-                        <StackPanel Margin="0 10 0 0" Orientation="Horizontal">
+                        <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"
                                       rubyer:InputBoxHelper.Watermark="水印"
@@ -81,14 +78,12 @@
 
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"
-                                      Margin="10 0 0 0"
                                       rubyer:InputBoxHelper.IsClearable="True"
                                       rubyer:InputBoxHelper.Watermark="可清除"
                                       ItemsSource="{Binding Items}" />
 
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"
-                                      Margin="10 0 0 0"
                                       rubyer:InputBoxHelper.IsRound="True"
                                       rubyer:InputBoxHelper.Watermark="边框圆角"
                                       ItemsSource="{Binding Items}" />
@@ -99,7 +94,7 @@
                 <controls:ControlDisplay Title="PreContent 、PostContent"
                                          Grid.Row="2"
                                          Description="通过设置 InputBoxHelper.PreContent 和 InputBoxHelper.PostContent，让下拉框内显示前后缀内容">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                         <ComboBox Width="150" ItemsSource="{Binding Items}">
                             <rubyer:InputBoxHelper.PreContent>
                                 <rubyer:Icon Type="BugFill" />
@@ -107,8 +102,7 @@
                         </ComboBox>
 
                         <ComboBox Style="{StaticResource FilledComboBox}"
-                                  Width="150"
-                                  Margin="10 5"
+                                  MinWidth="150"
                                   rubyer:InputBoxHelper.PostContent=".com"
                                   rubyer:InputBoxHelper.PreContent="http://">
                             <ComboBoxItem>baidu</ComboBoxItem>

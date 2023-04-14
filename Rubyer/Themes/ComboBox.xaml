@@ -268,6 +268,7 @@
 
             <TextBox x:Name="PART_EditableTextBox"
                      Style="{StaticResource RubyerComboBoxEditableTextBox}"
+                     Padding="{TemplateBinding Padding}"
                      HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                      VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                      rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -330,11 +331,11 @@
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.PanningMode" Value="Both" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Height" Value="28" />
+        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MaxDropDownHeight" Value="400" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="0 5" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerComboBoxItem}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />

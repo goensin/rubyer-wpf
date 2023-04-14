@@ -50,14 +50,14 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="0 5" />
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="AllowDrop" Value="true" />
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
-        <Setter Property="Height" Value="28" />
+        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="IsInactiveSelectionHighlightEnabled" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Cursor" Value="IBeam" />
@@ -100,14 +100,12 @@
                                 <ContentControl x:Name="preContent"
                                                 Grid.Column="0"
                                                 Margin="2 0"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
 
-                                <Grid Grid.Column="1"
-                                      Margin="{TemplateBinding Padding}"
-                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                                <Grid Grid.Column="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                                     <ScrollViewer x:Name="PART_ContentHost"
+                                                  Padding="{TemplateBinding Padding}"
                                                   Focusable="false"
                                                   HorizontalScrollBarVisibility="Hidden"
                                                   VerticalScrollBarVisibility="Hidden" />
@@ -120,7 +118,6 @@
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
                                         rubyer:ButtonHelper.Shape="Circle"
                                         Focusable="False"
@@ -132,7 +129,6 @@
                                 <ContentControl x:Name="postContent"
                                                 Grid.Column="3"
                                                 Margin="2 0"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                 Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Foreground="{DynamicResource SeconarydText}" />
                             </Grid>

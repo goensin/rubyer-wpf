@@ -92,16 +92,12 @@
                                          Grid.Row="3"
                                          Description="TextButton Style">
                     <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
-                        <Button Style="{StaticResource TextButton}"
-                                Width="80"
-                                Content="默认按钮" />
+                        <Button Style="{StaticResource TextButton}" Content="默认按钮" />
                         <Button Style="{DynamicResource TextAccentButton}"
-                                Width="80"
                                 rubyer:ButtonHelper.Shape="Round"
                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                 Content="强调按钮" />
                         <Button Style="{DynamicResource TextButton}"
-                                Padding="5"
                                 rubyer:ControlHelper.FocusedBrush="Pink"
                                 Foreground="Pink">
                             <rubyer:Icon Type="TvFill" />
@@ -121,19 +117,14 @@
                 <controls:ControlDisplay Title="Outline Button"
                                          Grid.Row="4"
                                          Description="OutlineButton Style">
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <Button Style="{StaticResource OutlineButton}"
-                                Width="80"
-                                Margin="5"
-                                Content="默认按钮" />
+                    <StackPanel Margin="5"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
+                        <Button Style="{StaticResource OutlineButton}" Content="默认按钮" />
                         <Button Style="{DynamicResource OutlineAccentButton}"
-                                Width="80"
-                                Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="强调按钮" />
-                        <Button Style="{StaticResource OutlineButton}"
-                                Margin="10 0"
-                                rubyer:ButtonHelper.Shape="Circle">
+                        <Button Style="{StaticResource OutlineButton}" rubyer:ButtonHelper.Shape="Circle">
                             <rubyer:Icon Type="MicrosoftFill" />
                         </Button>
                     </StackPanel>
@@ -176,12 +167,9 @@
                     <Grid Margin="5"
                           rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
                           rubyer:PanelHelper.Spacing="15">
-                        <Button Width="80"
-                                rubyer:ButtonHelper.ShowShadow="True"
-                                Content="默认按钮" />
+                        <Button rubyer:ButtonHelper.ShowShadow="True" Content="默认按钮" />
                         <Button Style="{DynamicResource AccentButton}"
                                 Grid.Column="1"
-                                Width="80"
                                 rubyer:ButtonHelper.Shape="Round"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="强调按钮" />
@@ -200,7 +188,6 @@
                                          Type="AndroidFill" />
                         </Button>
                         <Button Grid.Column="4"
-                                Width="80"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="不可用"
                                 IsEnabled="False" />

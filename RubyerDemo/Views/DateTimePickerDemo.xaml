@@ -39,7 +39,7 @@
                                            SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
 
                         <rubyer:DateTimePicker Width="170"
-                                               Margin="10 0 0 0"
+                                               Margin="10 0 0 0" 
                                                rubyer:InputBoxHelper.IsClearable="True"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
                                                SelectedDateTime="{Binding DateTime}" />

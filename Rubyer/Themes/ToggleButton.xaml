@@ -26,9 +26,9 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Height" Value="28" />
+        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="HorizontalContentAlignment" Value="Center" />
-        <Setter Property="Padding" Value="5 0" />
+        <Setter Property="Padding" Value="10 5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />

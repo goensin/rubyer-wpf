@@ -85,33 +85,29 @@
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Toggle Button" Grid.Row="2">
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <ToggleButton Width="100"
-                                      Margin="10 0"
+                    <StackPanel Margin="10"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
+                        <ToggleButton Width="80"
                                       Content="默认"
                                       IsChecked="True" />
                         <ToggleButton Style="{StaticResource LightToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       Content="亮色"
                                       IsChecked="True" />
                         <ToggleButton Style="{StaticResource DarkToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       Content="暗色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource AccentToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       Content="强调色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource DarkToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       Content="x:Null"
                                       IsChecked="{x:Null}" />
                         <ToggleButton Width="100"
-                                      Margin="10 0"
                                       Content="不可用"
                                       IsChecked="True"
                                       IsEnabled="False" />
@@ -119,38 +115,34 @@
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Round Toggle Button" Grid.Row="3">
-                    <StackPanel Margin="10" Orientation="Horizontal">
-                        <ToggleButton Width="100"
-                                      Margin="10 0"
+                    <StackPanel Margin="10"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
+                        <ToggleButton Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="默认"
                                       IsChecked="True" />
                         <ToggleButton Style="{StaticResource LightToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="亮色"
                                       IsChecked="True" />
                         <ToggleButton Style="{StaticResource DarkToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="暗色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource AccentToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="强调色"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource DarkToggleButton}"
-                                      Width="100"
-                                      Margin="10 0"
+                                      Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="x:Null"
                                       IsChecked="{x:Null}" />
-                        <ToggleButton Width="100"
-                                      Margin="10 0"
+                        <ToggleButton Width="80"
                                       rubyer:ButtonHelper.Shape="Round"
                                       Content="不可用"
                                       IsChecked="True"

@@ -13,7 +13,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Height" Value="28" />
+        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -57,12 +57,13 @@
                             <rubyer:InputBoxHelper.PostContent>
                                 <StackPanel Orientation="Horizontal">
                                     <ContentControl VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                    <UniformGrid Columns="1"
+                                    <UniformGrid Height="28"
+                                                 Columns="1"
                                                  Rows="2"
                                                  Visibility="{TemplateBinding ShowButton, Converter={StaticResource BooleanToVisibleConverter}}">
                                         <RepeatButton x:Name="PART_IncreaseButton"
                                                       Style="{StaticResource TextRepeatButton}"
-                                                      Height="Auto"
+                                                      Padding="0"
                                                       rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
                                                       Focusable="False"
                                                       Foreground="{DynamicResource SeconarydText}">
@@ -70,7 +71,7 @@
                                         </RepeatButton>
                                         <RepeatButton x:Name="PART_DecreaseButton"
                                                       Style="{StaticResource TextRepeatButton}"
-                                                      Height="Auto"
+                                                      Padding="0"
                                                       rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
                                                       Focusable="False"
                                                       Foreground="{DynamicResource SeconarydText}">
