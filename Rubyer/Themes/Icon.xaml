@@ -18,7 +18,7 @@
             <Setter.Value>
                 <MultiBinding Converter="{StaticResource MathAddConverter}">
                     <Binding Path="FontSize" RelativeSource="{RelativeSource Self}" />
-                    <Binding Source="11" />
+                    <Binding Source="6" />
                 </MultiBinding>
             </Setter.Value>
         </Setter>
@@ -31,8 +31,8 @@
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <Viewbox>
                             <Canvas x:Name="canvas"
-                                    Width="32"
-                                    Height="32">
+                                    Width="26"
+                                    Height="26">
                                 <Path x:Name="icon"
                                       Data="{Binding Code, RelativeSource={RelativeSource TemplatedParent}}"
                                       Fill="{TemplateBinding Foreground}"

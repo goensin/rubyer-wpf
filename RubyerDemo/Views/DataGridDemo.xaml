@@ -41,6 +41,7 @@
                                   rubyer:HeaderHelper.Padding="8"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
+                                  CanUserSortColumns="False"
                                   GridLinesVisibility="None"
                                   ItemsSource="{Binding Persons}"
                                   SelectionUnit="Cell">
@@ -98,17 +99,15 @@
                     <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                         <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
                         <DataGrid Grid.Row="1"
-                                  HorizontalContentAlignment="Center"
                                   rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                   rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                                   rubyer:ControlHelper.MaskOpacity="1"
-                                  rubyer:HeaderHelper.HorizontalAlignment="Center"
                                   AlternationCount="2"
                                   AutoGenerateColumns="True"
                                   CanUserAddRows="False"
                                   ColumnWidth="70"
                                   Foreground="{StaticResource BlackForeground}"
-                                  GridLinesVisibility="Horizontal"
+                                  GridLinesVisibility="All"
                                   HeadersVisibility="All"
                                   IsReadOnly="False"
                                   ItemsSource="{Binding Persons}"

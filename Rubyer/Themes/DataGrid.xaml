@@ -208,25 +208,21 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 BorderThickness="0">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
+                            <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Orientation="Horizontal">
+                                <ContentPresenter Grid.Column="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
                                 <rubyer:Icon x:Name="arrow"
                                              Foreground="{TemplateBinding Foreground}"
                                              RenderTransformOrigin="0.5,0.5"
-                                             Type="ArrowDownFill"
+                                             Type="ArrowDownSLine"
                                              Visibility="Collapsed">
                                     <rubyer:Icon.RenderTransform>
                                         <RotateTransform x:Name="arrowTransform" Angle="0" />
                                     </rubyer:Icon.RenderTransform>
                                 </rubyer:Icon>
-                                <ContentPresenter Grid.Column="1"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
+                            </StackPanel>
                         </Border>
                         <Thumb x:Name="PART_LeftHeaderGripper"
                                Style="{StaticResource ColumnHeaderGripperStyle}"
@@ -257,7 +253,7 @@
                                                          Storyboard.TargetProperty="Angle"
                                                          From="0"
                                                          To="180"
-                                                         Duration="0:0:0.35" />
+                                                         Duration="0:0:0.3" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.EnterActions>
@@ -267,7 +263,7 @@
                                         <DoubleAnimation Storyboard.TargetName="arrowTransform"
                                                          Storyboard.TargetProperty="Angle"
                                                          To="0"
-                                                         Duration="0:0:0.35" />
+                                                         Duration="0:0:0.3" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </DataTrigger.ExitActions>

@@ -194,6 +194,7 @@
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="0"
                                         Margin="10 0"
+                                        Padding="5"
                                         HorizontalContentAlignment="Left"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}" />
@@ -201,6 +202,7 @@
                                 <Button x:Name="PART_PreviousButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="1"
+                                        Padding="5"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
                                     <rubyer:Icon Type="ArrowUpSLine" />
@@ -209,6 +211,7 @@
                                 <Button x:Name="PART_NextButton"
                                         Style="{StaticResource TextButton}"
                                         Grid.Column="2"
+                                        Padding="5"
                                         Focusable="False"
                                         Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=Calendar}}">
                                     <rubyer:Icon Type="ArrowDownSLine" />
