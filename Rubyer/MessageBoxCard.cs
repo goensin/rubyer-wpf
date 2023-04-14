@@ -11,7 +11,6 @@ namespace Rubyer
     /// 消息框卡片
     /// </summary>
     [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
-    [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = OkButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = CancelButtonPartName, Type = typeof(Button))]
     [TemplatePart(Name = YesButtonPartName, Type = typeof(Button))]
@@ -22,11 +21,6 @@ namespace Rubyer
         /// 转换动画名称
         /// </summary>
         public const string TransitionPartName = "Path_Transition";
-
-        /// <summary>
-        /// 关闭按钮名称
-        /// </summary>
-        public const string CloseButtonPartName = "PART_CloseButton";
 
         /// <summary>
         /// 确认按钮名称
@@ -64,12 +58,6 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-
-            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
-            closeButton.Click += (sender, args) =>
-            {
-                InternalReturnResult(this, MessageBoxResult.Cancel);
-            };
 
             if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
             {
