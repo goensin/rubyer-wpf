@@ -21,31 +21,16 @@
                     <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
-                        <Button Width="80"
-                                Content="默认按钮"
+                        <Button Content="默认按钮"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />
-                        <Button Style="{DynamicResource LightButton}"
-                                Width="80"
-                                Content="亮色按钮" />
-                        <Button Style="{DynamicResource DarkButton}"
-                                Width="80"
-                                Content="暗色按钮" />
-                        <Button Style="{DynamicResource AccentButton}"
-                                Width="80"
-                                Content="强调按钮" />
-                        <Button Style="{DynamicResource InfoButton}"
-                                Width="80"
-                                Content="消息按钮" />
-                        <Button Style="{DynamicResource SuccessButton}"
-                                Width="80"
-                                Content="成功按钮" />
-                        <Button Style="{DynamicResource WaringButton}"
-                                Width="80"
-                                Content="警告按钮" />
-                        <Button Style="{DynamicResource ErrorButton}"
-                                Width="80"
-                                Content="错误按钮" />
+                        <Button Style="{DynamicResource LightButton}" Content="亮色按钮" />
+                        <Button Style="{DynamicResource DarkButton}" Content="暗色按钮" />
+                        <Button Style="{DynamicResource AccentButton}" Content="强调按钮" />
+                        <Button Style="{DynamicResource InfoButton}" Content="消息按钮" />
+                        <Button Style="{DynamicResource SuccessButton}" Content="成功按钮" />
+                        <Button Style="{DynamicResource WaringButton}" Content="警告按钮" />
+                        <Button Style="{DynamicResource ErrorButton}" Content="错误按钮" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
@@ -53,22 +38,18 @@
                                          Grid.Row="1"
                                          Description="通过 ButtonHelper.Shape=&quot;Round&quot; 设置圆角按钮，圆角半径自动适应按钮高度">
                     <StackPanel Margin="5" Orientation="Horizontal">
-                        <Button Width="80"
-                                Margin="5"
+                        <Button Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="默认按钮" />
                         <Button Style="{StaticResource LightButton}"
-                                Width="80"
                                 Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="亮色按钮" />
                         <Button Style="{StaticResource DarkButton}"
-                                Width="80"
                                 Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="暗色按钮" />
                         <Button Style="{StaticResource AccentButton}"
-                                Width="80"
                                 Height="40"
                                 Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
@@ -165,14 +146,12 @@
                         <Button x:Name="loadingButton"
                                 Width="100"
                                 Margin="10 0"
-                                Padding="10 0"
                                 rubyer:ButtonHelper.Loading="False"
                                 rubyer:ButtonHelper.LoadingContent="加载中"
                                 Click="Button_Click"
                                 Content="点我" />
                         <Button Style="{DynamicResource AccentButton}"
                                 Margin="10 0"
-                                Padding="10 0"
                                 rubyer:ButtonHelper.Loading="True"
                                 rubyer:ButtonHelper.LoadingContent="强调按钮"
                                 rubyer:ButtonHelper.Shape="Round"
