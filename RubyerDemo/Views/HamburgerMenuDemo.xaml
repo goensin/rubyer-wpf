@@ -14,14 +14,15 @@
             <GroupBox Height="600"
                       Margin="10"
                       Header="汉堡包菜单 - HamburgerMenu">
-                <Grid rubyer:GridHelper.ColumnDefinitions="*,*">
+                <Grid rubyer:GridHelper.ColumnDefinitions="*,*" rubyer:PanelHelper.Spacing="10">
                     <DockPanel>
                         <TextBlock DockPanel.Dock="Top" Text="items 方式" />
 
-                        <rubyer:HamburgerMenu rubyer:HeaderHelper.Background="#1F000000"
+                        <rubyer:HamburgerMenu BorderThickness="1"
                                               HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
                                               IsExpanded="False"
+                                              PaneBackground="#1F000000"
                                               SelectedIndex="0"
                                               TransitionType="None">
                             <rubyer:HamburgerMenu.OptionsItemsSource>
@@ -108,25 +109,31 @@
                     <DockPanel Grid.Column="1">
                         <TextBlock DockPanel.Dock="Top" Text="binding 方式" />
 
-                        <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource Light}"
+                        <rubyer:HamburgerMenu rubyer:ControlHelper.CornerRadius="15"
+                                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                              rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
+                                              rubyer:ControlHelper.MaskOpacity="1"
                                               rubyer:ControlHelper.SelectedBrush="{DynamicResource Dark}"
-                                              rubyer:HeaderHelper.Background="{DynamicResource Dark}"
                                               rubyer:HeaderHelper.FontSize="16"
-                                              rubyer:HeaderHelper.FontWeight="Bold"
-                                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                                              rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
                                               rubyer:ItemsControlHelper.ItemMargin="5 2"
-                                              rubyer:ItemsControlHelper.ItemPadding="10"
-                                              BorderThickness="1"
-                                              CollapsedWidth="50"
+                                              rubyer:ItemsControlHelper.ItemPadding="10 13"
+                                              Background="{DynamicResource Primary}"
+                                              CollapsedWidth="56"
+                                              CornerRadius="15"
                                               ExpandedWidth="300"
-                                              FontSize="14"
+                                              FontSize="16"
+                                              Foreground="{StaticResource WhiteForeground}"
                                               HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                               Header="开始"
+                                              IsShowLittleBar="False"
                                               ItemsSource="{Binding Models}"
                                               OptionsItemsSource="{Binding OptionsModels}"
+                                              PaneBackground="#3F000000"
+                                              PaneBorderCornerRadius="15"
                                               SelectedIndex="0"
-                                              TransitionDuration="0:0:1"
-                                              TransitionType="ZoomLeft">
+                                              TransitionDuration="0:0:0.5"
+                                              TransitionType="FadeLeft">
                             <rubyer:HamburgerMenu.ItemContainerStyle>
                                 <Style TargetType="rubyer:HamburgerMenuItem">
                                     <Setter Property="IconType" Value="{Binding Icon}" />
@@ -147,7 +154,7 @@
                             </rubyer:HamburgerMenu.OptionsItemContainerStyle>
                             <rubyer:HamburgerMenu.ContentTemplate>
                                 <DataTemplate>
-                                    <Border Background="{DynamicResource Light}">
+                                    <Border>
                                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                                             <rubyer:Icon Type="{Binding Icon}" />
                                             <TextBlock Text="{Binding Name}" />

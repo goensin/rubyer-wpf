@@ -4,6 +4,7 @@ using System.Collections;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -34,12 +35,27 @@ namespace Rubyer
 
         #region fields
 
+        private CornerRadius _cornerRadius;
         private MenuBase optionsMenu;
         private Transition contentTransition;
 
         #endregion fields
 
         #region properties
+
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
+        public static readonly DependencyProperty CornerRadiusProperty = Border.CornerRadiusProperty.AddOwner(typeof(HamburgerMenu), new FrameworkPropertyMetadata(default(CornerRadius), FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
+        /// 圆角半径
+        /// </summary>
+        public CornerRadius CornerRadius
+        {
+            get => _cornerRadius;
+            set => SetValue(CornerRadiusProperty, value);
+        }
 
         /// <summary>
         /// 是否展开菜单
@@ -159,6 +175,51 @@ namespace Rubyer
         {
             get { return (Duration)GetValue(TransitionDurationProperty); }
             set { SetValue(TransitionDurationProperty, value); }
+        }
+
+        /// <summary>
+        /// 面板背景
+        /// </summary>
+        public static readonly DependencyProperty PaneBackgroundProperty =
+            DependencyProperty.Register("PaneBackground", typeof(Brush), typeof(HamburgerMenu), new PropertyMetadata(default(Brush)));
+
+        /// <summary>
+        /// 面板背景
+        /// </summary>
+        public Brush PaneBackground
+        {
+            get { return (Brush)GetValue(PaneBackgroundProperty); }
+            set { SetValue(PaneBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 面板边框
+        /// </summary>
+        public static readonly DependencyProperty PaneBorderThicknessProperty =
+            DependencyProperty.Register("PaneBorderThickness", typeof(Thickness), typeof(HamburgerMenu), new PropertyMetadata(default(Thickness)));
+
+        /// <summary>
+        /// 面板边框
+        /// </summary>
+        public Thickness PaneBorderThickness
+        {
+            get { return (Thickness)GetValue(PaneBorderThicknessProperty); }
+            set { SetValue(PaneBorderThicknessProperty, value); }
+        }
+
+        /// <summary>
+        /// 面板圆角半径
+        /// </summary>
+        public static readonly DependencyProperty PaneBorderCornerRadiusProperty =
+            DependencyProperty.Register("PaneBorderCornerRadius", typeof(CornerRadius), typeof(HamburgerMenu), new PropertyMetadata(default(CornerRadius)));
+
+        /// <summary>
+        /// 面板圆角半径
+        /// </summary>
+        public CornerRadius PaneBorderCornerRadius
+        {
+            get { return (CornerRadius)GetValue(PaneBorderCornerRadiusProperty); }
+            set { SetValue(PaneBorderCornerRadiusProperty, value); }
         }
 
         #endregion properties
