@@ -68,42 +68,42 @@ namespace Rubyer
 
         }
 
-        private static void SetHorizontalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin)
+        private static void SetHorizontalSpacing(SpacingType type, FrameworkElement element, double spacing)
         {
             switch (type)
             {
                 case SpacingType.No:
                 default:
-                    element.Margin = new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom);
+                    element.Margin = new Thickness(0);
                     break;
                 case SpacingType.Start:
-                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, 0, oldMargin.Bottom);
+                    element.Margin = new Thickness(spacing / 2, 0, 0, 0);
                     break;
                 case SpacingType.End:
-                    element.Margin = new Thickness(0, oldMargin.Top, spacing / 2, oldMargin.Bottom);
+                    element.Margin = new Thickness(0, 0, spacing / 2, 0);
                     break;
                 case SpacingType.All:
-                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, spacing / 2, oldMargin.Bottom);
+                    element.Margin = new Thickness(spacing / 2, 0, spacing / 2, 0);
                     break;
             }
         }
 
-        private static void SetVerticalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin)
+        private static void SetVerticalSpacing(SpacingType type, FrameworkElement element, double spacing)
         {
             switch (type)
             {
                 case SpacingType.No:
                 default:
-                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, 0);
+                    element.Margin = new Thickness(0, 0, 0, 0);
                     break;
                 case SpacingType.Start:
-                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, 0);
+                    element.Margin = new Thickness(0, spacing / 2, 0, 0);
                     break;
                 case SpacingType.End:
-                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing / 2);
+                    element.Margin = new Thickness(0, 0, 0, spacing / 2);
                     break;
                 case SpacingType.All:
-                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, spacing / 2);
+                    element.Margin = new Thickness(0, spacing / 2, 0, spacing / 2);
                     break;
             }
         }
@@ -117,7 +117,6 @@ namespace Rubyer
             foreach (FrameworkElement element in children)
             {
                 var spacing = GetSpacing(stackPanel);
-                var oldMargin = element.Margin;
                 SpacingType type;
                 if (index == 0)
                 {
@@ -134,11 +133,11 @@ namespace Rubyer
 
                 if (stackPanel.Orientation == Orientation.Horizontal)
                 {
-                    SetHorizontalSpacing(type, element, spacing, oldMargin);
+                    SetHorizontalSpacing(type, element, spacing);
                 }
                 else
                 {
-                    SetVerticalSpacing(type, element, spacing, oldMargin);
+                    SetVerticalSpacing(type, element, spacing);
                 }
 
                 index++;
@@ -148,11 +147,10 @@ namespace Rubyer
         // Grid
         private static void SetGridSpacing(Grid grid)
         {
-            var children = grid.Children.OfType<FrameworkElement>().Where(x=>x.Visibility != Visibility.Collapsed).ToList();
+            var children = grid.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
             foreach (FrameworkElement element in children)
             {
                 var spacing = GetSpacing(grid);
-                var oldMargin = element.Margin;
 
                 // 水平间距
                 var column = Grid.GetColumn(element);
@@ -176,10 +174,9 @@ namespace Rubyer
                     type = SpacingType.All;
                 }
 
-                SetHorizontalSpacing(type, element, spacing, oldMargin);
+                SetHorizontalSpacing(type, element, spacing);
 
                 // 垂直间距
-                oldMargin = element.Margin;
                 var row = Grid.GetRow(element);
                 var rowSpan = Grid.GetRowSpan(element);
                 var gridRows = grid.RowDefinitions.Count;
@@ -201,7 +198,7 @@ namespace Rubyer
                     type = SpacingType.All;
                 }
 
-                SetVerticalSpacing(type, element, spacing, oldMargin);
+                SetVerticalSpacing(type, element, spacing);
             }
         }
     }
