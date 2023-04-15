@@ -31,8 +31,10 @@
                 <controls:ControlDisplay Title="PanelHelper.Spacing"
                                          Grid.Row="1"
                                          HorizontalContentAlignment="Stretch"
-                                         Description="通过 Row 和 Column 设置间隔, 实际设置 Child 的 Margin">
-                    <StackPanel>
+                                         Description="Grid 和 StackPanel 设置间隔, 实际设置 Child 的 Margin">
+                    <Grid rubyer:GridHelper.ColumnDefinitions="*,Auto"
+                          rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                          rubyer:PanelHelper.Spacing="10">
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
@@ -46,7 +48,10 @@
                                     Value="10" />
                         </StackPanel>
 
+                        <TextBlock Grid.Row="1" Text="Grid:" />
+
                         <Grid x:Name="spacingGrid"
+                              Grid.Row="2"
                               Height="100"
                               rubyer:GridHelper.ColumnDefinitions="*, *"
                               rubyer:GridHelper.RowDefinitions="*, *"
@@ -58,7 +63,46 @@
                                          Grid.Column="1"
                                          Background="{DynamicResource Warning}" />
                         </Grid>
-                    </StackPanel>
+
+                        <TextBlock Grid.Row="3" Text="StackPanel Horizontal:" />
+
+                        <StackPanel Grid.Row="4"
+                                    rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}"
+                                    Orientation="Horizontal">
+                            <StackPanel.Resources>
+                                <Style TargetType="rubyer:Card">
+                                    <Setter Property="Width" Value="30" />
+                                    <Setter Property="Height" Value="30" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <rubyer:Card Background="{DynamicResource Primary}" />
+                            <rubyer:Card Background="{DynamicResource Accent}" />
+                            <rubyer:Card Background="{DynamicResource Light}" />
+                            <rubyer:Card Background="{DynamicResource Dark}" />
+                            <rubyer:Card Background="{DynamicResource Info}" />
+                            <rubyer:Card Background="{DynamicResource Success}" />
+                            <rubyer:Card Background="{DynamicResource Warning}" />
+                            <rubyer:Card Background="{DynamicResource Error}" />
+                        </StackPanel>
+
+                        <TextBlock Grid.Column="1" Text="StackPanel Vertical:" />
+
+                        <StackPanel Grid.Row="1"
+                                    Grid.RowSpan="4"
+                                    Grid.Column="1"
+                                    rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                            <StackPanel.Resources>
+                                <Style TargetType="rubyer:Card">
+                                    <Setter Property="Width" Value="30" />
+                                    <Setter Property="Height" Value="30" />
+                                </Style>
+                            </StackPanel.Resources>
+                            <rubyer:Card Background="{DynamicResource Primary}" />
+                            <rubyer:Card Background="{DynamicResource Accent}" />
+                            <rubyer:Card Background="{DynamicResource Success}" />
+                            <rubyer:Card Background="{DynamicResource Warning}" />
+                        </StackPanel>
+                    </Grid>
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="GridHelper.Rows, GridHelper.Columns"
