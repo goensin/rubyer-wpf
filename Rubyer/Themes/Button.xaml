@@ -136,8 +136,7 @@
 
     <Style x:Key="RubyerButton"
            BasedOn="{StaticResource RubyerButtonBase}"
-           TargetType="{x:Type Button}">
-    </Style>
+           TargetType="{x:Type Button}" />
 
     <Style x:Key="LightButton"
            BasedOn="{StaticResource RubyerButton}"

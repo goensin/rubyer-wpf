@@ -91,20 +91,23 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                        <ScrollViewer Padding="{TemplateBinding Padding}"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="{Binding Path=(ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsGrouping" Value="true" />
-                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -199,21 +202,23 @@
 
                             <ScrollViewer Grid.Column="1"
                                           Padding="{TemplateBinding Padding}"
-                                          Focusable="false">
+                                          Focusable="False"
+                                          HorizontalScrollBarVisibility="{Binding Path=(ScrollViewer.HorizontalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          VerticalScrollBarVisibility="{Binding Path=(ScrollViewer.VerticalScrollBarVisibility), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                 <ItemsPresenter x:Name="scrollViewer" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="false">
+                        <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsGrouping" Value="true" />
-                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="false" />
+                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False" />
                             </MultiTrigger.Conditions>
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="false" />
+                            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
