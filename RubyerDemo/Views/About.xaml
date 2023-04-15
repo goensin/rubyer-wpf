@@ -64,9 +64,8 @@
                 <TextBlock>如果使用了感觉还不错，请作者喝杯茶吧。</TextBlock>
                 <ToggleButton x:Name="toggleButton"
                               Style="{DynamicResource AccentToggleButton}"
-                              Width="80"
+                              MinWidth="100"
                               Margin="20 0"
-                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
                               Background="{DynamicResource Accent}"
                               Foreground="{DynamicResource WhiteForeground}">
                     <rubyer:ToggleButtonHelper.CheckedContent>
@@ -81,7 +80,7 @@
             <rubyer:Transition Grid.Row="2"
                                IsShow="{Binding IsChecked, ElementName=toggleButton}"
                                Type="CollapseDown">
-                <StackPanel Orientation="Horizontal">
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                     <rubyer:Card Margin="10" Background="#07C160">
                         <StackPanel>
                             <TextBlock Margin="10"

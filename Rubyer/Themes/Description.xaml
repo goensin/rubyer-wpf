@@ -74,6 +74,7 @@
         <Setter Property="VerticalDescriptionAlignment" Value="Center" />
         <Setter Property="HorizontalDescriptionAlignment" Value="Left" />
         <Setter Property="DescriptionFontWeight" Value="Normal" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>

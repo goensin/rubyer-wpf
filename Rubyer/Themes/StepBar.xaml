@@ -13,6 +13,7 @@
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="CurrentIndex" Value="{Binding CurrentIndex, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="IconType" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="Template">

@@ -107,4 +107,18 @@
     <CornerRadius x:Key="RightContainerCornerRadius">0 5 5 0</CornerRadius>
     <CornerRadius x:Key="TopContainerCornerRadius">5 5 0 0</CornerRadius>
     <CornerRadius x:Key="BottomContainerCornerRadius">0 0 5 5</CornerRadius>
+
+    <Style x:Key="FocusVisual">
+        <Setter Property="Control.Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Rectangle Margin="2"
+                               SnapsToDevicePixels="true"
+                               Stroke="{DynamicResource DefaultForeground}"
+                               StrokeDashArray="1 2"
+                               StrokeThickness="1" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

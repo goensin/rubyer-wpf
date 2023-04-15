@@ -64,6 +64,7 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
+                                                Focusable="False"
                                                 IsHitTestVisible="False" />
 
                                 <ContentControl x:Name="header"
@@ -72,6 +73,7 @@
                                                 HorizontalAlignment="Left"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Header}"
+                                                Focusable="False"
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Grid>
                         </Border>
@@ -106,6 +108,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
@@ -135,6 +138,7 @@
                                                 HorizontalAlignment="Center"
                                                 VerticalAlignment="Center"
                                                 Content="{TemplateBinding Icon}"
+                                                Focusable="False"
                                                 IsHitTestVisible="False" />
 
                                 <rubyer:Icon x:Name="checkIcon"
@@ -142,6 +146,7 @@
                                              Height="{Binding ActualHeight, ElementName=header}"
                                              HorizontalAlignment="Center"
                                              VerticalAlignment="Center"
+                                             Focusable="False"
                                              Type="CheckFill"
                                              Visibility="Hidden" />
 

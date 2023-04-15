@@ -37,21 +37,17 @@
                 <controls:ControlDisplay Title="Round Button"
                                          Grid.Row="1"
                                          Description="通过 ButtonHelper.Shape=&quot;Round&quot; 设置圆角按钮，圆角半径自动适应按钮高度">
-                    <StackPanel Margin="5" Orientation="Horizontal">
-                        <Button Margin="5"
-                                rubyer:ButtonHelper.Shape="Round"
-                                Content="默认按钮" />
+                    <StackPanel Margin="5"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
+                        <Button rubyer:ButtonHelper.Shape="Round" Content="默认按钮" />
                         <Button Style="{StaticResource LightButton}"
-                                Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="亮色按钮" />
                         <Button Style="{StaticResource DarkButton}"
-                                Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="暗色按钮" />
                         <Button Style="{StaticResource AccentButton}"
-                                Height="40"
-                                Margin="5"
                                 rubyer:ButtonHelper.Shape="Round"
                                 Content="强调按钮" />
                     </StackPanel>
@@ -92,12 +88,16 @@
                                          Grid.Row="3"
                                          Description="TextButton Style">
                     <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
-                        <Button Style="{StaticResource TextButton}" Content="默认按钮" />
+                        <Button Style="{StaticResource TextButton}"
+                                VerticalAlignment="Center"
+                                Content="默认按钮" />
                         <Button Style="{DynamicResource TextAccentButton}"
+                                VerticalAlignment="Center"
                                 rubyer:ButtonHelper.Shape="Round"
                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                 Content="强调按钮" />
                         <Button Style="{DynamicResource TextButton}"
+                                VerticalAlignment="Center"
                                 rubyer:ControlHelper.FocusedBrush="Pink"
                                 Foreground="Pink">
                             <rubyer:Icon Type="TvFill" />
@@ -150,10 +150,6 @@
                         <Button Margin="10 0"
                                 rubyer:ButtonHelper.Loading="True"
                                 rubyer:ButtonHelper.Shape="Circle" />
-                        <Button Margin="10 0"
-                                rubyer:ButtonHelper.CircleDiameter="40"
-                                rubyer:ButtonHelper.Loading="True"
-                                rubyer:ButtonHelper.Shape="Circle" />
                         <Button Style="{StaticResource TextDarkButton}"
                                 Margin="10 0"
                                 rubyer:ButtonHelper.Loading="True"
@@ -165,7 +161,7 @@
                                          Grid.Row="6"
                                          Description="通过 ButtonHelper.ShowShadow 设置是否显示按钮阴影">
                     <Grid Margin="5"
-                          rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto, Auto"
+                          rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto"
                           rubyer:PanelHelper.Spacing="15">
                         <Button rubyer:ButtonHelper.ShowShadow="True" Content="默认按钮" />
                         <Button Style="{DynamicResource AccentButton}"
@@ -180,14 +176,6 @@
                             <rubyer:Icon Type="SearchLine" />
                         </Button>
                         <Button Grid.Column="3"
-                                rubyer:ButtonHelper.CircleDiameter="35"
-                                rubyer:ButtonHelper.Shape="Circle"
-                                rubyer:ButtonHelper.ShowShadow="True">
-                            <rubyer:Icon Width="25"
-                                         Height="25"
-                                         Type="AndroidFill" />
-                        </Button>
-                        <Button Grid.Column="4"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="不可用"
                                 IsEnabled="False" />

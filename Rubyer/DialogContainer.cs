@@ -1,5 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -57,6 +58,7 @@ namespace Rubyer
         private Border rootBorder;
         private object openParameter;
         private object closeParameter;
+        private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DialogContainer"/> class.
@@ -94,6 +96,8 @@ namespace Rubyer
             {
                 contentPresenter.PreviewKeyDown += ContentPresenter_PreviewKeyDown;
             }
+
+            focusableElements = new List<FrameworkElement>();
         }
 
         #region 命令
@@ -305,9 +309,24 @@ namespace Rubyer
         {
             DialogContainer dialog = d as DialogContainer;
 
-            if ((bool)e.NewValue)
+            if (dialog.IsShow)
             {
+                var dialogContent = dialog.Content as FrameworkElement;
+                dialogContent.ForEachVisualChild(x =>
+                {
+                    if (x is FrameworkElement element && element.Focusable)
+                    {
+                        element.Focusable = false;
+                        dialog.focusableElements.Add(element);
+                    }
+                });
+
                 dialog.OpenAnimiation(dialog);
+            }
+            else
+            {
+                dialog.focusableElements.ForEach(x => x.Focusable = true);
+                dialog.focusableElements.Clear();
             }
         }
 

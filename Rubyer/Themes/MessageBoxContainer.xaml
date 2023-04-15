@@ -29,12 +29,14 @@
                                            Panel.ZIndex="100"
                                            IsShow="{TemplateBinding IsShow}">
                             <Border x:Name="PART_RootBorder" Background="{TemplateBinding MaskBackground}">
-                                <ContentControl Grid.Row="1"
-                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                Content="{TemplateBinding DialogContent}"
-                                                Focusable="False"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <ContentPresenter x:Name="PART_DialogContentPresenter"
+                                                  Grid.Row="1"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding DialogContent}"
+                                                  ContentSource="DialogContent"
+                                                  Focusable="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Border>
                         </rubyer:Transition>
                     </Grid>

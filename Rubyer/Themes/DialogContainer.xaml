@@ -8,7 +8,7 @@
 
     <Style x:Key="RubyerDialogContainer" TargetType="rubyer:DialogContainer">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="MaskBackground" Value="{DynamicResource DialogBackground}" />
+        <Setter Property="MaskBackground" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
@@ -91,10 +91,11 @@
                                         </Border>
 
                                         <Border x:Name="contentBorder" Grid.Row="1">
-                                            <ContentControl Margin="{TemplateBinding Padding}"
-                                                            Content="{TemplateBinding DialogContent}"
-                                                            Focusable="False"
-                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            <ContentPresenter x:Name="dialogContent"
+                                                              Margin="{TemplateBinding Padding}"
+                                                              Content="{TemplateBinding DialogContent}"
+                                                              Focusable="False"
+                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                         </Border>
                                     </Grid>
                                 </Border>
@@ -118,6 +119,9 @@
                             <Setter TargetName="cardRoot" Property="Panel.ZIndex" Value="0" />
                             <Setter TargetName="cardRoot" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
+                        <Trigger Property="IsShow" Value="True">
+                            <!--<Setter TargetName="PART_ContentPresenter" Property="Is" Value="False" />-->
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

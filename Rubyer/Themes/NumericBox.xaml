@@ -12,6 +12,7 @@
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Cursor" Value="IBeam" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
@@ -51,7 +52,6 @@
                                  Background="{TemplateBinding Background}"
                                  BorderBrush="{TemplateBinding BorderBrush}"
                                  BorderThickness="{TemplateBinding BorderThickness}"
-                                 Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}"
                                  InputMethod.IsInputMethodEnabled="False"
                                  IsReadOnly="{TemplateBinding IsReadOnly}"

@@ -342,6 +342,7 @@
         <Setter Property="Foreground" Value="{DynamicResource Primary}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
         <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="False" />
         <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />

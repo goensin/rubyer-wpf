@@ -6,20 +6,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="FocusVisual">
-        <Setter Property="Control.Template">
-            <Setter.Value>
-                <ControlTemplate>
-                    <Rectangle Margin="2"
-                               SnapsToDevicePixels="true"
-                               Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
-                               StrokeDashArray="1 2"
-                               StrokeThickness="1" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <!--  默认按钮  -->
     <Style x:Key="RubyerButtonBase" TargetType="{x:Type ButtonBase}">
         <Setter Property="Background" Value="{DynamicResource Primary}" />
@@ -28,8 +14,6 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <!--<Setter Property="Height" Value="28" />-->
         <Setter Property="Padding" Value="10 5" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -63,7 +47,7 @@
                                                 IsActive="{TemplateBinding IsPressed}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                            <StackPanel Margin="{TemplateBinding Padding}" 
+                            <StackPanel Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         Orientation="Horizontal">
@@ -122,7 +106,6 @@
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Round">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
-                            <!--<Setter Property="VerticalAlignment" Value="Stretch" />-->
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Circle">
                             <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
@@ -137,6 +120,14 @@
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="loading" Property="Margin" Value="0" />
                         </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type Button}" />
+                                <Condition Binding="{Binding IsDefault, RelativeSource={RelativeSource Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource AllDirectionEffect3}" />
+                        </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -146,12 +137,6 @@
     <Style x:Key="RubyerButton"
            BasedOn="{StaticResource RubyerButtonBase}"
            TargetType="{x:Type Button}">
-        <Style.Triggers>
-            <Trigger Property="IsDefault" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource DefaultForeground}" />
-                <Setter Property="BorderThickness" Value="1" />
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="LightButton"

@@ -1,5 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,18 +12,11 @@ namespace Rubyer
     /// 消息框容器
     /// </summary>
     [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
-    [TemplatePart(Name = ContentPresenterPartName, Type = typeof(ContentPresenter))]
     public class MessageBoxContainer : ContentControl
     {
-        /// <summary>
-        /// 转换动画名称
-        /// </summary>
-        public const string TransitionPartName = "Path_Transition";
+        const string TransitionPartName = "Path_Transition";
 
-        /// <summary>
-        /// Content 内容名称
-        /// </summary>
-        public const string ContentPresenterPartName = "PART_ContentPresenter";
+        private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
 
         static MessageBoxContainer()
         {
@@ -40,10 +34,7 @@ namespace Rubyer
                 transition.Closed += (sender, e) => IsClosed = true;
             }
 
-            if (GetTemplateChild(ContentPresenterPartName) is ContentPresenter contentPresenter)
-            {
-                contentPresenter.PreviewKeyDown += ContentPresenter_PreviewKeyDown;
-            }
+            focusableElements = new List<FrameworkElement>();
         }
 
         /// <summary>
@@ -104,7 +95,30 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(BooleanBoxes.FalseBox));
+           DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageBoxContainer), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowChanged));
+
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var container = d as MessageBoxContainer;
+
+            if (container.IsShow)
+            {
+                var dialogContent = container.Content as FrameworkElement;
+                dialogContent.ForEachVisualChild(x =>
+                {
+                    if (x is FrameworkElement element && element.Focusable)
+                    {
+                        element.Focusable = false;
+                        container.focusableElements.Add(element);
+                    }
+                });
+            }
+            else
+            {
+                container.focusableElements.ForEach(x => x.Focusable = true);
+                container.focusableElements.Clear();
+            }
+        }
 
         /// <summary>
         /// 是否显示
@@ -128,15 +142,6 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsClosedProperty); }
             set { SetValue(IsClosedProperty, BooleanBoxes.Box(value)); }
-        }
-
-        private void ContentPresenter_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            Key key = e.Key == Key.System ? e.SystemKey : e.Key;
-            if (key == Key.Tab && IsShow)
-            {
-                e.Handled = true;
-            }
         }
     }
 }

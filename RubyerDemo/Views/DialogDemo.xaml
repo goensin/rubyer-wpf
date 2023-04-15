@@ -89,7 +89,9 @@
                                             BeforeOpenCommand="{Binding BeforeDialog3OpenCommand}"
                                             IsEscKeyToClose="False">
                         <rubyer:DialogContainer.DialogContent>
-                            <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *" rubyer:GridHelper.RowDefinitions="40, 40, Auto">
+                            <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *"
+                                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
+                                  rubyer:PanelHelper.Spacing="10">
                                 <TextBlock Margin="10 0">姓名</TextBlock>
                                 <TextBox Grid.Column="1"
                                          Width="120"
@@ -100,7 +102,6 @@
                                          Text="{Binding User.Age}" />
                                 <Button Grid.Row="2"
                                         Grid.ColumnSpan="2"
-                                        Margin="0 10 0 0"
                                         Command="{x:Static rubyer:DialogContainer.CloseDialogCommand}"
                                         CommandParameter="{Binding Paramters}"
                                         IsDefault="True">

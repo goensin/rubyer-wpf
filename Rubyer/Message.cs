@@ -47,7 +47,7 @@ namespace Rubyer
             {
                 Type = type,
                 Content = content,
-                IsClearable = isClearable,
+                IsClearable = isClearable
             };
         }
 
@@ -83,8 +83,10 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowGlobal(MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
+
             MessageWindow messageWindow = MessageWindow.GetInstance();
             messageWindow.Dispatcher.VerifyAccess();
+ 
             MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
