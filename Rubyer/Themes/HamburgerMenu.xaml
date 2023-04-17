@@ -234,6 +234,7 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelHeader" />
                     <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
@@ -241,6 +242,7 @@
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelItem" />
                     <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
