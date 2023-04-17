@@ -8,7 +8,7 @@
 
     <Style x:Key="RubyerDialogContainer" TargetType="rubyer:DialogContainer">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="MaskBackground" Value="Transparent" />
+        <Setter Property="MaskBackground" Value="{DynamicResource DialogBackground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
