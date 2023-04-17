@@ -6,11 +6,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              Background="{DynamicResource DefaultBackground}"
              mc:Ignorable="d">
-    <rubyer:DialogContainer Identifier="haha" x:Name="hah" IsShow="True">
-        <rubyer:DialogContainer.DialogContent>
-            <Button Content="Hello" />
-        </rubyer:DialogContainer.DialogContent>
-        <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
+    <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
             <Grid HorizontalAlignment="Center" rubyer:GridHelper.ColumnDefinitions="Auto, *">
                 <Image Grid.Column="0"
                        Width="50"
@@ -116,5 +112,4 @@
 
             </Grid>
         </Grid>
-    </rubyer:DialogContainer>
 </UserControl>
