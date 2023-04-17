@@ -89,7 +89,7 @@ namespace Rubyer
             if (GetTemplateChild(TransitionName) is Transition transition)
             {
                 transition.Showed += (sender, e) => IsClosed = false;
-                transition.Closed += Closed; ;
+                transition.Closed += Closed;
             }
 
             if (GetTemplateChild(ContentPresenterPartName) is ContentPresenter contentPresenter)
@@ -165,7 +165,7 @@ namespace Rubyer
         /// 关闭后事件
         /// </summary>
         public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
-            "AfterClose", RoutingStrategy.Bubble, typeof(DialogResultRoutedEventHandler), typeof(DialogContainer));
+            "AfterClose", RoutingStrategy.Direct, typeof(DialogResultRoutedEventHandler), typeof(DialogContainer));
 
         /// <summary>
         /// 关闭后事件
@@ -311,17 +311,19 @@ namespace Rubyer
 
             if (dialog.IsShow)
             {
-                var dialogContent = dialog.Content as FrameworkElement;
-                dialogContent.ForEachVisualChild(x =>
+                if (dialog.Content is FrameworkElement dialogContent)
                 {
-                    if (x is FrameworkElement element && element.Focusable)
+                    dialogContent.ForEachVisualChild(x =>
                     {
-                        element.Focusable = false;
-                        dialog.focusableElements.Add(element);
-                    }
-                });
+                        if (x is FrameworkElement element && element.Focusable)
+                        {
+                            element.Focusable = false;
+                            dialog.focusableElements.Add(element);
+                        }
+                    });
 
-                dialog.OpenAnimiation(dialog);
+                    dialog.OpenAnimiation(dialog);
+                }
             }
             else
             {

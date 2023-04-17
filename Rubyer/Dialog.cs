@@ -63,16 +63,22 @@ namespace Rubyer
             DialogContainer.OpenDialogCommand.Execute(parameters, dialog);
 
             var taskCompletionSource = new TaskCompletionSource<object>();
-            DialogContainer.DialogResultRoutedEventHandler handle = (sender, e) =>
-            {
-                taskCompletionSource.TrySetResult(e.Result);
-                dialog.DialogContent = null;
-            };
+            dialog.Tag = taskCompletionSource;
 
-            dialog.AfterClose -= handle;
-            dialog.AfterClose += handle;
+            dialog.AfterClose -= OnDialogClosed;
+            dialog.AfterClose += OnDialogClosed;
 
             return await taskCompletionSource.Task;
+        }
+
+        private static void OnDialogClosed(object sender, DialogResultRoutedEventArgs e)
+        {
+            var dialog = sender as DialogContainer;
+            var taskCompletionSource = dialog.Tag as TaskCompletionSource<object>;
+            taskCompletionSource.TrySetResult(e.Result);
+            dialog.DialogContent = null;
+            dialog.AfterClose -= OnDialogClosed;
+            dialog.Tag = null;
         }
 
         /// <summary>

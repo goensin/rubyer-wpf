@@ -6,110 +6,115 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              Background="{DynamicResource DefaultBackground}"
              mc:Ignorable="d">
-    <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
-        <Grid HorizontalAlignment="Center" rubyer:GridHelper.ColumnDefinitions="Auto, *">
-            <Image Grid.Column="0"
-                   Width="50"
-                   VerticalAlignment="Center"
-                   Source="../rubyer.ico" />
-            <StackPanel Grid.Column="1" Margin="20 0">
-                <StackPanel Margin="0 0 0 5" Orientation="Horizontal">
-                    <TextBlock FontSize="20">Rubyer</TextBlock>
-                    <TextBlock Margin="10 0">作者:  Ensin</TextBlock>
-                </StackPanel>
+    <rubyer:DialogContainer Identifier="haha" x:Name="hah" IsShow="True">
+        <rubyer:DialogContainer.DialogContent>
+            <Button Content="Hello" />
+        </rubyer:DialogContainer.DialogContent>
+        <Grid Margin="50 10 50 30" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
+            <Grid HorizontalAlignment="Center" rubyer:GridHelper.ColumnDefinitions="Auto, *">
+                <Image Grid.Column="0"
+                       Width="50"
+                       VerticalAlignment="Center"
+                       Source="../rubyer.ico" />
+                <StackPanel Grid.Column="1" Margin="20 0">
+                    <StackPanel Margin="0 0 0 5" Orientation="Horizontal">
+                        <TextBlock FontSize="20">Rubyer</TextBlock>
+                        <TextBlock Margin="10 0">作者:  Ensin</TextBlock>
+                    </StackPanel>
 
-                <TextBlock>
-                    项目地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://gitee.com/wuyanxin1028/rubyer-wpf">
-                        gitee.com/wuyanxin1028/rubyer-wpf
+                    <TextBlock>
+                        项目地址:<Hyperlink Click="Hyperlink_Click" NavigateUri="https://gitee.com/wuyanxin1028/rubyer-wpf">
+                            gitee.com/wuyanxin1028/rubyer-wpf
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="1"
+                  Margin="0 10 0 0"
+                  rubyer:GridHelper.RowDefinitions="*, *, *">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="反馈和建议" />
+                    <Border Width="300"
+                            Height="2"
+                            Margin="10"
+                            BorderBrush="{StaticResource Border}"
+                            BorderThickness="1" />
+                </StackPanel>
+                <TextBlock Grid.Row="1" Margin="20 10 0 0">
+                    Gitee :<Hyperlink Click="Hyperlink_Click" NavigateUri="https://gitee.com/wuyanxin1028/rubyer-wpf/issues">
+                        https://gitee.com/wuyanxin1028/rubyer-wpf/issues
                     </Hyperlink>
                 </TextBlock>
-            </StackPanel>
-        </Grid>
-        <Grid Grid.Row="1"
-              Margin="0 10 0 0"
-              rubyer:GridHelper.RowDefinitions="*, *, *">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="反馈和建议" />
-                <Border Width="300"
-                        Height="2"
-                        Margin="10"
-                        BorderBrush="{StaticResource Border}"
-                        BorderThickness="1" />
-            </StackPanel>
-            <TextBlock Grid.Row="1" Margin="20 10 0 0">
-                Gitee :<Hyperlink Click="Hyperlink_Click" NavigateUri="https://gitee.com/wuyanxin1028/rubyer-wpf/issues">
-                    https://gitee.com/wuyanxin1028/rubyer-wpf/issues
-                </Hyperlink>
-            </TextBlock>
-            <TextBlock Grid.Row="2" Margin="20 10 0 0">
-                E-mail:<Hyperlink NavigateUri="635831101@qq.com">
-                    635831101@qq.com
-                </Hyperlink>
-            </TextBlock>
-        </Grid>
-        <Grid Grid.Row="2"
-              Margin="0 10 0 0"
-              rubyer:GridHelper.RowDefinitions="*, *, *">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="打赏作者" />
-                <Border Width="300"
-                        Height="2"
-                        Margin="10"
-                        BorderBrush="{StaticResource Border}"
-                        BorderThickness="1" />
-            </StackPanel>
-            <StackPanel Grid.Row="1"
-                        Margin="20 10 0 0"
-                        Orientation="Horizontal">
-                <TextBlock>如果使用了感觉还不错，请作者喝杯茶吧。</TextBlock>
-                <ToggleButton x:Name="toggleButton"
-                              Style="{DynamicResource AccentToggleButton}"
-                              MinWidth="100"
-                              Margin="20 0"
-                              Background="{DynamicResource Accent}"
-                              Foreground="{DynamicResource WhiteForeground}">
-                    <rubyer:ToggleButtonHelper.CheckedContent>
-                        <rubyer:Icon Type="ArrowUpLine" />
-                    </rubyer:ToggleButtonHelper.CheckedContent>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5 0">打赏</TextBlock>
-                        <rubyer:Icon Type="MoneyCnyCircleFill" />
-                    </StackPanel>
-                </ToggleButton>
-            </StackPanel>
-            <rubyer:Transition Grid.Row="2"
-                               IsShow="{Binding IsChecked, ElementName=toggleButton}"
-                               Type="CollapseDown">
-                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                    <rubyer:Card Margin="10" Background="#07C160">
-                        <StackPanel>
-                            <TextBlock Margin="10"
-                                       HorizontalAlignment="Center"
-                                       FontSize="15"
-                                       Foreground="#FFFFFF">
-                                微信
-                            </TextBlock>
-                            <Image Width="150"
-                                   Margin="10"
-                                   Source="../Assets/wechat.jpg" />
-                        </StackPanel>
-                    </rubyer:Card>
-                    <rubyer:Card Margin="0 10 10 10" Background="#1677FF">
-                        <StackPanel>
-                            <TextBlock Margin="10"
-                                       HorizontalAlignment="Center"
-                                       FontSize="15"
-                                       Foreground="#FFFFFF">
-                                支付宝
-                            </TextBlock>
-                            <Image Width="150"
-                                   Margin="10"
-                                   Source="../Assets/ali.jpg" />
-                        </StackPanel>
-                    </rubyer:Card>
+                <TextBlock Grid.Row="2" Margin="20 10 0 0">
+                    E-mail:<Hyperlink NavigateUri="635831101@qq.com">
+                        635831101@qq.com
+                    </Hyperlink>
+                </TextBlock>
+            </Grid>
+            <Grid Grid.Row="2"
+                  Margin="0 10 0 0"
+                  rubyer:GridHelper.RowDefinitions="*, *, *">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="打赏作者" />
+                    <Border Width="300"
+                            Height="2"
+                            Margin="10"
+                            BorderBrush="{StaticResource Border}"
+                            BorderThickness="1" />
                 </StackPanel>
-            </rubyer:Transition>
+                <StackPanel Grid.Row="1"
+                            Margin="20 10 0 0"
+                            Orientation="Horizontal">
+                    <TextBlock>如果使用了感觉还不错，请作者喝杯茶吧。</TextBlock>
+                    <ToggleButton x:Name="toggleButton"
+                                  Style="{DynamicResource AccentToggleButton}"
+                                  MinWidth="100"
+                                  Margin="20 0"
+                                  Background="{DynamicResource Accent}"
+                                  Foreground="{DynamicResource WhiteForeground}">
+                        <rubyer:ToggleButtonHelper.CheckedContent>
+                            <rubyer:Icon Type="ArrowUpLine" />
+                        </rubyer:ToggleButtonHelper.CheckedContent>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Margin="5 0">打赏</TextBlock>
+                            <rubyer:Icon Type="MoneyCnyCircleFill" />
+                        </StackPanel>
+                    </ToggleButton>
+                </StackPanel>
+                <rubyer:Transition Grid.Row="2"
+                                   IsShow="{Binding IsChecked, ElementName=toggleButton}"
+                                   Type="CollapseDown">
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <rubyer:Card Margin="10" Background="#07C160">
+                            <StackPanel>
+                                <TextBlock Margin="10"
+                                           HorizontalAlignment="Center"
+                                           FontSize="15"
+                                           Foreground="#FFFFFF">
+                                    微信
+                                </TextBlock>
+                                <Image Width="150"
+                                       Margin="10"
+                                       Source="../Assets/wechat.jpg" />
+                            </StackPanel>
+                        </rubyer:Card>
+                        <rubyer:Card Margin="0 10 10 10" Background="#1677FF">
+                            <StackPanel>
+                                <TextBlock Margin="10"
+                                           HorizontalAlignment="Center"
+                                           FontSize="15"
+                                           Foreground="#FFFFFF">
+                                    支付宝
+                                </TextBlock>
+                                <Image Width="150"
+                                       Margin="10"
+                                       Source="../Assets/ali.jpg" />
+                            </StackPanel>
+                        </rubyer:Card>
+                    </StackPanel>
+                </rubyer:Transition>
 
+            </Grid>
         </Grid>
-    </Grid>
+    </rubyer:DialogContainer>
 </UserControl>
