@@ -150,7 +150,7 @@ namespace Rubyer
         /// 打开前事件
         /// </summary>
         public static readonly RoutedEvent BeforeOpenEvent = EventManager.RegisterRoutedEvent(
-            "BeforeOpen", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogContainer));
+            "BeforeOpen", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(DialogContainer));
 
         /// <summary>
         /// 打开前事件
