@@ -174,6 +174,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 获取父元素
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="child">子元素</param>
+        /// <returns>父元素</returns>
+        public static T TryGetParentFromVisualTree<T>(this DependencyObject child) where T : DependencyObject
+        {
+            if (child != null && !(child is T))
+            {
+                return VisualTreeHelper.GetParent(child).TryGetParentFromVisualTree<T>();
+            }
+
+            return (T)(object)child;
+        }
+
+        /// <summary>
         /// 遍历子元素
         /// </summary>
         /// <param name="dependencyObj">依赖对象</param>

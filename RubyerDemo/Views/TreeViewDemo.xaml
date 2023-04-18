@@ -29,7 +29,7 @@
                                      Grid.Column="1"
                                      VerticalAlignment="Top"
                                      HorizontalContentAlignment="Stretch"
-                                     Description="通过 TreeViewHelper.ExpandIconType 设置展开图标 &#x000A;通过 TreeViewHelper.IconFocusedBrush 设置选中展开图标颜色 &#x000A;通过 ControlHelper.FocusedBrush 和 ControlHelper.FocusedForegroundBrush 设置标题颜色 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙">
+                                     Description="通过 TreeViewHelper.ExpandIconType 设置展开图标 &#x000A;通过 TreeViewHelper.IconFocusedBrush 设置选中展开图标颜色 &#x000A;通过 ControlHelper.FocusedBrush 和 ControlHelper.FocusedForegroundBrush 设置标题颜色 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙；&#x000A;通过 TreeViewHelper.RightClickToSelected 设置右键选中">
                 <TreeView rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                           rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
@@ -38,6 +38,7 @@
                           rubyer:ItemsControlHelper.ItemPadding="8 6"
                           rubyer:TreeViewHelper.ExpandIconType="ArrowRightSLine"
                           rubyer:TreeViewHelper.IconFocusedBrush="{DynamicResource Accent}"
+                          rubyer:TreeViewHelper.RightClickToSelected="True"
                           Background="{DynamicResource Dark}"
                           Foreground="{DynamicResource WhiteForeground}"
                           ItemsSource="{Binding Cities}">
