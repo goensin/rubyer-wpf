@@ -164,52 +164,56 @@ namespace Rubyer
             }
         }
 
+        private static void SetPasswordBoxEvents(PasswordBox passwordBox)
+        {
+            if (passwordBox.TryGetChildPartFromVisualTree<Button>("PART_SwitchButton") is Button switchButton)
+            {
+                if (GetShowSwitchButton(passwordBox))
+                {
+                    switchButton.PreviewMouseDown += SwitchButton_MouseDown;
+                    switchButton.PreviewMouseUp += SwitchButton_MouseUp;
+                }
+                else
+                {
+                    switchButton.PreviewMouseDown -= SwitchButton_MouseDown;
+                    switchButton.PreviewMouseUp -= SwitchButton_MouseUp;
+                }
+            }
+        }
+
+        private static void PasswordBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            var passwordBox = sender as PasswordBox;
+            passwordBox.Loaded -= PasswordBox_Loaded;
+            SetPasswordBoxEvents(passwordBox);
+        }
+
+        private static void SwitchButton_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as Button;
+            var passwordBox = button.TryGetParentFromVisualTree<PasswordBox>();
+            SetShowPassword(passwordBox, true);
+        }
+
+        private static void SwitchButton_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var button = sender as Button;
+            var passwordBox = button.TryGetParentFromVisualTree<PasswordBox>();
+            SetShowPassword(passwordBox, false );
+        }
+
         private static void SwitchPasswordShow(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is PasswordBox passwordBox)
             {
-                MouseButtonEventHandler handleDown = (sender, args) =>
-                {
-                    SetShowPassword(passwordBox, !GetShowPassword(passwordBox));
-                    passwordBox.Focus();
-                };
-
-                MouseButtonEventHandler handleUp = (sender, args) =>
-                {
-                    SetShowPassword(passwordBox, false);
-                    passwordBox.GetType()
-                                .GetMethod("Select", BindingFlags.Instance | BindingFlags.NonPublic)
-                                .Invoke(passwordBox, new object[] { passwordBox.Password.Length, 1 });
-                };
-
                 if (passwordBox.IsLoaded)
                 {
-                    if (passwordBox.Template.FindName("switchVisibilityButton", passwordBox) is Button switchButton)
-                    {
-                        switchButton.AddHandler(UIElement.MouseDownEvent, handleDown, true);
-                        switchButton.AddHandler(UIElement.MouseUpEvent, handleUp, true);
-                    }
+                    SetPasswordBoxEvents(passwordBox);
                 }
                 else
                 {
-                    passwordBox.Loaded += (sender, arg) =>
-                    {
-                        if (passwordBox.Template.FindName("switchVisibilityButton", passwordBox) is Button switchButton)
-                        {
-                            switchButton.AddHandler(UIElement.MouseDownEvent, handleDown, true);
-                            switchButton.AddHandler(UIElement.MouseUpEvent, handleUp, true);
-                        }
-                    };
+                    passwordBox.Loaded += PasswordBox_Loaded;
                 }
-
-                passwordBox.Unloaded += (sender, arg) =>
-                {
-                    if (passwordBox.Template.FindName("switchVisibilityButton", passwordBox) is Button switchButton)
-                    {
-                        switchButton.RemoveHandler(UIElement.MouseDownEvent, handleDown);
-                        switchButton.RemoveHandler(UIElement.MouseUpEvent, handleUp);
-                    }
-                };
             }
         }
     }
