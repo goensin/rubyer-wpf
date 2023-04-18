@@ -1,5 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -85,6 +86,38 @@ namespace Rubyer
                     treeView.PreviewMouseRightButtonDown -= TreeView_PreviewMouseRightButtonDown;
                 }
             }
+        }
+
+        /// <summary>
+        /// 是否可绑定 SelectedItem
+        /// </summary>
+        public static readonly DependencyProperty IsBindableProperty = DependencyProperty.RegisterAttached(
+            "IsBindable", typeof(bool), typeof(TreeViewHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsBindableChanaged));
+
+        public static bool GetIsBindable(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsBindableProperty);
+        }
+
+        public static void SetIsBindable(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsBindableProperty, BooleanBoxes.Box(value));
+        }
+
+        /// <summary>
+        /// 可绑定的选中项
+        /// </summary>
+        public static readonly DependencyProperty SelectedItemProperty = DependencyProperty.RegisterAttached(
+            "SelectedItem", typeof(object), typeof(TreeViewHelper), new FrameworkPropertyMetadata(default(object), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemChanged));
+
+        public static object GetSelectedItem(DependencyObject obj)
+        {
+            return (object)obj.GetValue(SelectedItemProperty);
+        }
+
+        public static void SetSelectedItem(DependencyObject obj, object value)
+        {
+            obj.SetValue(SelectedItemProperty, value);
         }
 
         #region 定位到TreeViewItem方法
@@ -212,5 +245,43 @@ namespace Rubyer
         }
 
         #endregion
+
+        private static void OnIsBindableChanaged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TreeView treeView)
+            {
+                RoutedPropertyChangedEventHandler<object> handler = (a, b) =>
+                {
+                    SetSelectedItem(treeView, treeView.SelectedItem);
+                };
+
+                if (GetIsBindable(treeView))
+                {
+                    SetSelectedItem(treeView, treeView.SelectedItem);
+                    treeView.SelectedItemChanged += handler;
+                }
+                else
+                {
+                    treeView.SelectedItemChanged -= handler;
+                }
+            }
+        }
+
+        private static void OnSelectedItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is TreeView treeView)
+            {
+                if (GetIsBindable(treeView))
+                {
+                    if (treeView.SelectedItem != null && treeView.SelectedItem.Equals(GetSelectedItem(treeView)))
+                    {
+                        return;
+                    }
+
+                    var treeViewItem = GetTreeViewItem(treeView, GetSelectedItem(treeView));
+                    treeViewItem?.Focus();
+                }
+            }
+        }
     }
 }

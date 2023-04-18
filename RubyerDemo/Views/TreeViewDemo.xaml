@@ -12,8 +12,10 @@
     <smtx:XamlDisplay UniqueKey="TreeViewDemo">
         <Grid Margin="10"
               rubyer:GridHelper.ColumnDefinitions="1*, 2*"
+              rubyer:GridHelper.RowDefinitions="*,Auto"
               rubyer:PanelHelper.Spacing="10">
             <controls:ControlDisplay Title="Default TreeView"
+                                     Grid.RowSpan="2"
                                      VerticalAlignment="Top"
                                      HorizontalContentAlignment="Stretch">
                 <TreeView ItemsSource="{Binding Cities}">
@@ -29,25 +31,30 @@
                                      Grid.Column="1"
                                      VerticalAlignment="Top"
                                      HorizontalContentAlignment="Stretch"
-                                     Description="通过 TreeViewHelper.ExpandIconType 设置展开图标 &#x000A;通过 TreeViewHelper.IconFocusedBrush 设置选中展开图标颜色 &#x000A;通过 ControlHelper.FocusedBrush 和 ControlHelper.FocusedForegroundBrush 设置标题颜色 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙；&#x000A;通过 TreeViewHelper.RightClickToSelected 设置右键选中">
-                <TreeView rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
-                          rubyer:ControlHelper.MaskOpacity="0.8"
-                          rubyer:ItemsControlHelper.ItemMargin="0 1 5 1"
-                          rubyer:ItemsControlHelper.ItemPadding="8 6"
-                          rubyer:TreeViewHelper.ExpandIconType="ArrowRightSLine"
-                          rubyer:TreeViewHelper.IconFocusedBrush="{DynamicResource Accent}"
-                          rubyer:TreeViewHelper.RightClickToSelected="True"
-                          Background="{DynamicResource Dark}"
-                          Foreground="{DynamicResource WhiteForeground}"
-                          ItemsSource="{Binding Cities}">
-                    <TreeView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                            <TextBlock Text="{Binding Name}" />
-                        </HierarchicalDataTemplate>
-                    </TreeView.ItemTemplate>
-                </TreeView>
+                                     Description="通过 TreeViewHelper.ExpandIconType 设置展开图标 &#x000A;通过 TreeViewHelper.IconFocusedBrush 设置选中展开图标颜色 &#x000A;通过 ControlHelper.FocusedBrush 和 ControlHelper.FocusedForegroundBrush 设置标题颜色 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙；&#x000A;通过 TreeViewHelper.RightClickToSelected 设置右键选中&#x000A;通过 TreeViewHelper.SelectedItem 双向绑定选中项">
+                <Grid rubyer:GridHelper.RowDefinitions="Auto,*" rubyer:PanelHelper.Spacing="10">
+                    <TextBlock Text="{Binding SelectedCity.Name, StringFormat='当前选中：{0}'}" />
+                    <TreeView Grid.Row="1"
+                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                              rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                              rubyer:ControlHelper.MaskOpacity="0.8"
+                              rubyer:ItemsControlHelper.ItemMargin="0 1 5 1"
+                              rubyer:ItemsControlHelper.ItemPadding="8 6"
+                              rubyer:TreeViewHelper.ExpandIconType="ArrowRightSLine"
+                              rubyer:TreeViewHelper.IconFocusedBrush="{DynamicResource Accent}"
+                              rubyer:TreeViewHelper.RightClickToSelected="True"
+                              rubyer:TreeViewHelper.SelectedItem="{Binding SelectedCity}"
+                              Background="{DynamicResource Dark}"
+                              Foreground="{DynamicResource WhiteForeground}"
+                              ItemsSource="{Binding Cities}">
+                        <TreeView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                <TextBlock Text="{Binding Name}" />
+                            </HierarchicalDataTemplate>
+                        </TreeView.ItemTemplate>
+                    </TreeView>
+                </Grid>
             </controls:ControlDisplay>
         </Grid>
     </smtx:XamlDisplay>
