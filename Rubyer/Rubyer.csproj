@@ -8,7 +8,7 @@
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
 		<PackageProjectUrl></PackageProjectUrl>
-		<Version>2.8.8</Version>
+		<Version>2.8.9</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</RepositoryUrl>
