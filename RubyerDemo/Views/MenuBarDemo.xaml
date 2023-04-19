@@ -11,7 +11,7 @@
     <smtx:XamlDisplay HorizontalContentAlignment="Stretch"
                       VerticalContentAlignment="Stretch"
                       UniqueKey="MenuBarDemo">
-        <controls:ControlDisplay Title="Default TreeView"
+        <controls:ControlDisplay Title="Menu、ToolBar、StatusBar"
                                  Grid.RowSpan="2"
                                  Margin="10"
                                  HorizontalContentAlignment="Stretch">
@@ -68,7 +68,7 @@
 
                 <!--  ToolBar  -->
                 <ToolBarTray Grid.Row="1">
-                    <ToolBar Height="50" VerticalContentAlignment="Stretch" VerticalAlignment="Stretch">
+                    <ToolBar>
                         <Button Foreground="{DynamicResource Primary}" ToolTip="向后导航(Ctrl+-)">
                             <rubyer:Icon Type="ArrowLeftCircleFill" />
                         </Button>
