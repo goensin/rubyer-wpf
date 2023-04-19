@@ -338,7 +338,10 @@ namespace Rubyer
                 }
                 else
                 {
-                    numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
+                    if (numberBox.Value.HasValue)
+                    {
+                        numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
+                    }
                 }
             }
 

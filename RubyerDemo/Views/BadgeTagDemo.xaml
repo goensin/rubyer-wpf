@@ -17,26 +17,19 @@
                             <rubyer:Badge x:Name="MyBadge"
                                           Margin="10"
                                           Text="1">
-                                <Button Style="{DynamicResource TextButton}"
-                                        Width="60"
-                                        BorderThickness="1"
-                                        Click="Button_Click">
+                                <Button Style="{DynamicResource OutlineButton}" Click="Button_Click">
                                     经验+1
                                 </Button>
                             </rubyer:Badge>
                             <rubyer:Badge Margin="10"
                                           BadgeFontSize="20"
                                           Text="20">
-                                <Button Style="{DynamicResource TextButton}"
-                                        Width="60"
-                                        BorderThickness="1">
+                                <Button Style="{DynamicResource OutlineButton}" Width="60">
                                     回复
                                 </Button>
                             </rubyer:Badge>
                             <rubyer:Badge Margin="10" Text="99+">
-                                <Button Style="{DynamicResource TextButton}"
-                                        Width="60"
-                                        BorderThickness="1">
+                                <Button Style="{DynamicResource OutlineButton}" Width="60">
                                     评论
                                 </Button>
                             </rubyer:Badge>
@@ -48,9 +41,7 @@
                             <rubyer:Badge Margin="10"
                                           BadgeBrush="{StaticResource Success}"
                                           BadgeSize="30">
-                                <Button Style="{DynamicResource TextButton}"
-                                        Width="100"
-                                        BorderThickness="1">
+                                <Button Style="{DynamicResource OutlineButton}" Width="100">
                                     更新版本
                                 </Button>
                             </rubyer:Badge>
