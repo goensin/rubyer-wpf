@@ -1,4 +1,5 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -169,12 +170,23 @@ namespace Rubyer
                     else if (control is ComboBox comboBox)
                     {
                         comboBox.Focus();
-                        if (comboBox.IsEditable)
+                        if (ComboBoxHelper.GetIsMultiSelect(comboBox))
                         {
-                            comboBox.Text = null;
+                            for (int i = 0; i < comboBox.Items.Count; i++)
+                            {
+                                var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
+                                ComboBoxHelper.SetIsSelected(comboBoxItem, false);
+                            }
                         }
+                        else
+                        {
+                            if (comboBox.IsEditable)
+                            {
+                                comboBox.Text = null;
+                            }
 
-                        comboBox.SelectedItem = null;
+                            comboBox.SelectedItem = null;
+                        }
                     }
                 };
 

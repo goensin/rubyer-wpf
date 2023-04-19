@@ -117,8 +117,36 @@
                     </StackPanel>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="Enum to ItemsSource"
+                <controls:ControlDisplay Title="Multi Select"
                                          Grid.Row="3"
+                                         Description="通过 ComboBoxHelper.IsMultiSelect 设置是否启用多选">
+                    <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
+                        <ComboBox x:Name="multiComboBox"
+                                  MinWidth="120"
+                                  VerticalAlignment="Center"
+                                  rubyer:ComboBoxHelper.IsMultiSelect="True"
+                                  rubyer:ComboBoxHelper.MultiSelectSeparator="{Binding Text, ElementName=separator}"
+                                  rubyer:InputBoxHelper.IsClearable="True"
+                                  rubyer:InputBoxHelper.Watermark="多选框"
+                                  rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                                  SelectedItem="{Binding CurrentFood}" />
+
+                        <StackPanel rubyer:PanelHelper.Spacing="10">
+                            <TextBlock Text="根据 ComboBoxHelper.SelectedItems &#x000A;绑定选中项集合" />
+                            <ListBox BorderThickness="1" ItemsSource="{Binding Path=(rubyer:ComboBoxHelper.SelectedItems), ElementName=multiComboBox}" />
+                        </StackPanel>
+
+                        <StackPanel rubyer:PanelHelper.Spacing="10">
+                            <TextBlock Text="根据 ComboBoxHelper.MultiSelectSeparator &#x000A;设置多选分隔符, 默认‘, ’" />
+                            <TextBox x:Name="separator"
+                                     VerticalAlignment="Center"
+                                     Text=", " />
+                        </StackPanel>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Enum to ItemsSource"
+                                         Grid.Row="4"
                                          Description="通过 ItemsControlHelper.EnumValuesToItemsSource 设置，根据 SelectedItem 绑定 enum 值，自动设置 ItemsSource">
                     <ComboBox Width="120"
                               rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Accent}"

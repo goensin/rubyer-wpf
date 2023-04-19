@@ -23,7 +23,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
                     <Grid>
-                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                        <rubyer:ControlMask x:Name="mask"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
@@ -33,15 +34,25 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <DockPanel>
+                                <CheckBox x:Name="selectCheckBox"
+                                          Margin="0 0 5 0"
+                                          IsChecked="{Binding Path=(rubyer:ComboBoxHelper.IsSelected), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          Visibility="Collapsed" />
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </DockPanel>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
+                            <Setter TargetName="selectCheckBox" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="mask" Property="IsActive" Value="{Binding IsChecked, ElementName=selectCheckBox}" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -332,6 +343,7 @@
         <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 0.5" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
         <Setter Property="rubyer:ItemsControlHelper.EnumValuesToItemsSource" Value="False" />
+        <Setter Property="rubyer:ComboBoxHelper.IsMultiSelect" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBox}">
@@ -407,6 +419,13 @@
                                                   IsHitTestVisible="False"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
+                                <TextBlock x:Name="multiSelectText"
+                                           Margin="{TemplateBinding Padding}"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"
+                                           Text="{Binding Path=(rubyer:ComboBoxHelper.MultiSelectText), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                           Visibility="Collapsed" />
+
                                 <TextBlock x:Name="watermark"
                                            VerticalAlignment="Center"
                                            Foreground="{DynamicResource WatermarkText}"
@@ -462,21 +481,40 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
-                        <DataTrigger Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False">
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="False" />
+                                <Condition Binding="{Binding Path=Content, ElementName=contentPresenter, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
-                        </DataTrigger>
+                        </MultiDataTrigger>
                         <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
                         </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="True" />
+                                <Condition Binding="{Binding Path=Text, ElementName=multiSelectText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
+                        </MultiDataTrigger>
+                        <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="contentPresenter" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="multiSelectText" Property="Visibility" Value="Visible" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="IsEditable" Value="True">
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsEditable, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="False" />
+                </MultiDataTrigger.Conditions>
                 <Setter Property="IsTabStop" Value="False" />
                 <Setter Property="Template" Value="{StaticResource RubyerComboBoxEditableTemplate}" />
-            </Trigger>
+            </MultiDataTrigger>
             <Trigger Property="IsKeyboardFocused" Value="True">
                 <Setter Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
             </Trigger>
