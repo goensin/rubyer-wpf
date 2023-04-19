@@ -5,6 +5,7 @@
                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                      xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                      xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
                      Title="{Binding Title}"
                      Width="1100"
@@ -49,12 +50,16 @@
                         <MenuItem.Header>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock Margin="0 0 10 0" Text="字体大小: " />
-                                <rubyer:NumericBox Style="{StaticResource FrontBackNumericBox}"
-                                                   Width="120"
-                                                   Interval="1"
-                                                   MaxValue="20"
-                                                   MinValue="10"
-                                                   Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
+                                <ComboBox MinWidth="60"
+                                          SelectedIndex="2"
+                                          SelectedItem="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}">
+                                    <sys:Double>10</sys:Double>
+                                    <sys:Double>12</sys:Double>
+                                    <sys:Double>14</sys:Double>
+                                    <sys:Double>16</sys:Double>
+                                    <sys:Double>18</sys:Double>
+                                    <sys:Double>20</sys:Double>
+                                </ComboBox>
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>

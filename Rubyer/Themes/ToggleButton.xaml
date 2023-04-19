@@ -34,9 +34,9 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid>
                             <rubyer:ControlMask x:Name="mask"
-                                                IsActive="{TemplateBinding IsChecked}"
                                                 Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                IsActive="{TemplateBinding IsChecked}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                             <ContentPresenter x:Name="contentPresenter"
