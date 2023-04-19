@@ -62,8 +62,8 @@
     <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
-    <Color x:Key="LightHeaderBackgroundColor">#CFCFCF</Color>
-    <Color x:Key="DarkHeaderBackgroundColor">#757575</Color>
+    <Color x:Key="LightHeaderBackgroundColor">#1F000000</Color>
+    <Color x:Key="DarkHeaderBackgroundColor">#0FFFFFFF</Color>
     <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />

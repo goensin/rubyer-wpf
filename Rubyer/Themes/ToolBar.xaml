@@ -3,8 +3,8 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ToggleButton.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ComboBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="{x:Static ToolBar.SeparatorStyleKey}" TargetType="{x:Type Separator}">
@@ -23,23 +23,19 @@
     <Style x:Key="ToolBarButtonBaseStyle"
            BasedOn="{StaticResource TextButton}"
            TargetType="{x:Type Button}">
-        <Setter Property="Height" Value="28" />
-        <Setter Property="MinWidth" Value="28" />
         <Setter Property="Margin" Value="0 0 2 0" />
-        <Setter Property="Padding" Value="5 0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
     </Style>
 
     <Style x:Key="ToolBarToggleButtonStyle"
            BasedOn="{StaticResource RubyerToggleButton}"
            TargetType="{x:Type ToggleButton}">
-        <Setter Property="Height" Value="28" />
-        <Setter Property="MinWidth" Value="28" />
         <Setter Property="Margin" Value="0 0 2 0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
     </Style>
 
     <Style x:Key="{x:Static ToolBar.ButtonStyleKey}"
@@ -49,6 +45,10 @@
     <Style x:Key="{x:Static ToolBar.ToggleButtonStyleKey}"
            BasedOn="{StaticResource ToolBarToggleButtonStyle}"
            TargetType="{x:Type ToggleButton}" />
+
+    <Style x:Key="{x:Static ToolBar.ComboBoxStyleKey}"
+           BasedOn="{StaticResource RubyerComboBox}"
+           TargetType="{x:Type ComboBox}" />
 
     <Style x:Key="{x:Static ToolBar.CheckBoxStyleKey}"
            BasedOn="{StaticResource ToolBarToggleButtonStyle}"
@@ -142,6 +142,8 @@
         <Setter Property="Margin" Value="0 2" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ToolBarTray}}" />
         <Setter Property="Template">
             <Setter.Value>
