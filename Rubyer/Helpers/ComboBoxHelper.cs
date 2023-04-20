@@ -139,11 +139,28 @@ namespace Rubyer
             if (e.OldValue is INotifyCollectionChanged oldCollection)
             {
                 oldCollection.CollectionChanged -= handler;
+
+                for (int i = 0; i < comboBox.Items.Count; i++)
+                {
+                    var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
+                    SetIsSelected(comboBoxItem, false);
+                }
+
+                SetMultiSelectText(comboBox, null);
             }
 
             if (e.NewValue is INotifyCollectionChanged newCollection)
             {
                 newCollection.CollectionChanged += handler;
+
+                var list = e.NewValue as IList;
+                foreach (var item in list)
+                {
+                    var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(item) as ComboBoxItem;
+                    SetIsSelected(comboBoxItem, true);
+                }
+
+                UpdateMultiSelectText(comboBox);
             }
         }
 

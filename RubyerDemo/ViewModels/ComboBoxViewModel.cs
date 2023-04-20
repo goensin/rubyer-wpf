@@ -57,5 +57,16 @@ namespace RubyerDemo.ViewModels
                 SelectedItems.RemoveAt(0);
             }
         }
+
+        [RelayCommand]
+        private void ReplaceSelectedItems()
+        {
+            SelectedItems = new ObservableCollection<FoodType>() { FoodType.OysterOmelette };
+            SelectedItems.CollectionChanged += SelectedItems_CollectionChanged1;
+        }
+
+        private void SelectedItems_CollectionChanged1(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+        }
     }
 }

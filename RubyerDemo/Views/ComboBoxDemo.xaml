@@ -141,6 +141,9 @@
                                 <Button Style="{StaticResource ErrorButton}"
                                         Command="{Binding ClearSelectedItemsCommand}"
                                         Content="清除所有项" />
+                                <Button Style="{StaticResource SuccessButton}"
+                                        Command="{Binding ReplaceSelectedItemsCommand}"
+                                        Content="替换源" />
                             </StackPanel>
                             <ListBox BorderThickness="1" ItemsSource="{Binding SelectedItems}" />
                         </StackPanel>
