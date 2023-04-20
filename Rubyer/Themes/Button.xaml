@@ -126,7 +126,7 @@
                                 <Condition Binding="{Binding IsDefault, RelativeSource={RelativeSource Self}}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="effectBorder" Property="Effect" Value="{StaticResource AllDirectionEffect3}" />
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
                         </MultiDataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
