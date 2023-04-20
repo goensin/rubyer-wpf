@@ -174,8 +174,10 @@ namespace Rubyer
                         {
                             for (int i = 0; i < comboBox.Items.Count; i++)
                             {
-                                var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
-                                ComboBoxHelper.SetIsSelected(comboBoxItem, false);
+                                if (comboBox.ItemContainerGenerator.ContainerFromIndex(i) is ComboBoxItem comboBoxItem)
+                                {
+                                    ComboBoxHelper.SetIsSelected(comboBoxItem, false);
+                                }
                             }
                         }
                         else

@@ -126,6 +126,7 @@
                                   VerticalAlignment="Center"
                                   rubyer:ComboBoxHelper.IsMultiSelect="True"
                                   rubyer:ComboBoxHelper.MultiSelectSeparator="{Binding Text, ElementName=separator}"
+                                  rubyer:ComboBoxHelper.SelectedItems="{Binding SelectedItems}"
                                   rubyer:InputBoxHelper.IsClearable="True"
                                   rubyer:InputBoxHelper.Watermark="多选框"
                                   rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
@@ -133,7 +134,15 @@
 
                         <StackPanel rubyer:PanelHelper.Spacing="10">
                             <TextBlock Text="根据 ComboBoxHelper.SelectedItems &#x000A;绑定选中项集合" />
-                            <ListBox BorderThickness="1" ItemsSource="{Binding Path=(rubyer:ComboBoxHelper.SelectedItems), ElementName=multiComboBox}" />
+                            <StackPanel rubyer:PanelHelper.Spacing="5" Orientation="Horizontal">
+                                <Button Style="{StaticResource WaringButton}"
+                                        Command="{Binding RemoveFirstItemCommand}"
+                                        Content="移除第一个" />
+                                <Button Style="{StaticResource ErrorButton}"
+                                        Command="{Binding ClearSelectedItemsCommand}"
+                                        Content="清除所有项" />
+                            </StackPanel>
+                            <ListBox BorderThickness="1" ItemsSource="{Binding SelectedItems}" />
                         </StackPanel>
 
                         <StackPanel rubyer:PanelHelper.Spacing="10">
