@@ -153,7 +153,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{Binding View, RelativeSource={RelativeSource Self}, Converter={StaticResource ListViewGridViewConverter}}" />
-        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource LayoutBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />

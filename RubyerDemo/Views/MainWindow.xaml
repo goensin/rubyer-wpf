@@ -164,7 +164,6 @@
 
     <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
                           rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"
-                          rubyer:HeaderHelper.Background="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
                           rubyer:HeaderHelper.FontSize="{Binding FontSize, RelativeSource={RelativeSource Self}}"
                           rubyer:HeaderHelper.FontWeight="Bold"
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
@@ -172,7 +171,7 @@
                           Foreground="{DynamicResource WhiteForeground}"
                           Header="Controls"
                           ItemsSource="{Binding MenuItems}"
-                          PaneBackground="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=Window}}"
+                          PaneBackground="{Binding TitleBackground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
                           SelectedItem="{Binding CurrentMenuItem}">
         <rubyer:HamburgerMenu.ItemContainerStyle>
             <Style TargetType="rubyer:HamburgerMenuItem">

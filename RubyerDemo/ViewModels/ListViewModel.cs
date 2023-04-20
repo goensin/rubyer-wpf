@@ -58,7 +58,7 @@ namespace RubyerDemo.ViewModels
         private string name;
 
         [Display(Name = "名称")]
-        [ColumnWidth("*")]
+        [ColumnWidth("100")]
         public string Name
         {
             get => name;

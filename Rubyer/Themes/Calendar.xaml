@@ -281,7 +281,7 @@
     </Style>
 
     <Style x:Key="RubyerCalendar" TargetType="{x:Type Calendar}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CalendarButtonStyle" Value="{StaticResource RubyerCalendarButtonStyle}" />

@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerNotificationCard" TargetType="{x:Type rubyer:NotificationCard}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
@@ -24,7 +24,7 @@
         <Setter Property="Padding" Value="10 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />

@@ -33,7 +33,8 @@ namespace Rubyer
             "Mask",
             "MaskDark",
             "DialogBackground",
-            "HeaderBackground",
+            "LayoutBackground",
+            "FloatBackground",
         };
 
         private static bool themeApplying = false;
@@ -204,8 +205,10 @@ namespace Rubyer
         {
             var resourceDictionaries = Application.Current.Resources.MergedDictionaries;
 
-            var resourceDictionary = new ResourceDictionary();
-            resourceDictionary.Source = new Uri(colorUrl, UriKind.RelativeOrAbsolute);
+            var resourceDictionary = new ResourceDictionary
+            {
+                Source = new Uri(colorUrl, UriKind.RelativeOrAbsolute)
+            };
 
             if (resourceDictionaries.Any(x => x.Source.AbsoluteUri == resourceDictionary.Source.AbsoluteUri))
             {

@@ -54,13 +54,13 @@
                     <Grid>
                         <Border Margin="5"
                                 Padding="0 5"
-                                Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                Background="{DynamicResource FloatBackground}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 Effect="{DynamicResource AllDirectionEffect}" />
                         <Border x:Name="SubmenuBorder"
                                 Margin="5"
                                 Padding="0 5"
-                                Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                Background="{DynamicResource FloatBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -109,7 +109,7 @@
 
     <!--  SubmenuHeade  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Grid Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}">
+        <Grid Background="Transparent">
             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsActive="{TemplateBinding IsHighlighted}"
@@ -158,13 +158,13 @@
                         <Grid>
                             <Border Margin="5"
                                     Padding="0 5"
-                                    Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                    Background="{DynamicResource FloatBackground}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Effect="{DynamicResource AllDirectionEffect}" />
                             <Border x:Name="SubmenuBorder"
                                     Margin="5"
                                     Padding="0 5"
-                                    Background="{Binding RelativeSource={RelativeSource AncestorType=MenuBase}, Path=Background}"
+                                    Background="{DynamicResource FloatBackground}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -192,7 +192,7 @@
 
     <!--  SubmenuItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Grid Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}">
+        <Grid Background="Transparent">
             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsActive="{TemplateBinding IsHighlighted}"

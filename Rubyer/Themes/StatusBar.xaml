@@ -36,7 +36,7 @@
     </Style>
 
     <Style x:Key="RubyerStatusBar" TargetType="{x:Type StatusBar}">
-        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />

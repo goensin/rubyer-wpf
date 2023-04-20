@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerMessageBoxCard" TargetType="{x:Type rubyer:MessageBoxCard}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
         <Setter Property="BorderBrush" Value="{Binding ThemeColorBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
@@ -27,7 +27,7 @@
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />

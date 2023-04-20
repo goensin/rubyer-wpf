@@ -76,6 +76,7 @@
                                    VerticalOffset="5">
                                 <rubyer:Card Margin="5"
                                              Padding="0"
+                                             Background="{DynamicResource FloatBackground}"
                                              BorderThickness="0">
                                     <Grid>
                                         <Grid.RowDefinitions>

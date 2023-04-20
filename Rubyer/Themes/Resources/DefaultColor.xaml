@@ -12,6 +12,10 @@
     <Color x:Key="DarkDefaultBackgroundColor">#1E1E1E</Color>
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightDefaultBackgroundColor}" />
 
+    <Color x:Key="LightFloatBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkFloatBackgroundColor">#303030</Color>
+    <SolidColorBrush x:Key="FloatBackground" Color="{DynamicResource LightFloatBackgroundColor}" />
+
     <Color x:Key="LightPrimaryColor">#2196F3</Color>
     <Color x:Key="DarkPrimaryColor">#2196F3</Color>
     <SolidColorBrush x:Key="Primary" Color="{DynamicResource LightPrimaryColor}" />
@@ -62,9 +66,9 @@
     <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
-    <Color x:Key="LightHeaderBackgroundColor">#1F000000</Color>
-    <Color x:Key="DarkHeaderBackgroundColor">#0FFFFFFF</Color>
-    <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
+    <Color x:Key="LightLayoutBackgroundColor">#1F000000</Color>
+    <Color x:Key="DarkLayoutBackgroundColor">#1FFFFFFF</Color>
+    <SolidColorBrush x:Key="LayoutBackground" Color="{DynamicResource LightLayoutBackgroundColor}" />
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />

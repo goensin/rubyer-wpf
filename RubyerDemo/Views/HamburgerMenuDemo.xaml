@@ -19,7 +19,7 @@
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                           Header="开始"
                                           IsExpanded="False"
-                                          PaneBackground="#1F000000"
+                                          PaneBackground="{DynamicResource LayoutBackground}"
                                           SelectedIndex="0"
                                           TransitionType="None">
                         <rubyer:HamburgerMenu.OptionsItemsSource>

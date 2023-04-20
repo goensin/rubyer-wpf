@@ -239,7 +239,7 @@
                 <Grid>
                     <Border x:Name="dropDownBorder"
                             Margin="5"
-                            Background="{TemplateBinding Background}"
+                            Background="{DynamicResource FloatBackground}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             Effect="{DynamicResource AllDirectionEffect}" />
                     <ScrollViewer x:Name="DropDownScrollViewer"
@@ -372,7 +372,7 @@
                             <Grid>
                                 <Border x:Name="dropDownBorder"
                                         Margin="5"
-                                        Background="{TemplateBinding Background}"
+                                        Background="{DynamicResource FloatBackground}"
                                         CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         Effect="{DynamicResource AllDirectionEffect}" />
                                 <ScrollViewer x:Name="DropDownScrollViewer"

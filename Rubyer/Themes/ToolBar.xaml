@@ -167,12 +167,12 @@
                                        PopupAnimation="Fade"
                                        StaysOpen="False">
                                     <Grid Margin="5">
-                                        <Border Background="{DynamicResource DefaultBackground}"
+                                        <Border Background="{DynamicResource FloatBackground}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 Effect="{DynamicResource AllDirectionEffect}" />
 
                                         <Border x:Name="DropDownBorder"
-                                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=ToolBarTray}}"
+                                                Background="{DynamicResource FloatBackground}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel"
                                                                   Margin="5"
@@ -207,7 +207,7 @@
     </Style>
 
     <Style x:Key="RubyerToolBarTray" TargetType="{x:Type ToolBarTray}">
-        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
     </Style>
 </ResourceDictionary>

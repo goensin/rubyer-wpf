@@ -37,11 +37,11 @@ namespace RubyerDemo
         {
             if (e.IsDarkMode)
             {
-                this.BorderBrush = (Brush)Application.Current.Resources["Dark"];
+                this.TitleBackground = (Brush)Application.Current.Resources["Dark"];
             }
             else
             {
-                this.BorderBrush = (Brush)Application.Current.Resources["Primary"];
+                this.TitleBackground = (Brush)Application.Current.Resources["Primary"];
             }
         }
 

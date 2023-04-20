@@ -176,13 +176,13 @@
                                     <Grid>
                                         <Border Margin="5"
                                                 Padding="5"
-                                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}"
+                                                Background="{DynamicResource FloatBackground}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                                 Effect="{DynamicResource AllDirectionEffect}" />
                                         <Border x:Name="SubmenuBorder"
                                                 Margin="5"
                                                 Padding="5"
-                                                Background="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}"
+                                                Background="{DynamicResource FloatBackground}"
                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                 BorderThickness="{TemplateBinding BorderThickness}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
