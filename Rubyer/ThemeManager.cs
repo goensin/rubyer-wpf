@@ -6,6 +6,7 @@ using System.Windows;
 using Microsoft.Win32;
 using Rubyer.Models;
 using System.Linq;
+using System.Windows.Media.Effects;
 
 namespace Rubyer
 {
@@ -35,6 +36,19 @@ namespace Rubyer
             "DialogBackground",
             "LayoutBackground",
             "FloatBackground",
+            "AllDirectionEffect",
+            "AllDirectionEffect2",
+            "AllDirectionEffect3",
+            "AllDirectionEffect4",
+            "AllDirectionEffect5",
+            "RightTopEffect",
+            "LeftTopEffect",
+            "RightBottomEffect",
+            "LeftBottomEffect",
+            "TopEffect",
+            "BottomEffect",
+            "RightEffect",
+            "LeftEffect",
         };
 
         private static bool themeApplying = false;
@@ -66,16 +80,8 @@ namespace Rubyer
             return (int)registryValueObject <= 0;
         }
 
-        private static void ApplyColor(bool isDark, string colorName)
+        private static ColorAnimation GetColorAnimation(bool isDark, Color lightColor, Color darkColor)
         {
-            Color lightColor = (Color)Application.Current.FindResource($"Light{colorName}Color");
-            Color darkColor = (Color)Application.Current.FindResource($"Dark{colorName}Color");
-
-            if (!(Application.Current.Resources[colorName] is Brush brush))
-            {
-                return;
-            }
-
             themeApplying = true;
 
             var animation = new ColorAnimation
@@ -86,15 +92,48 @@ namespace Rubyer
             };
 
             animation.Completed += (sender, e) => themeApplying = false;
+            return animation;
+        }
 
-            if (brush.IsFrozen)
+        private static void ApplyColor(bool isDark, string colorName)
+        {
+            Color lightColor;
+            Color darkColor;
+            if (colorName.Contains("Effect"))
             {
-                brush = brush.CloneCurrentValue();
+                lightColor = (Color)Application.Current.FindResource($"LightEffectColor");
+                darkColor = (Color)Application.Current.FindResource($"DarkEffectColor");
+            }
+            else
+            {
+                lightColor = (Color)Application.Current.FindResource($"Light{colorName}Color");
+                darkColor = (Color)Application.Current.FindResource($"Dark{colorName}Color");
             }
 
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
 
-            Application.Current.Resources[colorName] = brush;
+            if (Application.Current.Resources[colorName] is Brush brush)
+            {
+                ColorAnimation animation = GetColorAnimation(isDark, lightColor, darkColor);
+
+                if (brush.IsFrozen)
+                {
+                    brush = brush.CloneCurrentValue();
+                }
+
+                brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
+
+                Application.Current.Resources[colorName] = brush;
+            }
+            else if (Application.Current.Resources[colorName] is DropShadowEffect effect)
+            {
+                if (effect.IsFrozen)
+                {
+                    effect = effect.CloneCurrentValue();
+                }
+
+                effect.Color = isDark ? darkColor : lightColor;
+                Application.Current.Resources[colorName] = effect;
+            }
         }
 
         private static ThemeColor GetCurrentThemeColor(Application application)

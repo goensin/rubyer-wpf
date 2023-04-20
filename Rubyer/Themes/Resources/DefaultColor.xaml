@@ -52,7 +52,8 @@
     <Color x:Key="DarkWatermarkTextColor">#BBE0E0E0</Color>
     <SolidColorBrush x:Key="WatermarkText" Color="{DynamicResource LightWatermarkTextColor}" />
 
-    <Color x:Key="EffectColor">#BDBDBD</Color>
+    <Color x:Key="LightEffectColor">#969696</Color>
+    <Color x:Key="DarkEffectColor">#000000</Color>
 
     <Color x:Key="LightMaskColor">#9E9E9E</Color>
     <Color x:Key="DarkMaskColor">#9E9E9E</Color>
