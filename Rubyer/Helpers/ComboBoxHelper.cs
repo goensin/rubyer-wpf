@@ -102,7 +102,7 @@ namespace Rubyer
         {
             var comboBox = d as ComboBox;
 
-            NotifyCollectionChangedEventHandler handler = (sender, args) =>
+            void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
             {
                 switch (args.Action)
                 {
@@ -134,11 +134,11 @@ namespace Rubyer
                 }
 
                 UpdateMultiSelectText(comboBox);
-            };
+            }
 
             if (e.OldValue is INotifyCollectionChanged oldCollection)
             {
-                oldCollection.CollectionChanged -= handler;
+                oldCollection.CollectionChanged -= OnCollectionChanged;
 
                 for (int i = 0; i < comboBox.Items.Count; i++)
                 {
@@ -153,7 +153,7 @@ namespace Rubyer
 
             if (e.NewValue is INotifyCollectionChanged newCollection)
             {
-                newCollection.CollectionChanged += handler;
+                newCollection.CollectionChanged += OnCollectionChanged;
 
                 var list = e.NewValue as IList;
                 foreach (var item in list)

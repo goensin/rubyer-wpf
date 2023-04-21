@@ -51,7 +51,7 @@
                         </Trigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
                             <Setter TargetName="selectCheckBox" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="mask" Property="IsActive" Value="{Binding IsChecked, ElementName=selectCheckBox}" />
+                            <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

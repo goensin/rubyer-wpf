@@ -62,7 +62,6 @@
 
                             <ComboBox Width="150"
                                       rubyer:InputBoxHelper.IsClearable="True"
-                                      rubyer:InputBoxHelper.PostContent="##"
                                       rubyer:InputBoxHelper.Watermark="可清除"
                                       ItemsSource="{Binding Items}" />
 

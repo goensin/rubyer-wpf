@@ -37,119 +37,105 @@
             <Menu Grid.Column="1"
                   HorizontalAlignment="Right"
                   rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                  rubyer:MenuHelper.IconWidth="30"
                   Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <TextBlock Text="字体" />
-                            <rubyer:Icon Margin="5 0 0 0" Type="FontSize2" />
+                        <StackPanel rubyer:PanelHelper.Spacing="8"
+                                    Orientation="Horizontal"
+                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                            <rubyer:Icon Type="SettingsFill" />
+                            <TextBlock Text="设置" />
                         </StackPanel>
                     </MenuItem.Header>
-                    <MenuItem>
+
+                    <MenuItem x:Name="darkMode"
+                              Click="BlackSwitch_Click"
+                              IsCheckable="True">
                         <MenuItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="0 0 10 0" Text="字体大小: " />
-                                <ComboBox MinWidth="60"
-                                          SelectedIndex="2"
-                                          SelectedItem="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}">
-                                    <sys:Double>10</sys:Double>
-                                    <sys:Double>12</sys:Double>
-                                    <sys:Double>14</sys:Double>
-                                    <sys:Double>16</sys:Double>
-                                    <sys:Double>18</sys:Double>
-                                    <sys:Double>20</sys:Double>
-                                </ComboBox>
+                            <StackPanel rubyer:PanelHelper.Spacing="6" Orientation="Horizontal">
+                                <TextBlock Text="深色模式" />
+                                <rubyer:Icon Type="MoonFill" />
                             </StackPanel>
                         </MenuItem.Header>
                     </MenuItem>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <TextBlock Text="圆角" />
-                            <rubyer:Icon Margin="5 0 0 0" Type="RoundedCorner" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                    <MenuItem>
-                        <MenuItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Margin="0 0 10 0" Text="控件: " />
-                                <Slider x:Name="controlSlider"
-                                        Width="120"
-                                        rubyer:SliderHelper.DraggingShowValue="True"
-                                        rubyer:SliderHelper.ValuePlacement="Right"
-                                        IsSnapToTickEnabled="True"
-                                        Maximum="15"
-                                        Minimum="0"
-                                        TickFrequency="0.1"
-                                        ValueChanged="controlSlider_ValueChanged" />
-                            </StackPanel>
-                        </MenuItem.Header>
+
+                    <MenuItem Header="主题配色" ItemsSource="{Binding ThemeColors}">
+                        <MenuItem.Icon>
+                            <rubyer:Icon Foreground="{DynamicResource Accent}" Type="TShirtFill" />
+                        </MenuItem.Icon>
+                        <MenuItem.ItemContainerStyle>
+                            <Style BasedOn="{StaticResource RubyerMenuItem}" TargetType="{x:Type MenuItem}">
+                                <Setter Property="Command" Value="{Binding DataContext.ChangeThemeColorCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                                <Setter Property="CommandParameter" Value="{Binding}" />
+                                <Setter Property="Foreground" Value="{Binding Primary}" />
+                                <Setter Property="Header" Value="{Binding Name}" />
+                                <Setter Property="Icon" Value="{Binding IsSeleted, Converter={StaticResource IsSelectedToIcon}}" />
+                            </Style>
+                        </MenuItem.ItemContainerStyle>
                     </MenuItem>
-                    <MenuItem>
-                        <MenuItem.Header>
-                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource DefaultForeground}">
-                                <TextBlock Margin="0 0 10 0" Text="容器: " />
-                                <Slider x:Name="contrainerSlider"
-                                        Width="120"
-                                        rubyer:SliderHelper.DraggingShowValue="True"
-                                        rubyer:SliderHelper.ValuePlacement="Right"
-                                        IsSnapToTickEnabled="True"
-                                        Maximum="20"
-                                        Minimum="0"
-                                        TickFrequency="0.1"
-                                        ValueChanged="contrainerSlider_ValueChanged" />
-                            </StackPanel>
-                        </MenuItem.Header>
+
+                    <MenuItem Header="字体大小">
+                        <MenuItem.Icon>
+                            <rubyer:Icon Type="FontSize2" />
+                        </MenuItem.Icon>
+                        <Slider Height="80"
+                                rubyer:SliderHelper.DraggingShowValue="True"
+                                Interval="1"
+                                IsSnapToTickEnabled="True"
+                                Maximum="24"
+                                Minimum="10"
+                                Orientation="Vertical"
+                                Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
                     </MenuItem>
-                </MenuItem>
-                <MenuItem ItemsSource="{Binding ThemeColors}">
-                    <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <TextBlock Text="主题" />
-                            <rubyer:Icon Margin="5 0 0 0"
-                                         Foreground="{DynamicResource Accent}"
-                                         Type="TShirtFill" />
-                        </StackPanel>
-                    </MenuItem.Header>
-                    <MenuItem.ItemContainerStyle>
-                        <Style BasedOn="{StaticResource RubyerMenuItem}" TargetType="{x:Type MenuItem}">
-                            <Setter Property="Command" Value="{Binding DataContext.ChangeThemeColorCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
-                            <Setter Property="CommandParameter" Value="{Binding}" />
-                            <Setter Property="Foreground" Value="{Binding Primary}" />
-                            <Setter Property="Header" Value="{Binding Name}" />
-                            <Setter Property="Icon" Value="{Binding IsSeleted, Converter={StaticResource IsSelectedToIcon}}" />
-                        </Style>
-                    </MenuItem.ItemContainerStyle>
-                </MenuItem>
-                <MenuItem>
-                    <MenuItem.Header>
-                        <ToggleButton x:Name="darkToggleButton"
-                                      Height="Auto"
-                                      Padding="0"
-                                      rubyer:ControlHelper.FocusedBrush="Transparent"
-                                      rubyer:ControlHelper.MaskOpacity="0"
-                                      Background="Transparent"
-                                      Click="BlackSwitch_Click">
-                            <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                                <TextBlock Text="夜间模式" />
-                                <rubyer:Icon Margin="5 0 0 0" Type="MoonFill" />
-                            </StackPanel>
-                            <rubyer:ToggleButtonHelper.CheckedContent>
+
+                    <MenuItem Header="圆角半径">
+                        <MenuItem.Icon>
+                            <rubyer:Icon Type="RoundedCorner" />
+                        </MenuItem.Icon>
+                        <MenuItem>
+                            <MenuItem.Header>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="白天模式" />
-                                    <rubyer:Icon Margin="5 0 0 0" Type="SunFill" />
+                                    <TextBlock Margin="0 0 10 0" Text="控件: " />
+                                    <Slider x:Name="controlSlider"
+                                            Width="120"
+                                            rubyer:SliderHelper.DraggingShowValue="True"
+                                            rubyer:SliderHelper.ValuePlacement="Right"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="15"
+                                            Minimum="0"
+                                            TickFrequency="0.1"
+                                            ValueChanged="controlSlider_ValueChanged" />
                                 </StackPanel>
-                            </rubyer:ToggleButtonHelper.CheckedContent>
-                        </ToggleButton>
-                    </MenuItem.Header>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem>
+                            <MenuItem.Header>
+                                <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource DefaultForeground}">
+                                    <TextBlock Margin="0 0 10 0" Text="容器: " />
+                                    <Slider x:Name="contrainerSlider"
+                                            Width="120"
+                                            rubyer:SliderHelper.DraggingShowValue="True"
+                                            rubyer:SliderHelper.ValuePlacement="Right"
+                                            IsSnapToTickEnabled="True"
+                                            Maximum="20"
+                                            Minimum="0"
+                                            TickFrequency="0.1"
+                                            ValueChanged="contrainerSlider_ValueChanged" />
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </MenuItem>
                 </MenuItem>
+
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel Orientation="Horizontal" TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                        <StackPanel rubyer:PanelHelper.Spacing="8"
+                                    Orientation="Horizontal"
+                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                            <rubyer:Icon Type="QuestionFill" />
                             <TextBlock Text="帮助" />
-                            <rubyer:Icon Margin="5 0 0 0" Type="QuestionFill" />
                         </StackPanel>
                     </MenuItem.Header>
                     <MenuItem Command="{Binding OpenAboutDialogCommand}" Header="关于">
