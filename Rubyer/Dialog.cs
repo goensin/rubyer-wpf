@@ -1,12 +1,9 @@
 ﻿using Rubyer.Commons;
-using Rubyer.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -138,9 +135,16 @@ namespace Rubyer
         /// </summary>
         /// <param name="dialog">对话框</param>
         /// <param name="parameter">参数</param>
-        public static void Close(DialogContainer dialog, IParameters parameter = null)
+        public static void Close(DialogContainer dialog, object parameter = null)
         {
             DialogContainer.CloseDialogCommand.Execute(parameter, dialog);
+        }
+
+        public static void Close(object parameter = null)
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            Close(container, parameter);
         }
     }
 }
