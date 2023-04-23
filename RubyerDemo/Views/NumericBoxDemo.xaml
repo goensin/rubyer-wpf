@@ -57,7 +57,7 @@
 
                         <rubyer:NumericBox MinWidth="120"
                                            Interval="0.1"
-                                           NumericType="Double"
+                                           NumericType="Double" TextFormat="F2"
                                            Value="{Binding DoubleValue}" />
                         <TextBlock Text="{Binding DoubleValue, StringFormat='double 值: {0}'}" />
                     </StackPanel>

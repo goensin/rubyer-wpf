@@ -118,7 +118,7 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
                         <ColumnDefinition Width="Auto" />
@@ -201,10 +201,10 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
+                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid.ColumnDefinitions>
 
                     <ContentPresenter x:Name="Icon"
@@ -260,6 +260,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
+        <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Style.Triggers>
             <Trigger Property="Role" Value="TopLevelHeader">
                 <Setter Property="Grid.IsSharedSizeScope" Value="True" />

@@ -65,9 +65,11 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
+
                             <Grid x:Name="PART_WindowTitleGrid"
                                   Grid.Row="0"
                                   Height="Auto"
+                                  Panel.ZIndex="100"
                                   Background="{TemplateBinding TitleBackground}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />

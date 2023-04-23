@@ -76,15 +76,30 @@ namespace Rubyer
         /// 标题
         /// </summary>
         public static readonly DependencyProperty HeaderProperty = DependencyProperty.Register(
-            "Header", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
+            "Header", typeof(string), typeof(HamburgerMenu), new PropertyMetadata(default(string)));
 
         /// <summary>
         /// 标题
         /// </summary>
-        public object Header
+        public string Header
         {
-            get { return (object)GetValue(HeaderProperty); }
+            get { return (string)GetValue(HeaderProperty); }
             set { SetValue(HeaderProperty, value); }
+        }
+
+        /// <summary>
+        /// 面板头部
+        /// </summary>
+        public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(
+            "PaneHeader", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
+
+        /// <summary>
+        /// 面板头部
+        /// </summary>
+        public object PaneHeader
+        {
+            get { return (object)GetValue(PaneHeaderProperty); }
+            set { SetValue(PaneHeaderProperty, value); }
         }
 
         /// <summary>

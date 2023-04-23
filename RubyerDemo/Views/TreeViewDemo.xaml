@@ -52,10 +52,10 @@
                             <HierarchicalDataTemplate ItemsSource="{Binding Children}">
                                 <TextBlock Text="{Binding Name}">
                                     <TextBlock.ContextMenu>
-                                        <ContextMenu>
+                                        <ContextMenu Foreground="{DynamicResource DefaultForeground}">
                                             <MenuItem Header="打开">
                                                 <MenuItem.Icon>
-                                                    <rubyer:Icon Type="FolderOpenLine"></rubyer:Icon>
+                                                    <rubyer:Icon Type="FolderOpenLine" />
                                                 </MenuItem.Icon>
                                             </MenuItem>
                                         </ContextMenu>

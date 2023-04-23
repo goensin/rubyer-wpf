@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using RubyerDemo.ViewModels;
+using RubyerDemo.ViewModels.Samples;
+using RubyerDemo.Views.Samples;
 using ShowMeTheXAML;
 using System;
 using System.Collections.Generic;
@@ -69,6 +71,7 @@ namespace RubyerDemo
             services.AddSingleton<ExpanderViewModel>();
             services.AddSingleton<ListBoxViewModel>();
             services.AddSingleton<TreeViewViewModel>();
+            services.AddSingleton<WechatViewModel>();
 
             return services.BuildServiceProvider();
         }

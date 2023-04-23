@@ -36,8 +36,8 @@
                                     <TabItem MinWidth="200" rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}">
                                         <TabItem.Header>
                                             <StackPanel Orientation="Horizontal">
-                                                <rubyer:Icon Margin="0 0 8 0" Type="{Binding DataContext.CurrentMenuItem.IconType, RelativeSource={RelativeSource AncestorType=Window}}" />
-                                                <TextBlock Height="Auto" Text="{Binding DataContext.CurrentMenuItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                                <rubyer:Icon Margin="0 0 8 0" Type="{Binding DataContext.CurrentViewItem.IconType, RelativeSource={RelativeSource AncestorType=Window}}" />
+                                                <TextBlock Height="Auto" Text="{Binding DataContext.CurrentViewItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
                                             </StackPanel>
                                         </TabItem.Header>
                                         

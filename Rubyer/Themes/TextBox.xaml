@@ -183,6 +183,9 @@
                         <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
                         </Trigger>
+                        <Trigger Property="BorderThickness" Value="0">
+                            <Setter TargetName="effectBorder" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

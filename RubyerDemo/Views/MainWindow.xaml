@@ -40,12 +40,35 @@
                   rubyer:MenuHelper.IconWidth="30"
                   Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
+                <MenuItem ItemsSource="{Binding SampleItems}">
+                    <MenuItem.Header>
+                        <StackPanel rubyer:PanelHelper.Spacing="8"
+                                    Orientation="Horizontal"
+                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
+                            <rubyer:Icon Type="Apps2Fill" />
+                            <TextBlock Text="样例" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                    <MenuItem.ItemContainerStyle>
+                        <Style BasedOn="{StaticResource RubyerMenuItem}" TargetType="{x:Type MenuItem}">
+                            <Setter Property="Command" Value="{Binding DataContext.OpenSampleWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+                            <Setter Property="CommandParameter" Value="{Binding}" />
+                            <Setter Property="Header" Value="{Binding Name}" />
+                            <Setter Property="Icon">
+                                <Setter.Value>
+                                    <rubyer:Icon Type="{Binding IconType}" />
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </MenuItem.ItemContainerStyle>
+                </MenuItem>
+
                 <MenuItem>
                     <MenuItem.Header>
                         <StackPanel rubyer:PanelHelper.Spacing="8"
                                     Orientation="Horizontal"
                                     TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <rubyer:Icon Type="SettingsFill" />
+                            <rubyer:Icon Type="Settings2Fill" />
                             <TextBlock Text="设置" />
                         </StackPanel>
                     </MenuItem.Header>
@@ -156,9 +179,9 @@
                           ExpandedWidth="170"
                           Foreground="{DynamicResource WhiteForeground}"
                           Header="Controls"
-                          ItemsSource="{Binding MenuItems}"
+                          ItemsSource="{Binding ViewItems}"
                           PaneBackground="{Binding TitleBackground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
-                          SelectedItem="{Binding CurrentMenuItem}">
+                          SelectedItem="{Binding CurrentViewItem}">
         <rubyer:HamburgerMenu.ItemContainerStyle>
             <Style TargetType="rubyer:HamburgerMenuItem">
                 <Setter Property="DataContext" Value="{Binding}" />
