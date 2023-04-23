@@ -67,5 +67,10 @@ namespace RubyerDemo
         {
             ThemeManager.SwitchThemeMode(darkMode.IsChecked ? ThemeMode.Dark : ThemeMode.Light);
         }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }
