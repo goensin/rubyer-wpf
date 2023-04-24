@@ -136,9 +136,19 @@
                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
-                            <TabPanel Panel.ZIndex="1"
-                                      IsItemsHost="True"
-                                      KeyboardNavigation.TabIndex="1" />
+                            <StackPanel x:Name="headerStackPanel" Orientation="Horizontal">
+                                <TabPanel Panel.ZIndex="1"
+                                          IsItemsHost="True"
+                                          KeyboardNavigation.TabIndex="1" />
+                                <Button x:Name="PART_AddButton"
+                                        Style="{StaticResource TextButton}"
+                                        Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                        Visibility="{Binding Path=(rubyer:TabControlHelper.IsShowAddButton), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <rubyer:Icon Type="AddLine" />
+                                </Button>
+                            </StackPanel>
                         </ScrollViewer>
 
                         <Border x:Name="contentPanel"
@@ -206,6 +216,7 @@
                             <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
                             <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource LeftControlCornerRadius}" />
+                            <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
@@ -221,6 +232,7 @@
                             <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
                             <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
+                            <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
@@ -311,6 +323,7 @@
            TargetType="{x:Type TabControl}">
         <Setter Property="BorderBrush" Value="{DynamicResource BorderLighter}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource LineTabItem}" />
         <Setter Property="rubyer:TabControlHelper.IsAnimation" Value="True" />
@@ -437,9 +450,19 @@
                                           Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           HorizontalScrollBarVisibility="Auto"
                                           VerticalScrollBarVisibility="Auto">
-                                <TabPanel Panel.ZIndex="1"
-                                          IsItemsHost="True"
-                                          KeyboardNavigation.TabIndex="1" />
+                                <StackPanel x:Name="headerStackPanel" Orientation="Horizontal">
+                                    <TabPanel Panel.ZIndex="1"
+                                              IsItemsHost="True"
+                                              KeyboardNavigation.TabIndex="1" />
+                                    <Button x:Name="PART_AddButton"
+                                            Style="{StaticResource TextButton}"
+                                            Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
+                                            Visibility="{Binding Path=(rubyer:TabControlHelper.IsShowAddButton), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <rubyer:Icon Type="AddLine" />
+                                    </Button>
+                                </StackPanel>
                             </ScrollViewer>
                         </Border>
 
@@ -479,6 +502,7 @@
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
@@ -489,6 +513,7 @@
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="2" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />

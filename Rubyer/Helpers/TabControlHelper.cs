@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -46,6 +47,48 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 添加按钮点击事件
+        /// </summary>
+        public static readonly RoutedEvent AddButtonClickEvent = EventManager.RegisterRoutedEvent(
+            "AddButtonClick", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(TabControlHelper));
+
+        public static void AddAddButtonClickHandler(DependencyObject dependencyObject, RoutedEventHandler handler)
+        {
+            if (dependencyObject is TabControl tabControl)
+            {
+                tabControl.AddHandler(AddButtonClickEvent, handler);
+            }
+        }
+
+        public static void RemoveAddButtonClickHandler(DependencyObject dependencyObject, RoutedEventHandler handler)
+        {
+            if (dependencyObject is TabControl tabControl)
+            {
+                tabControl.RemoveHandler(AddButtonClickEvent, handler);
+            }
+        }
+
+        #endregion
+
+        #region 命令
+
+        /// <summary>
+        /// 添加命令
+        /// </summary>
+        public static readonly DependencyProperty AddCommandProperty =
+            DependencyProperty.RegisterAttached("AddCommand", typeof(ICommand), typeof(TabControlHelper), new PropertyMetadata(null));
+
+        public static ICommand GetAddCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(AddCommandProperty);
+        }
+
+        public static void SetAddCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(AddCommandProperty, value);
+        }
+
         #endregion
 
         /// <summary>
@@ -54,14 +97,30 @@ namespace Rubyer
         public static readonly DependencyProperty IsClearableProperty =
             DependencyProperty.RegisterAttached("IsClearable", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsClearbleChanged));
 
+        public static bool GetIsClearable(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsClearableProperty);
+        }
+
+        public static void SetIsClearable(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsClearableProperty, BooleanBoxes.Box(value));
+        }
+
+        /// <summary>
+        /// 是否显示添加按钮
+        /// </summary>
+        public static readonly DependencyProperty IsShowAddButtonProperty =
+            DependencyProperty.RegisterAttached("IsShowAddButton", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowAddButtonChanged));
+
         /// <summary>
         /// Gets the is clearable.
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <returns>A bool.</returns>
-        public static bool GetIsClearable(DependencyObject obj)
+        public static bool GetIsShowAddButton(DependencyObject obj)
         {
-            return (bool)obj.GetValue(IsClearableProperty);
+            return (bool)obj.GetValue(IsShowAddButtonProperty);
         }
 
         /// <summary>
@@ -69,16 +128,28 @@ namespace Rubyer
         /// </summary>
         /// <param name="obj">The obj.</param>
         /// <param name="value">If true, value.</param>
-        public static void SetIsClearable(DependencyObject obj, bool value)
+        public static void SetIsShowAddButton(DependencyObject obj, bool value)
         {
-            obj.SetValue(IsClearableProperty, BooleanBoxes.Box(value));
+            obj.SetValue(IsShowAddButtonProperty, BooleanBoxes.Box(value));
+        }
+
+        private static TabControl FindTabControl(DependencyObject dependencyObject)
+        {
+            DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
+
+            if (parent != null && !(parent is TabControl))
+            {
+                return FindTabControl(parent);
+            }
+
+            return parent != null ? (TabControl)parent : null;
         }
 
         private static void OnIsClearbleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is TabItem tabItem)
             {
-                RoutedEventHandler handle = (sender, args) =>
+                void OnCloseButtonClicked(object sender, RoutedEventArgs args)
                 {
                     TabControl tabControl = FindTabControl(tabItem);
                     IEditableCollectionView items = tabControl.Items;
@@ -114,7 +185,7 @@ namespace Rubyer
                             StartColAnimation(tabControl, scrollViewer);
                         }
                     }
-                };
+                }
 
                 if (tabItem.IsLoaded)
                 {
@@ -122,11 +193,11 @@ namespace Rubyer
                     {
                         if (GetIsClearable(tabItem))
                         {
-                            clearButton.Click += handle;
+                            clearButton.Click += OnCloseButtonClicked;
                         }
                         else
                         {
-                            clearButton.Click -= handle;
+                            clearButton.Click -= OnCloseButtonClicked;
                         }
                     }
                 }
@@ -137,11 +208,11 @@ namespace Rubyer
                     {
                         if (GetIsClearable(tabItem))
                         {
-                            clearButton.Click += handle;
+                            clearButton.Click += OnCloseButtonClicked;
                         }
                         else
                         {
-                            clearButton.Click -= handle;
+                            clearButton.Click -= OnCloseButtonClicked;
                         }
                     }
                 };
@@ -152,23 +223,68 @@ namespace Rubyer
                     {
                         if (GetIsClearable(tabItem))
                         {
-                            clearButton.Click -= handle;
+                            clearButton.Click -= OnCloseButtonClicked;
                         }
                     }
                 };
             }
         }
 
-        private static TabControl FindTabControl(DependencyObject dependencyObject)
+
+        private static void OnIsShowAddButtonChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DependencyObject parent = VisualTreeHelper.GetParent(dependencyObject);
-
-            if (parent != null && !(parent is TabControl))
+            if (d is TabControl tabControl)
             {
-                return FindTabControl(parent);
-            }
+                void OnAddButtonClicked(object sender, RoutedEventArgs args)
+                {
+                    var eventArgs = new RoutedEventArgs(AddButtonClickEvent, tabControl);
+                    tabControl.RaiseEvent(eventArgs);
 
-            return parent != null ? (TabControl)parent : null;
+                    var command = GetAddCommand(tabControl);
+                    command?.Execute(null);
+                }
+
+                if (tabControl.IsLoaded)
+                {
+                    if (tabControl.Template.FindName("PART_AddButton", tabControl) is Button addButton)
+                    {
+                        if (GetIsShowAddButton(tabControl))
+                        {
+                            addButton.Click += OnAddButtonClicked;
+                        }
+                        else
+                        {
+                            addButton.Click -= OnAddButtonClicked;
+                        }
+                    }
+                }
+
+                tabControl.Loaded += (sender, arg) =>
+                {
+                    if (tabControl.Template.FindName("PART_AddButton", tabControl) is Button addButton)
+                    {
+                        if (GetIsShowAddButton(tabControl))
+                        {
+                            addButton.Click += OnAddButtonClicked;
+                        }
+                        else
+                        {
+                            addButton.Click -= OnAddButtonClicked;
+                        }
+                    }
+                };
+
+                tabControl.Unloaded += (sender, arg) =>
+                {
+                    if (tabControl.Template.FindName("PART_AddButton", tabControl) is Button addButton)
+                    {
+                        if (GetIsShowAddButton(tabControl))
+                        {
+                            addButton.Click -= OnAddButtonClicked;
+                        }
+                    }
+                };
+            }
         }
 
         /// <summary>
@@ -356,6 +472,9 @@ namespace Rubyer
         /// </summary>
         public bool Cancel { get; set; }
 
+        /// <summary>
+        /// 子项数据
+        /// </summary>
         public object Item { get; }
 
         public CloseTabItemRoutedEventArgs(object item)

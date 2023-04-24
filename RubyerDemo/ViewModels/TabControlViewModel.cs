@@ -53,7 +53,7 @@ namespace RubyerDemo.ViewModels
         }
 
         [RelayCommand]
-        private void AddTabItem()
+        private void AddTabItem(object items)
         {
             Poetry poetry = new Poetry
             {

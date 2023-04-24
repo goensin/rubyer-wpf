@@ -28,6 +28,9 @@
                                 Grid.Column="1"
                                 Height="150"
                                 HorizontalContentAlignment="Center"
+                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                rubyer:TabControlHelper.IsShowAddButton="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
                                 TabStripPlacement="Top">
@@ -47,25 +50,31 @@
                     <TabControl Grid.Row="2"
                                 Grid.Column="1"
                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
                                 rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
                                 rubyer:TabControlHelper.IsClearable="True"
+                                rubyer:TabControlHelper.IsShowAddButton="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
                                 TabStripPlacement="Bottom">
-                        <!--<TabControl.ItemTemplate>
+                        <TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
                             <DataTemplate />
-                        </TabControl.ContentTemplate>-->
+                        </TabControl.ContentTemplate>
                     </TabControl>
 
                     <!--  Left  -->
                     <TabControl Grid.RowSpan="3"
                                 Grid.Column="0"
                                 VerticalAlignment="Center"
+                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                rubyer:TabControlHelper.IsShowAddButton="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
                                 TabStripPlacement="Left">
@@ -83,7 +92,10 @@
                     <TabControl Grid.RowSpan="3"
                                 Grid.Column="2"
                                 VerticalAlignment="Center"
+                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
                                 rubyer:TabControlHelper.IsClearable="True"
+                                rubyer:TabControlHelper.IsShowAddButton="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
                                 TabStripPlacement="Right">

@@ -30,5 +30,10 @@ namespace RubyerDemo.Views
                 e.Cancel = true;
             }
         }
+
+        private void TabControl_AddButtonClick(object sender, RoutedEventArgs e)
+        {
+            Debug.WriteLine("TabControl 添加按钮点击事件");
+        }
     }
 }
