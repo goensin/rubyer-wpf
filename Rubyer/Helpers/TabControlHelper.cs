@@ -15,6 +15,39 @@ namespace Rubyer
     /// </summary>
     public static class TabControlHelper
     {
+        #region 事件
+
+        /// <summary>
+        /// 关闭 TabItem 事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void CloseTabItemRoutedEventHandler(object sender, CloseTabItemRoutedEventArgs e);
+
+        /// <summary>
+        /// 关闭 TabItem 事件
+        /// </summary>
+        public static readonly RoutedEvent CloseItemEvent = EventManager.RegisterRoutedEvent(
+            "CloseItem", RoutingStrategy.Bubble, typeof(CloseTabItemRoutedEventHandler), typeof(TabControlHelper));
+
+        public static void AddCloseItemHandler(DependencyObject dependencyObject, CloseTabItemRoutedEventHandler handler)
+        {
+            if (dependencyObject is TabControl tabControl)
+            {
+                tabControl.AddHandler(CloseItemEvent, handler);
+            }
+        }
+
+        public static void RemoveCloseItemHandler(DependencyObject dependencyObject, CloseTabItemRoutedEventHandler handler)
+        {
+            if (dependencyObject is TabControl tabControl)
+            {
+                tabControl.RemoveHandler(CloseItemEvent, handler);
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// 是否显示清除按钮
         /// </summary>
@@ -52,11 +85,21 @@ namespace Rubyer
 
                     if (items.CanRemove)
                     {
-                        items.Remove(tabItem.DataContext);      // Binding 移除方式
+                        var eventArgs = new CloseTabItemRoutedEventArgs(tabItem.DataContext, CloseItemEvent, tabItem);
+                        tabControl.RaiseEvent(eventArgs); // 触发移除事件
+                        if (!eventArgs.Cancel)
+                        {
+                            items.Remove(tabItem.DataContext); // Binding 移除方式
+                        }
                     }
                     else
                     {
-                        tabControl.Items.Remove(tabItem);       // TabItem 移除方式
+                        var eventArgs = new CloseTabItemRoutedEventArgs(tabItem, CloseItemEvent, tabItem);
+                        tabControl.RaiseEvent(eventArgs); // 触发移除事件
+                        if (!eventArgs.Cancel)
+                        {
+                            tabControl.Items.Remove(tabItem); // TabItem 移除方式
+                        }
                     }
 
                     if (GetIsAnimation(tabControl))
@@ -300,6 +343,39 @@ namespace Rubyer
                 rectangleRow.BeginAnimation(Canvas.LeftProperty, canvasAnimation);
                 rectangleRow.BeginAnimation(FrameworkElement.WidthProperty, sizeAnimation);
             }
+        }
+    }
+
+    /// <summary>
+    /// 关闭 tab 子项事件
+    /// </summary>
+    public class CloseTabItemRoutedEventArgs : RoutedEventArgs
+    {
+        /// <summary>
+        /// 是否取消关闭
+        /// </summary>
+        public bool Cancel { get; set; }
+
+        public object Item { get; }
+
+        public CloseTabItemRoutedEventArgs(object item)
+            : base()
+        {
+            Item = item;
+        }
+
+
+        public CloseTabItemRoutedEventArgs(object item, RoutedEvent routedEvent)
+            : base(routedEvent)
+        {
+            Item = item;
+        }
+
+
+        public CloseTabItemRoutedEventArgs(object item, RoutedEvent routedEvent, object source)
+            : base(routedEvent, source)
+        {
+            Item = item;
         }
     }
 }
