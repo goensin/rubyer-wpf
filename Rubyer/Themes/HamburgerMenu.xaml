@@ -115,7 +115,6 @@
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="200" />
         <Setter Property="ToolTipService.IsEnabled" Value="False" />
-        <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
@@ -151,16 +150,15 @@
                                              Type="CheckFill"
                                              Visibility="Hidden" />
 
-                                <DockPanel Grid.Column="1">
+                                <DockPanel Grid.Column="1" Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}">
                                     <rubyer:Icon x:Name="moreIcon"
                                                  Margin="20 0 0 0"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
                                                  DockPanel.Dock="Right"
-                                                 Type="ArrowDropRightLine"
-                                                 Visibility="Collapsed" />
+                                                 Type="ArrowRightSLine"
+                                                 Visibility="Hidden" />
                                     <ContentPresenter x:Name="header"
-                                                      Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                       ContentSource="Header"
@@ -206,11 +204,11 @@
                             <Setter Property="Icon" Value="{StaticResource optionsItemIcon}" />
                         </DataTrigger>
                         <Trigger Property="Role" Value="SubmenuItem">
-                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
                         </Trigger>
                         <Trigger Property="Role" Value="SubmenuHeader">
                             <Setter TargetName="moreIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -233,7 +231,7 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />
+                    <!--<Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />-->
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelHeader" />
                     <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
@@ -241,7 +239,7 @@
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />
+                    <!--<Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />-->
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelItem" />
                     <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
@@ -309,7 +307,7 @@
         <Setter Property="TabStripPlacement" Value="Left" />
         <Setter Property="TransitionType" Value="Fade" />
         <Setter Property="TransitionDuration" Value="0:0:0.5" />
-        <Setter Property="rubyer:MenuHelper.IconWidth" Value="24" />
+        <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
