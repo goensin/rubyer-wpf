@@ -7,14 +7,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Menu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <rubyer:Icon x:Key="itemIcon"
-                 x:Shared="False"
-                 Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenuItem}}" />
-
-    <rubyer:Icon x:Key="optionsItemIcon"
-                 x:Shared="False"
-                 Type="{Binding IconType, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenuOptionsItem}}" />
-
     <!--  HamburgerMenuItem  -->
     <Style x:Key="RubyerHamburgerMenuItem" TargetType="{x:Type rubyer:HamburgerMenuItem}">
         <Setter Property="Background" Value="Transparent" />
@@ -28,7 +20,7 @@
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="200" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuItem}">
@@ -58,23 +50,31 @@
                                     <ColumnDefinition x:Name="headerColumn" Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentControl x:Name="icon"
-                                                Width="{Binding ActualHeight, ElementName=header}"
-                                                Height="{Binding ActualHeight, ElementName=header}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Icon}"
-                                                Focusable="False"
-                                                IsHitTestVisible="False" />
+                                <rubyer:Icon x:Name="icon"
+                                             Focusable="False"
+                                             IsHitTestVisible="False"
+                                             Type="{TemplateBinding IconType}"
+                                             Visibility="Collapsed" />
 
-                                <ContentControl x:Name="header"
-                                                Grid.Column="1"
-                                                Margin="{TemplateBinding Padding}"
-                                                HorizontalAlignment="Left"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Header}"
-                                                Focusable="False"
-                                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <ContentPresenter x:Name="iconContent"
+                                                  Width="{Binding ActualHeight, ElementName=header}"
+                                                  Height="{Binding ActualHeight, ElementName=header}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Icon}"
+                                                  ContentSource="Icon"
+                                                  Focusable="False"
+                                                  IsHitTestVisible="False" />
+
+                                <ContentPresenter x:Name="header"
+                                                  Grid.Column="1"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="Left"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Header}"
+                                                  ContentSource="Header"
+                                                  Focusable="False"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </Grid>
                         </Border>
                     </Grid>
@@ -87,7 +87,8 @@
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
-                            <Setter Property="Icon" Value="{StaticResource itemIcon}" />
+                            <Setter TargetName="icon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="iconContent" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
                             <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
@@ -113,7 +114,7 @@
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
         <Setter Property="ToolTipService.VerticalOffset" Value="5" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="200" />
+        <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
         <Setter Property="ToolTipService.IsEnabled" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -132,14 +133,21 @@
                                     <ColumnDefinition x:Name="headerColumn" Width="*" />
                                 </Grid.ColumnDefinitions>
 
-                                <ContentControl x:Name="icon"
-                                                Width="{Binding ActualHeight, ElementName=header}"
-                                                Height="{Binding ActualHeight, ElementName=header}"
-                                                HorizontalAlignment="Center"
-                                                VerticalAlignment="Center"
-                                                Content="{TemplateBinding Icon}"
-                                                Focusable="False"
-                                                IsHitTestVisible="False" />
+                                <rubyer:Icon x:Name="icon"
+                                             Focusable="False"
+                                             IsHitTestVisible="False"
+                                             Type="{TemplateBinding IconType}"
+                                             Visibility="Collapsed" />
+
+                                <ContentPresenter x:Name="iconContent"
+                                                  Width="{Binding ActualHeight, ElementName=header}"
+                                                  Height="{Binding ActualHeight, ElementName=header}"
+                                                  HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"
+                                                  Content="{TemplateBinding Icon}"
+                                                  ContentSource="Icon"
+                                                  Focusable="False"
+                                                  IsHitTestVisible="False" />
 
                                 <rubyer:Icon x:Name="checkIcon"
                                              Width="{Binding ActualHeight, ElementName=header}"
@@ -201,7 +209,8 @@
                             <Setter TargetName="root" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding IconType, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource NotNullConverter}}" Value="True">
-                            <Setter Property="Icon" Value="{StaticResource optionsItemIcon}" />
+                            <Setter TargetName="icon" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="iconContent" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <Trigger Property="Role" Value="SubmenuItem">
                             <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
