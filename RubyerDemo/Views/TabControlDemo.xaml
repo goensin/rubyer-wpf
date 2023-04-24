@@ -47,18 +47,19 @@
                     <TabControl Grid.Row="2"
                                 Grid.Column="1"
                                 rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
                                 rubyer:TabControlHelper.IsClearable="True"
                                 ItemsSource="{Binding Poetries}"
                                 SelectedItem="{Binding SelectedPoetry}"
                                 TabStripPlacement="Bottom">
-                        <TabControl.ItemTemplate>
+                        <!--<TabControl.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Title}" />
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
                             <DataTemplate />
-                        </TabControl.ContentTemplate>
+                        </TabControl.ContentTemplate>-->
                     </TabControl>
 
                     <!--  Left  -->

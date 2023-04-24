@@ -91,6 +91,7 @@
                         BorderBrush="{StaticResource BorderLighter}"
                         BorderThickness="0 0 1 0">
                     <ListBox HorizontalContentAlignment="Stretch"
+                             d:ItemsSource="{d:SampleData ItemCount=5}"
                              rubyer:ControlHelper.MaskOpacity="0.4"
                              rubyer:ItemsControlHelper.ItemPadding="12"
                              ItemsSource="{Binding Contacts}">
@@ -179,7 +180,9 @@
                         </StackPanel>
                     </Border>
 
-                    <ItemsControl FontSize="14" ItemsSource="{Binding Messages}">
+                    <ItemsControl d:ItemsSource="{d:SampleData ItemCount=5}"
+                                  FontSize="14"
+                                  ItemsSource="{Binding Messages}">
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <StackPanel />
