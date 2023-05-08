@@ -194,15 +194,15 @@
                                       Margin="10 0"
                                       Content="默认"
                                       IsChecked="True" />
-                        <ToggleButton Style="{DynamicResource SwitchLightToggle}"
+                        <ToggleButton Style="{DynamicResource SwitchLightToggleButton}"
                                       Margin="10 0"
                                       Content="亮色"
                                       IsChecked="True" />
-                        <ToggleButton Style="{DynamicResource SwitchDarkToggle}"
+                        <ToggleButton Style="{DynamicResource SwitchDarkToggleButton}"
                                       Margin="10 0"
                                       Content="暗色"
                                       IsChecked="True" />
-                        <ToggleButton Style="{DynamicResource SwitchAccentToggle}"
+                        <ToggleButton Style="{DynamicResource SwitchAccentToggleButton}"
                                       Margin="10 0"
                                       Content="强调色"
                                       IsChecked="True" />
@@ -219,7 +219,7 @@
                                          Description="通过 ToggleButtonHelper.CheckedContent 设置选中时显示内容 &#x000A;通过 ControlHelper.FocusedBrush 设置选中颜色">
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <ToggleButton x:Name="nightMode"
-                                      Style="{DynamicResource SwitchAccentToggle}"
+                                      Style="{DynamicResource SwitchAccentToggleButton}"
                                       Margin="10 0"
                                       rubyer:ToggleButtonHelper.CheckedContent="ON"
                                       Content="OFF" />

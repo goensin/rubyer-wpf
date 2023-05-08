@@ -1,22 +1,113 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Windows;
+using System.Windows.Media;
 
 namespace RubyerDemo.ViewModels
 {
     public partial class TabControlViewModel : ObservableObject
     {
+        public List<Brush> AllBrushes => new List<Brush>
+        {
+            Application.Current.Resources["DefaultForeground"] as Brush,
+            Application.Current.Resources["DefaultBackground"] as Brush,
+            Application.Current.Resources["Primary"] as Brush,
+            Application.Current.Resources["Light"] as Brush,
+            Application.Current.Resources["Dark"] as Brush,
+            Application.Current.Resources["Accent"] as Brush,
+            Application.Current.Resources["Success"] as Brush,
+            Application.Current.Resources["Warning"] as Brush,
+            Application.Current.Resources["Info"] as Brush,
+            Application.Current.Resources["Error"] as Brush,
+            Application.Current.Resources["LayoutBackground"] as Brush,
+            Brushes.Transparent,
+        };
+
+        public List<FontWeight> AllFontWeights => new List<FontWeight>
+        {
+           FontWeights.Black ,
+           FontWeights.Bold ,
+           FontWeights.DemiBold ,
+           FontWeights.ExtraBlack ,
+           FontWeights.ExtraBold ,
+           FontWeights.ExtraLight ,
+           FontWeights.Heavy ,
+           FontWeights.Light ,
+           FontWeights.Medium ,
+           FontWeights.Regular ,
+           FontWeights.SemiBold ,
+           FontWeights.Thin ,
+           FontWeights.UltraBlack ,
+           FontWeights.UltraBold ,
+           FontWeights.UltraLight ,
+        };
+
+        public List<FontFamily> AllFontFamilys => Fonts.SystemFontFamilies.ToList();
+
+        public List<StyleResource> Styles => new List<StyleResource>
+        {
+            new StyleResource("RubyerTabControl", Application.Current.Resources["RubyerTabControl"] as Style),
+            new StyleResource("LineTabControl", Application.Current.Resources["LineTabControl"] as Style),
+            new StyleResource("CardTabControl", Application.Current.Resources["CardTabControl"] as Style),
+        };
+
+        [ObservableProperty]
+        private HorizontalAlignment horizontalAlignment;
+
+        [ObservableProperty]
+        private VerticalAlignment verticalAlignment;
+
+        [ObservableProperty]
+        private Brush selectedForeground;
+
+        [ObservableProperty]
+        private Brush selectedBackground;
+
+        [ObservableProperty]
+        private Brush foreground;
+
+        [ObservableProperty]
+        private Brush background;
+
+        [ObservableProperty]
+        private Brush contentForeground;
+
+        [ObservableProperty]
+        private Brush contentBackground;
+
+        [ObservableProperty]
+        private FontWeight fontWeight;
+
+        [ObservableProperty]
+        private FontFamily fontFamily;
+
+        [ObservableProperty]
+        private StyleResource style;
+
         [ObservableProperty]
         private ObservableCollection<Poetry> poetries;
+
         [ObservableProperty]
         private Poetry selectedPoetry;
 
-        [ObservableProperty]
         private int count = 1;
 
         public TabControlViewModel()
         {
+            SelectedForeground = AllBrushes[1];
+            SelectedBackground = AllBrushes[2];
+            Foreground = AllBrushes[0];
+            ContentForeground = AllBrushes[0];
+            Background = AllBrushes[11];
+            ContentBackground = AllBrushes[1];
+            FontWeight = FontWeights.Normal;
+            FontFamily = AllFontFamilys.FirstOrDefault(x => x.Source.Contains("YaHei"));
+            Style = Styles[0];
+
             Poetries = new ObservableCollection<Poetry>
             {
                 new Poetry
@@ -77,5 +168,20 @@ namespace RubyerDemo.ViewModels
 
         [ObservableProperty]
         private bool isChecked;
+    }
+
+    public partial class StyleResource : ObservableObject
+    {
+        [ObservableProperty]
+        private string name;
+
+        [ObservableProperty]
+        private Style style;
+
+        public StyleResource(string name, Style style)
+        {
+            this.name = name;
+            this.style = style;
+        }
     }
 }

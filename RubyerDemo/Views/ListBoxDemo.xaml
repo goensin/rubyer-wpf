@@ -22,7 +22,7 @@
 
                 <controls:ControlDisplay Title="Popular Style ListBox" Grid.Row="1">
                     <ListBox Style="{StaticResource PopularListBox}"
-                             Width="200"
+                             Width="200" Height="100"
                              ItemsSource="{Binding Items}"
                              SelectedIndex="0" />
                 </controls:ControlDisplay>

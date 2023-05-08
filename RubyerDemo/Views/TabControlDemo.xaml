@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="RubyerDemo.Views.TabControlDemo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
@@ -9,269 +10,439 @@
              d:DataContext="{d:DesignInstance Type=viewModels:TabControlViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TabControlDemo">
-        <Grid Margin="10"
-              rubyer:GridHelper.ColumnDefinitions="Auto, *"
-              rubyer:GridHelper.RowDefinitions="Auto, *, *, *"
-              rubyer:PanelHelper.Spacing="10">
-            <StackPanel Grid.RowSpan="4"
-                        VerticalAlignment="Center"
-                        Orientation="Vertical">
-                <Button Command="{Binding AddTabItemCommand}" Content="添加 TabItem" />
-            </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
+                <rubyer:Description Style="{StaticResource BorderDescription}"
+                                    HorizontalAlignment="Center"
+                                    Columns="3">
+                    <rubyer:DescriptionItem Description="选中前景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding SelectedForeground}"
+                                  Validation.ErrorTemplate="{StaticResource RubyerValidationErrorTemplate}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="选中背景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding SelectedBackground}"
+                                  Validation.ErrorTemplate="{StaticResource RubyerValidationErrorTemplate}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题前景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding Foreground}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题背景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding Background}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="前景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding ContentForeground}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="背景色">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllBrushes}"
+                                  SelectedItem="{Binding ContentBackground}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Rectangle Width="110"
+                                               Height="20"
+                                               Fill="{Binding}"
+                                               Stroke="{StaticResource Border}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllFontFamilys}"
+                                  SelectedItem="{Binding FontFamily}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体大小">
+                        <rubyer:NumericBox x:Name="fontSizeNumBox"
+                                           Width="150"
+                                           MaxValue="40"
+                                           MinValue="8"
+                                           Value="14" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="标题字体粗细">
+                        <ComboBox Width="150"
+                                  ItemsSource="{Binding AllFontWeights}"
+                                  SelectedItem="{Binding FontWeight}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="显示关闭按钮">
+                        <ToggleButton x:Name="CloseToggleButton" Style="{StaticResource SwitchToggleButton}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="显示新增按钮">
+                        <ToggleButton x:Name="AddToggleButton" Style="{StaticResource SwitchToggleButton}" />
+                    </rubyer:DescriptionItem>
+                    <rubyer:DescriptionItem Description="样式">
+                        <ComboBox Width="150"
+                                  DisplayMemberPath="Name"
+                                  ItemsSource="{Binding Styles}"
+                                  SelectedIndex="0"
+                                  SelectedItem="{Binding Style}" />
+                    </rubyer:DescriptionItem>
+                </rubyer:Description>
 
-            <GroupBox Grid.Row="1"
-                      Grid.Column="1"
-                      Header="默认选项卡-TabControl">
-                <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
-                    <!--  Top  -->
-                    <TabControl Grid.RowSpan="2"
-                                Grid.Column="1"
-                                Height="150"
-                                HorizontalContentAlignment="Center"
-                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
-                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
-                                rubyer:TabControlHelper.IsShowAddButton="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Top">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Content}" TextAlignment="Center" />
-                            </DataTemplate>
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                <controls:ControlDisplay Title="Default TabControl" Grid.Row="1">
+                    <Grid Height="200"
+                          rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto"
+                          rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
+                        <!--  Top  -->
+                        <TabControl Style="{Binding Style.Style}"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
+                                    Height="150"
+                                    rubyer:ControlHelper.FocusedBrush="{Binding SelectedBackground}"
+                                    rubyer:ControlHelper.FocusedForegroundBrush="{Binding SelectedForeground}"
+                                    rubyer:HeaderHelper.Background="{Binding Background}"
+                                    rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                                    rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                                    rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                                    rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
+                                    rubyer:TabControlHelper.IsClearable="{Binding IsChecked, ElementName=CloseToggleButton}"
+                                    rubyer:TabControlHelper.IsShowAddButton="{Binding IsChecked, ElementName=AddToggleButton}"
+                                    Background="{Binding ContentBackground}"
+                                    Foreground="{Binding ContentForeground}"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Top">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Content}" TextAlignment="Center" />
+                                </DataTemplate>
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Bottom  -->
-                    <TabControl Grid.Row="2"
-                                Grid.Column="1"
-                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
-                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
-                                rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                rubyer:TabControlHelper.IsShowAddButton="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Bottom">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Bottom  -->
+                        <TabControl Style="{Binding Style.Style}"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    rubyer:ControlHelper.FocusedBrush="{Binding SelectedBackground}"
+                                    rubyer:ControlHelper.FocusedForegroundBrush="{Binding SelectedForeground}"
+                                    rubyer:HeaderHelper.Background="{Binding Background}"
+                                    rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                                    rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                                    rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                                    rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
+                                    rubyer:TabControlHelper.IsClearable="{Binding IsChecked, ElementName=CloseToggleButton}"
+                                    rubyer:TabControlHelper.IsShowAddButton="{Binding IsChecked, ElementName=AddToggleButton}"
+                                    Background="{Binding ContentBackground}"
+                                    Foreground="{Binding ContentForeground}"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Bottom">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Left  -->
-                    <TabControl Grid.RowSpan="3"
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
-                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
-                                rubyer:TabControlHelper.IsShowAddButton="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Left">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Left  -->
+                        <TabControl Style="{Binding Style.Style}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{Binding SelectedBackground}"
+                                    rubyer:ControlHelper.FocusedForegroundBrush="{Binding SelectedForeground}"
+                                    rubyer:HeaderHelper.Background="{Binding Background}"
+                                    rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                                    rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                                    rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                                    rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
+                                    rubyer:TabControlHelper.IsClearable="{Binding IsChecked, ElementName=CloseToggleButton}"
+                                    rubyer:TabControlHelper.IsShowAddButton="{Binding IsChecked, ElementName=AddToggleButton}"
+                                    Background="{Binding ContentBackground}"
+                                    Foreground="{Binding ContentForeground}"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Left">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Right  -->
-                    <TabControl Grid.RowSpan="3"
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
-                                rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                rubyer:TabControlHelper.IsShowAddButton="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Right">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
-                </Grid>
-            </GroupBox>
+                        <!--  Right  -->
+                        <TabControl Style="{Binding Style.Style}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{Binding SelectedBackground}"
+                                    rubyer:ControlHelper.FocusedForegroundBrush="{Binding SelectedForeground}"
+                                    rubyer:HeaderHelper.Background="{Binding Background}"
+                                    rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
+                                    rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
+                                    rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                                    rubyer:HeaderHelper.Foreground="{Binding Foreground}"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
+                                    rubyer:TabControlHelper.IsClearable="{Binding IsChecked, ElementName=CloseToggleButton}"
+                                    rubyer:TabControlHelper.IsShowAddButton="{Binding IsChecked, ElementName=AddToggleButton}"
+                                    Background="{Binding ContentBackground}"
+                                    Foreground="{Binding ContentForeground}"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Right">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
+                    </Grid>
+                </controls:ControlDisplay>
 
-            <GroupBox Grid.Row="2"
-                      Grid.Column="1"
-                      Header="卡片选项卡-LineTabControl">
-                <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
-                    <!--  Top  -->
-                    <TabControl Style="{StaticResource LineTabControl}"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                rubyer:HeaderHelper.Background="AliceBlue"
-                                rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Top">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                <controls:ControlDisplay Title="Line TabControl" Grid.Row="2">
+                    <Grid Height="100"
+                          rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto"
+                          rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
+                        <!--  Top  -->
+                        <TabControl Style="{StaticResource LineTabControl}"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1" rubyer:HeaderHelper.Padding="10"
+                                    Height="150"
+                                    HorizontalContentAlignment="Center"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.IsShowAddButton="True"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Top">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Bottom  -->
-                    <TabControl Style="{StaticResource LineTabControl}"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Accent}"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Bottom">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Bottom  -->
+                        <TabControl Style="{StaticResource LineTabControl}"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                    rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
+                                    rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
+                                    rubyer:TabControlHelper.CloseItem="TabControl_CloseItem"
+                                    rubyer:TabControlHelper.IsClearable="True"
+                                    rubyer:TabControlHelper.IsShowAddButton="True"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Bottom">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Left  -->
-                    <TabControl Style="{StaticResource LineTabControl}"
-                                Grid.RowSpan="3"
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Success}"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Left">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Left  -->
+                        <TabControl Style="{StaticResource LineTabControl}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Left">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Right  -->
-                    <TabControl Style="{StaticResource LineTabControl}"
-                                Grid.RowSpan="3"
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource Warning}"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Right">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
-                </Grid>
-            </GroupBox>
+                        <!--  Right  -->
+                        <TabControl Style="{StaticResource LineTabControl}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Warning}"
+                                    rubyer:TabControlHelper.IsClearable="True"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Right">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
+                    </Grid>
+                </controls:ControlDisplay>
 
-            <GroupBox Grid.Row="3"
-                      Grid.Column="1"
-                      Header="线条选项卡-CardTabControl">
-                <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto" rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
-                    <!--  Top  -->
-                    <TabControl Style="{StaticResource CardTabControl}"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                ItemsSource="{Binding Poetries}"
-                                SelectedItem="{Binding SelectedPoetry}"
-                                TabStripPlacement="Top">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                <controls:ControlDisplay Title="Card Tab Control" Grid.Row="3">
+                    <Grid Height="100"
+                          rubyer:GridHelper.ColumnDefinitions="Auto, *, Auto"
+                          rubyer:GridHelper.RowDefinitions="Auto, *, Auto">
 
-                    <!--  Bottom  -->
-                    <TabControl Style="{StaticResource CardTabControl}"
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
-                                rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
-                                rubyer:HeaderHelper.Background="{DynamicResource BorderLighter}"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Bottom">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Top  -->
+                        <TabControl Style="{StaticResource CardTabControl}"
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    rubyer:TabControlHelper.IsClearable="True"
+                                    ItemsSource="{Binding Poetries}"
+                                    SelectedItem="{Binding SelectedPoetry}"
+                                    TabStripPlacement="Top">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Left  -->
-                    <TabControl Style="{StaticResource CardTabControl}"
-                                Grid.RowSpan="3"
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
-                                rubyer:HeaderHelper.Background="Transparent"
-                                rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}"
-                                rubyer:TabControlHelper.IsClearable="True"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Left">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
+                        <!--  Bottom  -->
+                        <TabControl Style="{StaticResource CardTabControl}"
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
+                                    rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource DefaultForeground}"
+                                    rubyer:HeaderHelper.Background="{DynamicResource BorderLighter}"
+                                    ItemsSource="{Binding Poetries}"
+                                    TabStripPlacement="Bottom">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
 
-                    <!--  Right  -->
-                    <TabControl Style="{StaticResource CardTabControl}"
-                                Grid.RowSpan="3"
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                rubyer:ControlHelper.FocusedBrush="{DynamicResource Warning}"
-                                ItemsSource="{Binding Poetries}"
-                                TabStripPlacement="Right">
-                        <TabControl.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Title}" />
-                            </DataTemplate>
-                        </TabControl.ItemTemplate>
-                        <TabControl.ContentTemplate>
-                            <DataTemplate />
-                        </TabControl.ContentTemplate>
-                    </TabControl>
-                </Grid>
-            </GroupBox>
-        </Grid>
+                        <!--  Left  -->
+                        <TabControl Style="{StaticResource CardTabControl}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="0"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
+                                    rubyer:HeaderHelper.Background="Transparent"
+                                    rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}"
+                                    rubyer:TabControlHelper.IsClearable="True"
+                                    ItemsSource="{Binding Poetries}"
+                                    TabStripPlacement="Left">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
+
+                        <!--  Right  -->
+                        <TabControl Style="{StaticResource CardTabControl}"
+                                    Grid.RowSpan="3"
+                                    Grid.Column="2"
+                                    VerticalAlignment="Center"
+                                    rubyer:ControlHelper.FocusedBrush="{DynamicResource Warning}"
+                                    ItemsSource="{Binding Poetries}"
+                                    TabStripPlacement="Right">
+                            <TabControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Title}" />
+                                </DataTemplate>
+                            </TabControl.ItemTemplate>
+                            <TabControl.ContentTemplate>
+                                <DataTemplate />
+                            </TabControl.ContentTemplate>
+                        </TabControl>
+                    </Grid>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
     </smtx:XamlDisplay>
 </UserControl>

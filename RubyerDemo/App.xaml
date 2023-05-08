@@ -40,7 +40,7 @@
                                                 <TextBlock Height="Auto" Text="{Binding DataContext.CurrentViewItem.Name, RelativeSource={RelativeSource AncestorType=Window}}" />
                                             </StackPanel>
                                         </TabItem.Header>
-                                        
+
                                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                                     </TabItem>
                                     <TabItem MinWidth="200" rubyer:ControlHelper.CornerRadius="{DynamicResource AllControlCornerRadius}">
@@ -50,7 +50,7 @@
                                                 <TextBlock Text="Xaml" />
                                             </StackPanel>
                                         </TabItem.Header>
-                                        
+
                                         <avalonedit:TextEditor Style="{StaticResource AvalonTextEditorXamlDisplay}"
                                                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"

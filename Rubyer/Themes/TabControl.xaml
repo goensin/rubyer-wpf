@@ -10,7 +10,6 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=TabControl}}" />
-        <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -88,7 +87,7 @@
     <Style x:Key="RubyerTabControl" TargetType="{x:Type TabControl}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Self}}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="0 2.5 0 0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -121,7 +120,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition x:Name="RowDefinition0" Height="Auto" />
-                            <RowDefinition x:Name="RowDefinition1" Height="2.5" />
+                            <RowDefinition x:Name="RowDefinition1" Height="0" />
                             <RowDefinition x:Name="RowDefinition2" Height="*" />
                         </Grid.RowDefinitions>
 
@@ -129,6 +128,7 @@
                                       Style="{StaticResource OnlyArrowScrollViewer}"
                                       Grid.Row="0"
                                       Grid.Column="0"
+                                      Panel.ZIndex="1"
                                       rubyer:ScrollViewerHelper.ArrowIconSize="{Binding (rubyer:ScrollViewerHelper.ArrowIconSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                       rubyer:ScrollViewerHelper.VerticalDelta="75"
@@ -137,12 +137,11 @@
                                       HorizontalScrollBarVisibility="Auto"
                                       VerticalScrollBarVisibility="Auto">
                             <StackPanel x:Name="headerStackPanel" Orientation="Horizontal">
-                                <TabPanel Panel.ZIndex="1"
-                                          IsItemsHost="True"
-                                          KeyboardNavigation.TabIndex="1" />
+                                <TabPanel IsItemsHost="True" KeyboardNavigation.TabIndex="1" />
                                 <Button x:Name="PART_AddButton"
                                         Style="{StaticResource TextButton}"
-                                        Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Margin="5 0 0 0"
+                                        rubyer:ButtonHelper.Shape="Circle"
                                         rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                         Visibility="{Binding Path=(rubyer:TabControlHelper.IsShowAddButton), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -154,6 +153,7 @@
                         <Border x:Name="contentPanel"
                                 Grid.Row="2"
                                 Grid.Column="0"
+                                Margin="0 -2.5 0 0"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
@@ -168,69 +168,46 @@
                                               ContentSource="SelectedContent"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-
-                        <Canvas x:Name="horizontalLine"
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                Background="{TemplateBinding BorderBrush}">
-                            <Rectangle x:Name="selectedRectRow"
-                                       Canvas.Left="0"
-                                       Canvas.Top="0"
-                                       Width="0"
-                                       Height="2.5"
-                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                        </Canvas>
-
-                        <Canvas x:Name="verticalLine"
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                Background="Transparent">
-                            <Rectangle x:Name="selectedRectCol"
-                                       Canvas.Left="0"
-                                       Canvas.Top="0"
-                                       Width="2.5"
-                                       Height="0"
-                                       Fill="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                        </Canvas>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="TabStripPlacement" Value="Bottom">
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition2" Property="Height" Value="Auto" />
-                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0 0 0 2.5" />
+                            <Setter TargetName="contentPanel" Property="Margin" Value="0 0 0 -2.5" />
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="2" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource BottomControlCornerRadius}" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Left">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="Auto" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="0" />
                             <Setter TargetName="ColumnDefinition2" Property="Width" Value="*" />
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
                             <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
                             <Setter TargetName="contentPanel" Property="Grid.Column" Value="2" />
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="2.5 0 0 0" />
+                            <Setter TargetName="contentPanel" Property="Margin" Value="-2.5 0 0 0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="0" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
-                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource LeftControlCornerRadius}" />
                             <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
                         <Trigger Property="TabStripPlacement" Value="Right">
                             <Setter TargetName="ColumnDefinition0" Property="Width" Value="*" />
-                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="2.5" />
+                            <Setter TargetName="ColumnDefinition1" Property="Width" Value="0" />
                             <Setter TargetName="ColumnDefinition2" Property="Width" Value="Auto" />
                             <Setter TargetName="RowDefinition0" Property="Height" Value="*" />
                             <Setter TargetName="RowDefinition1" Property="Height" Value="0" />
                             <Setter TargetName="RowDefinition2" Property="Height" Value="0" />
                             <Setter TargetName="contentPanel" Property="Grid.Column" Value="0" />
                             <Setter TargetName="contentPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="contentPanel" Property="BorderThickness" Value="0 0 2.5 0" />
+                            <Setter TargetName="contentPanel" Property="Margin" Value="0 0 -2.5 0" />
                             <Setter TargetName="headerPanel" Property="Grid.Column" Value="2" />
                             <Setter TargetName="headerPanel" Property="Grid.Row" Value="0" />
-                            <Setter TargetName="horizontalLine" Property="Background" Value="Transparent" />
-                            <Setter TargetName="verticalLine" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource RightControlCornerRadius}" />
                             <Setter TargetName="headerStackPanel" Property="Orientation" Value="Vertical" />
                         </Trigger>
@@ -247,12 +224,11 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=TabControl}}" />
-        <Setter Property="Margin" Value="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="HorizontalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="VerticalAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="rubyer:TabControlHelper.IsClearable" Value="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource AncestorType=TabControl}}" />
-        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=TabControl}}" />
         <Setter Property="FontFamily" Value="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=TabControl}}" />
@@ -266,32 +242,56 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="0"
                                 SnapsToDevicePixels="True" />
-                        <StackPanel Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                    Orientation="Horizontal">
-                            <ContentPresenter x:Name="contentPresenter"
-                                              ContentSource="Header"
-                                              Focusable="False"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            <Button x:Name="clearButton"
-                                    Style="{StaticResource TextButton}"
-                                    Margin="5 0 0 0"
-                                    rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
-                                    rubyer:ButtonHelper.Shape="Circle"
-                                    Foreground="{TemplateBinding Foreground}"
-                                    Visibility="Hidden">
-                                <rubyer:Icon Type="CloseLine" />
-                            </Button>
-                        </StackPanel>
+
+                        <DockPanel>
+                            <rubyer:Transition x:Name="lineTransirion"
+                                               DockPanel.Dock="Bottom"
+                                               IsShow="{TemplateBinding IsSelected}"
+                                               Type="CollapseLeft">
+                                <Rectangle x:Name="line"
+                                           Width="{Binding ActualWidth, ElementName=templateRoot}"
+                                           Height="2.5"
+                                           Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            </rubyer:Transition>
+
+                            <StackPanel Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                        Orientation="Horizontal">
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentSource="Header"
+                                                  Focusable="False"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Button x:Name="clearButton"
+                                        Style="{StaticResource TextButton}"
+                                        Margin="5 0 0 0"
+                                        rubyer:ButtonHelper.CircleDiameter="{StaticResource TabButtonCircleDiameter}"
+                                        rubyer:ButtonHelper.Shape="Circle"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Visibility="Hidden">
+                                    <rubyer:Icon Type="CloseLine" />
+                                </Button>
+                            </StackPanel>
+                        </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
                             <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="line" Property="Height" Value="{Binding ActualHeight, ElementName=templateRoot}" />
+                            <Setter TargetName="line" Property="Width" Value="2.5" />
+                            <Setter TargetName="lineTransirion" Property="DockPanel.Dock" Value="Right" />
+                            <Setter TargetName="lineTransirion" Property="Type" Value="CollapseDown" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter TargetName="line" Property="Height" Value="{Binding ActualHeight, ElementName=templateRoot}" />
+                            <Setter TargetName="line" Property="Width" Value="2.5" />
+                            <Setter TargetName="lineTransirion" Property="DockPanel.Dock" Value="Left" />
+                            <Setter TargetName="lineTransirion" Property="Type" Value="CollapseDown" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Bottom">
+                            <Setter TargetName="lineTransirion" Property="DockPanel.Dock" Value="Top" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -304,10 +304,10 @@
                             <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
                         </MultiDataTrigger>
                         <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=Self}}" />
+                            <Setter Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=Self}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
@@ -326,7 +326,6 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource LineTabItem}" />
-        <Setter Property="rubyer:TabControlHelper.IsAnimation" Value="True" />
     </Style>
 
     <Style x:Key="CardTabItem" TargetType="{x:Type TabItem}">
@@ -456,7 +455,8 @@
                                               KeyboardNavigation.TabIndex="1" />
                                     <Button x:Name="PART_AddButton"
                                             Style="{StaticResource TextButton}"
-                                            Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Margin="5 0 0 0"
+                                            rubyer:ButtonHelper.Shape="Circle"
                                             rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ScrollViewer}}"
                                             Visibility="{Binding Path=(rubyer:TabControlHelper.IsShowAddButton), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}">

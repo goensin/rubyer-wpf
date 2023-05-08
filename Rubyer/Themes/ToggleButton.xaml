@@ -259,21 +259,21 @@
     </Style>
 
     <!--  切换开关亮色  -->
-    <Style x:Key="SwitchLightToggle"
+    <Style x:Key="SwitchLightToggleButton"
            BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Light}" />
     </Style>
 
     <!--  切换开关暗色  -->
-    <Style x:Key="SwitchDarkToggle"
+    <Style x:Key="SwitchDarkToggleButton"
            BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Dark}" />
     </Style>
 
     <!--  切换开关强调色  -->
-    <Style x:Key="SwitchAccentToggle"
+    <Style x:Key="SwitchAccentToggleButton"
            BasedOn="{StaticResource SwitchToggleButton}"
            TargetType="{x:Type ToggleButton}">
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Accent}" />
