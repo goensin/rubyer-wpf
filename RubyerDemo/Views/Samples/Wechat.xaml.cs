@@ -30,9 +30,8 @@ namespace RubyerDemo.Views.Samples
             this.DataContext = App.Current.Services.GetRequiredService<WechatViewModel>();
         }
 
-        protected override async void OnClosing(CancelEventArgs e)
+        protected override void OnClosing(CancelEventArgs e)
         {
-            await Task.Delay(500);
             e.Cancel = true;
             this.Hide();
         }
