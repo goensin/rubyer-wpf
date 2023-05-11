@@ -99,7 +99,6 @@
                              rubyer:ItemsControlHelper.ItemMargin="0"
                              rubyer:ItemsControlHelper.ItemPadding="0"
                              ItemsSource="{Binding Source={StaticResource iconsSource}}"
-                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                              SelectedItem="{Binding CurrentIcon}"
                              VirtualizingPanel.IsVirtualizingWhenGrouping="True"
                              VirtualizingPanel.ScrollUnit="Pixel">
@@ -108,7 +107,7 @@
                         </ListBox.GroupStyle>
                         <ListBox.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <wpftk:VirtualizingWrapPanel MouseWheelDelta="80" />
+                                <wpftk:VirtualizingWrapPanel />
                             </ItemsPanelTemplate>
                         </ListBox.ItemsPanel>
                         <ListBox.ItemTemplate>

@@ -21,6 +21,7 @@
                      mc:Ignorable="d">
     <rubyer:RubyerWindow.Resources>
         <converter:IsSelectedToIconConverter x:Key="IsSelectedToIcon" />
+        <converter:GetIconConverter x:Key="GetIconConverter" />
     </rubyer:RubyerWindow.Resources>
     <!--  可自定义标题栏内容  -->
     <!--  WindowChrome.IsHitTestVisibleInChrome = "True" 才可以点击  -->
@@ -54,11 +55,7 @@
                             <Setter Property="Command" Value="{Binding DataContext.OpenSampleWindowCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
                             <Setter Property="CommandParameter" Value="{Binding}" />
                             <Setter Property="Header" Value="{Binding Name}" />
-                            <Setter Property="Icon">
-                                <Setter.Value>
-                                    <rubyer:Icon Type="{Binding IconType}" />
-                                </Setter.Value>
-                            </Setter>
+                            <Setter Property="Icon" Value="{Binding IconType, Converter={StaticResource GetIconConverter}}" />
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>

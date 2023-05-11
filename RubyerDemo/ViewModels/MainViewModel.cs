@@ -103,6 +103,7 @@ namespace RubyerDemo.ViewModels
             SampleItems = new ObservableCollection<ViewItem>
             {
                 new ViewItem("微信", "微信", new Wechat(), IconType.WechatFill),
+                new ViewItem("网易云音乐", "网易云音乐", new NetEaseCloudMusic(), IconType.NeteaseCloudMusicLine),
             };
         }
 
