@@ -150,23 +150,43 @@
                             <Setter TargetName="PART_DownButton" Property="Opacity" Value="0" />
                         </MultiTrigger>
 
-                        <MultiTrigger>
+                        <!--<MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
+                                <Condition Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal" />
+                                <Condition Binding="{Binding HorizontalOffset, ElementName=PART_ContentScrollViewer}" Value="0" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
+                        </MultiDataTrigger>
+
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
+                                <Condition Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal" />
+                                <Condition Binding="{Binding VerticalOffset, ElementName=PART_ContentScrollViewer}" Value="Vertical" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
+                        </MultiDataTrigger>-->
+                        
+                        <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsLoop" Value="False" />
                                 <Condition Property="CurrentIndex" Value="0" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
                             <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
-                        </MultiTrigger>
+                        </MultiTrigger>-->
 
-                        <MultiDataTrigger>
+                        <!--<MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
                                 <Condition Value="1">
                                     <Condition.Binding>
-                                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                        <MultiBinding Converter="{StaticResource IsEqualConverter}">
                                             <MultiBinding.Bindings>
-                                                <Binding Path="Items.Count" RelativeSource="{RelativeSource Self}" />
+                                                <Binding Path="ScrollableWidth" ElementName="PART_ContentScrollViewer" RelativeSource="{RelativeSource Self}" />
                                                 <Binding Path="CurrentIndex" RelativeSource="{RelativeSource Self}" />
                                             </MultiBinding.Bindings>
                                         </MultiBinding>
@@ -175,7 +195,7 @@
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="PART_RightButton" Property="IsEnabled" Value="False" />
                             <Setter TargetName="PART_DownButton" Property="IsEnabled" Value="False" />
-                        </MultiDataTrigger>
+                        </MultiDataTrigger>-->
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

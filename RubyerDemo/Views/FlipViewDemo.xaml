@@ -45,14 +45,6 @@
                                       Style="{StaticResource SwitchToggleButton}"
                                       IsChecked="True" />
                     </rubyer:DescriptionItem>
-                    <rubyer:DescriptionItem Description="当前索引">
-                        <rubyer:NumericBox x:Name="index"
-                                           Width="50"
-                                           IsReadOnly="True"
-                                           MaxValue="4"
-                                           MinValue="0"
-                                           Value="0" />
-                    </rubyer:DescriptionItem>
                     <rubyer:DescriptionItem Description="鼠标滚动翻页">
                         <ToggleButton x:Name="mouseWheel"
                                       Style="{StaticResource SwitchToggleButton}"
@@ -66,7 +58,6 @@
                                      AnimateDuration="{Binding Text, ElementName=duration}"
                                      AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
-                                     CurrentIndex="{Binding Value, ElementName=index}"
                                      IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
                                      IsButtonFloat="{Binding IsChecked, ElementName=isOverlay}"
                                      IsLoop="{Binding IsChecked, ElementName=isLoop}"
@@ -86,7 +77,6 @@
                                      AnimateDuration="{Binding Text, ElementName=duration}"
                                      AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
-                                     CurrentIndex="{Binding Value, ElementName=index}"
                                      IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
                                      IsButtonFloat="{Binding IsChecked, ElementName=isOverlay}"
                                      IsLoop="{Binding IsChecked, ElementName=isLoop}"

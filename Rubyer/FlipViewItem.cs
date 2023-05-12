@@ -11,7 +11,7 @@ namespace Rubyer
     /// <summary>
     /// 滑动视图子项
     /// </summary>
-    public class FlipViewItem : ContentControl
+    public class FlipViewItem : ListBoxItem
     {
         static FlipViewItem()
         {

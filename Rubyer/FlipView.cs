@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,7 +26,7 @@ namespace Rubyer
     [TemplatePart(Name = UpButtonName, Type = typeof(Button))]
     [TemplatePart(Name = DownButtonName, Type = typeof(Button))]
     [TemplatePart(Name = ContentScrollViewerName, Type = typeof(ScrollViewer))]
-    public class FlipView : ItemsControl
+    public class FlipView : ListBox
     {
         const string LeftButtonName = "PART_LeftButton";
         const string RightButtonName = "PART_RightButton";
@@ -103,21 +106,6 @@ namespace Rubyer
         {
             get { return (Style)GetValue(ArrowButtonStyleProperty); }
             set { SetValue(ArrowButtonStyleProperty, value); }
-        }
-
-        /// <summary>
-        /// 当前索引
-        /// </summary>
-        public static readonly DependencyProperty CurrentIndexProperty =
-            DependencyProperty.Register("CurrentIndex", typeof(int), typeof(FlipView), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnCurrentIndexChanged));
-
-        /// <summary>
-        ///  当前索引
-        /// </summary>
-        public int CurrentIndex
-        {
-            get { return (int)GetValue(CurrentIndexProperty); }
-            set { SetValue(CurrentIndexProperty, value); }
         }
 
         /// <summary>
@@ -273,6 +261,40 @@ namespace Rubyer
         #endregion
 
         /// <summary>
+        /// 添加滚动偏移
+        /// </summary>
+        private void AddScrollOffset()
+        {
+            if (Orientation == Orientation.Horizontal)
+            {
+                var offset = HorizontalOffset + scrollViewer.ActualWidth;
+                HorizontalAnimation(this, offset);
+            }
+            else
+            {
+                var offset = VerticalOffset + scrollViewer.ActualHeight;
+                VerticalAnimation(this, offset);
+            }
+        }
+
+        /// <summary>
+        /// 减少滚动偏移
+        /// </summary>
+        private void SubtractScrollOffset()
+        {
+            if (Orientation == Orientation.Horizontal)
+            {
+                var offset = HorizontalOffset - scrollViewer.ActualWidth;
+                HorizontalAnimation(this, offset);
+            }
+            else
+            {
+                var offset = VerticalOffset - scrollViewer.ActualHeight;
+                VerticalAnimation(this, offset);
+            }
+        }
+
+        /// <summary>
         /// 下一张
         /// </summary>
         private void ClickNextItem(object sender, RoutedEventArgs e)
@@ -282,7 +304,28 @@ namespace Rubyer
                 return;
             }
 
-            CurrentIndex++;
+            if (IsLoop)
+            {
+                if (Orientation == Orientation.Horizontal && HorizontalOffset >= scrollViewer.ScrollableWidth)
+                {
+                    var firstItem = Items[0];
+                    Items.Remove(firstItem);
+                    Items.Insert(Items.Count, firstItem);
+                    BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
+                    HorizontalOffset = (Items.Count - 2) * scrollViewer.ActualWidth;
+                }
+
+                if (Orientation == Orientation.Vertical && VerticalOffset >= scrollViewer.ScrollableHeight)
+                {
+                    var firstItem = Items[0];
+                    Items.Remove(firstItem);
+                    Items.Insert(Items.Count, firstItem);
+                    BeginAnimation(VerticalOffsetProperty, null);
+                    VerticalOffset = (Items.Count - 2) * scrollViewer.ActualHeight;
+                }
+            }
+
+            AddScrollOffset();
         }
 
         /// <summary>
@@ -295,7 +338,28 @@ namespace Rubyer
                 return;
             }
 
-            CurrentIndex--;
+            if (IsLoop)
+            {
+                if (Orientation == Orientation.Horizontal && HorizontalOffset <= 0)
+                {
+                    var lastItem = Items[Items.Count - 1];
+                    Items.Remove(lastItem);
+                    Items.Insert(0, lastItem);
+                    BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
+                    HorizontalOffset = scrollViewer.ActualWidth;
+                }
+
+                if (Orientation == Orientation.Vertical && VerticalOffset <= 0)
+                {
+                    var lastItem = Items[Items.Count - 1];
+                    Items.Remove(lastItem);
+                    Items.Insert(0, lastItem);
+                    BeginAnimation(VerticalOffsetProperty, null);
+                    VerticalOffset = scrollViewer.ActualHeight;
+                }
+            }
+
+            SubtractScrollOffset();
         }
 
         /// <summary>
@@ -365,67 +429,22 @@ namespace Rubyer
             flipView.BeginAnimation(VerticalOffsetProperty, animation);
         }
 
-        /// <summary>
-        /// 更新滚动条偏移
-        /// </summary>
-        /// <param name="flipView">滚动视图</param>
-        private static void UpdateScrollOffset(FlipView flipView)
-        {
-            if (flipView.Orientation == Orientation.Horizontal)
-            {
-                var offset = flipView.CurrentIndex * flipView.scrollViewer.ActualWidth;
-                HorizontalAnimation(flipView, offset);
-            }
-            else
-            {
-                var offset = flipView.CurrentIndex * flipView.scrollViewer.ActualHeight;
-                VerticalAnimation(flipView, offset);
-            }
-        }
-
-        /// <summary>
-        /// 当前索引改变
-        /// </summary>
-        private static void OnCurrentIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var flipView = d as FlipView;
-
-            if (flipView.CurrentIndex >= flipView.Items.Count)
-            {
-                if (flipView.IsLoop)
-                {
-                    flipView.CurrentIndex = 0;
-                    flipView.HorizontalOffset = 0;
-                    flipView.VerticalOffset = 0;
-                }
-                else
-                {
-                    flipView.CurrentIndex = flipView.Items.Count - 1;
-                }
-            }
-
-            if (flipView.CurrentIndex < 0)
-            {
-                if (flipView.IsLoop)
-                {
-                    flipView.CurrentIndex = flipView.Items.Count - 1;
-                }
-                else
-                {
-                    flipView.CurrentIndex = 0;
-                }
-            }
-
-            UpdateScrollOffset(flipView);
-        }
-
-        /// <summary>
-        /// 浮动按钮变化
-        /// </summary>
         private static void OnIsButtonFloatChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var flipView = d as FlipView;
-            flipView.CurrentIndex = 0;
+            if (!flipView.IsLoaded)
+            {
+                return;
+            }
+
+            if (flipView.Orientation == Orientation.Horizontal)
+            {
+                HorizontalAnimation(flipView, 0);
+            }
+            else
+            {
+                VerticalAnimation(flipView, 0);
+            }
         }
 
         /// <summary>
@@ -476,7 +495,14 @@ namespace Rubyer
 
             if (!animating)
             {
-                CurrentIndex += e.Delta > 0 ? -1 : 1;
+                if (e.Delta > 0)
+                {
+                    SubtractScrollOffset();
+                }
+                else
+                {
+                    AddScrollOffset();
+                }
             }
         }
     }
