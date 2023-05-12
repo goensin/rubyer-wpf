@@ -16,7 +16,6 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Padding" Value="10 5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -56,10 +55,10 @@
                             <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Circle">
-                            <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
-                            <Setter Property="Height" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
-                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Round">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />

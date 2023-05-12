@@ -7,9 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace RubyerDemo
 {
@@ -71,6 +74,7 @@ namespace RubyerDemo
             services.AddSingleton<ExpanderViewModel>();
             services.AddSingleton<ListBoxViewModel>();
             services.AddSingleton<TreeViewViewModel>();
+            services.AddSingleton<FlipViewViewModel>();
 
             services.AddSingleton<WechatViewModel>();
             services.AddSingleton<NetEaseCloudMusicViewModel>();

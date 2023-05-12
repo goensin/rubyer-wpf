@@ -55,27 +55,24 @@
 
                 <controls:ControlDisplay Title="Circle Button"
                                          Grid.Row="2"
-                                         Description="通过 ButtonHelper.Shape=&quot;Circle&quot; 圆型按钮，圆角半径自动适应按钮高度 &#x000A;通过 ButtonHelper.CircleDiameter 设置圆形直径">
+                                         Description="通过 ButtonHelper.Shape=&quot;Circle&quot; 圆型按钮，圆角半径自动适应按钮高度 &#x000A;">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Button Style="{StaticResource AccentButton}"
                                 Margin="10 0"
                                 rubyer:ButtonHelper.Shape="Circle"
                                 Content="赞" />
                         <Button Margin="10 0"
-                                rubyer:ButtonHelper.CircleDiameter="40"
                                 rubyer:ButtonHelper.Shape="Circle"
                                 FontSize="20">
                             <rubyer:Icon Type="QqFill" />
                         </Button>
                         <Button Margin="10 0"
-                                rubyer:ButtonHelper.CircleDiameter="45"
                                 rubyer:ButtonHelper.Shape="Circle"
                                 Background="Green"
                                 FontSize="30">
                             <rubyer:Icon Type="WechatFill" />
                         </Button>
                         <Button Margin="10 0"
-                                rubyer:ButtonHelper.CircleDiameter="55"
                                 rubyer:ButtonHelper.Shape="Circle"
                                 Background="Gray"
                                 FontSize="50">
@@ -104,7 +101,6 @@
                         </Button>
                         <Button Style="{DynamicResource TextSuccessButton}"
                                 Padding="5"
-                                rubyer:ButtonHelper.CircleDiameter="40"
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ControlHelper.FocusedBrush="{StaticResource Success}">
                             <rubyer:Icon Width="30"

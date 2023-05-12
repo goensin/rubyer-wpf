@@ -10,7 +10,7 @@
                      d:DataContext="{d:DesignInstance Type=samples:WechatViewModel}"
                      TitleBackground="Transparent"
                      TitleForeground="#A3A3A3"
-                     TitleHeight="60"
+                     TitleHeight="30"
                      mc:Ignorable="d">
     <rubyer:RubyerWindow.Resources>
         <SolidColorBrush x:Key="DefaultForeground" Color="#000000" />

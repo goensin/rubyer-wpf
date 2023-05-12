@@ -62,32 +62,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 圆形直径
-        /// </summary>
-        public static readonly DependencyProperty CircleDiameterProperty = DependencyProperty.RegisterAttached(
-            "CircleDiameter", typeof(double), typeof(ButtonHelper), new PropertyMetadata(default(double)));
-
-        /// <summary>
-        /// Sets the circle diameter.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="value">The value.</param>
-        public static void SetCircleDiameter(DependencyObject element, double value)
-        {
-            element.SetValue(CircleDiameterProperty, value);
-        }
-
-        /// <summary>
-        /// Gets the circle diameter.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns>A double.</returns>
-        public static double GetCircleDiameter(DependencyObject element)
-        {
-            return (double)element.GetValue(CircleDiameterProperty);
-        }
-
-        /// <summary>
         /// 加载中
         /// </summary>
         public static readonly DependencyProperty LoadingProperty = DependencyProperty.RegisterAttached(

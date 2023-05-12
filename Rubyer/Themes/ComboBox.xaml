@@ -277,7 +277,7 @@
             <Button x:Name="clearButton"
                     Style="{StaticResource TextButton}"
                     Grid.Column="1"
-                    rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
+                    Padding="2"
                     rubyer:ButtonHelper.Shape="Circle"
                     Foreground="{DynamicResource SeconarydText}"
                     Visibility="Collapsed">
@@ -436,7 +436,7 @@
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Grid.Column="2"
-                                    rubyer:ButtonHelper.CircleDiameter="{DynamicResource InsideButtonCircleDiameter}"
+                                    Padding="2"
                                     rubyer:ButtonHelper.Shape="Circle"
                                     Focusable="False"
                                     Foreground="{DynamicResource SeconarydText}"

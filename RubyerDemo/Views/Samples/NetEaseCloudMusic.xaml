@@ -151,7 +151,21 @@
             <TabControl Style="{StaticResource LineTabControl}"
                         rubyer:HeaderHelper.FontSize="19"
                         BorderBrush="Transparent">
-                <TabItem Header="个性推荐" />
+                <TabItem Header="个性推荐">
+                    <rubyer:FlipView Width="650"
+                                     Margin="0 30"
+                                     VerticalAlignment="Top"
+                                     IsAutoPlay="True"
+                                     IsButtonFloat="True"
+                                     IsLoop="True">
+                        <rubyer:FlipViewItem Background="{StaticResource Primary}" />
+                        <rubyer:FlipViewItem Background="{StaticResource Question}" />
+                        <rubyer:FlipViewItem Background="{StaticResource Info}" />
+                        <rubyer:FlipViewItem Background="{StaticResource Error}" />
+                        <rubyer:FlipViewItem Background="{StaticResource Success}" />
+                        <rubyer:FlipViewItem Background="{StaticResource Warning}" />
+                    </rubyer:FlipView>
+                </TabItem>
                 <TabItem Header="专属定制" />
                 <TabItem Header="歌单" />
                 <TabItem Header="排行榜" />
@@ -201,13 +215,14 @@
                                 ToolTip="上一首">
                             <rubyer:Icon Type="SkipBackFill" />
                         </Button>
-                        <Button rubyer:ButtonHelper.CircleDiameter="38"
-                                rubyer:ButtonHelper.Shape="Circle"
+                        <Button rubyer:ButtonHelper.Shape="Circle"
                                 Background="#0F000000"
-                                FontSize="24"
                                 Foreground="{StaticResource DefaultForeground}"
                                 ToolTip="播放">
-                            <rubyer:Icon Margin="7 0 0 0" Type="PlayFill" />
+                            <rubyer:Icon Width="28"
+                                         Height="28"
+                                         Margin="6 0 0 0"
+                                         Type="PlayFill" />
                         </Button>
                         <Button Style="{StaticResource TextButton}"
                                 FontSize="14"

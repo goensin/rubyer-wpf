@@ -277,9 +277,10 @@
                         <!--  Top  -->
                         <TabControl Style="{StaticResource LineTabControl}"
                                     Grid.RowSpan="2"
-                                    Grid.Column="1" rubyer:HeaderHelper.Padding="10"
+                                    Grid.Column="1"
                                     Height="150"
                                     HorizontalContentAlignment="Center"
+                                    rubyer:HeaderHelper.Padding="10"
                                     rubyer:TabControlHelper.AddButtonClick="TabControl_AddButtonClick"
                                     rubyer:TabControlHelper.AddCommand="{Binding AddTabItemCommand}"
                                     rubyer:TabControlHelper.IsShowAddButton="True"

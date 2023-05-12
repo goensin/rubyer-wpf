@@ -168,10 +168,13 @@
         </Grid>
     </rubyer:RubyerWindow.TitleBarContent>
 
-    <rubyer:HamburgerMenu rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
+    <rubyer:HamburgerMenu rubyer:ControlHelper.CornerRadius="0"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
                           rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"
                           rubyer:HeaderHelper.FontSize="{Binding FontSize, RelativeSource={RelativeSource Self}}"
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:ItemsControlHelper.ItemMargin="0"
+                          rubyer:ItemsControlHelper.ItemPadding="5 3"
                           ExpandedWidth="170"
                           Foreground="{DynamicResource WhiteForeground}"
                           Header="Controls"
@@ -180,11 +183,21 @@
                           SelectedItem="{Binding CurrentViewItem}"
                           TransitionDuration="0:0:0.7"
                           TransitionType="Fade">
+        <rubyer:HamburgerMenu.Resources>
+            <StackPanel x:Key="headContent"
+                        x:Shared="False"
+                        Orientation="Vertical">
+                <TextBlock Text="{Binding Name}" />
+                <TextBlock FontSize="12"
+                           Opacity="0.6"
+                           Text="{Binding Description}" />
+            </StackPanel>
+        </rubyer:HamburgerMenu.Resources>
         <rubyer:HamburgerMenu.ItemContainerStyle>
             <Style TargetType="rubyer:HamburgerMenuItem">
                 <Setter Property="DataContext" Value="{Binding}" />
                 <Setter Property="IconType" Value="{Binding IconType}" />
-                <Setter Property="Header" Value="{Binding Name}" />
+                <Setter Property="Header" Value="{StaticResource headContent}" />
             </Style>
         </rubyer:HamburgerMenu.ItemContainerStyle>
         <rubyer:HamburgerMenu.ContentTemplate>

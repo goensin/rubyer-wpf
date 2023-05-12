@@ -16,6 +16,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\img1.jpg" />
+	  <None Remove="Assets\img2.jpg" />
+	  <None Remove="Assets\img3.jpg" />
+	  <None Remove="Assets\img4.jpg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 		<None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
 	</ItemGroup>
@@ -42,6 +49,10 @@
 		<Resource Include="Assets\ali.jpg">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Assets\img1.jpg" />
+		<Resource Include="Assets\img2.jpg" />
+		<Resource Include="Assets\img3.jpg" />
+		<Resource Include="Assets\img4.jpg" />
 		<Resource Include="Assets\wechat.jpg">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>

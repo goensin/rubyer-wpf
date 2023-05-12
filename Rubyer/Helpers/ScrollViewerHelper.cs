@@ -344,22 +344,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 箭头按钮大小
-        /// </summary>
-        public static readonly DependencyProperty ArrowIconSizeProperty = DependencyProperty.RegisterAttached(
-            "ArrowIconSize", typeof(double), typeof(ScrollViewerHelper), new PropertyMetadata(default(double)));
-
-        public static void SetArrowIconSize(DependencyObject element, double value)
-        {
-            element.SetValue(ArrowIconSizeProperty, value);
-        }
-
-        public static double GetArrowIconSize(DependencyObject element)
-        {
-            return (double)element.GetValue(ArrowIconSizeProperty);
-        }
-
-        /// <summary>
         /// 箭头图标颜色
         /// </summary>
         public static readonly DependencyProperty ArrowIconBrushProperty = DependencyProperty.RegisterAttached(
@@ -373,6 +357,38 @@ namespace Rubyer
         public static Brush GetArrowIconBrush(DependencyObject element)
         {
             return (Brush)element.GetValue(ArrowIconBrushProperty);
+        }
+
+        /// <summary>
+        /// 是否浮动显示
+        /// </summary>
+        public static readonly DependencyProperty IsButtonFloatProperty = DependencyProperty.RegisterAttached(
+            "IsButtonFloat", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public static void SetIsButtonFloat(DependencyObject element, bool value)
+        {
+            element.SetValue(IsButtonFloatProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetIsButtonFloat(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsButtonFloatProperty);
+        }
+
+        /// <summary>
+        /// 箭头按钮样式
+        /// </summary>
+        public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.RegisterAttached(
+            "ArrowButtonStyle", typeof(Style), typeof(ScrollViewerHelper), new PropertyMetadata(default));
+
+        public static void SetArrowButtonStyle(DependencyObject element, Style value)
+        {
+            element.SetValue(ArrowButtonStyleProperty, value);
+        }
+
+        public static Style GetArrowButtonStyle(DependencyObject element)
+        {
+            return (Style)element.GetValue(ArrowButtonStyleProperty);
         }
     }
 }

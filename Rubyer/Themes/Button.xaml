@@ -22,7 +22,6 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource MaskDark}" />
         <Setter Property="rubyer:ButtonHelper.ShowShadow" Value="False" />
         <Setter Property="rubyer:ButtonHelper.Loading" Value="False" />
-        <Setter Property="rubyer:ButtonHelper.CircleDiameter" Value="28" />
         <Setter Property="rubyer:ButtonHelper.LoadingContent" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -108,10 +107,10 @@
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Circle">
-                            <Setter Property="Width" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
-                            <Setter Property="Height" Value="{Binding Path=(rubyer:ButtonHelper.CircleDiameter), RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="Width" Value="{Binding Path=ActualHeight, RelativeSource={RelativeSource Self}}" />
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
-                            <Setter Property="Padding" Value="0" />
+                            <Setter Property="Padding" Value="5" />
+                            <Setter Property="VerticalAlignment" Value="Center" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Loading" Value="True">
                             <Setter TargetName="loading" Property="Visibility" Value="Visible" />

@@ -54,8 +54,8 @@ namespace Rubyer.Converters
 
             switch (Operation)
             {
+                case MathOperation.Add:
                 default:
-                    // (case MathOperation.Add:)
                     return value1 + value2;
 
                 case MathOperation.Divide:

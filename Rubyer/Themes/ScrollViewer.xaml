@@ -68,6 +68,12 @@
                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="rubyer:ScrollViewerHelper.IsButtonFloat" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -106,11 +112,23 @@
         <Setter Property="rubyer:ScrollViewerHelper.IsOnlyArrow" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.HorizontalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.VerticalDelta" Value="100" />
-        <Setter Property="rubyer:ScrollViewerHelper.ArrowIconSize" Value="16" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowButtonStyle" Value="{StaticResource ScrollViewerArrowButton}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                    <ControlTemplate.Resources>
+                        <Style x:Key="ScrollViewerArrowButton"
+                               BasedOn="{StaticResource ScrollBarArrowButton}"
+                               TargetType="RepeatButton">
+                            <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                            <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                        </Style>
+
+                    </ControlTemplate.Resources>
                     <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -134,7 +152,7 @@
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
 
                         <RepeatButton x:Name="leftButton"
-                                      Style="{StaticResource ScrollViewerArrowButton}"
+                                      Style="{Binding Path=(rubyer:ScrollViewerHelper.ArrowButtonStyle), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       Grid.Row="1"
                                       Grid.Column="0"
                                       Height="Auto"
@@ -145,7 +163,7 @@
                         </RepeatButton>
 
                         <RepeatButton x:Name="rightButton"
-                                      Style="{StaticResource ScrollViewerArrowButton}"
+                                      Style="{Binding Path=(rubyer:ScrollViewerHelper.ArrowButtonStyle), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       Grid.Row="1"
                                       Grid.Column="2"
                                       Height="Auto"
@@ -155,7 +173,7 @@
                         </RepeatButton>
 
                         <RepeatButton x:Name="upButton"
-                                      Style="{StaticResource ScrollViewerArrowButton}"
+                                      Style="{Binding Path=(rubyer:ScrollViewerHelper.ArrowButtonStyle), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       Grid.Row="0"
                                       Grid.Column="1"
                                       Width="Auto"
@@ -165,7 +183,7 @@
                         </RepeatButton>
 
                         <RepeatButton x:Name="downButton"
-                                      Style="{StaticResource ScrollViewerArrowButton}"
+                                      Style="{Binding Path=(rubyer:ScrollViewerHelper.ArrowButtonStyle), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       Grid.Row="2"
                                       Grid.Column="1"
                                       Width="Auto"
@@ -174,6 +192,14 @@
                             <rubyer:Icon Type="ArrowDownSLine" />
                         </RepeatButton>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="rubyer:ScrollViewerHelper.IsButtonFloat" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="3" />
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="3" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
