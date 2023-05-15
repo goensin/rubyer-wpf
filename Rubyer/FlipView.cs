@@ -267,12 +267,12 @@ namespace Rubyer
         {
             if (Orientation == Orientation.Horizontal)
             {
-                var offset = HorizontalOffset + scrollViewer.ActualWidth;
+                var offset = HorizontalOffset + scrollViewer.ViewportWidth;
                 HorizontalAnimation(this, offset);
             }
             else
             {
-                var offset = VerticalOffset + scrollViewer.ActualHeight;
+                var offset = VerticalOffset + scrollViewer.ViewportHeight;
                 VerticalAnimation(this, offset);
             }
         }
@@ -312,7 +312,7 @@ namespace Rubyer
                     Items.Remove(firstItem);
                     Items.Insert(Items.Count, firstItem);
                     BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
-                    HorizontalOffset = (Items.Count - 2) * scrollViewer.ActualWidth;
+                    HorizontalOffset = (Items.Count - 2) * scrollViewer.ViewportWidth;
                 }
 
                 if (Orientation == Orientation.Vertical && VerticalOffset >= scrollViewer.ScrollableHeight)
@@ -321,7 +321,7 @@ namespace Rubyer
                     Items.Remove(firstItem);
                     Items.Insert(Items.Count, firstItem);
                     BeginAnimation(VerticalOffsetProperty, null);
-                    VerticalOffset = (Items.Count - 2) * scrollViewer.ActualHeight;
+                    VerticalOffset = (Items.Count - 2) * scrollViewer.ViewportHeight;
                 }
             }
 
@@ -346,7 +346,7 @@ namespace Rubyer
                     Items.Remove(lastItem);
                     Items.Insert(0, lastItem);
                     BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
-                    HorizontalOffset = scrollViewer.ActualWidth;
+                    HorizontalOffset = scrollViewer.ViewportWidth;
                 }
 
                 if (Orientation == Orientation.Vertical && VerticalOffset <= 0)
@@ -355,7 +355,7 @@ namespace Rubyer
                     Items.Remove(lastItem);
                     Items.Insert(0, lastItem);
                     BeginAnimation(VerticalOffsetProperty, null);
-                    VerticalOffset = scrollViewer.ActualHeight;
+                    VerticalOffset = scrollViewer.ViewportHeight;
                 }
             }
 

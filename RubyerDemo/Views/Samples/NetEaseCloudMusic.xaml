@@ -152,7 +152,7 @@
                         rubyer:HeaderHelper.FontSize="19"
                         BorderBrush="Transparent">
                 <TabItem Header="个性推荐">
-                    <rubyer:FlipView Width="650"
+                    <rubyer:FlipView Height="200"
                                      Margin="0 30"
                                      VerticalAlignment="Top"
                                      IsAutoPlay="True"

@@ -12,7 +12,7 @@
              d:DesignWidth="800"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="FlipViewDemo">
-        <ScrollViewer>
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <Grid Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
@@ -53,8 +53,7 @@
                 </rubyer:Description>
 
                 <controls:ControlDisplay Title="Flip View" Grid.Row="1">
-                    <rubyer:FlipView Width="600"
-                                     Height="400"
+                    <rubyer:FlipView MaxWidth="600"
                                      AnimateDuration="{Binding Text, ElementName=duration}"
                                      AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
@@ -73,7 +72,6 @@
 
                 <controls:ControlDisplay Title="Vertical" Grid.Row="2">
                     <rubyer:FlipView Width="600"
-                                     Height="400"
                                      AnimateDuration="{Binding Text, ElementName=duration}"
                                      AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
@@ -90,5 +88,6 @@
                 </controls:ControlDisplay>
             </Grid>
         </ScrollViewer>
+
     </smtx:XamlDisplay>
 </UserControl>

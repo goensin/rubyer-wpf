@@ -8,8 +8,10 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerFlipViewItem" TargetType="{x:Type rubyer:FlipViewItem}">
-        <Setter Property="Height" Value="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="Width" Value="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -19,11 +21,20 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}">
                         <ContentPresenter x:Name="PART_ContentPresenter"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           Focusable="False"
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
-                    <ControlTemplate.Triggers />
+                    <!--<ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding IsLoaded, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" Value="Vertical">
+                            <Setter Property="MaxWidth" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" Value="Vertical">
+                            <Setter Property="MaxHeight" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -38,8 +49,7 @@
     </Style>
 
     <Style x:Key="RubyerFlipView" TargetType="{x:Type rubyer:FlipView}">
-        <Setter Property="Width" Value="300" />
-        <Setter Property="Height" Value="200" />
+        <Setter Property="Height" Value="400" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerFlipViewItem}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ArrowButtonStyle" Value="{StaticResource FlipViewArrowButton}" />
@@ -169,7 +179,7 @@
                             <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
                             <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
                         </MultiDataTrigger>-->
-                        
+
                         <!--<MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsLoop" Value="False" />
