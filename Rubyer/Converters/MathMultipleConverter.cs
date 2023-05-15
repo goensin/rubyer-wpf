@@ -9,7 +9,7 @@ using System.Windows.Data;
 namespace Rubyer.Converters
 {
     /// <summary>
-    /// 数学计算转换器
+    /// 数学计算多转换器
     /// </summary>
     public class MathMultipleConverter : IMultiValueConverter
     {

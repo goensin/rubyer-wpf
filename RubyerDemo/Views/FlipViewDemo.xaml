@@ -8,8 +8,6 @@
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:FlipViewViewModel}"
-             d:DesignHeight="450"
-             d:DesignWidth="800"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="FlipViewDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
@@ -27,8 +25,10 @@
                                  Width="80"
                                  Text="0:0:0.5" />
                     </rubyer:DescriptionItem>
-                    <rubyer:DescriptionItem Description="切换动画缓动">
-                        <ComboBox x:Name="easing" ItemsSource="{Binding EasingFunctions}" />
+                    <rubyer:DescriptionItem Description="鼠标滚动翻页">
+                        <ToggleButton x:Name="mouseWheel"
+                                      Style="{StaticResource SwitchToggleButton}"
+                                      IsChecked="True" />
                     </rubyer:DescriptionItem>
                     <rubyer:DescriptionItem Description="自动播放">
                         <ToggleButton x:Name="isAutoPlay"
@@ -45,35 +45,25 @@
                                       Style="{StaticResource SwitchToggleButton}"
                                       IsChecked="True" />
                     </rubyer:DescriptionItem>
-                    <rubyer:DescriptionItem Description="鼠标滚动翻页">
-                        <ToggleButton x:Name="mouseWheel"
-                                      Style="{StaticResource SwitchToggleButton}"
-                                      IsChecked="True" />
-                    </rubyer:DescriptionItem>
                 </rubyer:Description>
 
                 <controls:ControlDisplay Title="Flip View" Grid.Row="1">
-                    <rubyer:FlipView MaxWidth="600"
+                    <rubyer:FlipView VerticalAlignment="Top"
                                      AnimateDuration="{Binding Text, ElementName=duration}"
-                                     AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
                                      IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
                                      IsButtonFloat="{Binding IsChecked, ElementName=isOverlay}"
                                      IsLoop="{Binding IsChecked, ElementName=isLoop}"
                                      IsMouseWheel="{Binding IsChecked, ElementName=mouseWheel}">
-                        <rubyer:FlipViewItem>
-                            <Image Source="../Assets/img1.jpg" />
-                        </rubyer:FlipViewItem>
-                        <Image Source="../Assets/img2.jpg" />
-                        <Image Source="../Assets/img3.jpg" />
-                        <Image Source="../Assets/img4.jpg" />
+                        <Image x:Name="i1" Source="../Assets/img1.jpg" />
+                        <Image x:Name="i2" Source="../Assets/img2.jpg" />
+                        <Image x:Name="i3" Source="../Assets/img3.jpg" />
+                        <Image x:Name="i4" Source="../Assets/img4.jpg" />
                     </rubyer:FlipView>
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Vertical" Grid.Row="2">
-                    <rubyer:FlipView Width="600"
-                                     AnimateDuration="{Binding Text, ElementName=duration}"
-                                     AnimateEasingFunction="{Binding SelectedItem, ElementName=easing}"
+                    <rubyer:FlipView AnimateDuration="{Binding Text, ElementName=duration}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
                                      IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
                                      IsButtonFloat="{Binding IsChecked, ElementName=isOverlay}"

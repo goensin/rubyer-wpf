@@ -27,14 +27,6 @@
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
-                    <!--<ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsLoaded, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" Value="Vertical">
-                            <Setter Property="MaxWidth" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Orientation, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" Value="Vertical">
-                            <Setter Property="MaxHeight" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>-->
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -160,52 +152,28 @@
                             <Setter TargetName="PART_DownButton" Property="Opacity" Value="0" />
                         </MultiTrigger>
 
-                        <!--<MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal" />
-                                <Condition Binding="{Binding HorizontalOffset, ElementName=PART_ContentScrollViewer}" Value="0" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
-                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
-                        </MultiDataTrigger>
+                        <Trigger Property="SelectedIndex" Value="0">
+                            <Setter TargetName="PART_LeftButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_UpButton" Property="Opacity" Value="0" />
+                        </Trigger>
 
-                        <MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Binding="{Binding Orientation, RelativeSource={RelativeSource Self}}" Value="Horizontal" />
-                                <Condition Binding="{Binding VerticalOffset, ElementName=PART_ContentScrollViewer}" Value="Vertical" />
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
-                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
-                        </MultiDataTrigger>-->
+                        <Trigger Property="SelectedIndex" Value="0">
+                            <Setter TargetName="PART_LeftButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_UpButton" Property="Opacity" Value="0" />
+                        </Trigger>
 
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsLoop" Value="False" />
-                                <Condition Property="CurrentIndex" Value="0" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
-                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
-                        </MultiTrigger>-->
-
-                        <!--<MultiDataTrigger>
-                            <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding IsLoop, RelativeSource={RelativeSource Self}}" Value="False" />
-                                <Condition Value="1">
-                                    <Condition.Binding>
-                                        <MultiBinding Converter="{StaticResource IsEqualConverter}">
-                                            <MultiBinding.Bindings>
-                                                <Binding Path="ScrollableWidth" ElementName="PART_ContentScrollViewer" RelativeSource="{RelativeSource Self}" />
-                                                <Binding Path="CurrentIndex" RelativeSource="{RelativeSource Self}" />
-                                            </MultiBinding.Bindings>
-                                        </MultiBinding>
-                                    </Condition.Binding>
-                                </Condition>
-                            </MultiDataTrigger.Conditions>
-                            <Setter TargetName="PART_RightButton" Property="IsEnabled" Value="False" />
-                            <Setter TargetName="PART_DownButton" Property="IsEnabled" Value="False" />
-                        </MultiDataTrigger>-->
+                        <DataTrigger Value="1">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="Items.Count" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="SelectedIndex" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="PART_RightButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_DownButton" Property="Opacity" Value="0" />
+                        </DataTrigger>
 
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

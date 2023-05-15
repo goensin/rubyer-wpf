@@ -28,6 +28,11 @@
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
     <converter:MathMultipleConverter x:Key="MathDivideConverter" Operation="Divide" />
 
+    <converter:MathConverter x:Key="AddConverter" />
+    <converter:MathConverter x:Key="SubtractConverter" Operation="Subtract" />
+    <converter:MathConverter x:Key="MultiplyConverter" Operation="Multiply" />
+    <converter:MathConverter x:Key="DivideConverter" Operation="Divide" />
+
     <converter:HalfOfDoubleConverter x:Key="HalfOfDoubleConverter" />
     <converter:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter" />
     <converter:NotNullConverter x:Key="NotNullConverter" />

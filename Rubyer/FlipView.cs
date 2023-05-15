@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
@@ -37,6 +38,7 @@ namespace Rubyer
         private ScrollViewer scrollViewer;
         private DispatcherTimer timer;
         private bool animating;
+        private bool sorting;
 
         static FlipView()
         {
@@ -55,6 +57,7 @@ namespace Rubyer
             return new FlipViewItem();
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -89,6 +92,8 @@ namespace Rubyer
             {
                 timer.Start();
             }
+
+            UpdateItemSort(this);
         }
 
         #region properties
@@ -202,7 +207,7 @@ namespace Rubyer
         /// 是否循环
         /// </summary>
         public static readonly DependencyProperty IsLoopProperty =
-            DependencyProperty.Register("IsLoop", typeof(bool), typeof(FlipView), new PropertyMetadata(BooleanBoxes.FalseBox));
+            DependencyProperty.Register("IsLoop", typeof(bool), typeof(FlipView), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsLoopChanged));
 
         /// <summary>
         /// 是否循环
@@ -260,6 +265,86 @@ namespace Rubyer
 
         #endregion
 
+        /// <inheritdoc/>
+        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
+        {
+            base.OnItemsChanged(e);
+
+            if (IsLoaded && !sorting)
+            {
+                UpdateItemSort(this);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnSelectionChanged(SelectionChangedEventArgs e)
+        {
+            base.OnSelectionChanged(e);
+
+            if (IsLoaded && !sorting)
+            {
+                UpdateItemSort(this);
+            }
+        }
+
+        /// <summary>
+        /// 更新子项排序
+        /// </summary>
+        /// <param name="flipView"></param>
+        /// <returns></returns>
+        private static void UpdateItemSort(FlipView flipView)
+        {
+            flipView.sorting = true;
+            var count = flipView.Items.Count;
+            if (flipView.Items.Count > 0)
+            {
+                if (flipView.SelectedIndex < 0)
+                {
+                    flipView.SelectedIndex = 0;
+                }
+
+                if (flipView.IsLoop)
+                {
+                    int frontCount = (count - 1) / 2; // 当前选中项前面应该有多少个
+                    int index = flipView.Items.IndexOf(flipView.SelectedItem);
+                    if (index < frontCount)  // 需要向前补 item
+                    {
+                        int num = frontCount - index; // 补 item 数量
+                        while (num-- > 0)
+                        {
+                            var item = flipView.Items[count - 1];
+                            flipView.Items.Remove(item);
+                            flipView.Items.Insert(0, item);
+                        }
+                    }
+                    else if (index > frontCount)  // 需要向后补 item
+                    {
+                        int num = index - frontCount; // 补 item 数量
+                        while (num-- > 0)
+                        {
+                            var item = flipView.Items[0];
+                            flipView.Items.Remove(item);
+                            flipView.Items.Insert(count - 1, item);
+                        }
+                    }
+
+                    index = flipView.Items.IndexOf(flipView.SelectedItem);
+                    if (flipView.Orientation == Orientation.Horizontal)
+                    {
+                        flipView.BeginAnimation(HorizontalOffsetProperty, null);
+                        flipView.HorizontalOffset = index * flipView.scrollViewer.ViewportWidth;
+                    }
+                    else
+                    {
+                        flipView.BeginAnimation(VerticalOffsetProperty, null);
+                        flipView.VerticalOffset = index * flipView.scrollViewer.ViewportHeight;
+                    }
+                }
+            }
+
+            flipView.sorting = false;
+        }
+
         /// <summary>
         /// 添加滚动偏移
         /// </summary>
@@ -304,27 +389,6 @@ namespace Rubyer
                 return;
             }
 
-            if (IsLoop)
-            {
-                if (Orientation == Orientation.Horizontal && HorizontalOffset >= scrollViewer.ScrollableWidth)
-                {
-                    var firstItem = Items[0];
-                    Items.Remove(firstItem);
-                    Items.Insert(Items.Count, firstItem);
-                    BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
-                    HorizontalOffset = (Items.Count - 2) * scrollViewer.ViewportWidth;
-                }
-
-                if (Orientation == Orientation.Vertical && VerticalOffset >= scrollViewer.ScrollableHeight)
-                {
-                    var firstItem = Items[0];
-                    Items.Remove(firstItem);
-                    Items.Insert(Items.Count, firstItem);
-                    BeginAnimation(VerticalOffsetProperty, null);
-                    VerticalOffset = (Items.Count - 2) * scrollViewer.ViewportHeight;
-                }
-            }
-
             AddScrollOffset();
         }
 
@@ -336,27 +400,6 @@ namespace Rubyer
             if (animating)
             {
                 return;
-            }
-
-            if (IsLoop)
-            {
-                if (Orientation == Orientation.Horizontal && HorizontalOffset <= 0)
-                {
-                    var lastItem = Items[Items.Count - 1];
-                    Items.Remove(lastItem);
-                    Items.Insert(0, lastItem);
-                    BeginAnimation(HorizontalOffsetProperty, null); // 删除属性的动画引用
-                    HorizontalOffset = scrollViewer.ViewportWidth;
-                }
-
-                if (Orientation == Orientation.Vertical && VerticalOffset <= 0)
-                {
-                    var lastItem = Items[Items.Count - 1];
-                    Items.Remove(lastItem);
-                    Items.Insert(0, lastItem);
-                    BeginAnimation(VerticalOffsetProperty, null);
-                    VerticalOffset = scrollViewer.ViewportHeight;
-                }
             }
 
             SubtractScrollOffset();
@@ -389,6 +432,8 @@ namespace Rubyer
             animation.Completed += (sender, e) =>
             {
                 flipView.animating = false;
+                int index = (int)Math.Round(flipView.HorizontalOffset / flipView.scrollViewer.ViewportWidth, 0);
+                flipView.SelectedIndex = index;
             };
 
             flipView.animating = true;
@@ -423,10 +468,20 @@ namespace Rubyer
             animation.Completed += (sender, e) =>
             {
                 flipView.animating = false;
+                int index = (int)Math.Round(flipView.VerticalOffset / flipView.scrollViewer.ViewportHeight, 0);
+                flipView.SelectedIndex = index;
             };
 
             flipView.animating = true;
             flipView.BeginAnimation(VerticalOffsetProperty, animation);
+        }
+
+        private static void OnIsLoopChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if ((bool)e.NewValue)
+            {
+                UpdateItemSort(d as FlipView);
+            }
         }
 
         private static void OnIsButtonFloatChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -493,16 +548,13 @@ namespace Rubyer
 
             e.Handled = true;
 
-            if (!animating)
+            if (e.Delta > 0)
             {
-                if (e.Delta > 0)
-                {
-                    SubtractScrollOffset();
-                }
-                else
-                {
-                    AddScrollOffset();
-                }
+                ClickLastItem(null, null);
+            }
+            else
+            {
+                ClickNextItem(null, null);
             }
         }
     }
