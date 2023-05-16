@@ -7,6 +7,14 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="FlipViewArrowButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="Button">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
+        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
+    </Style>
+
     <!--  滚动视图默认样式  -->
     <Style x:Key="RubyerFlipViewItem" TargetType="{x:Type rubyer:FlipViewItem}">
         <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
@@ -33,14 +41,6 @@
         </Setter>
     </Style>
 
-    <Style x:Key="FlipViewArrowButton"
-           BasedOn="{StaticResource RubyerButton}"
-           TargetType="Button">
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
-        <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
-    </Style>
-
     <Style x:Key="RubyerFlipView" TargetType="{x:Type rubyer:FlipView}">
         <Setter Property="Height" Value="400" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerFlipViewItem}" />
@@ -52,6 +52,165 @@
                 <CubicEase EasingMode="EaseOut" />
             </Setter.Value>
         </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:FlipView}">
+                    <Grid x:Name="root">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ScrollViewer Name="PART_ContentScrollViewer"
+                                      Grid.Row="1"
+                                      Grid.Column="1" CanContentScroll="False"
+                                      rubyer:ScrollViewerHelper.HorizontalOffset="{TemplateBinding HorizontalOffset}"
+                                      rubyer:ScrollViewerHelper.VerticalOffset="{TemplateBinding VerticalOffset}"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+
+                        <Button x:Name="PART_LeftButton"
+                                Style="{TemplateBinding ArrowButtonStyle}"
+                                Grid.Row="1"
+                                Margin="0 0 5 0"
+                                Visibility="Collapsed">
+                            <rubyer:Icon Type="ArrowLeftSLine" />
+                        </Button>
+
+                        <Button x:Name="PART_RightButton"
+                                Style="{TemplateBinding ArrowButtonStyle}"
+                                Grid.Row="1"
+                                Grid.Column="2"
+                                Margin="5 0 0 0"
+                                Visibility="Collapsed">
+                            <rubyer:Icon Type="ArrowRightSLine" />
+                        </Button>
+
+                        <Button x:Name="PART_UpButton"
+                                Style="{TemplateBinding ArrowButtonStyle}"
+                                Grid.Column="1"
+                                Margin="0 0 0 5"
+                                Visibility="Collapsed">
+                            <rubyer:Icon Type="ArrowUpSLine" />
+                        </Button>
+
+                        <Button x:Name="PART_DownButton"
+                                Style="{TemplateBinding ArrowButtonStyle}"
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Margin="0 5 0 0"
+                                Visibility="Collapsed">
+                            <rubyer:Icon Type="ArrowDownSLine" />
+                        </Button>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Horizontal">
+                            <Setter TargetName="PART_LeftButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_RightButton" Property="Visibility" Value="Visible" />
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter TargetName="PART_UpButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_DownButton" Property="Visibility" Value="Visible" />
+                            <Setter Property="ItemsPanel">
+                                <Setter.Value>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel />
+                                    </ItemsPanelTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+
+                        <Trigger Property="IsButtonFloat" Value="True">
+                            <Setter TargetName="PART_ContentScrollViewer" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="PART_ContentScrollViewer" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="PART_ContentScrollViewer" Property="Grid.RowSpan" Value="3" />
+                            <Setter TargetName="PART_ContentScrollViewer" Property="Grid.ColumnSpan" Value="3" />
+                        </Trigger>
+
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsButtonFloat" Value="True" />
+                                <Condition Property="IsMouseOver" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_LeftButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_RightButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_UpButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_DownButton" Property="Opacity" Value="0" />
+                        </MultiTrigger>
+
+                        <Trigger Property="SelectedIndex" Value="0">
+                            <Setter TargetName="PART_LeftButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_UpButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_LeftButton" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="PART_UpButton" Property="IsEnabled" Value="False" />
+                        </Trigger>
+
+                        <DataTrigger Value="1">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                    <MultiBinding.Bindings>
+                                        <Binding Path="Items.Count" RelativeSource="{RelativeSource Self}" />
+                                        <Binding Path="SelectedIndex" RelativeSource="{RelativeSource Self}" />
+                                    </MultiBinding.Bindings>
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="PART_RightButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_DownButton" Property="Opacity" Value="0" />
+                            <Setter TargetName="PART_RightButton" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="PART_DownButton" Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  轮播图样式  -->
+    <Style x:Key="CarouselFlipViewItem"
+           BasedOn="{StaticResource RubyerFlipViewItem}"
+           TargetType="rubyer:FlipViewItem">
+        <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}, Converter={StaticResource DivideConverter}, ConverterParameter=3}" />
+        <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}, Converter={StaticResource DivideConverter}, ConverterParameter=3}" />
+        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+        <!--<Setter Property="IsEnabled" Value="False" />-->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:FlipViewItem}">
+                    <Border x:Name="rootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ContentPresenter x:Name="PART_ContentPresenter"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="CarouselFlipView"
+           BasedOn="{StaticResource RubyerFlipView}"
+           TargetType="rubyer:FlipView">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource CarouselFlipViewItem}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:FlipView}">
@@ -174,82 +333,6 @@
                             <Setter TargetName="PART_RightButton" Property="IsEnabled" Value="False" />
                             <Setter TargetName="PART_DownButton" Property="IsEnabled" Value="False" />
                         </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <!--  轮播图样式  -->
-    <Style x:Key="CarouselFlipViewItem"
-           BasedOn="{StaticResource RubyerFlipViewItem}"
-           TargetType="rubyer:FlipViewItem">
-        <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="MinWidth">
-            <Setter.Value>
-                <MultiBinding Converter="{StaticResource CarouselScaleConvereter}">
-                    <Binding RelativeSource="{RelativeSource Self}" />
-                    <Binding RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
-                </MultiBinding>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:FlipViewItem}">
-                    <Border x:Name="rootBorder"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <ContentPresenter x:Name="PART_ContentPresenter"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                          Focusable="False"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
-    <Style x:Key="CarouselFlipView"
-           BasedOn="{StaticResource RubyerFlipView}"
-           TargetType="rubyer:FlipView">
-        <Setter Property="ItemContainerStyle" Value="{StaticResource CarouselFlipViewItem}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:FlipView}">
-                    <Grid x:Name="root">
-                        <ScrollViewer Name="PART_ContentScrollViewer"
-                                      rubyer:ScrollViewerHelper.HorizontalOffset="{TemplateBinding HorizontalOffset}"
-                                      rubyer:ScrollViewerHelper.VerticalOffset="{TemplateBinding VerticalOffset}"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden">
-                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </ScrollViewer>
-                    </Grid>
-
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="Orientation" Value="Horizontal">
-                            <Setter Property="ItemsPanel">
-                                <Setter.Value>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal" />
-                                    </ItemsPanelTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
-                        <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="ItemsPanel">
-                                <Setter.Value>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel />
-                                    </ItemsPanelTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

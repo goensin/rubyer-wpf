@@ -5,6 +5,8 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -29,7 +31,8 @@ namespace Rubyer
 
         private ScrollViewer scrollViewer;
         private DispatcherTimer timer;
-        private bool animating;
+        private bool horizontalAnimating;
+        private bool verticalAnimating;
         private bool sorting;
 
         static FlipView()
@@ -185,7 +188,7 @@ namespace Rubyer
         /// 是否按钮浮动
         /// </summary>
         public static readonly DependencyProperty IsButtonFloatProperty =
-            DependencyProperty.Register("IsButtonFloat", typeof(bool), typeof(FlipView), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsButtonFloatChanged));
+            DependencyProperty.Register("IsButtonFloat", typeof(bool), typeof(FlipView), new PropertyMetadata(BooleanBoxes.TrueBox, OnIsButtonFloatChanged));
 
         /// <summary>
         /// 是否按钮浮动
@@ -280,6 +283,25 @@ namespace Rubyer
             }
         }
 
+        /// <inheritdoc/>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            if (horizontalAnimating || verticalAnimating)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            var point = e.GetPosition(scrollViewer);
+            var hitTestResult = VisualTreeHelper.HitTest(this, point);
+            var flipViewItem = hitTestResult.VisualHit.TryGetParentFromVisualTree<FlipViewItem>();
+            if (flipViewItem != null)
+            {
+                e.Handled = true;
+                flipViewItem.IsSelected = true;
+            }
+        }
+
         /// <summary>
         /// 开始滚动偏移动画
         /// </summary>
@@ -332,13 +354,15 @@ namespace Rubyer
             {
                 var point = new Point(0, 0);
                 var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
-                StartOffsetAnimation(flipView, flipView.HorizontalOffset + targetPosition.X);
+                var offset = flipView.scrollViewer.HorizontalOffset + targetPosition.X - ((flipView.scrollViewer.ViewportWidth - item.ActualWidth) / 2);
+                StartOffsetAnimation(flipView, offset);
             }
             else
             {
                 var point = new Point(0, 0);
                 var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
-                StartOffsetAnimation(flipView, flipView.VerticalOffset + targetPosition.Y);
+                var offset = flipView.scrollViewer.VerticalOffset + targetPosition.Y - ((flipView.scrollViewer.ViewportHeight - item.ActualHeight) / 2);
+                StartOffsetAnimation(flipView, offset);
             }
         }
 
@@ -418,7 +442,7 @@ namespace Rubyer
         /// </summary>
         private void ClickNextItem(object sender, RoutedEventArgs e)
         {
-            if (animating || SelectedIndex >= Items.Count - 1)
+            if (horizontalAnimating || verticalAnimating || SelectedIndex >= Items.Count - 1)
             {
                 return;
             }
@@ -431,7 +455,7 @@ namespace Rubyer
         /// </summary>
         private void ClickLastItem(object sender, RoutedEventArgs e)
         {
-            if (animating || SelectedIndex <= 0)
+            if (horizontalAnimating || verticalAnimating || SelectedIndex <= 0)
             {
                 return;
             }
@@ -465,11 +489,11 @@ namespace Rubyer
 
             animation.Completed += (sender, e) =>
             {
-                flipView.animating = false;
+                flipView.horizontalAnimating = false;
                 UpdateItemSort(flipView);
             };
 
-            flipView.animating = true;
+            flipView.horizontalAnimating = true;
 
             flipView.BeginAnimation(HorizontalOffsetProperty, animation);
         }
@@ -500,11 +524,11 @@ namespace Rubyer
 
             animation.Completed += (sender, e) =>
             {
-                flipView.animating = false;
+                flipView.verticalAnimating = false;
                 UpdateItemSort(flipView);
             };
 
-            flipView.animating = true;
+            flipView.verticalAnimating = true;
             flipView.BeginAnimation(VerticalOffsetProperty, animation);
         }
 
