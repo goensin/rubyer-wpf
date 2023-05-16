@@ -1,18 +1,10 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Drawing;
-using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -84,6 +76,7 @@ namespace Rubyer
 
             scrollViewer = GetTemplateChild(ContentScrollViewerName) as ScrollViewer;
             scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
+            scrollViewer.SizeChanged += ScrollViewer_SizeChanged;
 
             timer = new DispatcherTimer();
             timer.Interval = AutoPlayInterval;
@@ -272,7 +265,7 @@ namespace Rubyer
 
             if (IsLoaded && !sorting)
             {
-                UpdateItemSort(this);
+                ScrollSelectedItemToCenter(this);
             }
         }
 
@@ -283,15 +276,75 @@ namespace Rubyer
 
             if (IsLoaded && !sorting)
             {
-                UpdateItemSort(this);
+                ScrollSelectedItemToCenter(this);
+            }
+        }
+
+        /// <summary>
+        /// 开始滚动偏移动画
+        /// </summary>
+        /// <param name="flipView">滑动视图</param>
+        /// <param name="offset">偏移</param>
+        private static void StartOffsetAnimation(FlipView flipView, double offset)
+        {
+            if (flipView.Orientation == Orientation.Horizontal)
+            {
+                HorizontalAnimation(flipView, offset);
+            }
+            else
+            {
+                VerticalAnimation(flipView, offset);
+            }
+        }
+
+        /// <summary>
+        /// 改变滚动偏移
+        /// </summary>
+        /// <param name="flipView">滑动视图</param>
+        /// <param name="offset">偏移</param>
+        private static void ChangeOffset(FlipView flipView, double offset)
+        {
+            if (flipView.Orientation == Orientation.Horizontal)
+            {
+                flipView.BeginAnimation(HorizontalOffsetProperty, null);
+                flipView.HorizontalOffset = offset;
+            }
+            else
+            {
+                flipView.BeginAnimation(VerticalOffsetProperty, null);
+                flipView.VerticalOffset = offset;
+            }
+        }
+
+        /// <summary>
+        /// 滚动到当前子项
+        /// </summary>
+        /// <param name="flipView">滑动视图</param>
+        private static void ScrollSelectedItemToCenter(FlipView flipView)
+        {
+            if (!flipView.IsLoaded)
+            {
+                return;
+            }
+
+            var item = flipView.ItemContainerGenerator.ContainerFromIndex(flipView.SelectedIndex) as FlipViewItem;
+            if (flipView.Orientation == Orientation.Horizontal)
+            {
+                var point = new Point(0, 0);
+                var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
+                StartOffsetAnimation(flipView, flipView.HorizontalOffset + targetPosition.X);
+            }
+            else
+            {
+                var point = new Point(0, 0);
+                var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
+                StartOffsetAnimation(flipView, flipView.VerticalOffset + targetPosition.Y);
             }
         }
 
         /// <summary>
         /// 更新子项排序
         /// </summary>
-        /// <param name="flipView"></param>
-        /// <returns></returns>
         private static void UpdateItemSort(FlipView flipView)
         {
             flipView.sorting = true;
@@ -309,10 +362,25 @@ namespace Rubyer
                     int index = flipView.Items.IndexOf(flipView.SelectedItem);
                     if (index < frontCount)  // 需要向前补 item
                     {
+                        index = flipView.Items.IndexOf(flipView.SelectedItem);
+
+
                         int num = frontCount - index; // 补 item 数量
                         while (num-- > 0)
                         {
                             var item = flipView.Items[count - 1];
+                            if (flipView.ItemContainerGenerator.ContainerFromItem(item) is FlipViewItem flipViewItem)
+                            {
+                                var offset = flipView.Orientation == Orientation.Horizontal ?
+                                             flipView.HorizontalOffset + flipViewItem.ActualWidth :
+                                             flipView.VerticalOffset + flipViewItem.ActualHeight;
+
+                                if (flipView.IsLoaded)
+                                {
+                                    ChangeOffset(flipView, offset);
+                                }
+                            }
+
                             flipView.Items.Remove(item);
                             flipView.Items.Insert(0, item);
                         }
@@ -323,21 +391,21 @@ namespace Rubyer
                         while (num-- > 0)
                         {
                             var item = flipView.Items[0];
+                            if (flipView.ItemContainerGenerator.ContainerFromItem(item) is FlipViewItem flipViewItem)
+                            {
+                                var offset = flipView.Orientation == Orientation.Horizontal ?
+                                             flipView.HorizontalOffset - flipViewItem.ActualWidth :
+                                             flipView.VerticalOffset - flipViewItem.ActualHeight;
+
+                                if (flipView.IsLoaded)
+                                {
+                                    ChangeOffset(flipView, offset);
+                                }
+                            }
+
                             flipView.Items.Remove(item);
                             flipView.Items.Insert(count - 1, item);
                         }
-                    }
-
-                    index = flipView.Items.IndexOf(flipView.SelectedItem);
-                    if (flipView.Orientation == Orientation.Horizontal)
-                    {
-                        flipView.BeginAnimation(HorizontalOffsetProperty, null);
-                        flipView.HorizontalOffset = index * flipView.scrollViewer.ViewportWidth;
-                    }
-                    else
-                    {
-                        flipView.BeginAnimation(VerticalOffsetProperty, null);
-                        flipView.VerticalOffset = index * flipView.scrollViewer.ViewportHeight;
                     }
                 }
             }
@@ -346,50 +414,16 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 添加滚动偏移
-        /// </summary>
-        private void AddScrollOffset()
-        {
-            if (Orientation == Orientation.Horizontal)
-            {
-                var offset = HorizontalOffset + scrollViewer.ViewportWidth;
-                HorizontalAnimation(this, offset);
-            }
-            else
-            {
-                var offset = VerticalOffset + scrollViewer.ViewportHeight;
-                VerticalAnimation(this, offset);
-            }
-        }
-
-        /// <summary>
-        /// 减少滚动偏移
-        /// </summary>
-        private void SubtractScrollOffset()
-        {
-            if (Orientation == Orientation.Horizontal)
-            {
-                var offset = HorizontalOffset - scrollViewer.ActualWidth;
-                HorizontalAnimation(this, offset);
-            }
-            else
-            {
-                var offset = VerticalOffset - scrollViewer.ActualHeight;
-                VerticalAnimation(this, offset);
-            }
-        }
-
-        /// <summary>
         /// 下一张
         /// </summary>
         private void ClickNextItem(object sender, RoutedEventArgs e)
         {
-            if (animating)
+            if (animating || SelectedIndex >= Items.Count - 1)
             {
                 return;
             }
 
-            AddScrollOffset();
+            SelectedIndex++;
         }
 
         /// <summary>
@@ -397,12 +431,12 @@ namespace Rubyer
         /// </summary>
         private void ClickLastItem(object sender, RoutedEventArgs e)
         {
-            if (animating)
+            if (animating || SelectedIndex <= 0)
             {
                 return;
             }
 
-            SubtractScrollOffset();
+            SelectedIndex--;
         }
 
         /// <summary>
@@ -432,8 +466,7 @@ namespace Rubyer
             animation.Completed += (sender, e) =>
             {
                 flipView.animating = false;
-                int index = (int)Math.Round(flipView.HorizontalOffset / flipView.scrollViewer.ViewportWidth, 0);
-                flipView.SelectedIndex = index;
+                UpdateItemSort(flipView);
             };
 
             flipView.animating = true;
@@ -468,8 +501,7 @@ namespace Rubyer
             animation.Completed += (sender, e) =>
             {
                 flipView.animating = false;
-                int index = (int)Math.Round(flipView.VerticalOffset / flipView.scrollViewer.ViewportHeight, 0);
-                flipView.SelectedIndex = index;
+                UpdateItemSort(flipView);
             };
 
             flipView.animating = true;
@@ -492,14 +524,7 @@ namespace Rubyer
                 return;
             }
 
-            if (flipView.Orientation == Orientation.Horizontal)
-            {
-                HorizontalAnimation(flipView, 0);
-            }
-            else
-            {
-                VerticalAnimation(flipView, 0);
-            }
+            ScrollSelectedItemToCenter(flipView);
         }
 
         /// <summary>
@@ -556,6 +581,14 @@ namespace Rubyer
             {
                 ClickNextItem(null, null);
             }
+        }
+
+        /// <summary>
+        /// 滚动区域大小变化
+        /// </summary>
+        private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            ScrollSelectedItemToCenter(this);
         }
     }
 }

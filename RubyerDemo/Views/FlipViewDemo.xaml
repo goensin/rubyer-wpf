@@ -12,7 +12,7 @@
     <smtx:XamlDisplay UniqueKey="FlipViewDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
             <Grid Margin="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <rubyer:Description Style="{StaticResource BorderDescription}"
                                     HorizontalAlignment="Center"
@@ -74,6 +74,22 @@
                         <Image Source="../Assets/img2.jpg" />
                         <Image Source="../Assets/img3.jpg" />
                         <Image Source="../Assets/img4.jpg" />
+                    </rubyer:FlipView>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Carousel Style" Grid.Row="3">
+                    <rubyer:FlipView Style="{StaticResource CarouselFlipView}"
+                                     AnimateDuration="{Binding Text, ElementName=duration}"
+                                     AutoPlayInterval="{Binding Text, ElementName=playInterval}"
+                                     IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
+                                     IsLoop="{Binding IsChecked, ElementName=isLoop}"
+                                     IsMouseWheel="{Binding IsChecked, ElementName=mouseWheel}">
+                        <Image Source="../Assets/img1.jpg" />
+                        <Image Source="../Assets/img2.jpg" />
+                        <Image Source="../Assets/img3.jpg" />
+                        <Image Source="../Assets/img4.jpg" />
+                        <Image Source="../Assets/img3.jpg" />
+                        <Image Source="../Assets/img2.jpg" />
                     </rubyer:FlipView>
                 </controls:ControlDisplay>
             </Grid>
