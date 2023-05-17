@@ -78,7 +78,6 @@ namespace Rubyer
             }
 
             scrollViewer = GetTemplateChild(ContentScrollViewerName) as ScrollViewer;
-            scrollViewer.PreviewMouseWheel += ScrollViewer_PreviewMouseWheel;
             scrollViewer.SizeChanged += ScrollViewer_SizeChanged;
 
             timer = new DispatcherTimer();
@@ -88,6 +87,9 @@ namespace Rubyer
             {
                 timer.Start();
             }
+
+            PreviewMouseWheel += FlipView_PreviewMouseWheel;
+            //Loaded += FlipView_Loaded;
 
             UpdateItemSort(this);
         }
@@ -272,6 +274,12 @@ namespace Rubyer
             }
         }
 
+        private void RestartTimer()
+        {
+            timer.Stop();
+            timer.Start();
+        }
+
         /// <inheritdoc/>
         protected override void OnSelectionChanged(SelectionChangedEventArgs e)
         {
@@ -279,6 +287,7 @@ namespace Rubyer
 
             if (IsLoaded && !sorting)
             {
+                RestartTimer();
                 ScrollSelectedItemToCenter(this);
             }
         }
@@ -294,6 +303,11 @@ namespace Rubyer
 
             var point = e.GetPosition(scrollViewer);
             var hitTestResult = VisualTreeHelper.HitTest(this, point);
+            if (hitTestResult == null)
+            {
+                return;
+            }
+
             var flipViewItem = hitTestResult.VisualHit.TryGetParentFromVisualTree<FlipViewItem>();
             if (flipViewItem != null)
             {
@@ -311,7 +325,7 @@ namespace Rubyer
         {
             if (flipView.Orientation == Orientation.Horizontal)
             {
-                HorizontalAnimation(flipView, offset);
+                HorizontalAnimation(flipView, offset, flipView.AnimateDuration);
             }
             else
             {
@@ -344,25 +358,21 @@ namespace Rubyer
         /// <param name="flipView">滑动视图</param>
         private static void ScrollSelectedItemToCenter(FlipView flipView)
         {
-            if (!flipView.IsLoaded)
+            if (!flipView.IsLoaded || flipView.horizontalAnimating || flipView.verticalAnimating)
             {
                 return;
             }
 
             var item = flipView.ItemContainerGenerator.ContainerFromIndex(flipView.SelectedIndex) as FlipViewItem;
+            var point = new Point(flipView.scrollViewer.HorizontalOffset, flipView.scrollViewer.VerticalOffset);
+            var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
             if (flipView.Orientation == Orientation.Horizontal)
             {
-                var point = new Point(0, 0);
-                var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
-                var offset = flipView.scrollViewer.HorizontalOffset + targetPosition.X - ((flipView.scrollViewer.ViewportWidth - item.ActualWidth) / 2);
-                StartOffsetAnimation(flipView, offset);
+                StartOffsetAnimation(flipView, targetPosition.X - (flipView.scrollViewer.ViewportWidth - item.ActualWidth) / 2);
             }
             else
             {
-                var point = new Point(0, 0);
-                var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
-                var offset = flipView.scrollViewer.VerticalOffset + targetPosition.Y - ((flipView.scrollViewer.ViewportHeight - item.ActualHeight) / 2);
-                StartOffsetAnimation(flipView, offset);
+                StartOffsetAnimation(flipView, targetPosition.Y - (flipView.scrollViewer.ViewportHeight - item.ActualHeight) / 2);
             }
         }
 
@@ -468,7 +478,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="flipView">滑动视图</param>
         /// <param name="offset">偏移</param>
-        private static void HorizontalAnimation(FlipView flipView, double offset)
+        private static void HorizontalAnimation(FlipView flipView, double offset, Duration duration)
         {
             if (offset < 0)
             {
@@ -483,7 +493,7 @@ namespace Rubyer
             {
                 From = flipView.HorizontalOffset,
                 To = offset,
-                Duration = flipView.AnimateDuration,
+                Duration = duration,
                 EasingFunction = flipView.AnimateEasingFunction,
             };
 
@@ -588,14 +598,14 @@ namespace Rubyer
         /// <summary>
         /// 滚动鼠标翻页
         /// </summary>
-        private void ScrollViewer_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
+        private void FlipView_PreviewMouseWheel(object sender, System.Windows.Input.MouseWheelEventArgs e)
         {
+            e.Handled = true;
+
             if (!IsMouseWheel)
             {
                 return;
             }
-
-            e.Handled = true;
 
             if (e.Delta > 0)
             {
@@ -612,7 +622,22 @@ namespace Rubyer
         /// </summary>
         private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            ScrollSelectedItemToCenter(this);
+            if (!(ItemContainerGenerator.ContainerFromIndex(SelectedIndex) is FlipViewItem item) ||
+                horizontalAnimating || verticalAnimating)
+            {
+                return;
+            }
+
+            var point = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+            var targetPosition = item.TransformToVisual(scrollViewer).Transform(point);
+            if (Orientation == Orientation.Horizontal)
+            {
+                ChangeOffset(this, targetPosition.X - (scrollViewer.ViewportWidth - item.ActualWidth) / 2);
+            }
+            else
+            {
+                ChangeOffset(this, targetPosition.Y - (scrollViewer.ViewportHeight - item.ActualHeight) / 2);
+            }
         }
     }
 }

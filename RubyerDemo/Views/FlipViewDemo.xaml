@@ -33,7 +33,7 @@
                     <rubyer:DescriptionItem Description="自动播放">
                         <ToggleButton x:Name="isAutoPlay"
                                       Style="{StaticResource SwitchToggleButton}"
-                                      IsChecked="True" />
+                                      IsChecked="False" />
                     </rubyer:DescriptionItem>
                     <rubyer:DescriptionItem Description="播放切换间隔">
                         <TextBox x:Name="playInterval"
@@ -43,7 +43,7 @@
                     <rubyer:DescriptionItem Description="循环显示">
                         <ToggleButton x:Name="isLoop"
                                       Style="{StaticResource SwitchToggleButton}"
-                                      IsChecked="True" />
+                                      IsChecked="False" />
                     </rubyer:DescriptionItem>
                 </rubyer:Description>
 
@@ -77,19 +77,36 @@
                     </rubyer:FlipView>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="Carousel Style" Grid.Row="3">
+                <controls:ControlDisplay Title="Carousel Style"
+                                         Grid.Row="3"
+                                         Description="轮播图样式，默认开启 IsLoop，子项最好大于 5 个">
                     <rubyer:FlipView Style="{StaticResource CarouselFlipView}"
+                                     Height="300"
                                      AnimateDuration="{Binding Text, ElementName=duration}"
                                      AutoPlayInterval="{Binding Text, ElementName=playInterval}"
                                      IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
-                                     IsLoop="{Binding IsChecked, ElementName=isLoop}"
                                      IsMouseWheel="{Binding IsChecked, ElementName=mouseWheel}">
-                        <Image Source="../Assets/img1.jpg" />
-                        <Image Source="../Assets/img2.jpg" />
-                        <Image Source="../Assets/img3.jpg" />
-                        <Image Source="../Assets/img4.jpg" />
-                        <Image Source="../Assets/img3.jpg" />
-                        <Image Source="../Assets/img2.jpg" />
+                        <Image Source="../Assets/img1.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img2.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img3.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img4.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img3.jpg" Stretch="Uniform" />
+                    </rubyer:FlipView>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Carousel Vertical Style" Grid.Row="4">
+                    <rubyer:FlipView Style="{StaticResource CarouselFlipView}"
+                                     Width="600" Background="AliceBlue"
+                                     AnimateDuration="{Binding Text, ElementName=duration}"
+                                     AutoPlayInterval="{Binding Text, ElementName=playInterval}"
+                                     IsAutoPlay="{Binding IsChecked, ElementName=isAutoPlay}"
+                                     IsMouseWheel="{Binding IsChecked, ElementName=mouseWheel}"
+                                     Orientation="Vertical">
+                        <Image Source="../Assets/img1.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img2.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img3.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img4.jpg" Stretch="Uniform" />
+                        <Image Source="../Assets/img3.jpg" Stretch="Uniform" />
                     </rubyer:FlipView>
                 </controls:ControlDisplay>
             </Grid>

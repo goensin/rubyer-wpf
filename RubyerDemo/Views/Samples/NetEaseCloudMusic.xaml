@@ -152,7 +152,7 @@
                         rubyer:HeaderHelper.FontSize="19"
                         BorderBrush="Transparent">
                 <TabItem Header="个性推荐">
-                    <rubyer:FlipView Height="200"
+                    <rubyer:FlipView Height="200" Style="{StaticResource CarouselFlipView}" rubyer:ControlHelper.CornerRadius="5"
                                      Margin="0 30"
                                      VerticalAlignment="Top"
                                      IsAutoPlay="True"
