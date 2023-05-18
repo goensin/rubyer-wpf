@@ -24,17 +24,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="CalendarDayButton">
                     <Grid>
-                        <Border x:Name="TodayBackground"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Opacity="0" />
-
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                        <Ellipse x:Name="TodayDot"
+                                 Width="5"
+                                 Height="5"
+                                 Margin="2"
+                                 HorizontalAlignment="Right"
+                                 VerticalAlignment="Top"
+                                 Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                 Opacity="0" />
 
                         <ContentPresenter x:Name="NormalText"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -94,7 +96,7 @@
                                 <VisualState Name="RegularDay" />
                                 <VisualState Name="Today">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="TodayBackground"
+                                        <DoubleAnimation Storyboard.TargetName="TodayDot"
                                                          Storyboard.TargetProperty="Opacity"
                                                          To="1"
                                                          Duration="0" />
@@ -120,6 +122,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="NormalText" Property="TextBlock.Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <Setter TargetName="TodayDot" Property="Fill" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsInactive" Value="True">
                             <Setter TargetName="NormalText" Property="Opacity" Value="0.4" />

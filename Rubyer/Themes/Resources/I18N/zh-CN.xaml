@@ -21,6 +21,7 @@
     <system:String x:Key="I18N_Clock_Hour">时</system:String>
     <system:String x:Key="I18N_Clock_Minute">分</system:String>
     <system:String x:Key="I18N_Clock_Second">秒</system:String>
+    <system:String x:Key="I18N_Clock_Ok">确认</system:String>
 
     <system:String x:Key="I18N_Info">提示</system:String>
     <system:String x:Key="I18N_Question">确认</system:String>

@@ -15,10 +15,10 @@
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="DateTime Control">
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
                         <Calendar Margin="5" />
-                        <rubyer:Clock Margin="10 0 0 0" SelectedTimeChanged="Clock_SelectedTimeChanged" />
-                        <rubyer:Clock Style="{StaticResource ComboBoxClock}" Margin="10 0 0 0" />
+                        <rubyer:Clock SelectedTimeChanged="Clock_SelectedTimeChanged" />
+                        <rubyer:Clock Style="{StaticResource ComboBoxClock}" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
@@ -39,7 +39,7 @@
                                            SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
 
                         <rubyer:DateTimePicker Width="170"
-                                               Margin="10 0 0 0" 
+                                               Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.IsClearable="True"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
                                                SelectedDateTime="{Binding DateTime}" />
@@ -61,7 +61,6 @@
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTime="{Binding DateTime}"
                                                SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
                     </StackPanel>
                 </controls:ControlDisplay>
@@ -75,14 +74,12 @@
                         <rubyer:TimePicker Width="150"
                                            Margin="10 0 0 0"
                                            rubyer:InputBoxHelper.IsRound="True"
-                                           rubyer:InputBoxHelper.Watermark="请选择时间"
-                                           SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
+                                           rubyer:InputBoxHelper.Watermark="请选择时间" />
 
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.IsRound="True"
-                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTime="{Binding DateTime}" />
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
@@ -101,8 +98,7 @@
                         <rubyer:DateTimePicker Style="{StaticResource FilledDateTimePicker}"
                                                Width="200"
                                                Margin="10 0 0 0"
-                                               rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTime="{Binding DateTime}" />
+                                               rubyer:InputBoxHelper.Watermark="请选择日期时间" />
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>

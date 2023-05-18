@@ -51,8 +51,6 @@ namespace Rubyer.Converters
                 return scaleTransform.ScaleX;
             }
 
-            Debug.WriteLine((item.Content as Image).Source);
-
             var point = new Point(0, -(scrollViewer.ViewportHeight - item.ActualHeight) / 2);
             var targetPosition = item.TransformToVisual(scrollViewer).Transform(point);
             var different = Math.Abs(targetPosition.Y);

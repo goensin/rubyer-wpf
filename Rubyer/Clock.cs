@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
@@ -13,7 +14,6 @@ namespace Rubyer
     [TemplatePart(Name = HourListPartName, Type = typeof(Selector))]
     [TemplatePart(Name = MinuteListPartName, Type = typeof(Selector))]
     [TemplatePart(Name = ConfirmPartName, Type = typeof(Button))]
-    [TemplatePart(Name = SelectTimePartName, Type = typeof(TextBlock))]
     public class Clock : Control
     {
         /// <summary>
@@ -32,14 +32,6 @@ namespace Rubyer
         public const string ConfirmPartName = "PART_ConfirmButton";
 
         /// <summary>
-        /// 时间文本名称
-        /// </summary>
-        public const string SelectTimePartName = "PART_SelectTime";
-
-        private Selector _hourList;
-        private Selector _minuteList;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Clock"/> class.
         /// </summary>
         static Clock()
@@ -52,46 +44,17 @@ namespace Rubyer
         {
             base.OnApplyTemplate();
 
-            if (GetTemplateChild(SelectTimePartName) is TextBlock selectTimeText)
-            {
-                var binding = new Binding("CurrentTime");
-                binding.Source = this;
-                binding.Mode = BindingMode.TwoWay;
-                binding.StringFormat = "{0:HH : mm}";
-                selectTimeText.SetBinding(TextBlock.TextProperty, binding);
-            }
-            var now = DateTime.Now;
-            CurrentTime = Convert.ToDateTime($"{now.Hour}:{now.Minute}");
-
-            if (GetTemplateChild(HourListPartName) is Selector hourList)
-            {
-                _hourList = hourList;
-
-                var binding = new Binding("Hour");
-                binding.Source = this;
-                binding.Mode = BindingMode.TwoWay;
-                hourList.SetBinding(Selector.SelectedItemProperty, binding);
-
-                AddItemsSource(hourList, 24, now.Hour);
-            }
-
-            if (GetTemplateChild(MinuteListPartName) is Selector minuteList)
-            {
-                _minuteList = minuteList;
-
-                var binding = new Binding("Minute");
-                binding.Source = this;
-                binding.Mode = BindingMode.TwoWay;
-                minuteList.SetBinding(Selector.SelectedItemProperty, binding);
-
-                AddItemsSource(minuteList, 60, now.Minute);
-            }
-
             if (GetTemplateChild(ConfirmPartName) is Button confirmButton)
             {
                 confirmButton.Click += ConfirmButton_Click;
             }
 
+            Hours = new ObservableCollection<int>(Enumerable.Range(0, 24));
+            Minutes = new ObservableCollection<int>(Enumerable.Range(0, 60));
+
+            CurrentTime = new DateTime(DateTime.Now.TimeOfDay.Ticks);
+            Hour = CurrentTime.Value.Hour;
+            Minute = CurrentTime.Value.Minute;
         }
 
         #region 路由事件
@@ -130,10 +93,25 @@ namespace Rubyer
         #region 依赖属性
 
         /// <summary>
+        /// 时集合
+        /// </summary>
+        internal static readonly DependencyProperty HoursProperty = DependencyProperty.Register(
+           "Hours", typeof(ObservableCollection<int>), typeof(Clock), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 时集合
+        /// </summary>
+        internal ObservableCollection<int> Hours
+        {
+            get { return (ObservableCollection<int>)GetValue(HoursProperty); }
+            set { SetValue(HoursProperty, value); }
+        }
+
+        /// <summary>
         /// 时
         /// </summary>
         public static readonly DependencyProperty HourProperty = DependencyProperty.Register(
-           "Hour", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+           "Hour", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
 
         /// <summary>
         /// 时
@@ -145,10 +123,25 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 分集合
+        /// </summary>
+        internal static readonly DependencyProperty MinutesProperty = DependencyProperty.Register(
+           "Minutes", typeof(ObservableCollection<int>), typeof(Clock), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 分集合
+        /// </summary>
+        internal ObservableCollection<int> Minutes
+        {
+            get { return (ObservableCollection<int>)GetValue(MinutesProperty); }
+            set { SetValue(MinutesProperty, value); }
+        }
+
+        /// <summary>
         /// 分
         /// </summary>
         public static readonly DependencyProperty MinuteProperty = DependencyProperty.Register(
-           "Minute", typeof(int), typeof(Clock), new PropertyMetadata(0, OnListSeletedChanged));
+           "Minute", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
 
         /// <summary>
         /// 分
@@ -163,11 +156,16 @@ namespace Rubyer
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
-           "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime), OnSelectTimeChanged));
+          "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime), OnSelectTimeChanged));
 
         private static void OnSelectTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            ((Clock)d).SetValueToClock();
+            var clock = (Clock)d;
+            if (clock.SelectedTime != null)
+            {
+                clock.Hour = clock.SelectedTime.Value.Hour;
+                clock.Minute = clock.SelectedTime.Value.Minute;
+            }
         }
 
         /// <summary>
@@ -194,54 +192,27 @@ namespace Rubyer
             set { SetValue(CurrentTimeProperty, value); }
         }
 
-        #endregion
+        /// <summary>
+        /// 是否显示确认按钮
+        /// </summary>
+        public static readonly DependencyProperty IsShowConfirmButtonProperty =
+            DependencyProperty.Register("IsShowConfirmButton", typeof(bool), typeof(Clock), new PropertyMetadata(BooleanBoxes.TrueBox));
 
         /// <summary>
-        /// 添加子项
+        /// 是否显示确认按钮
         /// </summary>
-        /// <param name="itemsControl">列表控件</param>
-        /// <param name="count">总数</param>
-        /// <param name="index">当前索引</param>
-        private void AddItemsSource(Selector itemsControl, int count, int index)
+        public bool IsShowConfirmButton
         {
-            string[] array = new string[count];
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = i.ToString("D2");
-            }
-
-            itemsControl.ItemsSource = array;
-            itemsControl.SelectedIndex = index;
+            get { return (bool)GetValue(IsShowConfirmButtonProperty); }
+            set { SetValue(IsShowConfirmButtonProperty, BooleanBoxes.Box(value)); }
         }
 
-        private void SetValueToClock()
-        {
-            if (SelectedTime != null)
-            {
-                _hourList.SelectedIndex =  SelectedTime.Value.Hour;
-                _minuteList.SelectedIndex = SelectedTime.Value.Minute;
-            }
-
-            ScrollToCurrentItem();
-        }
-
-        private void ScrollToCurrentItem()
-        {
-            if (_hourList is ListBox hourList)
-            {
-                hourList.ScrollIntoView(hourList.Items[hourList.SelectedIndex]);
-            }
-
-            if (_minuteList is ListBox minuteList)
-            {
-                minuteList.ScrollIntoView(minuteList.Items[minuteList.SelectedIndex]);
-            }
-        }
+        #endregion
 
         /// <summary>
         /// 时间选择改变
         /// </summary>
-        private static void OnListSeletedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnItemSeletedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var clock = d as Clock;
 
@@ -251,16 +222,14 @@ namespace Rubyer
             }
 
             clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
-            clock.ScrollToCurrentItem();
 
             if (e.NewValue != null)
             {
                 var args = new RoutedPropertyChangedEventArgs<DateTime?>(DateTime.Now, (DateTime)clock.CurrentTime);
-                args.RoutedEvent = Clock.CurrentTimeChangedEvent;
+                args.RoutedEvent = CurrentTimeChangedEvent;
                 clock.RaiseEvent(args);
             }
         }
-
 
         /// <summary>
         /// 确认时间
@@ -272,8 +241,8 @@ namespace Rubyer
             SelectedTime = CurrentTime;
 
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);
-            args.RoutedEvent = Clock.SelectedTimeChangedEvent;
-            this.RaiseEvent(args);
+            args.RoutedEvent = SelectedTimeChangedEvent;
+            RaiseEvent(args);
         }
     }
 }

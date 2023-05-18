@@ -3,7 +3,6 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollViewer.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -17,8 +16,8 @@
 
     <!--  滚动视图默认样式  -->
     <Style x:Key="RubyerFlipViewItem" TargetType="{x:Type rubyer:FlipViewItem}">
-        <Setter Property="Height" Value="{Binding ViewportHeight, FallbackValue=100, TargetNullValue=100, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="Width" Value="{Binding ViewportWidth, FallbackValue=100, TargetNullValue=100, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -44,6 +43,8 @@
     </Style>
 
     <Style x:Key="RubyerFlipView" TargetType="{x:Type rubyer:FlipView}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Height" Value="400" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerFlipViewItem}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -259,5 +260,131 @@
         <Setter Property="IsLoop" Value="True" />
         <Setter Property="IsAutoPlay" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource CarouselFlipViewItem}" />
+    </Style>
+
+    <!--  滚动选泽器样式  -->
+    <Style x:Key="SelecterFlipViewItem"
+           BasedOn="{StaticResource RubyerFlipViewItem}"
+           TargetType="rubyer:FlipViewItem">
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
+        <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:FlipViewItem}">
+                    <Grid>
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+
+                        <Border x:Name="rootBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                RenderTransformOrigin="0.5,0.5">
+                            <ContentPresenter x:Name="PART_ContentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Panel.ZIndex" Value="1" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SelecterRepeatButton"
+           BasedOn="{StaticResource RubyerRepeatButton}"
+           TargetType="RepeatButton">
+        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+    </Style>
+
+    <Style x:Key="SelecterFlipView"
+           BasedOn="{StaticResource RubyerFlipView}"
+           TargetType="rubyer:FlipView">
+        <Setter Property="Orientation" Value="Vertical" />
+        <Setter Property="IsLoop" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource SelecterFlipViewItem}" />
+        <Setter Property="ArrowButtonStyle" Value="{StaticResource SelecterRepeatButton}" />
+        <Setter Property="AnimateDuration" Value="0:0:0.01" />
+        <Setter Property="AnimateEasingFunction">
+            <Setter.Value>
+                <CubicEase EasingMode="EaseIn" />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5 6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:FlipView}">
+                    <Border x:Name="rootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <Grid x:Name="root">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.RowSpan="3"
+                                    Height="36"
+                                    Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <ScrollViewer Name="PART_ContentScrollViewer"
+                                          Grid.RowSpan="3"
+                                          rubyer:ScrollViewerHelper.HorizontalOffset="{TemplateBinding HorizontalOffset}"
+                                          rubyer:ScrollViewerHelper.VerticalOffset="{TemplateBinding VerticalOffset}"
+                                          CanContentScroll="False"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Hidden">
+                                <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </ScrollViewer>
+
+                            <RepeatButton x:Name="PART_UpButton"
+                                          Style="{TemplateBinding ArrowButtonStyle}"
+                                          Visibility="Collapsed">
+                                <rubyer:Icon Type="ArrowUpSLine" />
+                            </RepeatButton>
+
+                            <RepeatButton x:Name="PART_DownButton"
+                                          Style="{TemplateBinding ArrowButtonStyle}"
+                                          Grid.Row="2"
+                                          Visibility="Collapsed">
+                                <rubyer:Icon Type="ArrowDownSLine" />
+                            </RepeatButton>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_UpButton" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="PART_DownButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

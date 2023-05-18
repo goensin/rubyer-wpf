@@ -27,7 +27,7 @@
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
-        <Setter Property="rubyer:HeaderHelper.Padding" Value="5 7" />
+        <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
@@ -88,35 +88,35 @@
                                         <Border x:Name="title"
                                                 Grid.Row="0"
                                                 Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                CornerRadius="{DynamicResource TopContainerCornerRadius}"
-                                                Effect="{DynamicResource BottomEffect}">
-                                            <TextBlock x:Name="PART_CurrentTextBox"
+                                                CornerRadius="{DynamicResource TopContainerCornerRadius}">
+                                            <!--<TextBlock x:Name="PART_CurrentTextBox"
                                                        HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                        FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />-->
                                         </Border>
 
                                         <Border Grid.Row="1">
-                                            <StackPanel>
+                                            <StackPanel Orientation="Horizontal">
                                                 <Calendar x:Name="PART_Calendar"
                                                           Margin="0"
                                                           rubyer:ControlHelper.CornerRadius="0"
                                                           rubyer:HeaderHelper.Background="Transparent"
-                                                          rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}" />
+                                                          rubyer:HeaderHelper.Foreground="{DynamicResource DefaultForeground}"
+                                                          Background="Transparent" />
+                                                <Border BorderBrush="{DynamicResource BorderLighter}" BorderThickness="1 0 0 0" />
                                                 <rubyer:Clock x:Name="PART_Clock"
-                                                              Style="{StaticResource ComboBoxClock}"
+                                                              Height="{Binding ActualHeight, ElementName=PART_Calendar}"
                                                               Margin="0"
                                                               rubyer:ControlHelper.CornerRadius="0"
-                                                              BorderThickness="0" />
+                                                              Background="Transparent"
+                                                              IsShowConfirmButton="False" />
                                             </StackPanel>
                                         </Border>
 
                                         <Button x:Name="PART_ConfirmButton"
-                                                Style="{StaticResource TextButton}"
                                                 Grid.Row="2"
                                                 Margin="5"
                                                 Content="确认" />

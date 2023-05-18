@@ -34,7 +34,6 @@ namespace Rubyer
         private Clock _clock;
         private Calendar _calendar;
         private Button _confirmButton;
-        private TextBlock _currentTextBlock;
 
         private bool isInternalSetting = true;
         private DateTime currentDateTime;
@@ -81,12 +80,9 @@ namespace Rubyer
 
             Button confirmButton = GetTemplateChild(ConfirmButtonPartName) as Button;
             confirmButton.Click += ConfirmButton_Click;
-            this._confirmButton = confirmButton;
-
-            _currentTextBlock = GetTemplateChild(CurrentTextBoxPartName) as TextBlock;
+            _confirmButton = confirmButton;
 
             currentDateTime = SelectedDateTime == null ? DateTime.Now : SelectedDateTime.Value;
-            _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
         }
 
         #region 路由事件
@@ -280,7 +276,6 @@ namespace Rubyer
                 currentDateTime = e.NewValue.Value;
             }
 
-            _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
         }
 
         /// <summary>
@@ -305,7 +300,6 @@ namespace Rubyer
                 currentDateTime = (DateTime)_calendar.SelectedDate + time;
             }
 
-            _currentTextBlock.Text = currentDateTime.ToString(SelectedDateTimeFormat);
             Mouse.Capture(null);
         }
 
