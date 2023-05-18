@@ -17,8 +17,8 @@
 
     <!--  滚动视图默认样式  -->
     <Style x:Key="RubyerFlipViewItem" TargetType="{x:Type rubyer:FlipViewItem}">
-        <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Height" Value="{Binding ViewportHeight, FallbackValue=100, TargetNullValue=100, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="Width" Value="{Binding ViewportWidth, FallbackValue=100, TargetNullValue=100, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -206,17 +206,26 @@
                         <Border.RenderTransform>
                             <ScaleTransform x:Name="scale" ScaleY="{Binding ScaleX, RelativeSource={RelativeSource Self}}">
                                 <ScaleTransform.ScaleX>
-                                    <MultiBinding Converter="{StaticResource CarouselHorizontalScaleConvereter}">
+                                    <MultiBinding Converter="{StaticResource CarouselScaleConvereter}">
                                         <MultiBinding.Bindings>
                                             <Binding RelativeSource="{RelativeSource AncestorType=rubyer:FlipViewItem}" />
-                                            <Binding Path="HorizontalOffset" RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
                                             <Binding ElementName="scale" />
                                             <Binding Path="Orientation" RelativeSource="{RelativeSource AncestorType=rubyer:FlipView}" />
+                                            <Binding Path="HorizontalOffset" RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
+                                            <Binding Path="VerticalOffset" RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
                                         </MultiBinding.Bindings>
                                     </MultiBinding>
                                 </ScaleTransform.ScaleX>
                             </ScaleTransform>
                         </Border.RenderTransform>
+                        <Border.Opacity>
+                            <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                                <MultiBinding.Bindings>
+                                    <Binding ElementName="scale" Path="ScaleX" />
+                                    <Binding Source="0.5" />
+                                </MultiBinding.Bindings>
+                            </MultiBinding>
+                        </Border.Opacity>
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -236,77 +245,8 @@
                         </DataTrigger>
 
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Panel.ZIndex" Value="100" />
-                            <!--<Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="scale"
-                                                         Storyboard.TargetProperty="ScaleX"
-                                                         To="2"
-                                                         Duration="0:0:0.5">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="scale"
-                                                         Storyboard.TargetProperty="ScaleX"
-                                                         To="1"
-                                                         Duration="0:0:0.5">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>-->
-                            <!--<Setter TargetName="scale" Property="ScaleX">
-                                <Setter.Value>
-                                    <MultiBinding Converter="{StaticResource CarouselHorizontalScaleConvereter}">
-                                        <MultiBinding.Bindings>
-                                            <Binding RelativeSource="{RelativeSource AncestorType=rubyer:FlipViewItem}" />
-                                            <Binding Path="HorizontalOffset" RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
-                                            <Binding ElementName="scale" />
-                                        </MultiBinding.Bindings>
-                                    </MultiBinding>
-                                </Setter.Value>
-                            </Setter>-->
+                            <Setter Property="Panel.ZIndex" Value="1" />
                         </Trigger>
-                        <Trigger Property="IsSelected" Value="False">
-                            <Trigger.EnterActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                         To="0.5"
-                                                         Duration="0:0:0.5">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetProperty="Opacity"
-                                                         To="1"
-                                                         Duration="0:0:0.6">
-                                            <DoubleAnimation.EasingFunction>
-                                                <CubicEase EasingMode="EaseOut" />
-                                            </DoubleAnimation.EasingFunction>
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </Trigger.ExitActions>
-                        </Trigger>
-
-
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -317,6 +257,7 @@
            BasedOn="{StaticResource RubyerFlipView}"
            TargetType="rubyer:FlipView">
         <Setter Property="IsLoop" Value="True" />
+        <Setter Property="IsAutoPlay" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource CarouselFlipViewItem}" />
     </Style>
 </ResourceDictionary>

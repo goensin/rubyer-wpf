@@ -153,6 +153,7 @@ namespace RubyerDemo.ViewModels
         {
             var window = item.Content as Window;
             window.Show();
+            window.Activate();
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Collections;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
@@ -89,9 +91,14 @@ namespace Rubyer
             }
 
             PreviewMouseWheel += FlipView_PreviewMouseWheel;
-            //Loaded += FlipView_Loaded;
+            Loaded += FlipView_Loaded;
 
             UpdateItemSort(this);
+        }
+
+        private void FlipView_Loaded(object sender, RoutedEventArgs e)
+        {
+            ScrollSelectedItemToCenter(this);
         }
 
         #region properties
@@ -263,21 +270,13 @@ namespace Rubyer
 
         #endregion
 
-        /// <inheritdoc/>
-        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-        {
-            base.OnItemsChanged(e);
-
-            if (IsLoaded && !sorting)
-            {
-                ScrollSelectedItemToCenter(this);
-            }
-        }
-
         private void RestartTimer()
         {
             timer.Stop();
-            timer.Start();
+            if (IsAutoPlay)
+            {
+                timer.Start();
+            }
         }
 
         /// <inheritdoc/>
@@ -285,34 +284,24 @@ namespace Rubyer
         {
             base.OnSelectionChanged(e);
 
-            if (IsLoaded && !sorting)
+            if (IsLoaded && !sorting && SelectedIndex >= 0)
             {
                 RestartTimer();
                 ScrollSelectedItemToCenter(this);
             }
+
+            if (SelectedIndex < 0 && Items.Count > 0)
+            {
+                SelectedIndex = 0;
+            }
         }
 
-        /// <inheritdoc/>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             if (horizontalAnimating || verticalAnimating)
             {
                 e.Handled = true;
                 return;
-            }
-
-            var point = e.GetPosition(scrollViewer);
-            var hitTestResult = VisualTreeHelper.HitTest(this, point);
-            if (hitTestResult == null)
-            {
-                return;
-            }
-
-            var flipViewItem = hitTestResult.VisualHit.TryGetParentFromVisualTree<FlipViewItem>();
-            if (flipViewItem != null)
-            {
-                e.Handled = true;
-                flipViewItem.IsSelected = true;
             }
         }
 
@@ -358,7 +347,7 @@ namespace Rubyer
         /// <param name="flipView">滑动视图</param>
         private static void ScrollSelectedItemToCenter(FlipView flipView)
         {
-            if (!flipView.IsLoaded || flipView.horizontalAnimating || flipView.verticalAnimating)
+            if (!flipView.IsLoaded || flipView.horizontalAnimating || flipView.verticalAnimating || flipView.SelectedIndex < 0)
             {
                 return;
             }
@@ -413,10 +402,18 @@ namespace Rubyer
                                 {
                                     ChangeOffset(flipView, offset);
                                 }
-                            }
 
-                            flipView.Items.Remove(item);
-                            flipView.Items.Insert(0, item);
+                                if (flipView.ItemsSource is IList list)
+                                {
+                                    list.Remove(item);
+                                    list.Insert(0, item);
+                                }
+                                else
+                                {
+                                    flipView.Items.Remove(item);
+                                    flipView.Items.Insert(0, item);
+                                }
+                            }
                         }
                     }
                     else if (index > frontCount)  // 需要向后补 item
@@ -435,10 +432,18 @@ namespace Rubyer
                                 {
                                     ChangeOffset(flipView, offset);
                                 }
-                            }
 
-                            flipView.Items.Remove(item);
-                            flipView.Items.Insert(count - 1, item);
+                                if (flipView.ItemsSource is IList list)
+                                {
+                                    list.Remove(item);
+                                    list.Insert(count - 1, item);
+                                }
+                                else
+                                {
+                                    flipView.Items.Remove(item);
+                                    flipView.Items.Insert(count - 1, item);
+                                }
+                            }
                         }
                     }
                 }

@@ -1,10 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace RubyerDemo.ViewModels
 {
@@ -14,29 +18,23 @@ namespace RubyerDemo.ViewModels
     public partial class FlipViewViewModel : ObservableObject
     {
         [ObservableProperty]
-        private List<IEasingFunction> easingFunctions;
+        private ObservableCollection<Image> items;
 
         public FlipViewViewModel()
         {
-            easingFunctions = new List<IEasingFunction>
+            items = new ObservableCollection<Image>();
+            for (int i = 0; i < 4; i++)
             {
-                null,
-                new BackEase { EasingMode = EasingMode.EaseIn },
-                new BackEase { EasingMode = EasingMode.EaseOut },
-                new BackEase { EasingMode = EasingMode.EaseInOut },
-                new BounceEase { EasingMode = EasingMode.EaseIn },
-                new BounceEase { EasingMode = EasingMode.EaseOut },
-                new BounceEase { EasingMode = EasingMode.EaseInOut },
-                new CircleEase { EasingMode = EasingMode.EaseIn },
-                new CircleEase { EasingMode = EasingMode.EaseOut },
-                new CircleEase { EasingMode = EasingMode.EaseInOut },
-                new CubicEase { EasingMode = EasingMode.EaseIn },
-                new CubicEase { EasingMode = EasingMode.EaseOut },
-                new CubicEase { EasingMode = EasingMode.EaseInOut },
-                new ElasticEase { EasingMode = EasingMode.EaseIn },
-                new ElasticEase { EasingMode = EasingMode.EaseOut },
-                new ElasticEase { EasingMode = EasingMode.EaseInOut }
-            };
+                Image image = new Image();
+                image.Width = 600;
+                BitmapImage bitmapImage = new BitmapImage();
+                bitmapImage.BeginInit();
+                bitmapImage.UriSource = new Uri(@$"../Assets/img{i + 1}.jpg",UriKind.Relative);
+                bitmapImage.DecodePixelWidth = 600;
+                bitmapImage.EndInit();
+                image.Source = bitmapImage;
+                items.Add(image);
+            }
         }
     }
 }

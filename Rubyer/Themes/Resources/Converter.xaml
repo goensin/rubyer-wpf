@@ -52,7 +52,6 @@
     <converter:DoubleToThicknessConverter x:Key="DoubleToLeftAndRightThicknessConverter" Mode="LeftAndRight" />
     <converter:DoubleToThicknessConverter x:Key="DoubleToTopAndBottomThicknessConverter" Mode="TopAndBottom" />
 
-    <converter:CarouselHorizontalScaleConvereter x:Key="CarouselHorizontalScaleConvereter" />
-    <converter:CarouselVerticalScaleConvereter x:Key="CarouselVerticalScaleConvereter" />
+    <converter:CarouselScaleConvereter x:Key="CarouselScaleConvereter" />
 
 </ResourceDictionary>

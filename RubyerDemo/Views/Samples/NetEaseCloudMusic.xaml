@@ -152,12 +152,12 @@
                         rubyer:HeaderHelper.FontSize="19"
                         BorderBrush="Transparent">
                 <TabItem Header="个性推荐">
-                    <rubyer:FlipView Height="200" Style="{StaticResource CarouselFlipView}" rubyer:ControlHelper.CornerRadius="5"
+                    <rubyer:FlipView Style="{StaticResource CarouselFlipView}"
+                                     Height="200"
                                      Margin="0 30"
                                      VerticalAlignment="Top"
-                                     IsAutoPlay="True"
-                                     IsButtonFloat="True"
-                                     IsLoop="True">
+                                     rubyer:ControlHelper.CornerRadius="5"
+                                     IsButtonFloat="True">
                         <rubyer:FlipViewItem Background="{StaticResource Primary}" />
                         <rubyer:FlipViewItem Background="{StaticResource Question}" />
                         <rubyer:FlipViewItem Background="{StaticResource Info}" />
