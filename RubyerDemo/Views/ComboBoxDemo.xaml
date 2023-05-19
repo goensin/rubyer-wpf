@@ -39,7 +39,7 @@
                                       IsEditable="True"
                                       IsEnabled="False"
                                       SelectedIndex="0">
-                                <ComboBoxItem>可编辑</ComboBoxItem>
+                                <ComboBoxItem>不可用</ComboBoxItem>
                             </ComboBox>
                             <ComboBox Style="{StaticResource FilledComboBox}"
                                       Width="150"

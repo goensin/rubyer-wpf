@@ -49,12 +49,15 @@
                 </Button>
                 <TextBox Style="{StaticResource FilledTextBox}"
                          Width="150"
+                         rubyer:InputBoxHelper.IsClearable="True"
                          rubyer:InputBoxHelper.IsRound="True"
                          rubyer:InputBoxHelper.Watermark="周杰伦"
                          Background="#1F000000"
-                         BorderThickness="0">
+                         BorderThickness="0"
+                         Foreground="{StaticResource WhiteForeground}">
                     <TextBox.Resources>
                         <SolidColorBrush x:Key="WatermarkText" Color="#5FFFFFFF" />
+                        <SolidColorBrush x:Key="SeconarydText" Color="#FFFFFF" />
                     </TextBox.Resources>
                     <rubyer:InputBoxHelper.PreContent>
                         <rubyer:Icon Foreground="{StaticResource WhiteForeground}" Type="SearchLine" />

@@ -105,39 +105,18 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <StackPanel Grid.Column="1"
-                                            Margin="3 0"
-                                            HorizontalAlignment="Right"
-                                            Orientation="Horizontal">
-                                    <Border x:Name="splitBorder"
-                                            Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
-                                            BorderBrush="Transparent"
-                                            BorderThickness="1"
-                                            SnapsToDevicePixels="True">
-                                        <rubyer:Icon x:Name="arrow"
-                                                     HorizontalAlignment="Center"
-                                                     VerticalAlignment="Center"
-                                                     Foreground="{DynamicResource SeconarydText}"
-                                                     RenderTransformOrigin="0.5,0.5"
-                                                     Type="ArrowDownSLine">
-                                            <rubyer:Icon.RenderTransform>
-                                                <RotateTransform x:Name="arrowTransform" Angle="0" />
-                                            </rubyer:Icon.RenderTransform>
-                                        </rubyer:Icon>
-                                    </Border>
-                                </StackPanel>
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Focusable="False"
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Grid>
+                            <rubyer:Icon x:Name="arrow"
+                                         Grid.Column="1"
+                                         Margin="5 0"
+                                         HorizontalAlignment="Right"
+                                         VerticalAlignment="Center"
+                                         Foreground="{DynamicResource SeconarydText}"
+                                         RenderTransformOrigin="0.5,0.5"
+                                         Type="ArrowDownSLine">
+                                <rubyer:Icon.RenderTransform>
+                                    <RotateTransform x:Name="arrowTransform" Angle="0" />
+                                </rubyer:Icon.RenderTransform>
+                            </rubyer:Icon>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
