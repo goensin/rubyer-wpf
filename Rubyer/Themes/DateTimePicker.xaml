@@ -88,15 +88,7 @@
                                         <Border x:Name="title"
                                                 Grid.Row="0"
                                                 Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                CornerRadius="{DynamicResource TopContainerCornerRadius}">
-                                            <!--<TextBlock x:Name="PART_CurrentTextBox"
-                                                       HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />-->
-                                        </Border>
+                                                CornerRadius="{DynamicResource TopContainerCornerRadius}" />
 
                                         <Border Grid.Row="1">
                                             <StackPanel Orientation="Horizontal">
@@ -119,7 +111,7 @@
                                         <Button x:Name="PART_ConfirmButton"
                                                 Grid.Row="2"
                                                 Margin="5"
-                                                Content="确认" />
+                                                Content="{DynamicResource I18N_Clock_Ok}" />
                                     </Grid>
                                 </rubyer:Card>
                             </Popup>

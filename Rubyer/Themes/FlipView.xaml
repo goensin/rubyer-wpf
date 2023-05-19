@@ -319,16 +319,12 @@
            TargetType="rubyer:FlipView">
         <Setter Property="Orientation" Value="Vertical" />
         <Setter Property="IsLoop" Value="True" />
+        <Setter Property="IsContinuousSwitching" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource SelecterFlipViewItem}" />
         <Setter Property="ArrowButtonStyle" Value="{StaticResource SelecterRepeatButton}" />
-        <Setter Property="AnimateDuration" Value="0:0:0.01" />
-        <Setter Property="AnimateEasingFunction">
-            <Setter.Value>
-                <CubicEase EasingMode="EaseIn" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="AnimateDuration" Value="0:0:0.25" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
@@ -382,6 +378,14 @@
                             <Setter TargetName="PART_UpButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_DownButton" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <!--<Trigger SourceName="PART_UpButton" Property="IsPressed" Value="True">
+                            <Setter Property="IsContinuousSwitching" Value="False" />
+                            <Setter Property="AnimateDuration" Value="0:0:0.1" />
+                        </Trigger>
+                        <Trigger SourceName="PART_DownButton" Property="IsPressed" Value="True">
+                            <Setter Property="IsContinuousSwitching" Value="False" />
+                            <Setter Property="AnimateDuration" Value="0:0:0.1" />
+                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

@@ -35,6 +35,8 @@ namespace Rubyer
 
         private ScrollViewer scrollViewer;
         private DispatcherTimer timer;
+        Storyboard horizontalStoryboard;
+        Storyboard verticalStoryboard;
         private bool horizontalAnimating;
         private bool verticalAnimating;
         private bool sorting;
@@ -96,6 +98,34 @@ namespace Rubyer
             Loaded += FlipView_Loaded;
 
             UpdateItemSort(this);
+
+            horizontalStoryboard = new Storyboard();
+            horizontalStoryboard.Completed += (sender, e) =>
+            {
+                var state = horizontalStoryboard.GetCurrentState(this);
+                if (state != ClockState.Active)
+                {
+                    horizontalAnimating = false;
+                    var horizontalOffset = HorizontalOffset;
+                    BeginAnimation(HorizontalOffsetProperty, null);
+                    HorizontalOffset = horizontalOffset;
+                    UpdateItemSort(this);
+                }
+            };
+
+            verticalStoryboard = new Storyboard();
+            verticalStoryboard.Completed += (sender, e) =>
+            {
+                var state = verticalStoryboard.GetCurrentState(this);
+                if (state != ClockState.Active)
+                {
+                    verticalAnimating = false;
+                    var verticalOffset = VerticalOffset;
+                    BeginAnimation(VerticalOffsetProperty, null);
+                    VerticalOffset = verticalOffset;
+                    UpdateItemSort(this);
+                }
+            };
         }
 
         private void FlipView_Loaded(object sender, RoutedEventArgs e)
@@ -270,6 +300,20 @@ namespace Rubyer
             set { SetValue(AutoPlayIntervalProperty, value); }
         }
 
+        /// <summary>
+        /// 是否连续切换
+        /// </summary>
+        public static readonly DependencyProperty IsContinuousSwitchingProperty =
+            DependencyProperty.Register("IsContinuousSwitching", typeof(bool), typeof(FlipView), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 是否连续切换
+        /// </summary>
+        public bool IsContinuousSwitching
+        {
+            get { return (bool)GetValue(IsContinuousSwitchingProperty); }
+            set { SetValue(IsContinuousSwitchingProperty, BooleanBoxes.Box(value)); }
+        }
         #endregion
 
         private void RestartTimer()
@@ -298,18 +342,28 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 是否禁止切换 item
+        /// </summary>
+        private static bool IsForbidSwitching(FlipView flipView)
+        {
+            return (flipView.horizontalAnimating || flipView.verticalAnimating) && !flipView.IsContinuousSwitching;
+        }
+
+        /// <inheritdoc/>
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
-            if (horizontalAnimating || verticalAnimating)
+            if (IsForbidSwitching(this))
             {
                 e.Handled = true;
                 return;
             }
         }
 
+        /// <inheritdoc/>
         protected override void OnPreviewMouseMove(MouseEventArgs e)
         {
-            if (horizontalAnimating || verticalAnimating)
+            if (IsForbidSwitching(this))
             {
                 ReleaseMouseCapture();
                 e.Handled = true;
@@ -317,9 +371,10 @@ namespace Rubyer
             }
         }
 
+        /// <inheritdoc/>
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
-            if (horizontalAnimating || verticalAnimating)
+            if (IsForbidSwitching(this))
             {
                 e.Handled = true;
                 return;
@@ -333,13 +388,13 @@ namespace Rubyer
         /// <param name="offset">偏移</param>
         private static void StartOffsetAnimation(FlipView flipView, double offset)
         {
-            if (flipView.Orientation == Orientation.Horizontal)
+            if (flipView.Orientation == Orientation.Horizontal && flipView.HorizontalOffset != offset)
             {
                 HorizontalAnimation(flipView, offset, flipView.AnimateDuration);
             }
-            else
+            else if (flipView.Orientation == Orientation.Vertical && flipView.VerticalOffset != offset)
             {
-                VerticalAnimation(flipView, offset);
+                VerticalAnimation(flipView, offset, flipView.AnimateDuration);
             }
         }
 
@@ -350,15 +405,34 @@ namespace Rubyer
         /// <param name="offset">偏移</param>
         private static void ChangeOffset(FlipView flipView, double offset)
         {
-            if (flipView.Orientation == Orientation.Horizontal)
+            if (flipView.Orientation == Orientation.Horizontal && flipView.HorizontalOffset != offset)
             {
-                flipView.BeginAnimation(HorizontalOffsetProperty, null);
                 flipView.HorizontalOffset = offset;
+            }
+            else if (flipView.Orientation == Orientation.Vertical && flipView.VerticalOffset != offset)
+            {
+                flipView.VerticalOffset = offset;
+            }
+        }
+
+        /// <summary>
+        /// 获取当前偏移
+        /// </summary>
+        /// <param name="item">子项</param>
+        /// <param name="orientation">方向</param>
+        /// <param name="scrollViewer">滚动视图</param>
+        /// <returns>偏移</returns>
+        private static double GetCurrentOffset(FlipViewItem item, Orientation orientation, ScrollViewer scrollViewer)
+        {
+            var point = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
+            var targetPosition = item.TransformToVisual(scrollViewer).Transform(point);
+            if (orientation == Orientation.Horizontal)
+            {
+                return targetPosition.X - (scrollViewer.ViewportWidth - item.ActualWidth) / 2;
             }
             else
             {
-                flipView.BeginAnimation(VerticalOffsetProperty, null);
-                flipView.VerticalOffset = offset;
+                return targetPosition.Y - (scrollViewer.ViewportHeight - item.ActualHeight) / 2;
             }
         }
 
@@ -366,25 +440,23 @@ namespace Rubyer
         /// 滚动到当前子项
         /// </summary>
         /// <param name="flipView">滑动视图</param>
-        private static void ScrollSelectedItemToCenter(FlipView flipView)
+        /// <param name="noAnimation">不使用动画</param>
+        private static void ScrollSelectedItemToCenter(FlipView flipView, bool noAnimation = false)
         {
-            if (!flipView.IsLoaded || flipView.SelectedIndex < 0 || flipView.horizontalAnimating || flipView.verticalAnimating)
+            if (!flipView.IsLoaded || flipView.SelectedIndex < 0 || IsForbidSwitching(flipView))
             {
                 return;
             }
 
             var item = flipView.ItemContainerGenerator.ContainerFromIndex(flipView.SelectedIndex) as FlipViewItem;
-            var point = new Point(flipView.scrollViewer.HorizontalOffset, flipView.scrollViewer.VerticalOffset);
-            var targetPosition = item.TransformToVisual(flipView.scrollViewer).Transform(point);
-            if (flipView.Orientation == Orientation.Horizontal)
+            var offset = GetCurrentOffset(item, flipView.Orientation, flipView.scrollViewer);
+            if (noAnimation)
             {
-                var offset = targetPosition.X - (flipView.scrollViewer.ViewportWidth - item.ActualWidth) / 2;
-                    StartOffsetAnimation(flipView, offset);
-        }
+                ChangeOffset(flipView, offset);
+            }
             else
             {
-                var offset = targetPosition.Y - (flipView.scrollViewer.ViewportHeight - item.ActualHeight) / 2;
-                    StartOffsetAnimation(flipView, offset);
+                StartOffsetAnimation(flipView, offset);
             }
         }
 
@@ -393,6 +465,8 @@ namespace Rubyer
         /// </summary>
         private static void UpdateItemSort(FlipView flipView)
         {
+            ScrollSelectedItemToCenter(flipView, noAnimation: true);
+
             flipView.sorting = true;
             var count = flipView.Items.Count;
             if (flipView.Items.Count > 0)
@@ -478,7 +552,7 @@ namespace Rubyer
         /// </summary>
         private void ClickNextItem(object sender, RoutedEventArgs e)
         {
-            if (horizontalAnimating || verticalAnimating || SelectedIndex >= Items.Count - 1)
+            if (IsForbidSwitching(this) || SelectedIndex >= Items.Count - 1)
             {
                 return;
             }
@@ -491,7 +565,7 @@ namespace Rubyer
         /// </summary>
         private void ClickLastItem(object sender, RoutedEventArgs e)
         {
-            if (horizontalAnimating || verticalAnimating || SelectedIndex <= 0)
+            if (IsForbidSwitching(this) || SelectedIndex <= 0)
             {
                 return;
             }
@@ -504,6 +578,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="flipView">滑动视图</param>
         /// <param name="offset">偏移</param>
+        /// <param name="duration">动画时长</param>
         private static void HorizontalAnimation(FlipView flipView, double offset, Duration duration)
         {
             if (offset < 0)
@@ -515,23 +590,25 @@ namespace Rubyer
                 offset = flipView.scrollViewer.ScrollableWidth;
             }
 
-            var animation = new DoubleAnimation
-            {
-                From = flipView.HorizontalOffset,
-                To = offset,
-                Duration = duration,
-                EasingFunction = flipView.AnimateEasingFunction,
-            };
+            DoubleAnimation animation = flipView.horizontalStoryboard.Children.Count > 0 ?
+                                        flipView.horizontalStoryboard.Children[0] as DoubleAnimation :
+                                        new DoubleAnimation();
 
-            animation.Completed += (sender, e) =>
+            animation.From = flipView.HorizontalOffset;
+            animation.To = offset;
+            animation.Duration = duration;
+            animation.EasingFunction = flipView.AnimateEasingFunction;
+
+            Storyboard.SetTargetProperty(animation, new PropertyPath(HorizontalOffsetProperty));
+            Storyboard.SetTarget(animation, flipView);
+
+            if (flipView.horizontalStoryboard.Children.Count == 0)
             {
-                flipView.horizontalAnimating = false;
-                UpdateItemSort(flipView);
-            };
+                flipView.horizontalStoryboard.Children.Add(animation);
+            }
 
             flipView.horizontalAnimating = true;
-
-            flipView.BeginAnimation(HorizontalOffsetProperty, animation);
+            flipView.horizontalStoryboard.Begin(flipView, isControllable: true);
         }
 
         /// <summary>
@@ -539,7 +616,8 @@ namespace Rubyer
         /// </summary>
         /// <param name="flipView">滑动视图</param>
         /// <param name="offset">偏移</param>
-        private static void VerticalAnimation(FlipView flipView, double offset)
+        /// <param name="duration">动画时长</param>
+        private static void VerticalAnimation(FlipView flipView, double offset, Duration duration)
         {
             if (offset < 0)
             {
@@ -550,22 +628,25 @@ namespace Rubyer
                 offset = flipView.scrollViewer.ScrollableHeight;
             }
 
-            var animation = new DoubleAnimation
-            {
-                From = flipView.VerticalOffset,
-                To = offset,
-                Duration = flipView.AnimateDuration,
-                EasingFunction = flipView.AnimateEasingFunction,
-            };
+            DoubleAnimation animation = flipView.verticalStoryboard.Children.Count > 0 ?
+                                        flipView.verticalStoryboard.Children[0] as DoubleAnimation :
+                                        new DoubleAnimation();
 
-            animation.Completed += (sender, e) =>
+            animation.From = flipView.VerticalOffset;
+            animation.To = offset;
+            animation.Duration = flipView.AnimateDuration;
+            animation.EasingFunction = flipView.AnimateEasingFunction;
+
+            Storyboard.SetTargetProperty(animation, new PropertyPath(VerticalOffsetProperty));
+            Storyboard.SetTarget(animation, flipView);
+
+            if (flipView.verticalStoryboard.Children.Count == 0)
             {
-                flipView.verticalAnimating = false;
-                UpdateItemSort(flipView);
-            };
+                flipView.verticalStoryboard.Children.Add(animation);
+            }
 
             flipView.verticalAnimating = true;
-            flipView.BeginAnimation(VerticalOffsetProperty, animation);
+            flipView.verticalStoryboard.Begin(flipView, isControllable: true);
         }
 
         private static void OnIsLoopChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
@@ -648,23 +729,14 @@ namespace Rubyer
         /// </summary>
         private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (SelectedIndex < 0 ||
-                !(ItemContainerGenerator.ContainerFromIndex(SelectedIndex) is FlipViewItem item) ||
-                horizontalAnimating || verticalAnimating)
+            if (SelectedIndex < 0 || IsForbidSwitching(this) ||
+                !(ItemContainerGenerator.ContainerFromIndex(SelectedIndex) is FlipViewItem item))
             {
                 return;
             }
 
-            var point = new Point(scrollViewer.HorizontalOffset, scrollViewer.VerticalOffset);
-            var targetPosition = item.TransformToVisual(scrollViewer).Transform(point);
-            if (Orientation == Orientation.Horizontal)
-            {
-                ChangeOffset(this, targetPosition.X - (scrollViewer.ViewportWidth - item.ActualWidth) / 2);
-            }
-            else
-            {
-                ChangeOffset(this, targetPosition.Y - (scrollViewer.ViewportHeight - item.ActualHeight) / 2);
-            }
+            var offset = GetCurrentOffset(item, Orientation, scrollViewer);
+            ChangeOffset(this, offset);
         }
     }
 }
