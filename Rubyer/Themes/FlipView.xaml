@@ -328,7 +328,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="5 0" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5 6" />
         <Setter Property="Template">
             <Setter.Value>
@@ -346,8 +346,10 @@
                             </Grid.RowDefinitions>
 
                             <Border Grid.RowSpan="3"
-                                    Height="36"
-                                    Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    Height="{TemplateBinding FontSize, Converter={StaticResource AddConverter}, ConverterParameter=20}"
+                                    Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <ScrollViewer Name="PART_ContentScrollViewer"
                                           Grid.RowSpan="3"
                                           rubyer:ScrollViewerHelper.HorizontalOffset="{TemplateBinding HorizontalOffset}"
@@ -378,14 +380,6 @@
                             <Setter TargetName="PART_UpButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_DownButton" Property="Visibility" Value="Visible" />
                         </Trigger>
-                        <!--<Trigger SourceName="PART_UpButton" Property="IsPressed" Value="True">
-                            <Setter Property="IsContinuousSwitching" Value="False" />
-                            <Setter Property="AnimateDuration" Value="0:0:0.1" />
-                        </Trigger>
-                        <Trigger SourceName="PART_DownButton" Property="IsPressed" Value="True">
-                            <Setter Property="IsContinuousSwitching" Value="False" />
-                            <Setter Property="AnimateDuration" Value="0:0:0.1" />
-                        </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
