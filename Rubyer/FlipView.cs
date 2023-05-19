@@ -405,11 +405,11 @@ namespace Rubyer
         /// <param name="offset">偏移</param>
         private static void ChangeOffset(FlipView flipView, double offset)
         {
-            if (flipView.Orientation == Orientation.Horizontal && flipView.HorizontalOffset != offset)
+            if (flipView.Orientation == Orientation.Horizontal && flipView.scrollViewer.HorizontalOffset != offset)
             {
                 flipView.HorizontalOffset = offset;
             }
-            else if (flipView.Orientation == Orientation.Vertical && flipView.VerticalOffset != offset)
+            else if (flipView.Orientation == Orientation.Vertical && flipView.scrollViewer.VerticalOffset != offset)
             {
                 flipView.VerticalOffset = offset;
             }
@@ -465,8 +465,6 @@ namespace Rubyer
         /// </summary>
         private static void UpdateItemSort(FlipView flipView)
         {
-            ScrollSelectedItemToCenter(flipView, noAnimation: true);
-
             flipView.sorting = true;
             var count = flipView.Items.Count;
             if (flipView.Items.Count > 0)
@@ -541,6 +539,9 @@ namespace Rubyer
                             }
                         }
                     }
+
+                    flipView.UpdateLayout();
+                    ScrollSelectedItemToCenter(flipView, noAnimation: true);
                 }
             }
 
