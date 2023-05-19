@@ -130,7 +130,7 @@ namespace Rubyer
 
         private void FlipView_Loaded(object sender, RoutedEventArgs e)
         {
-            ScrollSelectedItemToCenter(this);
+            ScrollSelectedItemToCenter(this, noAnimation: true);
         }
 
         #region properties

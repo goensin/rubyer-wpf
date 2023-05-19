@@ -16,6 +16,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="30" />
+        <Setter Property="Padding" Value="5 2" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -39,6 +40,7 @@
                                  Opacity="0" />
 
                         <ContentPresenter x:Name="NormalText"
+                                          Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
@@ -50,7 +52,6 @@
                               Opacity="0"
                               RenderTransformOrigin="0.5,0.5"
                               Stretch="Fill" />
-
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>
@@ -139,12 +140,13 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="FontSize" Value="13" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=Calendar}}" />
         <Setter Property="MinHeight" Value="50" />
         <Setter Property="MinWidth" Value="50" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Margin" Value="1" />
+        <Setter Property="Padding" Value="5" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -158,6 +160,7 @@
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                         <ContentPresenter x:Name="NormalText"
+                                          Margin="{TemplateBinding Padding}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                     </Grid>
@@ -292,13 +295,12 @@
         <Setter Property="CalendarItemStyle" Value="{StaticResource RubyerCalendarItemStyle}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="rubyer:HeaderHelper.FontSize" Value="18" />
+        <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}, Converter={StaticResource AddConverter}, ConverterParameter=5}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Stretch" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />

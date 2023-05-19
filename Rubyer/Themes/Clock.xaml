@@ -30,7 +30,6 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="Height" Value="330" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -56,7 +55,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Border x:Name="content">
-                                    <Grid Width="200">
+                                    <Grid MinWidth="200">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
                                             <ColumnDefinition />
@@ -99,7 +98,6 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="14" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
