@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RubyerDemo.ViewModels
 {
@@ -18,7 +19,9 @@ namespace RubyerDemo.ViewModels
     {
         public TreeViewViewModel()
         {
-            var json = File.ReadAllText("city.json");
+            var uri = new Uri("city.json", UriKind.Relative);
+            var streamResourceInfo = Application.GetResourceStream(uri);
+            var json = new StreamReader(streamResourceInfo.Stream).ReadToEnd();
             Cities = JsonSerializer.Deserialize<List<City>>(json);
         }
 

@@ -6,6 +6,8 @@
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>rubyer.ico</ApplicationIcon>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<Authors>Ensin</Authors>
+		<Version>2.9.3</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -20,6 +22,7 @@
 	  <None Remove="Assets\img2.jpg" />
 	  <None Remove="Assets\img3.jpg" />
 	  <None Remove="Assets\img4.jpg" />
+	  <None Remove="city.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -56,15 +59,12 @@
 		<Resource Include="Assets\wechat.jpg">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="city.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+		</Resource>
 		<Resource Include="rubyer.ico">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Resource>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Update="city.json">
-	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 
 	<ItemGroup>
