@@ -14,10 +14,17 @@ namespace RubyerDemo.ViewModels
     /// </summary>
     public partial class IconViewModel : ObservableObject
     {
-        private static readonly IEnumerable<IconInfo> allIcons = Icon.GetAllIconInfo();
+        public IconViewModel()
+        {
+            AllIcons = Icon.GetAllIconInfo();
+            IconInfos = allIcons.GroupBy(x => x.Group);
+        }
 
         [ObservableProperty]
-        private IEnumerable<IGrouping<string, IconInfo>> iconInfos = allIcons.GroupBy(x => x.Group);
+        private IEnumerable<IconInfo> allIcons;
+
+        [ObservableProperty]
+        private IEnumerable<IGrouping<string, IconInfo>> iconInfos;
 
         [ObservableProperty]
         private IconInfo currentIcon;
