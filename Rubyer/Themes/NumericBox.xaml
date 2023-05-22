@@ -58,7 +58,9 @@
                                  MaxLength="{TemplateBinding MaxLength}">
                             <rubyer:InputBoxHelper.PostContent>
                                 <StackPanel Orientation="Horizontal">
-                                    <ContentControl VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <ContentControl x:Name="PART_Content"
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                     <UniformGrid Height="28"
                                                  Columns="1"
                                                  Rows="2"
