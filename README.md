@@ -40,6 +40,10 @@ Install-Package Rubyer 添加引用，
     <Color x:Key="DarkDefaultBackgroundColor">#1E1E1E</Color>
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightDefaultBackgroundColor}" />
 
+    <Color x:Key="LightFloatBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkFloatBackgroundColor">#303030</Color>
+    <SolidColorBrush x:Key="FloatBackground" Color="{DynamicResource LightFloatBackgroundColor}" />
+
     <Color x:Key="LightPrimaryColor">#2196F3</Color>
     <Color x:Key="DarkPrimaryColor">#2196F3</Color>
     <SolidColorBrush x:Key="Primary" Color="{DynamicResource LightPrimaryColor}" />
@@ -76,7 +80,8 @@ Install-Package Rubyer 添加引用，
     <Color x:Key="DarkWatermarkTextColor">#BBE0E0E0</Color>
     <SolidColorBrush x:Key="WatermarkText" Color="{DynamicResource LightWatermarkTextColor}" />
 
-    <Color x:Key="EffectColor">#BDBDBD</Color>
+    <Color x:Key="LightEffectColor">#969696</Color>
+    <Color x:Key="DarkEffectColor">#000000</Color>
 
     <Color x:Key="LightMaskColor">#9E9E9E</Color>
     <Color x:Key="DarkMaskColor">#9E9E9E</Color>
@@ -87,12 +92,12 @@ Install-Package Rubyer 添加引用，
     <SolidColorBrush x:Key="MaskDark" Color="{DynamicResource LightMaskDarkColor}" />
 
     <Color x:Key="LightDialogBackgroundColor">#99373737</Color>
-    <Color x:Key="DarkDialogBackgroundColor">#BB373737</Color>
+    <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
-    <Color x:Key="LightHeaderBackgroundColor">#CFCFCF</Color>
-    <Color x:Key="DarkHeaderBackgroundColor">#757575</Color>
-    <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
+    <Color x:Key="LightLayoutBackgroundColor">#1F000000</Color>
+    <Color x:Key="DarkLayoutBackgroundColor">#1FFFFFFF</Color>
+    <SolidColorBrush x:Key="LayoutBackground" Color="{DynamicResource LightLayoutBackgroundColor}" />
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />
