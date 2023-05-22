@@ -9,55 +9,44 @@ using System.Text;
 
 namespace RubyerDemo.ViewModels
 {
+    /// <summary>
+    /// 图标
+    /// </summary>
     public partial class IconViewModel : ObservableObject
     {
-        public IEnumerable<IconInfo> AllIconInfo => Icon.GetAllIconInfo();
+        private static readonly IEnumerable<IconInfo> allIcons = Icon.GetAllIconInfo();
 
-        private IEnumerable<IconInfo> iconInfos;
+        [ObservableProperty]
+        private IEnumerable<IGrouping<string, IconInfo>> iconInfos = allIcons.GroupBy(x => x.Group);
 
-        public IEnumerable<IconInfo> IconInfos
-        {
-            get
-            {
-                if (iconInfos == null)
-                {
-                    iconInfos = AllIconInfo;
-                }
-
-                return iconInfos;
-            }
-            set
-            {
-                SetProperty(ref iconInfos, value);
-            }
-        }
-
-        /// <summary>
-        /// 当前图标
-        /// </summary>
         [ObservableProperty]
         private IconInfo currentIcon;
 
-        /// <summary>
-        /// 搜索文本
-        /// </summary>
         [ObservableProperty]
         private string searchText;
 
-        /// <summary>
-        /// 搜索命令
-        /// </summary>
+        [ObservableProperty]
+        private int iconTabIndex;
+
         [RelayCommand]
         private void Search()
         {
             if (string.IsNullOrWhiteSpace(SearchText))
             {
-                IconInfos = AllIconInfo;
+                IconInfos = allIcons.GroupBy(x => x.Group);
             }
             else
             {
-                IconInfos = AllIconInfo.Where(i => i.Type.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                IconInfos = allIcons.Where(x => x.Type.ToString().Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).GroupBy(x => x.Group);
             }
+
+            IconTabIndex = 0;
+        }
+
+        [RelayCommand]
+        private void SelectedItem(IconInfo icon)
+        {
+            CurrentIcon = icon;
         }
     }
 }
