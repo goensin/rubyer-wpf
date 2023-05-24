@@ -2,12 +2,13 @@
 
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net6.0-windows</TargetFrameworks>
+		<TargetFrameworks>net472;netcoreapp3.1;net6.0-windows</TargetFrameworks>
 		<UseWPF>true</UseWPF>
 		<ApplicationIcon>rubyer.ico</ApplicationIcon>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
 		<Authors>Ensin</Authors>
 		<Version>2.9.3</Version>
+		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -42,10 +43,11 @@
 
 	<ItemGroup Condition=" '$(TargetFramework)' == 'net472' ">
 		<Reference Include="System.ComponentModel.DataAnnotations" />
+		<PackageReference Include="System.Text.Json" Version="7.0.2" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Rubyer\Rubyer.csproj" />
+	  <ProjectReference Include="..\Rubyer\Rubyer.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -44,7 +44,7 @@ namespace RubyerDemo.ViewModels
             }
             else
             {
-                IconInfos = allIcons.Where(x => x.Type.ToString().Contains(SearchText, StringComparison.CurrentCultureIgnoreCase)).GroupBy(x => x.Group);
+                IconInfos = allIcons.Where(i => i.Type.ToString().IndexOf(SearchText, StringComparison.CurrentCultureIgnoreCase) >= 0).GroupBy(x => x.Group);
             }
 
             IconTabIndex = 0;

@@ -7,8 +7,15 @@ using System.Threading.Tasks;
 
 namespace RubyerDemo.Models
 {
-    public record City(
-        [property: JsonPropertyName("code")] string Code,
-        [property: JsonPropertyName("name")] string Name,
-        [property: JsonPropertyName("children")] List<City> Children );
+    public class City
+    {
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        [JsonPropertyName("children")]
+        public List<City> Children { get; set; }
+    }
 }
