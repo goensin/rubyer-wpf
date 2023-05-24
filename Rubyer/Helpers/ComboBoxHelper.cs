@@ -1,4 +1,5 @@
-﻿using Rubyer.Commons.KnownBoxes;
+﻿using Rubyer.Commons;
+using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
+using System.Xml.Linq;
 
 namespace Rubyer
 {
@@ -22,17 +25,11 @@ namespace Rubyer
         /// 是否多选
         /// </summary>
         public static readonly DependencyProperty IsMultiSelectProperty = DependencyProperty.RegisterAttached(
-            "IsMultiSelect", typeof(bool), typeof(ComboBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+            "IsMultiSelect", typeof(bool), typeof(ComboBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsMultiSelectChanged));
 
-        public static void SetIsMultiSelect(DependencyObject element, bool value)
-        {
-            element.SetValue(IsMultiSelectProperty, BooleanBoxes.Box(value));
-        }
+        public static void SetIsMultiSelect(DependencyObject element, bool value) => element.SetValue(IsMultiSelectProperty, BooleanBoxes.Box(value));
 
-        public static bool GetIsMultiSelect(DependencyObject element)
-        {
-            return (bool)element.GetValue(IsMultiSelectProperty);
-        }
+        public static bool GetIsMultiSelect(DependencyObject element) => (bool)element.GetValue(IsMultiSelectProperty);
 
         /// <summary>
         /// 子项是否选中
@@ -40,15 +37,9 @@ namespace Rubyer
         internal static readonly DependencyProperty IsSelectedProperty = DependencyProperty.RegisterAttached(
             "IsSelected", typeof(bool), typeof(ComboBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsSelectedChanged));
 
-        internal static void SetIsSelected(DependencyObject element, bool value)
-        {
-            element.SetValue(IsSelectedProperty, BooleanBoxes.Box(value));
-        }
+        internal static void SetIsSelected(DependencyObject element, bool value) => element.SetValue(IsSelectedProperty, BooleanBoxes.Box(value));
 
-        internal static bool GetIsSelected(DependencyObject element)
-        {
-            return (bool)element.GetValue(IsSelectedProperty);
-        }
+        internal static bool GetIsSelected(DependencyObject element) => (bool)element.GetValue(IsSelectedProperty);
 
         /// <summary>
         /// 多选时显示文本
@@ -56,15 +47,9 @@ namespace Rubyer
         public static readonly DependencyProperty MultiSelectTextProperty = DependencyProperty.RegisterAttached(
             "MultiSelectText", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(null));
 
-        public static void SetMultiSelectText(DependencyObject element, string value)
-        {
-            element.SetValue(MultiSelectTextProperty, value);
-        }
+        public static void SetMultiSelectText(DependencyObject element, string value) => element.SetValue(MultiSelectTextProperty, value);
 
-        public static string GetMultiSelectText(DependencyObject element)
-        {
-            return (string)element.GetValue(MultiSelectTextProperty);
-        }
+        public static string GetMultiSelectText(DependencyObject element) => (string)element.GetValue(MultiSelectTextProperty);
 
         /// <summary>
         /// 多选时文本分隔符
@@ -72,15 +57,19 @@ namespace Rubyer
         public static readonly DependencyProperty MultiSelectSeparatorProperty = DependencyProperty.RegisterAttached(
             "MultiSelectSeparator", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(", ", OnMultiSelectSeparatorChanged));
 
-        public static void SetMultiSelectSeparator(DependencyObject element, string value)
-        {
-            element.SetValue(MultiSelectSeparatorProperty, value);
-        }
+        public static void SetMultiSelectSeparator(DependencyObject element, string value) => element.SetValue(MultiSelectSeparatorProperty, value);
 
-        public static string GetMultiSelectSeparator(DependencyObject element)
-        {
-            return (string)element.GetValue(MultiSelectSeparatorProperty);
-        }
+        public static string GetMultiSelectSeparator(DependencyObject element) => (string)element.GetValue(MultiSelectSeparatorProperty);
+
+        /// <summary>
+        /// 内部选中项集合
+        /// </summary>
+        internal static readonly DependencyProperty InternalSelectedItemsProperty = DependencyProperty.RegisterAttached(
+            "InternalSelectedItems", typeof(IList), typeof(ComboBoxHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+
+        internal static void SetInternalSelectedItems(DependencyObject element, IList value) => element.SetValue(InternalSelectedItemsProperty, value);
+
+        internal static IList GetInternalSelectedItems(DependencyObject element) => (IList)element.GetValue(InternalSelectedItemsProperty);
 
         /// <summary>
         /// 选中项集合
@@ -88,101 +77,175 @@ namespace Rubyer
         public static readonly DependencyProperty SelectedItemsProperty = DependencyProperty.RegisterAttached(
             "SelectedItems", typeof(IList), typeof(ComboBoxHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemsChanged));
 
-        public static void SetSelectedItems(DependencyObject element, IList value)
+        public static void SetSelectedItems(DependencyObject element, IList value) => element.SetValue(SelectedItemsProperty, value);
+
+        public static IList GetSelectedItems(DependencyObject element) => (IList)element.GetValue(SelectedItemsProperty);
+
+        private static void OnIsMultiSelectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            element.SetValue(SelectedItemsProperty, value);
+            if (d is ComboBox comboBox)
+            {
+                if (GetIsMultiSelect(comboBox))
+                {
+                    var internalItems = new ElementObservableCollection<object>(comboBox);
+                    internalItems.CollectionChanged += Items_CollectionChanged;
+                    SetInternalSelectedItems(comboBox, internalItems);
+                }
+                else
+                {
+                    var internalItems = GetInternalSelectedItems(comboBox) as INotifyCollectionChanged;
+                    internalItems.CollectionChanged -= Items_CollectionChanged;
+                    SetInternalSelectedItems(comboBox, null);
+                }
+            }
         }
 
-        public static IList GetSelectedItems(DependencyObject element)
+        private static void Items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            return (IList)element.GetValue(SelectedItemsProperty);
+            var collection = sender as ElementObservableCollection<object>;
+            var comboBox = collection.Owner as ComboBox;
+            var selectedItems = GetSelectedItems(comboBox);
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var item in e.NewItems)
+                    {
+                        selectedItems.Add(item);
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems)
+                    {
+                        var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(item) as ComboBoxItem;
+                        SetIsSelected(comboBoxItem, false);
+
+                        selectedItems.Remove(item);
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+
+                case NotifyCollectionChangedAction.Move:
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    for (int i = 0; i < comboBox.Items.Count; i++)
+                    {
+                        var item = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
+                        SetIsSelected(item, false);
+
+                        selectedItems.Remove(item);
+                    }
+
+                    break;
+            }
+
+            if (comboBox.IsLoaded)
+            {
+                UpdateMultiSelectText(comboBox);
+            }
         }
 
         private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var comboBox = d as ComboBox;
-
-            void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+            if (GetInternalSelectedItems(comboBox) is ElementObservableCollection<object> internalItems)
             {
-                switch (args.Action)
+                internalItems.CollectionChanged -= Items_CollectionChanged;
+                internalItems.Clear();
+                if (e.NewValue is IList newSelectedItems)
                 {
-                    case NotifyCollectionChangedAction.Add:
-                        break;
-
-                    case NotifyCollectionChangedAction.Remove:
-                        foreach (var item in args.OldItems)
-                        {
-                            var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(item) as ComboBoxItem;
-                            SetIsSelected(comboBoxItem, false);
-                        }
-                        break;
-
-                    case NotifyCollectionChangedAction.Replace:
-                        break;
-
-                    case NotifyCollectionChangedAction.Move:
-                        break;
-
-                    case NotifyCollectionChangedAction.Reset:
-                        for (int i = 0; i < comboBox.Items.Count; i++)
-                        {
-                            var item = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
-                            SetIsSelected(item, false);
-                        }
-
-                        break;
-                }
-
-                UpdateMultiSelectText(comboBox);
-            }
-
-            if (e.OldValue is INotifyCollectionChanged oldCollection)
-            {
-                oldCollection.CollectionChanged -= OnCollectionChanged;
-
-                for (int i = 0; i < comboBox.Items.Count; i++)
-                {
-                    if (comboBox.ItemContainerGenerator.ContainerFromIndex(i) is ComboBoxItem comboBoxItem)
+                    foreach (var item in newSelectedItems)
                     {
-                        SetIsSelected(comboBoxItem, false);
+                        internalItems.Add(item);
                     }
                 }
-
-                SetMultiSelectText(comboBox, null);
+                internalItems.CollectionChanged += Items_CollectionChanged;
             }
 
-            if (e.NewValue is INotifyCollectionChanged newCollection)
-            {
-                newCollection.CollectionChanged += OnCollectionChanged;
+          
 
-                var list = e.NewValue as IList;
-                if (comboBox.IsLoaded)
-                {
-                    UpdateComboBoxItemSelectState(comboBox, list);
-                }
-                else
-                {
-                    comboBox.Loaded += (sender, args) =>
-                    {
-                        comboBox.IsDropDownOpen = true;
-                        UpdateComboBoxItemSelectState(comboBox, list);
-                        comboBox.IsDropDownOpen = false;
-                    };
-                }
-            }
-        }
+            //void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+            //{
+            //    switch (args.Action)
+            //    {
+            //        case NotifyCollectionChangedAction.Add:
+            //            break;
 
-        private static void UpdateComboBoxItemSelectState(ComboBox comboBox, IList list)
-        {
-            foreach (var item in list)
-            {
-                if (comboBox.ItemContainerGenerator.ContainerFromItem(item) is ComboBoxItem comboBoxItem)
-                {
-                    SetIsSelected(comboBoxItem, true);
-                }
-            }
-            
-            UpdateMultiSelectText(comboBox);
+            //        case NotifyCollectionChangedAction.Remove:
+            //            foreach (var item in args.OldItems)
+            //            {
+            //                var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(item) as ComboBoxItem;
+            //                SetIsSelected(comboBoxItem, false);
+            //            }
+            //            break;
+
+            //        case NotifyCollectionChangedAction.Replace:
+            //            break;
+
+            //        case NotifyCollectionChangedAction.Move:
+            //            break;
+
+            //        case NotifyCollectionChangedAction.Reset:
+            //            for (int i = 0; i < comboBox.Items.Count; i++)
+            //            {
+            //                var item = comboBox.ItemContainerGenerator.ContainerFromIndex(i) as ComboBoxItem;
+            //                SetIsSelected(item, false);
+            //            }
+
+            //            break;
+            //    }
+
+            //    UpdateMultiSelectText(comboBox);
+            //}
+
+            //void UpdateItemSelected()
+            //{
+            //    if (e.OldValue is INotifyCollectionChanged oldCollection)
+            //    {
+            //        oldCollection.CollectionChanged -= OnCollectionChanged;
+            //    }
+
+            //    if (e.NewValue is INotifyCollectionChanged newCollection)
+            //    {
+            //        newCollection.CollectionChanged += OnCollectionChanged;
+
+            //        var list = e.NewValue as IList;
+            //        foreach (var item in comboBox.Items)
+            //        {
+
+            //            if (comboBox.ItemContainerGenerator.ContainerFromItem(item) is ComboBoxItem comboBoxItem)
+            //            {
+            //                if (list.Contains(item))
+            //                {
+            //                    SetIsSelected(comboBoxItem, true);
+            //                }
+            //                else
+            //                {
+            //                    SetIsSelected(comboBoxItem, false);
+            //                }
+            //            }
+            //        }
+
+            //        UpdateMultiSelectText(comboBox);
+            //    }
+            //}
+
+            //if (comboBox.IsLoaded)
+            //{
+            //    UpdateItemSelected();
+            //}
+            //else
+            //{
+            //    comboBox.Loaded += (sender, args) =>
+            //    {
+            //        comboBox.IsDropDownOpen = true;
+            //        comboBox.IsDropDownOpen = false;
+            //        UpdateItemSelected();
+            //    };
+            //}
         }
 
         private static void UpdateMultiSelectText(ComboBox comboBox)
@@ -214,11 +277,10 @@ namespace Rubyer
             var index = comboBox.ItemContainerGenerator.IndexFromContainer(comboBoxItem);
             var itemData = comboBox.Items[index];
 
-            var selectedItems = GetSelectedItems(comboBox);
+            var selectedItems = GetInternalSelectedItems(comboBox);
             if (selectedItems == null)
             {
-                selectedItems = new ObservableCollection<object>();
-                SetSelectedItems(comboBox, selectedItems);
+                return;
             }
 
             if ((bool)e.NewValue)
