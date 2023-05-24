@@ -172,12 +172,11 @@ namespace Rubyer
                         comboBox.Focus();
                         if (ComboBoxHelper.GetIsMultiSelect(comboBox))
                         {
-                            for (int i = 0; i < comboBox.Items.Count; i++)
+                            var items = ComboBoxHelper.GetSelectedItems(comboBox);
+                            if (items is { })
                             {
-                                if (comboBox.ItemContainerGenerator.ContainerFromIndex(i) is ComboBoxItem comboBoxItem)
-                                {
-                                    ComboBoxHelper.SetIsSelected(comboBoxItem, false);
-                                }
+                                items.Clear();
+                                comboBox.IsDropDownOpen = false;
                             }
                         }
                         else

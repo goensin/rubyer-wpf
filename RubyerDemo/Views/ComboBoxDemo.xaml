@@ -120,8 +120,7 @@
                                          Grid.Row="3"
                                          Description="通过 ComboBoxHelper.IsMultiSelect 设置是否启用多选">
                     <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
-                        <ComboBox x:Name="multiComboBox"
-                                  Width="200"
+                        <ComboBox Width="200"
                                   VerticalAlignment="Center"
                                   rubyer:ComboBoxHelper.IsMultiSelect="True"
                                   rubyer:ComboBoxHelper.MultiSelectSeparator="{Binding Text, ElementName=separator}"
