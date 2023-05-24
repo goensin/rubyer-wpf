@@ -17,7 +17,7 @@ namespace RubyerDemo.ViewModels
         public ComboBoxViewModel()
         {
             this.PropertyChanged += ComboBoxViewModel_PropertyChanged;
-            SelectedItems = new ObservableCollection<FoodType>();
+            SelectedItems = new ObservableCollection<FoodType>() { FoodType.BeefMeatballs};
             SelectedItems.CollectionChanged += SelectedItems_CollectionChanged;
         }
 

@@ -156,14 +156,33 @@ namespace Rubyer
                 newCollection.CollectionChanged += OnCollectionChanged;
 
                 var list = e.NewValue as IList;
-                foreach (var item in list)
+                if (comboBox.IsLoaded)
                 {
-                    var comboBoxItem = comboBox.ItemContainerGenerator.ContainerFromItem(item) as ComboBoxItem;
+                    UpdateComboBoxItemSelectState(comboBox, list);
+                }
+                else
+                {
+                    comboBox.Loaded += (sender, args) =>
+                    {
+                        comboBox.IsDropDownOpen = true;
+                        UpdateComboBoxItemSelectState(comboBox, list);
+                        comboBox.IsDropDownOpen = false;
+                    };
+                }
+            }
+        }
+
+        private static void UpdateComboBoxItemSelectState(ComboBox comboBox, IList list)
+        {
+            foreach (var item in list)
+            {
+                if (comboBox.ItemContainerGenerator.ContainerFromItem(item) is ComboBoxItem comboBoxItem)
+                {
                     SetIsSelected(comboBoxItem, true);
                 }
-
-                UpdateMultiSelectText(comboBox);
             }
+            
+            UpdateMultiSelectText(comboBox);
         }
 
         private static void UpdateMultiSelectText(ComboBox comboBox)
