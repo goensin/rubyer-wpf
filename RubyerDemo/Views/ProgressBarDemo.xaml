@@ -22,7 +22,7 @@
                             rubyer:SliderHelper.ValuePlacement="Bottom"
                             IsSnapToTickEnabled="True"
                             Maximum="100"
-                            Minimum="1"
+                            Minimum="0"
                             Value="70" />
                 </StackPanel>
 

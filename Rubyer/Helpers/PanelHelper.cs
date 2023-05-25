@@ -51,7 +51,6 @@ namespace Rubyer
         {
             var panel = (Panel)sender;
             panel.Loaded -= SetPanelChildrenSpacing;
-
             switch (panel)
             {
                 case StackPanel stackPanel:
@@ -65,6 +64,11 @@ namespace Rubyer
                 default:
                     break;
             }
+
+        }
+
+        private static void Panel_LayoutUpdated(object sender, EventArgs e)
+        {
 
         }
 

@@ -106,12 +106,16 @@ namespace Rubyer
                 }
                 else
                 {
-                    slider.Loaded += (sender, args) =>
-                    {
-                        AddCurrentValueAdorner(slider);
-                    };
+                    slider.Loaded += Slider_Loaded;
                 }
             }
+        }
+
+        private static void Slider_Loaded(object sender, RoutedEventArgs e)
+        {
+            var slider = sender as Slider;
+            slider.Loaded -= Slider_Loaded;
+            AddCurrentValueAdorner(slider);
         }
 
         private static void AddCurrentValueAdorner(Slider slider)
