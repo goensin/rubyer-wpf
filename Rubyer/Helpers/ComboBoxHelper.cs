@@ -151,6 +151,12 @@ namespace Rubyer
         private static void UpdateMultiSelectText(ComboBox comboBox)
         {
             var selectedItems = GetSelectedItems(comboBox);
+            if (selectedItems is null)
+            {
+                SetMultiSelectText(comboBox, string.Empty);
+                return;
+            }
+
             var texts = new List<string>();
             foreach (var item in selectedItems)
             {
