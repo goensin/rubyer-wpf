@@ -21,6 +21,12 @@
                                           IsExpanded="False"
                                           SelectedIndex="0"
                                           TransitionType="None">
+                        <rubyer:HamburgerMenu.PaneHeader>
+                            <TextBlock Margin="20 10"
+                                       HorizontalAlignment="Center"
+                                       Text="PaneHeader" />
+                        </rubyer:HamburgerMenu.PaneHeader>
+
                         <rubyer:HamburgerMenu.OptionsItemsSource>
                             <rubyer:HamburgerMenuItemCollection>
                                 <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
@@ -99,6 +105,12 @@
                                                   Header="不可用"
                                                   IconType="EmotionUnhappyLine"
                                                   IsEnabled="False" />
+
+                        <rubyer:HamburgerMenu.PaneFooter>
+                            <TextBlock Margin="20 10"
+                                       HorizontalAlignment="Center"
+                                       Text="PaneFooter" />
+                        </rubyer:HamburgerMenu.PaneFooter>
                     </rubyer:HamburgerMenu>
                 </DockPanel>
 

@@ -240,17 +240,15 @@
         <Style.Triggers>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <!--<Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />-->
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelHeader" />
-                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
+                    <Condition Binding="{Binding IsExpanded, FallbackValue=True, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="ToolTipService.IsEnabled" Value="True" />
             </MultiDataTrigger>
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
-                    <!--<Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type rubyer:HamburgerMenu}" />-->
                     <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelItem" />
-                    <Condition Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
+                    <Condition Binding="{Binding IsExpanded, FallbackValue=True, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
                 </MultiDataTrigger.Conditions>
                 <Setter Property="ToolTipService.IsEnabled" Value="True" />
             </MultiDataTrigger>
@@ -269,11 +267,6 @@
                             CornerRadius="{DynamicResource AllControlCornerRadius}">
                         <StackPanel ClipToBounds="True" IsItemsHost="True" />
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="HasItems" Value="True">
-                            <Setter TargetName="border" Property="Margin" Value="0 20 0 20" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -306,7 +299,7 @@
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="0 10" />
-        <Setter Property="rubyer:HeaderHelper.Margin" Value="0 0 0 10" />
+        <Setter Property="rubyer:HeaderHelper.Margin" Value="0 0 0 0" />
         <Setter Property="CollapsedWidth" Value="40" />
         <Setter Property="ExpandedWidth" Value="200" />
         <Setter Property="IsExpanded" Value="True" />
@@ -343,9 +336,14 @@
                                     <Grid Width="{TemplateBinding ExpandedWidth}">
                                         <Grid.RowDefinitions>
                                             <RowDefinition x:Name="menuRow" Height="Auto" />
-                                            <RowDefinition x:Name="paneHeaderRow" Height="Auto" />
+                                            <RowDefinition x:Name="paneHeaderRow"
+                                                           Height="Auto"
+                                                           MinHeight="10" />
                                             <RowDefinition x:Name="itemsRow" Height="*" />
                                             <RowDefinition x:Name="optionsRow" Height="Auto" />
+                                            <RowDefinition x:Name="paneFooterRow"
+                                                           Height="Auto"
+                                                           MinHeight="10" />
                                         </Grid.RowDefinitions>
 
                                         <Border x:Name="headerBorder"
@@ -389,8 +387,6 @@
                                         </Border>
 
                                         <ContentPresenter Grid.Row="1"
-                                                          Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
-                                                          HorizontalAlignment="Left"
                                                           ContentSource="PaneHeader"
                                                           Focusable="False"
                                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -423,6 +419,11 @@
                                                                      ItemTemplateSelector="{TemplateBinding OptionsItemTemplateSelector}"
                                                                      ItemsSource="{TemplateBinding OptionsItemsSource}"
                                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                        <ContentPresenter Grid.Row="4"
+                                                          ContentSource="PaneFooter"
+                                                          Focusable="False"
+                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                     </Grid>
                                 </rubyer:Transition>
                             </Border>

@@ -35,7 +35,8 @@
         <rubyer:HamburgerMenu.PaneHeader>
             <Rectangle Width="35"
                        Height="35"
-                       Margin="0 28 0 16"
+                       Margin="10 28 0 16"
+                       HorizontalAlignment="Left"
                        Fill="{StaticResource WhiteForeground}" />
         </rubyer:HamburgerMenu.PaneHeader>
 

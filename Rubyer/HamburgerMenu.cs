@@ -88,18 +88,33 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 面板头部
+        /// 面板头部内容
         /// </summary>
         public static readonly DependencyProperty PaneHeaderProperty = DependencyProperty.Register(
             "PaneHeader", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
 
         /// <summary>
-        /// 面板头部
+        /// 面板头部内容
         /// </summary>
         public object PaneHeader
         {
             get { return (object)GetValue(PaneHeaderProperty); }
             set { SetValue(PaneHeaderProperty, value); }
+        }
+
+        /// <summary>
+        /// 面板底部内容
+        /// </summary>
+        public static readonly DependencyProperty PaneFooterProperty = DependencyProperty.Register(
+            "PaneFooter", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
+
+        /// <summary>
+        /// 面板底部内容
+        /// </summary>
+        public object PaneFooter
+        {
+            get { return (object)GetValue(PaneFooterProperty); }
+            set { SetValue(PaneFooterProperty, value); }
         }
 
         /// <summary>
