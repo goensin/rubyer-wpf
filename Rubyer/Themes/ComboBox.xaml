@@ -107,7 +107,7 @@
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <rubyer:Icon x:Name="arrow"
                                          Grid.Column="1"
-                                         Margin="5 0"
+                                         Margin="3 0"
                                          HorizontalAlignment="Right"
                                          VerticalAlignment="Center"
                                          Foreground="{DynamicResource SeconarydText}"

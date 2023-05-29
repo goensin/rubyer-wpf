@@ -281,18 +281,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Grid>
-                        <Border x:Name="columnHeaderBorder"
-                                Padding="{TemplateBinding Padding}"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                BorderThickness="0">
+                    <Border x:Name="columnHeaderBorder"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            BorderThickness="0">
 
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </Border>
-                    </Grid>
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
                             <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 1 0" />
@@ -318,32 +316,30 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Grid>
-                        <Border x:Name="columnHeaderBorder"
-                                Padding="{TemplateBinding Padding}"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                BorderThickness="0">
+                    <Border x:Name="columnHeaderBorder"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                            BorderThickness="0">
 
-                            <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Orientation="Horizontal">
-                                <CheckBox Margin="0 0 3 0"
-                                          rubyer:DataGridHelper.IsHeaderSelectCheckBox="True"
-                                          Foreground="{TemplateBinding Foreground}">
-                                    <rubyer:ToggleButtonHelper.CheckedContent>
-                                        <MultiBinding Converter="{StaticResource GetDataGridColumnCheckedContent}" Mode="OneWay">
-                                            <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" />
-                                            <Binding RelativeSource="{RelativeSource AncestorType=DataGridColumnHeader}" />
-                                        </MultiBinding>
-                                    </rubyer:ToggleButtonHelper.CheckedContent>
-                                    <CheckBox.Content>
-                                        <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </CheckBox.Content>
-                                </CheckBox>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
+                        <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Orientation="Horizontal">
+                            <CheckBox Margin="0 0 3 0"
+                                      rubyer:DataGridHelper.IsHeaderSelectCheckBox="True"
+                                      Foreground="{TemplateBinding Foreground}">
+                                <rubyer:ToggleButtonHelper.CheckedContent>
+                                    <MultiBinding Converter="{StaticResource GetDataGridColumnCheckedContent}" Mode="OneWay">
+                                        <Binding RelativeSource="{RelativeSource AncestorType=DataGrid}" />
+                                        <Binding RelativeSource="{RelativeSource AncestorType=DataGridColumnHeader}" />
+                                    </MultiBinding>
+                                </rubyer:ToggleButtonHelper.CheckedContent>
+                                <CheckBox.Content>
+                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </CheckBox.Content>
+                            </CheckBox>
+                        </StackPanel>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
                             <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 1 0" />

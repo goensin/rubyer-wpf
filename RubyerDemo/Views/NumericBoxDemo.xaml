@@ -42,6 +42,7 @@
                                            rubyer:InputBoxHelper.Watermark="Interval=2"
                                            Interval="2"
                                            Value="0" />
+
                         <Label Content="不显示按钮:" />
                         <rubyer:NumericBox Width="120"
                                            rubyer:InputBoxHelper.IsClearable="True"
@@ -57,7 +58,8 @@
 
                         <rubyer:NumericBox MinWidth="120"
                                            Interval="0.1"
-                                           NumericType="Double" TextFormat="F2"
+                                           NumericType="Double"
+                                           TextFormat="F2"
                                            Value="{Binding DoubleValue}" />
                         <TextBlock Text="{Binding DoubleValue, StringFormat='double 值: {0}'}" />
                     </StackPanel>
