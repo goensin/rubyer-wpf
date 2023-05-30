@@ -546,7 +546,9 @@
 
     <Style x:Key="RubyerDataGridTextColumn"
            BasedOn="{StaticResource RubyerTextBox}"
-           TargetType="{x:Type TextBox}" />
+           TargetType="{x:Type TextBox}" >
+        <Setter Property="Padding" Value="0 2" />
+    </Style>
 
     <Style x:Key="RubyerDataGridCheckBoxColumn"
            BasedOn="{StaticResource RubyerCheckBox}"
@@ -562,17 +564,11 @@
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="RubyerDataGridComboBoxColumn"
-           BasedOn="{StaticResource RubyerComboBox}"
-           TargetType="{x:Type ComboBox}">
-        <Setter Property="Focusable" Value="False" />
-        <Setter Property="IsHitTestVisible" Value="False" />
-        <Setter Property="BorderThickness" Value="0" />
-    </Style>
-
     <Style x:Key="RubyerDataGridComboBoxColumnEditting"
            BasedOn="{StaticResource RubyerComboBox}"
-           TargetType="{x:Type ComboBox}" />
+           TargetType="{x:Type ComboBox}" >
+        <Setter Property="Padding" Value="0 3" />
+    </Style>
 
     <Style x:Key="RubyerDataGridDetailToggleButtonColumn" TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable" Value="False" />

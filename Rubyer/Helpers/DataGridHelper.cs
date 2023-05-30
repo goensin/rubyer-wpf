@@ -144,13 +144,54 @@ namespace Rubyer
 
             if (enableCheckBoxAssist)
             {
-                dataGrid.PreviewMouseLeftButtonDown += AllowDirectEditWithoutFocus;
+                //dataGrid.PreviewMouseLeftButtonDown += AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown += EditOnSpacebarPress;
+                dataGrid.CurrentCellChanged += DataGrid_CurrentCellChanged;
             }
             else
             {
-                dataGrid.PreviewMouseLeftButtonDown -= AllowDirectEditWithoutFocus;
+                //dataGrid.PreviewMouseLeftButtonDown -= AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown -= EditOnSpacebarPress;
+                dataGrid.CurrentCellChanged -= DataGrid_CurrentCellChanged;
+            }
+        }
+
+        private static void DataGrid_CurrentCellChanged(object sender, EventArgs e)
+        {
+            var dataGrid = sender as DataGrid;
+            var cellInfo = dataGrid.CurrentCell;
+            if (!cellInfo.IsValid)
+            {
+                return;
+            }
+
+            var dataGridRow = dataGrid.ItemContainerGenerator.ContainerFromItem(cellInfo.Item) as DataGridRow;
+            var cellsPresenter = dataGridRow.TryGetChildFromVisualTree<DataGridCellsPresenter>(element => element is DataGridCellsPresenter);
+            if (cellsPresenter.ItemContainerGenerator.ContainerFromIndex(cellInfo.Column.DisplayIndex) is not DataGridCell dataGridCell || dataGridCell.IsEditing)
+            {
+                return;
+            }
+
+            dataGrid.BeginEdit();
+            var element = cellInfo.Column.GetCellContent(cellInfo.Item);
+
+            switch (element)
+            {
+                case ToggleButton toggleButton:
+                    toggleButton.IsChecked = !toggleButton.IsChecked;
+
+                    //if (cellInfo.Column is DataGridDetailToggleButtonColumn)
+                    //{
+                        dataGrid.CommitEdit();
+                    //}
+                    break;
+
+                case ComboBox comboBox:
+                    comboBox.IsDropDownOpen = true;
+                    break;
+
+                default:
+                    break;
             }
         }
 
@@ -171,7 +212,7 @@ namespace Rubyer
 
             // Readonly has to be handled as the passthrough ignores the
             // cell and interacts directly with the content
-            if (dataGridCell?.IsReadOnly ?? true || dataGridCell.IsEditing)
+            if (dataGridCell is null || dataGridCell.IsReadOnly || dataGridCell.IsEditing)
             {
                 return;
             }
@@ -223,8 +264,20 @@ namespace Rubyer
                         // dropdown
                         case ComboBox comboBox:
                             {
-                                comboBox.IsDropDownOpen = true;
-                                mouseArgs.Handled = true;
+                                var toggleButton = comboBox.TryGetChildFromVisualTree<ToggleButton>(element => element is ToggleButton);
+                                if (toggleButton is null)
+                                {
+                                    break;
+                                }
+                                var newMouseEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, 0, MouseButton.Left)
+                                {
+                                    RoutedEvent = Mouse.MouseDownEvent,
+                                    Source = dataGrid
+                                };
+                                toggleButton.RaiseEvent(newMouseEvent);
+
+                                //comboBox.IsDropDownOpen = true;
+                                //mouseArgs.Handled = true;
                                 break;
                             }
 

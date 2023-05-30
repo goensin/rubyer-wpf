@@ -44,7 +44,7 @@
                                   CanUserSortColumns="False"
                                   GridLinesVisibility="None"
                                   ItemsSource="{Binding Persons}"
-                                  SelectionUnit="Cell">
+                                  SelectionUnit="FullRow">
                             <DataGrid.Resources>
                                 <Style BasedOn="{StaticResource WaveLoading}" TargetType="rubyer:Loading" />
                             </DataGrid.Resources>
@@ -150,7 +150,7 @@
                             </DataGrid.RowStyle>
                             <DataGrid.Columns>
                                 <rubyer:DataGridDetailToggleButtonColumn Width="60"
-                                                                         rubyer:DataGridHelper.ColumnPosition="End"
+                                                                         rubyer:DataGridHelper.ColumnPosition="Start"
                                                                          Header="详细" />
                             </DataGrid.Columns>
                         </DataGrid>

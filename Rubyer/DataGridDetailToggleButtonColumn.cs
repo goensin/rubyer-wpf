@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -98,11 +93,7 @@ namespace Rubyer
         private ToggleButton GenerateToggleButton(bool isEditing, DataGridCell cell)
         {
             ToggleButton toggleButton = (cell != null) ? (cell.Content as ToggleButton) : null;
-            if (toggleButton == null)
-            {
-                toggleButton = new ToggleButton();
-            }
-
+            toggleButton ??= new ToggleButton();
             toggleButton.IsThreeState = false;
             ApplyStyle(isEditing, defaultToElementStyle: true, toggleButton);
             ApplyBinding(toggleButton, ToggleButton.IsCheckedProperty);
@@ -112,8 +103,7 @@ namespace Rubyer
         /// <inheritdoc/>
         protected override object PrepareCellForEdit(FrameworkElement editingElement, RoutedEventArgs editingEventArgs)
         {
-            ToggleButton toggleButton = editingElement as ToggleButton;
-            if (toggleButton != null)
+            if (editingElement is ToggleButton toggleButton)
             {
                 toggleButton.Focus();
                 bool? isChecked = toggleButton.IsChecked;
