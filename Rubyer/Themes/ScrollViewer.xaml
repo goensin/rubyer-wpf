@@ -199,6 +199,30 @@
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="3" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="3" />
                         </Trigger>
+                        <Trigger Property="VerticalOffset" Value="0">
+                            <Setter TargetName="upButton" Property="IsEnabled" Value="False" />
+                        </Trigger>
+                        <Trigger Property="HorizontalOffset" Value="0">
+                            <Setter TargetName="leftButton" Property="IsEnabled" Value="False" />
+                        </Trigger>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
+                                    <Binding Path="ScrollableHeight" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="VerticalOffset" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="downButton" Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                        <DataTrigger Value="True">
+                            <DataTrigger.Binding>
+                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
+                                    <Binding Path="ScrollableWidth" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="HorizontalOffset" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </DataTrigger.Binding>
+                            <Setter TargetName="rightButton" Property="IsEnabled" Value="False" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
