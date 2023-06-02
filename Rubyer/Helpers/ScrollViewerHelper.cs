@@ -360,19 +360,19 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 是否浮动显示
+        /// ScrollBar 动画进度
         /// </summary>
-        public static readonly DependencyProperty IsButtonFloatProperty = DependencyProperty.RegisterAttached(
-            "IsButtonFloat", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+        public static readonly DependencyProperty ScrollBarAnimationProcessProperty = DependencyProperty.RegisterAttached(
+            "ScrollBarAnimationProcess", typeof(double), typeof(ScrollViewerHelper), new PropertyMetadata(0.4));
 
-        public static void SetIsButtonFloat(DependencyObject element, bool value)
+        public static void SetScrollBarAnimationProcess(DependencyObject element, double value)
         {
-            element.SetValue(IsButtonFloatProperty, BooleanBoxes.Box(value));
+            element.SetValue(ScrollBarAnimationProcessProperty, value);
         }
 
-        public static bool GetIsButtonFloat(DependencyObject element)
+        public static double GetScrollBarAnimationProcess(DependencyObject element)
         {
-            return (bool)element.GetValue(IsButtonFloatProperty);
+            return (double)element.GetValue(ScrollBarAnimationProcessProperty);
         }
 
         /// <summary>

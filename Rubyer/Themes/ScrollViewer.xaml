@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:rubyer="clr-namespace:Rubyer">
+                    xmlns:rubyer="clr-namespace:Rubyer"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ScrollBar.xaml" />
@@ -16,7 +17,7 @@
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarBackground" Value="Transparent" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource BorderLight}" />
-        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="16" />
+        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
@@ -36,8 +37,8 @@
                                    Grid.Column="1"
                                    Fill="Transparent" />
                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                                Grid.Row="0"
-                                                Grid.Column="0"
+                                                Grid.RowSpan="2"
+                                                Grid.ColumnSpan="2"
                                                 Margin="{TemplateBinding Padding}"
                                                 CanContentScroll="{TemplateBinding CanContentScroll}"
                                                 CanHorizontallyScroll="False"
@@ -55,6 +56,7 @@
                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Style="{StaticResource RubyerScrollBar}"
                                    Grid.Row="1"
@@ -68,12 +70,6 @@
                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="rubyer:ScrollViewerHelper.IsButtonFloat" Value="True">
-                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
-                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -87,8 +83,8 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
     </Style>
 
-    <Style x:Key="ScrollViewerArrowButton"
-           BasedOn="{StaticResource ScrollBarArrowButton}"
+    <Style x:Key="RubyerScrollViewerArrowButton"
+           BasedOn="{StaticResource RubyerScrollBarArrowButton}"
            TargetType="RepeatButton">
         <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
@@ -113,22 +109,10 @@
         <Setter Property="rubyer:ScrollViewerHelper.HorizontalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.VerticalDelta" Value="100" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="rubyer:ScrollViewerHelper.ArrowButtonStyle" Value="{StaticResource ScrollViewerArrowButton}" />
+        <Setter Property="rubyer:ScrollViewerHelper.ArrowButtonStyle" Value="{StaticResource RubyerScrollViewerArrowButton}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
-                    <ControlTemplate.Resources>
-                        <Style x:Key="ScrollViewerArrowButton"
-                               BasedOn="{StaticResource ScrollBarArrowButton}"
-                               TargetType="RepeatButton">
-                            <Setter Property="FontSize" Value="{Binding Path=FontSize, RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                            <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                            <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-                        </Style>
-
-                    </ControlTemplate.Resources>
                     <Grid x:Name="Grid" Background="{TemplateBinding Background}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -193,12 +177,12 @@
                         </RepeatButton>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="rubyer:ScrollViewerHelper.IsButtonFloat" Value="True">
+                        <!--<Trigger Property="rubyer:ScrollViewerHelper.IsButtonFloat" Value="True">
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.Row" Value="0" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.Column" Value="0" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="3" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="3" />
-                        </Trigger>
+                        </Trigger>-->
                         <Trigger Property="VerticalOffset" Value="0">
                             <Setter TargetName="upButton" Property="IsEnabled" Value="False" />
                         </Trigger>

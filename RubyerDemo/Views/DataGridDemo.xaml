@@ -99,6 +99,8 @@
                     <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
                         <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
                         <DataGrid Grid.Row="1"
+                                  Width="300" BorderThickness="1"
+                                  Height="150"
                                   rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                   rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
                                   rubyer:ControlHelper.MaskOpacity="1"
@@ -113,9 +115,6 @@
                                   ItemsSource="{Binding Persons}"
                                   RowHeaderWidth="40"
                                   SelectionMode="Extended">
-                            <rubyer:DataGridHelper.RowHeaderTitle>
-                                <rubyer:Icon Type="AppsFill" />
-                            </rubyer:DataGridHelper.RowHeaderTitle>
                             <DataGrid.RowHeaderTemplate>
                                 <DataTemplate>
                                     <Border>
@@ -123,7 +122,7 @@
                                     </Border>
                                 </DataTemplate>
                             </DataGrid.RowHeaderTemplate>
-                            <DataGrid.RowDetailsTemplate>
+                            <!--<DataGrid.RowDetailsTemplate>
                                 <DataTemplate>
                                     <StackPanel Margin="30 5" Orientation="Vertical">
                                         <TextBlock Margin="0 0 0 5"
@@ -147,12 +146,12 @@
                                         </Trigger>
                                     </Style.Triggers>
                                 </Style>
-                            </DataGrid.RowStyle>
-                            <DataGrid.Columns>
+                            </DataGrid.RowStyle>-->
+                            <!--<DataGrid.Columns>
                                 <rubyer:DataGridDetailToggleButtonColumn Width="60"
                                                                          rubyer:DataGridHelper.ColumnPosition="Start"
                                                                          Header="详细" />
-                            </DataGrid.Columns>
+                            </DataGrid.Columns>-->
                         </DataGrid>
                     </Grid>
                 </GroupBox>

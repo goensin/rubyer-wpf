@@ -277,7 +277,7 @@
     <Style x:Key="FirstDataGridColumnHeader"
            BasedOn="{StaticResource RubyerDataGridColumnHeader}"
            TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Background" Value="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -357,28 +357,14 @@
     </Style>
 
     <!--  Style and template for the DataGridColumnHeadersPresenter.  -->
-    <Style TargetType="{x:Type DataGridColumnHeadersPresenter}">
+    <Style x:Key="RubyerDataGridColumnHeadersPresenter" TargetType="{x:Type DataGridColumnHeadersPresenter}">
         <Setter Property="Background" Value="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeadersPresenter}">
                     <Grid Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
-                        <DataGridColumnHeader Style="{StaticResource FirstDataGridColumnHeader}"
-                                              Width="{Binding RowHeaderActualWidth, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              Command="DataGrid.SelectAllCommand"
-                                              Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
-                            <ContentControl Content="{Binding Path=(rubyer:DataGridHelper.RowHeaderTitle), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                        </DataGridColumnHeader>
-
-                        <Grid Grid.Column="1">
-                            <DataGridColumnHeader x:Name="PART_FillerColumnHeader" IsHitTestVisible="False" />
-                            <ItemsPresenter />
-                        </Grid>
+                        <DataGridColumnHeader x:Name="PART_FillerColumnHeader" IsHitTestVisible="False" />
+                        <ItemsPresenter />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -455,6 +441,7 @@
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid x:Name="root">
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
@@ -463,25 +450,37 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="Auto" />
                                         </Grid.RowDefinitions>
+
+
+                                        <DataGridColumnHeader Style="{StaticResource FirstDataGridColumnHeader}"
+                                                              Width="{Binding RowHeaderActualWidth, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                              Command="DataGrid.SelectAllCommand"
+                                                              Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}">
+                                            <ContentControl Content="{Binding Path=(rubyer:DataGridHelper.RowHeaderTitle), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </DataGridColumnHeader>
+
                                         <DataGridColumnHeadersPresenter x:Name="PART_ColumnHeadersPresenter"
-                                                                        Grid.Column="0"
+                                                                        Style="{StaticResource RubyerDataGridColumnHeadersPresenter}"
+                                                                        Grid.Column="1"
                                                                         Grid.ColumnSpan="2"
                                                                         Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Column}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
                                                                 Grid.Row="1"
+                                                                Grid.RowSpan="2"
+                                                                Grid.ColumnSpan="3"
                                                                 CanContentScroll="{TemplateBinding CanContentScroll}" />
 
                                         <ScrollBar x:Name="PART_VerticalScrollBar"
                                                    Style="{StaticResource RubyerScrollBar}"
                                                    Grid.Row="1"
-                                                   Grid.Column="1"
+                                                   Grid.Column="2"
                                                    Maximum="{TemplateBinding ScrollableHeight}"
                                                    Orientation="Vertical"
                                                    ViewportSize="{TemplateBinding ViewportHeight}"
                                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                                        <Grid Grid.Row="2" Grid.Column="0">
+                                        <Grid Grid.Row="2" Grid.Column="1">
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                                 <ColumnDefinition Width="*" />
@@ -498,14 +497,14 @@
                                         </Grid>
                                         <Border x:Name="emptyBorder"
                                                 Grid.Row="1"
-                                                Grid.ColumnSpan="2"
+                                                Grid.ColumnSpan="3"
                                                 Visibility="Collapsed">
                                             <ContentControl x:Name="emptyView" Content="{Binding Path=(rubyer:DataGridHelper.EmptyView), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
                                         </Border>
 
                                         <Border x:Name="loadingBorder"
                                                 Grid.Row="1"
-                                                Grid.ColumnSpan="2"
+                                                Grid.ColumnSpan="3"
                                                 Background="{DynamicResource DialogBackground}"
                                                 Visibility="Collapsed">
                                             <rubyer:Card Padding="10"
@@ -546,7 +545,7 @@
 
     <Style x:Key="RubyerDataGridTextColumn"
            BasedOn="{StaticResource RubyerTextBox}"
-           TargetType="{x:Type TextBox}" >
+           TargetType="{x:Type TextBox}">
         <Setter Property="Padding" Value="0 2" />
     </Style>
 
@@ -566,7 +565,7 @@
 
     <Style x:Key="RubyerDataGridComboBoxColumnEditting"
            BasedOn="{StaticResource RubyerComboBox}"
-           TargetType="{x:Type ComboBox}" >
+           TargetType="{x:Type ComboBox}">
         <Setter Property="Padding" Value="0 3" />
     </Style>
 
