@@ -61,15 +61,15 @@
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
                                     <Border x:Name="titleBorder"
-                                            Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             CornerRadius="{Binding (rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                         <TextBlock x:Name="title"
-                                                   Margin="{Binding (rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   HorizontalAlignment="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   VerticalAlignment="{Binding (rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   FontSize="{Binding (rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   FontWeight="{Binding (rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                    Text="{TemplateBinding Title}" />
                                     </Border>
 

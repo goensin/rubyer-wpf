@@ -118,7 +118,7 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
                         <ColumnDefinition Width="Auto" />
@@ -201,10 +201,10 @@
             <Border Padding="{TemplateBinding Padding}">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
+                        <ColumnDefinition Width="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" SharedSizeGroup="Icon" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut" />
-                        <ColumnDefinition Width="{Binding (rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        <ColumnDefinition Width="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                     </Grid.ColumnDefinitions>
 
                     <ContentPresenter x:Name="Icon"

@@ -66,7 +66,7 @@
                                         </Grid.RowDefinitions>
                                         <Border x:Name="titleBar"
                                                 Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                CornerRadius="{Binding (rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                                 <Button x:Name="PART_CloseButton"
                                                         Style="{StaticResource TextButton}"

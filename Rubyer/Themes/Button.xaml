@@ -114,7 +114,7 @@
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Loading" Value="True">
                             <Setter TargetName="loading" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="contentPresenter" Property="Content" Value="{Binding (rubyer:ButtonHelper.LoadingContent), RelativeSource={RelativeSource AncestorType=Button}}" />
+                            <Setter TargetName="contentPresenter" Property="Content" Value="{Binding Path=(rubyer:ButtonHelper.LoadingContent), RelativeSource={RelativeSource AncestorType=Button}}" />
                         </Trigger>
                         <Trigger Property="Content" Value="{x:Null}">
                             <Setter TargetName="loading" Property="Margin" Value="0" />

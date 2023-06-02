@@ -89,7 +89,7 @@
                                 <Control Margin="0 0 3 0"
                                          SnapsToDevicePixels="False"
                                          Template="{Binding ValidationErrorTemplate, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}"
-                                         Visibility="{Binding (Validation.HasError), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
+                                         Visibility="{Binding Path=(Validation.HasError), Converter={StaticResource BooleanToVisibleConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGridRow}}}" />
                                 <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </StackPanel>
                         </Border>
@@ -193,8 +193,8 @@
     <Style x:Key="RubyerDataGridColumnHeader" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding (rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="FontSize" Value="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="FontWeight" Value="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=DataGrid}}" />

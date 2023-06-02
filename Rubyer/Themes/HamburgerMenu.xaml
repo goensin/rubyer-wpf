@@ -348,18 +348,18 @@
 
                                         <Border x:Name="headerBorder"
                                                 Width="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:Transition}}"
-                                                Margin="{Binding (rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 HorizontalAlignment="Left"
-                                                Background="{Binding (rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Button x:Name="PART_HamburgerButton"
                                                     Style="{StaticResource TextButton}"
                                                     Height="Auto"
-                                                    Padding="{Binding (rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    HorizontalContentAlignment="{Binding (rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    rubyer:ControlHelper.CornerRadius="{Binding (rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    rubyer:ControlHelper.MaskOpacity="{Binding (rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    Foreground="{Binding (rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    HorizontalContentAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                     ToolTipService.InitialShowDelay="100"
                                                     ToolTipService.Placement="Right"
                                                     ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource Self}}"
@@ -379,8 +379,8 @@
                                                     <TextBlock x:Name="header"
                                                                Grid.Column="1"
                                                                VerticalAlignment="Center"
-                                                               FontSize="{Binding (rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                               FontWeight="{Binding (rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                               FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                               FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                                Text="{TemplateBinding Header}" />
                                                 </Grid>
                                             </Button>
@@ -398,8 +398,8 @@
                                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                             <ScrollViewer x:Name="itemsScroll"
                                                           Style="{StaticResource OnlyArrowScrollViewer}"
-                                                          rubyer:ControlHelper.CornerRadius="{Binding (rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
-                                                          rubyer:ControlHelper.FocusedBrush="{Binding (rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
+                                                          rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
+                                                          rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                                           rubyer:ScrollViewerHelper.HorizontalDelta="150"
                                                           rubyer:ScrollViewerHelper.VerticalDelta="75"
                                                           HorizontalScrollBarVisibility="Disabled"

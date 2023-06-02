@@ -29,7 +29,7 @@
                         <rubyer:Transition HorizontalAlignment="Left"
                                            IsShow="{TemplateBinding IsSelected}"
                                            Type="ZoomY"
-                                           Visibility="{Binding (rubyer:ListBoxHelper.IsShowLittleBar), RelativeSource={RelativeSource AncestorType=ListBox}, Converter={StaticResource BooleanToVisibleConverter}}">
+                                           Visibility="{Binding Path=(rubyer:ListBoxHelper.IsShowLittleBar), RelativeSource={RelativeSource AncestorType=ListBox}, Converter={StaticResource BooleanToVisibleConverter}}">
                             <Rectangle Width="3"
                                        Height="{Binding ActualHeight, ElementName=content}"
                                        Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
