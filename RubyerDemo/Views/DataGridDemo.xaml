@@ -237,14 +237,7 @@
                                          Grid.Row="8"
                                          Description="可通过 DataGridHelper.EmptyView 自定义">
                     <DataGrid x:Name="DataGrid9"
-                              Height="400">
-                        <DataGridCheckBoxColumn Width="50" Header="选择" />
-                        <DataGridTextColumn Width="100" Header="日期" />
-                        <DataGridTextColumn Width="80" Header="星期" />
-                        <DataGridTextColumn Width="120" Header="温度" />
-                        <DataGridTextColumn Width="120" Header="天气" />
-                        <DataGridTextColumn Width="100" Header="风向" />
-                        <DataGridTextColumn Width="80" Header="风力" />
+                              Height="200" Width="400">
                     </DataGrid>
                 </controls:ControlDisplay>
             </Grid>
