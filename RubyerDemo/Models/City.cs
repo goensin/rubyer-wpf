@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace RubyerDemo.Models
 {
+    /// <summary>
+    /// 城市
+    /// </summary>
     public class City
     {
         [JsonPropertyName("code")]

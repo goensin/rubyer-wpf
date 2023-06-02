@@ -24,6 +24,7 @@
 	  <None Remove="Assets\img3.jpg" />
 	  <None Remove="Assets\img4.jpg" />
 	  <None Remove="city.json" />
+	  <None Remove="weather.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,6 +67,9 @@
 		</Resource>
 		<Resource Include="rubyer.ico">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Resource>
+		<Resource Include="weather.json">
+		  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
 	</ItemGroup>
 

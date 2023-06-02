@@ -11,7 +11,6 @@ using System;
 using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace Rubyer
@@ -144,15 +143,15 @@ namespace Rubyer
 
             if (enableCheckBoxAssist)
             {
-                //dataGrid.PreviewMouseLeftButtonDown += AllowDirectEditWithoutFocus;
+                dataGrid.PreviewMouseLeftButtonDown += AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown += EditOnSpacebarPress;
-                dataGrid.CurrentCellChanged += DataGrid_CurrentCellChanged;
+                //dataGrid.CurrentCellChanged += DataGrid_CurrentCellChanged;
             }
             else
             {
-                //dataGrid.PreviewMouseLeftButtonDown -= AllowDirectEditWithoutFocus;
+                dataGrid.PreviewMouseLeftButtonDown -= AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown -= EditOnSpacebarPress;
-                dataGrid.CurrentCellChanged -= DataGrid_CurrentCellChanged;
+                //dataGrid.CurrentCellChanged -= DataGrid_CurrentCellChanged;
             }
         }
 
@@ -165,7 +164,11 @@ namespace Rubyer
                 return;
             }
 
-            var dataGridRow = dataGrid.ItemContainerGenerator.ContainerFromItem(cellInfo.Item) as DataGridRow;
+            if (dataGrid.IsReadOnly || dataGrid.ItemContainerGenerator.ContainerFromItem(cellInfo.Item) is not DataGridRow dataGridRow)
+            {
+                return;
+            }
+
             var cellsPresenter = dataGridRow.TryGetChildFromVisualTree<DataGridCellsPresenter>(element => element is DataGridCellsPresenter);
             if (cellsPresenter.ItemContainerGenerator.ContainerFromIndex(cellInfo.Column.DisplayIndex) is not DataGridCell dataGridCell || dataGridCell.IsEditing)
             {
@@ -182,7 +185,7 @@ namespace Rubyer
 
                     //if (cellInfo.Column is DataGridDetailToggleButtonColumn)
                     //{
-                        dataGrid.CommitEdit();
+                    dataGrid.CommitEdit();
                     //}
                     break;
 

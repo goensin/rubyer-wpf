@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="RubyerDemo.Views.DataGridDemo"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
              xmlns:core="clr-namespace:System;assembly=mscorlib"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -19,73 +20,48 @@
         </ObjectDataProvider>
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="DataGridDemo">
-        <ScrollViewer>
-            <Grid Width="600"
-                  Margin="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto"
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+            <Grid Margin="20"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
-                <GroupBox Header="数据表格-DataGrid">
-                    <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
-                        <TextBlock Margin="0 0 0 10" Text="列头字体、对齐设置,全选列" />
-
-                        <DataGrid Grid.Row="1"
-                                  Height="200"
-                                  HorizontalContentAlignment="Center"
-                                  rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                  rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                                  rubyer:HeaderHelper.FontFamily="隶书"
-                                  rubyer:HeaderHelper.FontSize="18"
-                                  rubyer:HeaderHelper.FontWeight="Bold"
-                                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                                  rubyer:HeaderHelper.HorizontalAlignment="Center"
-                                  rubyer:HeaderHelper.Padding="8"
+                <controls:ControlDisplay Title="Default DataGrid">
+                    <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
+                        <DataGrid x:Name="DataGrid1"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
-                                  CanUserSortColumns="False"
-                                  GridLinesVisibility="None"
-                                  ItemsSource="{Binding Persons}"
-                                  SelectionUnit="FullRow">
-                            <DataGrid.Resources>
-                                <Style BasedOn="{StaticResource WaveLoading}" TargetType="rubyer:Loading" />
-                            </DataGrid.Resources>
-                            <rubyer:DataGridHelper.EmptyView>
-                                <Border Background="{DynamicResource Primary}">
-                                    <TextBlock HorizontalAlignment="Center" FontSize="22">自定义无数据内容</TextBlock>
-                                </Border>
-                            </rubyer:DataGridHelper.EmptyView>
+                                  GridLinesVisibility="All"
+                                  ItemsSource="{Binding Weathers}">
                             <DataGrid.Columns>
-                                <rubyer:DataGridSelectCheckBoxColumn Width="85"
-                                                                     Binding="{Binding IsSelected}"
-                                                                     Header="全选" />
-                                <DataGridTextColumn Width="60"
-                                                    Binding="{Binding Id}"
-                                                    Header="序号" />
-                                <DataGridTextColumn Width="70"
-                                                    Binding="{Binding Name}"
-                                                    Header="姓名" />
-                                <DataGridTextColumn Width="60"
-                                                    Binding="{Binding Age}"
-                                                    Header="年龄" />
-
-                                <DataGridComboBoxColumn Width="80"
-                                                        Header="性别"
-                                                        ItemsSource="{Binding Source={StaticResource GenderTypeEnum}}"
-                                                        SelectedItemBinding="{Binding Gender}" />
-
-                                <DataGridTemplateColumn Width="*" Header="操作">
+                                <DataGridCheckBoxColumn Width="50"
+                                                        Binding="{Binding IsSelected}"
+                                                        Header="选择" />
+                                <DataGridTextColumn Width="100"
+                                                    Binding="{Binding Day}"
+                                                    Header="日期" />
+                                <DataGridTextColumn Width="80"
+                                                    Binding="{Binding Week}"
+                                                    Header="星期" />
+                                <DataGridTextColumn Width="120"
+                                                    Binding="{Binding Temperature}"
+                                                    Header="温度" />
+                                <DataGridTextColumn Width="120"
+                                                    Binding="{Binding Weather}"
+                                                    Header="天气" />
+                                <DataGridTextColumn Width="100"
+                                                    Binding="{Binding Wind}"
+                                                    Header="风向" />
+                                <DataGridTextColumn Width="80"
+                                                    Binding="{Binding Winp}"
+                                                    Header="风力" />
+                                <DataGridTemplateColumn Width="70" Header="操作">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <Button Height="Auto" Padding="5">
-                                                    <rubyer:Icon Type="PencilLine" />
+                                                <Button Style="{StaticResource TextButton}" Padding="5">
+                                                    <rubyer:Icon Type="Edit2Fill" />
                                                 </Button>
-                                                <Button Style="{StaticResource AccentButton}"
-                                                        Height="Auto"
-                                                        Margin="2 0 0 0"
-                                                        Padding="5"
-                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                                        CommandParameter="{Binding}">
-                                                    <rubyer:Icon Type="DeleteBinLine" />
+                                                <Button Style="{StaticResource TextErrorButton}" Padding="5">
+                                                    <rubyer:Icon Type="DeleteBinFill" />
                                                 </Button>
                                             </StackPanel>
                                         </DataTemplate>
@@ -93,67 +69,184 @@
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
+
+                        <StackPanel Grid.Row="1"
+                                    rubyer:PanelHelper.Spacing="20"
+                                    Orientation="Horizontal">
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="只读"
+                                          IsChecked="{Binding IsReadOnly, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="排序"
+                                          IsChecked="{Binding CanUserSortColumns, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="拖动"
+                                          IsChecked="{Binding CanUserReorderColumns, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="调整列"
+                                          IsChecked="{Binding CanUserResizeColumns, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="调整行"
+                                          IsChecked="{Binding CanUserResizeRows, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="删除行"
+                                          IsChecked="{Binding CanUserDeleteRows, ElementName=DataGrid1}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="添加行"
+                                          IsChecked="{Binding CanUserAddRows, ElementName=DataGrid1}" />
+                        </StackPanel>
                     </Grid>
-                </GroupBox>
-                <GroupBox Grid.Row="1" Header="数据表格-DataGrid">
-                    <Grid Margin="5" rubyer:GridHelper.RowDefinitions="Auto, *">
-                        <TextBlock Margin="0 0 0 10" Text="隔行变色，选中颜色设置，展开详细内容，自动排序" />
-                        <DataGrid Grid.Row="1"
-                                  rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
-                                  rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
-                                  rubyer:ControlHelper.MaskOpacity="1"
-                                  AlternationCount="2"
+
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="自动生成列数据" Grid.Row="1">
+                    <DataGrid x:Name="DataGrid2"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              ItemsSource="{Binding Weathers}" />
+
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="设置表格样式"
+                                         Grid.Row="2"
+                                         Description="HeaderHelper 设置表头，居中对齐，选中颜色等">
+                    <DataGrid x:Name="DataGrid3"
+                              HorizontalContentAlignment="Center"
+                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
+                              rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                              rubyer:ControlHelper.MaskOpacity="1"
+                              rubyer:HeaderHelper.Background="{DynamicResource Accent}"
+                              rubyer:HeaderHelper.FontFamily="宋体"
+                              rubyer:HeaderHelper.FontSize="16"
+                              rubyer:HeaderHelper.FontWeight="Bold"
+                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                              rubyer:HeaderHelper.HorizontalAlignment="Center"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              GridLinesVisibility="None"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding Weathers}"
+                              RowHeight="36" />
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="隔行变色" Grid.Row="3">
+                    <DataGrid x:Name="DataGrid4"
+                              AlternationCount="2"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding Weathers}">
+                        <DataGrid.RowStyle>
+                            <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}">
+                                <Style.Triggers>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                                        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+                                    </Trigger>
+                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                                        <Setter Property="Background" Value="{DynamicResource Light}" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+                    </DataGrid>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="表格行头显示，自动序号" Grid.Row="4">
+                    <DataGrid x:Name="DataGrid5"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              HeadersVisibility="All"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding Weathers}"
+                              RowHeaderWidth="50">
+                        <DataGrid.RowHeaderTemplate>
+                            <DataTemplate>
+                                <Border>
+                                    <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
+                                </Border>
+                            </DataTemplate>
+                        </DataGrid.RowHeaderTemplate>
+                    </DataGrid>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="展开详细信息" Grid.Row="5">
+                    <DataGrid x:Name="DataGrid6"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              ItemsSource="{Binding Weathers}">
+                        <DataGrid.RowDetailsTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="30 5"
+                                            HorizontalAlignment="Center"
+                                            Orientation="Vertical">
+                                    <TextBlock Margin="0 0 0 5"
+                                               FontWeight="Bold"
+                                               Text="详细天气" />
+                                    <TextBlock Text="{Binding Day, StringFormat='日期：{0}'}" />
+                                    <TextBlock Text="{Binding Temperature, StringFormat='温度：{0}'}" />
+                                    <TextBlock Text="{Binding Weather, StringFormat='天气：{0}'}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGrid.RowDetailsTemplate>
+                        <DataGrid.Columns>
+                            <rubyer:DataGridDetailToggleButtonColumn Width="60"
+                                                                     rubyer:DataGridHelper.ColumnPosition="Start"
+                                                                     Header="详细" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="全选列" Grid.Row="6">
+                    <DataGrid x:Name="DataGrid7"
+                              AutoGenerateColumns="True"
+                              CanUserAddRows="False"
+                              ItemsSource="{Binding Weathers}">
+                        <DataGrid.Columns>
+                            <rubyer:DataGridSelectCheckBoxColumn Width="85"
+                                                                 Binding="{Binding IsSelected}"
+                                                                 Header="全选" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="加载中显示" Grid.Row="7">
+                    <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
+                        <DataGrid x:Name="DataGrid8"
+                                  rubyer:DataGridHelper.Loading="True"
                                   AutoGenerateColumns="True"
-                                  BorderThickness="1"
                                   CanUserAddRows="False"
-                                  ColumnWidth="70"
-                                  Foreground="{StaticResource BlackForeground}"
-                                  GridLinesVisibility="All"
-                                  HeadersVisibility="All"
-                                  IsReadOnly="False"
-                                  ItemsSource="{Binding Persons}"
-                                  RowHeaderWidth="40"
-                                  SelectionMode="Extended">
-                            <DataGrid.RowHeaderTemplate>
-                                <DataTemplate>
-                                    <Border>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
-                                    </Border>
-                                </DataTemplate>
-                            </DataGrid.RowHeaderTemplate>
-                            <DataGrid.RowDetailsTemplate>
-                                <DataTemplate>
-                                    <StackPanel Margin="30 5" Orientation="Vertical">
-                                        <TextBlock Margin="0 0 0 5"
-                                                   FontSize="14"
-                                                   FontWeight="Bold"
-                                                   Text="简介" />
-                                        <TextBlock Text="{Binding Name, StringFormat='姓名：{0}'}" />
-                                        <TextBlock Text="{Binding Age, StringFormat='年龄：{0}'}" />
-                                        <TextBlock Text="{Binding Gender, StringFormat='性别：{0}'}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </DataGrid.RowDetailsTemplate>
-                            <DataGrid.RowStyle>
-                                <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}">
-                                    <Style.Triggers>
-                                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                            <Setter Property="Background" Value="LavenderBlush" />
-                                        </Trigger>
-                                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                            <Setter Property="Background" Value="LightCyan" />
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </DataGrid.RowStyle>
-                            <DataGrid.Columns>
-                                <rubyer:DataGridDetailToggleButtonColumn Width="60"
-                                                                         rubyer:DataGridHelper.ColumnPosition="Start"
-                                                                         Header="详细" />
-                            </DataGrid.Columns>
-                        </DataGrid>
+                                  ItemsSource="{Binding Weathers}" />
+
+                        <StackPanel Grid.Row="1"
+                                    rubyer:PanelHelper.Spacing="20"
+                                    Orientation="Horizontal">
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                          Content="加载中"
+                                          IsChecked="{Binding Path=(rubyer:DataGridHelper.Loading), ElementName=DataGrid8}" />
+
+                            <TextBox Width="150"
+                                     rubyer:InputBoxHelper.Watermark="请输入加载中内容"
+                                     Text="{Binding Path=(rubyer:DataGridHelper.LoadingContent), ElementName=DataGrid8, UpdateSourceTrigger=PropertyChanged}" />
+                        </StackPanel>
                     </Grid>
-                </GroupBox>
+
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="无数据显示"
+                                         Grid.Row="8"
+                                         Description="可通过 DataGridHelper.EmptyView 自定义">
+                    <DataGrid x:Name="DataGrid9"
+                              Height="400">
+                        <DataGridCheckBoxColumn Width="50" Header="选择" />
+                        <DataGridTextColumn Width="100" Header="日期" />
+                        <DataGridTextColumn Width="80" Header="星期" />
+                        <DataGridTextColumn Width="120" Header="温度" />
+                        <DataGridTextColumn Width="120" Header="天气" />
+                        <DataGridTextColumn Width="100" Header="风向" />
+                        <DataGridTextColumn Width="80" Header="风力" />
+                    </DataGrid>
+                </controls:ControlDisplay>
             </Grid>
         </ScrollViewer>
     </smtx:XamlDisplay>

@@ -284,13 +284,12 @@
                     <Border x:Name="columnHeaderBorder"
                             Padding="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
-                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                            BorderThickness="0">
-
+                            BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}">
                         <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
+
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="Vertical">
                             <Setter TargetName="columnHeaderBorder" Property="BorderThickness" Value="0 0 1 0" />
@@ -371,6 +370,10 @@
         </Setter>
     </Style>
 
+    <rubyer:Icon x:Key="DataGridRowHeaderTitleIcon"
+                 x:Shared="False"
+                 Type="GridFill" />
+
     <!--  Style and template for the DataGrid.  -->
     <Style x:Key="RubyerDataGrid" TargetType="{x:Type DataGrid}">
         <Setter Property="Background" Value="Transparent" />
@@ -419,11 +422,7 @@
                 </StackPanel>
             </Setter.Value>
         </Setter>
-        <Setter Property="rubyer:DataGridHelper.RowHeaderTitle">
-            <Setter.Value>
-                <rubyer:Icon Type="GridFill" />
-            </Setter.Value>
-        </Setter>
+        <Setter Property="rubyer:DataGridHelper.RowHeaderTitle" Value="{StaticResource DataGridRowHeaderTitleIcon}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -480,21 +479,16 @@
                                                    Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
                                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                                        <Grid Grid.Row="2" Grid.Column="1">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                                                <ColumnDefinition Width="*" />
-                                            </Grid.ColumnDefinitions>
+                                        <ScrollBar x:Name="PART_HorizontalScrollBar"
+                                                   Style="{StaticResource RubyerScrollBar}"
+                                                   Grid.Row="2"
+                                                   Grid.ColumnSpan="2"
+                                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                                   Orientation="Horizontal"
+                                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                   Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                                            <ScrollBar x:Name="PART_HorizontalScrollBar"
-                                                       Style="{StaticResource RubyerScrollBar}"
-                                                       Grid.Column="1"
-                                                       Maximum="{TemplateBinding ScrollableWidth}"
-                                                       Orientation="Horizontal"
-                                                       ViewportSize="{TemplateBinding ViewportWidth}"
-                                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                                       Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                                        </Grid>
                                         <Border x:Name="emptyBorder"
                                                 Grid.Row="1"
                                                 Grid.ColumnSpan="3"
