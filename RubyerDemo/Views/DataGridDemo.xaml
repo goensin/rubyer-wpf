@@ -21,7 +21,7 @@
     </UserControl.Resources>
     <smtx:XamlDisplay UniqueKey="DataGridDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled">
-            <Grid Margin="20"
+            <Grid Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default DataGrid">
@@ -237,8 +237,8 @@
                                          Grid.Row="8"
                                          Description="可通过 DataGridHelper.EmptyView 自定义">
                     <DataGrid x:Name="DataGrid9"
-                              Height="200" Width="400">
-                    </DataGrid>
+                              Width="400"
+                              Height="200" />
                 </controls:ControlDisplay>
             </Grid>
         </ScrollViewer>

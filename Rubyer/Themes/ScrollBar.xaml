@@ -256,7 +256,7 @@
                     <Condition Property="Orientation" Value="Vertical" />
                     <Condition Property="IsMouseOver" Value="True" />
                 </MultiTrigger.Conditions>
-                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                 <MultiTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
