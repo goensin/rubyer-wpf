@@ -63,12 +63,21 @@
     </Style>
 
     <ControlTemplate x:Key="RubyerVerticalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid x:Name="root">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Grid.Tag>
+                <system:Double>0.4</system:Double>
+            </Grid.Tag>
+            <Grid.Width>
+                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                    <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                </MultiBinding>
+            </Grid.Width>
 
             <Border Grid.RowSpan="3"
                     Background="{TemplateBinding Background}"
@@ -80,7 +89,8 @@
                           Width="{TemplateBinding Width}"
                           Height="{TemplateBinding Width}"
                           Command="ScrollBar.LineUpCommand"
-                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                          Visibility="Collapsed">
                 <rubyer:Icon Type="ArrowUpSLine" />
             </RepeatButton>
 
@@ -104,25 +114,75 @@
                           Width="{TemplateBinding Width}"
                           Height="{TemplateBinding Width}"
                           Command="ScrollBar.LineDownCommand"
-                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                          Visibility="Collapsed">
                 <rubyer:Icon Type="ArrowDownSLine" />
             </RepeatButton>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter TargetName="upButton" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="downButton" Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Self}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="upButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="downButton" Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Orientation" Value="Vertical" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="root"
+                                             Storyboard.TargetProperty="Tag"
+                                             To="1"
+                                             Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="root"
+                                             Storyboard.TargetProperty="Tag"
+                                             To="0.4"
+                                             Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
     <ControlTemplate x:Key="RubyerHorizontalScrollBar" TargetType="{x:Type ScrollBar}">
-        <Grid>
+        <Grid x:Name="root">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+            <Grid.Tag>
+                <system:Double>0.4</system:Double>
+            </Grid.Tag>
+            <Grid.Height>
+                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                    <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                </MultiBinding>
+            </Grid.Height>
+
             <Border Grid.ColumnSpan="3"
                     Background="{TemplateBinding Background}"
                     CornerRadius="{DynamicResource AllControlCornerRadius}" />
@@ -133,7 +193,8 @@
                           Width="{TemplateBinding Height}"
                           Height="{TemplateBinding Height}"
                           Command="ScrollBar.LineLeftCommand"
-                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                          Visibility="Collapsed" >
                 <rubyer:Icon Type="ArrowLeftSLine" />
             </RepeatButton>
 
@@ -158,16 +219,55 @@
                           Height="{TemplateBinding Height}"
                           Command="ScrollBar.LineRightCommand"
                           Cursor="Arrow"
-                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                          Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                          Visibility="Collapsed">
                 <rubyer:Icon Type="ArrowRightSLine" />
             </RepeatButton>
         </Grid>
         <ControlTemplate.Triggers>
-            <DataTrigger Binding="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Self}}" Value="False">
-                <Setter TargetName="leftButton" Property="Visibility" Value="Collapsed" />
-                <Setter TargetName="rightButton" Property="Visibility" Value="Collapsed" />
-            </DataTrigger>
-
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
+                    <Condition Binding="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Self}}" Value="True" />
+                </MultiDataTrigger.Conditions>
+                <Setter TargetName="leftButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
+            </MultiDataTrigger>
+            
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Orientation" Value="Horizontal" />
+                    <Condition Property="IsMouseOver" Value="True" />
+                </MultiTrigger.Conditions>
+                <MultiTrigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="root"
+                                             Storyboard.TargetProperty="Tag"
+                                             To="1"
+                                             Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.EnterActions>
+                <MultiTrigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetName="root"
+                                             Storyboard.TargetProperty="Tag"
+                                             To="0.4"
+                                             Duration="0:0:0.3">
+                                <DoubleAnimation.EasingFunction>
+                                    <CubicEase EasingMode="EaseOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </MultiTrigger.ExitActions>
+            </MultiTrigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -182,110 +282,15 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
-        <Setter Property="Tag">
-            <Setter.Value>
-                <system:Double>0.4</system:Double>
-            </Setter.Value>
-        </Setter>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
-                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
                 <Setter Property="Template" Value="{StaticResource RubyerHorizontalScrollBar}" />
                 <Setter Property="Width" Value="Auto" />
-                <Setter Property="Height">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                            <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Self}" />
-                            <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
-                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="False" />
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Template" Value="{StaticResource RubyerVerticalScrollBar}" />
-                <Setter Property="Width">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                            <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Self}" />
-                            <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
             </Trigger>
-
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="Orientation" Value="Horizontal" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                <MultiTrigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.Target="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="1"
-                                             Duration="0:0:0.3">
-                                <DoubleAnimation.EasingFunction>
-                                    <CubicEase EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.EnterActions>
-                <MultiTrigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.Target="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="0.4"
-                                             Duration="0:0:0.3">
-                                <DoubleAnimation.EasingFunction>
-                                    <CubicEase EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.ExitActions>
-            </MultiTrigger>
-
-            <MultiTrigger>
-                <MultiTrigger.Conditions>
-                    <Condition Property="Orientation" Value="Vertical" />
-                    <Condition Property="IsMouseOver" Value="True" />
-                </MultiTrigger.Conditions>
-                <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                <MultiTrigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.Target="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="1"
-                                             Duration="0:0:0.3">
-                                <DoubleAnimation.EasingFunction>
-                                    <CubicEase EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.EnterActions>
-                <MultiTrigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation Storyboard.Target="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="0.4"
-                                             Duration="0:0:0.3">
-                                <DoubleAnimation.EasingFunction>
-                                    <CubicEase EasingMode="EaseOut" />
-                                </DoubleAnimation.EasingFunction>
-                            </DoubleAnimation>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </MultiTrigger.ExitActions>
-            </MultiTrigger>
         </Style.Triggers>
     </Style>
 
