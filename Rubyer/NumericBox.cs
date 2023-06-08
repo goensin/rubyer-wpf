@@ -83,6 +83,8 @@ namespace Rubyer
             {
                 downButton.Click += DecreaseButton_Click;
             }
+
+            PreviewKeyDown += NumericBox_PreviewKeyDown;
         }
 
         #region events
@@ -427,6 +429,19 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 按下键盘
+        /// </summary>
+        private void NumericBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                if (textBox.IsFocused)
+                {
+
+                }
+            }
+        }
         #endregion methods
     }
 }
