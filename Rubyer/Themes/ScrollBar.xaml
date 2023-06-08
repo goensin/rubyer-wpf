@@ -194,7 +194,7 @@
                           Height="{TemplateBinding Height}"
                           Command="ScrollBar.LineLeftCommand"
                           Foreground="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                          Visibility="Collapsed" >
+                          Visibility="Collapsed">
                 <rubyer:Icon Type="ArrowLeftSLine" />
             </RepeatButton>
 
@@ -233,7 +233,7 @@
                 <Setter TargetName="leftButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
-            
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Horizontal" />

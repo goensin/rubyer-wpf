@@ -396,6 +396,14 @@ namespace Rubyer
             {
                 e.Handled = true;
             }
+
+            if (e.Key == Key.Enter)
+            {
+                if (textBox.IsFocused)
+                {
+                    this.Focus();
+                }
+            }
         }
 
         private void TextBox_CanExecutePaste(object sender, CanExecuteRoutedEventArgs e)
@@ -426,7 +434,6 @@ namespace Rubyer
                 }
             }
         }
-
         #endregion methods
     }
 }
