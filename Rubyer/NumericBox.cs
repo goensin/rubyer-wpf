@@ -83,6 +83,8 @@ namespace Rubyer
             {
                 downButton.Click += DecreaseButton_Click;
             }
+
+            PreviewKeyDown += NumericBox_PreviewKeyDown;
         }
 
         #region events
