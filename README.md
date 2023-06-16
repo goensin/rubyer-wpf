@@ -40,9 +40,17 @@ Install-Package Rubyer 添加引用，
     <Color x:Key="DarkDefaultBackgroundColor">#1E1E1E</Color>
     <SolidColorBrush x:Key="DefaultBackground" Color="{DynamicResource LightDefaultBackgroundColor}" />
 
-    <Color x:Key="LightFloatBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="LightFloatBackgroundColor">#F8F8F8</Color>
     <Color x:Key="DarkFloatBackgroundColor">#303030</Color>
     <SolidColorBrush x:Key="FloatBackground" Color="{DynamicResource LightFloatBackgroundColor}" />
+
+    <Color x:Key="LightControlBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkControlBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="ControlBackground" Color="{DynamicResource LightControlBackgroundColor}" />
+
+    <Color x:Key="LightContainerBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkContainerBackgroundColor">#2D2D2D</Color>
+    <SolidColorBrush x:Key="ContainerBackground" Color="{DynamicResource LightContainerBackgroundColor}" />
 
     <Color x:Key="LightPrimaryColor">#2196F3</Color>
     <Color x:Key="DarkPrimaryColor">#2196F3</Color>
