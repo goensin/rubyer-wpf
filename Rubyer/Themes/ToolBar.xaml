@@ -207,7 +207,7 @@
     </Style>
 
     <Style x:Key="RubyerToolBarTray" TargetType="{x:Type ToolBarTray}">
-        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
+        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
     </Style>
 </ResourceDictionary>

@@ -10,7 +10,7 @@
 
     <!--  默认  -->
     <Style x:Key="RubyerGroupBox" TargetType="{x:Type GroupBox}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource ContainerBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />
@@ -134,7 +134,7 @@
 
     <!--  带颜色标题  -->
     <Style x:Key="ColorHeaderGroupBox" TargetType="{x:Type GroupBox}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource ContainerBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1" />

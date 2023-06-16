@@ -26,14 +26,14 @@
                     <Grid>
                         <Border Margin="{TemplateBinding Margin}"
                                 Padding="{TemplateBinding Padding}"
-                                Background="{TemplateBinding Background}"
+                                Background="{DynamicResource FloatBackground}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{DynamicResource AllDirectionEffect}" />
+                                Effect="{DynamicResource AllDirectionEffect2}" />
 
                         <Border x:Name="Border"
                                 Margin="{TemplateBinding Margin}"
                                 Padding="{TemplateBinding Padding}"
-                                Background="{TemplateBinding Background}"
+                                Background="{DynamicResource FloatBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">

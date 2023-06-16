@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerCard" TargetType="{x:Type rubyer:Card}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource ContainerBackground}" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />

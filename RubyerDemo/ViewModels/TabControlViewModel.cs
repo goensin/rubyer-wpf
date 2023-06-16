@@ -23,7 +23,7 @@ namespace RubyerDemo.ViewModels
             Application.Current.Resources["Warning"] as Brush,
             Application.Current.Resources["Info"] as Brush,
             Application.Current.Resources["Error"] as Brush,
-            Application.Current.Resources["LayoutBackground"] as Brush,
+            Application.Current.Resources["HeaderBackground"] as Brush,
             Brushes.Transparent,
         };
 

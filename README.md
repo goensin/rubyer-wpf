@@ -95,9 +95,9 @@ Install-Package Rubyer 添加引用，
     <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
-    <Color x:Key="LightLayoutBackgroundColor">#1F000000</Color>
-    <Color x:Key="DarkLayoutBackgroundColor">#1FFFFFFF</Color>
-    <SolidColorBrush x:Key="LayoutBackground" Color="{DynamicResource LightLayoutBackgroundColor}" />
+    <Color x:Key="LightHeaderBackgroundColor">#1F000000</Color>
+    <Color x:Key="DarkHeaderBackgroundColor">#1FFFFFFF</Color>
+    <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
 
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />

@@ -400,7 +400,7 @@
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource LayoutBackground}" />
+        <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />

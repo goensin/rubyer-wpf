@@ -34,7 +34,7 @@ namespace Rubyer
             "Mask",
             "MaskDark",
             "DialogBackground",
-            "LayoutBackground",
+            "HeaderBackground",
             "FloatBackground",
             "AllDirectionEffect",
             "AllDirectionEffect2",
@@ -50,6 +50,7 @@ namespace Rubyer
             "RightEffect",
             "LeftEffect",
             "ControlBackground",
+            "ContainerBackground",
         };
 
         private static bool themeApplying = false;

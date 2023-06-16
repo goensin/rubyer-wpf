@@ -7,8 +7,8 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerToolTip" TargetType="ToolTip">
-        <Setter Property="Background" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="HasDropShadow" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="true" />
         <Setter Property="Padding" Value="10 5" />

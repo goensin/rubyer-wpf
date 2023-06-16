@@ -10,7 +10,7 @@
            BasedOn="{StaticResource RubyerButton}"
            TargetType="Button">
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="Background" Value="{DynamicResource LayoutBackground}" />
+        <Setter Property="Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="rubyer:ButtonHelper.Shape" Value="Circle" />
     </Style>
 
