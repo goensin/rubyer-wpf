@@ -158,6 +158,13 @@
         <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
+    <Style x:Key="SecondaryButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{DynamicResource Secondary}" />
+        <Setter Property="Foreground" Value="{DynamicResource SecondaryForeground}" />
+    </Style>
+
     <Style x:Key="InfoButton"
            BasedOn="{StaticResource RubyerButton}"
            TargetType="{x:Type Button}">

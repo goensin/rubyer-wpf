@@ -24,6 +24,7 @@
                         <Button Content="默认按钮"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />
+                        <Button Style="{DynamicResource SecondaryButton}" Content="次级按钮" />
                         <Button Style="{DynamicResource LightButton}" Content="亮色按钮" />
                         <Button Style="{DynamicResource DarkButton}" Content="暗色按钮" />
                         <Button Style="{DynamicResource AccentButton}" Content="强调按钮" />

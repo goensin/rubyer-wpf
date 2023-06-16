@@ -23,6 +23,8 @@ namespace Rubyer
             "DefaultForeground",
             "DefaultBackground",
             "Primary",
+            "Secondary",
+            "SecondaryForeground",
             "Accent",
             "Light",
             "Dark",

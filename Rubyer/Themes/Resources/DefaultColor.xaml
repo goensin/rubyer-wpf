@@ -40,6 +40,14 @@
     <Color x:Key="DarkDarkColor">#0069C0</Color>
     <SolidColorBrush x:Key="Dark" Color="{DynamicResource LightDarkColor}" />
 
+    <Color x:Key="LightSecondaryColor">#E3E3E3</Color>
+    <Color x:Key="DarkSecondaryColor">#424242</Color>
+    <SolidColorBrush x:Key="Secondary" Color="{DynamicResource LightSecondaryColor}" />
+
+    <Color x:Key="LightSecondaryForegroundColor">#252526</Color>
+    <Color x:Key="DarkSecondaryForegroundColor">#FFFFFF</Color>
+    <SolidColorBrush x:Key="SecondaryForeground" Color="{DynamicResource LightSecondaryForegroundColor}" />
+
     <Color x:Key="LightBorderColor">#9E9E9E</Color>
     <Color x:Key="DarkBorderColor">#CFCFCF</Color>
     <SolidColorBrush x:Key="Border" Color="{DynamicResource LightBorderColor}" />
