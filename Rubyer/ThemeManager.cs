@@ -49,6 +49,7 @@ namespace Rubyer
             "BottomEffect",
             "RightEffect",
             "LeftEffect",
+            "ControlBackground",
         };
 
         private static bool themeApplying = false;

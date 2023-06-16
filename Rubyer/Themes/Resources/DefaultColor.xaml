@@ -16,6 +16,10 @@
     <Color x:Key="DarkFloatBackgroundColor">#303030</Color>
     <SolidColorBrush x:Key="FloatBackground" Color="{DynamicResource LightFloatBackgroundColor}" />
 
+    <Color x:Key="LightControlBackgroundColor">#FFFFFF</Color>
+    <Color x:Key="DarkControlBackgroundColor">#1E1E1E</Color>
+    <SolidColorBrush x:Key="ControlBackground" Color="{DynamicResource LightControlBackgroundColor}" />
+
     <Color x:Key="LightPrimaryColor">#2196F3</Color>
     <Color x:Key="DarkPrimaryColor">#2196F3</Color>
     <SolidColorBrush x:Key="Primary" Color="{DynamicResource LightPrimaryColor}" />

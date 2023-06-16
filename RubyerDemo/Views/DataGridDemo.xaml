@@ -125,7 +125,6 @@
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               GridLinesVisibility="None"
-                              IsReadOnly="True"
                               ItemsSource="{Binding Weathers}"
                               RowHeight="36" />
                 </controls:ControlDisplay>

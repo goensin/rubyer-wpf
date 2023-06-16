@@ -17,7 +17,7 @@
                 <controls:ControlDisplay Title="Default ListBox">
                     <ListBox Width="200"
                              ItemsSource="{Binding Items}"
-                             SelectedIndex="0"/>
+                             SelectedIndex="0" />
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Color ListBox"
