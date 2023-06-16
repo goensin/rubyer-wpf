@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="MenuScrollViewer"
-           BasedOn="{StaticResource SmallScrollViewer}"
+           BasedOn="{StaticResource OnlyArrowScrollViewer}"
            TargetType="{x:Type ScrollViewer}">
         <Setter Property="HorizontalScrollBarVisibility" Value="Hidden" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />

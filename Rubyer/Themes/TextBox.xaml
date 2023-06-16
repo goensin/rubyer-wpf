@@ -3,7 +3,7 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ContextMenu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <!--  错误验证  -->
@@ -106,6 +106,7 @@
                                                   VerticalScrollBarVisibility="Hidden" />
                                     <TextBlock x:Name="watermark"
                                                Foreground="{DynamicResource WatermarkText}"
+                                               IsHitTestVisible="False"
                                                Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Grid>
 
@@ -188,6 +189,15 @@
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu Style="{StaticResource RubyerContextMenu}">
+                    <MenuItem Command="ApplicationCommands.Copy" />
+                    <MenuItem Command="ApplicationCommands.Cut" />
+                    <MenuItem Command="ApplicationCommands.Paste" />
+                </ContextMenu>
             </Setter.Value>
         </Setter>
         <Style.Triggers>

@@ -82,8 +82,8 @@
     <Style BasedOn="{StaticResource RubyerTimePicker}" TargetType="{x:Type rubyer:TimePicker}" />
     <Style BasedOn="{StaticResource RubyerToolTip}" TargetType="{x:Type ToolTip}" />
     <Style BasedOn="{StaticResource RubyerScrollViewer}" TargetType="{x:Type ScrollViewer}" />
-    <Style BasedOn="{StaticResource RubyerMenu}" TargetType="{x:Type Menu}" />
     <Style BasedOn="{StaticResource RubyerMenuItem}" TargetType="{x:Type MenuItem}" />
+    <Style BasedOn="{StaticResource RubyerMenu}" TargetType="{x:Type Menu}" />
     <Style BasedOn="{StaticResource RubyerContextMenu}" TargetType="{x:Type ContextMenu}" />
     <Style BasedOn="{StaticResource RubyerToolBar}" TargetType="{x:Type ToolBar}" />
     <Style BasedOn="{StaticResource RubyerToolBarTray}" TargetType="{x:Type ToolBarTray}" />

@@ -20,8 +20,7 @@
                 <Menu>
                     <MenuItem Header="文件">
                         <MenuItem Header="新建">
-                            <MenuItem Header="文件"
-                                      InputGestureText="Ctrl+N" />
+                            <MenuItem Header="文件" InputGestureText="Ctrl+N" />
                             <MenuItem Header="项目" />
                         </MenuItem>
                         <MenuItem Header="打开" />

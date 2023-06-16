@@ -24,7 +24,8 @@
                                  TextWrapping="Wrap" />
                         <rubyer:Card Grid.Row="2"
                                      Margin="3 5"
-                                     Padding="10">
+                                     Padding="10"
+                                     Background="{DynamicResource FloatBackground}">
                             <ContentPresenter x:Name="contentPresenter"
                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               Focusable="False"

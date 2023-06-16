@@ -8,7 +8,7 @@
 
     <!--  默认单选框  -->
     <Style x:Key="RubyerRadioButton" TargetType="{x:Type RadioButton}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="1.5" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
