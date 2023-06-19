@@ -32,35 +32,37 @@
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                        <StackPanel x:Name="contentPanel"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                    Orientation="Horizontal">
-                            <ContentPresenter x:Name="contentPresenter"
-                                              ContentSource="Header"
-                                              Focusable="False"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <DockPanel x:Name="contentPanel"
+                                   Margin="{TemplateBinding Padding}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalAlignment}">
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Margin="5 0 0 0"
                                     Padding="2"
                                     rubyer:ButtonHelper.Shape="Circle"
                                     rubyer:ControlHelper.FocusedBrush="{DynamicResource MaskDark}"
+                                    DockPanel.Dock="Right"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Hidden">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
-                        </StackPanel>
+
+                            <ContentPresenter x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
                             <Setter Property="HorizontalAlignment" Value="Stretch" />
-                            <Setter TargetName="contentPanel" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
@@ -252,37 +254,40 @@
                                            Fill="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </rubyer:Transition>
 
-                            <StackPanel Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                        Orientation="Horizontal">
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  ContentSource="Header"
-                                                  Focusable="False"
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <DockPanel Margin="{TemplateBinding Padding}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalAlignment}">
                                 <Button x:Name="clearButton"
                                         Style="{StaticResource TextButton}"
                                         Margin="5 0 0 0"
                                         Padding="2"
                                         rubyer:ButtonHelper.Shape="Circle"
+                                        DockPanel.Dock="Right"
                                         Foreground="{TemplateBinding Foreground}"
                                         Visibility="Hidden">
                                     <rubyer:Icon Type="CloseLine" />
                                 </Button>
-                            </StackPanel>
+
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  ContentSource="Header"
+                                                  Focusable="False"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </DockPanel>
                         </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
-                            <Setter Property="HorizontalAlignment" Value="Right" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="line" Property="Height" Value="{Binding ActualHeight, ElementName=templateRoot}" />
                             <Setter TargetName="line" Property="Width" Value="2.5" />
                             <Setter TargetName="lineTransirion" Property="DockPanel.Dock" Value="Right" />
                             <Setter TargetName="lineTransirion" Property="Type" Value="CollapseDown" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
-                            <Setter Property="HorizontalAlignment" Value="Left" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="line" Property="Height" Value="{Binding ActualHeight, ElementName=templateRoot}" />
                             <Setter TargetName="line" Property="Width" Value="2.5" />
                             <Setter TargetName="lineTransirion" Property="DockPanel.Dock" Value="Left" />
@@ -354,35 +359,36 @@
                                             IsActive="{TemplateBinding IsSelected}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                        <StackPanel x:Name="contentPanel"
-                                    Margin="{TemplateBinding Padding}"
-                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                    Orientation="Horizontal">
-                            <ContentPresenter x:Name="contentPresenter"
-                                              ContentSource="Header"
-                                              Focusable="False"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <DockPanel x:Name="contentPanel"
+                                   Margin="{TemplateBinding Padding}"
+                                   HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                   VerticalAlignment="{TemplateBinding VerticalAlignment}">
                             <Button x:Name="clearButton"
                                     Style="{StaticResource TextButton}"
                                     Margin="5 0 0 0"
                                     Padding="2"
                                     rubyer:ButtonHelper.Shape="Circle"
                                     rubyer:ControlHelper.FocusedBrush="{DynamicResource MaskDark}"
+                                    DockPanel.Dock="Right"
                                     Foreground="{TemplateBinding Foreground}"
                                     Visibility="Hidden">
                                 <rubyer:Icon Type="CloseLine" />
                             </Button>
-                        </StackPanel>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              ContentSource="Header"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </DockPanel>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Left">
                             <Setter Property="HorizontalAlignment" Value="Stretch" />
-                            <Setter TargetName="contentPanel" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}" Value="Right">
                             <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="contentPresenter" Property="HorizontalAlignment" Value="Center" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:TabControlHelper.IsClearable), RelativeSource={RelativeSource Self}}" Value="False">
                             <Setter TargetName="clearButton" Property="Visibility" Value="Collapsed" />
