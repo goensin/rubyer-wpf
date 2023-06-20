@@ -70,9 +70,9 @@
         <Setter Property="DescriptionForeground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalDescriptionAlignment" Value="Center" />
-        <Setter Property="HorizontalDescriptionAlignment" Value="Left" />
+        <Setter Property="HorizontalDescriptionAlignment" Value="Stretch" />
         <Setter Property="DescriptionFontWeight" Value="Normal" />
         <Setter Property="DescriptionFontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Focusable" Value="False" />
