@@ -32,7 +32,7 @@ namespace Rubyer
             Dialogs.Add(identifier, dialog);
         }
 
-        private static async Task<object> ShowInternal(DialogContainer dialog, object content, object parameters, string title, Action<DialogContainer> openHandler, Action<DialogContainer, object> closeHandle, bool showCloseButton)
+        private static async Task<object> ShowInternal(DialogContainer dialog, object content, object parameters, string title, Action<DialogContainer> openHandler, Action<DialogContainer, object> closeHandle, bool? showCloseButton)
         {
             dialog.Dispatcher.VerifyAccess();
 
@@ -54,7 +54,7 @@ namespace Rubyer
             }
 
             dialog.DialogContent = content;
-            dialog.IsShowCloseButton = showCloseButton;
+            dialog.IsShowCloseButton = showCloseButton == null ? dialog.IsShowCloseButton : showCloseButton.Value;
             dialog.BeforeOpenHandler = openHandler;
             dialog.AfterCloseHandler = closeHandle;
             DialogContainer.OpenDialogCommand.Execute(parameters, dialog);
@@ -89,7 +89,7 @@ namespace Rubyer
         /// <param name="closeHandle">关闭后处理程序</param>
         /// <param name="showCloseButton">是否显示默认关闭按钮</param>
         /// <returns>结果</returns>
-        public static async Task<object> Show(string identifier, object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool showCloseButton = true)
+        public static async Task<object> Show(string identifier, object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool? showCloseButton = null)
         {
             if (Dialogs.TryGetValue(identifier, out DialogContainer container))
             {
@@ -110,7 +110,7 @@ namespace Rubyer
         /// <param name="closeHandle">关闭后处理程序</param>
         /// <param name="showCloseButton">是否显示默认关闭按钮</param>
         /// <returns>结果</returns>
-        public static async Task<object> Show(object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool showCloseButton = true)
+        public static async Task<object> Show(object content, object parameters = null, string title = null, Action<DialogContainer> openHandler = null, Action<DialogContainer, object> closeHandle = null, bool? showCloseButton = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
