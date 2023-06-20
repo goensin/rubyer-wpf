@@ -250,7 +250,7 @@
     <Style x:Key="OutlineButton"
            BasedOn="{StaticResource TextButton}"
            TargetType="{x:Type Button}">
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
     </Style>
 
     <Style x:Key="OutlineLightButton"

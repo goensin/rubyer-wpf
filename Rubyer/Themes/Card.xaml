@@ -48,6 +48,6 @@
 
     <Style x:Key="OutLineCard" TargetType="{x:Type rubyer:Card}">
         <Setter Property="BorderEffect" Value="{x:Null}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
     </Style>
 </ResourceDictionary>

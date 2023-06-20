@@ -70,7 +70,7 @@
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource Error}" />
-                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

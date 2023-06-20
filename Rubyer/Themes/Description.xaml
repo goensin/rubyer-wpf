@@ -99,7 +99,7 @@
     <Style x:Key="BorderDescription"
            BasedOn="{StaticResource RubyerDescription}"
            TargetType="{x:Type rubyer:Description}">
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
         <Setter Property="DescriptionBackground" Value="{DynamicResource HeaderBackground}" />
     </Style>
 </ResourceDictionary>

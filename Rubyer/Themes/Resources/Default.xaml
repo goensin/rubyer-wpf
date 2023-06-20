@@ -7,6 +7,9 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/zh-CN.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!--  BorderThickness  -->
+    <Thickness x:Key="DefaultBorderThickness">2</Thickness>
+
     <!--  Opacity  -->
     <system:Double x:Key="UnenableOpcity">0.5</system:Double>
 
