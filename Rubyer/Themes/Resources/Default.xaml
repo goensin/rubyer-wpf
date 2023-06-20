@@ -8,7 +8,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <!--  BorderThickness  -->
-    <Thickness x:Key="DefaultBorderThickness">2</Thickness>
+    <Thickness x:Key="DefaultBorderThickness">1</Thickness>
 
     <!--  Opacity  -->
     <system:Double x:Key="UnenableOpcity">0.5</system:Double>
