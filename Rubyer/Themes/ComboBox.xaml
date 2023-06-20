@@ -105,18 +105,24 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <rubyer:Icon x:Name="arrow"
-                                         Grid.Column="1"
-                                         Margin="3 0"
-                                         HorizontalAlignment="Right"
-                                         VerticalAlignment="Center"
-                                         Foreground="{DynamicResource SeconarydText}"
-                                         RenderTransformOrigin="0.5,0.5"
-                                         Type="ArrowDownSLine">
-                                <rubyer:Icon.RenderTransform>
-                                    <RotateTransform x:Name="arrowTransform" Angle="0" />
-                                </rubyer:Icon.RenderTransform>
-                            </rubyer:Icon>
+                            <DockPanel>
+                                <rubyer:Icon x:Name="arrow"
+                                             Grid.Column="1"
+                                             Margin="3 0"
+                                             VerticalAlignment="Center"
+                                             DockPanel.Dock="Right"
+                                             Foreground="{DynamicResource SeconarydText}"
+                                             RenderTransformOrigin="0.5,0.5"
+                                             Type="ArrowDownSLine">
+                                    <rubyer:Icon.RenderTransform>
+                                        <RotateTransform x:Name="arrowTransform" Angle="0" />
+                                    </rubyer:Icon.RenderTransform>
+                                </rubyer:Icon>
+
+                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                  Focusable="False"
+                                                  SnapsToDevicePixels="True" />
+                            </DockPanel>
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -196,11 +202,6 @@
 
     <ControlTemplate x:Key="RubyerComboBoxEditableTemplate" TargetType="{x:Type ComboBox}">
         <Grid x:Name="templateRoot" SnapsToDevicePixels="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="22" />
-            </Grid.ColumnDefinitions>
             <Popup x:Name="PART_Popup"
                    Grid.ColumnSpan="2"
                    MaxHeight="{TemplateBinding MaxDropDownHeight}"
@@ -240,28 +241,36 @@
                           Background="{TemplateBinding Background}"
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}"
-                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                <Grid SnapsToDevicePixels="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-            <TextBox x:Name="PART_EditableTextBox"
-                     Style="{StaticResource RubyerComboBoxEditableTextBox}"
-                     Padding="{TemplateBinding Padding}"
-                     HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                     rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                     IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
+                    <TextBox x:Name="PART_EditableTextBox"
+                             Style="{StaticResource RubyerComboBoxEditableTextBox}"
+                             Margin="{TemplateBinding Padding}"
+                             Padding="0"
+                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                             rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
 
-            <Button x:Name="clearButton"
-                    Style="{StaticResource TextButton}"
-                    Grid.Column="1"
-                    Padding="2"
-                    rubyer:ButtonHelper.Shape="Circle"
-                    Foreground="{DynamicResource SeconarydText}"
-                    Visibility="Collapsed">
-                <rubyer:Icon Type="CloseLine" />
-            </Button>
+                    <Button x:Name="clearButton"
+                            Style="{StaticResource TextButton}"
+                            Grid.Column="1"
+                            Padding="2"
+                            rubyer:ButtonHelper.Shape="Circle"
+                            Foreground="{DynamicResource SeconarydText}"
+                            Visibility="Collapsed">
+                        <rubyer:Icon Type="CloseLine" />
+                    </Button>
+                </Grid>
+            </ToggleButton>
         </Grid>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -303,6 +312,7 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
+        <Setter Property="Padding" Value="0 5" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
@@ -311,7 +321,6 @@
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MaxDropDownHeight" Value="400" />
-        <Setter Property="Padding" Value="0 5" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerComboBoxItem}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
@@ -329,10 +338,6 @@
                     <Grid x:Name="templateRoot"
                           Background="Transparent"
                           SnapsToDevicePixels="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="22" />
-                        </Grid.ColumnDefinitions>
 
                         <Popup x:Name="PART_Popup"
                                Grid.ColumnSpan="2"
@@ -373,64 +378,65 @@
                                       Background="{TemplateBinding Background}"
                                       BorderBrush="{TemplateBinding BorderBrush}"
                                       BorderThickness="{TemplateBinding BorderThickness}"
-                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" />
-                        <Grid Margin="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), Converter={StaticResource DoubleToLeftAndRightThicknessConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                              rubyer:GridHelper.ColumnDefinitions="Auto,*,Auto,Auto"
-                              rubyer:PanelHelper.Spacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                            <Grid Margin="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), Converter={StaticResource DoubleToLeftAndRightThicknessConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                  rubyer:GridHelper.ColumnDefinitions="Auto,*,Auto,Auto"
+                                  rubyer:PanelHelper.Spacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}">
 
-                            <ContentControl x:Name="preContent"
-                                            Grid.Column="0"
-                                            VerticalAlignment="Center"
-                                            Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            Foreground="{DynamicResource SeconarydText}"
-                                            IsHitTestVisible="False"
-                                            IsTabStop="False" />
+                                <ContentControl x:Name="preContent"
+                                                Grid.Column="0"
+                                                VerticalAlignment="Center"
+                                                Content="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Foreground="{DynamicResource SeconarydText}"
+                                                IsHitTestVisible="False"
+                                                IsTabStop="False" />
 
-                            <Grid Grid.Column="1" VerticalAlignment="Center">
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Content="{TemplateBinding SelectionBoxItem}"
-                                                  ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
-                                                  ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                                  ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                                                  IsHitTestVisible="False"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                <Grid Grid.Column="1" VerticalAlignment="Center">
+                                    <ContentPresenter x:Name="contentPresenter"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      Content="{TemplateBinding SelectionBoxItem}"
+                                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                      IsHitTestVisible="False"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                                <TextBlock x:Name="multiSelectText"
-                                           Margin="{TemplateBinding Padding}"
-                                           VerticalAlignment="Center"
-                                           IsHitTestVisible="False"
-                                           Text="{Binding Path=(rubyer:ComboBoxHelper.MultiSelectText), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                           Visibility="Collapsed" />
+                                    <TextBlock x:Name="multiSelectText"
+                                               Margin="{TemplateBinding Padding}"
+                                               VerticalAlignment="Center"
+                                               IsHitTestVisible="False"
+                                               Text="{Binding Path=(rubyer:ComboBoxHelper.MultiSelectText), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                               Visibility="Collapsed" />
 
-                                <TextBlock x:Name="watermark"
-                                           VerticalAlignment="Center"
-                                           Foreground="{DynamicResource WatermarkText}"
-                                           IsHitTestVisible="False"
-                                           Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <TextBlock x:Name="watermark"
+                                               VerticalAlignment="Center"
+                                               Foreground="{DynamicResource WatermarkText}"
+                                               IsHitTestVisible="False"
+                                               Text="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                </Grid>
+
+                                <Button x:Name="clearButton"
+                                        Style="{StaticResource TextButton}"
+                                        Grid.Column="2"
+                                        Padding="2"
+                                        rubyer:ButtonHelper.Shape="Circle"
+                                        Focusable="False"
+                                        Foreground="{DynamicResource SeconarydText}"
+                                        Visibility="Collapsed">
+                                    <rubyer:Icon Type="CloseLine" />
+                                </Button>
+
+                                <ContentControl x:Name="postContent"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Center"
+                                                Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Foreground="{DynamicResource SeconarydText}"
+                                                IsHitTestVisible="False"
+                                                IsTabStop="False" />
                             </Grid>
-
-                            <Button x:Name="clearButton"
-                                    Style="{StaticResource TextButton}"
-                                    Grid.Column="2"
-                                    Padding="2"
-                                    rubyer:ButtonHelper.Shape="Circle"
-                                    Focusable="False"
-                                    Foreground="{DynamicResource SeconarydText}"
-                                    Visibility="Collapsed">
-                                <rubyer:Icon Type="CloseLine" />
-                            </Button>
-
-                            <ContentControl x:Name="postContent"
-                                            Grid.Column="3"
-                                            VerticalAlignment="Center"
-                                            Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            Foreground="{DynamicResource SeconarydText}"
-                                            IsHitTestVisible="False"
-                                            IsTabStop="False" />
-                        </Grid>
+                        </ToggleButton>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">
