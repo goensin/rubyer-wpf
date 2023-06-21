@@ -26,7 +26,7 @@
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default DataGrid">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
-                        <DataGrid x:Name="DataGrid1"
+                        <DataGrid x:Name="DataGrid1" BorderThickness="1"
                                   AutoGenerateColumns="False"
                                   CanUserAddRows="False"
                                   GridLinesVisibility="All"

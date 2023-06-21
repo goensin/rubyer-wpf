@@ -13,7 +13,6 @@
 
     <!--  Style and template for the DataGridCell.  -->
     <Style x:Key="RubyerDataGridCell" TargetType="{x:Type DataGridCell}">
-        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="Template">
@@ -30,7 +29,7 @@
                         <Border x:Name="border"
                                 Background="Transparent"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="0"
+                                BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <ContentPresenter Margin="{TemplateBinding Padding}"
@@ -43,7 +42,6 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
-                            <!--<Setter TargetName="border" Property="BorderThickness" Value="1" />-->
                         </Trigger>
                         <DataTrigger Binding="{Binding SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="FullRow">
                             <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
@@ -116,6 +114,8 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+
 
     <!--  Style and template for the DataGridRow.  -->
     <Style x:Key="RubyerDataGridRow" TargetType="{x:Type DataGridRow}">

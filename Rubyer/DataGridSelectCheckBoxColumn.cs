@@ -80,6 +80,11 @@ namespace Rubyer
                 {
                     var row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
                     var cellsPresenter = row.TryGetChildFromVisualTree<DataGridCellsPresenter>(x => x is DataGridCellsPresenter);
+                    if (cellsPresenter is null)
+                    {
+                        continue;
+                    }
+
                     var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(DisplayIndex) as DataGridCell;
                     var currentCheckBox = cell.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
                     allValues.Add(currentCheckBox.IsChecked);
