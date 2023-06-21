@@ -169,8 +169,12 @@
                     </DataGrid>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="展开详细信息" Grid.Row="5">
+                <controls:ControlDisplay Title="展开详细信息"
+                                         Grid.Row="5"
+                                         Description="DataGridDetailToggleButtonColumn">
                     <DataGrid x:Name="DataGrid6"
+                              HorizontalContentAlignment="Center"
+                              rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               ItemsSource="{Binding Weathers}">
@@ -196,15 +200,17 @@
                     </DataGrid>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="全选列" Grid.Row="6">
+                <controls:ControlDisplay Title="选择列"
+                                         Grid.Row="6"
+                                         Description="DataGridSelectCheckBoxColumn">
                     <DataGrid x:Name="DataGrid7"
+                              HorizontalContentAlignment="Center"
+                              rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               ItemsSource="{Binding Weathers}">
                         <DataGrid.Columns>
-                            <rubyer:DataGridSelectCheckBoxColumn Width="85"
-                                                                 Binding="{Binding IsSelected}"
-                                                                 Header="全选" />
+                            <rubyer:DataGridSelectCheckBoxColumn Width="85" Binding="{Binding IsSelected}" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </controls:ControlDisplay>

@@ -324,8 +324,8 @@
                         <StackPanel HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                     VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     Orientation="Horizontal">
-                            <CheckBox Margin="0 0 3 0"
-                                      rubyer:DataGridHelper.IsHeaderSelectCheckBox="True"
+                            <CheckBox rubyer:DataGridHelper.IsHeaderSelectCheckBox="True"
+                                      Content="{TemplateBinding Content}"
                                       Foreground="{TemplateBinding Foreground}">
                                 <rubyer:ToggleButtonHelper.CheckedContent>
                                     <MultiBinding Converter="{StaticResource GetDataGridColumnCheckedContent}" Mode="OneWay">
@@ -333,9 +333,6 @@
                                         <Binding RelativeSource="{RelativeSource AncestorType=DataGridColumnHeader}" />
                                     </MultiBinding>
                                 </rubyer:ToggleButtonHelper.CheckedContent>
-                                <CheckBox.Content>
-                                    <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                </CheckBox.Content>
                             </CheckBox>
                         </StackPanel>
                     </Border>
