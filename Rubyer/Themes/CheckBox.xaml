@@ -53,7 +53,7 @@
 
                             <Grid x:Name="markGrid" Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}">
                                 <rubyer:Icon x:Name="checkedMark"
-                                             Foreground="{TemplateBinding Background}"
+                                             Foreground="{DynamicResource WhiteForeground}"
                                              RenderTransformOrigin="0.5,0.5"
                                              Type="CheckFill">
                                     <rubyer:Icon.RenderTransform>
@@ -67,7 +67,7 @@
                                 </rubyer:Icon>
 
                                 <rubyer:Icon x:Name="nullMark"
-                                             Foreground="{TemplateBinding Background}"
+                                             Foreground="{DynamicResource WhiteForeground}"
                                              RenderTransformOrigin="0.5,0.5"
                                              Type="SubtractLine"
                                              Visibility="Collapsed" />
