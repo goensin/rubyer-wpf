@@ -136,13 +136,11 @@ namespace Rubyer
             {
                 dataGrid.PreviewMouseLeftButtonDown += AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown += EditOnSpacebarPress;
-                //dataGrid.CurrentCellChanged += DataGrid_CurrentCellChanged;
             }
             else
             {
                 dataGrid.PreviewMouseLeftButtonDown -= AllowDirectEditWithoutFocus;
                 dataGrid.KeyDown -= EditOnSpacebarPress;
-                //dataGrid.CurrentCellChanged -= DataGrid_CurrentCellChanged;
             }
         }
 
@@ -250,6 +248,7 @@ namespace Rubyer
                                 };
 
                                 toggleButton.RaiseEvent(newMouseEvent);
+                                dataGridCell.IsEditing = false;
                                 break;
                             }
 
