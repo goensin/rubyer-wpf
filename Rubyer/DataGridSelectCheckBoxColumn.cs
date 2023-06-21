@@ -53,12 +53,12 @@ namespace Rubyer
             {
                 checkBox = new CheckBox();
 
-                //if (!isEditing)
-                //{
-                //checkBox.Loaded += CheckBox_Checked;
-                //checkBox.Checked += CheckBox_Checked;
-                //checkBox.Unchecked += CheckBox_Checked;
-                //}
+                if (!isEditing)
+                {
+                    checkBox.Loaded += CheckBox_Checked;
+                    checkBox.Checked += CheckBox_Checked;
+                    checkBox.Unchecked += CheckBox_Checked;
+                }
             }
 
             checkBox.IsThreeState = IsThreeState;
@@ -69,54 +69,35 @@ namespace Rubyer
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            //if (sender is CheckBox checkBox)
-            //{
-            //    var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
-            //    var columnHeader = GetHeader(this, dataGrid);
-            //    var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
+            if (sender is CheckBox checkBox)
+            {
+                var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
+                var columnHeader = GetHeader(this, dataGrid);
+                var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
 
-            //    var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
-            //    if (bindingPath == null)
-            //    {
-            //        Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 路径");
-            //        return;
-            //    }
+                var allValues = new List<bool?>();
+                foreach (var item in dataGrid.Items)
+                {
+                    var row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                    var cellsPresenter = row.TryGetChildFromVisualTree<DataGridCellsPresenter>(x => x is DataGridCellsPresenter);
+                    var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(DisplayIndex) as DataGridCell;
+                    var currentCheckBox = cell.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
+                    allValues.Add(currentCheckBox.IsChecked);
+                }
 
-            //    var allValues = new List<bool?>();
-            //    foreach (var item in dataGrid.Items)
-            //    {
-            //        // 因为当前 Checked 事件比 binding 值改变快，所有当前 check box 使用 IsChecked 判断
-            //        if (checkBox.DataContext == item)
-            //        {
-            //            allValues.Add(checkBox.IsChecked);
-            //            continue;
-            //        }
-
-            //        var propertyInfo = item.GetType().GetProperty(bindingPath);
-            //        if (propertyInfo != null)
-            //        {
-            //            var value = propertyInfo.GetValue(item) as bool?;
-            //            allValues.Add(value);
-            //        }
-            //        else
-            //        {
-            //            Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 属性");
-            //        }
-
-            //        if (allValues.All(x => x == true))
-            //        {
-            //            headerCheckBox.IsChecked = true;
-            //        }
-            //        else if (allValues.All(x => x == false))
-            //        {
-            //            headerCheckBox.IsChecked = false;
-            //        }
-            //        else
-            //        {
-            //            headerCheckBox.IsChecked = null;
-            //        }
-            //    }
-            //}
+                if (allValues.All(x => x == true))
+                {
+                    headerCheckBox.IsChecked = true;
+                }
+                else if (allValues.All(x => x == false))
+                {
+                    headerCheckBox.IsChecked = false;
+                }
+                else
+                {
+                    headerCheckBox.IsChecked = null;
+                }
+            }
         }
 
         /// <inheritdoc/>

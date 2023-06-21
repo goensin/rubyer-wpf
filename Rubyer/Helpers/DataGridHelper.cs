@@ -12,6 +12,7 @@ using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace Rubyer
 {
@@ -84,24 +85,14 @@ namespace Rubyer
         /// <param name="isChecked">If true, is checked.</param>
         private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked)
         {
-            var bindingPath = (columnHeader.Column.ClipboardContentBinding as Binding)?.Path.Path;
-            if (bindingPath == null)
-            {
-                Debug.WriteLine("DataGridSelectCheckBoxColumn 全选切换找不到 Binding 路径");
-                return;
-            }
-
+            var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
             foreach (var item in dataGrid.Items)
             {
-                var propertyInfo = item.GetType().GetProperty(bindingPath);
-                if (propertyInfo != null)
-                {
-                    propertyInfo.SetValue(item, isChecked);
-                }
-                else
-                {
-                    Debug.WriteLine("DataGridSelectCheckBoxColumn  全选切换找不到 Binding 属性");
-                }
+                var row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                var cellsPresenter = row.TryGetChildFromVisualTree<DataGridCellsPresenter>(x => x is DataGridCellsPresenter);
+                var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(columnHeader.DisplayIndex) as DataGridCell;
+                var checkBox = cell.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
+                checkBox.IsChecked = isChecked;
             }
         }
 

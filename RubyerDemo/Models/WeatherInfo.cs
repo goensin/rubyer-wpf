@@ -11,6 +11,8 @@ namespace RubyerDemo.Models
     /// </summary>
     public class WeatherInfo : ObservableObject
     {
+        private bool isSelected;
+
         [JsonPropertyName("days")]
         [Display(Name = "日期")]
         [ColumnWidth("100")]
@@ -40,8 +42,6 @@ namespace RubyerDemo.Models
         [Display(Name = "天气")]
         [ColumnWidth("120")]
         public string Weather { get; set; }
-
-        private bool isSelected;
 
         /// <summary>
         /// 不自动生成字段

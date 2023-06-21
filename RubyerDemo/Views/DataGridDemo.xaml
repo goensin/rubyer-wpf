@@ -210,7 +210,9 @@
                               CanUserAddRows="False"
                               ItemsSource="{Binding Weathers}">
                         <DataGrid.Columns>
-                            <rubyer:DataGridSelectCheckBoxColumn Width="85" Binding="{Binding IsSelected}" />
+                            <rubyer:DataGridSelectCheckBoxColumn Width="85"
+                                                                 Binding="{Binding IsSelected}"
+                                                                 Header="全选" />
                         </DataGrid.Columns>
                     </DataGrid>
                 </controls:ControlDisplay>
