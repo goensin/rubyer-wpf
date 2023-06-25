@@ -11,7 +11,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="GroupBoxDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="10" rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto" rubyer:PanelHelper.Spacing="10">
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
                 <rubyer:Description Style="{StaticResource BorderDescription}" Columns="3">
                     <rubyer:DescriptionItem Description="标题对齐">
                         <ComboBox Width="150"
