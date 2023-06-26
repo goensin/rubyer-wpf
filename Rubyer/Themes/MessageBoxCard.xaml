@@ -19,7 +19,7 @@
         <Setter Property="MessageBoxButton" Value="OK" />
         <Setter Property="MinHeight" Value="120" />
         <Setter Property="MinWidth" Value="250" />
-        <Setter Property="Padding" Value="10" />
+        <Setter Property="Padding" Value="20" />
         <Setter Property="ShowShadow" Value="True" />
         <Setter Property="IsShow" Value="True" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
@@ -99,7 +99,7 @@
                                                    TextWrapping="Wrap" />
                                     </Grid>
                                     <StackPanel Grid.Row="2"
-                                                Margin="5"
+                                                Margin="{TemplateBinding Padding}"
                                                 HorizontalAlignment="Right"
                                                 rubyer:PanelHelper.Spacing="10"
                                                 Orientation="Horizontal">
