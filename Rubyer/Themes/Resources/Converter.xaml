@@ -23,6 +23,14 @@
                                          FalseVisibility="Visible"
                                          TrueVisibility="Hidden" />
 
+    <converter:NullToVisibilityConverter x:Key="NullToCollapsedConverter" />
+    <converter:NullToVisibilityConverter x:Key="NullToVisibleConverter"
+                                         NotNullVisibility="Collapsed"
+                                         NullVisibility="Visible" />
+    <converter:NullToVisibilityConverter x:Key="NullToHiddenConverter"
+                                         NotNullVisibility="Visible"
+                                         NullVisibility="Hidden" />
+
     <converter:MathMultipleConverter x:Key="MathAddConverter" />
     <converter:MathMultipleConverter x:Key="MathSubtractConverter" Operation="Subtract" />
     <converter:MathMultipleConverter x:Key="MathMultiplyConverter" Operation="Multiply" />
@@ -53,5 +61,6 @@
     <converter:DoubleToThicknessConverter x:Key="DoubleToTopAndBottomThicknessConverter" Mode="TopAndBottom" />
 
     <converter:CarouselScaleConvereter x:Key="CarouselScaleConvereter" />
+
 
 </ResourceDictionary>
