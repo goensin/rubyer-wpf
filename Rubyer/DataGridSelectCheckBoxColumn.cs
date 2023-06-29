@@ -74,6 +74,10 @@ namespace Rubyer
                 var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
                 var columnHeader = GetHeader(this, dataGrid);
                 var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
+                if (headerCheckBox is null)
+                {
+                    return;
+                }
 
                 var allValues = new List<bool?>();
                 foreach (var item in dataGrid.Items)
