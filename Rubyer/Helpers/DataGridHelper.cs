@@ -11,8 +11,6 @@ using System;
 using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
-using System.Diagnostics;
-using System.Collections.Generic;
 
 namespace Rubyer
 {
@@ -85,6 +83,7 @@ namespace Rubyer
         /// <param name="isChecked">If true, is checked.</param>
         private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked)
         {
+            dataGrid.SelectedIndex = -1;
             var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
             foreach (var item in dataGrid.Items)
             {
@@ -95,9 +94,19 @@ namespace Rubyer
                     continue;
                 }
 
-                var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(columnHeader.DisplayIndex) as DataGridCell;
-                var checkBox = cell.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
-                checkBox.IsChecked = isChecked;
+                var cellContent = columnHeader.Column.GetCellContent(row);
+                var cell = cellContent.TryGetParentFromVisualTree<DataGridCell>();
+                if (cellContent is CheckBox checkBox)
+                {
+                    dataGrid.CurrentCell = new DataGridCellInfo(cell);
+                    dataGrid.BeginEdit();
+                    if (checkBox.IsChecked != null)
+                    {
+                        checkBox.IsChecked = isChecked;
+                    }
+
+                    dataGrid.CommitEdit();
+                }
             }
         }
 

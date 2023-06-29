@@ -25,15 +25,17 @@ namespace RubyerDemo.ViewModels
             items = new ObservableCollection<Image>();
             for (int i = 0; i < 4; i++)
             {
-                Image image = new Image();
-                image.Width = 600;
-                BitmapImage bitmapImage = new BitmapImage();
+                var bitmapImage = new BitmapImage();
                 bitmapImage.BeginInit();
-                bitmapImage.UriSource = new Uri(@$"../Assets/img{i + 1}.jpg",UriKind.Relative);
+                bitmapImage.UriSource = new Uri(@$"../Assets/img{i + 1}.jpg", UriKind.Relative);
                 bitmapImage.DecodePixelWidth = 600;
                 bitmapImage.EndInit();
-                image.Source = bitmapImage;
-                items.Add(image);
+
+                items.Add(new Image
+                {
+                    Width = 600,
+                    Source = bitmapImage
+                });
             }
         }
     }

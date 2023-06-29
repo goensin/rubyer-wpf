@@ -26,8 +26,9 @@
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default DataGrid">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
-                        <DataGrid x:Name="DataGrid1" BorderThickness="1"
+                        <DataGrid x:Name="DataGrid1"
                                   AutoGenerateColumns="False"
+                                  BorderThickness="1"
                                   CanUserAddRows="False"
                                   GridLinesVisibility="All"
                                   ItemsSource="{Binding Weathers}">
@@ -223,7 +224,11 @@
                                   rubyer:DataGridHelper.Loading="True"
                                   AutoGenerateColumns="True"
                                   CanUserAddRows="False"
-                                  ItemsSource="{Binding Weathers}" />
+                                  ItemsSource="{Binding Weathers}">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn Binding="{Binding IsSelected}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
 
                         <StackPanel Grid.Row="1"
                                     rubyer:PanelHelper.Spacing="20"
