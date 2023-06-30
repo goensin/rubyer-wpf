@@ -157,8 +157,9 @@
                     <Border x:Name="root"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="0"
-                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
@@ -168,7 +169,15 @@
                                     Padding="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
-                                    CornerRadius="{DynamicResource TopContainerCornerRadius}">
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <Border.CornerRadius>
+                                    <MultiBinding Converter="{StaticResource TopInsideCornerRadiusConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="root" Path="BorderThickness" />
+                                            <Binding ElementName="root" Path="CornerRadius" />
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </Border.CornerRadius>
                                 <ContentPresenter HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   ContentSource="Header"
@@ -179,14 +188,10 @@
                                                   TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                   TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </Border>
-                            <Border x:Name="content"
-                                    Grid.Row="1"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{DynamicResource BottomContainerCornerRadius}">
-                                <ContentPresenter Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Border>
+
+                            <ContentPresenter Grid.Row="1"
+                                              Margin="{TemplateBinding Padding}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Grid>
                     </Border>
                 </ControlTemplate>

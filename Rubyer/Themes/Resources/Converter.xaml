@@ -62,5 +62,10 @@
 
     <converter:CarouselScaleConvereter x:Key="CarouselScaleConvereter" />
 
+    <converter:InsideCornerRadiusConverter x:Key="InsideCornerRadiusConverter" />
+    <converter:InsideCornerRadiusConverter x:Key="TopInsideCornerRadiusConverter" Type="Top" />
+    <converter:InsideCornerRadiusConverter x:Key="BottomInsideCornerRadiusConverter" Type="Bottom" />
+    <converter:InsideCornerRadiusConverter x:Key="LeftInsideCornerRadiusConverter" Type="Left" />
+    <converter:InsideCornerRadiusConverter x:Key="RightInsideCornerRadiusConverter" Type="Right" />
 
 </ResourceDictionary>

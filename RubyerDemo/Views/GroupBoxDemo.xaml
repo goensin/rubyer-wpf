@@ -95,7 +95,7 @@
                               rubyer:HeaderHelper.Background="{Binding Background}"
                               rubyer:HeaderHelper.FontFamily="{Binding FontFamily}"
                               rubyer:HeaderHelper.FontSize="{Binding Value, ElementName=fontSizeNumBox}"
-                              rubyer:HeaderHelper.FontWeight="{Binding FontWeight}"
+                              rubyer:HeaderHelper.FontWeight="{Binding FontWeight}" 
                               rubyer:HeaderHelper.Foreground="{Binding Foreground}"
                               rubyer:HeaderHelper.HorizontalAlignment="{Binding HorizontalAlignment}"
                               Header="ColorHeaderGroupBox">
