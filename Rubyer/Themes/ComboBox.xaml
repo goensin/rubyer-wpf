@@ -108,7 +108,7 @@
                             <DockPanel>
                                 <rubyer:Icon x:Name="arrow"
                                              Grid.Column="1"
-                                             Margin="3 0"
+                                             Margin="0 0 3 0"
                                              VerticalAlignment="Center"
                                              DockPanel.Dock="Right"
                                              Foreground="{DynamicResource SeconarydText}"
@@ -119,9 +119,7 @@
                                     </rubyer:Icon.RenderTransform>
                                 </rubyer:Icon>
 
-                                <ContentPresenter Margin="{TemplateBinding Padding}"
-                                                  Focusable="False"
-                                                  SnapsToDevicePixels="True" />
+                                <ContentPresenter Focusable="False" SnapsToDevicePixels="True" />
                             </DockPanel>
                         </Border>
                     </Grid>
@@ -457,7 +455,7 @@
                                 <Condition Property="rubyer:ControlHelper.IsKeyBoardFocused" Value="True" />
                                 <Condition Property="rubyer:InputBoxHelper.IsClearable" Value="True" />
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="clearButton" Property="Visibility" Value="Visible" />
+                            <!--<Setter TargetName="clearButton" Property="Visibility" Value="Visible" />-->
                         </MultiTrigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
