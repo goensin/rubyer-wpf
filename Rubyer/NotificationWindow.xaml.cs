@@ -40,14 +40,11 @@ namespace Rubyer
         /// <returns>MessageWindow 实例</returns>
         public static NotificationWindow GetInstance()
         {
-            if (notificationWindow == null)
+            if (notificationWindow is null || !notificationWindow.IsLoaded)
             {
                 notificationWindow = new NotificationWindow();
             }
-            else if (!notificationWindow.IsLoaded)
-            {
-                notificationWindow = new NotificationWindow();
-            }
+
             return notificationWindow;
         }
 

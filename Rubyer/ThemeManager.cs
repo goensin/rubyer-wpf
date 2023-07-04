@@ -101,21 +101,22 @@ namespace Rubyer
 
         private static void ApplyColor(bool isDark, string colorName)
         {
+            var application = Application.Current;
             Color lightColor;
             Color darkColor;
             if (colorName.Contains("Effect"))
             {
-                lightColor = (Color)Application.Current.FindResource($"LightEffectColor");
-                darkColor = (Color)Application.Current.FindResource($"DarkEffectColor");
+                lightColor = (Color)application.FindResource($"LightEffectColor");
+                darkColor = (Color)application.FindResource($"DarkEffectColor");
             }
             else
             {
-                lightColor = (Color)Application.Current.FindResource($"Light{colorName}Color");
-                darkColor = (Color)Application.Current.FindResource($"Dark{colorName}Color");
+                lightColor = (Color)application.FindResource($"Light{colorName}Color");
+                darkColor = (Color)application.FindResource($"Dark{colorName}Color");
             }
 
 
-            if (Application.Current.Resources[colorName] is Brush brush)
+            if (application.Resources[colorName] is Brush brush)
             {
                 ColorAnimation animation = GetColorAnimation(isDark, lightColor, darkColor);
 
@@ -126,9 +127,9 @@ namespace Rubyer
 
                 brush.BeginAnimation(SolidColorBrush.ColorProperty, animation);
 
-                Application.Current.Resources[colorName] = brush;
+                application.Resources[colorName] = brush;
             }
-            else if (Application.Current.Resources[colorName] is DropShadowEffect effect)
+            else if (application.Resources[colorName] is DropShadowEffect effect)
             {
                 if (effect.IsFrozen)
                 {
@@ -136,7 +137,7 @@ namespace Rubyer
                 }
 
                 effect.Color = isDark ? darkColor : lightColor;
-                Application.Current.Resources[colorName] = effect;
+                application.Resources[colorName] = effect;
             }
         }
 

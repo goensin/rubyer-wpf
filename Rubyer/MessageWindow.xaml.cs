@@ -28,14 +28,11 @@ namespace Rubyer
         /// <returns>MessageWindow 实例</returns>
         public static MessageWindow GetInstance()
         {
-            if (messageWindow == null)
+            if (messageWindow is null || !messageWindow.IsLoaded)
             {
                 messageWindow = new MessageWindow();
             }
-            else if (!messageWindow.IsLoaded)
-            {
-                messageWindow = new MessageWindow();
-            }
+
             return messageWindow;
         }
 

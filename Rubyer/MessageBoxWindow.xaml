@@ -17,14 +17,7 @@
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
-
+    
     <Border x:Name="messageBoxPanel"
             HorizontalAlignment="Center"
             VerticalAlignment="Center" />

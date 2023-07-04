@@ -35,5 +35,10 @@ namespace RubyerDemo.Views.Samples
             e.Cancel = true;
             this.Hide();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Notification.SuccessGlobal("hello rubyer ~~", millisecondTimeOut: 0);
+        }
     }
 }

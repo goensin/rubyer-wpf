@@ -220,6 +220,7 @@
                         </Button>
                         <Button rubyer:ButtonHelper.Shape="Circle"
                                 Background="#0F000000"
+                                Click="Button_Click"
                                 Foreground="{StaticResource DefaultForeground}"
                                 ToolTip="播放">
                             <rubyer:Icon Width="28"

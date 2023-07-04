@@ -12,12 +12,5 @@
         WindowState="Maximized"
         WindowStyle="None"
         mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageCard.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <StackPanel x:Name="messageStackPanel" Margin="10" />
 </Window>
