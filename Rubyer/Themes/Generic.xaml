@@ -72,6 +72,7 @@
     <Style BasedOn="{StaticResource RubyerToggleButton}" TargetType="{x:Type ToggleButton}" />
     <Style BasedOn="{StaticResource RubyerLabel}" TargetType="{x:Type Label}" />
     <Style BasedOn="{StaticResource RubyerListView}" TargetType="{x:Type ListView}" />
+    <Style BasedOn="{StaticResource RubyerTreeViewItem}" TargetType="{x:Type TreeViewItem}" />
     <Style BasedOn="{StaticResource RubyerTreeView}" TargetType="{x:Type TreeView}" />
     <Style BasedOn="{StaticResource RubyerExpander}" TargetType="{x:Type Expander}" />
     <Style BasedOn="{StaticResource RubyerTabControl}" TargetType="{x:Type TabControl}" />

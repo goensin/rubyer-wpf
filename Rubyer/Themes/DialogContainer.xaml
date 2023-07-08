@@ -120,7 +120,6 @@
                             <Setter TargetName="cardRoot" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
                         <Trigger Property="IsShow" Value="True">
-                            <!--<Setter TargetName="PART_ContentPresenter" Property="Is" Value="False" />-->
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

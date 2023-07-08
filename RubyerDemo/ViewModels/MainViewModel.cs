@@ -25,6 +25,7 @@ namespace RubyerDemo.ViewModels
 
             ViewItems = new ObservableCollection<ViewItem>
             {
+                new ViewItem("Overview", "总览", new Overview(), IconType.Home2Line),
                 new ViewItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
                 new ViewItem("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
                 new ViewItem("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),

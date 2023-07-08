@@ -1,0 +1,482 @@
+﻿<UserControl x:Class="RubyerDemo.Views.Overview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RubyerDemo.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             mc:Ignorable="d">
+    <ScrollViewer>
+        <StackPanel Margin="20"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    rubyer:PanelHelper.Spacing="15"
+                    IsEnabled="{Binding IsEnabled, ElementName=enableToggle}">
+            <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                        <Button Content="默认" />
+                        <Button Style="{StaticResource SecondaryButton}" Content="次级" />
+                        <Button Style="{StaticResource AccentButton}" Content="强调" />
+                        <Button Style="{StaticResource OutlineButton}" Content="默认" />
+                        <Button Style="{StaticResource OutlineAccentButton}" Content="强调" />
+                        <Button Style="{StaticResource TextButton}" Content="默认" />
+                        <Button Style="{StaticResource TextAccentButton}" Content="强调" />
+                        <Button rubyer:ButtonHelper.Shape="Round" Content="圆角" />
+                        <Button Style="{StaticResource AccentButton}" rubyer:ButtonHelper.Shape="Circle">
+                            <rubyer:Icon Type="RemixiconFill" />
+                        </Button>
+                        <Button Style="{StaticResource DarkButton}"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Content="阴影" />
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                        <rubyer:Badge>
+                            <Button Style="{StaticResource OutlineButton}" Content="更新" />
+                        </rubyer:Badge>
+                        <rubyer:Badge Text="99+">
+                            <Button Style="{StaticResource OutlineAccentButton}" Content="消息" />
+                        </rubyer:Badge>
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                        <rubyer:Tag Margin="10"
+                                    Background="{DynamicResource DefaultForeground}"
+                                    Foreground="{DynamicResource DefaultBackground}"
+                                    HeadBackground="#C71D23"
+                                    HeadForeground="#FFFFFF"
+                                    Url="https://gitee.com/wuyanxin1028/rubyer-wpf">
+                            <rubyer:Tag.Header>
+                                <rubyer:Icon Type="CodeBoxFill" />
+                            </rubyer:Tag.Header>
+                            Rubyer
+                        </rubyer:Tag>
+                    </StackPanel>
+                </rubyer:Card>
+            </StackPanel>
+            <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                        <ToggleButton Content="默认" IsChecked="True" />
+                        <ToggleButton Style="{StaticResource AccentToggleButton}" Content="强调" />
+                        <ToggleButton Style="{StaticResource SwitchToggleButton}" Content="开关一" />
+                        <ToggleButton Style="{StaticResource SwitchAccentToggleButton}"
+                                      Content="开关二"
+                                      IsChecked="True" />
+                        <ToggleButton x:Name="enableToggle"
+                                      Style="{StaticResource SwitchToggleButton}"
+                                      Content="IsEnabled"
+                                      IsChecked="True" />
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                        <CheckBox Content="选中" IsChecked="True" />
+                        <CheckBox Content="未选中" />
+                        <CheckBox Content="null" IsChecked="{x:Null}" />
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                        <RadioButton Content="选项一" IsChecked="True" />
+                        <RadioButton Style="{StaticResource LightRadioButton}" Content="选项二" />
+                        <RadioButton Style="{StaticResource DarkRadioButton}" Content="选项三" />
+                    </StackPanel>
+                </rubyer:Card>
+            </StackPanel>
+            <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="15">
+                        <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                            <TextBox Width="140"
+                                     rubyer:InputBoxHelper.IsClearable="True"
+                                     rubyer:InputBoxHelper.Watermark="默认"
+                                     Text="文本框" />
+                            <TextBox Width="140"
+                                     rubyer:InputBoxHelper.IsRound="True"
+                                     rubyer:InputBoxHelper.Watermark="圆角" />
+                            <TextBox Style="{StaticResource FilledTextBox}"
+                                     Width="140"
+                                     rubyer:InputBoxHelper.Watermark="Filled" />
+                        </StackPanel>
+                        <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                            <PasswordBox Width="140"
+                                         rubyer:InputBoxHelper.IsClearable="True"
+                                         rubyer:InputBoxHelper.Watermark="默认"
+                                         rubyer:PasswordBoxHelper.ShowSwitchButton="True"
+                                         Password="password" />
+                            <PasswordBox Width="140"
+                                         rubyer:InputBoxHelper.IsRound="True"
+                                         rubyer:InputBoxHelper.Watermark="圆角"
+                                         Password="password" />
+                            <PasswordBox Style="{StaticResource FilledPasswordBox}"
+                                         Width="140"
+                                         rubyer:InputBoxHelper.Watermark="Filled"
+                                         Password="password" />
+                        </StackPanel>
+                        <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                            <ComboBox Width="140"
+                                      rubyer:InputBoxHelper.IsClearable="True"
+                                      rubyer:InputBoxHelper.Watermark="默认"
+                                      SelectedIndex="0">
+                                <ComboBoxItem>选项一</ComboBoxItem>
+                                <ComboBoxItem>选项二</ComboBoxItem>
+                                <ComboBoxItem>选项三</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox Width="140"
+                                      rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                      rubyer:InputBoxHelper.IsRound="True"
+                                      rubyer:InputBoxHelper.Watermark="圆角">
+                                <ComboBoxItem>选项一</ComboBoxItem>
+                                <ComboBoxItem>选项二</ComboBoxItem>
+                                <ComboBoxItem>选项三</ComboBoxItem>
+                            </ComboBox>
+                            <ComboBox Style="{StaticResource FilledComboBox}"
+                                      Width="140"
+                                      rubyer:InputBoxHelper.Watermark="Filled"
+                                      IsEditable="True">
+                                <ComboBoxItem>选项一</ComboBoxItem>
+                                <ComboBoxItem>选项二</ComboBoxItem>
+                                <ComboBoxItem>选项三</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                        <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                            <rubyer:NumericBox Width="140"
+                                               rubyer:InputBoxHelper.IsClearable="True"
+                                               rubyer:InputBoxHelper.Watermark="默认"
+                                               rubyer:PasswordBoxHelper.ShowSwitchButton="True"
+                                               MaxValue="100"
+                                               MinValue="-100"
+                                               Value="1" />
+                            <rubyer:NumericBox Width="140"
+                                               rubyer:InputBoxHelper.IsRound="True"
+                                               rubyer:InputBoxHelper.Watermark="圆角"
+                                               Interval="0.1"
+                                               NumericType="Double"
+                                               TextFormat="N2"
+                                               Value="0.01" />
+                            <rubyer:NumericBox Style="{StaticResource FilledNumericBox}"
+                                               Width="140"
+                                               rubyer:InputBoxHelper.Watermark="Filled" />
+                        </StackPanel>
+                        <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
+                            <rubyer:DateTimePicker Width="140" rubyer:InputBoxHelper.Watermark="日期时间" />
+                            <DatePicker Width="140"
+                                        rubyer:InputBoxHelper.IsRound="True"
+                                        rubyer:InputBoxHelper.Watermark="日期" />
+                            <rubyer:TimePicker Width="140" rubyer:InputBoxHelper.Watermark="时间" />
+                        </StackPanel>
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="10">
+                        <StackPanel Width="120" rubyer:PanelHelper.Spacing="10">
+                            <Slider x:Name="valueSlider"
+                                    Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    TickFrequency="5"
+                                    Value="50" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.ValuePlacement="Bottom"
+                                    Foreground="{DynamicResource Success}"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    TickFrequency="10"
+                                    TickPlacement="TopLeft"
+                                    Value="60" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Accent}"
+                                    Foreground="{StaticResource Dark}"
+                                    IsSelectionRangeEnabled="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="10"
+                                    TickPlacement="Both"
+                                    Value="30" />
+                        </StackPanel>
+                        <StackPanel Height="120"
+                                    rubyer:PanelHelper.Spacing="22"
+                                    Orientation="Horizontal">
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    TickFrequency="5"
+                                    Value="70" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.ValuePlacement="Left"
+                                    Foreground="{DynamicResource Accent}"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    TickFrequency="10"
+                                    TickPlacement="TopLeft"
+                                    Value="60" />
+                            <Slider Margin="0 10"
+                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Accent}"
+                                    Foreground="{StaticResource Dark}"
+                                    IsSelectionRangeEnabled="True"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    SelectionEnd="70"
+                                    SelectionStart="30"
+                                    TickFrequency="10"
+                                    TickPlacement="Both"
+                                    Value="30" />
+                        </StackPanel>
+                    </StackPanel>
+                </rubyer:Card>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="20">
+                        <StackPanel rubyer:PanelHelper.Spacing="15">
+                            <ProgressBar Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Margin="0 20 0 0"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
+                                         Background="Transparent"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Margin="0 20 0 0"
+                                         rubyer:ProgressBarHelper.Thickness="10"
+                                         IsIndeterminate="True"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                        </StackPanel>
+                        <StackPanel Height="120"
+                                    rubyer:PanelHelper.Spacing="15"
+                                    Orientation="Horizontal">
+                            <ProgressBar Orientation="Vertical" Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Margin="0 20 0 0"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
+                                         Background="Transparent"
+                                         Orientation="Vertical"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Margin="0 20 0 0"
+                                         rubyer:ProgressBarHelper.Thickness="10"
+                                         IsIndeterminate="True"
+                                         Orientation="Vertical"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         Width="25"
+                                         Height="25"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                         rubyer:ProgressBarHelper.ShowPercent="True"
+                                         Background="Transparent"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                            <ProgressBar Style="{StaticResource CircleProgressBar}"
+                                         IsIndeterminate="True"
+                                         Value="{Binding Value, ElementName=valueSlider}" />
+                        </StackPanel>
+                    </StackPanel>
+                </rubyer:Card>
+            </StackPanel>
+            <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                <StackPanel rubyer:PanelHelper.Spacing="15">
+                    <rubyer:Card Padding="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                            <ListBox Width="200" SelectedIndex="0">
+                                <ListBoxItem>选项一</ListBoxItem>
+                                <ListBoxItem>选项二</ListBoxItem>
+                                <ListBoxItem>选项三</ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </rubyer:Card>
+                    <rubyer:Card Padding="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="15">
+                            <TabControl>
+                                <TabItem Header="选项一" />
+                                <TabItem Header="选项二" />
+                                <TabItem Header="选项三" />
+                            </TabControl>
+                            <TabControl Style="{StaticResource LineTabControl}">
+                                <TabItem Header="选项一" />
+                                <TabItem Header="选项二" />
+                                <TabItem Header="选项三" />
+                            </TabControl>
+                            <TabControl Style="{StaticResource CardTabControl}">
+                                <TabItem Header="选项一" />
+                                <TabItem Header="选项二" />
+                                <TabItem Header="选项三" />
+                            </TabControl>
+                        </StackPanel>
+                    </rubyer:Card>
+                </StackPanel>
+
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
+                        <TreeView Width="180" Height="240">
+                            <TreeViewItem Header="标题 1">
+                                <TreeViewItem Header="标题 1.1" />
+                                <TreeViewItem Header="标题 1.2" />
+                                <TreeViewItem Header="标题 1.3" />
+                            </TreeViewItem>
+                            <TreeViewItem Header="标题 2" IsExpanded="True">
+                                <TreeViewItem Header="标题 2.1" />
+                                <TreeViewItem Header="标题 2.2">
+                                    <TreeViewItem Header="标题 2.2.1" />
+                                    <TreeViewItem Header="标题 2.2.2" />
+                                </TreeViewItem>
+                                <TreeViewItem Header="标题 2.3" />
+                            </TreeViewItem>
+                            <TreeViewItem Header="标题 3">
+                                <TreeViewItem Header="标题 3.1" />
+                                <TreeViewItem Header="标题 3.2" />
+                                <TreeViewItem Header="标题 3.3" />
+                            </TreeViewItem>
+                        </TreeView>
+                    </StackPanel>
+                </rubyer:Card>
+
+                <StackPanel rubyer:PanelHelper.Spacing="15">
+                    <rubyer:Card Padding="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="20">
+                            <Menu>
+                                <MenuItem Header="文件">
+                                    <MenuItem Header="新建">
+                                        <MenuItem Header="文件" InputGestureText="Ctrl+N" />
+                                        <MenuItem Header="项目" />
+                                    </MenuItem>
+                                    <MenuItem Header="打开" />
+                                </MenuItem>
+                                <MenuItem Header="编辑">
+                                    <MenuItem Header="查找和替换"
+                                              IsCheckable="True"
+                                              IsChecked="True" />
+                                    <Separator />
+                                    <MenuItem Command="Cut" Header="剪切">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="Scissors2Line" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Command="Copy" Header="复制">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="FileCopyLine" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Command="Paste" Header="粘贴">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="SurveyLine" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem Header="高级">
+                                        <MenuItem Header="转换为大写" />
+                                    </MenuItem>
+                                </MenuItem>
+                                <MenuItem Header="视图">
+                                    <MenuItem Header="工具栏">
+                                        <MenuItem Header="文本编辑器"
+                                                  IsCheckable="True"
+                                                  IsChecked="True" />
+                                        <MenuItem Header="查看设计器" IsCheckable="true" />
+                                        <MenuItem Header="布局"
+                                                  IsCheckable="true"
+                                                  IsChecked="True" />
+                                        <MenuItem Header="调试" IsCheckable="true" />
+                                    </MenuItem>
+                                </MenuItem>
+                                <Separator />
+                                <MenuItem Header="无内容" />
+                            </Menu>
+                            <ToolBarTray Grid.Row="1">
+                                <ToolBar Foreground="{DynamicResource Dark}">
+                                    <RadioButton GroupName="Align" Tag="left">
+                                        <rubyer:Icon Type="AlignLeft" />
+                                    </RadioButton>
+                                    <RadioButton GroupName="Align" Tag="center">
+                                        <rubyer:Icon Type="AlignCenter" />
+                                    </RadioButton>
+                                    <RadioButton GroupName="Align" Tag="right">
+                                        <rubyer:Icon Type="AlignRight" />
+                                    </RadioButton>
+                                </ToolBar>
+                                <ToolBar>
+                                    <ToggleButton x:Name="ItalicToggle">
+                                        <rubyer:Icon Type="Italic" />
+                                    </ToggleButton>
+                                    <ToggleButton x:Name="UnderlineToggle">
+                                        <rubyer:Icon Type="Underline" />
+                                    </ToggleButton>
+                                    <ToggleButton x:Name="BoldToggle">
+                                        <rubyer:Icon Type="Bold" />
+                                    </ToggleButton>
+                                </ToolBar>
+                                <ToolBar>
+                                    <TextBox Width="100"
+                                             rubyer:InputBoxHelper.IsClearable="True"
+                                             rubyer:InputBoxHelper.Watermark="搜索">
+                                        <rubyer:InputBoxHelper.PreContent>
+                                            <rubyer:Icon Type="SearchLine" />
+                                        </rubyer:InputBoxHelper.PreContent>
+                                    </TextBox>
+                                </ToolBar>
+                            </ToolBarTray>
+                            <StatusBar Grid.Row="3">
+                                <StatusBarItem HorizontalAlignment="Left">
+                                    <rubyer:Icon Type="TerminalBoxLine" />
+                                </StatusBarItem>
+                                <Separator />
+                                <StatusBarItem HorizontalAlignment="Left" Content="就绪" />
+                                <StatusBarItem HorizontalAlignment="Right">
+                                    <StackPanel Orientation="Horizontal">
+                                        <rubyer:Icon Margin="5 0" Type="UploadLine" />
+                                        <TextBlock Margin="5 0" Text="添加到源代码管理" />
+                                        <rubyer:Icon Margin="5 0" Type="Notification3Fill" />
+                                    </StackPanel>
+                                </StatusBarItem>
+                            </StatusBar>
+                        </StackPanel>
+                    </rubyer:Card>
+                    <rubyer:Card Padding="10">
+                        <StackPanel rubyer:PanelHelper.Spacing="15">
+                            <rubyer:StepBar CurrentIndex="1">
+                                <rubyer:StepBarItem Description="描述一">步骤一</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="描述二">步骤二</rubyer:StepBarItem>
+                                <rubyer:StepBarItem Description="描述三">步骤三</rubyer:StepBarItem>
+                            </rubyer:StepBar>
+                        </StackPanel>
+                    </rubyer:Card>
+                </StackPanel>
+
+            </StackPanel>
+            <StackPanel>
+                <rubyer:Card Padding="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="15">
+                        <rubyer:PageBar IsShowPageSize="True"
+                                        IsShowTotal="True"
+                                        PageSize="10"
+                                        Total="100" />
+                        <rubyer:PageBar Style="{StaticResource TextPageBar}"
+                                        IsRound="True"
+                                        IsShowPageSize="True"
+                                        IsShowTotal="True"
+                                        PageSize="10"
+                                        SelectedBrush="{DynamicResource Accent}"
+                                        Total="100" />
+                    </StackPanel>
+                </rubyer:Card>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+
+</UserControl>

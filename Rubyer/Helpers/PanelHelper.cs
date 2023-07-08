@@ -36,6 +36,9 @@ namespace Rubyer
         {
             if (d is Panel panel)
             {
+                panel.SizeChanged -= Panel_SizeChanged;
+                panel.SizeChanged += Panel_SizeChanged;
+
                 if (panel.IsLoaded)
                 {
                     SetPanelChildrenSpacing(panel, null);
@@ -45,6 +48,11 @@ namespace Rubyer
                     panel.Loaded += SetPanelChildrenSpacing;
                 }
             }
+        }
+
+        private static void Panel_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            SetPanelChildrenSpacing(sender, null);
         }
 
         private static void SetPanelChildrenSpacing(object sender, RoutedEventArgs e)
@@ -60,16 +68,7 @@ namespace Rubyer
                 case Grid grid:
                     SetGridSpacing(grid);
                     break;
-
-                default:
-                    break;
             }
-
-        }
-
-        private static void Panel_LayoutUpdated(object sender, EventArgs e)
-        {
-
         }
 
         private static void SetHorizontalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin)
@@ -151,7 +150,7 @@ namespace Rubyer
         // Grid
         private static void SetGridSpacing(Grid grid)
         {
-            var children = grid.Children.OfType<FrameworkElement>().Where(x=>x.Visibility != Visibility.Collapsed).ToList();
+            var children = grid.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
             foreach (FrameworkElement element in children)
             {
                 var spacing = GetSpacing(grid);
