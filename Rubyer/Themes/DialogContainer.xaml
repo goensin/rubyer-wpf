@@ -119,8 +119,6 @@
                             <Setter TargetName="cardRoot" Property="Panel.ZIndex" Value="0" />
                             <Setter TargetName="cardRoot" Property="Visibility" Value="Collapsed" />
                         </MultiTrigger>
-                        <Trigger Property="IsShow" Value="True">
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

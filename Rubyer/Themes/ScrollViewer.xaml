@@ -7,6 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerScrollViewer" TargetType="{x:Type ScrollViewer}">
+        <Setter Property="PanningMode" Value="Both" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
@@ -46,22 +47,11 @@
                                                 Content="{TemplateBinding Content}"
                                                 ContentTemplate="{TemplateBinding ContentTemplate}" />
 
-                        <ScrollBar x:Name="PART_VerticalScrollBar"
-                                   Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="0"
-                                   Grid.Column="1"
-                                   AutomationProperties.AutomationId="VerticalScrollBar"
-                                   Cursor="Arrow"
-                                   Maximum="{TemplateBinding ScrollableHeight}"
-                                   Minimum="0"
-                                   ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-
                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                    Style="{StaticResource RubyerScrollBar}"
                                    Grid.Row="1"
                                    Grid.Column="0"
+                                   Panel.ZIndex="100"
                                    AutomationProperties.AutomationId="HorizontalScrollBar"
                                    Cursor="Arrow"
                                    Maximum="{TemplateBinding ScrollableWidth}"
@@ -70,7 +60,28 @@
                                    ViewportSize="{TemplateBinding ViewportWidth}"
                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <ScrollBar x:Name="PART_VerticalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="0"
+                                   Grid.Column="1"
+                                   Panel.ZIndex="100"
+                                   AutomationProperties.AutomationId="VerticalScrollBar"
+                                   Cursor="Arrow"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   Minimum="0"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="IsHitTestVisible" Value="False" />
+                        </Trigger>
+                        <Trigger SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="IsHitTestVisible" Value="False" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -10,8 +10,7 @@
         <StackPanel Margin="20"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    rubyer:PanelHelper.Spacing="15"
-                    IsEnabled="{Binding IsEnabled, ElementName=enableToggle}">
+                    rubyer:PanelHelper.Spacing="15">
             <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">
                 <rubyer:Card Padding="10">
                     <StackPanel rubyer:PanelHelper.Spacing="15" Orientation="Horizontal">

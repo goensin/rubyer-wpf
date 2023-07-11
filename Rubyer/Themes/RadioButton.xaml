@@ -22,8 +22,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type RadioButton}">
-                    <Grid x:Name="templateRoot"
-                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                    <Grid x:Name="templateRoot" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
