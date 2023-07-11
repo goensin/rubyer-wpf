@@ -76,10 +76,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ScrollContentPresenter" Property="IsHitTestVisible" Value="False" />
+                            <Setter Property="PanningMode" Value="None" />
                         </Trigger>
                         <Trigger SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True">
-                            <Setter TargetName="PART_ScrollContentPresenter" Property="IsHitTestVisible" Value="False" />
+                            <Setter Property="PanningMode" Value="None" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
