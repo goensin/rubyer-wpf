@@ -35,6 +35,7 @@ namespace Rubyer
         private bool horizontalAnimating;
         private bool verticalAnimating;
         private bool sorting;
+        private TouchPoint firstPoint;
 
         static FlipView()
         {
@@ -722,7 +723,6 @@ namespace Rubyer
             }
         }
 
-        private TouchPoint firstPoint;
         private void FlipView_PreviewTouchDown(object sender, TouchEventArgs e)
         {
             e.Handled = true;

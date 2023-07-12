@@ -27,7 +27,6 @@
                 <controls:ControlDisplay Title="Default DataGrid">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
                         <DataGrid x:Name="DataGrid1"
-                                  Height="200"
                                   AutoGenerateColumns="False"
                                   BorderThickness="1"
                                   CanUserAddRows="False"
@@ -115,10 +114,10 @@
 
                 <controls:ControlDisplay Title="自动生成列数据" Grid.Row="1">
                     <DataGrid x:Name="DataGrid2"
+                              Height="180"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               ItemsSource="{Binding Weathers}" />
-
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="设置表格样式"

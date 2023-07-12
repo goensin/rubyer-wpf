@@ -20,7 +20,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -74,20 +74,6 @@
                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <!--<MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
-                                <Condition SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="PanningMode" Value="None" />
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
-                                <Condition SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="PanningMode" Value="None" />
-                        </MultiTrigger>-->
                         <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True">
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />

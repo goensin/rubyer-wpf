@@ -369,7 +369,7 @@ namespace Rubyer
         /// 是否滚动条动态大小
         /// </summary>
         public static readonly DependencyProperty IsDynamicBarSizeProperty = DependencyProperty.RegisterAttached(
-            "IsDynamicBarSize", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+            "IsDynamicBarSize", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsDynamicBarSizeChanged));
 
         public static void SetIsDynamicBarSize(DependencyObject element, bool value)
         {
@@ -379,6 +379,54 @@ namespace Rubyer
         public static bool GetIsDynamicBarSize(DependencyObject element)
         {
             return (bool)element.GetValue(IsDynamicBarSizeProperty);
+        }
+
+        private static void CaptureScrollBarTouchDown(ScrollViewer scrollViewer)
+        {
+            var isDynamicBarSize = GetIsDynamicBarSize(scrollViewer);
+            if (scrollViewer.Template.FindName("PART_VerticalScrollBar", scrollViewer) is not ScrollBar verticalScrollBar ||
+                scrollViewer.Template.FindName("PART_HorizontalScrollBar", scrollViewer) is not ScrollBar horizontalScrollBar)
+            {
+                return;
+            }
+
+            if (isDynamicBarSize)
+            {
+                verticalScrollBar.PreviewTouchDown += ScrollBar_PreviewTouchDown;
+                horizontalScrollBar.PreviewTouchDown += ScrollBar_PreviewTouchDown;
+            }
+            else
+            {
+                verticalScrollBar.PreviewTouchDown -= ScrollBar_PreviewTouchDown;
+                horizontalScrollBar.PreviewTouchDown -= ScrollBar_PreviewTouchDown;
+            }
+        }
+
+        private static void OnIsDynamicBarSizeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ScrollViewer scrollViewer)
+            {
+                if (scrollViewer.IsLoaded)
+                {
+                    CaptureScrollBarTouchDown(scrollViewer);
+                }
+                else
+                {
+                    scrollViewer.Loaded += ScrollViewer_Loaded;
+                }
+            }
+        }
+
+        private static void ScrollViewer_Loaded(object sender, RoutedEventArgs e)
+        {
+            var scrollViewer = sender as ScrollViewer;
+            scrollViewer.Loaded -= ScrollViewer_Loaded;
+            CaptureScrollBarTouchDown(scrollViewer);
+        }
+
+        private static void ScrollBar_PreviewTouchDown(object sender, System.Windows.Input.TouchEventArgs e)
+        {
+            e.Handled = true;
         }
     }
 }

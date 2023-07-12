@@ -477,7 +477,6 @@
                             <ScrollViewer x:Name="DG_ScrollViewer"
                                           Grid.Row="1"
                                           Grid.ColumnSpan="2"
-                                          rubyer:ScrollViewerHelper.IsDynamicBarSize="False"
                                           Background="Transparent"
                                           Focusable="False">
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
