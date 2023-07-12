@@ -323,21 +323,11 @@ namespace Rubyer
             scrollViewer.BeginAnimation(HorizontalOffsetProperty, Animation);
         }
 
-        /// <summary>
-        /// Sets the is only arrow.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <param name="value">If true, value.</param>
         public static void SetIsOnlyArrow(DependencyObject element, bool value)
         {
             element.SetValue(IsOnlyArrowProperty, BooleanBoxes.Box(value));
         }
 
-        /// <summary>
-        /// Gets the is only arrow.
-        /// </summary>
-        /// <param name="element">The element.</param>
-        /// <returns>A bool.</returns>
         public static bool GetIsOnlyArrow(DependencyObject element)
         {
             return (bool)element.GetValue(IsOnlyArrowProperty);
@@ -360,22 +350,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// ScrollBar 动画进度
-        /// </summary>
-        public static readonly DependencyProperty ScrollBarAnimationProcessProperty = DependencyProperty.RegisterAttached(
-            "ScrollBarAnimationProcess", typeof(double), typeof(ScrollViewerHelper), new PropertyMetadata(0.4));
-
-        public static void SetScrollBarAnimationProcess(DependencyObject element, double value)
-        {
-            element.SetValue(ScrollBarAnimationProcessProperty, value);
-        }
-
-        public static double GetScrollBarAnimationProcess(DependencyObject element)
-        {
-            return (double)element.GetValue(ScrollBarAnimationProcessProperty);
-        }
-
-        /// <summary>
         /// 箭头按钮样式
         /// </summary>
         public static readonly DependencyProperty ArrowButtonStyleProperty = DependencyProperty.RegisterAttached(
@@ -389,6 +363,22 @@ namespace Rubyer
         public static Style GetArrowButtonStyle(DependencyObject element)
         {
             return (Style)element.GetValue(ArrowButtonStyleProperty);
+        }
+
+        /// <summary>
+        /// 是否滚动条动态大小
+        /// </summary>
+        public static readonly DependencyProperty IsDynamicBarSizeProperty = DependencyProperty.RegisterAttached(
+            "IsDynamicBarSize", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public static void SetIsDynamicBarSize(DependencyObject element, bool value)
+        {
+            element.SetValue(IsDynamicBarSizeProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetIsDynamicBarSize(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsDynamicBarSizeProperty);
         }
     }
 }

@@ -20,6 +20,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
@@ -38,8 +39,6 @@
                                    Fill="Transparent" />
 
                         <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
-                                                Grid.RowSpan="2"
-                                                Grid.ColumnSpan="2"
                                                 Margin="{TemplateBinding Padding}"
                                                 CanContentScroll="{TemplateBinding CanContentScroll}"
                                                 CanHorizontallyScroll="False"
@@ -75,11 +74,23 @@
                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True">
+                        <!--<MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
+                                <Condition SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
                             <Setter Property="PanningMode" Value="None" />
-                        </Trigger>
-                        <Trigger SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True">
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
+                                <Condition SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
                             <Setter Property="PanningMode" Value="None" />
+                        </MultiTrigger>-->
+                        <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True">
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
+                            <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -154,7 +165,6 @@
                                       Height="Auto"
                                       VerticalAlignment="Stretch"
                                       Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}">
-
                             <rubyer:Icon Type="ArrowLeftSLine" />
                         </RepeatButton>
 

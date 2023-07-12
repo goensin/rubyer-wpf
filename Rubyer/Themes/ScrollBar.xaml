@@ -70,7 +70,7 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.Tag>
-                <system:Double>0.4</system:Double>
+                <system:Double>0.5</system:Double>
             </Grid.Tag>
             <Grid.Width>
                 <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
@@ -128,11 +128,21 @@
                 <Setter TargetName="upButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="downButton" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
-
+            
+            <MultiTrigger >
+                <MultiTrigger.Conditions>
+                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True"/>
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="upButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="downButton" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+            
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Vertical" />
                     <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.EnterActions>
                     <BeginStoryboard>
@@ -153,7 +163,7 @@
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetName="root"
                                              Storyboard.TargetProperty="Tag"
-                                             To="0.4"
+                                             To="0.5"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -163,6 +173,9 @@
                     </BeginStoryboard>
                 </MultiTrigger.ExitActions>
             </MultiTrigger>
+            <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False">
+                <Setter TargetName="root" Property="Tag" Value="1" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -174,7 +187,7 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.Tag>
-                <system:Double>0.4</system:Double>
+                <system:Double>0.5</system:Double>
             </Grid.Tag>
             <Grid.Height>
                 <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
@@ -234,10 +247,20 @@
                 <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
 
+            <MultiTrigger >
+                <MultiTrigger.Conditions>
+                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True"/>
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False"/>
+                </MultiTrigger.Conditions>
+                <Setter TargetName="leftButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
+            </MultiTrigger>
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Horizontal" />
                     <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.EnterActions>
                     <BeginStoryboard>
@@ -258,7 +281,7 @@
                         <Storyboard>
                             <DoubleAnimation Storyboard.TargetName="root"
                                              Storyboard.TargetProperty="Tag"
-                                             To="0.4"
+                                             To="0.5"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -268,6 +291,9 @@
                     </BeginStoryboard>
                 </MultiTrigger.ExitActions>
             </MultiTrigger>
+            <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False">
+                <Setter TargetName="root" Property="Tag" Value="1" />
+            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -282,6 +308,7 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="{Binding Path=(rubyer:ScrollViewerHelper.ShowArrowButton), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.IsDynamicBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Template" Value="{StaticResource RubyerHorizontalScrollBar}" />

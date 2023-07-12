@@ -5,8 +5,78 @@
              xmlns:local="clr-namespace:RubyerDemo.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             Foreground="{DynamicResource DefaultForeground}"
              mc:Ignorable="d">
-    <ScrollViewer>
+    <UserControl.Resources>
+        <ControlTemplate x:Key="ScrollViewerTemplate1" TargetType="{x:Type ScrollViewer}">
+            <Grid x:Name="Grid" Background="{TemplateBinding Background}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="Corner"
+                           Grid.Row="1"
+                           Grid.Column="1"
+                           Fill="Transparent" />
+                <ScrollContentPresenter x:Name="PART_ScrollContentPresenter"
+                                        Margin="{TemplateBinding Padding}"
+                                        CanContentScroll="{TemplateBinding CanContentScroll}"
+                                        CanHorizontallyScroll="False"
+                                        CanVerticallyScroll="False"
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                <ScrollBar x:Name="PART_HorizontalScrollBar"
+                           Style="{StaticResource RubyerScrollBar}"
+                           Grid.Row="1"
+                           Grid.Column="0"
+                           Panel.ZIndex="100"
+                           AutomationProperties.AutomationId="HorizontalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableWidth}"
+                           Minimum="0"
+                           Orientation="Horizontal"
+                           ViewportSize="{TemplateBinding ViewportWidth}"
+                           Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                           Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                <ScrollBar x:Name="PART_VerticalScrollBar"
+                           Style="{StaticResource RubyerScrollBar}"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Panel.ZIndex="100"
+                           AutomationProperties.AutomationId="VerticalScrollBar"
+                           Cursor="Arrow"
+                           Maximum="{TemplateBinding ScrollableHeight}"
+                           Minimum="0"
+                           ViewportSize="{TemplateBinding ViewportHeight}"
+                           Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                           Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="ComputedHorizontalScrollBarVisibility" Value="Collapsed" />
+                        <Condition Property="ComputedVerticalScrollBarVisibility" Value="Collapsed" />
+                    </MultiTrigger.Conditions>
+                    <Setter Property="IsManipulationEnabled" Value="False" />
+                </MultiTrigger>
+                <Trigger SourceName="PART_HorizontalScrollBar" Property="IsMouseOver" Value="True">
+                    <Setter Property="PanningMode" Value="None" />
+                </Trigger>
+                <Trigger SourceName="PART_VerticalScrollBar" Property="IsMouseOver" Value="True">
+                    <Setter Property="PanningMode" Value="None" />
+                </Trigger>
+                <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True">
+                    <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
+                    <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+    </UserControl.Resources>
+    <ScrollViewer Style="{x:Null}" Template="{DynamicResource ScrollViewerTemplate1}">
         <StackPanel Margin="20"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"

@@ -20,33 +20,38 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DockPanel Margin="{TemplateBinding Padding}">
-                            <ScrollViewer DockPanel.Dock="Top"
-                                          Focusable="False"
-                                          HorizontalScrollBarVisibility="Hidden"
-                                          VerticalScrollBarVisibility="Hidden">
-                                <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </ScrollViewer>
 
-                            <ScrollContentPresenter Name="PART_ScrollContentPresenter"
-                                                    CanContentScroll="True"
-                                                    CanHorizontallyScroll="False"
-                                                    CanVerticallyScroll="False"
-                                                    KeyboardNavigation.DirectionalNavigation="Local" />
-                        </DockPanel>
+                        <ScrollViewer Grid.ColumnSpan="2"
+                                      Margin="{TemplateBinding Padding}"
+                                      DockPanel.Dock="Top"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+
+
+                        <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                Grid.Row="1"
+                                                CanContentScroll="True"
+                                                CanHorizontallyScroll="False"
+                                                CanVerticallyScroll="False"
+                                                KeyboardNavigation.DirectionalNavigation="Local" />
+
                         <ScrollBar Name="PART_HorizontalScrollBar"
                                    Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="1"
+                                   Grid.Row="2"
                                    Maximum="{TemplateBinding ScrollableWidth}"
                                    Orientation="Horizontal"
                                    ViewportSize="{TemplateBinding ViewportWidth}"
@@ -55,6 +60,7 @@
 
                         <ScrollBar Name="PART_VerticalScrollBar"
                                    Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="1"
                                    Grid.Column="1"
                                    Maximum="{TemplateBinding ScrollableHeight}"
                                    ViewportSize="{TemplateBinding ViewportHeight}"

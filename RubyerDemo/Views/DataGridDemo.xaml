@@ -27,11 +27,24 @@
                 <controls:ControlDisplay Title="Default DataGrid">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
                         <DataGrid x:Name="DataGrid1"
+                                  Height="200"
                                   AutoGenerateColumns="False"
                                   BorderThickness="1"
                                   CanUserAddRows="False"
                                   GridLinesVisibility="All"
-                                  ItemsSource="{Binding Weathers}">
+                                  HeadersVisibility="All"
+                                  IsReadOnly="True"
+                                  ItemsSource="{Binding Weathers}"
+                                  RowHeaderWidth="50"
+                                  SelectionMode="Single"
+                                  VirtualizingPanel.IsVirtualizing="False">
+                            <DataGrid.RowHeaderTemplate>
+                                <DataTemplate>
+                                    <Border>
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
+                                    </Border>
+                                </DataTemplate>
+                            </DataGrid.RowHeaderTemplate>
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Width="50"
                                                         Binding="{Binding IsSelected}"
