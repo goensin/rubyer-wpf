@@ -158,49 +158,6 @@ namespace Rubyer
             }
         }
 
-        private static void DataGrid_CurrentCellChanged(object sender, EventArgs e)
-        {
-            var dataGrid = sender as DataGrid;
-            var cellInfo = dataGrid.CurrentCell;
-            if (!cellInfo.IsValid)
-            {
-                return;
-            }
-
-            if (dataGrid.IsReadOnly || dataGrid.ItemContainerGenerator.ContainerFromItem(cellInfo.Item) is not DataGridRow dataGridRow)
-            {
-                return;
-            }
-
-            var cellsPresenter = dataGridRow.TryGetChildFromVisualTree<DataGridCellsPresenter>(element => element is DataGridCellsPresenter);
-            if (cellsPresenter.ItemContainerGenerator.ContainerFromIndex(cellInfo.Column.DisplayIndex) is not DataGridCell dataGridCell || dataGridCell.IsEditing)
-            {
-                return;
-            }
-
-            dataGrid.BeginEdit();
-            var element = cellInfo.Column.GetCellContent(cellInfo.Item);
-
-            switch (element)
-            {
-                case ToggleButton toggleButton:
-                    toggleButton.IsChecked = !toggleButton.IsChecked;
-
-                    //if (cellInfo.Column is DataGridDetailToggleButtonColumn)
-                    //{
-                    dataGrid.CommitEdit();
-                    //}
-                    break;
-
-                case ComboBox comboBox:
-                    comboBox.IsDropDownOpen = true;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
         #region form https://github.com/MaterialDesignInXAML/MaterialDesignInXamlToolkit
 
         /// <summary>

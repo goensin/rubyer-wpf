@@ -31,12 +31,10 @@
                                   BorderThickness="1"
                                   CanUserAddRows="False"
                                   GridLinesVisibility="All"
-                                  HeadersVisibility="All"
                                   IsReadOnly="True"
                                   ItemsSource="{Binding Weathers}"
                                   RowHeaderWidth="50"
-                                  SelectionMode="Single"
-                                  VirtualizingPanel.IsVirtualizing="False">
+                                  SelectionMode="Single">
                             <DataGrid.RowHeaderTemplate>
                                 <DataTemplate>
                                     <Border>
