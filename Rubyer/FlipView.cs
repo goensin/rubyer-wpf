@@ -1,16 +1,11 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Reflection;
-using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 
@@ -95,6 +90,8 @@ namespace Rubyer
             }
 
             PreviewMouseWheel += FlipView_PreviewMouseWheel;
+            PreviewTouchDown += FlipView_PreviewTouchDown;
+            PreviewTouchMove += FlipView_PreviewTouchMove;
             Loaded += FlipView_Loaded;
 
             UpdateItemSort(this);
@@ -721,6 +718,43 @@ namespace Rubyer
             }
             else
             {
+                ClickNextItem(null, null);
+            }
+        }
+
+        private TouchPoint firstPoint;
+        private void FlipView_PreviewTouchDown(object sender, TouchEventArgs e)
+        {
+            e.Handled = true;
+            firstPoint = e.GetTouchPoint(this);
+        }
+
+        private void FlipView_PreviewTouchMove(object sender, TouchEventArgs e)
+        {
+            if (!IsMouseWheel || firstPoint is null)
+            {
+                return;
+            }
+
+            var lastPoint = e.GetTouchPoint(this);
+            double offset;
+            if (this.Orientation == Orientation.Horizontal)
+            {
+                offset = lastPoint.Position.X - firstPoint.Position.X;
+            }
+            else
+            {
+                offset = lastPoint.Position.Y - firstPoint.Position.Y;
+            }
+
+            if (offset > 30)
+            {
+                firstPoint = lastPoint;
+                ClickLastItem(null, null);
+            }
+            else if (offset < -30)
+            {
+                firstPoint = lastPoint;
                 ClickNextItem(null, null);
             }
         }

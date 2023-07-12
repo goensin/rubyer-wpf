@@ -56,6 +56,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+        <Setter Property="IsManipulationEnabled" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:FlipView}">
@@ -82,6 +83,7 @@
                                           rubyer:ScrollViewerHelper.VerticalOffset="{TemplateBinding VerticalOffset}"
                                           CanContentScroll="False"
                                           HorizontalScrollBarVisibility="Hidden"
+                                          PanningMode="None"
                                           VerticalScrollBarVisibility="Hidden">
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>
@@ -356,6 +358,7 @@
                                           rubyer:ScrollViewerHelper.VerticalOffset="{TemplateBinding VerticalOffset}"
                                           CanContentScroll="False"
                                           HorizontalScrollBarVisibility="Hidden"
+                                          PanningMode="None"
                                           VerticalScrollBarVisibility="Hidden">
                                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </ScrollViewer>

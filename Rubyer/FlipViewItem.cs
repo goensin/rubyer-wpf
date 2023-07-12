@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -16,6 +18,19 @@ namespace Rubyer
         static FlipViewItem()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(FlipViewItem), new FrameworkPropertyMetadata(typeof(FlipViewItem)));
+        }
+
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+        }
+
+        /// <inheritdoc/>
+        protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
+        {
+            // 取消鼠标左键点击选择，改成右击
+            base.OnMouseRightButtonDown(e);
         }
 
         #region properties
