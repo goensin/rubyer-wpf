@@ -320,6 +320,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="MaxDropDownHeight" Value="400" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerComboBoxItem}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
