@@ -128,16 +128,16 @@
                 <Setter TargetName="upButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="downButton" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
-            
-            <MultiTrigger >
+
+            <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True"/>
-                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False"/>
+                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False" />
                 </MultiTrigger.Conditions>
                 <Setter TargetName="upButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="downButton" Property="Visibility" Value="Visible" />
             </MultiTrigger>
-            
+
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Vertical" />
@@ -247,10 +247,10 @@
                 <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
             </MultiDataTrigger>
 
-            <MultiTrigger >
+            <MultiTrigger>
                 <MultiTrigger.Conditions>
-                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True"/>
-                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False"/>
+                    <Condition Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
+                    <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False" />
                 </MultiTrigger.Conditions>
                 <Setter TargetName="leftButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="rightButton" Property="Visibility" Value="Visible" />
