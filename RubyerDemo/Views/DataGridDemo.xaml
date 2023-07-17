@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:views="clr-namespace:RubyerDemo.Views"
              xmlns:vm="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=vm:DataGridViewModel, IsDesignTimeCreatable=True}"
              mc:Ignorable="d">
@@ -71,7 +72,9 @@
                                                 <Button Style="{StaticResource TextButton}" Padding="5">
                                                     <rubyer:Icon Type="Edit2Fill" />
                                                 </Button>
-                                                <Button Style="{StaticResource TextErrorButton}" Padding="5">
+                                                <Button Style="{StaticResource TextErrorButton}"
+                                                        Padding="5"
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=views:DataGridDemo}}">
                                                     <rubyer:Icon Type="DeleteBinFill" />
                                                 </Button>
                                             </StackPanel>

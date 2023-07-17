@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using RubyerDemo.Models;
 using System;
 using System.Collections.Generic;
@@ -32,9 +33,10 @@ namespace RubyerDemo.ViewModels
         private ObservableCollection<WeatherInfo> weathers;
 
         [RelayCommand]
-        private void Delete(WeatherInfo person)
+        private async Task Delete(WeatherInfo info)
         {
-            //Persons.Remove(person);
+            var result = await MessageBoxR.Confirm("是否删除信息？");
+            Message.Show(result);
         }
     }
 }
