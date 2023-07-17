@@ -27,7 +27,7 @@ namespace RubyerDemo.ViewModels
                     break;
 
                 case "4":
-                    MessageBoxR.WaringGlobal("警告警告警告警告警告警告", "标题名称", MessageBoxButton.YesNo);
+                    MessageBoxR.WarningGlobal("警告警告警告警告警告警告", "标题名称", MessageBoxButton.YesNo);
                     break;
 
                 case "5":
@@ -59,7 +59,7 @@ namespace RubyerDemo.ViewModels
                     break;
 
                 case "4":
-                    await MessageBoxR.Waring("警告警告警告警告警告警告", button: MessageBoxButton.YesNo);
+                    await MessageBoxR.Warning("警告警告警告警告警告警告", button: MessageBoxButton.YesNo);
                     break;
 
                 case "5":

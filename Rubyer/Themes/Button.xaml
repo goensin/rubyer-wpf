@@ -172,7 +172,7 @@
         <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
     </Style>
 
-    <Style x:Key="WaringButton"
+    <Style x:Key="WarningButton"
            BasedOn="{StaticResource RubyerButton}"
            TargetType="{x:Type Button}">
         <Setter Property="Background" Value="{DynamicResource Warning}" />
