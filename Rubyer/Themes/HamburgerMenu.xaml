@@ -19,7 +19,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
-        <Setter Property="ToolTipService.VerticalOffset" Value="5" />
+        <Setter Property="ToolTipService.VerticalOffset" Value="3" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
         <Setter Property="Template">
             <Setter.Value>
@@ -91,7 +91,7 @@
                             <Setter TargetName="iconContent" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False">
-                            <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource CloneConverter}}" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding TabStripPlacement, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="Right">
                             <Setter TargetName="littleBar" Property="HorizontalAlignment" Value="Right" />
@@ -110,10 +110,10 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource CloneConverter}}" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
-        <Setter Property="ToolTipService.VerticalOffset" Value="5" />
+        <Setter Property="ToolTipService.VerticalOffset" Value="3" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
         <Setter Property="ToolTipService.IsEnabled" Value="False" />
         <Setter Property="Template">

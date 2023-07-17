@@ -68,4 +68,5 @@
     <converter:InsideCornerRadiusConverter x:Key="LeftInsideCornerRadiusConverter" Type="Left" />
     <converter:InsideCornerRadiusConverter x:Key="RightInsideCornerRadiusConverter" Type="Right" />
 
+    <converter:CloneConverter x:Key="CloneConverter" />
 </ResourceDictionary>
