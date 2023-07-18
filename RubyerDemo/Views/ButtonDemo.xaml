@@ -30,7 +30,7 @@
                         <Button Style="{DynamicResource AccentButton}" Content="强调按钮" />
                         <Button Style="{DynamicResource InfoButton}" Content="消息按钮" />
                         <Button Style="{DynamicResource SuccessButton}" Content="成功按钮" />
-                        <Button Style="{DynamicResource WaringButton}" Content="警告按钮" />
+                        <Button Style="{DynamicResource WarningButton}" Content="警告按钮" />
                         <Button Style="{DynamicResource ErrorButton}" Content="错误按钮" />
                     </StackPanel>
                 </controls:ControlDisplay>

@@ -140,6 +140,11 @@ namespace Rubyer
             DialogContainer.CloseDialogCommand.Execute(parameter, dialog);
         }
 
+        /// <summary>
+        /// 关闭
+        /// </summary>
+        /// <param name="parameter">参数</param>
+        /// <exception cref="NullReferenceException">找不到对话框</exception>
         public static void Close(object parameter = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");

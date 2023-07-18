@@ -133,7 +133,7 @@
                         <StackPanel rubyer:PanelHelper.Spacing="10">
                             <TextBlock Text="根据 ComboBoxHelper.SelectedItems &#x000A;绑定选中项集合" />
                             <StackPanel rubyer:PanelHelper.Spacing="5" Orientation="Horizontal">
-                                <Button Style="{StaticResource WaringButton}"
+                                <Button Style="{StaticResource WarningButton}"
                                         Command="{Binding RemoveFirstItemCommand}"
                                         Content="移除第一个" />
                                 <Button Style="{StaticResource ErrorButton}"
