@@ -56,7 +56,6 @@ namespace Rubyer
         public Action<DialogContainer, object> AfterCloseHandler;
 
         private Border rootBorder;
-        private object openParameter;
         private object closeParameter;
         private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
 
@@ -375,7 +374,6 @@ namespace Rubyer
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            openParameter = e.Parameter;
             IsShow = true;
         }
 
@@ -415,11 +413,6 @@ namespace Rubyer
             dialog.BeforeOpenHandler?.Invoke(dialog);
 
             _ = dialog.Focus();
-
-            if (dialog.DialogContent is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
-            {
-                dialogContext.OnDialogOpened(dialog.openParameter);
-            }
         }
 
         private void Closed(object sender, RoutedEventArgs e)

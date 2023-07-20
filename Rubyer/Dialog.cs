@@ -18,6 +18,49 @@ namespace Rubyer
         internal static Dictionary<string, DialogContainer> Dialogs { get; private set; } = new Dictionary<string, DialogContainer>();
 
         /// <summary>
+        /// 操作对话框 DataContext 的逻辑
+        /// </summary>
+        private static Func<DialogContainer, object, object, bool> dataContextAction = (dialog, content, parameter) =>
+        {
+            if (content is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
+            {
+                // 绑定标题
+                var binding = new Binding(nameof(dialog.Title))
+                {
+                    Source = dialogContext,
+                    Mode = BindingMode.OneWay
+                };
+
+                dialog.SetBinding(DialogContainer.TitleProperty, binding);
+
+                // 设置关闭对话框委托
+                dialogContext.RequestClose += (param) =>
+                {
+                    DialogContainer.CloseDialogCommand.Execute(param, dialog);
+                };
+
+                // 传参到对话框打开 viewmodel
+                dialog.BeforeOpen += (sender, e) =>
+                {
+                    dialogContext.OnDialogOpened(parameter);
+                };
+
+                return true;
+            }
+
+            return false;
+        };
+
+        /// <summary>
+        /// 配置对话框 DataContext 操作逻辑
+        /// </summary>
+        /// <param name="configure">配置逻辑</param>
+        public static void ConfigureDataContextAction(Func<DialogContainer, object, object, bool> configure)
+        {
+            dataContextAction = configure;
+        }
+
+        /// <summary>
         /// 添加对话框
         /// </summary>
         /// <param name="identifier">标识</param>
@@ -36,19 +79,7 @@ namespace Rubyer
         {
             dialog.Dispatcher.VerifyAccess();
 
-            if (content is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
-            {
-                var binding = new Binding(nameof(dialog.Title));
-                binding.Source = dialogContext;
-                binding.Mode = BindingMode.OneWay;
-                dialog.SetBinding(DialogContainer.TitleProperty, binding);
-
-                dialogContext.RequestClose += (param) =>
-                {
-                    DialogContainer.CloseDialogCommand.Execute(param, dialog);
-                };
-            }
-            else
+            if (!dataContextAction.Invoke(dialog, content, parameters))
             {
                 dialog.Title = title;
             }
