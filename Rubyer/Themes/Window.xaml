@@ -12,10 +12,7 @@
         <Setter Property="Foreground" Value="{Binding TitleForeground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
-        <Setter Property="Height" Value="Auto" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.8" />
-        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
     </Style>
 
     <Style x:Key="TitleBarCloseButtonStyle"
@@ -106,7 +103,6 @@
                                 <StackPanel x:Name="WindowCommandButtonsStackPanel"
                                             Grid.Column="1"
                                             HorizontalAlignment="Right"
-                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                             Background="Transparent"
                                             Orientation="Horizontal"
                                             WindowChrome.IsHitTestVisibleInChrome="True">
