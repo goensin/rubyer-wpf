@@ -79,7 +79,6 @@
                                         Visibility="{TemplateBinding TitleShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 <!--  默认 window 的左边内容：图标 + 标题  -->
                                 <Grid Grid.Column="0"
-                                      Margin="2 0"
                                       TextBlock.Foreground="{TemplateBinding TitleForeground}">
                                     <StackPanel x:Name="defalutTitle"
                                                 Orientation="Horizontal"
