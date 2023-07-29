@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
+using static Rubyer.DialogContainer;
 
 namespace Rubyer
 {
@@ -17,47 +18,15 @@ namespace Rubyer
         /// </summary>
         internal static Dictionary<string, DialogContainer> Dialogs { get; private set; } = new Dictionary<string, DialogContainer>();
 
-        /// <summary>
-        /// 操作对话框 DataContext 的逻辑
-        /// </summary>
-        private static Func<DialogContainer, object, object, bool> dataContextAction = (dialog, content, parameter) =>
-        {
-            if (content is FrameworkElement element && element.DataContext is IDialogDataContext dialogContext)
-            {
-                // 绑定标题
-                var binding = new Binding(nameof(dialog.Title))
-                {
-                    Source = dialogContext,
-                    Mode = BindingMode.OneWay
-                };
-
-                dialog.SetBinding(DialogContainer.TitleProperty, binding);
-
-                // 设置关闭对话框委托
-                dialogContext.RequestClose += (param) =>
-                {
-                    DialogContainer.CloseDialogCommand.Execute(param, dialog);
-                };
-
-                // 传参到对话框打开 viewmodel
-                dialog.BeforeOpen += (sender, e) =>
-                {
-                    dialogContext.OnDialogOpened(parameter);
-                };
-
-                return true;
-            }
-
-            return false;
-        };
+        private static IDialogDataContextConfiguration dataContextConfiguration = new DialogDataContextConfiguration();
 
         /// <summary>
         /// 配置对话框 DataContext 操作逻辑
         /// </summary>
-        /// <param name="configure">配置逻辑</param>
-        public static void ConfigureDataContextAction(Func<DialogContainer, object, object, bool> configure)
+        /// <param name="configuration">配置逻辑</param>
+        public static void ConfigureDataContextAction(IDialogDataContextConfiguration configuration)
         {
-            dataContextAction = configure;
+            dataContextConfiguration = configuration;
         }
 
         /// <summary>
@@ -79,7 +48,7 @@ namespace Rubyer
         {
             dialog.Dispatcher.VerifyAccess();
 
-            if (!dataContextAction.Invoke(dialog, content, parameters))
+            if (!dataContextConfiguration.OnOpenAction(dialog, content, parameters))
             {
                 dialog.Title = title;
             }
@@ -93,10 +62,15 @@ namespace Rubyer
             var taskCompletionSource = new TaskCompletionSource<object>();
             dialog.Tag = taskCompletionSource;
 
-            dialog.AfterClose -= OnDialogClosed;
             dialog.AfterClose += OnDialogClosed;
 
-            return await taskCompletionSource.Task;
+            var result = await taskCompletionSource.Task;
+
+            dialog.AfterClose -= OnDialogClosed;
+
+            dataContextConfiguration.OnCloseAction();
+
+            return result;
         }
 
         private static void OnDialogClosed(object sender, DialogResultRoutedEventArgs e)
