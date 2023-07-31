@@ -27,6 +27,7 @@ namespace RubyerDemo.ViewModels
             {
                 new ViewItem("Overview", "总览", new Overview(), IconType.Home2Line),
                 new ViewItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
+                new ViewItem("DropDownButton", "下拉按钮", new DropDownButtonDemo(), IconType.ArrowDownCircleLine),
                 new ViewItem("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
                 new ViewItem("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),
                 new ViewItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
