@@ -21,6 +21,28 @@
                     <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
+                        <rubyer:DropDownButton x:Name="DropDown" Content="默认按钮">
+                            <rubyer:DropDownButton.MenuItemsSource>
+                                <rubyer:MenuItemCollection>
+                                    <MenuItem Header="菜单一">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="AncientGateFill" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <MenuItem Header="菜单二">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="Building2Fill" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                    <Separator />
+                                    <MenuItem Header="菜单三">
+                                        <MenuItem.Icon>
+                                            <rubyer:Icon Type="AncientPavilionFill" />
+                                        </MenuItem.Icon>
+                                    </MenuItem>
+                                </rubyer:MenuItemCollection>
+                            </rubyer:DropDownButton.MenuItemsSource>
+                        </rubyer:DropDownButton>
                         <Button Content="默认按钮"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />

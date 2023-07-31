@@ -1,0 +1,199 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Menu.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <!--  默认按钮  -->
+    <Style x:Key="RubyerDropDownButton" TargetType="{x:Type rubyer:DropDownButton}">
+        <Setter Property="Background" Value="{DynamicResource Primary}" />
+        <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="10 5" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="MenuItemContainerStyle" Value="{StaticResource RubyerMenuItem}" />
+        <Setter Property="IsShowSeparator" Value="True" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource MaskDark}" />
+        <Setter Property="rubyer:ButtonHelper.ShowShadow" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:DropDownButton}">
+                    <Grid x:Name="root">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="effectBorder"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        Effect="{DynamicResource RightBottomEffect}"
+                                        Visibility="Collapsed" />
+
+                                <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    IsActive="{TemplateBinding IsPressed}"
+                                                    MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                                <ContentPresenter x:Name="contentPresenter"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Focusable="False"
+                                                  RecognizesAccessKey="True"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                <Menu Grid.Column="1"
+                                      rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      rubyer:MenuHelper.IconWidth="{Binding ActualWidth, ElementName=icon, Converter={StaticResource AddConverter}, ConverterParameter=10}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      Foreground="{DynamicResource DefaultForeground}">
+                                    <Separator Margin="0"
+                                               BorderBrush="{TemplateBinding BorderBrush}"
+                                               Visibility="{TemplateBinding IsShowSeparator, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                    <MenuItem x:Name="PART_DropDownMenuItem"
+                                              Style="{StaticResource RubyerMenuItem}"
+                                              Padding="5 0"
+                                              IsSubmenuOpen="{TemplateBinding IsDropDownOpen}"
+                                              ItemContainerStyle="{TemplateBinding MenuItemContainerStyle}"
+                                              ItemTemplate="{TemplateBinding MenuItemTemplate}"
+                                              ItemTemplateSelector="{TemplateBinding MenuItemTemplateSelector}"
+                                              ItemsSource="{TemplateBinding MenuItemsSource}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                        <MenuItem.Template>
+                                            <ControlTemplate TargetType="{x:Type MenuItem}">
+                                                <Border BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                    <Grid>
+                                                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                            IsActive="{TemplateBinding IsHighlighted}"
+                                                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                                                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                                          ContentSource="Header"
+                                                                          RecognizesAccessKey="True"
+                                                                          TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
+
+                                                        <Popup x:Name="Popup"
+                                                               AllowsTransparency="True"
+                                                               Focusable="False"
+                                                               HorizontalOffset="-5"
+                                                               IsOpen="{TemplateBinding IsSubmenuOpen}"
+                                                               Placement="Bottom"
+                                                               PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=rubyer:DropDownButton}}"
+                                                               PopupAnimation="Fade">
+                                                            <Grid>
+                                                                <Border Margin="5"
+                                                                        Padding="0 5"
+                                                                        Background="{DynamicResource FloatBackground}"
+                                                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                        Effect="{DynamicResource AllDirectionEffect}" />
+                                                                <Border x:Name="SubmenuBorder"
+                                                                        Margin="5"
+                                                                        Padding="0 5"
+                                                                        Background="{DynamicResource FloatBackground}"
+                                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                                                    <ScrollViewer Style="{StaticResource MenuScrollViewer}" CanContentScroll="True">
+                                                                        <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
+                                                                    </ScrollViewer>
+                                                                </Border>
+                                                            </Grid>
+                                                        </Popup>
+                                                    </Grid>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsSuspendingPopupAnimation" Value="True">
+                                                        <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
+                                                    </Trigger>
+                                                    <Trigger Property="IsEnabled" Value="False">
+                                                        <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </MenuItem.Template>
+                                        <MenuItem.Header>
+                                            <rubyer:Icon x:Name="icon"
+                                                         Foreground="{TemplateBinding Foreground}"
+                                                         Type="ArrowDownSLine" />
+                                        </MenuItem.Header>
+                                    </MenuItem>
+                                </Menu>
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Effect.ShadowDepth"
+                                                         To="0"
+                                                         Duration="0:0:0.15">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Effect.ShadowDepth"
+                                                         Duration="0:0:0.25">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseIn" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger Property="rubyer:ButtonHelper.ShowShadow" Value="True">
+                            <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding DependencyObjectType.SystemType, RelativeSource={RelativeSource Self}}" Value="{x:Type Button}" />
+                                <Condition Binding="{Binding IsDefault, RelativeSource={RelativeSource Self}}" Value="True" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

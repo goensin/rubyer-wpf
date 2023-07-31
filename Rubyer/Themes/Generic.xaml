@@ -57,6 +57,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/NotificationCard.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Renamer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/FlipView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DropDownButton.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -118,4 +119,5 @@
     <Style BasedOn="{StaticResource RubyerRenamer}" TargetType="{x:Type rubyer:Renamer}" />
     <Style BasedOn="{StaticResource RubyerFlipView}" TargetType="{x:Type rubyer:FlipView}" />
     <Style BasedOn="{StaticResource RubyerFlipViewItem}" TargetType="{x:Type rubyer:FlipViewItem}" />
+    <Style BasedOn="{StaticResource RubyerDropDownButton}" TargetType="{x:Type rubyer:DropDownButton}" />
 </ResourceDictionary>

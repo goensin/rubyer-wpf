@@ -217,7 +217,7 @@
         <rubyer:HamburgerMenuItem Header="朋友圈" IconType="WechatFill" />
 
         <rubyer:HamburgerMenu.OptionsItemsSource>
-            <rubyer:HamburgerMenuItemCollection>
+            <rubyer:MenuItemCollection>
                 <rubyer:HamburgerMenuOptionsItem Header="小程序面板" IconType="LinksLine" />
                 <rubyer:HamburgerMenuOptionsItem Header="手机" IconType="SmartphoneLine" />
                 <rubyer:HamburgerMenuOptionsItem Header="更多" IconType="MenuLine">
@@ -225,7 +225,7 @@
                     <rubyer:HamburgerMenuOptionsItem FontSize="14" Header="意见反馈" />
                     <rubyer:HamburgerMenuOptionsItem FontSize="14" Header="设置" />
                 </rubyer:HamburgerMenuOptionsItem>
-            </rubyer:HamburgerMenuItemCollection>
+            </rubyer:MenuItemCollection>
         </rubyer:HamburgerMenu.OptionsItemsSource>
     </rubyer:HamburgerMenu>
 </rubyer:RubyerWindow>
