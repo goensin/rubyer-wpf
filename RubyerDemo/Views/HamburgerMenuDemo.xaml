@@ -28,7 +28,7 @@
                         </rubyer:HamburgerMenu.PaneHeader>
 
                         <rubyer:HamburgerMenu.OptionsItemsSource>
-                            <rubyer:MenuItemCollection>
+                            <rubyer:HamburgerMenuItemCollection>
                                 <rubyer:HamburgerMenuOptionsItem Command="{Binding SelecteCommand}"
                                                                  CommandParameter="{Binding Header, RelativeSource={RelativeSource Self}}"
                                                                  Header="睡眠"
@@ -64,7 +64,7 @@
                                                                          IconType="BugFill" />
                                     </rubyer:HamburgerMenuOptionsItem>
                                 </rubyer:HamburgerMenuOptionsItem>
-                            </rubyer:MenuItemCollection>
+                            </rubyer:HamburgerMenuItemCollection>
                         </rubyer:HamburgerMenu.OptionsItemsSource>
 
                         <rubyer:HamburgerMenuItem Command="{Binding SelecteCommand}"
