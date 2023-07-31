@@ -18,9 +18,16 @@ namespace Rubyer.Converters
                 return value;
             }
 
-            string xaml = XamlWriter.Save(value);
-            var cloneValue = XamlReader.Parse(xaml);
-            return cloneValue;
+            try
+            {
+                string xaml = XamlWriter.Save(value);
+                var cloneValue = XamlReader.Parse(xaml);
+                return cloneValue;
+            }
+            catch (Exception)
+            {
+                return value;
+            }
         }
 
         /// <inheritdoc/>
