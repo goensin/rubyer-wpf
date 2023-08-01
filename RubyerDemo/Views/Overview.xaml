@@ -18,10 +18,8 @@
                         <Button Content="默认" />
                         <Button Style="{StaticResource SecondaryButton}" Content="次级" />
                         <Button Style="{StaticResource AccentButton}" Content="强调" />
-                        <Button Style="{StaticResource OutlineButton}" Content="默认" />
-                        <Button Style="{StaticResource OutlineAccentButton}" Content="强调" />
-                        <Button Style="{StaticResource TextButton}" Content="默认" />
-                        <Button Style="{StaticResource TextAccentButton}" Content="强调" />
+                        <Button Style="{StaticResource OutlineButton}" Content="轮廓" />
+                        <Button Style="{StaticResource TextButton}" Content="文字" />
                         <Button rubyer:ButtonHelper.Shape="Round" Content="圆角" />
                         <Button Style="{StaticResource AccentButton}" rubyer:ButtonHelper.Shape="Circle">
                             <rubyer:Icon Type="RemixiconFill" />
@@ -29,6 +27,15 @@
                         <Button Style="{StaticResource DarkButton}"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="阴影" />
+                        <rubyer:DropDownButton Content="下拉按钮">
+                            <rubyer:DropDownButton.MenuItemsSource>
+                                <rubyer:MenuItemCollection>
+                                    <MenuItem Header="选项一"></MenuItem>
+                                    <MenuItem Header="选项二"></MenuItem>
+                                    <MenuItem Header="选项三"></MenuItem>
+                                </rubyer:MenuItemCollection>
+                            </rubyer:DropDownButton.MenuItemsSource>
+                        </rubyer:DropDownButton>
                     </StackPanel>
                 </rubyer:Card>
                 <rubyer:Card Padding="10">
