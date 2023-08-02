@@ -53,8 +53,16 @@ namespace Rubyer
         /// <inheritdoc/>
         public void OnCloseAction()
         {
-            dialog.BeforeOpen -= Dialog_BeforeOpen;
-            dialogContext.RequestClose -= DialogContext_RequestClose;
+            if (dialog is { })
+            {
+                dialog.BeforeOpen -= Dialog_BeforeOpen;
+            }
+
+            if (dialogContext is { })
+            {
+                dialogContext.RequestClose -= DialogContext_RequestClose;
+            }
+
             openParameter = null;
             dialogContext = null;
             dialog = null;
