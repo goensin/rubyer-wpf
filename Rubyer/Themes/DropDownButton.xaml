@@ -61,7 +61,8 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                            <Menu Grid.Column="1"
+                            <Menu Style="{StaticResource RubyerMenu}"
+                                  Grid.Column="1"
                                   rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"

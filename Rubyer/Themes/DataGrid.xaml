@@ -148,6 +148,11 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </SelectiveScrollingGrid.RowDefinitions>
+                                
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                                   Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                
                                 <DataGridCellsPresenter Grid.Column="1"
                                                         ItemsPanel="{TemplateBinding ItemsPanel}"
                                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -159,9 +164,6 @@
                                     <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                 </rubyer:Transition>
 
-                                <DataGridRowHeader Grid.RowSpan="2"
-                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
-                                                   Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                             </SelectiveScrollingGrid>
                         </Grid>
                     </Border>

@@ -77,10 +77,14 @@
                                     TabStripPlacement="Left">
                             <TabControl.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Width="130"
-                                               FontSize="16"
-                                               Text="{Binding Key}"
-                                               TextAlignment="Center" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock FontSize="16"
+                                                   Text="{Binding Key}"
+                                                   TextAlignment="Center" />
+                                        <TextBlock FontSize="13"
+                                                   Text="{Binding Count, StringFormat=' ({0})'}"
+                                                   TextAlignment="Center" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </TabControl.ItemTemplate>
                             <TabControl.ContentTemplate>
