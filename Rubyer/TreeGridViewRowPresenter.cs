@@ -16,21 +16,21 @@ namespace Rubyer
 
 
         /// <inheritdoc/>
-        protected override Size MeasureOverride(Size constraint)
-        {
-            GridViewColumnCollection columns = base.Columns;
-            if (columns == null)
-            {
-                return default(Size);
-            }
+        //protected override Size MeasureOverride(Size constraint)
+        //{
+        //    GridViewColumnCollection columns = base.Columns;
+        //    if (columns == null)
+        //    {
+        //        return default(Size);
+        //    }
 
-            var column = columns.FirstOrDefault();
-            var element = GetVisualChild(0) as FrameworkElement;
-            //element.Width = 20;
-            var size = base.MeasureOverride(constraint);
-            size.Width -= size.Width / 2;
-            return size;
-        }
+        //    var column = columns.FirstOrDefault();
+        //    var element = GetVisualChild(0) as FrameworkElement;
+        //    //element.Width = 20;
+        //    var size = base.MeasureOverride(constraint);
+        //    size.Width -= size.Width / 2;
+        //    return size;
+        //}
 
     }
 }

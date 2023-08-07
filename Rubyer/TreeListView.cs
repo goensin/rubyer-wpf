@@ -24,22 +24,22 @@ namespace Rubyer
 
         public TreeListView()
         {
-            Columns.CollectionChanged += Columns_CollectionChanged;
+            //Columns.CollectionChanged += Columns_CollectionChanged;
         }
 
-        private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            foreach (var column in Columns)
-            {
-                column.CellTemplate = null;
-            }
+        //private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        //{
+        //    foreach (var column in Columns)
+        //    {
+        //        column.CellTemplate = null;
+        //    }
 
-            var firstColumn = Columns.FirstOrDefault();
-            if (firstColumn != null)
-            {
-                firstColumn.CellTemplate = this.FindResource("RubyerTreeGridViewCellTemplate") as DataTemplate;
-            }
-        }
+        //    var firstColumn = Columns.FirstOrDefault();
+        //    if (firstColumn != null)
+        //    {
+        //        firstColumn.CellTemplate = this.FindResource("RubyerTreeGridViewCellTemplate") as DataTemplate;
+        //    }
+        //}
 
         /// <summary>
         /// 列集合

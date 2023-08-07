@@ -31,14 +31,19 @@
                 <rubyer:TreeListView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
                 </rubyer:TreeListView.ItemTemplate>
-                
+
                 <rubyer:TreeListView.Columns>
                     <GridViewColumn Width="80"
                                     DisplayMemberBinding="{Binding Code}"
                                     Header="编号" />
                     <GridViewColumn Width="100"
-                                    DisplayMemberBinding="{Binding Name}"
-                                    Header="名称" />
+                                    Header="名称" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="{Binding Name}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </rubyer:TreeListView.Columns>
             </rubyer:TreeListView>
 

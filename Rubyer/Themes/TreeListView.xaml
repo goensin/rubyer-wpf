@@ -75,10 +75,10 @@
     <DataTemplate x:Key="RubyerTreeGridViewCellTemplate">
         <StackPanel Orientation="Horizontal">
             <ToggleButton x:Name="Expander"
-                      Style="{StaticResource ExpandCollapseToggleStyle}"
-                      ClickMode="Press"
-                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeListViewItem}}" />
-            <TextBlock Text="aaa"/>
+                          Style="{StaticResource ExpandCollapseToggleStyle}"
+                          ClickMode="Press"
+                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeListViewItem}}" />
+            <TextBlock Text="aaa" />
         </StackPanel>
     </DataTemplate>
 
@@ -123,10 +123,10 @@
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="true">
                             <rubyer:TreeGridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
-                                                  Content="{TemplateBinding DataContext}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                             Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                             Content="{TemplateBinding Header}"
+                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                         <rubyer:Transition Grid.Row="1"
                                            Grid.Column="1"
@@ -229,7 +229,7 @@
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Normal" />
-        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
+        <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
         <Setter Property="Template">
