@@ -7,43 +7,199 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeView.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="RubyerTreeListViewScrollViewer"
+           BasedOn="{StaticResource RubyerScrollViewer}"
+           TargetType="ScrollViewer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollViewer">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ScrollViewer Grid.ColumnSpan="2"
+                                      Margin="{TemplateBinding Padding}"
+                                      DockPanel.Dock="Top"
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="Hidden"
+                                      VerticalScrollBarVisibility="Hidden">
+                            <!--<GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />-->
+                            <GridViewHeaderRowPresenter Columns="{Binding Path=Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+
+
+                        <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                Grid.Row="1"
+                                                CanContentScroll="True"
+                                                CanHorizontallyScroll="False"
+                                                CanVerticallyScroll="False"
+                                                KeyboardNavigation.DirectionalNavigation="Local" />
+
+                        <ScrollBar Name="PART_HorizontalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="2"
+                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                   Orientation="Horizontal"
+                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                   Value="{TemplateBinding HorizontalOffset}" />
+
+                        <ScrollBar Name="PART_VerticalScrollBar"
+                                   Style="{StaticResource RubyerScrollBar}"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                   Value="{TemplateBinding VerticalOffset}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="RubyerTreeGridViewCellTemplate">
+        <StackPanel Orientation="Horizontal">
+            <ToggleButton x:Name="Expander"
+                      Style="{StaticResource ExpandCollapseToggleStyle}"
+                      ClickMode="Press"
+                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeListViewItem}}" />
+            <TextBlock Text="aaa"/>
+        </StackPanel>
+    </DataTemplate>
+
     <Style x:Key="RubyerTreeListViewItem" TargetType="{x:Type rubyer:TreeListViewItem}">
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ListView}}" />
-        <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=ListView}}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=ListView}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=ListView}}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TreeView}}" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+        <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:TreeListViewItem}">
-
                     <Grid x:Name="root">
-                        <rubyer:ControlMask />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                        <Border x:Name="Border"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ToggleButton x:Name="Expander"
+                                      Style="{StaticResource ExpandCollapseToggleStyle}"
+                                      ClickMode="Press"
+                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                            <GridViewRowPresenter x:Name="content"
-                                                  Margin="{TemplateBinding Padding}"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                        <rubyer:ControlMask Grid.Column="1"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+
+                        <Border x:Name="Bd"
+                                Grid.Column="1"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="true">
+                            <rubyer:TreeGridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                  Content="{TemplateBinding DataContext}"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
+                        <rubyer:Transition Grid.Row="1"
+                                           Grid.Column="1"
+                                           IsShow="{TemplateBinding IsExpanded}"
+                                           Type="CollapseUp">
+                            <ItemsPresenter x:Name="ItemsHost"
+                                            VerticalAlignment="Top"
+                                            Opacity="0"
+                                            Visibility="Collapsed" />
+                        </rubyer:Transition>
                     </Grid>
 
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="root" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="ItemsHost"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="0"
+                                                         Duration="0:0:0.3">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="ItemsHost" Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0.3" Value="{x:Static Visibility.Collapsed}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="HasItems" Value="false">
+                            <Setter TargetName="Expander" Property="Visibility" Value="Hidden" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=ListView}}" />
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="true">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="RubyerTreeListView" TargetType="{x:Type rubyer:TreeListView}">
@@ -51,15 +207,24 @@
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto" />
+        <Setter Property="ScrollViewer.PanningMode" Value="Both" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerTreeListViewItem}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
+        <Setter Property="rubyer:TreeViewHelper.IconFocusedBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:TreeViewHelper.RightClickToSelected" Value="True" />
+        <Setter Property="rubyer:TreeViewHelper.IsBindable" Value="True" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource BlackForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
@@ -67,39 +232,46 @@
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Left" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
-        <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
-        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
-        <Setter Property="rubyer:TreeViewHelper.ExpandIconType" Value="ArrowRightLine" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="rubyer:TreeListView">
-                    <Border Name="Border"
-                            Background="{TemplateBinding Background}"
+                <ControlTemplate TargetType="{x:Type rubyer:TreeListView}">
+                    <Border x:Name="Bd"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
-                            <ItemsPresenter />
+                        <ScrollViewer x:Name="_tv_scrollviewer_"
+                                      Style="{StaticResource RubyerTreeListViewScrollViewer}"
+                                      Padding="{TemplateBinding Padding}"
+                                      Background="{TemplateBinding Background}"
+                                      CanContentScroll="false"
+                                      Focusable="false"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">
+                            <ItemsPresenter x:Name="items" OverridesDefaultStyle="True" />
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsGrouping" Value="True" />
-                                <Condition Property="VirtualizingPanel.IsVirtualizingWhenGrouping" Value="False" />
-                            </MultiTrigger.Conditions>
-                            <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
-                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                            <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        </Trigger>
+                        <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                            <Setter TargetName="_tv_scrollviewer_" Property="CanContentScroll" Value="True" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="VirtualizingPanel.IsVirtualizing" Value="True">
+                <Setter Property="ItemsPanel">
+                    <Setter.Value>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary>

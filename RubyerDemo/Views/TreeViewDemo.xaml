@@ -28,18 +28,20 @@
             </controls:ControlDisplay>
 
             <rubyer:TreeListView Grid.Column="1" ItemsSource="{Binding Cities}">
-                <rubyer:TreeListView.View>
-                    <GridView>
-                        <GridViewColumn Width="80"
-                                        DisplayMemberBinding="{Binding Code}"
-                                        Header="编号" />
-                        <GridViewColumn Width="100"
-                                        DisplayMemberBinding="{Binding Name}"
-                                        Header="名称" />
-                    </GridView>
-                </rubyer:TreeListView.View>
+                <rubyer:TreeListView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
+                </rubyer:TreeListView.ItemTemplate>
+                
+                <rubyer:TreeListView.Columns>
+                    <GridViewColumn Width="80"
+                                    DisplayMemberBinding="{Binding Code}"
+                                    Header="编号" />
+                    <GridViewColumn Width="100"
+                                    DisplayMemberBinding="{Binding Name}"
+                                    Header="名称" />
+                </rubyer:TreeListView.Columns>
             </rubyer:TreeListView>
-                    
+
             <!--<controls:ControlDisplay Title="Configure TreeView"
                                      Grid.Column="1"
                                      VerticalAlignment="Top"

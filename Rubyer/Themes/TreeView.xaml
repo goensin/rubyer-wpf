@@ -79,7 +79,6 @@
                 <ControlTemplate TargetType="{x:Type TreeViewItem}">
                     <Grid x:Name="root">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="19" />
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
@@ -94,7 +93,6 @@
                                       IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
 
                         <rubyer:ControlMask Grid.Column="1"
-                                            Grid.ColumnSpan="2"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TreeView}}"
                                             IsActive="{TemplateBinding IsSelected}"
@@ -102,7 +100,6 @@
 
                         <Border x:Name="Bd"
                                 Grid.Column="1"
-                                Grid.ColumnSpan="2"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -115,7 +112,6 @@
                         </Border>
                         <rubyer:Transition Grid.Row="1"
                                            Grid.Column="1"
-                                           Grid.ColumnSpan="2"
                                            IsShow="{TemplateBinding IsExpanded}"
                                            Type="CollapseUp">
                             <ItemsPresenter x:Name="ItemsHost"
