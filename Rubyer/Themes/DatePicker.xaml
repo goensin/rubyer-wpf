@@ -3,6 +3,7 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Calendar.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
@@ -17,6 +18,7 @@
         <Setter Property="IsTodayHighlighted" Value="True" />
         <Setter Property="SelectedDateFormat" Value="Short" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
@@ -66,6 +68,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

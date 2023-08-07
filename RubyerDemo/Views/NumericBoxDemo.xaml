@@ -33,6 +33,7 @@
                         <rubyer:NumericBox Width="120"
                                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
                                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
+                                           IsReadOnly="True"
                                            MaxValue="10"
                                            MinValue="-10"
                                            Value="1" />

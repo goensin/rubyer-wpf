@@ -15,9 +15,10 @@
         <ScrollViewer Style="{StaticResource SmallScrollViewer}">
             <controls:ControlDisplay Title="Default PageBar" Margin="10">
                 <Grid rubyer:GridHelper.RowDefinitions="Auto, Auto">
-                    <StackPanel Orientation="Horizontal" rubyer:PanelHelper.Spacing="10">
+                    <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
                         <StackPanel rubyer:PanelHelper.Spacing="10">
-                            <StackPanel HorizontalAlignment="Center" rubyer:PanelHelper.Spacing="10"
+                            <StackPanel HorizontalAlignment="Center"
+                                        rubyer:PanelHelper.Spacing="10"
                                         Orientation="Horizontal">
                                 <CheckBox x:Name="totleCheckBox"
                                           Content="显示总页数"
@@ -68,8 +69,8 @@
                                 </ComboBox>
                             </StackPanel>
 
-                            <StackPanel rubyer:PanelHelper.Spacing="10"
-                                        HorizontalAlignment="Left"
+                            <StackPanel HorizontalAlignment="Left"
+                                        rubyer:PanelHelper.Spacing="10"
                                         Orientation="Horizontal">
                                 <CheckBox x:Name="roundCheckBox"
                                           Content="圆角"
@@ -125,7 +126,7 @@
                                             PageSizeChangedCommand="{Binding PageSizeChangedCommand}"
                                             PageSizeCollection="2, 5, 10, 20, 30"
                                             SelectedBrush="{Binding SelectedBrush}"
-                                            Total="100" />
+                                            Total="1000" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>
