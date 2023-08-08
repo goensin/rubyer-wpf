@@ -3,7 +3,9 @@ using System;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Media3D;
 
 namespace Rubyer
 {
@@ -64,7 +66,20 @@ namespace Rubyer
         {
             if (e.OriginalSource is DependencyObject dependencyObject)
             {
-                var treeViewItem = dependencyObject.TryGetParentFromVisualTree<TreeViewItem>();
+                TreeViewItem treeViewItem = null;
+                if (dependencyObject is Visual || dependencyObject is Visual3D)
+                {
+                    treeViewItem = dependencyObject.TryGetParentFromVisualTree<TreeViewItem>();
+                }
+                else
+                {
+                    var parent = LogicalTreeHelper.GetParent(dependencyObject);
+                    if (parent != null)
+                    {
+                        treeViewItem = parent.TryGetParentFromVisualTree<TreeViewItem>();
+                    }
+                }
+
                 if (treeViewItem != null)
                 {
                     treeViewItem.Focus();

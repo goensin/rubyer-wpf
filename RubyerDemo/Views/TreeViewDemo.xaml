@@ -21,7 +21,9 @@
                 <TreeView ItemsSource="{Binding Cities}">
                     <TreeView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                            <TextBlock Text="{Binding Name}" />
+                            <TextBlock>
+                                <Run Text="{Binding Name}" />
+                            </TextBlock>
                         </HierarchicalDataTemplate>
                     </TreeView.ItemTemplate>
                 </TreeView>
@@ -36,11 +38,10 @@
                     <GridViewColumn Width="80"
                                     DisplayMemberBinding="{Binding Code}"
                                     Header="编号" />
-                    <GridViewColumn Width="100"
-                                    Header="名称" >
+                    <GridViewColumn Width="100" Header="名称">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Content="{Binding Name}"/>
+                                <Button Content="{Binding Name}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
