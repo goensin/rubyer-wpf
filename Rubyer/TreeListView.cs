@@ -1,6 +1,4 @@
-﻿using System.Collections.Specialized;
-using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 
 namespace Rubyer
@@ -22,25 +20,6 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeListView), new FrameworkPropertyMetadata(typeof(TreeListView)));
         }
 
-        public TreeListView()
-        {
-            //Columns.CollectionChanged += Columns_CollectionChanged;
-        }
-
-        //private void Columns_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    foreach (var column in Columns)
-        //    {
-        //        column.CellTemplate = null;
-        //    }
-
-        //    var firstColumn = Columns.FirstOrDefault();
-        //    if (firstColumn != null)
-        //    {
-        //        firstColumn.CellTemplate = this.FindResource("RubyerTreeGridViewCellTemplate") as DataTemplate;
-        //    }
-        //}
-
         /// <summary>
         /// 列集合
         /// </summary>
@@ -61,12 +40,6 @@ namespace Rubyer
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new TreeListViewItem();
-        }
-
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
         }
     }
 }

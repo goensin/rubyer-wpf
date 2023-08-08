@@ -29,16 +29,14 @@
                 </TreeView>
             </controls:ControlDisplay>
 
-            <rubyer:TreeListView Grid.Column="1" ItemsSource="{Binding Cities}">
+            <!--<rubyer:TreeListView Grid.Column="1" ItemsSource="{Binding Cities}">
                 <rubyer:TreeListView.ItemTemplate>
                     <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
                 </rubyer:TreeListView.ItemTemplate>
 
                 <rubyer:TreeListView.Columns>
-                    <GridViewColumn Width="80"
-                                    DisplayMemberBinding="{Binding Code}"
-                                    Header="编号" />
-                    <GridViewColumn Width="100" Header="名称">
+                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="编号" />
+                    <GridViewColumn Header="名称">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Button Content="{Binding Name}" />
@@ -46,9 +44,9 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
                 </rubyer:TreeListView.Columns>
-            </rubyer:TreeListView>
+            </rubyer:TreeListView>-->
 
-            <!--<controls:ControlDisplay Title="Configure TreeView"
+            <controls:ControlDisplay Title="Configure TreeView"
                                      Grid.Column="1"
                                      VerticalAlignment="Top"
                                      HorizontalContentAlignment="Stretch"
@@ -86,7 +84,7 @@
                         </TreeView.ItemTemplate>
                     </TreeView>
                 </Grid>
-            </controls:ControlDisplay>-->
+            </controls:ControlDisplay>
         </Grid>
     </smtx:XamlDisplay>
 </UserControl>

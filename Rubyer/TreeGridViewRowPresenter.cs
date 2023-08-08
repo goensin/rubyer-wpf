@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,24 +14,17 @@ namespace Rubyer
     /// </summary>
     public class TreeGridViewRowPresenter : GridViewRowPresenter
     {
-
+        /// <inheritdoc/>
+        protected override Size MeasureOverride(Size constraint)
+        {
+            
+            return base.MeasureOverride(constraint);
+        }
 
         /// <inheritdoc/>
-        //protected override Size MeasureOverride(Size constraint)
-        //{
-        //    GridViewColumnCollection columns = base.Columns;
-        //    if (columns == null)
-        //    {
-        //        return default(Size);
-        //    }
-
-        //    var column = columns.FirstOrDefault();
-        //    var element = GetVisualChild(0) as FrameworkElement;
-        //    //element.Width = 20;
-        //    var size = base.MeasureOverride(constraint);
-        //    size.Width -= size.Width / 2;
-        //    return size;
-        //}
-
+        protected override Size ArrangeOverride(Size arrangeSize)
+        {
+            return base.ArrangeOverride(arrangeSize);
+        }
     }
 }

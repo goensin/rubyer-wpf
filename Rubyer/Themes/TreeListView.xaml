@@ -41,7 +41,6 @@
                             <GridViewHeaderRowPresenter Columns="{Binding Path=Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
 
-
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"
                                                 Grid.Row="1"
                                                 CanContentScroll="True"
@@ -72,16 +71,6 @@
         </Setter>
     </Style>
 
-    <DataTemplate x:Key="RubyerTreeGridViewCellTemplate">
-        <StackPanel Orientation="Horizontal">
-            <ToggleButton x:Name="Expander"
-                          Style="{StaticResource ExpandCollapseToggleStyle}"
-                          ClickMode="Press"
-                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeListViewItem}}" />
-            <TextBlock Text="aaa" />
-        </StackPanel>
-    </DataTemplate>
-
     <Style x:Key="RubyerTreeListViewItem" TargetType="{x:Type rubyer:TreeListViewItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TreeView}}" />
@@ -96,7 +85,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:TreeListViewItem}">
                     <Grid x:Name="root">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="20" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -122,7 +111,8 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="true">
-                            <rubyer:TreeGridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            <rubyer:TreeGridViewRowPresenter Margin="20 0 0 0"
+                                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                              Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
                                                              Content="{TemplateBinding Header}"
