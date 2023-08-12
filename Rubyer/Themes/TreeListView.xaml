@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Rubyer.Converters"
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
@@ -42,7 +43,7 @@
                         </ScrollViewer>
 
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"
-                                                Grid.Row="1"
+                                                Grid.Row="1" Grid.ColumnSpan="2"
                                                 CanContentScroll="True"
                                                 CanHorizontallyScroll="False"
                                                 CanVerticallyScroll="False"
@@ -83,9 +84,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:TreeListViewItem}">
+                    <ControlTemplate.Resources>
+                        <converters:TreeListViewItemFirstColumnOffsetConverter x:Key="TreeListViewItemFirstColumnOffsetConverter" />
+                    </ControlTemplate.Resources>
                     <Grid x:Name="root">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -111,12 +115,20 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 SnapsToDevicePixels="true">
-                            <rubyer:TreeGridViewRowPresenter Margin="20 0 0 0"
-                                                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            <rubyer:TreeGridViewRowPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                              Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
                                                              Content="{TemplateBinding Header}"
-                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>
+                                    <MultiBinding Converter="{StaticResource TreeListViewItemFirstColumnOffsetConverter}">
+                                        <MultiBinding.Bindings>
+                                            <Binding ElementName="Bd" />
+                                            <Binding RelativeSource="{RelativeSource AncestorType=rubyer:TreeListView}" />
+                                        </MultiBinding.Bindings>
+                                    </MultiBinding>
+                                </rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>
+                            </rubyer:TreeGridViewRowPresenter>
                         </Border>
                         <rubyer:Transition Grid.Row="1"
                                            Grid.Column="1"
@@ -231,7 +243,6 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <ScrollViewer x:Name="_tv_scrollviewer_"
                                       Style="{StaticResource RubyerTreeListViewScrollViewer}"
-                                      Padding="{TemplateBinding Padding}"
                                       Background="{TemplateBinding Background}"
                                       CanContentScroll="false"
                                       Focusable="false"

@@ -186,7 +186,7 @@
                 <controls:ControlDisplay Title="展开详细信息"
                                          Grid.Row="5"
                                          Description="DataGridDetailToggleButtonColumn">
-                    <DataGrid x:Name="DataGrid6"
+                    <DataGrid x:Name="DataGrid6" Height="200"
                               HorizontalContentAlignment="Center"
                               rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"

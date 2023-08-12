@@ -148,11 +148,11 @@
                                     <RowDefinition Height="*" />
                                     <RowDefinition Height="Auto" />
                                 </SelectiveScrollingGrid.RowDefinitions>
-                                
+
                                 <DataGridRowHeader Grid.RowSpan="2"
                                                    SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
                                                    Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
-                                
+
                                 <DataGridCellsPresenter Grid.Column="1"
                                                         ItemsPanel="{TemplateBinding ItemsPanel}"
                                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />

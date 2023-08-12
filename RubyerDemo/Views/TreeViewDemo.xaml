@@ -29,23 +29,6 @@
                 </TreeView>
             </controls:ControlDisplay>
 
-            <!--<rubyer:TreeListView Grid.Column="1" ItemsSource="{Binding Cities}">
-                <rubyer:TreeListView.ItemTemplate>
-                    <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
-                </rubyer:TreeListView.ItemTemplate>
-
-                <rubyer:TreeListView.Columns>
-                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="编号" />
-                    <GridViewColumn Header="名称">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="{Binding Name}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                </rubyer:TreeListView.Columns>
-            </rubyer:TreeListView>-->
-
             <controls:ControlDisplay Title="Configure TreeView"
                                      Grid.Column="1"
                                      VerticalAlignment="Top"

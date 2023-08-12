@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -14,17 +12,76 @@ namespace Rubyer
     /// </summary>
     public class TreeGridViewRowPresenter : GridViewRowPresenter
     {
-        /// <inheritdoc/>
-        protected override Size MeasureOverride(Size constraint)
+        /// <summary>
+        /// 首列偏移大小
+        /// </summary>
+        public static readonly DependencyProperty FirstColumnOffsetSizeProperty =
+                DependencyProperty.Register("FirstColumnOffsetSize", typeof(double), typeof(TreeGridViewRowPresenter), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 列集合
+        /// </summary>
+        public double FirstColumnOffsetSize
         {
-            
-            return base.MeasureOverride(constraint);
+            get { return (double)GetValue(FirstColumnOffsetSizeProperty); }
+            set { SetValue(FirstColumnOffsetSizeProperty, value); }
         }
 
         /// <inheritdoc/>
         protected override Size ArrangeOverride(Size arrangeSize)
         {
-            return base.ArrangeOverride(arrangeSize);
+            GridViewColumnCollection columns = base.Columns;
+            if (columns == null)
+            {
+                return arrangeSize;
+            }
+
+            List<UIElement> internalChildren = new List<UIElement>();
+            var count = VisualTreeHelper.GetChildrenCount(this);
+            for (int i = 0; i < count; i++)
+            {
+                if (VisualTreeHelper.GetChild(this, i) is FrameworkElement element)
+                {
+                    internalChildren.Add(element);
+                }
+            }
+
+            double num = 0.0;
+            double num2 = arrangeSize.Width;
+            int index = 0;
+            foreach (GridViewColumn item in columns)
+            {
+                // 实在拿不到 Column 几个属性，需要使用反射
+                var columnType = item.GetType();
+                var actualIndexPropertyInfo = columnType.GetProperty("ActualIndex", BindingFlags.Instance | BindingFlags.NonPublic);
+                var statePropertyInfo = columnType.GetProperty("State", BindingFlags.Instance | BindingFlags.NonPublic);
+                var desiredWidthPropertyInfo = columnType.GetProperty("DesiredWidth", BindingFlags.Instance | BindingFlags.NonPublic);
+
+                var actualIndex = (int)actualIndexPropertyInfo.GetValue(item);
+                var state = (int)statePropertyInfo.GetValue(item);
+                var desiredWidth = (double)desiredWidthPropertyInfo.GetValue(item);
+
+                UIElement uIElement = internalChildren[actualIndex];
+                if (uIElement != null)
+                {
+                    double num3 = Math.Min(num2, (state == 3) ? item.Width : desiredWidth);
+
+                    if (index++ == 0)
+                    {
+                        num3 -= FirstColumnOffsetSize;
+                    }
+
+                    if (num3 < 0)
+                    {
+                        num3 = 0;
+                    }
+                    uIElement.Arrange(new Rect(num, 0.0, num3, arrangeSize.Height));
+                    num2 -= num3;
+                    num += num3;
+                }
+            }
+
+            return arrangeSize;
         }
     }
 }

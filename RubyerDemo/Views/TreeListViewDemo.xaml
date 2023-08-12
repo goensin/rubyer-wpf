@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="RubyerDemo.Views.TreeListViewDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TreeViewViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="TreeListViewDemo">
+        <Grid Margin="10" rubyer:PanelHelper.Spacing="10">
+            <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch">
+                <rubyer:TreeListView rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                                     rubyer:HeaderHelper.FontSize="16"
+                                     rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
+                                     rubyer:HeaderHelper.Padding="10"
+                                     ItemsSource="{Binding Cities}"
+                                     VirtualizingPanel.IsVirtualizing="False">
+                    <rubyer:TreeListView.ItemTemplate>
+                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
+                    </rubyer:TreeListView.ItemTemplate>
+
+                    <rubyer:TreeListView.Columns>
+                        <GridViewColumn Width="200"
+                                        DisplayMemberBinding="{Binding Code}"
+                                        Header="编号" />
+
+                        <GridViewColumn Width="300" Header="名称">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Padding="0 2" Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </rubyer:TreeListView.Columns>
+                </rubyer:TreeListView>
+            </controls:ControlDisplay>
+        </Grid>
+    </smtx:XamlDisplay>
+</UserControl>

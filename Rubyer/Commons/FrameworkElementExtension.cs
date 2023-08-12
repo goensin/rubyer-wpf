@@ -33,6 +33,28 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 遍历父元素
+        /// </summary>
+        /// <param name="dependencyObject">依赖对象</param>
+        /// <param name="parentAction">父元素回调</param>
+        /// <param name="overCondition">结束条件</param>
+        public static void ForEachParent(this DependencyObject dependencyObject, Action<DependencyObject> parentAction, Func<DependencyObject, bool> overCondition = null)
+        {
+            DependencyObject parent;
+            while ((parent = VisualTreeHelper.GetParent(dependencyObject)) != null)
+            {
+                parentAction?.Invoke(parent);
+                if (overCondition?.Invoke(parent) == true)
+                {
+                    break;
+                }
+
+                dependencyObject = parent;
+            }
+        }
+
+
+        /// <summary>
         /// 查找父元素
         /// </summary>
         /// <typeparam name="T">类型</typeparam>

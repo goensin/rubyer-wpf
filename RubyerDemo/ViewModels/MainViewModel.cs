@@ -44,6 +44,7 @@ namespace RubyerDemo.ViewModels
                 new ViewItem("ListBox", "列表框", new ListBoxDemo(), IconType.ListUnordered),
                 new ViewItem("ListView", "列表视图", new ListViewDemo(), IconType.ListCheck2),
                 new ViewItem("TreeView", "树形视图", new TreeViewDemo(), IconType.NodeTree),
+                new ViewItem("TreeListView", "树形列表视图", new TreeListViewDemo(), IconType.NodeTree),
                 new ViewItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
                 new ViewItem("TabControl", "选项卡", new TabControlDemo(), IconType.Layout4Line),
                 new ViewItem("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),
