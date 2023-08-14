@@ -43,8 +43,9 @@
                         </ScrollViewer>
 
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"
-                                                Grid.Row="1" Grid.ColumnSpan="2"
-                                                CanContentScroll="True"
+                                                Grid.Row="1"
+                                                Grid.ColumnSpan="2"
+                                                CanContentScroll="{TemplateBinding CanContentScroll}"
                                                 CanHorizontallyScroll="False"
                                                 CanVerticallyScroll="False"
                                                 KeyboardNavigation.DirectionalNavigation="Local" />
@@ -234,6 +235,7 @@
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Top" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:TreeListView}">
@@ -244,8 +246,8 @@
                         <ScrollViewer x:Name="_tv_scrollviewer_"
                                       Style="{StaticResource RubyerTreeListViewScrollViewer}"
                                       Background="{TemplateBinding Background}"
-                                      CanContentScroll="false"
-                                      Focusable="false"
+                                      CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
+                                      Focusable="False"
                                       HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}">

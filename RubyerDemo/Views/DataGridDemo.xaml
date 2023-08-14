@@ -186,12 +186,14 @@
                 <controls:ControlDisplay Title="展开详细信息"
                                          Grid.Row="5"
                                          Description="DataGridDetailToggleButtonColumn">
-                    <DataGrid x:Name="DataGrid6" Height="200"
+                    <DataGrid x:Name="DataGrid6"
+                              Height="200"
                               HorizontalContentAlignment="Center"
                               rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
-                              ItemsSource="{Binding Weathers}">
+                              ItemsSource="{Binding Weathers}"
+                              ScrollViewer.CanContentScroll="False">
                         <DataGrid.RowDetailsTemplate>
                             <DataTemplate>
                                 <StackPanel Margin="30 5"
