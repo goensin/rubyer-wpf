@@ -31,15 +31,14 @@
                                       Focusable="False"
                                       HorizontalScrollBarVisibility="Hidden"
                                       VerticalScrollBarVisibility="Hidden">
-                            <!--<GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />-->
-                            <GridViewHeaderRowPresenter Columns="{Binding Path=Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=AllowsColumnReorder, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        ColumnHeaderContainerStyle="{Binding Path=ColumnHeaderContainerStyle, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        ColumnHeaderContextMenu="{Binding Path=ColumnHeaderContextMenu, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        ColumnHeaderTemplate="{Binding Path=ColumnHeaderTemplate, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        ColumnHeaderTemplateSelector="{Binding Path=ColumnHeaderTemplateSelector, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        ColumnHeaderToolTip="{Binding Path=ColumnHeaderToolTip, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        Columns="{Binding Path=Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </ScrollViewer>
 
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"

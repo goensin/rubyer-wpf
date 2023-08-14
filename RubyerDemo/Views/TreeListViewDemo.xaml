@@ -16,6 +16,7 @@
                                      rubyer:HeaderHelper.FontSize="16"
                                      rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
                                      rubyer:HeaderHelper.Padding="10"
+                                     AllowsColumnReorder="False"
                                      ItemsSource="{Binding Cities}"
                                      VirtualizingPanel.IsVirtualizing="False">
                     <rubyer:TreeListView.ItemTemplate>
