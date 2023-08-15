@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -103,9 +104,22 @@ namespace Rubyer
                     {
                         num3 = 0;
                     }
+
                     uIElement.Arrange(new Rect(num, 0.0, num3, arrangeSize.Height));
                     num2 -= num3;
                     num += num3;
+
+                    Line line = new()
+                    {
+                        Stroke = Brushes.Black,
+                        StrokeThickness = 1,
+                        X1 = 0,
+                        Y1 = 0,
+                        X2 = 0,
+                        Y2 = arrangeSize.Height
+                    };
+
+                    line.Arrange(new Rect(num, 0.0, 0.0, arrangeSize.Height));
                 }
             }
 

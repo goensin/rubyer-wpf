@@ -12,12 +12,13 @@
     <smtx:XamlDisplay UniqueKey="TreeListViewDemo">
         <Grid Margin="10" rubyer:PanelHelper.Spacing="10">
             <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch">
-                <rubyer:TreeListView rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                <rubyer:TreeListView rubyer:HeaderHelper.Background="Transparent"
                                      rubyer:HeaderHelper.FontSize="16"
-                                     rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
+                                     rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
                                      rubyer:HeaderHelper.HorizontalAlignment="Left"
                                      rubyer:HeaderHelper.Padding="10"
                                      AllowsColumnReorder="False"
+                                     GridLinesVisibility="All"
                                      ItemsSource="{Binding Cities}">
                     <rubyer:TreeListView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}" />

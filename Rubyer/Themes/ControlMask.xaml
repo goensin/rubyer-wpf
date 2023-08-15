@@ -7,6 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerControlMask" TargetType="{x:Type rubyer:ControlMask}">
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background" Value="{DynamicResource Mask}" />
         <Setter Property="IsTabStop" Value="False" />
@@ -19,6 +20,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:ControlMask}">
                     <Grid>
                         <Border x:Name="maskBorder"
+                                BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{TemplateBinding CornerRadius}"
                                 Opacity="0">

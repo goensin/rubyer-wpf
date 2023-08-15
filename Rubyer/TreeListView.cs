@@ -10,23 +10,35 @@ namespace Rubyer
     [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(TreeListViewItem))]
     public class TreeListView : TreeView
     {
+        public static readonly DependencyProperty ColumnHeaderContainerStyleProperty =
+            DependencyProperty.Register("ColumnHeaderContainerStyle", typeof(Style), typeof(TreeListView));
+
+        public static readonly DependencyProperty ColumnHeaderTemplateSelectorProperty =
+            DependencyProperty.Register("ColumnHeaderTemplateSelector", typeof(DataTemplateSelector), typeof(TreeListView), new FrameworkPropertyMetadata());
+
+        public static readonly DependencyProperty ColumnHeaderStringFormatProperty =
+            DependencyProperty.Register("ColumnHeaderStringFormat", typeof(string), typeof(TreeListView));
+
+        public static readonly DependencyProperty AllowsColumnReorderProperty =
+            DependencyProperty.Register("AllowsColumnReorder", typeof(bool), typeof(TreeListView), new FrameworkPropertyMetadata(BooleanBoxes.TrueBox));
+
+        public static readonly DependencyProperty ColumnHeaderContextMenuProperty =
+            DependencyProperty.Register("ColumnHeaderContextMenu", typeof(ContextMenu), typeof(TreeListView));
+
+        public static readonly DependencyProperty ColumnHeaderToolTipProperty =
+            DependencyProperty.Register("ColumnHeaderToolTip", typeof(object), typeof(TreeListView));
+
         /// <summary>
         /// 列集合
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty =
-                DependencyProperty.Register("Columns", typeof(GridViewColumnCollection), typeof(TreeListView), new PropertyMetadata(new GridViewColumnCollection()));
+            DependencyProperty.Register("Columns", typeof(GridViewColumnCollection), typeof(TreeListView), new PropertyMetadata(new GridViewColumnCollection()));
 
-        public static readonly DependencyProperty ColumnHeaderContainerStyleProperty = DependencyProperty.Register("ColumnHeaderContainerStyle", typeof(Style), typeof(TreeListView));
-
-        public static readonly DependencyProperty ColumnHeaderTemplateSelectorProperty = DependencyProperty.Register("ColumnHeaderTemplateSelector", typeof(DataTemplateSelector), typeof(TreeListView), new FrameworkPropertyMetadata());
-
-        public static readonly DependencyProperty ColumnHeaderStringFormatProperty = DependencyProperty.Register("ColumnHeaderStringFormat", typeof(string), typeof(TreeListView));
-
-        public static readonly DependencyProperty AllowsColumnReorderProperty = DependencyProperty.Register("AllowsColumnReorder", typeof(bool), typeof(TreeListView), new FrameworkPropertyMetadata(BooleanBoxes.TrueBox));
-
-        public static readonly DependencyProperty ColumnHeaderContextMenuProperty = DependencyProperty.Register("ColumnHeaderContextMenu", typeof(ContextMenu), typeof(TreeListView));
-
-        public static readonly DependencyProperty ColumnHeaderToolTipProperty = DependencyProperty.Register("ColumnHeaderToolTip", typeof(object), typeof(TreeListView));
+        /// <summary>
+        /// 网格线可见性
+        /// </summary>
+        public static readonly DependencyProperty GridLinesVisibilityProperty =
+            DependencyProperty.Register("GridLinesVisibility", typeof(DataGridGridLinesVisibility), typeof(TreeListView), new PropertyMetadata(DataGridGridLinesVisibility.None));
 
         static TreeListView()
         {
@@ -76,6 +88,15 @@ namespace Rubyer
         {
             get { return (GridViewColumnCollection)GetValue(ColumnsProperty); }
             set { SetValue(ColumnsProperty, value); }
+        }
+
+        /// <summary>
+        ///  网格线可见性
+        /// </summary>
+        public DataGridGridLinesVisibility GridLinesVisibility
+        {
+            get { return (DataGridGridLinesVisibility)GetValue(GridLinesVisibilityProperty); }
+            set { SetValue(GridLinesVisibilityProperty, value); }
         }
 
         /// <inheritdoc/>
