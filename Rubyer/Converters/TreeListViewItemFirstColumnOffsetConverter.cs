@@ -3,6 +3,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media;
 
@@ -21,9 +22,9 @@ namespace Rubyer.Converters
             }
 
             var element = ValidateArgument.NotNullOrEmptyCast<UIElement>(values[0], "value[0]");
-            var treeListView = ValidateArgument.NotNullOrEmptyCast<TreeListView>(values[1], "value[1]");
+            var scrollViewer = ValidateArgument.NotNullOrEmptyCast<ScrollViewer>(values[1], "value[1]");
 
-            var point = element.TranslatePoint(new Point(), treeListView);
+            var point = element.TranslatePoint(new Point(), scrollViewer);
 
 
             int layerCount = 0;
@@ -35,8 +36,7 @@ namespace Rubyer.Converters
                 }
             }, parent => parent is TreeListView);
 
-            var itemPadding = ItemsControlHelper.GetItemPadding(treeListView);
-            return point.X;
+            return point.X + scrollViewer.HorizontalOffset;
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
