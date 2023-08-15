@@ -74,6 +74,8 @@
 
     <Style x:Key="RubyerTreeListViewItem" TargetType="{x:Type rubyer:TreeListViewItem}">
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderThickness" Value="0 0 1 1" />
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
@@ -119,12 +121,13 @@
                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                              Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
                                                              Content="{TemplateBinding Header}"
+                                                             ItemPadding="{TemplateBinding Padding}"
                                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                 <rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>
                                     <MultiBinding Converter="{StaticResource TreeListViewItemFirstColumnOffsetConverter}">
                                         <MultiBinding.Bindings>
                                             <Binding ElementName="Bd" />
-                                            <Binding RelativeSource="{RelativeSource AncestorType=rubyer:TreeListView}" />
+                                            <Binding RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
                                         </MultiBinding.Bindings>
                                     </MultiBinding>
                                 </rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>

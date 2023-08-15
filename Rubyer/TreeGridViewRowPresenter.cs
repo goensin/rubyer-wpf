@@ -27,6 +27,34 @@ namespace Rubyer
             set { SetValue(FirstColumnOffsetSizeProperty, value); }
         }
 
+        /// <summary>
+        /// 子项内边距
+        /// </summary>
+        public static readonly DependencyProperty ItemPaddingProperty =
+                DependencyProperty.Register("ItemPadding", typeof(Thickness), typeof(TreeGridViewRowPresenter), new PropertyMetadata(default(Thickness)));
+
+        /// <summary>
+        /// 子项内边距
+        /// </summary>
+        public Thickness ItemPadding
+        {
+            get { return (Thickness)GetValue(ItemPaddingProperty); }
+            set { SetValue(ItemPaddingProperty, value); }
+        }
+
+        /// <inheritdoc/>
+        protected override Size MeasureOverride(Size constraint)
+        {
+            var size = base.MeasureOverride(constraint);
+            var horPadding = ItemPadding.Left + ItemPadding.Right;
+            if (size.Width >= FirstColumnOffsetSize + horPadding)
+            {
+                size.Width -= FirstColumnOffsetSize + horPadding;
+            }
+
+            return size;
+        }
+
         /// <inheritdoc/>
         protected override Size ArrangeOverride(Size arrangeSize)
         {

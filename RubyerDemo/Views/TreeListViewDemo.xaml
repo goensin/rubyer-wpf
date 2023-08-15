@@ -15,15 +15,37 @@
                 <rubyer:TreeListView rubyer:HeaderHelper.Background="{DynamicResource Primary}"
                                      rubyer:HeaderHelper.FontSize="16"
                                      rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
+                                     rubyer:HeaderHelper.HorizontalAlignment="Left"
                                      rubyer:HeaderHelper.Padding="10"
                                      AllowsColumnReorder="False"
-                                     ItemsSource="{Binding Cities}"
-                                     VirtualizingPanel.IsVirtualizing="False">
+                                     ItemsSource="{Binding Cities}">
                     <rubyer:TreeListView.ItemTemplate>
                         <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
                     </rubyer:TreeListView.ItemTemplate>
 
                     <rubyer:TreeListView.Columns>
+                        <GridViewColumn Width="200"
+                                        DisplayMemberBinding="{Binding Code}"
+                                        Header="编号" />
+
+                        <GridViewColumn Width="300" Header="名称">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Padding="0 2" Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Width="200"
+                                        DisplayMemberBinding="{Binding Code}"
+                                        Header="编号" />
+
+                        <GridViewColumn Width="300" Header="名称">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox Padding="0 2" Text="{Binding Name}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Width="200"
                                         DisplayMemberBinding="{Binding Code}"
                                         Header="编号" />
