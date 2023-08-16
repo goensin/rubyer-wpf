@@ -26,16 +26,6 @@ namespace Rubyer.Converters
 
             var point = element.TranslatePoint(new Point(), scrollViewer);
 
-
-            int layerCount = 0;
-            element.ForEachParent(parent =>
-            {
-                if (parent is TreeListViewItem)
-                {
-                    layerCount++;
-                }
-            }, parent => parent is TreeListView);
-
             return point.X + scrollViewer.HorizontalOffset;
         }
 

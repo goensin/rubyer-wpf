@@ -72,6 +72,39 @@
         </Setter>
     </Style>
 
+    <Style x:Key="RubyerTreeGridViewCell" TargetType="rubyer:TreeGridViewCell">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=TreeView}}" />
+        <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=TreeView}}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="rubyer:TreeGridViewCell">
+                    <Border x:Name="RootBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                          Focusable="False"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="Vertical">
+                            <Setter TargetName="RootBorder" Property="BorderThickness" Value="0 0 1 0" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="All">
+                            <Setter TargetName="RootBorder" Property="BorderThickness" Value="0 0 1 0" />
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="RubyerTreeGridViewColumnHeader" TargetType="GridViewColumnHeader">
         <Setter Property="Background" Value="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
         <Setter Property="Foreground" Value="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
@@ -120,14 +153,13 @@
 
     <Style x:Key="RubyerTreeListViewItem" TargetType="{x:Type rubyer:TreeListViewItem}">
         <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}" />
-        <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="Margin" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TreeView}}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -135,33 +167,42 @@
                     <ControlTemplate.Resources>
                         <converters:TreeListViewItemFirstColumnOffsetConverter x:Key="TreeListViewItemFirstColumnOffsetConverter" />
                     </ControlTemplate.Resources>
-                    <Border>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
 
-                            <rubyer:ControlMask x:Name="mask"
-                                                Grid.ColumnSpan="2"
-                                                Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
-                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TreeView}}"
-                                                IsActive="{TemplateBinding IsSelected}"
-                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TreeView}}" />
+                        <rubyer:ControlMask x:Name="mask"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=TreeView}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=TreeView}}" />
 
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <DockPanel>
+                                <Rectangle DockPanel.Dock="Left">
+                                    <Rectangle.Width>
+                                        <MultiBinding Converter="{StaticResource TreeViewItemOffsetConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding ElementName="Bd" />
+                                                <Binding ElementName="Expander" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </Rectangle.Width>
+                                </Rectangle>
 
-                            <Border x:Name="Bd"
-                                    Grid.Column="1"
-                                    Padding="{TemplateBinding Padding}"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                                <rubyer:TreeGridViewRowPresenter Grid.Column="1"
+                                <ToggleButton x:Name="Expander"
+                                              Style="{StaticResource ExpandCollapseToggleStyle}"
+                                              ClickMode="Press"
+                                              DockPanel.Dock="Left"
+                                              IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                                <rubyer:TreeGridViewRowPresenter x:Name="row"
                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                                  Columns="{Binding Columns, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}"
@@ -171,33 +212,25 @@
                                     <rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>
                                         <MultiBinding Converter="{StaticResource TreeListViewItemFirstColumnOffsetConverter}">
                                             <MultiBinding.Bindings>
-                                                <Binding ElementName="Bd" />
+                                                <Binding ElementName="row" />
                                                 <Binding RelativeSource="{RelativeSource AncestorType=ScrollViewer}" />
                                             </MultiBinding.Bindings>
                                         </MultiBinding>
                                     </rubyer:TreeGridViewRowPresenter.FirstColumnOffsetSize>
                                 </rubyer:TreeGridViewRowPresenter>
-                            </Border>
-
-                            <ToggleButton x:Name="Expander"
-                                          Style="{StaticResource ExpandCollapseToggleStyle}"
-                                          ClickMode="Press"
-                                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </DockPanel>
+                        </Border>
 
 
-                            <rubyer:Transition Grid.Row="1"
-                                               Grid.Column="1"
-                                               IsShow="{TemplateBinding IsExpanded}"
-                                               Type="CollapseUp">
-                                <ItemsPresenter x:Name="ItemsHost"
-                                                VerticalAlignment="Top"
-                                                Opacity="0"
-                                                Visibility="Collapsed" />
-                            </rubyer:Transition>
-                        </Grid>
-                    </Border>
-
-
+                        <rubyer:Transition Grid.Row="1"
+                                           IsShow="{TemplateBinding IsExpanded}"
+                                           Type="CollapseUp">
+                            <ItemsPresenter x:Name="ItemsHost"
+                                            VerticalAlignment="Top"
+                                            Opacity="0"
+                                            Visibility="Collapsed" />
+                        </rubyer:Transition>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="True">
                             <Trigger.EnterActions>
@@ -244,14 +277,11 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=TreeView}}" />
                         </Trigger>
-                        <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="Vertical">
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0 0 1 0" />
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="Horizontal">
                             <Setter TargetName="Bd" Property="BorderThickness" Value="0 0 0 1" />
                         </DataTrigger>
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="All">
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0 0 1 1" />
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="0 0 0 1" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

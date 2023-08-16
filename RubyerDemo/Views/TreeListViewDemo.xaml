@@ -12,54 +12,67 @@
     <smtx:XamlDisplay UniqueKey="TreeListViewDemo">
         <Grid Margin="10" rubyer:PanelHelper.Spacing="10">
             <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch">
-                <rubyer:TreeListView rubyer:HeaderHelper.Background="Transparent"
-                                     rubyer:HeaderHelper.FontSize="16"
-                                     rubyer:HeaderHelper.Foreground="{StaticResource BlackForeground}"
-                                     rubyer:HeaderHelper.HorizontalAlignment="Left"
-                                     rubyer:HeaderHelper.Padding="10"
-                                     AllowsColumnReorder="False"
-                                     GridLinesVisibility="All"
-                                     ItemsSource="{Binding Cities}">
-                    <rubyer:TreeListView.ItemTemplate>
-                        <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
-                    </rubyer:TreeListView.ItemTemplate>
+                <DockPanel>
+                    <rubyer:Description Style="{StaticResource BorderDescription}"
+                                        Margin="0 0 0 10"
+                                        HorizontalAlignment="Center"
+                                        Columns="3"
+                                        DockPanel.Dock="Top">
+                        <rubyer:DescriptionItem Description="分隔线">
+                            <ComboBox Width="120"
+                                      rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                                      SelectedItem="{Binding GridLinesVisibility, ElementName=treeGrid}" />
+                        </rubyer:DescriptionItem>
+                        <rubyer:DescriptionItem Description="单元水平对齐">
+                            <ComboBox Width="120"
+                                      rubyer:ItemsControlHelper.EnumValuesToItemsSource="True"
+                                      SelectedItem="{Binding HorizontalContentAlignment, ElementName=treeGrid}" />
+                        </rubyer:DescriptionItem>
+                        <rubyer:DescriptionItem Description="移动列位置">
+                            <CheckBox IsChecked="{Binding AllowsColumnReorder, ElementName=treeGrid}" />
+                        </rubyer:DescriptionItem>
+                    </rubyer:Description>
 
-                    <rubyer:TreeListView.Columns>
-                        <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Code}"
-                                        Header="编号" />
+                    <rubyer:TreeListView x:Name="treeGrid"
+                                         rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                                         rubyer:HeaderHelper.FontSize="16"
+                                         rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
+                                         rubyer:HeaderHelper.HorizontalAlignment="Left"
+                                         rubyer:HeaderHelper.Padding="10"
+                                         AllowsColumnReorder="True"
+                                         BorderThickness="1"
+                                         GridLinesVisibility="Vertical"
+                                         ItemsSource="{Binding Cities}">
+                        <rubyer:TreeListView.ItemTemplate>
+                            <HierarchicalDataTemplate ItemsSource="{Binding Children}" />
+                        </rubyer:TreeListView.ItemTemplate>
 
-                        <GridViewColumn Width="300" Header="名称">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Padding="0 2" Text="{Binding Name}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Code}"
-                                        Header="编号" />
+                        <rubyer:TreeListView.Columns>
+                            <GridViewColumn Width="200"
+                                            DisplayMemberBinding="{Binding Code}"
+                                            Header="编号" />
 
-                        <GridViewColumn Width="300" Header="名称">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Padding="0 2" Text="{Binding Name}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="200"
-                                        DisplayMemberBinding="{Binding Code}"
-                                        Header="编号" />
+                            <GridViewColumn Width="300" Header="名称">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Padding="0 2" Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Width="200"
+                                            DisplayMemberBinding="{Binding Code}"
+                                            Header="编号" />
 
-                        <GridViewColumn Width="300" Header="名称">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <TextBox Padding="0 2" Text="{Binding Name}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </rubyer:TreeListView.Columns>
-                </rubyer:TreeListView>
+                            <GridViewColumn Width="300" Header="名称">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBox Padding="0 2" Text="{Binding Name}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </rubyer:TreeListView.Columns>
+                    </rubyer:TreeListView>
+                </DockPanel>
             </controls:ControlDisplay>
         </Grid>
     </smtx:XamlDisplay>

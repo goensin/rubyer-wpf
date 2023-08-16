@@ -69,4 +69,5 @@
     <converter:InsideCornerRadiusConverter x:Key="RightInsideCornerRadiusConverter" Type="Right" />
 
     <converter:CloneConverter x:Key="CloneConverter" />
+    <converter:TreeViewItemOffsetConverter x:Key="TreeViewItemOffsetConverter" />
 </ResourceDictionary>

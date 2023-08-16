@@ -121,6 +121,7 @@
     <Style BasedOn="{StaticResource RubyerFlipView}" TargetType="{x:Type rubyer:FlipView}" />
     <Style BasedOn="{StaticResource RubyerFlipViewItem}" TargetType="{x:Type rubyer:FlipViewItem}" />
     <Style BasedOn="{StaticResource RubyerDropDownButton}" TargetType="{x:Type rubyer:DropDownButton}" />
+    <Style BasedOn="{StaticResource RubyerTreeGridViewCell}" TargetType="{x:Type rubyer:TreeGridViewCell}" />
     <Style BasedOn="{StaticResource RubyerTreeListViewItem}" TargetType="{x:Type rubyer:TreeListViewItem}" />
     <Style BasedOn="{StaticResource RubyerTreeListView}" TargetType="{x:Type rubyer:TreeListView}" />
 </ResourceDictionary>

@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
@@ -41,6 +44,30 @@ namespace Rubyer
         {
             get { return (Thickness)GetValue(ItemPaddingProperty); }
             set { SetValue(ItemPaddingProperty, value); }
+        }
+
+        protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
+        {
+            if (visualAdded is FrameworkElement element && element is not TreeGridViewCell)
+            {
+                element.Margin = new Thickness(0);
+
+                var type = GetType();
+                var propertyInfo = type.GetProperty("InternalChildren", BindingFlags.Instance | BindingFlags.NonPublic);
+                var elementCollection = (UIElementCollection)propertyInfo.GetValue(this);
+
+                var cell = new TreeGridViewCell();
+
+                var index = elementCollection.IndexOf(element);
+                elementCollection.Remove(element);
+                elementCollection.Insert(index, cell);
+
+                cell.Content = element;
+
+                base.OnVisualChildrenChanged(cell, visualRemoved);
+            }
+
+            base.OnVisualChildrenChanged(visualAdded, visualRemoved);
         }
 
         /// <inheritdoc/>
@@ -108,22 +135,11 @@ namespace Rubyer
                     uIElement.Arrange(new Rect(num, 0.0, num3, arrangeSize.Height));
                     num2 -= num3;
                     num += num3;
-
-                    Line line = new()
-                    {
-                        Stroke = Brushes.Black,
-                        StrokeThickness = 1,
-                        X1 = 0,
-                        Y1 = 0,
-                        X2 = 0,
-                        Y2 = arrangeSize.Height
-                    };
-
-                    line.Arrange(new Rect(num, 0.0, 0.0, arrangeSize.Height));
                 }
             }
 
             return arrangeSize;
         }
+
     }
 }
