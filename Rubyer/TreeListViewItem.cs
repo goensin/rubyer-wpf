@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -26,6 +27,16 @@ namespace Rubyer
             return item is TreeListViewItem;
         }
 
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+        }
 
+        /// <inheritdoc/>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            IsSelected = true;
+        }
     }
 }

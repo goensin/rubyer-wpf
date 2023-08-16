@@ -29,7 +29,7 @@
                                       SelectedItem="{Binding HorizontalContentAlignment, ElementName=treeGrid}" />
                         </rubyer:DescriptionItem>
                         <rubyer:DescriptionItem Description="移动列位置">
-                            <CheckBox IsChecked="{Binding AllowsColumnReorder, ElementName=treeGrid}" />
+                            <ToggleButton Style="{StaticResource SwitchToggleButton}" Margin="20 0" IsChecked="{Binding AllowsColumnReorder, ElementName=treeGrid}" />
                         </rubyer:DescriptionItem>
                     </rubyer:Description>
 
