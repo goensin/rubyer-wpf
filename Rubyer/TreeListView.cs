@@ -32,7 +32,7 @@ namespace Rubyer
         /// 列集合
         /// </summary>
         public static readonly DependencyProperty ColumnsProperty =
-            DependencyProperty.Register("Columns", typeof(GridViewColumnCollection), typeof(TreeListView), new PropertyMetadata(new GridViewColumnCollection()));
+            DependencyProperty.Register("Columns", typeof(GridViewColumnCollection), typeof(TreeListView), new PropertyMetadata(null));
 
         /// <summary>
         /// 网格线可见性
@@ -97,6 +97,14 @@ namespace Rubyer
         {
             get { return (DataGridGridLinesVisibility)GetValue(GridLinesVisibilityProperty); }
             set { SetValue(GridLinesVisibilityProperty, value); }
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public TreeListView()
+        {
+            Columns = new GridViewColumnCollection();
         }
 
         /// <inheritdoc/>
