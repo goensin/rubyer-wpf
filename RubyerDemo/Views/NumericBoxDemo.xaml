@@ -29,13 +29,12 @@
                                          Grid.Row="1"
                                          Description="通过 MaxValue 和 MinValue 设置最大最小值 &#x000A;通过 Interval 设置加减间隔 &#x000A;通过 ShowButton 设置加减按钮显示">
                     <StackPanel rubyer:PanelHelper.Spacing="10" Orientation="Horizontal">
-                        <Label Content="-10 ~ 10:" />
+                        <Label Content="10 ~ 100:" />
                         <rubyer:NumericBox Width="120"
                                            rubyer:ControlHelper.FocusBorderBrush="{DynamicResource Success}"
                                            rubyer:ControlHelper.MouseOverBrush="{DynamicResource Success}"
-                                           IsReadOnly="True"
-                                           MaxValue="10"
-                                           MinValue="-10"
+                                           MaxValue="100"
+                                           MinValue="10"
                                            Value="1" />
 
                         <Label Content="加减间隔 2:" />
@@ -76,6 +75,7 @@
 
                         <rubyer:NumericBox MinWidth="120"
                                            rubyer:InputBoxHelper.PreContent="身高"
+                                           IsReadOnly="True"
                                            TextFormat="0cm"
                                            Value="177" />
                     </StackPanel>

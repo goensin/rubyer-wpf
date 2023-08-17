@@ -63,13 +63,9 @@ namespace Rubyer
 
             if (GetTemplateChild(TextBoxPartName) is TextBox textBox)
             {
-                var textBinding = new Binding(nameof(Text));
-                textBinding.Source = this;
-                textBinding.Mode = BindingMode.TwoWay;
-                textBox.SetBinding(TextBox.TextProperty, textBinding);
-                textBox.TextChanged += TextBox_TextChanged;
                 textBox.PreviewTextInput += TextBox_PreviewTextInput;
                 textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                textBox.LostFocus += TextBox_LostFocus;
                 textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
                 this.textBox = textBox;
             }
@@ -83,6 +79,8 @@ namespace Rubyer
             {
                 downButton.Click += DecreaseButton_Click;
             }
+
+            this.Loaded += NumericBox_Loaded;
         }
 
         #region events
@@ -105,21 +103,6 @@ namespace Rubyer
         #endregion events
 
         #region propteries
-
-        /// <summary>
-        /// 显示文本
-        /// </summary>
-        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
-           "Text", typeof(string), typeof(NumericBox), new PropertyMetadata(null, OnTextChanged));
-
-        /// <summary>
-        /// 显示文本
-        /// </summary>
-        public string Text
-        {
-            get { return (string)GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
 
         /// <summary>
         /// 文本格式
@@ -311,70 +294,38 @@ namespace Rubyer
             textBox.Focus();
         }
 
-        private static void OnTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+
+        private void NumericBox_Loaded(object sender, RoutedEventArgs e)
         {
-            var numberBox = d as NumericBox;
+            this.Loaded -= NumericBox_Loaded;
 
-            if (double.TryParse(numberBox.Text, out double value))
+            if (!string.IsNullOrEmpty(textBox.Text))
             {
-                var newValue = GetCalculatedValue(numberBox, value);
-                if (numberBox.Value != newValue)
-                {
-                    if (numberBox.IsLoaded)
-                    {
-                        numberBox.Value = newValue;
-                    }
-                    else
-                    {
-                        numberBox.Loaded += NumberBox_Loaded;
-                    }
-                }
-            }
-            else if (string.IsNullOrEmpty(numberBox.Text))
-            {
-                if (InputBoxHelper.GetIsClearable(numberBox))
-                {
-                    numberBox.Value = null;
-                }
-                else
-                {
-                    if (numberBox.Value.HasValue)
-                    {
-                        numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
-                    }
-                }
-            }
-
-            if (!numberBox.Value.HasValue)
-            {
-                numberBox.Text = null;
+                CheckTextValue();
             }
             else
             {
-                numberBox.Text = numberBox.Value.Value.ToString(numberBox.TextFormat);
-            }
-        }
-
-        private static void NumberBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            var numberBox = sender as NumericBox;
-            if (double.TryParse(numberBox.Text, out double value))
-            {
-                var newValue = GetCalculatedValue(numberBox, value);
-                if (numberBox.Value != newValue)
+                if (Value < MinValue)
                 {
-                    numberBox.Value = newValue;
+                    Value = MinValue;
                 }
-            }
+                else if (Value > MaxValue)
+                {
+                    Value = MaxValue;
+                }
 
-            numberBox.Loaded -= NumberBox_Loaded;
+                SetTextBoxContent();
+            }
         }
 
         private static void OnValueChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var numberBox = d as NumericBox;
-            numberBox.Text = numberBox.Value?.ToString(numberBox.TextFormat);
-            numberBox.textBox?.Select(numberBox.textBox.Text.Length, 1);
+            if (numberBox.textBox != null)
+            {
+                numberBox.textBox.Text = numberBox.Value?.ToString(numberBox.TextFormat);
+                numberBox.textBox.Select(numberBox.textBox.Text.Length, 1);
+            }
 
             var args = new RoutedPropertyChangedEventArgs<double?>((double?)e.OldValue, (double?)e.NewValue);
             args.RoutedEvent = NumericBox.ValueChangedEvent;
@@ -413,27 +364,44 @@ namespace Rubyer
             e.Handled = true;
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void CheckTextValue()
         {
-            var textBox = sender as TextBox;
-
             if (double.TryParse(textBox.Text, out double value))
             {
-                if (value < MinValue || value > MaxValue)
+                var newValue = GetCalculatedValue(this, value);
+                if (Value != newValue)
                 {
-                    var newValue = GetCalculatedValue(this, value);
-                    if (Value != newValue)
-                    {
-                        Value = newValue;
-                    }
-                    else
-                    {
-                        textBox.Text = newValue.ToString(TextFormat);
-                        textBox.Select(textBox.Text.Length, 0);
-                    }
+                    Value = newValue;
                 }
             }
+            else if (string.IsNullOrEmpty(textBox.Text))
+            {
+                if (InputBoxHelper.GetIsClearable(this))
+                {
+                    Value = null;
+                }
+            }
+
+            SetTextBoxContent();
         }
+
+        private void SetTextBoxContent()
+        {
+            if (Value.HasValue)
+            {
+                textBox.Text = Value.Value.ToString(TextFormat);
+            }
+            else
+            {
+                textBox.Text = null;
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CheckTextValue();
+        }
+
         #endregion methods
     }
 }
