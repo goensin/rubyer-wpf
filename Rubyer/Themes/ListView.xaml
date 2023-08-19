@@ -44,6 +44,8 @@
 
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"
                                                 Grid.Row="1"
+                                                Grid.RowSpan="2"
+                                                Grid.ColumnSpan="2"
                                                 CanContentScroll="True"
                                                 CanHorizontallyScroll="False"
                                                 CanVerticallyScroll="False"
@@ -187,8 +189,8 @@
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0" />
-        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="5" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0 1" />
+        <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="0 5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListView">

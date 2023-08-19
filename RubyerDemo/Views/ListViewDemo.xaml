@@ -10,54 +10,50 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:ListViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="ListViewDemo">
-        <ScrollViewer>
-            <Grid Margin="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
-                  rubyer:PanelHelper.Spacing="10">
-                <controls:ControlDisplay Title="Default ListView" HorizontalContentAlignment="Stretch">
-                    <ListView ItemsSource="{Binding Items}" SelectedIndex="0" />
-                </controls:ControlDisplay>
+        <Grid Margin="10"
+              rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+              rubyer:PanelHelper.Spacing="10">
+            <controls:ControlDisplay Title="Default ListView" HorizontalContentAlignment="Stretch">
+                <ListView ItemsSource="{Binding Items}" SelectedIndex="0" />
+            </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="GridView ListView"
-                                         Grid.Row="1"
-                                         Description="通过 HeaderHelper.Foreground 和 HeaderHelper.Background 设置标题颜色 &#x000A;通过 HeaderHelper.FontSize 和 HeaderHelper.FontWeight 设置标题字体 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙">
-                    <ListView Height="200"
-                              VerticalContentAlignment="Center"
-                              rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                              rubyer:HeaderHelper.Background="{DynamicResource Primary}"
-                              rubyer:HeaderHelper.FontSize="15"
-                              rubyer:HeaderHelper.FontWeight="Bold"
-                              rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                              rubyer:HeaderHelper.Padding="5 8"
-                              rubyer:ItemsControlHelper.ItemMargin="2 1"
-                              rubyer:ItemsControlHelper.ItemPadding="5"
-                              ItemsSource="{Binding Persons}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Width="80"
-                                                DisplayMemberBinding="{Binding Id}"
-                                                Header="序号" />
-                                <GridViewColumn Width="100"
-                                                DisplayMemberBinding="{Binding Name}"
-                                                Header="名字" />
-                                <GridViewColumn Width="100"
-                                                DisplayMemberBinding="{Binding Age}"
-                                                Header="年龄" />
-                                <GridViewColumn Width="100"
-                                                DisplayMemberBinding="{Binding Gender}"
-                                                Header="性别" />
-                                <GridViewColumn Width="50" Header="选中">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <CheckBox IsChecked="{Binding IsSelected}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </controls:ControlDisplay>
-            </Grid>
-        </ScrollViewer>
+            <controls:ControlDisplay Title="GridView ListView"
+                                     Grid.Row="1"
+                                     Description="通过 HeaderHelper.Foreground 和 HeaderHelper.Background 设置标题颜色 &#x000A;通过 HeaderHelper.FontSize 和 HeaderHelper.FontWeight 设置标题字体 &#x000A;通过 ItemsControlHelper.ItemPadding 和 ItemsControlHelper.ItemMargin 设置行间隙">
+                <ListView Height="200"
+                          rubyer:ControlHelper.CornerRadius="{DynamicResource AllContainerCornerRadius}"
+                          rubyer:HeaderHelper.Background="{DynamicResource Primary}"
+                          rubyer:HeaderHelper.FontSize="15"
+                          rubyer:HeaderHelper.FontWeight="Bold"
+                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
+                          rubyer:HeaderHelper.HorizontalAlignment="Stretch"
+                          rubyer:HeaderHelper.Padding="5 8"
+                          ItemsSource="{Binding Persons}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Width="80"
+                                            DisplayMemberBinding="{Binding Id}"
+                                            Header="序号" />
+                            <GridViewColumn Width="100"
+                                            DisplayMemberBinding="{Binding Name}"
+                                            Header="名字" />
+                            <GridViewColumn Width="100"
+                                            DisplayMemberBinding="{Binding Age}"
+                                            Header="年龄" />
+                            <GridViewColumn Width="100"
+                                            DisplayMemberBinding="{Binding Gender}"
+                                            Header="性别" />
+                            <GridViewColumn Width="50" Header="选中">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <CheckBox IsChecked="{Binding IsSelected}" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </controls:ControlDisplay>
+        </Grid>
     </smtx:XamlDisplay>
 </UserControl>

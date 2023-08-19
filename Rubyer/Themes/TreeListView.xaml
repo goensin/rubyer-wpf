@@ -43,6 +43,7 @@
 
                         <ScrollContentPresenter Name="PART_ScrollContentPresenter"
                                                 Grid.Row="1"
+                                                Grid.RowSpan="2"
                                                 Grid.ColumnSpan="2"
                                                 CanContentScroll="{TemplateBinding CanContentScroll}"
                                                 CanHorizontallyScroll="False"
