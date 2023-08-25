@@ -26,7 +26,6 @@
                           rubyer:HeaderHelper.FontSize="15"
                           rubyer:HeaderHelper.FontWeight="Bold"
                           rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                          rubyer:HeaderHelper.HorizontalAlignment="Stretch"
                           rubyer:HeaderHelper.Padding="5 8"
                           ItemsSource="{Binding Persons}">
                     <ListView.View>

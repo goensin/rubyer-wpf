@@ -77,7 +77,7 @@ namespace Rubyer
         {
             var dialog = sender as DialogContainer;
             var taskCompletionSource = dialog.Tag as TaskCompletionSource<object>;
-            taskCompletionSource.TrySetResult(e.Result);
+            taskCompletionSource?.TrySetResult(e.Result);
             dialog.DialogContent = null;
             dialog.AfterClose -= OnDialogClosed;
             dialog.Tag = null;
