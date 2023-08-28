@@ -272,6 +272,12 @@
         </Setter>
     </Style>
 
+    <rubyer:Icon x:Key="HamburgerMenuIcon"
+                 HorizontalAlignment="Center"
+                 VerticalAlignment="Center"
+                 x:Shared="False"
+                 Type="MenuLine" />
+
     <!--  HamburgerMenu  -->
     <Style x:Key="RubyerHamburgerMenu" TargetType="{x:Type rubyer:HamburgerMenu}">
         <Setter Property="Background" Value="Transparent" />
@@ -310,6 +316,7 @@
         <Setter Property="TransitionType" Value="Fade" />
         <Setter Property="TransitionDuration" Value="0:0:0.5" />
         <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="MenuIcon" Value="{StaticResource HamburgerMenuIcon}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">
@@ -370,11 +377,7 @@
                                                         <ColumnDefinition Width="*" />
                                                     </Grid.ColumnDefinitions>
 
-                                                    <rubyer:Icon Width="{Binding ActualHeight, ElementName=header}"
-                                                                 Height="{Binding ActualHeight, ElementName=header}"
-                                                                 HorizontalAlignment="Center"
-                                                                 VerticalAlignment="Center"
-                                                                 Type="MenuLine" />
+                                                    <ContentPresenter ContentSource="MenuIcon" />
 
                                                     <TextBlock x:Name="header"
                                                                Grid.Column="1"

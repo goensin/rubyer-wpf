@@ -252,6 +252,21 @@ namespace Rubyer
             set { SetValue(PaneBorderCornerRadiusProperty, value); }
         }
 
+        /// <summary>
+        /// 菜单图标
+        /// </summary>
+        public static readonly DependencyProperty MenuIconProperty = DependencyProperty.Register(
+            "MenuIcon", typeof(object), typeof(HamburgerMenu), new PropertyMetadata(default(object)));
+
+        /// <summary>
+        /// 菜单图标
+        /// </summary>
+        public object MenuIcon
+        {
+            get { return GetValue(MenuIconProperty); }
+            set { SetValue(MenuIconProperty, value); }
+        }
+        
         #endregion properties
 
         #region options item

@@ -9,6 +9,16 @@
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:HamburgerMenuViewModel}"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <rubyer:BooleanToObjectConverter x:Key="BoolToMenuIconConverter">
+            <rubyer:BooleanToObjectConverter.TrueValue>
+                <rubyer:Icon Type="MenuFoldLine" />
+            </rubyer:BooleanToObjectConverter.TrueValue>
+            <rubyer:BooleanToObjectConverter.FalseValue>
+                <rubyer:Icon Type="MenuUnfoldLine" />
+            </rubyer:BooleanToObjectConverter.FalseValue>
+        </rubyer:BooleanToObjectConverter>
+    </UserControl.Resources>
     <smtx:XamlDisplay HorizontalContentAlignment="Stretch" UniqueKey="HamburgerMenuDemo">
         <GroupBox Margin="10" Header="汉堡包菜单 - HamburgerMenu">
             <Grid rubyer:GridHelper.ColumnDefinitions="*,*" rubyer:PanelHelper.Spacing="10">
@@ -117,7 +127,8 @@
                 <DockPanel Grid.Column="1">
                     <TextBlock DockPanel.Dock="Top" Text="binding 方式" />
 
-                    <rubyer:HamburgerMenu rubyer:ControlHelper.CornerRadius="15"
+                    <rubyer:HamburgerMenu x:Name="menu2"
+                                          rubyer:ControlHelper.CornerRadius="15"
                                           rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
                                           rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource WhiteForeground}"
                                           rubyer:ControlHelper.MaskOpacity="1"
@@ -134,9 +145,9 @@
                                           FontSize="16"
                                           Foreground="{StaticResource WhiteForeground}"
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
-                                          Header="开始"
                                           IsShowLittleBar="False"
                                           ItemsSource="{Binding Models}"
+                                          MenuIcon="{Binding IsExpanded, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToMenuIconConverter}}"
                                           OptionsItemsSource="{Binding OptionsModels}"
                                           PaneBackground="#3F000000"
                                           PaneBorderCornerRadius="15"
