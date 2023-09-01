@@ -66,7 +66,7 @@ namespace Rubyer
         public bool AllowsColumnReorder
         {
             get => (bool)GetValue(AllowsColumnReorderProperty);
-            set => SetValue(AllowsColumnReorderProperty, value);
+            set => SetValue(AllowsColumnReorderProperty, BooleanBoxes.Box(value));
         }
 
         public ContextMenu ColumnHeaderContextMenu

@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -46,6 +42,7 @@ namespace Rubyer
             set { SetValue(ItemPaddingProperty, value); }
         }
 
+        /// <inheritdoc/>
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {
             if (visualAdded is FrameworkElement element && element is not TreeGridViewCell)
