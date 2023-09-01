@@ -706,12 +706,12 @@ namespace Rubyer
         /// </summary>
         private void FlipView_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
         {
-            e.Handled = true;
-
             if (!IsMouseWheel)
             {
                 return;
             }
+
+            e.Handled = true;
 
             if (e.Delta > 0)
             {
