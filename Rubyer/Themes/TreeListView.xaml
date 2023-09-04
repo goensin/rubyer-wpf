@@ -203,13 +203,6 @@
                                               DockPanel.Dock="Left"
                                               IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}" />
 
-                                <rubyer:Loading x:Name="loading"
-                                                Background="Transparent"
-                                                Diameter="{Binding ActualHeight, ElementName=row, Converter={StaticResource SubtractConverter}, ConverterParameter=16}"
-                                                Foreground="{TemplateBinding Foreground}"
-                                                StrokeThickness="2"
-                                                Visibility="Collapsed" />
-
                                 <rubyer:TreeGridViewRowPresenter x:Name="row"
                                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -291,10 +284,6 @@
                         <DataTrigger Binding="{Binding GridLinesVisibility, RelativeSource={RelativeSource AncestorType=rubyer:TreeListView}}" Value="All">
                             <Setter TargetName="Bd" Property="BorderThickness" Value="0 0 0 1" />
                         </DataTrigger>
-                        <Trigger Property="IsLoading" Value="True">
-                            <Setter TargetName="loading" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="PART_ExpanderToggleButton" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
