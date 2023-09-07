@@ -58,7 +58,6 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <ToggleButton rubyer:ToggleButtonHelper.CheckedContent="选中"
-                                                      Click="ToggleButton_Click"
                                                       Content="未选"
                                                       IsChecked="{Binding IsSelected}" />
                                     </DataTemplate>
