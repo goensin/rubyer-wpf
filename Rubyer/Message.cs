@@ -64,10 +64,11 @@ namespace Rubyer
                 _ = Task.Run(async () =>
                 {
                     await Task.Delay(millisecondTimeOut + TransitionTime, token);
-                    Application.Current.Dispatcher.Invoke(() =>
+
+                    if (messageCard is { })
                     {
-                        messageCard.IsShow = false;
-                    });
+                        messageCard.Dispatcher.Invoke(() => messageCard.IsShow = false);
+                    }
                 }, token);
             }
         }
@@ -85,7 +86,7 @@ namespace Rubyer
         {
             MessageWindow messageWindow = MessageWindow.GetInstance();
             messageWindow.Dispatcher.VerifyAccess();
- 
+
             MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 

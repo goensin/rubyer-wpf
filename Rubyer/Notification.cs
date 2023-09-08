@@ -72,10 +72,12 @@ namespace Rubyer
                 _ = Task.Run(async () =>
                 {
                     await Task.Delay(millisecondTimeOut + TransitionTime, token);
-                    Application.Current.Dispatcher.Invoke(() =>
+
+                    if (notificationCard is { })
                     {
-                        notificationCard.IsShow = false;
-                    });
+                        notificationCard.Dispatcher.Invoke(() => notificationCard.IsShow = false);
+                    }
+
                 }, token);
             }
         }
