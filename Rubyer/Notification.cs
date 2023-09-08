@@ -184,6 +184,13 @@ namespace Rubyer
 
         #region 指定容器
 
+        private static NotificationContainer GetRootContainer()
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            NotificationContainer container = activedWindow.TryGetChildFromVisualTree<NotificationContainer>(null) ?? throw new NullReferenceException("Can't Find the NotificationContainer");
+            return container;
+        }
+
         private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
         {
             container.Dispatcher.VerifyAccess();
@@ -385,9 +392,7 @@ namespace Rubyer
         /// </summary>
         public static void ClearAll()
         {
-            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
-            NotificationContainer container = activedWindow.TryGetChildFromVisualTree<NotificationContainer>(null) ?? throw new NullReferenceException("Can't Find the NotificationContainer");
-            container?.ClearCards();
+            GetRootContainer()?.ClearCards();
         }
 
         #endregion 指定容器

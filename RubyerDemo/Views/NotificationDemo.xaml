@@ -33,7 +33,7 @@
                 <Grid Margin="10">
                     <GroupBox Margin="0 0 0 10" Header="通知-Notification">
                         <StackPanel Margin="5">
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <TextBlock Width="100"
                                            Margin="10"
                                            HorizontalAlignment="Center"
@@ -42,19 +42,9 @@
                                            Margin="10"
                                            HorizontalAlignment="Center"
                                            Text="指定容器弹出" />
+                                <Border Width="250" />
                             </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <Label Content="HorizontalAlignment:" />
-                                <ComboBox Width="100"
-                                          Margin="5 0 10 0"
-                                          ItemsSource="{Binding Source={StaticResource HorizontalAlignmentValues}}"
-                                          SelectedItem="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:NotificationContainer}}" />
-                                <Label Content="VerticalAlignment:" />
-                                <ComboBox Width="100"
-                                          Margin="5 0 10 0"
-                                          ItemsSource="{Binding Source={StaticResource VerticalAlignmentValues}}"
-                                          SelectedItem="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:NotificationContainer}}" />
-                            </StackPanel>
+
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <Button x:Name="NotificationBtn"
                                         Style="{StaticResource LightButton}"
@@ -140,15 +130,18 @@
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <Button x:Name="ClearBtn"
+                                        Style="{StaticResource DarkButton}"
                                         Width="100"
                                         Margin="10"
                                         Click="ClearBtn_Click"
                                         Content="清除通知" />
                                 <Button x:Name="ClearContainerBtn"
+                                        Style="{StaticResource DarkButton}"
                                         Width="100"
                                         Margin="10"
                                         Click="ClearContainerBtn_Click"
                                         Content="清除通知" />
+                                <Border Width="250" />
                             </StackPanel>
                             <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
                                 <rubyer:NotificationCard Title="title"

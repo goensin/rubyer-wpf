@@ -83,14 +83,13 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void ShowGlobal(MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-
             MessageWindow messageWindow = MessageWindow.GetInstance();
             messageWindow.Dispatcher.VerifyAccess();
  
             MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            messageCard.Close += (sender, e) => messageWindow.RemoveMessageCard(messageCard);
+            messageCard.Close += (sender, e) => messageWindow.Remove(messageCard);
             messageCard.MouseEnter += (sender, e) => cts.Cancel();
             messageCard.MouseLeave += (sender, e) =>
             {
@@ -99,7 +98,7 @@ namespace Rubyer
             };
 
             messageWindow.Show();
-            messageWindow.AddMessageCard(messageCard);
+            messageWindow.Add(messageCard);
             DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
         }
 
@@ -158,9 +157,26 @@ namespace Rubyer
             ShowGlobal(MessageType.Error, content, millisecondTimeOut, isClearable);
         }
 
+        /// <summary>
+        /// 全局清除所有消息
+        /// </summary>
+        public static void ClearAllGlobal()
+        {
+            MessageWindow messageWindow = MessageWindow.GetInstance();
+            messageWindow.Dispatcher.VerifyAccess();
+            messageWindow.ClearAll();
+        }
+
         #endregion 全局
 
         #region 指定容器
+
+        private static MessageContainer GetRootContainer()
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            MessageContainer container = activedWindow.TryGetChildFromVisualTree<MessageContainer>(null) ?? throw new NullReferenceException("Can't Find the MessageContainer");
+            return container;
+        }
 
         private static void ShowInternal(MessageContainer container, MessageType type, object content, int millisecondTimeOut, bool isClearable)
         {
@@ -168,7 +184,7 @@ namespace Rubyer
             MessageCard messageCard = GetMessageCard(type, content, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            messageCard.Close += (sender, e) => container.RemoveMessageCard(messageCard);
+            messageCard.Close += (sender, e) => container.RemoveCard(messageCard);
             messageCard.MouseEnter += (sender, e) => cts.Cancel();
             messageCard.MouseLeave += (sender, e) =>
             {
@@ -176,7 +192,7 @@ namespace Rubyer
                 DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
             };
 
-            container.AddMessageCard(messageCard);
+            container.AddCard(messageCard);
             DelayCloseMessageCard(millisecondTimeOut, messageCard, cts.Token);
         }
 
@@ -209,8 +225,7 @@ namespace Rubyer
         /// <param name="isClearable">是否显示关闭按钮</param>
         public static void Show(MessageType type, object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
-            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
-            MessageContainer container = activedWindow.TryGetChildFromVisualTree<MessageContainer>(null) ?? throw new NullReferenceException("Can't Find the MessageContainer");
+            MessageContainer container = GetRootContainer();
             ShowInternal(container, type, content, millisecondTimeOut, isClearable);
         }
 
@@ -331,6 +346,27 @@ namespace Rubyer
         public static void Error(object content, int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(MessageType.Error, content, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 清除所有通知
+        /// </summary>
+        public static void ClearAll(string containerIdentifier)
+        {
+            if (!Containers.ContainsKey(containerIdentifier))
+            {
+                throw new NullReferenceException($"The notification container Identifier '{containerIdentifier}' could not be found");
+            }
+
+            Containers[containerIdentifier]?.ClearCards();
+        }
+
+        /// <summary>
+        /// 清除所有通知
+        /// </summary>
+        public static void ClearAll()
+        {
+            GetRootContainer()?.ClearCards();
         }
 
         #endregion 指定容器

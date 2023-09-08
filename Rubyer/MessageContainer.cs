@@ -57,7 +57,7 @@ namespace Rubyer
         /// 添加消息卡片
         /// </summary>
         /// <param name="messageCard">消息卡片</param>
-        internal void AddMessageCard(MessageCard messageCard)
+        internal void AddCard(MessageCard messageCard)
         {
             _ = messageStackPanel.Children.Add(messageCard);
         }
@@ -66,9 +66,20 @@ namespace Rubyer
         /// 移除消息卡片
         /// </summary>
         /// <param name="messageCard"></param>
-        internal void RemoveMessageCard(MessageCard messageCard)
+        internal void RemoveCard(MessageCard messageCard)
         {
             messageStackPanel.Children.Remove(messageCard);
+        }
+
+        /// <summary>
+        /// 移除所有卡片
+        /// </summary>
+        internal void ClearCards()
+        {
+            foreach (MessageCard card in messageStackPanel.Children)
+            {
+                card.IsShow = false;
+            }
         }
     }
 }
