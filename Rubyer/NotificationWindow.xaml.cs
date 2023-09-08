@@ -52,7 +52,7 @@ namespace Rubyer
         /// 添加通知卡片
         /// </summary>
         /// <param name="notificationCard">通知卡片</param>
-        internal void AddMessageCard(NotificationCard notificationCard)
+        internal void Add(NotificationCard notificationCard)
         {
             notificationStackPanel.Children.Insert(0, notificationCard);
         }
@@ -61,12 +61,23 @@ namespace Rubyer
         /// 移除通知卡片
         /// </summary>
         /// <param name="notificationCard">通知卡片</param>
-        internal void RemoveMessageCard(NotificationCard notificationCard)
+        internal void Remove(NotificationCard notificationCard)
         {
             notificationStackPanel.Children.Remove(notificationCard);
             if (notificationStackPanel.Children.Count == 0)
             {
                 Close();
+            }
+        }
+
+        /// <summary>
+        /// 移除全部
+        /// </summary>
+        internal void ClearAll()
+        {
+            foreach (NotificationCard card in notificationStackPanel.Children)
+            {
+                card.IsShow = false;
             }
         }
     }

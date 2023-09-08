@@ -54,27 +54,37 @@ namespace RubyerDemo.Views
 
         private void NotificationContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Show(ConstNames.NotificationDemo, content: "message");
+            Notification.Show(content: "message");
         }
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Info(ConstNames.NotificationDemo, content: "info");
+            Notification.Info(content: "info");
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Warning(ConstNames.NotificationDemo, content: "warning");
+            Notification.Warning(content: "warning");
         }
 
         private void SuccessContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Success(ConstNames.NotificationDemo, content: "success");
+            Notification.Success(content: "success");
         }
 
         private void ErrorContaionBtn_Click(object sender, RoutedEventArgs e)
         {
             Notification.Error("error", millisecondTimeOut: 0);
+        }
+
+        private void ClearContainerBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Notification.ClearAll();
+        }
+
+        private void ClearBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Notification.ClearAllGlobal();
         }
     }
 }

@@ -97,7 +97,7 @@ namespace Rubyer
             NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            notificationCard.Close += (sender, e) => notificationWindow.RemoveMessageCard(notificationCard);
+            notificationCard.Close += (sender, e) => notificationWindow.Remove(notificationCard);
             notificationCard.MouseEnter += (sender, e) => cts.Cancel();
             notificationCard.MouseLeave += (sender, e) =>
             {
@@ -106,7 +106,7 @@ namespace Rubyer
             };
 
             notificationWindow.Show();
-            notificationWindow.AddMessageCard(notificationCard);
+            notificationWindow.Add(notificationCard);
             DelayCloseNotificationCard(millisecondTimeOut, notificationCard, cts.Token);
         }
 
@@ -168,6 +168,16 @@ namespace Rubyer
         public static void ErrorGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
         {
             ShowGlobal(NotificationType.Error, content, title, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 全局清除所有通知
+        /// </summary>
+        public static void ClearAllGlobal()
+        {
+            NotificationWindow notificationWindow = NotificationWindow.GetInstance();
+            notificationWindow.Dispatcher.VerifyAccess();
+            notificationWindow.ClearAll();
         }
 
         #endregion 全局
@@ -355,6 +365,29 @@ namespace Rubyer
         public static void Error(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
         {
             Show(NotificationType.Error, content, title, millisecondTimeOut, isClearable);
+        }
+
+        /// <summary>
+        /// 清除所有通知
+        /// </summary>
+        public static void ClearAll(string containerIdentifier)
+        {
+            if (!Containers.ContainsKey(containerIdentifier))
+            {
+                throw new NullReferenceException($"The notification container Identifier '{containerIdentifier}' could not be found");
+            }
+
+            Containers[containerIdentifier]?.ClearCards();
+        }
+
+        /// <summary>
+        /// 清除所有通知
+        /// </summary>
+        public static void ClearAll()
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            NotificationContainer container = activedWindow.TryGetChildFromVisualTree<NotificationContainer>(null) ?? throw new NullReferenceException("Can't Find the NotificationContainer");
+            container?.ClearCards();
         }
 
         #endregion 指定容器

@@ -70,5 +70,16 @@ namespace Rubyer
         {
             stackPanel.Children.Remove(card);
         }
+
+        /// <summary>
+        /// 移除所有卡片
+        /// </summary>
+        internal void ClearCards()
+        {
+            foreach (NotificationCard card in stackPanel.Children)
+            {
+                card.IsShow = false;
+            }
+        }
     }
 }
