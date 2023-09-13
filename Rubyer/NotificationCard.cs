@@ -166,6 +166,21 @@ namespace Rubyer
             set { SetValue(TitleProperty, value); }
         }
 
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public static readonly DependencyProperty TransitionTypeProperty =
+            DependencyProperty.Register("TransitionType", typeof(TransitionType), typeof(NotificationCard), new PropertyMetadata(default(TransitionType)));
+
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public TransitionType TransitionType
+        {
+            get { return (TransitionType)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
+        }
+
         #endregion 依赖属性
     }
 }

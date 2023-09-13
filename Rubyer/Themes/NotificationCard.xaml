@@ -24,6 +24,7 @@
         <Setter Property="Padding" Value="10 0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="TransitionType" Value="FadeLeft" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
@@ -37,7 +38,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:NotificationCard}">
                     <rubyer:Transition x:Name="Path_Transition"
                                        IsShow="{TemplateBinding IsShow}"
-                                       Type="CollapseUp"
+                                       Type="{TemplateBinding TransitionType}"
                                        Duration="0:0:0.5">
                         <Border x:Name="rootBorder"
                                 Margin="{TemplateBinding Margin}"

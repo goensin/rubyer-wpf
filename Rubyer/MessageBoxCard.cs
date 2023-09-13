@@ -245,6 +245,21 @@ namespace Rubyer
             set { SetValue(MessageBoxButtonProperty, value); }
         }
 
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public static readonly DependencyProperty TransitionTypeProperty =
+            DependencyProperty.Register("TransitionType", typeof(TransitionType), typeof(MessageBoxCard), new PropertyMetadata(default(TransitionType)));
+
+        /// <summary>
+        /// 转换类型
+        /// </summary>
+        public TransitionType TransitionType
+        {
+            get { return (TransitionType)GetValue(IsShowProperty); }
+            set { SetValue(IsShowProperty, value); }
+        }
+
         #endregion 依赖属性
 
         private void InternalReturnResult(MessageBoxCard card, MessageBoxResult result)
