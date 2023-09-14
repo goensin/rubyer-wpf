@@ -140,7 +140,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(NotificationCard), new PropertyMetadata(BooleanBoxes.FalseBox));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(NotificationCard), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowChanged));
 
         /// <summary>
         /// 是否显示
@@ -182,5 +182,15 @@ namespace Rubyer
         }
 
         #endregion 依赖属性
+
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var notificationCard = d as NotificationCard;
+            if (!notificationCard.IsLoaded && !notificationCard.IsShow)
+            {
+                RoutedEventArgs eventArgs = new RoutedEventArgs(CloseEvent, notificationCard);
+                notificationCard.RaiseEvent(eventArgs);
+            }
+        }
     }
 }

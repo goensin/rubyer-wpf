@@ -1,4 +1,5 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -140,7 +141,7 @@ namespace Rubyer
         /// 是否显示
         /// </summary>
         public static readonly DependencyProperty IsShowProperty =
-            DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageCard), new PropertyMetadata(BooleanBoxes.FalseBox));
+            DependencyProperty.Register("IsShow", typeof(bool), typeof(MessageCard), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowChanged));
 
         /// <summary>
         /// 是否显示
@@ -167,5 +168,15 @@ namespace Rubyer
         }
 
         #endregion 依赖属性
+
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var messageCard = d as MessageCard;
+            if (!messageCard.IsLoaded && !messageCard.IsShow)
+            {
+                RoutedEventArgs eventArgs = new RoutedEventArgs(CloseEvent, messageCard);
+                messageCard.RaiseEvent(eventArgs);
+            }
+        }
     }
 }
