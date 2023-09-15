@@ -30,9 +30,9 @@
                         <rubyer:DropDownButton Content="下拉按钮">
                             <rubyer:DropDownButton.MenuItemsSource>
                                 <rubyer:MenuItemCollection>
-                                    <MenuItem Header="选项一"></MenuItem>
-                                    <MenuItem Header="选项二"></MenuItem>
-                                    <MenuItem Header="选项三"></MenuItem>
+                                    <MenuItem Header="选项一" />
+                                    <MenuItem Header="选项二" />
+                                    <MenuItem Header="选项三" />
                                 </rubyer:MenuItemCollection>
                             </rubyer:DropDownButton.MenuItemsSource>
                         </rubyer:DropDownButton>

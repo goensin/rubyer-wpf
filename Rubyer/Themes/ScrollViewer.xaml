@@ -16,7 +16,7 @@
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.99" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarBackground" Value="Transparent" />
-        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource BorderLight}" />
+        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarForeground" Value="{DynamicResource ScrollBarBrush}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />

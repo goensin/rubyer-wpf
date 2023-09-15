@@ -149,6 +149,7 @@
                                       rubyer:ControlHelper.MouseOverBrush="{TemplateBinding SelectedBrush}"
                                       rubyer:InputBoxHelper.IsRound="{TemplateBinding IsRound}"
                                       rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_PageBar_PageSize}"
+                                      IsEditable="True"
                                       ItemsSource="{TemplateBinding PageSizeCollection}"
                                       SelectedItem="{Binding PageSize, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
                                       Visibility="{TemplateBinding IsShowPageSize, Converter={StaticResource BooleanToVisibleConverter}}" />

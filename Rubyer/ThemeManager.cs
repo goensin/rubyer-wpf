@@ -53,6 +53,7 @@ namespace Rubyer
             "LeftEffect",
             "ControlBackground",
             "ContainerBackground",
+            "ScrollBarBrush",
         };
 
         private static bool themeApplying = false;
