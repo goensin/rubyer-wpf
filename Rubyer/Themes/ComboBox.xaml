@@ -37,9 +37,11 @@
                             <DockPanel>
                                 <CheckBox x:Name="selectCheckBox"
                                           Margin="0 0 5 0"
+                                          Content="{TemplateBinding Content}"
                                           IsChecked="{Binding Path=(rubyer:ComboBoxHelper.IsSelected), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           Visibility="Collapsed" />
-                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                <ContentPresenter x:Name="content"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                             </DockPanel>
@@ -52,6 +54,7 @@
                         <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
                             <Setter TargetName="selectCheckBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="content" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

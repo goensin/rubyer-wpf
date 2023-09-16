@@ -74,7 +74,8 @@
                                                 </Button>
                                                 <Button Style="{StaticResource TextErrorButton}"
                                                         Padding="5"
-                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=views:DataGridDemo}}">
+                                                        Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=views:DataGridDemo}}"
+                                                        CommandParameter="{Binding .}">
                                                     <rubyer:Icon Type="DeleteBinFill" />
                                                 </Button>
                                             </StackPanel>
