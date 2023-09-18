@@ -38,14 +38,14 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="TitleShadow" Value="False" />
-        <Setter Property="TitleHeight" Value="24" />
+        <Setter Property="TitleHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(WindowChrome.WindowChrome).CaptionHeight, Mode=TwoWay}" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />
         <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="TitleBackground" Value="{DynamicResource Primary}" />
         <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
-                <WindowChrome CaptionHeight="{Binding TitleHeight, FallbackValue=30, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
+                <WindowChrome CaptionHeight="24"
                               CornerRadius="0"
                               GlassFrameThickness="1"
                               NonClientFrameEdges="None"
