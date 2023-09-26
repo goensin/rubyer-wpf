@@ -37,12 +37,6 @@
                                           RecognizesAccessKey="True"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <!--<DataTrigger Binding="{Binding IsLoaded, RelativeSource={RelativeSource Self}}" Value="True">
-                            <Setter Property="Height" Value="{Binding ViewportHeight, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
-                            <Setter Property="Width" Value="{Binding ViewportWidth, RelativeSource={RelativeSource AncestorType=rubyer:FlipView}}" />
-                        </DataTrigger>-->
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
