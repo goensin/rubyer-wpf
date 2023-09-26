@@ -104,6 +104,7 @@ namespace Rubyer
                 if (state != ClockState.Active)
                 {
                     horizontalAnimating = false;
+                    ScrollSelectedItemToCenter(this, noAnimation: true); // 防止 ui 线程卡住，导致未滚动到正确位置
                     var horizontalOffset = HorizontalOffset;
                     BeginAnimation(HorizontalOffsetProperty, null);
                     HorizontalOffset = horizontalOffset;
@@ -118,6 +119,7 @@ namespace Rubyer
                 if (state != ClockState.Active)
                 {
                     verticalAnimating = false;
+                    ScrollSelectedItemToCenter(this, noAnimation: true); // 防止 ui 线程卡住，导致未滚动到正确位置
                     var verticalOffset = VerticalOffset;
                     BeginAnimation(VerticalOffsetProperty, null);
                     VerticalOffset = verticalOffset;
