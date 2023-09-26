@@ -21,12 +21,6 @@ namespace Rubyer
         }
 
         /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-        }
-
-        /// <inheritdoc/>
         protected override void OnMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             // 取消鼠标左键点击选择，改成右击
