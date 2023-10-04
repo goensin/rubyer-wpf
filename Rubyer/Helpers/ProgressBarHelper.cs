@@ -1,5 +1,8 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media.Animation;
 
 namespace Rubyer
 {
@@ -84,6 +87,77 @@ namespace Rubyer
         public static void SetIndeterminateValue(DependencyObject obj, double value)
         {
             obj.SetValue(IndeterminateValueProperty, value);
+        }
+
+        /// <summary>
+        /// 是否启用动画
+        /// </summary>
+        public static readonly DependencyProperty IsAnimationProperty =
+            DependencyProperty.RegisterAttached("IsAnimation", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsAnimationChanged));
+
+        public static bool GetIsAnimation(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsAnimationProperty);
+        }
+
+        public static void SetIsAnimation(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsAnimationProperty, BooleanBoxes.Box(value));
+        }
+
+        /// <summary>
+        /// 是否进行动画中
+        /// </summary>
+        internal static readonly DependencyPropertyKey IsAnimatingPropertyKey =
+            DependencyProperty.RegisterAttachedReadOnly("IsAnimating", typeof(bool), typeof(ProgressBarHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 是否进行动画中
+        /// </summary>
+        public static readonly DependencyProperty IsAnimatingProperty = IsAnimatingPropertyKey.DependencyProperty;
+
+        public static bool GetIsAnimating(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(IsAnimatingProperty);
+        }
+
+        internal static void SetIsAnimating(DependencyObject obj, bool value)
+        {
+            obj.SetValue(IsAnimatingPropertyKey, BooleanBoxes.Box(value));
+        }
+
+        private static void OnIsAnimationChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ProgressBar progressBar)
+            {
+                if (GetIsAnimation(progressBar))
+                {
+                    progressBar.ValueChanged += ProgressBar_ValueChanged;
+                }
+                else
+                {
+                    progressBar.ValueChanged -= ProgressBar_ValueChanged;
+                }
+            }
+        }
+
+        private static void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            var progressBar = (ProgressBar)sender;
+            if (GetIsAnimating(progressBar))
+            {
+                return;
+            }
+
+            var doubleAnimation = new DoubleAnimation(e.OldValue, e.NewValue, new Duration(TimeSpan.FromSeconds(0.5)));
+            doubleAnimation.EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut };
+            doubleAnimation.Completed += (a, b) =>
+            {
+                SetIsAnimating(progressBar, false);
+                progressBar.BeginAnimation(ProgressBar.ValueProperty, null);
+            };
+            SetIsAnimating(progressBar, true);
+            progressBar.BeginAnimation(ProgressBar.ValueProperty, doubleAnimation);
         }
     }
 }
