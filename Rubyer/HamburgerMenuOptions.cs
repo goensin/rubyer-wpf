@@ -6,6 +6,7 @@ namespace Rubyer
     /// <summary>
     /// 汉堡包菜单选项控件
     /// </summary>
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     public class HamburgerMenuOptions : Menu
     {
         static HamburgerMenuOptions()

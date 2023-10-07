@@ -251,8 +251,7 @@
 
     <!--  MenuItem Style  -->
     <Style x:Key="RubyerMenuItem" TargetType="{x:Type MenuItem}">
-        <Setter Property="OverridesDefaultStyle" Value="True" />
-        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
         <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=MenuBase}}" />

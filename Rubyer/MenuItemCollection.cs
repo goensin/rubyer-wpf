@@ -4,9 +4,7 @@ using System.Windows.Controls;
 namespace Rubyer
 {
     /// <summary>
-    /// The MenuItemCollection provides typed collection of HamburgerMenuItemBase.
-    /// form https://github.com/MahApps/MahApps.Metro
-    /// MahApps.Metro.Controls.HamburgerMenu
+    /// MenuItem 集合
     /// </summary>
     public class MenuItemCollection : FreezableCollection<Control>
     {

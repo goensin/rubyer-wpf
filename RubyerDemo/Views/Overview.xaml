@@ -32,6 +32,7 @@
                                 <rubyer:MenuItemCollection>
                                     <MenuItem Header="选项一" />
                                     <MenuItem Header="选项二" />
+                                    <Separator />
                                     <MenuItem Header="选项三" />
                                 </rubyer:MenuItemCollection>
                             </rubyer:DropDownButton.MenuItemsSource>

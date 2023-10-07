@@ -19,7 +19,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="ToolTipService.Placement" Value="Right" />
         <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
-        <Setter Property="ToolTipService.VerticalOffset" Value="3" />
         <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
         <Setter Property="Template">
             <Setter.Value>
@@ -103,23 +102,25 @@
     </Style>
 
     <!--  HamburgerMenuOptionsItem  -->
-    <Style x:Key="RubyerHamburgerMenuOptionsItem" TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
+    <Style x:Key="RubyerHamburgerMenuOptionsItem"
+           TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
+        <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Cursor" Value="Arrow" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
-        <Setter Property="ToolTip" Value="{Binding Header, RelativeSource={RelativeSource Self}, Converter={StaticResource CloneConverter}}" />
-        <Setter Property="ToolTipService.Placement" Value="Right" />
-        <Setter Property="ToolTipService.PlacementTarget" Value="{Binding RelativeSource={RelativeSource Self}}" />
-        <Setter Property="ToolTipService.VerticalOffset" Value="3" />
-        <Setter Property="ToolTipService.InitialShowDelay" Value="300" />
-        <Setter Property="ToolTipService.IsEnabled" Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
-                    <Grid x:Name="root" Background="{TemplateBinding Background}">
+                    <Grid x:Name="root"
+                          Background="{TemplateBinding Background}"
+                          ToolTip="{TemplateBinding Header, Converter={StaticResource CloneConverter}}"
+                          ToolTipService.InitialShowDelay="300"
+                          ToolTipService.IsEnabled="{Binding IsExpanded, Converter={StaticResource BooleanToInverseConverter}, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
+                          ToolTipService.Placement="Right"
+                          ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}}">
                         <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
@@ -214,10 +215,12 @@
                         </DataTrigger>
                         <Trigger Property="Role" Value="SubmenuItem">
                             <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
+                            <Setter TargetName="root" Property="ToolTipService.IsEnabled" Value="False" />
                         </Trigger>
                         <Trigger Property="Role" Value="SubmenuHeader">
                             <Setter TargetName="moreIcon" Property="Visibility" Value="Visible" />
                             <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
+                            <Setter TargetName="root" Property="ToolTipService.IsEnabled" Value="False" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
@@ -237,22 +240,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelHeader" />
-                    <Condition Binding="{Binding IsExpanded, FallbackValue=True, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="ToolTipService.IsEnabled" Value="True" />
-            </MultiDataTrigger>
-            <MultiDataTrigger>
-                <MultiDataTrigger.Conditions>
-                    <Condition Binding="{Binding Role, RelativeSource={RelativeSource Self}}" Value="TopLevelItem" />
-                    <Condition Binding="{Binding IsExpanded, FallbackValue=True, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" Value="False" />
-                </MultiDataTrigger.Conditions>
-                <Setter Property="ToolTipService.IsEnabled" Value="True" />
-            </MultiDataTrigger>
-        </Style.Triggers>
     </Style>
 
     <Style x:Key="RubyerHamburgerMenuOptions"
@@ -317,6 +304,7 @@
         <Setter Property="TransitionDuration" Value="0:0:0.5" />
         <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
         <Setter Property="MenuIcon" Value="{StaticResource HamburgerMenuIcon}" />
+        <Setter Property="PaneBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">

@@ -97,7 +97,7 @@ namespace Rubyer
             "ShowPassword", typeof(bool), typeof(PasswordBoxHelper), new PropertyMetadata(BooleanBoxes.FalseBox));
 
         /// <summary>
-        /// 行数
+        /// 显示密码
         /// </summary>
         public static readonly DependencyProperty ShowPasswordProperty = ShowPasswordPropertyKey.DependencyProperty;
 

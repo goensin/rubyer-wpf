@@ -83,14 +83,14 @@
     <Color x:Key="DarkDialogBackgroundColor">#88111111</Color>
     <SolidColorBrush x:Key="DialogBackground" Color="{DynamicResource LightDialogBackgroundColor}" />
 
-    <Color x:Key="LightHeaderBackgroundColor">#1F000000</Color>
-    <Color x:Key="DarkHeaderBackgroundColor">#1FFFFFFF</Color>
+    <Color x:Key="LightHeaderBackgroundColor">#E0E0E0</Color>
+    <Color x:Key="DarkHeaderBackgroundColor">#474747</Color>
     <SolidColorBrush x:Key="HeaderBackground" Color="{DynamicResource LightHeaderBackgroundColor}" />
 
     <Color x:Key="LightScrollBarBrushColor">#CFCFCF</Color>
     <Color x:Key="DarkScrollBarBrushColor">#424242</Color>
     <SolidColorBrush x:Key="ScrollBarBrush" Color="{DynamicResource LightScrollBarBrushColor}" />
-    
+
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />
     <SolidColorBrush x:Key="Warning" Color="#F57C00" />

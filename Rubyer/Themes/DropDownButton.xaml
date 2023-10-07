@@ -61,10 +61,8 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                            <Menu Style="{StaticResource RubyerMenu}"
-                                  Grid.Column="1"
+                            <Menu Grid.Column="1"
                                   rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                  rubyer:ControlHelper.FocusedBrush="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   rubyer:ControlHelper.MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                   rubyer:MenuHelper.IconWidth="{Binding ActualWidth, ElementName=icon, Converter={StaticResource AddConverter}, ConverterParameter=10}"
                                   BorderBrush="{TemplateBinding BorderBrush}"
@@ -73,7 +71,6 @@
                                            BorderBrush="{TemplateBinding BorderBrush}"
                                            Visibility="{TemplateBinding IsShowSeparator, Converter={StaticResource BooleanToVisibleConverter}}" />
                                 <MenuItem x:Name="PART_DropDownMenuItem"
-                                          Style="{StaticResource RubyerMenuItem}"
                                           Padding="5 0"
                                           IsSubmenuOpen="{TemplateBinding IsDropDownOpen}"
                                           ItemContainerStyle="{TemplateBinding MenuItemContainerStyle}"

@@ -14,16 +14,21 @@
                   rubyer:PanelHelper.Spacing="10">
                 <StackPanel Margin="10 10 10 0"
                             HorizontalAlignment="Center"
+                            rubyer:PanelHelper.Spacing="10"
                             Orientation="Horizontal">
                     <TextBlock Margin="10 0" Text="Value:" />
                     <Slider x:Name="valueSlider"
                             Width="200"
                             rubyer:SliderHelper.DraggingShowValue="True"
                             rubyer:SliderHelper.ValuePlacement="Bottom"
+                            Interval="10"
                             IsSnapToTickEnabled="True"
                             Maximum="100"
                             Minimum="0"
+                            TickFrequency="10"
+                            TickPlacement="Both"
                             Value="70" />
+                    <TextBox Text="{Binding Value, ElementName=valueSlider, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <controls:ControlDisplay Title="Default ProgressBar" Grid.Row="1">
