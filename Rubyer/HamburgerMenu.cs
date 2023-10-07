@@ -148,6 +148,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 图标宽度
+        /// </summary>
+        public static readonly DependencyProperty IconWidthProperty = DependencyProperty.Register(
+            "IconWidth", typeof(double), typeof(HamburgerMenu), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 图标宽度
+        /// </summary>
+        public double IconWidth
+        {
+            get { return (double)GetValue(IconWidthProperty); }
+            set { SetValue(IconWidthProperty, value); }
+        }
+
+        /// <summary>
         /// 是否显示汉堡包按钮
         /// </summary>
         public static readonly DependencyProperty IsShowHamburgerButtonProperty = DependencyProperty.Register(

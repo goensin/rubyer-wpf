@@ -172,6 +172,7 @@
                                 <Setter Property="CommandParameter" Value="{Binding Name}" />
                             </Style>
                         </rubyer:HamburgerMenu.OptionsItemContainerStyle>
+
                         <rubyer:HamburgerMenu.ContentTemplate>
                             <DataTemplate>
                                 <Border>

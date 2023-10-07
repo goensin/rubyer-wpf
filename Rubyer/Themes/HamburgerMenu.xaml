@@ -45,7 +45,7 @@
                         <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition x:Name="iconClolumn" Width="{Binding CollapsedWidth, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                                    <ColumnDefinition x:Name="iconClolumn" Width="{Binding IconWidth, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource DoubleToGridLengthConverter}}" />
                                     <ColumnDefinition x:Name="headerColumn" Width="*" />
                                 </Grid.ColumnDefinitions>
 
@@ -60,7 +60,6 @@
                                                   Height="{Binding ActualHeight, ElementName=header}"
                                                   HorizontalAlignment="Center"
                                                   VerticalAlignment="Center"
-                                                  Content="{TemplateBinding Icon}"
                                                   ContentSource="Icon"
                                                   Focusable="False"
                                                   IsHitTestVisible="False" />
@@ -70,7 +69,6 @@
                                                   Margin="{TemplateBinding Padding}"
                                                   HorizontalAlignment="Left"
                                                   VerticalAlignment="Center"
-                                                  Content="{TemplateBinding Header}"
                                                   ContentSource="Header"
                                                   Focusable="False"
                                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
@@ -102,8 +100,7 @@
     </Style>
 
     <!--  HamburgerMenuOptionsItem  -->
-    <Style x:Key="RubyerHamburgerMenuOptionsItem"
-           TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
+    <Style x:Key="RubyerHamburgerMenuOptionsItem" TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Height" Value="Auto" />
         <Setter Property="Cursor" Value="Arrow" />
@@ -130,7 +127,7 @@
                         <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition x:Name="iconClolumn" Width="{Binding CollapsedWidth, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource DoubleToGridLengthConverter}}" />
+                                    <ColumnDefinition x:Name="iconClolumn" Width="{Binding IconWidth, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}, Converter={StaticResource DoubleToGridLengthConverter}}" />
                                     <ColumnDefinition x:Name="headerColumn" Width="*" />
                                 </Grid.ColumnDefinitions>
 
@@ -150,24 +147,14 @@
                                                   Focusable="False"
                                                   IsHitTestVisible="False" />
 
-                                <rubyer:Icon x:Name="checkIcon"
-                                             Width="{Binding ActualHeight, ElementName=header}"
-                                             Height="{Binding ActualHeight, ElementName=header}"
-                                             HorizontalAlignment="Center"
-                                             VerticalAlignment="Center"
-                                             Focusable="False"
-                                             Type="CheckFill"
-                                             Visibility="Hidden" />
-
                                 <DockPanel Grid.Column="1" Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}">
                                     <rubyer:Icon x:Name="moreIcon"
-                                                 Margin="20 0 0 0"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
-                                                 DockPanel.Dock="Right"
+                                                 DockPanel.Dock="Right" 
                                                  Type="ArrowRightSLine"
-                                                 Visibility="Hidden" />
-                                    <ContentPresenter x:Name="header"
+                                                 Visibility="Collapsed" />
+                                    <ContentPresenter x:Name="header" 
                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                       ContentSource="Header"
@@ -214,28 +201,14 @@
                             <Setter TargetName="iconContent" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <Trigger Property="Role" Value="SubmenuItem">
-                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
                             <Setter TargetName="root" Property="ToolTipService.IsEnabled" Value="False" />
+                            <Setter TargetName="header" Property="Margin" Value="0 0 10 0" />
                         </Trigger>
                         <Trigger Property="Role" Value="SubmenuHeader">
                             <Setter TargetName="moreIcon" Property="Visibility" Value="Visible" />
-                            <Setter TargetName="iconClolumn" Property="Width" Value="{Binding Path=(rubyer:MenuHelper.IconWidth), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
                             <Setter TargetName="root" Property="ToolTipService.IsEnabled" Value="False" />
+                            <Setter TargetName="header" Property="Margin" Value="0 0 10 0" />
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Role" Value="SubmenuItem" />
-                                <Condition Property="IsChecked" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="checkIcon" Property="Visibility" Value="Visible" />
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="Role" Value="SubmenuItem" />
-                                <Condition Property="IsCheckable" Value="True" />
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="icon" Property="Visibility" Value="Hidden" />
-                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -302,7 +275,8 @@
         <Setter Property="TabStripPlacement" Value="Left" />
         <Setter Property="TransitionType" Value="Fade" />
         <Setter Property="TransitionDuration" Value="0:0:0.5" />
-        <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding IconWidth, RelativeSource={RelativeSource Self}}" />
         <Setter Property="MenuIcon" Value="{StaticResource HamburgerMenuIcon}" />
         <Setter Property="PaneBackground" Value="{DynamicResource HeaderBackground}" />
         <Setter Property="Template">
