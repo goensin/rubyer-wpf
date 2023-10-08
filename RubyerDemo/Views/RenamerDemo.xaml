@@ -32,7 +32,6 @@
                         </rubyer:Renamer>
 
                         <Button Margin="5 0"
-                                Padding="5"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Command="{x:Static rubyer:Renamer.RenameCommand}"
                                 CommandTarget="{Binding ElementName=renamer}"
@@ -56,7 +55,6 @@
                             </StackPanel>
                         </rubyer:Renamer>
                         <Button Margin="5 0"
-                                Padding="5"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Command="{x:Static rubyer:Renamer.RenameCommand}"
                                 CommandTarget="{Binding ElementName=renamer2}"

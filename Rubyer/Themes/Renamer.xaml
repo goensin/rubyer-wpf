@@ -14,6 +14,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="Content" Value="{Binding Text, Mode=OneWay, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
@@ -21,7 +22,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Renamer}">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <TextBox x:Name="PART_TextBox"
                                  Style="{StaticResource RubyerTextBox}"
                                  Height="Auto"
