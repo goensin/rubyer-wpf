@@ -8,31 +8,31 @@
 		<Description>WPF 使用的 UI 控件包</Description>
 		<PackageIcon>rubyer.png</PackageIcon>
 		<PackageProjectUrl></PackageProjectUrl>
-		<Version>2.11.11</Version>
+		<Version>2.11.12</Version>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<RepositoryUrl>https://gitee.com/wuyanxin1028/rubyer-wpf</RepositoryUrl>
 		<LangVersion>preview</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
-	  <Compile Remove="Assets\**" />
-	  <Compile Remove="Publish\**" />
-	  <EmbeddedResource Remove="Assets\**" />
-	  <EmbeddedResource Remove="Publish\**" />
-	  <None Remove="Assets\**" />
-	  <None Remove="Publish\**" />
-	  <None Include="rubyer.png">
-	    <Pack>True</Pack>
-	    <PackagePath></PackagePath>
-	  </None>
-	  <Page Remove="Assets\**" />
-	  <Page Remove="Publish\**" />
+		<Compile Remove="Assets\**" />
+		<Compile Remove="Publish\**" />
+		<EmbeddedResource Remove="Assets\**" />
+		<EmbeddedResource Remove="Publish\**" />
+		<None Remove="Assets\**" />
+		<None Remove="Publish\**" />
+		<None Include="rubyer.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<Page Remove="Assets\**" />
+		<Page Remove="Publish\**" />
 	</ItemGroup>
-  <ItemGroup>
-    <None Include="..\.editorconfig" Link=".editorconfig" />
-    <None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\.editorconfig" Link=".editorconfig" />
+		<None Include="..\Settings.XamlStyler" Link="Settings.XamlStyler" />
+	</ItemGroup>
+	<ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
+		<Reference Include="System.ComponentModel.DataAnnotations" />
+	</ItemGroup>
 </Project>
