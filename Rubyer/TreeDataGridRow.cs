@@ -8,16 +8,8 @@ namespace Rubyer
     /// <summary>
     /// 树形数据表格行
     /// </summary>
-    [TemplatePart(Name = ExpanderBorderPanelName, Type = typeof(Border))]
     public class TreeDataGridRow : DataGridRow
     {
-        /// <summary>
-        /// 消息堆叠面板名称
-        /// </summary>
-        public const string ExpanderBorderPanelName = "PART_ExpanderBorder";
-
-        private Border expandBorder;
-
         #region 路由事件
 
         /// <summary>
@@ -149,27 +141,11 @@ namespace Rubyer
             internal set { SetValue(NodeLevelPropertyKey, value); }
         }
 
-        /// <summary>
-        /// 展开宽度
-        /// </summary>
-        public double ExpanderWidth
-        {
-            get => expandBorder is null ? 0 : expandBorder.ActualWidth;
-        }
-
         #endregion
 
         static TreeDataGridRow()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeDataGridRow), new FrameworkPropertyMetadata(typeof(TreeDataGridRow)));
-        }
-
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            expandBorder = GetTemplateChild(ExpanderBorderPanelName) as Border;
         }
 
         private static void OnIsExpandedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

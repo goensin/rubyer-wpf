@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Rubyer.Commons.KnownBoxes;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -17,29 +17,24 @@ namespace Rubyer
     {
         private bool isPreparing = false;
 
-        /// <summary>
-        /// 展开位置宽度 Key
-        /// </summary>
-        internal static readonly DependencyPropertyKey ExpanderWidthPropertyKey =
-            DependencyProperty.RegisterReadOnly("ExpanderWidth", typeof(double), typeof(TreeDataGrid), new PropertyMetadata(0D));
-
-        /// <summary>
-        /// 展开位置宽度
-        /// </summary>
-        public static readonly DependencyProperty ExpanderWidthProperty = ExpanderWidthPropertyKey.DependencyProperty;
-
-        /// <summary>
-        /// 展开位置宽度
-        /// </summary>
-        public double ExpanderWidth
-        {
-            get { return (double)GetValue(ExpanderWidthProperty); }
-            internal set { SetValue(ExpanderWidthPropertyKey, value); }
-        }
-
         static TreeDataGrid()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeDataGrid), new FrameworkPropertyMetadata(typeof(TreeDataGrid)));
+        }
+
+        /// <summary>
+        /// 是否展开
+        /// </summary>
+        public static readonly DependencyProperty ExpanderIconTypeProperty =
+            DependencyProperty.Register("ExpanderIconType", typeof(IconType), typeof(TreeDataGrid), new PropertyMetadata(default(IconType)));
+
+        /// <summary>
+        /// 是否展开
+        /// </summary>
+        public IconType ExpanderIconType
+        {
+            get { return (IconType)GetValue(ExpanderIconTypeProperty); }
+            set { SetValue(ExpanderIconTypeProperty, value); }
         }
 
         /// <inheritdoc/>
@@ -49,7 +44,6 @@ namespace Rubyer
 
             if (HierarchicalItemsSource is not null && ChildrenPath is not null)
             {
-                //ItemsSource = new ObservableCollection<object>(AddChildrenToSelf(HierarchicalItemsSource, ChildrenPath));
                 ItemsSource = new ObservableCollection<object>(HierarchicalItemsSource as IEnumerable<object>);
             }
         }
@@ -164,17 +158,6 @@ namespace Rubyer
             return collection is { } && firstItem is { } && collection.Contains(firstItem);
         }
 
-        /// <summary>
-        /// 更新前面展开位置宽度
-        /// </summary>
-        private void UpdateExpanderWidth()
-        {
-            ExpanderWidth = ItemContainerGenerator.Items
-                                                  .Select(ItemContainerGenerator.ContainerFromItem)
-                                                  .OfType<TreeDataGridRow>()
-                                                  .Max(x => x.ExpanderWidth);
-        }
-
         /// <inheritdoc/>
         protected override void OnLoadingRow(DataGridRowEventArgs e)
         {
@@ -183,8 +166,6 @@ namespace Rubyer
             var row = e.Row as TreeDataGridRow;
             row.Expanded += Row_Expanded;
             row.Collapsed += Row_Collapsed;
-
-            UpdateExpanderWidth();
         }
 
         /// <inheritdoc/>
@@ -195,8 +176,6 @@ namespace Rubyer
             var row = e.Row as TreeDataGridRow;
             row.Expanded -= Row_Expanded;
             row.Collapsed -= Row_Collapsed;
-
-            UpdateExpanderWidth();
         }
 
         /// <summary>

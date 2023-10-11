@@ -17,7 +17,7 @@
                         <rubyer:Icon x:Name="ExpandPath"
                                      Foreground="{TemplateBinding Foreground}"
                                      RenderTransformOrigin="0.5 0.5"
-                                     Type="ArrowRightSFill">
+                                     Type="{Binding ExpanderIconType, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGrid}}">
                             <rubyer:Icon.RenderTransform>
                                 <RotateTransform x:Name="transform" Angle="0" />
                             </rubyer:Icon.RenderTransform>
@@ -67,11 +67,6 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
                     <Grid x:Name="root">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-
                         <rubyer:ControlMask x:Name="mask"
                                             Grid.ColumnSpan="2"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -80,39 +75,43 @@
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             Visibility="Visible" />
 
-                        <Border x:Name="PART_ExpanderBorder" BorderBrush="{TemplateBinding BorderBrush}">
-                            <StackPanel Orientation="Horizontal">
-                                <Rectangle>
-                                    <Rectangle.Width>
-                                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                                            <MultiBinding.Bindings>
-                                                <Binding Path="NodeLevel" RelativeSource="{RelativeSource AncestorType=rubyer:TreeDataGridRow}" />
-                                                <Binding ElementName="PART_ExpanderToggleButton" Path="ActualWidth" />
-                                            </MultiBinding.Bindings>
-                                        </MultiBinding>
-                                    </Rectangle.Width>
-                                </Rectangle>
+                        <DockPanel Margin="{TemplateBinding Padding}">
+                            <Border x:Name="PART_ExpanderBorder"
+                                    VerticalAlignment="Center"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    DockPanel.Dock="Left">
+                                <StackPanel Orientation="Horizontal">
+                                    <Rectangle>
+                                        <Rectangle.Width>
+                                            <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                                                <MultiBinding.Bindings>
+                                                    <Binding Path="NodeLevel" RelativeSource="{RelativeSource AncestorType=rubyer:TreeDataGridRow}" />
+                                                    <Binding ElementName="PART_ExpanderToggleButton" Path="ActualWidth" />
+                                                </MultiBinding.Bindings>
+                                            </MultiBinding>
+                                        </Rectangle.Width>
+                                    </Rectangle>
 
-                                <ToggleButton x:Name="PART_ExpanderToggleButton"
-                                              Style="{StaticResource TreeDataGridToggleButton}"
-                                              ClickMode="Press"
-                                              IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGridRow}}"
-                                              Visibility="Collapsed" />
-                            </StackPanel>
-                        </Border>
+                                    <ToggleButton x:Name="PART_ExpanderToggleButton"
+                                                  Style="{StaticResource TreeDataGridToggleButton}"
+                                                  ClickMode="Press"
+                                                  IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGridRow}}"
+                                                  Visibility="Collapsed" />
+                                </StackPanel>
+                            </Border>
 
-                        <Border x:Name="border"
-                                Grid.Column="1"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </Border>
+                            <Border x:Name="border"
+                                    Grid.Column="1"
+                                    Background="Transparent"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                                <ContentPresenter HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                  VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                        </DockPanel>
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -207,5 +206,6 @@
            TargetType="{x:Type rubyer:TreeDataGrid}">
         <Setter Property="RowStyle" Value="{StaticResource RubyerTreeDataGridRow}" />
         <Setter Property="CellStyle" Value="{StaticResource RubyerTreeDataGridCell}" />
+        <Setter Property="ExpanderIconType" Value="ArrowRightSFill" />
     </Style>
 </ResourceDictionary>
