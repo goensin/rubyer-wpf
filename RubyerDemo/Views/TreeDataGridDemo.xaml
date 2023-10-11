@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="RubyerDemo.Views.TreeDataGridDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:TreeDataGridViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="TreeDataGridDemo">
+        <controls:ControlDisplay Title="树形数据表格" Grid.Row="8">
+            <rubyer:TreeDataGrid x:Name="TreeDataGrid"
+                                 Height="400"
+                                 AutoGenerateColumns="False"
+                                 BorderThickness="1"
+                                 CanUserAddRows="False"
+                                 ChildrenPath="Children"
+                                 GridLinesVisibility="All"
+                                 HierarchicalItemsSource="{Binding Cities}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="100"
+                                        Binding="{Binding Code}"
+                                        Header="编号" />
+                    <DataGridTextColumn Width="57"
+                                        Binding="{Binding Name}"
+                                        Header="名称" />
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="名称">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Name}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="操作">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="0 0 20 0"
+                                            rubyer:PanelHelper.Spacing="5"
+                                            Orientation="Horizontal">
+                                    <Button Style="{StaticResource ErrorButton}" Content="删除" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </rubyer:TreeDataGrid>
+        </controls:ControlDisplay>
+    </smtx:XamlDisplay>
+</UserControl>

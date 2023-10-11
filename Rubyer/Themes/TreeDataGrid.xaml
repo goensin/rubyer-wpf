@@ -1,0 +1,211 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DataGrid.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="TreeDataGridToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type rubyer:TreeDataGrid}}}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Border Background="Transparent">
+                        <rubyer:Icon x:Name="ExpandPath"
+                                     Foreground="{TemplateBinding Foreground}"
+                                     RenderTransformOrigin="0.5 0.5"
+                                     Type="ArrowRightSFill">
+                            <rubyer:Icon.RenderTransform>
+                                <RotateTransform x:Name="transform" Angle="0" />
+                            </rubyer:Icon.RenderTransform>
+                        </rubyer:Icon>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="transform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="45"
+                                                         Duration="0:0:0.15">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="transform"
+                                                         Storyboard.TargetProperty="Angle"
+                                                         To="0"
+                                                         Duration="0:0:0.15">
+                                            <DoubleAnimation.EasingFunction>
+                                                <CubicEase EasingMode="EaseOut" />
+                                            </DoubleAnimation.EasingFunction>
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerTreeDataGridCell"
+           BasedOn="{StaticResource RubyerDataGridCell}"
+           TargetType="{x:Type DataGridCell}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type DataGridCell}">
+                    <Grid x:Name="root">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <rubyer:ControlMask x:Name="mask"
+                                            Grid.ColumnSpan="2"
+                                            Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            IsActive="{TemplateBinding IsSelected}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                            Visibility="Visible" />
+
+                        <Border x:Name="PART_ExpanderBorder" BorderBrush="{TemplateBinding BorderBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <Rectangle>
+                                    <Rectangle.Width>
+                                        <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
+                                            <MultiBinding.Bindings>
+                                                <Binding Path="NodeLevel" RelativeSource="{RelativeSource AncestorType=rubyer:TreeDataGridRow}" />
+                                                <Binding ElementName="PART_ExpanderToggleButton" Path="ActualWidth" />
+                                            </MultiBinding.Bindings>
+                                        </MultiBinding>
+                                    </Rectangle.Width>
+                                </Rectangle>
+
+                                <ToggleButton x:Name="PART_ExpanderToggleButton"
+                                              Style="{StaticResource TreeDataGridToggleButton}"
+                                              ClickMode="Press"
+                                              IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGridRow}}"
+                                              Visibility="Collapsed" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border x:Name="border"
+                                Grid.Column="1"
+                                Background="Transparent"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding SelectionUnit, RelativeSource={RelativeSource AncestorType=DataGrid}}" Value="FullRow">
+                            <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding HasChildRow, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGridRow}}" Value="True" />
+                                <Condition Binding="{Binding Column.DisplayIndex, RelativeSource={RelativeSource Mode=Self}}" Value="0" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_ExpanderToggleButton" Property="Visibility" Value="Visible" />
+                        </MultiDataTrigger>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding HasChildRow, RelativeSource={RelativeSource AncestorType=rubyer:TreeDataGridRow}}" Value="False" />
+                                <Condition Binding="{Binding Column.DisplayIndex, RelativeSource={RelativeSource Mode=Self}}" Value="0" />
+                            </MultiDataTrigger.Conditions>
+                            <Setter TargetName="PART_ExpanderToggleButton" Property="Visibility" Value="Hidden" />
+                        </MultiDataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Style and template for the DataGridRow.  -->
+    <Style x:Key="RubyerTreeDataGridRow" TargetType="{x:Type rubyer:TreeDataGridRow}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Validation.ErrorTemplate" Value="{x:Null}" />
+        <Setter Property="DetailsVisibility" Value="Collapsed" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:TreeDataGridRow}">
+                    <Border x:Name="DGR_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="True">
+                        <Grid>
+                            <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                                IsActive="{TemplateBinding IsSelected}"
+                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+
+                            <SelectiveScrollingGrid>
+                                <SelectiveScrollingGrid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </SelectiveScrollingGrid.ColumnDefinitions>
+                                <SelectiveScrollingGrid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </SelectiveScrollingGrid.RowDefinitions>
+
+                                <DataGridRowHeader Grid.RowSpan="2"
+                                                   SelectiveScrollingGrid.SelectiveScrollingOrientation="Vertical"
+                                                   Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.Row}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                <DataGridCellsPresenter Grid.Column="1"
+                                                        ItemContainerStyle="{StaticResource RubyerTreeDataGridCell}"
+                                                        ItemsPanel="{TemplateBinding ItemsPanel}"
+                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                                <rubyer:Transition Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   IsShow="{TemplateBinding DetailsVisibility, Converter={StaticResource VisibilityToBooleanConverter}}"
+                                                   Type="CollapseUp">
+                                    <DataGridDetailsPresenter SelectiveScrollingGrid.SelectiveScrollingOrientation="{Binding AreRowDetailsFrozen, ConverterParameter={x:Static SelectiveScrollingOrientation.Vertical}, Converter={x:Static DataGrid.RowDetailsScrollingConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
+                                </rubyer:Transition>
+
+                            </SelectiveScrollingGrid>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerTreeDataGrid"
+           BasedOn="{StaticResource RubyerDataGrid}"
+           TargetType="{x:Type rubyer:TreeDataGrid}">
+        <Setter Property="RowStyle" Value="{StaticResource RubyerTreeDataGridRow}" />
+        <Setter Property="CellStyle" Value="{StaticResource RubyerTreeDataGridCell}" />
+    </Style>
+</ResourceDictionary>

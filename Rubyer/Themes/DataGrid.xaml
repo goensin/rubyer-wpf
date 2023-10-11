@@ -115,8 +115,6 @@
         </Setter>
     </Style>
 
-
-
     <!--  Style and template for the DataGridRow.  -->
     <Style x:Key="RubyerDataGridRow" TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="Transparent" />
@@ -385,7 +383,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HeadersVisibility" Value="Column" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="HorizontalGridLinesBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="VerticalGridLinesBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />

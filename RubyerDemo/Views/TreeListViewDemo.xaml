@@ -11,7 +11,7 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TreeListViewDemo">
         <Grid Margin="10" rubyer:PanelHelper.Spacing="10">
-            <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch">
+            <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch" Description="只支持子项和界面内容较少情况，性能较差。">
                 <DockPanel>
                     <rubyer:Description Style="{StaticResource BorderDescription}"
                                         Margin="0 0 0 10"
@@ -62,19 +62,6 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-
-                            <GridViewColumn Width="200"
-                                            DisplayMemberBinding="{Binding Code}"
-                                            Header="编号" />
-
-                            <GridViewColumn Width="300" Header="名称">
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <TextBox Padding="0 2" Text="{Binding Name}" />
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
-
                         </rubyer:TreeListView.Columns>
                     </rubyer:TreeListView>
                 </DockPanel>

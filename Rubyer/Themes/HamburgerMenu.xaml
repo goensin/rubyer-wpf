@@ -151,10 +151,10 @@
                                     <rubyer:Icon x:Name="moreIcon"
                                                  HorizontalAlignment="Center"
                                                  VerticalAlignment="Center"
-                                                 DockPanel.Dock="Right" 
+                                                 DockPanel.Dock="Right"
                                                  Type="ArrowRightSLine"
                                                  Visibility="Collapsed" />
-                                    <ContentPresenter x:Name="header" 
+                                    <ContentPresenter x:Name="header"
                                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                                       ContentSource="Header"

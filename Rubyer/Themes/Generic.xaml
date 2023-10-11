@@ -59,6 +59,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/FlipView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DropDownButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeListView.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeDataGrid.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -124,4 +125,5 @@
     <Style BasedOn="{StaticResource RubyerTreeGridViewCell}" TargetType="{x:Type rubyer:TreeGridViewCell}" />
     <Style BasedOn="{StaticResource RubyerTreeListViewItem}" TargetType="{x:Type rubyer:TreeListViewItem}" />
     <Style BasedOn="{StaticResource RubyerTreeListView}" TargetType="{x:Type rubyer:TreeListView}" />
+    <Style BasedOn="{StaticResource RubyerTreeDataGrid}" TargetType="{x:Type rubyer:TreeDataGrid}" />
 </ResourceDictionary>

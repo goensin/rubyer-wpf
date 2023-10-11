@@ -46,6 +46,7 @@ namespace RubyerDemo.ViewModels
                 new ViewItem("TreeView", "树形视图", new TreeViewDemo(), IconType.NodeTree),
                 new ViewItem("TreeListView", "树形列表视图", new TreeListViewDemo(), IconType.NodeTree),
                 new ViewItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
+                new ViewItem("TreeDataGrid", "树形数据表格", new TreeDataGridDemo(), IconType.Table2),
                 new ViewItem("TabControl", "选项卡", new TabControlDemo(), IconType.Layout4Line),
                 new ViewItem("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),
                 new ViewItem("TextBlock", "文本块", new TextBlockDemo(), IconType.Text),
@@ -61,6 +62,7 @@ namespace RubyerDemo.ViewModels
                 new ViewItem("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new ViewItem("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
                 new ViewItem("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
+
             };
 
             CurrentViewItem = ViewItems.First();
