@@ -20,13 +20,13 @@
                                  GridLinesVisibility="All"
                                  HierarchicalItemsSource="{Binding Cities}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="100"
+                    <DataGridTextColumn Width="150"
                                         Binding="{Binding Code}"
                                         Header="编号" />
-                    <DataGridTextColumn Width="57"
+                    <DataGridTextColumn Width="200"
                                         Binding="{Binding Name}"
                                         Header="名称" />
-                    <DataGridTemplateColumn Header="名称">
+                    <!--<DataGridTemplateColumn Header="名称">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBox Text="{Binding Name}" />
@@ -88,13 +88,11 @@
                                 <TextBox Text="{Binding Name}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    </DataGridTemplateColumn>-->
                     <DataGridTemplateColumn Header="操作">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0 0 20 0"
-                                            rubyer:PanelHelper.Spacing="5"
-                                            Orientation="Horizontal">
+                                <StackPanel rubyer:PanelHelper.Spacing="5" Orientation="Horizontal">
                                     <Button Style="{StaticResource ErrorButton}" Content="删除" />
                                 </StackPanel>
                             </DataTemplate>
