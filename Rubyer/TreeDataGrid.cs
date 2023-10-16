@@ -1,12 +1,16 @@
-﻿using Rubyer.Commons.KnownBoxes;
+﻿using Microsoft.VisualBasic;
+using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 
 namespace Rubyer
 {
@@ -22,14 +26,79 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TreeDataGrid), new FrameworkPropertyMetadata(typeof(TreeDataGrid)));
         }
 
+        [Bindable(true)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        internal new IEnumerable ItemsSource
+        {
+            get
+            {
+                return Items.SourceCollection;
+            }
+            set
+            {
+                if (value == null)
+                {
+                    ClearValue(ItemsSourceProperty);
+                }
+                else
+                {
+                    SetValue(ItemsSourceProperty, value);
+                }
+            }
+        }
+
         /// <summary>
-        /// 是否展开
+        /// 树形数据源
+        /// </summary>
+        public static readonly DependencyProperty HierarchicalItemsSourceProperty =
+            DependencyProperty.Register("HierarchicalItemsSource", typeof(IEnumerable), typeof(TreeDataGrid), new PropertyMetadata(default(IEnumerable), OnHierarchicalItemsSourceChanged));
+
+        private static void OnHierarchicalItemsSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var treeDataGrid = (TreeDataGrid)d;
+            if (treeDataGrid.HierarchicalItemsSource is not null && treeDataGrid.ChildrenPath is not null)
+            {
+                treeDataGrid.AddNotifyCollectionChanged(treeDataGrid.HierarchicalItemsSource);
+                treeDataGrid.ItemsSource = new ObservableCollection<object>(treeDataGrid.HierarchicalItemsSource as IEnumerable<object>);
+            }
+            else
+            {
+                treeDataGrid.ItemsSource = null;
+            }
+        }
+
+        /// <summary>
+        /// 树形数据源
+        /// </summary>
+        public IEnumerable HierarchicalItemsSource
+        {
+            get { return (IEnumerable)GetValue(HierarchicalItemsSourceProperty); }
+            set { SetValue(HierarchicalItemsSourceProperty, value); }
+        }
+
+        /// <summary>
+        /// 子项路径
+        /// </summary>
+        public static readonly DependencyProperty ChildrenPathProperty =
+            DependencyProperty.Register("ChildrenPath", typeof(string), typeof(TreeDataGrid), new PropertyMetadata(default(string)));
+
+        /// <summary>
+        /// 子项路径
+        /// </summary>
+        public string ChildrenPath
+        {
+            get { return (string)GetValue(ChildrenPathProperty); }
+            set { SetValue(ChildrenPathProperty, value); }
+        }
+
+        /// <summary>
+        /// 展开图标
         /// </summary>
         public static readonly DependencyProperty ExpanderIconTypeProperty =
             DependencyProperty.Register("ExpanderIconType", typeof(IconType), typeof(TreeDataGrid), new PropertyMetadata(default(IconType)));
 
         /// <summary>
-        /// 是否展开
+        /// 展开图标
         /// </summary>
         public IconType ExpanderIconType
         {
@@ -41,10 +110,82 @@ namespace Rubyer
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+        }
 
-            if (HierarchicalItemsSource is not null && ChildrenPath is not null)
+        private object FindParent(IEnumerable<object> enumerable)
+        {
+            var collection = ItemsSource as ObservableCollection<object>;
+            foreach (var item in collection)
             {
-                ItemsSource = new ObservableCollection<object>(HierarchicalItemsSource as IEnumerable<object>);
+                var items = GetItemsFromPath(item);
+                if (items.Equals(enumerable))
+                {
+                    return item;
+                }
+            }
+
+            return null;
+        }
+
+        private void HierarchicalItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (ItemsSource is not ObservableCollection<object> collection)
+            {
+                return;
+            }
+
+            switch (e.Action)
+            {
+                case NotifyCollectionChangedAction.Add:
+                    var parent = FindParent(sender as IEnumerable<object>);
+
+                    var isExpanded = GetIsExpanded(parent);
+                    if (isExpanded)
+                    {
+                        RemoveChildren(parent, collection); // 清除后再加载
+
+                        InsertChildren(parent, collection);
+                    }
+
+                    break;
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var item in e.OldItems)
+                    {
+                        if (Items.Contains(item))
+                        {
+                            RemoveChildren(item, collection);
+                            collection.Remove(item);
+                        }
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Replace:
+                    if (e.OldItems.Count > 0 && e.NewItems.Count > 0)
+                    {
+                        var oldItem = e.OldItems[0];
+                        var index = collection.IndexOf(oldItem);
+                        RemoveChildren(oldItem, collection);
+                        collection[index] = e.NewItems[0];
+                    }
+                    break;
+                case NotifyCollectionChangedAction.Move:
+                    collection.Move(e.OldStartingIndex, e.NewStartingIndex);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    collection.Clear();
+                    break;
+            }
+        }
+
+        private void AddNotifyCollectionChanged(IEnumerable collection)
+        {
+            if (collection is INotifyCollectionChanged notifyCollection)
+            {
+                notifyCollection.CollectionChanged += HierarchicalItemsSource_CollectionChanged;
+                foreach (var item in collection)
+                {
+                    var items = GetItemsFromPath(item);
+                    AddNotifyCollectionChanged(items);
+                }
             }
         }
 
@@ -59,6 +200,8 @@ namespace Rubyer
         {
             base.PrepareContainerForItemOverride(element, item);
 
+            isPreparing = true;
+
             var row = (TreeDataGridRow)element;
 
             var parentRow = GetParentRowFromData(HierarchicalItemsSource, item); // 获取父级行
@@ -68,8 +211,8 @@ namespace Rubyer
             row.HasChildRow = GetHasChildRow(HierarchicalItemsSource, item, ref level).GetValueOrDefault();  // 是否有子行 
             row.NodeLevel = level; // 所处节点级数
 
-            isPreparing = true;
             row.IsExpanded = GetIsExpanded(item);
+
             isPreparing = false;
         }
 
@@ -196,19 +339,8 @@ namespace Rubyer
             return value is IEnumerable<object> children ? children : Enumerable.Empty<object>();
         }
 
-        private void Row_Expanded(object sender, RoutedEventArgs e)
+        private void InsertChildren(object model, ObservableCollection<object> collection)
         {
-            if (isPreparing)
-            {
-                return;
-            }
-
-            var row = (TreeDataGridRow)sender;
-            var model = row.DataContext;
-            var collection = ItemsSource as ObservableCollection<object>;
-
-            RemoveChildren(model, collection); // 清除后再加载
-
             if (model is { } && collection is { })
             {
                 int index = -1;
@@ -246,6 +378,23 @@ namespace Rubyer
             }
         }
 
+
+        private void Row_Expanded(object sender, RoutedEventArgs e)
+        {
+            if (isPreparing)
+            {
+                return;
+            }
+
+            var row = (TreeDataGridRow)sender;
+            var model = row.DataContext;
+            var collection = ItemsSource as ObservableCollection<object>;
+
+            RemoveChildren(model, collection); // 清除后再加载
+
+            InsertChildren(model, collection);
+        }
+
         /// <summary>
         /// 递归移除所有子项
         /// </summary>
@@ -272,57 +421,6 @@ namespace Rubyer
             var model = row.DataContext;
             var collection = ItemsSource as ObservableCollection<object>;
             RemoveChildren(model, collection);
-        }
-
-        [Bindable(true)]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        internal new IEnumerable ItemsSource
-        {
-            get
-            {
-                return Items.SourceCollection;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    ClearValue(ItemsSourceProperty);
-                }
-                else
-                {
-                    SetValue(ItemsSourceProperty, value);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 树形数据源
-        /// </summary>
-        public static readonly DependencyProperty HierarchicalItemsSourceProperty =
-            DependencyProperty.Register("HierarchicalItemsSource", typeof(IEnumerable), typeof(TreeDataGrid), new PropertyMetadata(default(IEnumerable)));
-
-        /// <summary>
-        /// 树形数据源
-        /// </summary>
-        public IEnumerable HierarchicalItemsSource
-        {
-            get { return (IEnumerable)GetValue(HierarchicalItemsSourceProperty); }
-            set { SetValue(HierarchicalItemsSourceProperty, value); }
-        }
-
-        /// <summary>
-        /// 子项路径
-        /// </summary>
-        public static readonly DependencyProperty ChildrenPathProperty =
-            DependencyProperty.Register("ChildrenPath", typeof(string), typeof(TreeDataGrid), new PropertyMetadata(default(string)));
-
-        /// <summary>
-        /// 子项路径
-        /// </summary>
-        public string ChildrenPath
-        {
-            get { return (string)GetValue(ChildrenPathProperty); }
-            set { SetValue(ChildrenPathProperty, value); }
         }
     }
 }

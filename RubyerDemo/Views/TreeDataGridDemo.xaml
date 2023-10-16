@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:controls="clr-namespace:RubyerDemo.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RubyerDemo.Views"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
@@ -10,96 +11,61 @@
              d:DataContext="{d:DesignInstance Type=viewmodels:TreeDataGridViewModel}"
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TreeDataGridDemo">
-        <controls:ControlDisplay Title="树形数据表格" Grid.Row="8">
-            <rubyer:TreeDataGrid x:Name="TreeDataGrid"
-                                 Height="400"
-                                 AutoGenerateColumns="False"
-                                 BorderThickness="1"
-                                 CanUserAddRows="False"
-                                 ChildrenPath="Children"
-                                 GridLinesVisibility="All"
-                                 HierarchicalItemsSource="{Binding Cities}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="150"
-                                        Binding="{Binding Code}"
-                                        Header="编号" />
-                    <DataGridTextColumn Width="200"
-                                        Binding="{Binding Name}"
-                                        Header="名称" />
-                    <!--<DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="名称">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Name}" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
-                    <DataGridTemplateColumn Header="操作">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <StackPanel rubyer:PanelHelper.Spacing="5" Orientation="Horizontal">
-                                    <Button Style="{StaticResource ErrorButton}" Content="删除" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid.Columns>
-            </rubyer:TreeDataGrid>
+        <controls:ControlDisplay Title="树形数据表格"
+                                 Grid.Row="8"
+                                 Margin="10">
+            <DockPanel>
+                <StackPanel Margin="0 10"
+                            rubyer:PanelHelper.Spacing="10"
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal">
+                    <!--<Button Padding="30 5"
+                                HorizontalAlignment="Left"
+                                Command="{Binding MoveCommand}"
+                                Content="移动" />-->
+                    <Button Padding="30 5"
+                            HorizontalAlignment="Left"
+                            Command="{Binding UpdateCitiesSourceCommand}"
+                            Content="更新数据源" />
+                </StackPanel>
+
+                <rubyer:TreeDataGrid x:Name="TreeDataGrid"
+                                     AutoGenerateColumns="False"
+                                     BorderThickness="1"
+                                     CanUserAddRows="False"
+                                     ChildrenPath="Children"
+                                     GridLinesVisibility="All"
+                                     HierarchicalItemsSource="{Binding Cities}"
+                                     SelectedItem="{Binding SelectedCity}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="150"
+                                            Binding="{Binding Code}"
+                                            Header="编号" />
+                        <DataGridTextColumn Width="200"
+                                            Binding="{Binding Name}"
+                                            Header="名称" />
+                        <DataGridTemplateColumn Header="操作">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel rubyer:PanelHelper.Spacing="5" Orientation="Horizontal">
+                                        <Button Command="{Binding DataContext.AddCommand, RelativeSource={RelativeSource AncestorType=local:TreeDataGridDemo}}"
+                                                CommandParameter="{Binding .}"
+                                                Content="添加" />
+                                        <Button Style="{StaticResource ErrorButton}"
+                                                Command="{Binding DataContext.DeleteCommand, RelativeSource={RelativeSource AncestorType=local:TreeDataGridDemo}}"
+                                                CommandParameter="{Binding .}"
+                                                Content="删除" />
+                                        <Button Style="{StaticResource SuccessButton}"
+                                                Command="{Binding DataContext.ReplaceCommand, RelativeSource={RelativeSource AncestorType=local:TreeDataGridDemo}}"
+                                                CommandParameter="{Binding .}"
+                                                Content="替换" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </rubyer:TreeDataGrid>
+            </DockPanel>
         </controls:ControlDisplay>
     </smtx:XamlDisplay>
 </UserControl>

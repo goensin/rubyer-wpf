@@ -1,20 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections.ObjectModel;
 
 namespace RubyerDemo.Models
 {
     /// <summary>
     /// 城市
     /// </summary>
-    public class City
+    public partial class City : ObservableObject, ICloneable
     {
-        [JsonPropertyName("code")]
-        public string Code { get; set; }
+        [ObservableProperty]
+        private string code;
 
-        [JsonPropertyName("name")]
-        public string Name { get; set; }
+        [ObservableProperty]
+        private string name;
 
-        [JsonPropertyName("children")]
-        public List<City> Children { get; set; }
+        [ObservableProperty]
+        private ObservableCollection<City> children;
+
+        public object Clone()
+        {
+            return MemberwiseClone();
+        }
     }
 }
