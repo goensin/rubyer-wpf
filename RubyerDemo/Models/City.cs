@@ -16,7 +16,7 @@ namespace RubyerDemo.Models
         private string name;
 
         [ObservableProperty]
-        private ObservableCollection<City> children;
+        private ObservableCollection<City> children = new ObservableCollection<City>();
 
         public object Clone()
         {

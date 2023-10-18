@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using Rubyer.Commons.KnownBoxes;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,9 +6,9 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 
 namespace Rubyer
 {
@@ -117,7 +115,7 @@ namespace Rubyer
             var collection = ItemsSource as ObservableCollection<object>;
             foreach (var item in collection)
             {
-                var items = GetItemsFromPath(item);
+                var items = GetItemsFromChildPath(item);
                 if (items.Equals(enumerable))
                 {
                     return item;
@@ -134,19 +132,42 @@ namespace Rubyer
                 return;
             }
 
+            var childrenCollection = sender as IEnumerable<object>;
+            var parent = FindParent(childrenCollection);
+            TreeDataGridRow row = null; // 当前行是否存在
+            if (parent != null)
+            {
+                row = ItemContainerGenerator.ContainerFromItem(parent) as TreeDataGridRow;
+                if (row is { })
+                {
+                    row.HasChildRow = childrenCollection.Any();
+                }
+            }
+
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-                    var parent = FindParent(sender as IEnumerable<object>);
 
-                    var isExpanded = GetIsExpanded(parent);
-                    if (isExpanded)
+                    // 添加集合改变通知
+                    foreach (var item in e.NewItems)
                     {
-                        RemoveChildren(parent, collection); // 清除后再加载
-
-                        InsertChildren(parent, collection);
+                        AddNotifyCollectionChanged(GetItemsFromChildPath(item));
                     }
 
+                    if (parent is { }) // 找得到节点
+                    {
+                        if (row is { } && row.IsExpanded)
+                        {
+                            AddChildren(parent, collection, e.NewItems);
+                        }
+                    }
+                    else if (sender.Equals(HierarchicalItemsSource)) // root 节点
+                    {
+                        foreach (var item in e.NewItems)
+                        {
+                            collection.Add(item);
+                        }
+                    }
                     break;
                 case NotifyCollectionChangedAction.Remove:
                     foreach (var item in e.OldItems)
@@ -183,7 +204,7 @@ namespace Rubyer
                 notifyCollection.CollectionChanged += HierarchicalItemsSource_CollectionChanged;
                 foreach (var item in collection)
                 {
-                    var items = GetItemsFromPath(item);
+                    var items = GetItemsFromChildPath(item);
                     AddNotifyCollectionChanged(items);
                 }
             }
@@ -244,7 +265,7 @@ namespace Rubyer
                     }
                 }
 
-                var parentRow = GetParentRowFromData(GetItemsFromPath(item), child, item);
+                var parentRow = GetParentRowFromData(GetItemsFromChildPath(item), child, item);
                 if (parentRow is { })
                 {
                     return parentRow;
@@ -268,12 +289,12 @@ namespace Rubyer
             {
                 if (item == child)
                 {
-                    var children = GetItemsFromPath(child);
+                    var children = GetItemsFromChildPath(child);
                     return children.Any();
                 }
                 else
                 {
-                    var childCollection = GetItemsFromPath(item);
+                    var childCollection = GetItemsFromChildPath(item);
                     if (childCollection.Any())
                     {
                         var result = GetHasChildRow(childCollection, child, ref level);
@@ -297,7 +318,7 @@ namespace Rubyer
         private bool GetIsExpanded(object model)
         {
             var collection = ItemsSource as ObservableCollection<object>;
-            var firstItem = GetItemsFromPath(model).FirstOrDefault();
+            var firstItem = GetItemsFromChildPath(model).FirstOrDefault();
             return collection is { } && firstItem is { } && collection.Contains(firstItem);
         }
 
@@ -326,7 +347,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="model">数据对象</param>
         /// <returns>子项集合</returns>
-        private IEnumerable<object> GetItemsFromPath(object model)
+        private IEnumerable<object> GetItemsFromChildPath(object model)
         {
             var itemType = model.GetType();
             var propertyInfo = itemType.GetProperty(ChildrenPath);
@@ -339,7 +360,12 @@ namespace Rubyer
             return value is IEnumerable<object> children ? children : Enumerable.Empty<object>();
         }
 
-        private void InsertChildren(object model, ObservableCollection<object> collection)
+        /// <summary>
+        /// 加载所有子项
+        /// </summary>
+        /// <param name="model">数据对象</param>
+        /// <param name="collection">数据集合</param>
+        private void LoadChildren(object model, ObservableCollection<object> collection)
         {
             if (model is { } && collection is { })
             {
@@ -357,7 +383,7 @@ namespace Rubyer
 
                 if (finded)
                 {
-                    var items = GetItemsFromPath(model);
+                    var items = GetItemsFromChildPath(model);
                     foreach (var newItem in items)
                     {
                         // .net6 以下版本 DataGrid 快速插入子项可能会出现异常报错: https://github.com/dotnet/wpf/issues/2854
@@ -365,7 +391,7 @@ namespace Rubyer
                         try
                         {
 #endif
-                            collection.Insert(++index, newItem);
+                        collection.Insert(++index, newItem);
 #if !NET6_0_OR_GREATER
                         }
                         catch (System.Exception ex)
@@ -378,6 +404,45 @@ namespace Rubyer
             }
         }
 
+        private void GetItemLastChildIndex(object model, ObservableCollection<object> collection, ref int index)
+        {
+            var items = GetItemsFromChildPath(model);
+            foreach (var item in items)
+            {
+                if (collection.Contains(item))
+                {
+                    index++;
+                    GetItemLastChildIndex(item, collection, ref index);
+                }
+            }
+        }
+
+        private void AddChildren(object model, ObservableCollection<object> collection, IList children)
+        {
+            if (model is { } && collection is { })
+            {
+                int index = -1;
+                bool finded = false;
+                foreach (var item in collection)
+                {
+                    index++;
+                    if (item == model)
+                    {
+                        finded = true;
+                        break;
+                    }
+                }
+
+                if (finded)
+                {
+                    GetItemLastChildIndex(model, collection, ref index);
+                    foreach (var newItem in children)
+                    {
+                        collection.Insert(++index, newItem);
+                    }
+                }
+            }
+        }
 
         private void Row_Expanded(object sender, RoutedEventArgs e)
         {
@@ -392,7 +457,7 @@ namespace Rubyer
 
             RemoveChildren(model, collection); // 清除后再加载
 
-            InsertChildren(model, collection);
+            LoadChildren(model, collection);
         }
 
         /// <summary>
@@ -402,7 +467,7 @@ namespace Rubyer
         /// <param name="collection">数据集合</param>
         private void RemoveChildren(object model, ObservableCollection<object> collection)
         {
-            var items = GetItemsFromPath(model);
+            var items = GetItemsFromChildPath(model);
             foreach (var item in items)
             {
                 collection.Remove(item);

@@ -32,7 +32,7 @@ namespace RubyerDemo.ViewModels
         }
 
         [ObservableProperty]
-        private ObservableCollection<City> cities;
+        private ObservableCollection<City> cities = null;
 
         private void RemoveCity(City deleteCity, Collection<City> cities)
         {
@@ -69,7 +69,7 @@ namespace RubyerDemo.ViewModels
                 city.Children = new ObservableCollection<City>();
             }
 
-            city.Children.Add(new City() { Code = city.Code + 1, Name = city.Name + 1 });
+            city.Children.Add(new City() { Code = city.Code + " - ", Name = city.Name + " - " });
         }
 
         [RelayCommand]
