@@ -392,18 +392,14 @@ namespace Rubyer
                     foreach (var newItem in items)
                     {
                         // .net6 以下版本 DataGrid 快速插入子项可能会出现异常报错: https://github.com/dotnet/wpf/issues/2854
-#if !NET6_0_OR_GREATER
                         try
                         {
-#endif
                             collection.Insert(++index, newItem);
-#if !NET6_0_OR_GREATER
                         }
                         catch (System.Exception ex)
                         {
                             Debug.WriteLine(ex, "TreeDataGrid 插入数据异常");
                         }
-#endif
                     }
                 }
             }
