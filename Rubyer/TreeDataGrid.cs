@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -147,7 +145,6 @@ namespace Rubyer
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add:
-
                     // 添加集合改变通知
                     foreach (var item in e.NewItems)
                     {
@@ -232,9 +229,17 @@ namespace Rubyer
             row.HasChildRow = GetHasChildRow(HierarchicalItemsSource, item, ref level).GetValueOrDefault();  // 是否有子行 
             row.NodeLevel = level; // 所处节点级数
 
-            row.IsExpanded = GetIsExpanded(item);
+            if (!row.IsExpanded)
+            {
+                row.IsExpanded = GetIsExpanded(item);
+            }
 
             isPreparing = false;
+
+            if (row.IsExpanded)
+            {
+                Row_Expanded(row, null);
+            }
         }
 
         /// <summary>
@@ -391,7 +396,7 @@ namespace Rubyer
                         try
                         {
 #endif
-                        collection.Insert(++index, newItem);
+                            collection.Insert(++index, newItem);
 #if !NET6_0_OR_GREATER
                         }
                         catch (System.Exception ex)

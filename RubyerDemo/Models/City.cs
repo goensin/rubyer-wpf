@@ -18,6 +18,9 @@ namespace RubyerDemo.Models
         [ObservableProperty]
         private ObservableCollection<City> children = new ObservableCollection<City>();
 
+        [ObservableProperty]
+        private bool isExpanded;
+
         public object Clone()
         {
             return MemberwiseClone();

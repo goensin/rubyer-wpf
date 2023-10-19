@@ -7,6 +7,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:TreeDataGridViewModel}"
              mc:Ignorable="d">
@@ -35,9 +36,13 @@
                                      CanUserAddRows="False"
                                      ChildrenPath="Children"
                                      GridLinesVisibility="All"
-                                     HierarchicalItemsSource="{Binding Cities}"
-                                     SelectedItem="{Binding SelectedCity}">
-                    <DataGrid.Columns>
+                                     HierarchicalItemsSource="{Binding Cities}">
+                    <rubyer:TreeDataGrid.RowStyle>
+                        <Style BasedOn="{StaticResource RubyerTreeDataGridRow}" TargetType="{x:Type rubyer:TreeDataGridRow}">
+                            <Setter Property="IsExpanded" Value="{Binding IsExpanded, UpdateSourceTrigger=PropertyChanged}" />
+                        </Style>
+                    </rubyer:TreeDataGrid.RowStyle>
+                    <rubyer:TreeDataGrid.Columns>
                         <DataGridTextColumn Width="150"
                                             Binding="{Binding Code}"
                                             Header="编号" />
@@ -63,7 +68,7 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-                    </DataGrid.Columns>
+                    </rubyer:TreeDataGrid.Columns>
                 </rubyer:TreeDataGrid>
             </DockPanel>
         </controls:ControlDisplay>

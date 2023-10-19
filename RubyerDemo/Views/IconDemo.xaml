@@ -45,6 +45,7 @@
                                          Margin="10 0 0 0"
                                          rubyer:InputBoxHelper.PreContent="选中"
                                          BorderThickness="0"
+                                         IsReadOnly="True"
                                          Text="{Binding CurrentIcon.Type, StringFormat='&lt;rubyer:Icon Type=&quot;{0}&quot; /&gt;'}" />
                                 <Button x:Name="copyButton"
                                         Style="{StaticResource TextButton}"

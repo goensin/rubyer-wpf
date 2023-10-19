@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
@@ -29,6 +30,8 @@ namespace RubyerDemo.ViewModels
             var streamResourceInfo = Application.GetResourceStream(uri);
             var json = new StreamReader(streamResourceInfo.Stream).ReadToEnd();
             Cities = new ObservableCollection<City>(JsonSerializer.Deserialize<List<City>>(json));
+            Cities.First().IsExpanded = true;
+            Cities.First().Children.First().IsExpanded = true;
         }
 
         [ObservableProperty]
@@ -64,11 +67,8 @@ namespace RubyerDemo.ViewModels
         [RelayCommand]
         private void Add(City city)
         {
-            if (city.Children is null)
-            {
-                city.Children = new ObservableCollection<City>();
-            }
-
+            city.IsExpanded = !city.IsExpanded;
+            city.Children ??= new ObservableCollection<City>();
             city.Children.Add(new City() { Code = city.Code + " - ", Name = city.Name + " - " });
         }
 

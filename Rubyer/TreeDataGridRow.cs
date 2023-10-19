@@ -50,7 +50,7 @@ namespace Rubyer
         /// 是否展开
         /// </summary>
         public static readonly DependencyProperty IsExpandedProperty =
-            DependencyProperty.Register("IsExpanded", typeof(bool), typeof(TreeDataGridRow), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsExpandedChanged));
+            DependencyProperty.Register("IsExpanded", typeof(bool), typeof(TreeDataGridRow), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsExpandedChanged));
 
         /// <summary>
         /// 是否展开
