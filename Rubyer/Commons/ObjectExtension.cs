@@ -36,19 +36,19 @@ namespace Rubyer.Commons
         /// <summary>
         /// 获取描述
         /// </summary>
-        /// <param name="value">对象</param>
+        /// <param name="obj">对象</param>
         /// <returns>描述</returns>
-        public static string GetDescription(this object value)
+        public static string GetDescription(this object obj, string propertyName)
         {
-            if (value != null)
+            if (obj != null)
             {
-                FieldInfo fieldInfo = value.GetType().GetField(value.ToString());
-                if (fieldInfo != null)
+                var methodInfo = obj.GetType().GetMembers().FirstOrDefault(x => x.Name == propertyName);
+                if (methodInfo != null)
                 {
-                    var attributes = fieldInfo.GetCustomAttributes<DescriptionAttribute>(inherit: false);
+                    var attributes = methodInfo.GetCustomAttributes<DescriptionAttribute>(inherit: false);
                     return ((attributes.Count() > 0) && (!string.IsNullOrEmpty(attributes.First().Description)))
                         ? attributes.First().Description
-                        : value.ToString();
+                        : obj.ToString();
                 }
             }
 

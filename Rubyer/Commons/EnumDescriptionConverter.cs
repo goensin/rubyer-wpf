@@ -23,7 +23,8 @@ namespace Rubyer.Commons
         {
             if (destinationType == typeof(string))
             {
-                return value?.GetDescription();
+                var enumValue = value as Enum;
+                return enumValue?.GetDescription();
             }
 
             return string.Empty;
@@ -38,7 +39,7 @@ namespace Rubyer.Commons
                 for (int i = 0; i < enumValues.Length; i++)
                 {
                     var enumValue = enumValues.GetValue(i);
-                    if (value.Equals(enumValue.GetDescription()))
+                    if (value.Equals(((Enum)enumValue).GetDescription()))
                     {
                         return enumValue;
                     }
