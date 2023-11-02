@@ -45,9 +45,8 @@
                   rubyer:GridHelper.RowDefinitions="62,*"
                   TextBlock.Foreground="{DynamicResource DefaultForeground}">
                 <Border BorderBrush="{StaticResource BorderLighter}" BorderThickness="0 0 1 1">
-                    <DockPanel VerticalAlignment="Center">
-                        <Button Margin="10 0"
-                                Padding="4 2"
+                    <DockPanel Margin="5 0" rubyer:PanelHelper.Spacing="10" VerticalAlignment="Center">
+                        <Button Padding="4 2"
                                 Background="{StaticResource BorderLighter}"
                                 DockPanel.Dock="Right"
                                 FontSize="14"
@@ -56,7 +55,6 @@
                             <rubyer:Icon Type="AddLine" />
                         </Button>
                         <TextBox Style="{StaticResource FilledTextBox}"
-                                 Margin="10 0 0 0"
                                  Padding="5 3"
                                  rubyer:InputBoxHelper.Watermark="搜索"
                                  FontSize="13"

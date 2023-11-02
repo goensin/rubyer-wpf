@@ -17,8 +17,8 @@
             <Grid Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
-                <controls:ControlDisplay Height="300" Title="Default Button">
-                    <!--<StackPanel Margin="5"
+                <controls:ControlDisplay Title="Default Button">
+                    <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
                         <Button Content="默认按钮"
@@ -32,26 +32,7 @@
                         <Button Style="{DynamicResource SuccessButton}" Content="成功按钮" />
                         <Button Style="{DynamicResource WarningButton}" Content="警告按钮" />
                         <Button Style="{DynamicResource ErrorButton}" Content="错误按钮" />
-                    </StackPanel>-->
-                    <DockPanel Margin="5" rubyer:PanelHelper.Spacing="10">
-                        <Button Content="默认按钮"
-                                IsDefault="True"
-                                ToolTip="hello rubyer" />
-                        <Button Style="{DynamicResource SecondaryButton}" Content="次级按钮" />
-                        <Button Style="{DynamicResource LightButton}"
-                                Content="亮色按钮"
-                                DockPanel.Dock="top" />
-                        <Button Style="{DynamicResource DarkButton}" Content="暗色按钮" />
-                        <Button Style="{DynamicResource AccentButton}" Content="强调按钮" />
-                        <Button Style="{DynamicResource InfoButton}"
-                                Content="消息按钮"
-                                DockPanel.Dock="Bottom" />
-                        <Button Style="{DynamicResource SuccessButton}" Content="成功按钮" />
-                        <Button Style="{DynamicResource WarningButton}"
-                                Content="警告按钮"
-                                DockPanel.Dock="Right" />
-                        <Button Style="{DynamicResource ErrorButton}" Content="错误按钮" />
-                    </DockPanel>
+                    </StackPanel>
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Round Button"
