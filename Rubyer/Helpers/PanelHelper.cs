@@ -68,47 +68,35 @@ namespace Rubyer
                 case Grid grid:
                     SetGridSpacing(grid);
                     break;
-            }
-        }
 
-        private static void SetHorizontalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin)
-        {
-            switch (type)
-            {
-                case SpacingType.No:
-                default:
-                    element.Margin = new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom);
-                    break;
-                case SpacingType.Start:
-                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, 0, oldMargin.Bottom);
-                    break;
-                case SpacingType.End:
-                    element.Margin = new Thickness(0, oldMargin.Top, spacing / 2, oldMargin.Bottom);
-                    break;
-                case SpacingType.All:
-                    element.Margin = new Thickness(spacing / 2, oldMargin.Top, spacing / 2, oldMargin.Bottom);
+                case DockPanel dockPanel:
+                    SetDockPanelSpacing(dockPanel);
                     break;
             }
         }
 
-        private static void SetVerticalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin)
+        private static void SetHorizontalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin, bool isHalf = true)
         {
-            switch (type)
+            var margin = isHalf ? spacing / 2 : spacing;
+            element.Margin = type switch
             {
-                case SpacingType.No:
-                default:
-                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, 0);
-                    break;
-                case SpacingType.Start:
-                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, 0);
-                    break;
-                case SpacingType.End:
-                    element.Margin = new Thickness(oldMargin.Left, 0, oldMargin.Right, spacing / 2);
-                    break;
-                case SpacingType.All:
-                    element.Margin = new Thickness(oldMargin.Left, spacing / 2, oldMargin.Right, spacing / 2);
-                    break;
-            }
+                SpacingType.Start => new Thickness(margin, oldMargin.Top, 0, oldMargin.Bottom),
+                SpacingType.End => new Thickness(0, oldMargin.Top, margin, oldMargin.Bottom),
+                SpacingType.All => new Thickness(margin, oldMargin.Top, margin, oldMargin.Bottom),
+                _ => new Thickness(0, oldMargin.Top, 0, oldMargin.Bottom),
+            };
+        }
+
+        private static void SetVerticalSpacing(SpacingType type, FrameworkElement element, double spacing, Thickness oldMargin, bool isHalf = true)
+        {
+            var margin = isHalf ? spacing / 2 : spacing;
+            element.Margin = type switch
+            {
+                SpacingType.Start => new Thickness(oldMargin.Left, margin, oldMargin.Right, 0),
+                SpacingType.End => new Thickness(oldMargin.Left, 0, oldMargin.Right, margin),
+                SpacingType.All => new Thickness(oldMargin.Left, margin, oldMargin.Right, margin),
+                _ => new Thickness(oldMargin.Left, 0, oldMargin.Right, 0),
+            };
         }
 
         // StackPanel
@@ -117,9 +105,9 @@ namespace Rubyer
             var children = stackPanel.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
             var count = children.Count;
             var index = 0;
+            var spacing = GetSpacing(stackPanel);
             foreach (FrameworkElement element in children)
             {
-                var spacing = GetSpacing(stackPanel);
                 SpacingType type;
                 if (index == 0)
                 {
@@ -151,9 +139,9 @@ namespace Rubyer
         private static void SetGridSpacing(Grid grid)
         {
             var children = grid.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
+            var spacing = GetSpacing(grid);
             foreach (FrameworkElement element in children)
             {
-                var spacing = GetSpacing(grid);
                 var oldMargin = element.Margin;
 
                 // 水平间距
@@ -204,6 +192,43 @@ namespace Rubyer
                 }
 
                 SetVerticalSpacing(type, element, spacing, oldMargin);
+            }
+        }
+
+        // DockPanel
+        private static void SetDockPanelSpacing(DockPanel dockPanel)
+        {
+            var children = dockPanel.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
+            var count = children.Count;
+            var index = 0;
+            var spacing = GetSpacing(dockPanel);
+            foreach (FrameworkElement element in children)
+            {
+                var oldMargin = element.Margin;
+                var dock = DockPanel.GetDock(element);
+                if (++index < count)
+                {
+                    SpacingType type = dock switch
+                    {
+                        Dock.Left => SpacingType.End,
+                        Dock.Top => SpacingType.End,
+                        Dock.Right => SpacingType.Start,
+                        Dock.Bottom => SpacingType.Start,
+                        _ => SpacingType.End,
+                    };
+
+                    switch (dock)
+                    {
+                        case Dock.Left:
+                        case Dock.Right:
+                            SetHorizontalSpacing(type, element, spacing, oldMargin, isHalf: false);
+                            break;
+                        case Dock.Top:
+                        case Dock.Bottom:
+                            SetVerticalSpacing(type, element, spacing, oldMargin, isHalf: false);
+                            break;
+                    }
+                }
             }
         }
     }
