@@ -45,7 +45,9 @@
                   rubyer:GridHelper.RowDefinitions="62,*"
                   TextBlock.Foreground="{DynamicResource DefaultForeground}">
                 <Border BorderBrush="{StaticResource BorderLighter}" BorderThickness="0 0 1 1">
-                    <DockPanel Margin="5 0" rubyer:PanelHelper.Spacing="10" VerticalAlignment="Center">
+                    <DockPanel Margin="5 0"
+                               VerticalAlignment="Center"
+                               rubyer:PanelHelper.Spacing="10">
                         <Button Padding="4 2"
                                 Background="{StaticResource BorderLighter}"
                                 DockPanel.Dock="Right"

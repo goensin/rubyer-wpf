@@ -11,7 +11,9 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="TreeListViewDemo">
         <Grid Margin="10" rubyer:PanelHelper.Spacing="10">
-            <controls:ControlDisplay Title="Default TreeListView" HorizontalContentAlignment="Stretch" Description="只支持子项和界面内容较少情况，性能较差。有性能需要建议使用 TreeDataGrid">
+            <controls:ControlDisplay Title="Default TreeListView"
+                                     HorizontalContentAlignment="Stretch"
+                                     Description="只支持子项和界面内容较少情况，性能较差。有性能需要建议使用 TreeDataGrid">
                 <DockPanel rubyer:PanelHelper.Spacing="10">
                     <rubyer:Description Style="{StaticResource BorderDescription}"
                                         HorizontalAlignment="Center"

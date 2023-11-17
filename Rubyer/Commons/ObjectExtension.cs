@@ -20,7 +20,7 @@ namespace Rubyer.Commons
         /// <returns>A T.</returns>
         public static T AssertCast<T>(this object value)
         {
-            return (T)((object)value);
+            return (T)value;
         }
 
         /// <summary>
@@ -37,6 +37,7 @@ namespace Rubyer.Commons
         /// 获取描述
         /// </summary>
         /// <param name="obj">对象</param>
+        /// <param name="propertyName">属性名称</param>
         /// <returns>描述</returns>
         public static string GetDescription(this object obj, string propertyName)
         {
