@@ -33,7 +33,7 @@
                                          HorizontalContentAlignment="Stretch"
                                          Description="Grid 和 StackPanel 设置间隔, 实际设置 Child 的 Margin">
                     <Grid rubyer:GridHelper.ColumnDefinitions="*,Auto"
-                          rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+                          rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
                           rubyer:PanelHelper.Spacing="10">
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"
@@ -44,7 +44,7 @@
                                     rubyer:SliderHelper.DraggingShowValue="True"
                                     IsSnapToTickEnabled="True"
                                     Maximum="20"
-                                    Minimum="1"
+                                    Minimum="0"
                                     Value="10" />
                         </StackPanel>
 
@@ -102,6 +102,30 @@
                             <rubyer:Card Background="{DynamicResource Success}" />
                             <rubyer:Card Background="{DynamicResource Warning}" />
                         </StackPanel>
+
+
+                        <TextBlock Grid.Row="5" Text="DockPanel:" />
+
+                        <DockPanel Grid.Row="6"
+                                   Height="200"
+                                   rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                            <rubyer:Card Width="30"
+                                         Background="{DynamicResource Primary}"
+                                         DockPanel.Dock="Left" />
+                            <rubyer:Card Width="30"
+                                         Background="{DynamicResource Info}"
+                                         DockPanel.Dock="Left" />
+                            <rubyer:Card Width="30"
+                                         Background="{DynamicResource Accent}"
+                                         DockPanel.Dock="Right" />
+                            <rubyer:Card Height="30"
+                                         Background="{DynamicResource Success}"
+                                         DockPanel.Dock="Top" />
+                            <rubyer:Card Height="30"
+                                         Background="{DynamicResource Warning}"
+                                         DockPanel.Dock="Bottom" />
+                            <rubyer:Card Background="{DynamicResource Dark}" DockPanel.Dock="Bottom" />
+                        </DockPanel>
                     </Grid>
                 </controls:ControlDisplay>
 

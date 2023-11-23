@@ -40,7 +40,8 @@
                             </rubyer:DropDownButton.MenuItemsSource>
                         </rubyer:DropDownButton>
 
-                        <rubyer:DropDownButton rubyer:ButtonHelper.ShowShadow="True" Background="{DynamicResource Accent}"
+                        <rubyer:DropDownButton rubyer:ButtonHelper.ShowShadow="True"
+                                               Background="{DynamicResource Accent}"
                                                Content="无分隔"
                                                IsShowSeparator="False">
                             <rubyer:DropDownButton.MenuItemsSource>
