@@ -8,6 +8,7 @@ using System.Windows;
 using System.Xml.Linq;
 using System.Drawing;
 using System.Reflection;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -71,6 +72,10 @@ namespace Rubyer
 
                 case DockPanel dockPanel:
                     SetDockPanelSpacing(dockPanel);
+                    break;
+
+                case WrapPanel wrapPanel:
+                    SetWrapPanelSpacing(wrapPanel);
                     break;
             }
         }
@@ -229,6 +234,54 @@ namespace Rubyer
                             break;
                     }
                 }
+            }
+        }
+
+        // WrapPanel
+        private static void SetWrapPanelSpacing(WrapPanel wrapPanel)
+        {
+            var children = wrapPanel.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
+            var count = children.Count;
+            var spacing = GetSpacing(wrapPanel);
+            foreach (FrameworkElement element in children)
+            {
+                SpacingType type;
+                var point = element.TranslatePoint(new System.Windows.Point(), wrapPanel);
+                if (point.X < element.Width)
+                {
+                    type = SpacingType.End;
+                }
+                else if (wrapPanel.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth)
+                {
+                    type = SpacingType.Start;
+                }
+                else
+                {
+                    type = SpacingType.All;
+                }
+
+                SetHorizontalSpacing(type, element, spacing, new Thickness(0));
+            }
+
+            foreach (FrameworkElement element in children)
+            {
+                SpacingType type;
+                var point = element.TranslatePoint(new System.Windows.Point(), wrapPanel);
+
+                if (point.Y < element.Height)
+                {
+                    type = SpacingType.End;
+                }
+                else if (wrapPanel.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight)
+                {
+                    type = SpacingType.Start;
+                }
+                else
+                {
+                    type = SpacingType.All;
+                }
+
+                SetVerticalSpacing(type, element, spacing, new Thickness(element.Margin.Left, 0, element.Margin.Right, 0));
             }
         }
     }

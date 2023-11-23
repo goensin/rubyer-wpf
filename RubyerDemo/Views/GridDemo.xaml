@@ -32,9 +32,7 @@
                                          Grid.Row="1"
                                          HorizontalContentAlignment="Stretch"
                                          Description="Grid 和 StackPanel 设置间隔, 实际设置 Child 的 Margin">
-                    <Grid rubyer:GridHelper.ColumnDefinitions="*,Auto"
-                          rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-                          rubyer:PanelHelper.Spacing="10">
+                    <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" rubyer:PanelHelper.Spacing="10">
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
@@ -48,84 +46,138 @@
                                     Value="10" />
                         </StackPanel>
 
-                        <TextBlock Grid.Row="1" Text="Grid:" />
+                        <!--  Grid  -->
+                        <StackPanel Grid.Row="1" rubyer:PanelHelper.Spacing="5">
+                            <TextBlock Text="Grid:" />
 
-                        <Grid x:Name="spacingGrid"
-                              Grid.Row="2"
-                              Height="100"
-                              rubyer:GridHelper.ColumnDefinitions="*, *"
-                              rubyer:GridHelper.RowDefinitions="*, *"
-                              rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
-                            <rubyer:Card Background="{DynamicResource Primary}" />
-                            <rubyer:Card Grid.Column="1" Background="{DynamicResource Accent}" />
-                            <rubyer:Card Grid.Row="1" Background="{DynamicResource Success}" />
-                            <rubyer:Card Grid.Row="1"
-                                         Grid.Column="1"
-                                         Background="{DynamicResource Warning}" />
-                        </Grid>
-
-                        <TextBlock Grid.Row="3" Text="StackPanel Horizontal:" />
-
-                        <StackPanel Grid.Row="4"
-                                    rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}"
-                                    Orientation="Horizontal">
-                            <StackPanel.Resources>
-                                <Style TargetType="rubyer:Card">
-                                    <Setter Property="Width" Value="30" />
-                                    <Setter Property="Height" Value="30" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <rubyer:Card Background="{DynamicResource Primary}" />
-                            <rubyer:Card Background="{DynamicResource Accent}" />
-                            <rubyer:Card Background="{DynamicResource Light}" />
-                            <rubyer:Card Background="{DynamicResource Dark}" />
-                            <rubyer:Card Background="{DynamicResource Info}" />
-                            <rubyer:Card Background="{DynamicResource Success}" />
-                            <rubyer:Card Background="{DynamicResource Warning}" />
-                            <rubyer:Card Background="{DynamicResource Error}" />
+                            <Grid x:Name="spacingGrid"
+                                  Height="100"
+                                  rubyer:GridHelper.ColumnDefinitions="*, *"
+                                  rubyer:GridHelper.RowDefinitions="*, *"
+                                  rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                                <rubyer:Card Background="{DynamicResource Primary}" />
+                                <rubyer:Card Grid.Column="1" Background="{DynamicResource Accent}" />
+                                <rubyer:Card Grid.Row="1" Background="{DynamicResource Success}" />
+                                <rubyer:Card Grid.Row="1"
+                                             Grid.Column="1"
+                                             Background="{DynamicResource Warning}" />
+                            </Grid>
                         </StackPanel>
 
-                        <TextBlock Grid.Column="1" Text="StackPanel Vertical:" />
-
-                        <StackPanel Grid.Row="1"
-                                    Grid.RowSpan="4"
-                                    Grid.Column="1"
-                                    rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
-                            <StackPanel.Resources>
-                                <Style TargetType="rubyer:Card">
-                                    <Setter Property="Width" Value="30" />
-                                    <Setter Property="Height" Value="30" />
-                                </Style>
-                            </StackPanel.Resources>
-                            <rubyer:Card Background="{DynamicResource Primary}" />
-                            <rubyer:Card Background="{DynamicResource Accent}" />
-                            <rubyer:Card Background="{DynamicResource Success}" />
-                            <rubyer:Card Background="{DynamicResource Warning}" />
+                        <!--  StackPanel Horizontal  -->
+                        <StackPanel Grid.Row="3" rubyer:PanelHelper.Spacing="5">
+                            <TextBlock Text="StackPanel Horizontal:" />
+                            <StackPanel rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}" Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="rubyer:Card">
+                                        <Setter Property="Width" Value="30" />
+                                        <Setter Property="Height" Value="30" />
+                                    </Style>
+                                </StackPanel.Resources>
+                                <rubyer:Card Background="{DynamicResource Primary}" />
+                                <rubyer:Card Background="{DynamicResource Accent}" />
+                                <rubyer:Card Background="{DynamicResource Light}" />
+                                <rubyer:Card Background="{DynamicResource Dark}" />
+                                <rubyer:Card Background="{DynamicResource Info}" />
+                                <rubyer:Card Background="{DynamicResource Success}" />
+                                <rubyer:Card Background="{DynamicResource Warning}" />
+                                <rubyer:Card Background="{DynamicResource Error}" />
+                            </StackPanel>
                         </StackPanel>
 
+                        <DockPanel Grid.Row="4" rubyer:PanelHelper.Spacing="100">
+                            <!--  StackPanel Vertical  -->
+                            <StackPanel Grid.Row="4"
+                                        rubyer:PanelHelper.Spacing="5"
+                                        DockPanel.Dock="Left">
+                                <TextBlock Text="StackPanel Vertical:" />
+                                <StackPanel HorizontalAlignment="Left" rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="rubyer:Card">
+                                            <Setter Property="Width" Value="30" />
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <rubyer:Card Background="{DynamicResource Primary}" />
+                                    <rubyer:Card Background="{DynamicResource Accent}" />
+                                    <rubyer:Card Background="{DynamicResource Success}" />
+                                    <rubyer:Card Background="{DynamicResource Warning}" />
+                                </StackPanel>
+                            </StackPanel>
 
-                        <TextBlock Grid.Row="5" Text="DockPanel:" />
-
-                        <DockPanel Grid.Row="6"
-                                   Height="200"
-                                   rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
-                            <rubyer:Card Width="30"
-                                         Background="{DynamicResource Primary}"
-                                         DockPanel.Dock="Left" />
-                            <rubyer:Card Width="30"
-                                         Background="{DynamicResource Info}"
-                                         DockPanel.Dock="Left" />
-                            <rubyer:Card Width="30"
-                                         Background="{DynamicResource Accent}"
-                                         DockPanel.Dock="Right" />
-                            <rubyer:Card Height="30"
-                                         Background="{DynamicResource Success}"
-                                         DockPanel.Dock="Top" />
-                            <rubyer:Card Height="30"
-                                         Background="{DynamicResource Warning}"
-                                         DockPanel.Dock="Bottom" />
-                            <rubyer:Card Background="{DynamicResource Dark}" DockPanel.Dock="Bottom" />
+                            <!--  DockPanel  -->
+                            <StackPanel rubyer:PanelHelper.Spacing="5">
+                                <TextBlock Text="DockPanel:" />
+                                <DockPanel Height="180" rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                                    <rubyer:Card Width="30"
+                                                 Background="{DynamicResource Primary}"
+                                                 DockPanel.Dock="Left" />
+                                    <rubyer:Card Width="30"
+                                                 Background="{DynamicResource Info}"
+                                                 DockPanel.Dock="Left" />
+                                    <rubyer:Card Width="30"
+                                                 Background="{DynamicResource Accent}"
+                                                 DockPanel.Dock="Right" />
+                                    <rubyer:Card Height="30"
+                                                 Background="{DynamicResource Success}"
+                                                 DockPanel.Dock="Top" />
+                                    <rubyer:Card Height="30"
+                                                 Background="{DynamicResource Warning}"
+                                                 DockPanel.Dock="Bottom" />
+                                    <rubyer:Card Background="{DynamicResource Dark}" DockPanel.Dock="Bottom" />
+                                </DockPanel>
+                            </StackPanel>
                         </DockPanel>
+
+                        <StackPanel Grid.Row="5"
+                                    rubyer:PanelHelper.Spacing="100"
+                                    Orientation="Horizontal">
+                            <!--  WrapPanel Horizontal  -->
+                            <StackPanel rubyer:PanelHelper.Spacing="5">
+                                <TextBlock Text="WrapPanel Horizontal:" />
+                                <WrapPanel Width="150" rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                                    <WrapPanel.Resources>
+                                        <Style TargetType="rubyer:Card">
+                                            <Setter Property="Width" Value="30" />
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </WrapPanel.Resources>
+                                    <rubyer:Card Background="{DynamicResource Primary}" />
+                                    <rubyer:Card Background="{DynamicResource Accent}" />
+                                    <rubyer:Card Background="{DynamicResource Light}" />
+                                    <rubyer:Card Background="{DynamicResource Dark}" />
+                                    <rubyer:Card Background="{DynamicResource Info}" />
+                                    <rubyer:Card Background="{DynamicResource Success}" />
+                                    <rubyer:Card Background="{DynamicResource Warning}" />
+                                    <rubyer:Card Background="{DynamicResource Error}" />
+                                    <rubyer:Card Background="{DynamicResource DefaultBackground}" />
+                                </WrapPanel>
+                            </StackPanel>
+
+                            <!--  WrapPanel Vertical  -->
+                            <StackPanel rubyer:PanelHelper.Spacing="5">
+                                <TextBlock Text="WrapPanel Horizontal:" />
+                                <WrapPanel Height="150"
+                                           rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}"
+                                           Orientation="Vertical">
+                                    <WrapPanel.Resources>
+                                        <Style TargetType="rubyer:Card">
+                                            <Setter Property="Width" Value="30" />
+                                            <Setter Property="Height" Value="30" />
+                                        </Style>
+                                    </WrapPanel.Resources>
+                                    <rubyer:Card Background="{DynamicResource Primary}" />
+                                    <rubyer:Card Background="{DynamicResource Accent}" />
+                                    <rubyer:Card Background="{DynamicResource Light}" />
+                                    <rubyer:Card Background="{DynamicResource Dark}" />
+                                    <rubyer:Card Background="{DynamicResource Info}" />
+                                    <rubyer:Card Background="{DynamicResource Success}" />
+                                    <rubyer:Card Background="{DynamicResource Warning}" />
+                                    <rubyer:Card Background="{DynamicResource Error}" />
+                                    <rubyer:Card Background="{DynamicResource DefaultBackground}" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </StackPanel>
                     </Grid>
                 </controls:ControlDisplay>
 
