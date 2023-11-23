@@ -156,7 +156,7 @@
 
                             <!--  WrapPanel Vertical  -->
                             <StackPanel rubyer:PanelHelper.Spacing="5">
-                                <TextBlock Text="WrapPanel Horizontal:" />
+                                <TextBlock Text="WrapPanel Vertical:" />
                                 <WrapPanel Height="150"
                                            rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}"
                                            Orientation="Vertical">
