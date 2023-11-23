@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Controls;
 using System.Windows;
-using System.Xml.Linq;
-using System.Drawing;
-using System.Reflection;
-using System.Windows.Media;
+using System.Windows.Controls.Primitives;
+using System;
+using System.Collections.Generic;
 
 namespace Rubyer
 {
@@ -76,6 +71,10 @@ namespace Rubyer
 
                 case WrapPanel wrapPanel:
                     SetWrapPanelSpacing(wrapPanel);
+                    break;
+
+                case UniformGrid uniformGrid:
+                    SetUniformGridSpacing(uniformGrid);
                     break;
             }
         }
@@ -238,20 +237,85 @@ namespace Rubyer
         }
 
         // WrapPanel
+        private static void SetWrapPanelHorizontalSpacing(WrapPanel wrapPanel, List<FrameworkElement> children, double spacing)
+        {
+            foreach (FrameworkElement element in children)
+            {
+                SpacingType type;
+                var point = element.TranslatePoint(new Point(), wrapPanel);
+                if (point.X < element.ActualWidth)
+                {
+                    type = SpacingType.End;
+                }
+                else if (wrapPanel.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth /*+ (GetSpacing(wrapPanel))*/)
+                {
+                    type = SpacingType.Start;
+                }
+                else
+                {
+                    type = SpacingType.All;
+                }
+
+                SetHorizontalSpacing(type, element, spacing, new Thickness(0, element.Margin.Top, 0, element.Margin.Bottom));
+            }
+        }
+
+        private static void SetWrapPanelVerticalSpacing(WrapPanel wrapPanel, List<FrameworkElement> children, double spacing)
+        {
+            foreach (FrameworkElement element in children)
+            {
+                SpacingType type;
+                var point = element.TranslatePoint(new Point(), wrapPanel);
+
+                if (point.Y < element.ActualHeight)
+                {
+                    type = SpacingType.End;
+                }
+                else if (wrapPanel.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight /*+ (GetSpacing(wrapPanel))*/)
+                {
+                    type = SpacingType.Start;
+                }
+                else
+                {
+                    type = SpacingType.All;
+                }
+
+                SetVerticalSpacing(type, element, spacing, new Thickness(element.Margin.Left, 0, element.Margin.Right, 0));
+            }
+        }
+
+
         private static void SetWrapPanelSpacing(WrapPanel wrapPanel)
         {
             var children = wrapPanel.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
             var count = children.Count;
             var spacing = GetSpacing(wrapPanel);
+            if (wrapPanel.Orientation == Orientation.Horizontal)
+            {
+                SetWrapPanelHorizontalSpacing(wrapPanel, children, spacing);
+                SetWrapPanelVerticalSpacing(wrapPanel, children, spacing);
+            }
+            else
+            {
+                SetWrapPanelVerticalSpacing(wrapPanel, children, spacing);
+                SetWrapPanelHorizontalSpacing(wrapPanel, children, spacing);
+            }
+        }
+
+        private static void SetUniformGridSpacing(UniformGrid uniformGrid)
+        {
+            var children = uniformGrid.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
+            var count = children.Count;
+            var spacing = GetSpacing(uniformGrid);
             foreach (FrameworkElement element in children)
             {
                 SpacingType type;
-                var point = element.TranslatePoint(new System.Windows.Point(), wrapPanel);
-                if (point.X < element.Width)
+                var point = element.TranslatePoint(new Point(), uniformGrid);
+                if (point.X < element.ActualWidth)
                 {
                     type = SpacingType.End;
                 }
-                else if (wrapPanel.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth)
+                else if (uniformGrid.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth)
                 {
                     type = SpacingType.Start;
                 }
@@ -266,13 +330,13 @@ namespace Rubyer
             foreach (FrameworkElement element in children)
             {
                 SpacingType type;
-                var point = element.TranslatePoint(new System.Windows.Point(), wrapPanel);
+                var point = element.TranslatePoint(new Point(), uniformGrid);
 
-                if (point.Y < element.Height)
+                if (point.Y < element.ActualHeight)
                 {
                     type = SpacingType.End;
                 }
-                else if (wrapPanel.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight)
+                else if (uniformGrid.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight)
                 {
                     type = SpacingType.Start;
                 }
