@@ -60,7 +60,7 @@
                                 <Slider x:Name="sizeSlider"
                                         Width="200"
                                         Margin="10 0 0 0"
-                                        rubyer:SliderHelper.DraggingShowValue="True"
+                                        AutoToolTipPlacement="TopLeft"
                                         IsSnapToTickEnabled="True"
                                         Maximum="40"
                                         Minimum="10"

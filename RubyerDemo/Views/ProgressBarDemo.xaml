@@ -19,8 +19,7 @@
                     <TextBlock Margin="10 0" Text="Value:" />
                     <Slider x:Name="valueSlider"
                             Width="200"
-                            rubyer:SliderHelper.DraggingShowValue="True"
-                            rubyer:SliderHelper.ValuePlacement="Bottom"
+                              AutoToolTipPlacement="TopLeft"
                             Interval="10"
                             IsSnapToTickEnabled="True"
                             Maximum="100"
@@ -132,8 +131,7 @@
                             <TextBlock Margin="10 0" Text="Thickness:" />
                             <Slider x:Name="thicknessSlider"
                                     Width="200"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
-                                    rubyer:SliderHelper.ValuePlacement="Bottom"
+                                 AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="20"
                                     Minimum="1"
@@ -172,8 +170,7 @@
                             <TextBlock Margin="10 0" Text="Indeterminate Value:" />
                             <Slider x:Name="indeterminateSlider"
                                     Width="200"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
-                                    rubyer:SliderHelper.ValuePlacement="Bottom"
+                                AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="50"
                                     Minimum="1"

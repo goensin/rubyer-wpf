@@ -184,15 +184,14 @@
                         <StackPanel Width="120" rubyer:PanelHelper.Spacing="10">
                             <Slider x:Name="valueSlider"
                                     Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="100"
                                     Minimum="0"
                                     TickFrequency="5"
                                     Value="50" />
                             <Slider Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
-                                    rubyer:SliderHelper.ValuePlacement="Bottom"
+                                    AutoToolTipPlacement="BottomRight"
                                     Foreground="{DynamicResource Success}"
                                     IsSnapToTickEnabled="True"
                                     Maximum="100"
@@ -201,7 +200,7 @@
                                     TickPlacement="TopLeft"
                                     Value="60" />
                             <Slider Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                    AutoToolTipPlacement="TopLeft"
                                     rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Accent}"
                                     Foreground="{StaticResource Dark}"
                                     IsSelectionRangeEnabled="True"
@@ -218,7 +217,7 @@
                                     rubyer:PanelHelper.Spacing="22"
                                     Orientation="Horizontal">
                             <Slider Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                      AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="100"
                                     Minimum="0"
@@ -226,8 +225,7 @@
                                     TickFrequency="5"
                                     Value="70" />
                             <Slider Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
-                                    rubyer:SliderHelper.ValuePlacement="Left"
+                                      AutoToolTipPlacement="TopLeft"
                                     Foreground="{DynamicResource Accent}"
                                     IsSnapToTickEnabled="True"
                                     Maximum="100"
@@ -237,7 +235,7 @@
                                     TickPlacement="TopLeft"
                                     Value="60" />
                             <Slider Margin="0 10"
-                                    rubyer:SliderHelper.DraggingShowValue="True"
+                                      AutoToolTipPlacement="TopLeft"
                                     rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Accent}"
                                     Foreground="{StaticResource Dark}"
                                     IsSelectionRangeEnabled="True"

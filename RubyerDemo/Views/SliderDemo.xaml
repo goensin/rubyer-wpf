@@ -59,18 +59,17 @@
 
                 <controls:ControlDisplay Title="当前值显示、当前值格式化、滑块轨道大小"
                                          Grid.Row="1"
-                                         Description="通过 SliderHelper.DraggingShowValue 拖拽滑块时显示当前值 &#x000A;通过 SliderHelper.ValuePlacement 设置当前值位置 &#x000A;通过 SliderHelper.ValueStringFormat 格式化当前值显示 &#x000A;通过 GripDiameter 设置滑块直径大小 &#x000A;通过 SliderHelper.TrackThickness 设置轨道厚度">
+                                         Description="通过 GripDiameter 设置滑块直径大小 &#x000A;通过 SliderHelper.TrackThickness 设置轨道厚度">
                     <StackPanel Width="500">
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
+                                AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
                                 TickFrequency="5"
                                 Value="70" />
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValuePlacement="Bottom"
+                                AutoToolTipPlacement="BottomRight"
                                 Foreground="{DynamicResource Success}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -79,8 +78,8 @@
                                 TickPlacement="TopLeft"
                                 Value="60" />
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValueStringFormat="⭐0⭐"
+                                AutoToolTipPlacement="TopLeft"
+                                AutoToolTipPrecision="2"
                                 Foreground="{DynamicResource Warning}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -89,7 +88,7 @@
                                 TickPlacement="BottomRight"
                                 Value="50" />
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
+                                AutoToolTipPlacement="TopLeft"
                                 Foreground="{DynamicResource Error}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -98,10 +97,10 @@
                                 TickPlacement="Both"
                                 Value="40" />
                         <Slider Margin="0 10"
-                                rubyer:SliderHelper.DraggingShowValue="True"
                                 rubyer:SliderHelper.GripDiameter="24"
                                 rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Warning}"
                                 rubyer:SliderHelper.TrackThickness="8"
+                                AutoToolTipPlacement="TopLeft"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -117,8 +116,7 @@
                 <controls:ControlDisplay Title="Vertical Slider" Grid.Row="2">
                     <StackPanel Height="200" Orientation="Horizontal">
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValuePlacement="Left"
+                                AutoToolTipPlacement="TopLeft"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
@@ -126,7 +124,7 @@
                                 TickFrequency="10"
                                 Value="70" />
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
+                                AutoToolTipPlacement="TopLeft"
                                 Foreground="{DynamicResource Success}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -136,8 +134,8 @@
                                 TickPlacement="TopLeft"
                                 Value="60" />
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
-                                rubyer:SliderHelper.ValueStringFormat="⭐0⭐"
+                                AutoToolTipPlacement="TopLeft"
+                                AutoToolTipPrecision="2"
                                 Foreground="{DynamicResource Warning}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -147,7 +145,7 @@
                                 TickPlacement="BottomRight"
                                 Value="50" />
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
+                                AutoToolTipPlacement="TopLeft"
                                 Foreground="{DynamicResource Error}"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
@@ -157,10 +155,10 @@
                                 TickPlacement="Both"
                                 Value="40" />
                         <Slider Margin="20 0"
-                                rubyer:SliderHelper.DraggingShowValue="True"
                                 rubyer:SliderHelper.GripDiameter="24"
                                 rubyer:SliderHelper.SelectionRangeBrush="{DynamicResource Warning}"
                                 rubyer:SliderHelper.TrackThickness="8"
+                                AutoToolTipPlacement="TopLeft"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"

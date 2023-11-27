@@ -101,7 +101,8 @@
                             <rubyer:Icon Type="FontSize2" />
                         </MenuItem.Icon>
                         <Slider Height="80"
-                                rubyer:SliderHelper.DraggingShowValue="True"
+                                AutoToolTipPlacement="TopLeft"
+                                AutoToolTipPrecision="2"
                                 Interval="1"
                                 IsSnapToTickEnabled="True"
                                 Maximum="24"
@@ -120,8 +121,8 @@
                                     <TextBlock Margin="0 0 10 0" Text="控件: " />
                                     <Slider x:Name="controlSlider"
                                             Width="120"
-                                            rubyer:SliderHelper.DraggingShowValue="True"
-                                            rubyer:SliderHelper.ValuePlacement="Right"
+                                            AutoToolTipPlacement="TopLeft"
+                                            AutoToolTipPrecision="2"
                                             IsSnapToTickEnabled="True"
                                             Maximum="15"
                                             Minimum="0"
@@ -136,8 +137,8 @@
                                     <TextBlock Margin="0 0 10 0" Text="容器: " />
                                     <Slider x:Name="contrainerSlider"
                                             Width="120"
-                                            rubyer:SliderHelper.DraggingShowValue="True"
-                                            rubyer:SliderHelper.ValuePlacement="Right"
+                                            AutoToolTipPlacement="TopLeft"
+                                            AutoToolTipPrecision="2"
                                             IsSnapToTickEnabled="True"
                                             Maximum="20"
                                             Minimum="0"

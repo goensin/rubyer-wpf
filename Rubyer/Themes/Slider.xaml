@@ -131,8 +131,14 @@
                                    Height="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
                                    Fill="{Binding Path=(rubyer:SliderHelper.SelectionRangeBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                    Visibility="Hidden" />
+                        <!--<Button Canvas.Left="{Binding Path=(Canvas.Left), ElementName=PART_SelectionRange}"
+                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                rubyer:ButtonHelper.Shape="Circle"
+                                Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"
+                                RenderTransformOrigin="0.5 0.5" />-->
                     </Canvas>
                 </Border>
+
 
                 <Track x:Name="PART_Track"
                        Grid.Row="1"
@@ -344,25 +350,12 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
-        <Setter Property="rubyer:SliderHelper.DraggingShowValue" Value="False" />
         <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
         <Setter Property="rubyer:SliderHelper.GripDiameter" Value="15" />
-        <Setter Property="rubyer:SliderHelper.ValuePlacement" Value="Top" />
-        <Setter Property="rubyer:SliderHelper.ValueOffset" Value="-10" />
         <Setter Property="rubyer:SliderHelper.TrackThickness" Value="4" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}" />
-                <Setter Property="rubyer:SliderHelper.ValuePlacement" Value="Right" />
-            </Trigger>
-            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Right">
-                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="10" />
-            </Trigger>
-            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Bottom">
-                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="10" />
-            </Trigger>
-            <Trigger Property="rubyer:SliderHelper.ValuePlacement" Value="Left">
-                <Setter Property="rubyer:SliderHelper.ValueOffset" Value="-10" />
             </Trigger>
         </Style.Triggers>
     </Style>
