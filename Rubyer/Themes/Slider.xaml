@@ -1,10 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="clr-namespace:Rubyer.Converters"
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
+
+    <converters:AutoToolTipPlacementToPlacementModeConverter x:Key="AutoToolTipPlacementToPlacementModeConverter" />
 
     <Style x:Key="RepeatButtonTransparent" TargetType="{x:Type RepeatButton}">
         <Setter Property="Background" Value="Transparent" />
@@ -129,16 +132,92 @@
                     <Canvas>
                         <Rectangle x:Name="PART_SelectionRange"
                                    Height="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
-                                   Fill="{Binding Path=(rubyer:SliderHelper.SelectionRangeBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                   Fill="{TemplateBinding Foreground}"
                                    Visibility="Hidden" />
-                        <!--<Button Canvas.Left="{Binding Path=(Canvas.Left), ElementName=PART_SelectionRange}"
+                        <Button x:Name="StartRangeButton"
+                                Canvas.Left="{Binding Path=(Canvas.Left), ElementName=PART_SelectionRange}"
                                 Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                 rubyer:ButtonHelper.Shape="Circle"
-                                Background="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"
-                                RenderTransformOrigin="0.5 0.5" />-->
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Collapsed">
+                            <Button.RenderTransform>
+                                <TranslateTransform X="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
+                                    <TranslateTransform.Y>
+                                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     Path="ActualHeight"
+                                                     RelativeSource="{RelativeSource AncestorType=Button}" />
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     ElementName="PART_SelectionRange"
+                                                     Path="ActualHeight" />
+                                        </MultiBinding>
+                                    </TranslateTransform.Y>
+                                </TranslateTransform>
+                            </Button.RenderTransform>
+                            <Button.ToolTip>
+                                <ToolTip IsOpen="False">
+                                    <ToolTip.Placement>
+                                        <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
+                                            <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding Path="Orientation" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        </MultiBinding>
+                                    </ToolTip.Placement>
+                                    <MultiBinding Converter="{StaticResource GetPrecisionValueConverter}">
+                                        <Binding Path="SelectionStart" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        <Binding Path="AutoToolTipPrecision" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    </MultiBinding>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button x:Name="EndRangeButton"
+                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                rubyer:ButtonHelper.Shape="Circle"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Collapsed">
+                            <Button.RenderTransform>
+                                <TranslateTransform X="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
+                                    <TranslateTransform.Y>
+                                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     Path="ActualHeight"
+                                                     RelativeSource="{RelativeSource AncestorType=Button}" />
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     ElementName="PART_SelectionRange"
+                                                     Path="ActualHeight" />
+                                        </MultiBinding>
+                                    </TranslateTransform.Y>
+                                </TranslateTransform>
+                            </Button.RenderTransform>
+                            <Canvas.Left>
+                                <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                    <Binding ElementName="PART_SelectionRange" Path="(Canvas.Left)" />
+                                    <Binding ElementName="PART_SelectionRange" Path="ActualWidth" />
+                                </MultiBinding>
+                            </Canvas.Left>
+                            <Button.ToolTip>
+                                <ToolTip IsOpen="False">
+                                    <ToolTip.Placement>
+                                        <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
+                                            <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding Path="Orientation" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        </MultiBinding>
+                                    </ToolTip.Placement>
+                                    <MultiBinding Converter="{StaticResource GetPrecisionValueConverter}">
+                                        <Binding Path="SelectionEnd" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        <Binding Path="AutoToolTipPrecision" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    </MultiBinding>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
                     </Canvas>
                 </Border>
-
 
                 <Track x:Name="PART_Track"
                        Grid.Row="1"
@@ -160,7 +239,7 @@
                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
                                VerticalAlignment="Center"
                                Focusable="False"
-                               Foreground="{Binding Foreground, RelativeSource={RelativeSource AncestorType=Slider}}"
+                               Foreground="{TemplateBinding Foreground}"
                                OverridesDefaultStyle="True"
                                Template="{StaticResource SliderThumbHorizontalDefault}" />
                     </Track.Thumb>
@@ -180,6 +259,9 @@
             </Trigger>
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter TargetName="PART_SelectionRange" Property="Visibility" Value="Visible" />
+                <Setter TargetName="StartRangeButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="EndRangeButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_Track" Property="Visibility" Value="Hidden" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
@@ -291,8 +373,91 @@
                     <Canvas Margin="0">
                         <Rectangle x:Name="PART_SelectionRange"
                                    Width="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
-                                   Fill="{Binding Path=(rubyer:SliderHelper.SelectionRangeBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                   Fill="{TemplateBinding Foreground}"
                                    Visibility="Hidden" />
+
+                        <Button x:Name="StartRangeButton"
+                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                rubyer:ButtonHelper.Shape="Circle"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Collapsed">
+                            <Button.RenderTransform>
+                                <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
+                                    <TranslateTransform.X>
+                                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     Path="ActualWidth"
+                                                     RelativeSource="{RelativeSource AncestorType=Button}" />
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     ElementName="PART_SelectionRange"
+                                                     Path="ActualWidth" />
+                                        </MultiBinding>
+                                    </TranslateTransform.X>
+                                </TranslateTransform>
+                            </Button.RenderTransform>
+                            <Canvas.Top>
+                                <MultiBinding Converter="{StaticResource MathAddConverter}">
+                                    <Binding ElementName="PART_SelectionRange" Path="(Canvas.Top)" />
+                                    <Binding ElementName="PART_SelectionRange" Path="ActualHeight" />
+                                </MultiBinding>
+                            </Canvas.Top>
+                            <Button.ToolTip>
+                                <ToolTip IsOpen="False">
+                                    <ToolTip.Placement>
+                                        <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
+                                            <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding Path="Orientation" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        </MultiBinding>
+                                    </ToolTip.Placement>
+                                    <MultiBinding Converter="{StaticResource GetPrecisionValueConverter}">
+                                        <Binding Path="SelectionStart" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        <Binding Path="AutoToolTipPrecision" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    </MultiBinding>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
+
+                        <Button x:Name="EndRangeButton"
+                                Canvas.Top="{Binding Path=(Canvas.Top), ElementName=PART_SelectionRange}"
+                                Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                rubyer:ButtonHelper.Shape="Circle"
+                                rubyer:ButtonHelper.ShowShadow="True"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Collapsed">
+                            <Button.RenderTransform>
+                                <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
+                                    <TranslateTransform.X>
+                                        <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     Path="ActualWidth"
+                                                     RelativeSource="{RelativeSource AncestorType=Button}" />
+                                            <Binding Converter="{StaticResource DivideConverter}"
+                                                     ConverterParameter="-2"
+                                                     ElementName="PART_SelectionRange"
+                                                     Path="ActualWidth" />
+                                        </MultiBinding>
+                                    </TranslateTransform.X>
+                                </TranslateTransform>
+                            </Button.RenderTransform>
+                            <Button.ToolTip>
+                                <ToolTip IsOpen="False">
+                                    <ToolTip.Placement>
+                                        <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
+                                            <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                            <Binding Path="Orientation" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        </MultiBinding>
+                                    </ToolTip.Placement>
+                                    <MultiBinding Converter="{StaticResource GetPrecisionValueConverter}">
+                                        <Binding Path="SelectionEnd" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                        <Binding Path="AutoToolTipPrecision" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
+                                    </MultiBinding>
+                                </ToolTip>
+                            </Button.ToolTip>
+                        </Button>
                     </Canvas>
                 </Border>
                 <Track x:Name="PART_Track"
@@ -335,6 +500,9 @@
             </Trigger>
             <Trigger Property="IsSelectionRangeEnabled" Value="true">
                 <Setter TargetName="PART_SelectionRange" Property="Visibility" Value="Visible" />
+                <Setter TargetName="StartRangeButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="EndRangeButton" Property="Visibility" Value="Visible" />
+                <Setter TargetName="PART_Track" Property="Visibility" Value="Hidden" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
@@ -350,9 +518,9 @@
         <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
         <Setter Property="Template" Value="{StaticResource SliderHorizontal}" />
-        <Setter Property="rubyer:SliderHelper.SelectionRangeBrush" Value="{DynamicResource Accent}" />
         <Setter Property="rubyer:SliderHelper.GripDiameter" Value="15" />
         <Setter Property="rubyer:SliderHelper.TrackThickness" Value="4" />
+        <Setter Property="rubyer:SliderHelper.IsSelectionRange" Value="{Binding IsSelectionRangeEnabled, RelativeSource={RelativeSource Self}}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Template" Value="{StaticResource SliderVertical}" />

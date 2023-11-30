@@ -21,7 +21,7 @@
                     <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
-                        <Button Content="默认按钮"
+                        <Button Content="默认按钮" x:Name="defaultButton"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />
                         <Button Style="{DynamicResource SecondaryButton}" Content="次级按钮" />
