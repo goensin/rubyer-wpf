@@ -1,4 +1,5 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -140,6 +141,7 @@ namespace Rubyer
                 var percent = slider.Orientation == Orientation.Horizontal ?
                               position.X / slider.ActualWidth :
                               (slider.ActualHeight - position.Y) / slider.ActualHeight;
+
                 if (percent < 0)
                 {
                     percent = 0;
@@ -151,6 +153,15 @@ namespace Rubyer
                 }
 
                 var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
+
+                // 保持 Thumb 在刻度上
+                if (slider.IsSnapToTickEnabled && slider.TickFrequency > 0)
+                {
+                    var num = slider.Minimum + Math.Round((value - slider.Minimum) / slider.TickFrequency) * slider.TickFrequency;
+                    var num2 = Math.Min(slider.Maximum, num + slider.TickFrequency);
+
+                    value = value >= (num + num2) * 0.5 ? num2 : num;
+                }
 
                 if (button.Name.Contains("Start"))
                 {
