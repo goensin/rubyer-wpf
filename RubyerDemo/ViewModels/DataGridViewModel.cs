@@ -25,6 +25,10 @@ namespace RubyerDemo.ViewModels
             var streamResourceInfo = Application.GetResourceStream(uri);
             var json = new StreamReader(streamResourceInfo.Stream).ReadToEnd();
             Weathers = JsonSerializer.Deserialize<ObservableCollection<WeatherInfo>>(json);
+            for (int i = 0; i < Weathers.Count; i += 2)
+            {
+                Weathers[i].IsSelected = true;
+            }
 
             uri = new Uri("city.json", UriKind.Relative);
             streamResourceInfo = Application.GetResourceStream(uri);

@@ -222,6 +222,7 @@
                                          Description="DataGridSelectCheckBoxColumn">
                     <DataGrid x:Name="DataGrid7"
                               HorizontalContentAlignment="Center"
+                              rubyer:DataGridHelper.ClickToEdit="True"
                               rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"

@@ -36,7 +36,8 @@
                                      CanUserAddRows="False"
                                      ChildrenPath="Children"
                                      GridLinesVisibility="All"
-                                     HierarchicalItemsSource="{Binding Cities}">
+                                     HierarchicalItemsSource="{Binding Cities}"
+                                     IsReadOnly="True">
                     <rubyer:TreeDataGrid.RowStyle>
                         <Style BasedOn="{StaticResource RubyerTreeDataGridRow}" TargetType="{x:Type rubyer:TreeDataGridRow}">
                             <Setter Property="IsExpanded" Value="{Binding IsExpanded, UpdateSourceTrigger=PropertyChanged}" />

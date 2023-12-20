@@ -141,16 +141,8 @@ namespace Rubyer
                 var percent = slider.Orientation == Orientation.Horizontal ?
                               position.X / slider.ActualWidth :
                               (slider.ActualHeight - position.Y) / slider.ActualHeight;
-
-                if (percent < 0)
-                {
-                    percent = 0;
-                }
-
-                if (percent > 1)
-                {
-                    percent = 1;
-                }
+                percent = Math.Max(percent, 0);
+                percent = Math.Min(percent, 1);
 
                 var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
 
@@ -165,12 +157,7 @@ namespace Rubyer
 
                 if (button.Name.Contains("Start"))
                 {
-                    if (value > slider.SelectionEnd)
-                    {
-                        value = slider.SelectionEnd;
-                    }
-
-                    slider.SelectionStart = value;
+                    slider.SelectionStart = Math.Min(value, slider.SelectionEnd);
                 }
                 else
                 {

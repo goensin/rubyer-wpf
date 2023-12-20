@@ -14,6 +14,7 @@ using Rubyer.Enums;
 using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Markup;
+using System.Collections.Generic;
 
 namespace Rubyer
 {
@@ -59,8 +60,54 @@ namespace Rubyer
             {
                 if (GetIsHeaderSelectCheckBox(checkBox))
                 {
+                    UpdateSelectCheckBoxStatus(checkBox, null);
+
                     checkBox.Checked += CheckBox_Checked;
                     checkBox.Unchecked += CheckBox_Checked;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 更新 DataGridSelectCheckBoxColumn 的 Header CheckBox 状态
+        /// </summary>
+        /// <param name="headerCheckBox">头部 CheckBox</param>
+        /// <param name="currentCheckBox">当前 CheckBox</param>
+        internal static void UpdateSelectCheckBoxStatus(CheckBox headerCheckBox, CheckBox currentCheckBox)
+        {
+            var dataGrid = headerCheckBox.TryGetParentFromVisualTree<DataGrid>();
+            var columnHeader = headerCheckBox.TryGetParentFromVisualTree<DataGridColumnHeader>();
+
+            var allValues = new List<bool?>();
+            foreach (var item in dataGrid.Items)
+            {
+                if (((DataGridSelectCheckBoxColumn)columnHeader.Column).Binding is Binding binding &&
+                    item.GetType().GetProperty(binding.Path.Path) is PropertyInfo property &&
+                    property.GetValue(item) is bool isChecked)
+                {
+                    allValues.Add(currentCheckBox is null ?
+                                    isChecked :
+                                    item.Equals(currentCheckBox.DataContext) ? currentCheckBox.IsChecked : isChecked);
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            if (allValues.Any())
+            {
+                if (allValues.All(x => x == true))
+                {
+                    headerCheckBox.IsChecked = true;
+                }
+                else if (allValues.All(x => x == false))
+                {
+                    headerCheckBox.IsChecked = false;
+                }
+                else
+                {
+                    headerCheckBox.IsChecked = null;
                 }
             }
         }
@@ -75,7 +122,7 @@ namespace Rubyer
             var checkBox = (CheckBox)sender;
             var columnHeader = checkBox.TryGetParentFromVisualTree<DataGridColumnHeader>();
             var datagrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
-            ChangeAllCheckBoxCell(datagrid, columnHeader, checkBox.IsChecked);
+            ChangeAllCheckBoxCell(datagrid, columnHeader, checkBox.IsChecked, checkBox);
         }
 
         /// <summary>
@@ -84,33 +131,18 @@ namespace Rubyer
         /// <param name="dataGrid">The data grid.</param>
         /// <param name="columnHeader">column header</param>
         /// <param name="isChecked">If true, is checked.</param>
-        private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked)
+        private static void ChangeAllCheckBoxCell(DataGrid dataGrid, DataGridColumnHeader columnHeader, bool? isChecked, CheckBox headerCheckBox)
         {
-            dataGrid.SelectedIndex = -1;
-            var headerCheckBox = columnHeader.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
             foreach (var item in dataGrid.Items)
             {
-                var row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                var cellsPresenter = row.TryGetChildFromVisualTree<DataGridCellsPresenter>(x => x is DataGridCellsPresenter);
-                if (cellsPresenter is null)
+                if (((DataGridSelectCheckBoxColumn)columnHeader.Column).Binding is Binding binding &&
+                        item.GetType().GetProperty(binding.Path.Path) is PropertyInfo property)
                 {
-                    continue;
-                }
-
-                var cellContent = columnHeader.Column.GetCellContent(row);
-                var cell = cellContent.TryGetParentFromVisualTree<DataGridCell>();
-                if (cellContent is CheckBox checkBox)
-                {
-                    dataGrid.CurrentCell = new DataGridCellInfo(cell);
-                    dataGrid.BeginEdit();
-                    if (checkBox.IsChecked != null)
-                    {
-                        checkBox.IsChecked = isChecked;
-                    }
-
-                    dataGrid.CommitEdit();
+                    property.SetValue(item, isChecked);
                 }
             }
+
+            headerCheckBox.IsChecked = isChecked;
         }
 
         /// <summary>
@@ -176,95 +208,82 @@ namespace Rubyer
                 .OfType<DataGridCell>()
                 .FirstOrDefault();
 
-            // Readonly has to be handled as the passthrough ignores the
+            // Readonly has to be handled as the pass-through ignores the
             // cell and interacts directly with the content
-            if (dataGridCell is null || dataGridCell.IsReadOnly || dataGridCell.IsEditing)
+            if (dataGridCell?.IsReadOnly ?? true)
             {
                 return;
             }
 
-            if (dataGridCell?.Content is UIElement element)
+            if (dataGridCell.Content is UIElement element)
             {
                 var dataGrid = (DataGrid)sender;
-
-                // Check if the cursor actually hit the element and not just the cell
-                var mousePosition = mouseArgs.GetPosition(element);
-                var elementHitBox = new Rect(element.RenderSize);
-                if (elementHitBox.Contains(mousePosition))
+                // If it is a DataGridTemplateColumn we want the
+                // click to be handled naturally by the control
+                if (dataGridCell.Column.GetType() == typeof(DataGridTemplateColumn))
                 {
-                    // If it is a DataGridTemplateColumn we want the
-                    // click to be handled naturally by the control
-                    if (dataGridCell.Column.GetType() == typeof(DataGridTemplateColumn))
-                    {
-                        return;
-                    }
+                    return;
+                }
+                if (dataGridCell.IsEditing)
+                {
+                    // If the cell is already being edited, we don't want to (re)start editing
+                    return;
+                }
+                //NB: Issue 2852 - Don't handle events from nested data grids
+                var parentDataGrid = dataGridCell
+                    .GetVisualAncestry()
+                    .OfType<DataGrid>()
+                    .FirstOrDefault();
+                if (parentDataGrid != dataGrid)
+                {
+                    return;
+                }
 
-                    dataGrid.CurrentCell = new DataGridCellInfo(dataGridCell);
-                    dataGrid.BeginEdit();
-                    //Begin edit likely changes the visual tree, trigger the mouse down event to cause the DataGrid to adjust selection
-                    var mouseDownEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, mouseArgs.Timestamp, mouseArgs.ChangedButton)
-                    {
-                        RoutedEvent = Mouse.MouseDownEvent,
-                        Source = mouseArgs.Source
-                    };
+                dataGrid.CurrentCell = new DataGridCellInfo(dataGridCell);
+                dataGrid.BeginEdit();
 
-                    dataGridCell.RaiseEvent(mouseDownEvent);
-
-                    switch (dataGridCell?.Content)
-                    {
-                        // Send a 'left click' routed command to the toggleButton
-                        case ToggleButton toggleButton:
+                switch (dataGridCell.Content)
+                {
+                    case TextBoxBase textBox:
+                        {
+                            // Send a 'left-click' routed event to the TextBox to place the I-beam at the position of the mouse cursor
+                            var mouseDownEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, mouseArgs.Timestamp, mouseArgs.ChangedButton)
                             {
-                                var newMouseEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, 0, MouseButton.Left)
+                                RoutedEvent = Mouse.MouseDownEvent,
+                                Source = mouseArgs.Source
+                            };
+                            textBox.RaiseEvent(mouseDownEvent);
+                            break;
+                        }
+
+                    case ToggleButton toggleButton:
+                        {
+                            // Check if the cursor actually hit the checkbox and not just the cell
+                            var mousePosition = mouseArgs.GetPosition(element);
+                            var elementHitBox = new Rect(element.RenderSize);
+                            if (elementHitBox.Contains(mousePosition))
+                            {
+                                // Send a 'left click' routed command to the toggleButton to toggle the state
+                                var newMouseEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, mouseArgs.Timestamp, mouseArgs.ChangedButton)
                                 {
                                     RoutedEvent = Mouse.MouseDownEvent,
                                     Source = dataGrid
                                 };
 
                                 toggleButton.RaiseEvent(newMouseEvent);
-                                dataGridCell.IsEditing = false;
-                                break;
                             }
 
-                        // Open the dropdown explicitly. Left clicking is not
-                        // viable, as it would edit the text and not open the
-                        // dropdown
-                        case ComboBox comboBox:
-                            {
-                                var toggleButton = comboBox.TryGetChildFromVisualTree<ToggleButton>(element => element is ToggleButton);
-                                if (toggleButton is null)
-                                {
-                                    break;
-                                }
-                                var newMouseEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, 0, MouseButton.Left)
-                                {
-                                    RoutedEvent = Mouse.MouseDownEvent,
-                                    Source = dataGrid
-                                };
-                                toggleButton.RaiseEvent(newMouseEvent);
+                            break;
+                        }
 
-                                //comboBox.IsDropDownOpen = true;
-                                //mouseArgs.Handled = true;
-                                break;
-                            }
-
-                        case TextBlock textBlock:
-                            {
-                                var newMouseEvent = new MouseButtonEventArgs(mouseArgs.MouseDevice, 0, MouseButton.Left)
-                                {
-                                    RoutedEvent = Mouse.MouseDownEvent,
-                                    Source = dataGrid
-                                };
-
-                                textBlock.RaiseEvent(newMouseEvent);
-                                break;
-                            }
-
-                        default:
-                            {
-                                break;
-                            }
-                    }
+                    // Open the dropdown explicitly. Left clicking is not
+                    // viable, as it would edit the text and not open the
+                    // dropdown
+                    case ComboBox comboBox:
+                        {
+                            comboBox.IsDropDownOpen = true;
+                            break;
+                        }
                 }
             }
         }

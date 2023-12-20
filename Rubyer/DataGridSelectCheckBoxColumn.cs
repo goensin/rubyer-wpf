@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -49,19 +43,14 @@ namespace Rubyer
         private CheckBox GenerateCheckBox(bool isEditing, DataGridCell cell)
         {
             CheckBox checkBox = (cell != null) ? (cell.Content as CheckBox) : null;
-            if (checkBox == null)
+            if (checkBox is null)
             {
                 checkBox = new CheckBox();
-
-                if (!isEditing)
-                {
-                    checkBox.Loaded += CheckBox_Checked;
-                    checkBox.Checked += CheckBox_Checked;
-                    checkBox.Unchecked += CheckBox_Checked;
-                }
+                checkBox.IsThreeState = IsThreeState;
+                checkBox.Checked += CheckBox_Checked;
+                checkBox.Unchecked += CheckBox_Checked;
             }
 
-            checkBox.IsThreeState = IsThreeState;
             ApplyStyle(isEditing, defaultToElementStyle: true, checkBox);
             ApplyBinding(checkBox, ToggleButton.IsCheckedProperty);
             return checkBox;
@@ -69,7 +58,7 @@ namespace Rubyer
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (sender is CheckBox checkBox)
+            if (sender is CheckBox checkBox && checkBox.IsLoaded)
             {
                 var dataGrid = checkBox.TryGetParentFromVisualTree<DataGrid>();
                 var columnHeader = GetHeader(this, dataGrid);
@@ -79,33 +68,7 @@ namespace Rubyer
                     return;
                 }
 
-                var allValues = new List<bool?>();
-                foreach (var item in dataGrid.Items)
-                {
-                    var row = dataGrid.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                    var cellsPresenter = row.TryGetChildFromVisualTree<DataGridCellsPresenter>(x => x is DataGridCellsPresenter);
-                    if (cellsPresenter is null)
-                    {
-                        continue;
-                    }
-
-                    var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(DisplayIndex) as DataGridCell;
-                    var currentCheckBox = cell.TryGetChildFromVisualTree<CheckBox>(x => x is CheckBox);
-                    allValues.Add(currentCheckBox.IsChecked);
-                }
-
-                if (allValues.All(x => x == true))
-                {
-                    headerCheckBox.IsChecked = true;
-                }
-                else if (allValues.All(x => x == false))
-                {
-                    headerCheckBox.IsChecked = false;
-                }
-                else
-                {
-                    headerCheckBox.IsChecked = null;
-                }
+                DataGridHelper.UpdateSelectCheckBoxStatus(headerCheckBox, checkBox);
             }
         }
 
