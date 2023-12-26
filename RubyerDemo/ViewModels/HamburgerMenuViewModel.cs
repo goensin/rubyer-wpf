@@ -44,7 +44,6 @@ namespace RubyerDemo.ViewModels
                 new HamburgerMenuModel("文档",IconType.FileLine),
                 new HamburgerMenuModel("图片",IconType.ImageLine),
                 new HamburgerMenuModel("设置",IconType.Settings2Line),
-                new HamburgerMenuModel("无图标",null),
                 new HamburgerMenuModel("不可用",IconType.EmotionUnhappyLine,false),
             };
 
@@ -53,6 +52,14 @@ namespace RubyerDemo.ViewModels
                 new HamburgerMenuModel("睡眠",IconType.MoonFill),
                 new HamburgerMenuModel("关机",IconType.ShutDownLine),
                 new HamburgerMenuModel("重启",IconType.RestartLine),
+                new HamburgerMenuModel("更多",IconType.More2Line)
+                {
+                    Childs = new ObservableCollection<HamburgerMenuModel>
+                    {
+                        new HamburgerMenuModel("WiFi",IconType.WifiLine),
+                        new HamburgerMenuModel("蓝牙",IconType.BluetoothLine),
+                    }
+                },
             };
         }
     }
@@ -79,6 +86,9 @@ namespace RubyerDemo.ViewModels
         /// </summary>
         [ObservableProperty]
         private bool isEnable;
+
+        [ObservableProperty]
+        private ObservableCollection<HamburgerMenuModel> childs;
 
         public HamburgerMenuModel(string name, IconType? icon, bool isEnable = true)
         {

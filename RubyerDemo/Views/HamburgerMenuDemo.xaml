@@ -141,7 +141,7 @@
                                           Background="{DynamicResource Primary}"
                                           CollapsedWidth="56"
                                           CornerRadius="15"
-                                          ExpandedWidth="300"
+                                          ExpandedWidth="250"
                                           FontSize="16"
                                           Foreground="{StaticResource WhiteForeground}"
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
@@ -149,7 +149,7 @@
                                           ItemsSource="{Binding Models}"
                                           MenuIcon="{Binding IsExpanded, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToMenuIconConverter}}"
                                           OptionsItemsSource="{Binding OptionsModels}"
-                                          PaneBackground="#3F000000"
+                                          PaneBackground="{StaticResource Dark}"
                                           PaneBorderCornerRadius="15"
                                           SelectedIndex="0"
                                           TransitionDuration="0:0:0.5"
@@ -170,6 +170,7 @@
                                 <Setter Property="IsEnabled" Value="{Binding IsEnable}" />
                                 <Setter Property="Command" Value="{Binding DataContext.SelecteCommand, RelativeSource={RelativeSource AncestorType=local:HamburgerMenuDemo}}" />
                                 <Setter Property="CommandParameter" Value="{Binding Name}" />
+                                <Setter Property="ItemsSource" Value="{Binding Childs}" />
                             </Style>
                         </rubyer:HamburgerMenu.OptionsItemContainerStyle>
 

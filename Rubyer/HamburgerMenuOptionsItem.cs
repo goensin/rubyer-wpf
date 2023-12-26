@@ -11,29 +11,10 @@ namespace Rubyer
     /// <summary>
     /// 汉堡包菜单选项
     /// </summary>
+    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(HamburgerMenuOptionsItem))]
     public class HamburgerMenuOptionsItem : MenuItem
     {
-        static HamburgerMenuOptionsItem()
-        {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenuOptionsItem), new FrameworkPropertyMetadata(typeof(HamburgerMenuOptionsItem)));
-        }
-
         #region properties
-
-        ///// <summary>
-        ///// 图标
-        ///// </summary>
-        //public static readonly DependencyProperty IconProperty = DependencyProperty.Register(
-        //    "Icon", typeof(object), typeof(HamburgerMenuOptionsItem), new PropertyMetadata(null));
-
-        ///// <summary>
-        ///// 图标
-        ///// </summary>
-        //public object Icon
-        //{
-        //    get { return (object)GetValue(IconProperty); }
-        //    set { SetValue(IconProperty, value); }
-        //}
 
         /// <summary>
         /// 图标类型
@@ -51,5 +32,21 @@ namespace Rubyer
         }
 
         #endregion properties
+        static HamburgerMenuOptionsItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(HamburgerMenuOptionsItem), new FrameworkPropertyMetadata(typeof(HamburgerMenuOptionsItem)));
+        }
+
+        /// <inheritdoc/>
+        protected override bool IsItemItsOwnContainerOverride(object item)
+        {
+            return item is HamburgerMenuOptionsItem;
+        }
+
+        /// <inheritdoc/>
+        protected override DependencyObject GetContainerForItemOverride()
+        {
+            return new HamburgerMenuOptionsItem();
+        }
     }
 }
