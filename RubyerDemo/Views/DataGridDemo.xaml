@@ -162,10 +162,9 @@
                     <DataGrid x:Name="DataGrid5"
                               Height="130"
                               rubyer:DataGridHelper.AutoGenerateRowNumber="True"
-                              AutoGenerateColumns="True"
+                              AutoGenerateColumns="True" CanUserDeleteRows="True"
                               CanUserAddRows="False"
                               HeadersVisibility="All"
-                              IsReadOnly="True"
                               ItemsSource="{Binding Weathers}"
                               RowHeaderWidth="50" />
                 </controls:ControlDisplay>

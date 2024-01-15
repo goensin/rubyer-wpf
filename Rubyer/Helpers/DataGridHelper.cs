@@ -12,6 +12,7 @@ using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 
 namespace Rubyer
 {
@@ -591,19 +592,38 @@ namespace Rubyer
                 if (GetAutoGenerateRowNumber(dataGrid) && dataGrid.HeadersVisibility.HasFlag(DataGridHeadersVisibility.Row))
                 {
                     dataGrid.LoadingRow += DataGrid_LoadingRow;
+                    dataGrid.ItemContainerGenerator.ItemsChanged += ItemContainerGenerator_ItemsChanged;
                 }
                 else
                 {
                     dataGrid.LoadingRow -= DataGrid_LoadingRow;
+                    dataGrid.ItemContainerGenerator.ItemsChanged -= ItemContainerGenerator_ItemsChanged;
+                }
+            }
+        }
+
+
+        private static void UpdateRowHeader(DataGridRow row)
+        {
+            var number = row.GetIndex() + 1;
+            row.Header = number;
+        }
+
+        private static void ItemContainerGenerator_ItemsChanged(object sender, ItemsChangedEventArgs e)
+        {
+            var generator = (ItemContainerGenerator)sender;
+            foreach (var item in generator.Items)
+            {
+                if (generator.ContainerFromItem(item) is DataGridRow row)
+                {
+                    UpdateRowHeader(row);
                 }
             }
         }
 
         private static void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
         {
-            var row = e.Row;
-            var number = row.GetIndex() + 1;
-            row.Header = number;
+            UpdateRowHeader(e.Row);
         }
     }
 }
