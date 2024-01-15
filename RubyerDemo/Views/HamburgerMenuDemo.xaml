@@ -22,7 +22,7 @@
     <smtx:XamlDisplay HorizontalContentAlignment="Stretch" UniqueKey="HamburgerMenuDemo">
         <GroupBox Margin="10" Header="汉堡包菜单 - HamburgerMenu">
             <Grid rubyer:GridHelper.ColumnDefinitions="*,*" rubyer:PanelHelper.Spacing="10">
-                <DockPanel>
+                <DockPanel rubyer:PanelHelper.Spacing="10">
                     <TextBlock DockPanel.Dock="Top" Text="items 方式" />
 
                     <rubyer:HamburgerMenu BorderThickness="1"
@@ -124,7 +124,7 @@
                     </rubyer:HamburgerMenu>
                 </DockPanel>
 
-                <DockPanel Grid.Column="1">
+                <DockPanel Grid.Column="1" rubyer:PanelHelper.Spacing="10">
                     <TextBlock DockPanel.Dock="Top" Text="binding 方式" />
 
                     <rubyer:HamburgerMenu x:Name="menu2"

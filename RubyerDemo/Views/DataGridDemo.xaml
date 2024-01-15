@@ -34,15 +34,7 @@
                                   GridLinesVisibility="All"
                                   IsReadOnly="True"
                                   ItemsSource="{Binding Weathers}"
-                                  RowHeaderWidth="50"
                                   SelectionMode="Single">
-                            <DataGrid.RowHeaderTemplate>
-                                <DataTemplate>
-                                    <Border>
-                                        <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
-                                    </Border>
-                                </DataTemplate>
-                            </DataGrid.RowHeaderTemplate>
                             <DataGrid.Columns>
                                 <DataGridCheckBoxColumn Width="50"
                                                         Binding="{Binding IsSelected}"
@@ -168,20 +160,14 @@
 
                 <controls:ControlDisplay Title="表格行头显示，自动序号" Grid.Row="4">
                     <DataGrid x:Name="DataGrid5"
+                              Height="130"
+                              rubyer:DataGridHelper.AutoGenerateRowNumber="True"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               HeadersVisibility="All"
                               IsReadOnly="True"
                               ItemsSource="{Binding Weathers}"
-                              RowHeaderWidth="50">
-                        <DataGrid.RowHeaderTemplate>
-                            <DataTemplate>
-                                <Border>
-                                    <TextBlock HorizontalAlignment="Center" Text="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Converter={StaticResource DataGridRowIndexConverter}}" />
-                                </Border>
-                            </DataTemplate>
-                        </DataGrid.RowHeaderTemplate>
-                    </DataGrid>
+                              RowHeaderWidth="50" />
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="展开详细信息"

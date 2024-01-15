@@ -11,9 +11,6 @@ using System;
 using Rubyer.Commons.KnownBoxes;
 using Rubyer.DataAnnotations;
 using Rubyer.Enums;
-using System.Collections;
-using System.Collections.ObjectModel;
-using System.Windows.Markup;
 using System.Collections.Generic;
 
 namespace Rubyer
@@ -575,6 +572,38 @@ namespace Rubyer
         public static bool GetApplyColumnElementStyle(DependencyObject element)
         {
             return (bool)element.GetValue(ApplyColumnElementStyleProperty);
+        }
+
+        /// <summary>
+        /// 自动生成行号，显示在 RowHeader。
+        /// </summary>
+        public static readonly DependencyProperty AutoGenerateRowNumberProperty =
+            DependencyProperty.RegisterAttached("AutoGenerateRowNumber", typeof(bool), typeof(DataGridHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnAutoGenerateRowNumberChanged));
+
+        public static bool GetAutoGenerateRowNumber(DependencyObject obj) => (bool)obj.GetValue(AutoGenerateRowNumberProperty);
+
+        public static void SetAutoGenerateRowNumber(DependencyObject obj, bool value) => obj.SetValue(AutoGenerateRowNumberProperty, BooleanBoxes.Box(value));
+
+        private static void OnAutoGenerateRowNumberChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is DataGrid dataGrid)
+            {
+                if (GetAutoGenerateRowNumber(dataGrid) && dataGrid.HeadersVisibility.HasFlag(DataGridHeadersVisibility.Row))
+                {
+                    dataGrid.LoadingRow += DataGrid_LoadingRow;
+                }
+                else
+                {
+                    dataGrid.LoadingRow -= DataGrid_LoadingRow;
+                }
+            }
+        }
+
+        private static void DataGrid_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            var row = e.Row;
+            var number = row.GetIndex() + 1;
+            row.Header = number;
         }
     }
 }
