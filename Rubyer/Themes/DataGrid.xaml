@@ -480,7 +480,7 @@
                                         <ScrollBar x:Name="PART_HorizontalScrollBar"
                                                    Style="{StaticResource RubyerScrollBar}"
                                                    Grid.Row="2"
-                                                   Grid.ColumnSpan="2"
+                                                   Grid.Column="1"
                                                    Maximum="{TemplateBinding ScrollableWidth}"
                                                    Orientation="Horizontal"
                                                    ViewportSize="{TemplateBinding ViewportWidth}"

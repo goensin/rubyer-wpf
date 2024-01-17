@@ -4,7 +4,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -79,6 +78,26 @@ namespace Rubyer
         public static bool GetIsRangeButtonPressed(DependencyObject obj) => (bool)obj.GetValue(IsRangeButtonPressedProperty);
 
         internal static void SetIsRangeButtonPressed(DependencyObject obj, bool value) => obj.SetValue(IsRangeButtonPressedPropertyKey, BooleanBoxes.Box(value));
+
+        // 选中访问改变事件
+        public static readonly RoutedEvent SelectionRangeChangedEvent = EventManager.RegisterRoutedEvent(
+            "SelectionRangeChanged", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(SliderHelper));
+
+        public static void AddSelectionRangeChangedHandler(DependencyObject dependencyObject, RoutedEventHandler handler)
+        {
+            if (dependencyObject is Slider slider)
+            {
+                slider.AddHandler(SelectionRangeChangedEvent, handler);
+            }
+        }
+
+        public static void RemoveSelectionRangeChangedHandler(DependencyObject dependencyObject, RoutedEventHandler handler)
+        {
+            if (dependencyObject is Slider slider)
+            {
+                slider.RemoveHandler(SelectionRangeChangedEvent, handler);
+            }
+        }
 
         private static void OnIsSelectionRangeChangded(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -155,12 +174,16 @@ namespace Rubyer
                     value = value >= (num + num2) * 0.5 ? num2 : num;
                 }
 
+                bool hasChanged;
                 if (button.Name.Contains("Start"))
                 {
-                    slider.SelectionStart = Math.Min(value, slider.SelectionEnd);
+                    var newStart = Math.Min(value, slider.SelectionEnd);
+                    hasChanged = slider.SelectionStart != newStart;
+                    slider.SelectionStart = newStart;
                 }
                 else
                 {
+                    hasChanged = slider.SelectionEnd != value;
                     slider.SelectionEnd = value;
                 }
 
@@ -183,6 +206,11 @@ namespace Rubyer
                             toolTip.VerticalOffset = point.Y;
                         }
                     }
+                }
+
+                if (hasChanged)
+                {
+                    slider.RaiseEvent(new RoutedEventArgs(SelectionRangeChangedEvent));
                 }
             }
         }

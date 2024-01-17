@@ -47,7 +47,7 @@
                         <Slider Margin="0 10"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
-                                Maximum="100"
+                                Maximum="100" rubyer:SliderHelper.SelectionRangeChanged="Slider_SelectionRangeChanged"
                                 Minimum="0"
                                 SelectionEnd="70"
                                 SelectionStart="30"

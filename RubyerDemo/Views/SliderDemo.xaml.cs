@@ -28,5 +28,11 @@ namespace RubyerDemo.Views
         {
             Debug.WriteLine($"Renamer TextChanged: {e.NewValue}");
         }
+
+        private void Slider_SelectionRangeChanged(object sender, RoutedEventArgs e)
+        {
+            var slider=(Slider)sender;
+            Debug.WriteLine($"Slider SelectionRangeChanged: {slider.SelectionStart} - {slider.SelectionEnd}");
+        }
     }
 }
