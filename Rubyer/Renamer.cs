@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace Rubyer
         public const string TextBoxPartName = "PART_TextBox";
 
         private TextBox textBox;
+        private bool isMouseUpWhenFocused; // 当聚焦时再点击
 
         #region commands
 
@@ -140,15 +142,35 @@ namespace Rubyer
             textBox.InputBindings.Add(enterKeyBinding);
             textBox.InputBindings.Add(escKeyBinding);
             this.InputBindings.Add(f2KeyBinding);
+        }
 
-            this.PreviewMouseUp += (sender, e) =>
+        /// <inheritdoc/>
+        protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
+        {
+            if (!IsRenaming)
             {
-                if (!IsRenaming)
-                {
-                    //e.Handled = true;
-                    this.Focus();
-                }
-            };
+                Focus();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
+        {
+            if (IsFocused)
+            {
+                isMouseUpWhenFocused = true;
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnPreviewMouseLeftButtonUp(MouseButtonEventArgs e)
+        {
+            if (isMouseUpWhenFocused)
+            {
+                isMouseUpWhenFocused = false;
+                RenameCommand.Execute(null, this);
+                return;
+            }
         }
 
         private void RenameHandler(object sender, ExecutedRoutedEventArgs e)
