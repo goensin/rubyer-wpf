@@ -140,7 +140,7 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
-                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.InitialShowDelay="10"
                                 ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
@@ -180,7 +180,7 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
-                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.InitialShowDelay="10"
                                 ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
@@ -389,7 +389,7 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
-                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.InitialShowDelay="10"
                                 ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
@@ -436,7 +436,7 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
-                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.InitialShowDelay="10"
                                 ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>

@@ -125,8 +125,7 @@ namespace Rubyer
                 WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
                 WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
                 WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
-                startButton.MouseEnter += (sender, e) => UpdateToolTipOffset(startButton, slider);
-                //WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "MouseEnter ", UpdateSliderRangeValues);
+                WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "MouseEnter", RangeButton_MouseEnter);
             }
 
             if (slider.Template.FindName("EndRangeButton", slider) is Button endButton)
@@ -134,8 +133,16 @@ namespace Rubyer
                 WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
                 WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
                 WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
-                endButton.MouseEnter += (sender, e) => UpdateToolTipOffset(endButton, slider);
-                //WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "MouseEnter", UpdateSliderRangeValues);
+                WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "MouseEnter", RangeButton_MouseEnter);
+            }
+        }
+
+        private static void RangeButton_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var button = (Button)sender;
+            if (button.TemplatedParent is Slider slider)
+            {
+                UpdateToolTipOffset(button, slider);
             }
         }
 
@@ -166,7 +173,6 @@ namespace Rubyer
                     toolTip.PlacementTarget ??= slider;
                     toolTip.IsOpen = true;
                     var point = button.TranslatePoint(new Point(), slider);
-
                     if (slider.Orientation == Orientation.Horizontal)
                     {
                         toolTip.HorizontalOffset = point.X;
