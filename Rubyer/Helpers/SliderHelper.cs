@@ -1,5 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -116,20 +117,25 @@ namespace Rubyer
 
         private static void Slider_Loaded(object sender, RoutedEventArgs e)
         {
-            var slider = sender as Slider;
+            var slider = (Slider)sender;
             slider.Loaded -= Slider_Loaded;
+
             if (slider.Template.FindName("StartRangeButton", slider) is Button startButton)
             {
-                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
-                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
-                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
+                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
+                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
+                WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
+                startButton.MouseEnter += (sender, e) => UpdateToolTipOffset(startButton, slider);
+                //WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "MouseEnter ", UpdateSliderRangeValues);
             }
 
             if (slider.Template.FindName("EndRangeButton", slider) is Button endButton)
             {
-                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
-                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
-                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
+                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
+                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
+                WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
+                endButton.MouseEnter += (sender, e) => UpdateToolTipOffset(endButton, slider);
+                //WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "MouseEnter", UpdateSliderRangeValues);
             }
         }
 
@@ -147,6 +153,31 @@ namespace Rubyer
             if (button.ToolTip is ToolTip toolTip)
             {
                 toolTip.IsOpen = false;
+            }
+        }
+
+        // 更新 ToolTip
+        private static void UpdateToolTipOffset(Button button, Slider slider)
+        {
+            if (slider.AutoToolTipPlacement != AutoToolTipPlacement.None)
+            {
+                if (button.ToolTip is ToolTip toolTip)
+                {
+                    toolTip.PlacementTarget ??= slider;
+                    toolTip.IsOpen = true;
+                    var point = button.TranslatePoint(new Point(), slider);
+
+                    if (slider.Orientation == Orientation.Horizontal)
+                    {
+                        toolTip.HorizontalOffset = point.X;
+                        toolTip.VerticalOffset = 0;
+                    }
+                    else
+                    {
+                        toolTip.HorizontalOffset = 0;
+                        toolTip.VerticalOffset = point.Y;
+                    }
+                }
             }
         }
 
@@ -174,6 +205,7 @@ namespace Rubyer
                     value = value >= (num + num2) * 0.5 ? num2 : num;
                 }
 
+                // 更新 SelectionStart 和 SelectionEnd 值
                 bool hasChanged;
                 if (button.Name.Contains("Start"))
                 {
@@ -183,30 +215,12 @@ namespace Rubyer
                 }
                 else
                 {
-                    hasChanged = slider.SelectionEnd != value;
-                    slider.SelectionEnd = value;
+                    var newEnd = Math.Max(value, slider.SelectionStart);
+                    hasChanged = slider.SelectionEnd != newEnd;
+                    slider.SelectionEnd = newEnd;
                 }
 
-                if (slider.AutoToolTipPlacement != AutoToolTipPlacement.None)
-                {
-                    if (button.ToolTip is ToolTip toolTip)
-                    {
-                        toolTip.PlacementTarget ??= slider;
-                        toolTip.IsOpen = true;
-
-                        var point = button.TranslatePoint(new Point(), slider);
-                        if (slider.Orientation == Orientation.Horizontal)
-                        {
-                            toolTip.HorizontalOffset = point.X;
-                            toolTip.VerticalOffset = 0;
-                        }
-                        else
-                        {
-                            toolTip.HorizontalOffset = 0;
-                            toolTip.VerticalOffset = point.Y;
-                        }
-                    }
-                }
+                UpdateToolTipOffset(button, slider);
 
                 if (hasChanged)
                 {

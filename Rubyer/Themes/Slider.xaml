@@ -140,6 +140,8 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
+                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
                                 <TranslateTransform X="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
@@ -158,7 +160,7 @@
                                 </TranslateTransform>
                             </Button.RenderTransform>
                             <Button.ToolTip>
-                                <ToolTip IsOpen="False">
+                                <ToolTip x:Name="StartToolTip" IsOpen="False">
                                     <ToolTip.Placement>
                                         <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
                                             <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
@@ -178,6 +180,8 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
+                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
                                 <TranslateTransform X="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
@@ -202,7 +206,7 @@
                                 </MultiBinding>
                             </Canvas.Left>
                             <Button.ToolTip>
-                                <ToolTip IsOpen="False">
+                                <ToolTip x:Name="EndToolTip" IsOpen="False">
                                     <ToolTip.Placement>
                                         <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
                                             <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
@@ -262,6 +266,10 @@
                 <Setter TargetName="StartRangeButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="EndRangeButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_Track" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <Trigger Property="AutoToolTipPlacement" Value="None">
+                <Setter TargetName="StartRangeButton" Property="ToolTipService.IsEnabled" Value="False" />
+                <Setter TargetName="EndRangeButton" Property="ToolTipService.IsEnabled" Value="False" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
@@ -381,6 +389,8 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
+                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
                                 <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
@@ -426,6 +436,8 @@
                                 rubyer:ButtonHelper.Shape="Circle"
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Background="{TemplateBinding Foreground}"
+                                ToolTipService.InitialShowDelay="0"
+                                ToolTipService.PlacementTarget="{Binding RelativeSource={RelativeSource AncestorType=Slider}}"
                                 Visibility="Collapsed">
                             <Button.RenderTransform>
                                 <TranslateTransform Y="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Button}, Converter={StaticResource DivideConverter}, ConverterParameter=-2}">
@@ -503,6 +515,10 @@
                 <Setter TargetName="StartRangeButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="EndRangeButton" Property="Visibility" Value="Visible" />
                 <Setter TargetName="PART_Track" Property="Visibility" Value="Hidden" />
+            </Trigger>
+            <Trigger Property="AutoToolTipPlacement" Value="None">
+                <Setter TargetName="StartRangeButton" Property="ToolTipService.IsEnabled" Value="False" />
+                <Setter TargetName="EndRangeButton" Property="ToolTipService.IsEnabled" Value="False" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />

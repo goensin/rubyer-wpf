@@ -62,11 +62,6 @@ namespace RubyerDemo.ViewModels
         private void ReplaceSelectedItems()
         {
             SelectedItems = new ObservableCollection<FoodType>() { FoodType.OysterOmelette };
-            SelectedItems.CollectionChanged += SelectedItems_CollectionChanged1;
-        }
-
-        private void SelectedItems_CollectionChanged1(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
         }
     }
 }
