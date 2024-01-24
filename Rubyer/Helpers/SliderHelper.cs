@@ -122,18 +122,39 @@ namespace Rubyer
 
             if (slider.Template.FindName("StartRangeButton", slider) is Button startButton)
             {
-                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
-                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
-                WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
-                WeakEventManager<Button, MouseEventArgs>.AddHandler(startButton, "MouseEnter", RangeButton_MouseEnter);
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "MouseEnter", RangeButton_MouseEnter);
             }
 
             if (slider.Template.FindName("EndRangeButton", slider) is Button endButton)
             {
-                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
-                WeakEventManager<Button, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
-                WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
-                WeakEventManager<Button, MouseEventArgs>.AddHandler(endButton, "MouseEnter", RangeButton_MouseEnter);
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "MouseEnter", RangeButton_MouseEnter);
+            }
+
+            if (slider.Template.FindName("TrackBackground", slider) is Border backBorder)
+            {
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(backBorder, "PreviewMouseLeftButtonDown", TrackBackground_MouseDown);
+            }
+        }
+
+        private static void TrackBackground_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (sender.Equals(e.OriginalSource))
+            {
+                var border = (Border)sender;
+                if (border.TryGetParentFromVisualTree<Slider>() is Slider slider)
+                {
+                    var position = e.GetPosition(border);
+                    var isStart = slider.Orientation == Orientation.Horizontal ?
+                                  position.X / slider.ActualWidth < slider.SelectionStart / slider.Maximum :
+                                  (slider.ActualHeight - position.Y) / slider.ActualHeight < slider.SelectionStart / slider.Maximum;
+                    UpdateRangeSelection(slider, position, isStart);
+                }
             }
         }
 
@@ -187,6 +208,47 @@ namespace Rubyer
             }
         }
 
+
+        private static void UpdateRangeSelection(Slider slider, Point position, bool isStart)
+        {
+            var percent = slider.Orientation == Orientation.Horizontal ?
+                          position.X / slider.ActualWidth :
+                          (slider.ActualHeight - position.Y) / slider.ActualHeight;
+            percent = Math.Max(percent, 0);
+            percent = Math.Min(percent, 1);
+
+            var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
+
+            // 保持 Thumb 在刻度上
+            if (slider.IsSnapToTickEnabled && slider.TickFrequency > 0)
+            {
+                var num = slider.Minimum + Math.Round((value - slider.Minimum) / slider.TickFrequency) * slider.TickFrequency;
+                var num2 = Math.Min(slider.Maximum, num + slider.TickFrequency);
+
+                value = value >= (num + num2) * 0.5 ? num2 : num;
+            }
+
+            // 更新 SelectionStart 和 SelectionEnd 值
+            bool hasChanged;
+            if (isStart)
+            {
+                var newStart = Math.Min(value, slider.SelectionEnd);
+                hasChanged = slider.SelectionStart != newStart;
+                slider.SelectionStart = newStart;
+            }
+            else
+            {
+                var newEnd = Math.Max(value, slider.SelectionStart);
+                hasChanged = slider.SelectionEnd != newEnd;
+                slider.SelectionEnd = newEnd;
+            }
+
+            if (hasChanged)
+            {
+                slider.RaiseEvent(new RoutedEventArgs(SelectionRangeChangedEvent));
+            }
+        }
+
         private static void RangeButton_MouseMove(object sender, MouseEventArgs e)
         {
             var button = (Button)sender;
@@ -194,44 +256,10 @@ namespace Rubyer
             {
                 var slider = button.TryGetParentFromVisualTree<Slider>();
                 var position = e.MouseDevice.GetPosition(slider);
-                var percent = slider.Orientation == Orientation.Horizontal ?
-                              position.X / slider.ActualWidth :
-                              (slider.ActualHeight - position.Y) / slider.ActualHeight;
-                percent = Math.Max(percent, 0);
-                percent = Math.Min(percent, 1);
 
-                var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
-
-                // 保持 Thumb 在刻度上
-                if (slider.IsSnapToTickEnabled && slider.TickFrequency > 0)
-                {
-                    var num = slider.Minimum + Math.Round((value - slider.Minimum) / slider.TickFrequency) * slider.TickFrequency;
-                    var num2 = Math.Min(slider.Maximum, num + slider.TickFrequency);
-
-                    value = value >= (num + num2) * 0.5 ? num2 : num;
-                }
-
-                // 更新 SelectionStart 和 SelectionEnd 值
-                bool hasChanged;
-                if (button.Name.Contains("Start"))
-                {
-                    var newStart = Math.Min(value, slider.SelectionEnd);
-                    hasChanged = slider.SelectionStart != newStart;
-                    slider.SelectionStart = newStart;
-                }
-                else
-                {
-                    var newEnd = Math.Max(value, slider.SelectionStart);
-                    hasChanged = slider.SelectionEnd != newEnd;
-                    slider.SelectionEnd = newEnd;
-                }
+                UpdateRangeSelection(slider, position, button.Name.Contains("Start"));
 
                 UpdateToolTipOffset(button, slider);
-
-                if (hasChanged)
-                {
-                    slider.RaiseEvent(new RoutedEventArgs(SelectionRangeChangedEvent));
-                }
             }
         }
     }
