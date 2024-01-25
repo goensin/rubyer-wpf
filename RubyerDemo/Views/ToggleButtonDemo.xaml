@@ -222,7 +222,8 @@
                                       Style="{DynamicResource SwitchAccentToggleButton}"
                                       Margin="10 0"
                                       rubyer:ToggleButtonHelper.CheckedContent="ON"
-                                      Content="OFF" />
+                                      Content="OFF"
+                                      FontSize="20" />
 
                         <ToggleButton Style="{DynamicResource SwitchToggleButton}"
                                       Margin="10 0"
