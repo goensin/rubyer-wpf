@@ -284,20 +284,12 @@ namespace Rubyer
         {
             GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min + interval : Value.GetValueOrDefault() + interval);
-            if (!textBox.IsReadOnly)
-            {
-                textBox.Focus();
-            }
         }
 
         private void DecreaseButton_Click(object sender, RoutedEventArgs e)
         {
             GetIntervalAndMin(out double interval, out double min);
             Value = GetCalculatedValue(this, Value == null ? min : Value.GetValueOrDefault() - interval);
-            if (!textBox.IsReadOnly)
-            {
-                textBox.Focus();
-            }
         }
 
 

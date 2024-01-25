@@ -35,57 +35,54 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:NumericBox}">
-                    <Grid x:Name="PART_Root">
-                        <TextBox x:Name="PART_TextBox"
-                                 Style="{StaticResource RubyerTextBox}"
-                                 Height="Auto"
-                                 Padding="{TemplateBinding Padding}"
-                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:InputBoxHelper.IsClearable="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                 Background="{TemplateBinding Background}"
-                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                 Foreground="{TemplateBinding Foreground}"
-                                 InputMethod.IsInputMethodEnabled="False"
-                                 IsReadOnly="{TemplateBinding IsReadOnly}"
-                                 MaxLength="{TemplateBinding MaxLength}">
-                            <rubyer:InputBoxHelper.PostContent>
-                                <StackPanel Orientation="Horizontal">
-                                    <ContentControl x:Name="PART_Content"
-                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                    Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                    <UniformGrid Height="28"
-                                                 Columns="1"
-                                                 Rows="2"
-                                                 Visibility="{TemplateBinding ShowButton, Converter={StaticResource BooleanToVisibleConverter}}">
-                                        <RepeatButton x:Name="PART_IncreaseButton"
-                                                      Style="{StaticResource TextRepeatButton}"
-                                                      Padding="0"
-                                                      rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
-                                                      Focusable="False"
-                                                      Foreground="{DynamicResource SeconarydText}">
-                                            <rubyer:Icon Type="ArrowUpSLine" />
-                                        </RepeatButton>
-                                        <RepeatButton x:Name="PART_DecreaseButton"
-                                                      Style="{StaticResource TextRepeatButton}"
-                                                      Padding="0"
-                                                      rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
-                                                      Focusable="False"
-                                                      Foreground="{DynamicResource SeconarydText}">
-                                            <rubyer:Icon Type="ArrowDownSLine" />
-                                        </RepeatButton>
-                                    </UniformGrid>
-                                </StackPanel>
-                            </rubyer:InputBoxHelper.PostContent>
-                        </TextBox>
-                    </Grid>
+                    <TextBox x:Name="PART_TextBox"
+                             Style="{StaticResource RubyerTextBox}"
+                             Height="Auto"
+                             Padding="{TemplateBinding Padding}"
+                             HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                             VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                             rubyer:ControlHelper.CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.IsClearable="{Binding Path=(rubyer:InputBoxHelper.IsClearable), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             Background="{TemplateBinding Background}"
+                             BorderBrush="{TemplateBinding BorderBrush}"
+                             BorderThickness="{TemplateBinding BorderThickness}"
+                             Foreground="{TemplateBinding Foreground}"
+                             IsReadOnly="{TemplateBinding IsReadOnly}"
+                             MaxLength="{TemplateBinding MaxLength}">
+                        <rubyer:InputBoxHelper.PostContent>
+                            <StackPanel Orientation="Horizontal">
+                                <ContentControl x:Name="PART_Content"
+                                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                Content="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <UniformGrid Height="28"
+                                             Columns="1"
+                                             Rows="2"
+                                             Visibility="{TemplateBinding ShowButton, Converter={StaticResource BooleanToVisibleConverter}}">
+                                    <RepeatButton x:Name="PART_IncreaseButton"
+                                                  Style="{StaticResource TextRepeatButton}"
+                                                  Padding="0"
+                                                  rubyer:ControlHelper.CornerRadius="{DynamicResource TopControlCornerRadius}"
+                                                  Focusable="False"
+                                                  Foreground="{DynamicResource SeconarydText}">
+                                        <rubyer:Icon Type="ArrowUpSLine" />
+                                    </RepeatButton>
+                                    <RepeatButton x:Name="PART_DecreaseButton"
+                                                  Style="{StaticResource TextRepeatButton}"
+                                                  Padding="0"
+                                                  rubyer:ControlHelper.CornerRadius="{DynamicResource BottomControlCornerRadius}"
+                                                  Focusable="False"
+                                                  Foreground="{DynamicResource SeconarydText}">
+                                        <rubyer:Icon Type="ArrowDownSLine" />
+                                    </RepeatButton>
+                                </UniformGrid>
+                            </StackPanel>
+                        </rubyer:InputBoxHelper.PostContent>
+                    </TextBox>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter TargetName="PART_TextBox" Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Error}" />
