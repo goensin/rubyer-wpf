@@ -63,21 +63,21 @@ namespace Rubyer
 
             if (GetTemplateChild(TextBoxPartName) is TextBox textBox)
             {
-                textBox.PreviewTextInput += TextBox_PreviewTextInput;
-                textBox.PreviewKeyDown += TextBox_PreviewKeyDown;
-                textBox.LostFocus += TextBox_LostFocus;
+                WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
+                WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
+                WeakEventManager<UIElement, RoutedEventArgs>.AddHandler(textBox, "LostFocus", TextBox_LostFocus);
                 textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
                 this.textBox = textBox;
             }
 
             if (GetTemplateChild(ButtonIncreasePartName) is ButtonBase upButton)
             {
-                upButton.Click += IncreaseButton_Click;
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(upButton, "Click", IncreaseButton_Click);
             }
 
             if (GetTemplateChild(ButtonDecreasePartName) is ButtonBase downButton)
             {
-                downButton.Click += DecreaseButton_Click;
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(downButton, "Click", DecreaseButton_Click);
             }
 
             this.Loaded += NumericBox_Loaded;
