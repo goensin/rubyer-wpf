@@ -45,9 +45,12 @@
                                 TickPlacement="Both"
                                 Value="40" />
                         <Slider Margin="0 10"
+                                rubyer:SliderHelper.GripDiameter="20"
+                                rubyer:SliderHelper.SelectionRangeChanged="Slider_SelectionRangeChanged"
+                                rubyer:SliderHelper.TrackThickness="15"
                                 IsSelectionRangeEnabled="True"
                                 IsSnapToTickEnabled="True"
-                                Maximum="100" rubyer:SliderHelper.SelectionRangeChanged="Slider_SelectionRangeChanged"
+                                Maximum="100"
                                 Minimum="0"
                                 SelectionEnd="70"
                                 SelectionStart="30"

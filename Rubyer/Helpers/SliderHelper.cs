@@ -1,13 +1,34 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
-using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace Rubyer
 {
+    /// <summary>
+    /// 范围按钮类型
+    /// </summary>
+    internal enum RangeButtonType
+    {
+        /// <summary>
+        /// 开始按钮
+        /// </summary>
+        Start,
+
+        /// <summary>
+        /// 结束按钮
+        /// </summary>
+        End,
+
+        /// <summary>
+        /// 范围按钮
+        /// </summary>
+        Selection,
+    }
+
     /// <summary>
     /// Slider 帮助类
     /// </summary>
@@ -136,6 +157,13 @@ namespace Rubyer
                 WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "MouseEnter", RangeButton_MouseEnter);
             }
 
+            if (slider.Template.FindName("PART_SelectionRange", slider) is Button rangeButton)
+            {
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(rangeButton, "PreviewMouseLeftButtonDown", RangeButton_MouseDown);
+                WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(rangeButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(rangeButton, "PreviewMouseMove", RangeButton_MouseMove);
+            }
+
             if (slider.Template.FindName("TrackBackground", slider) is Border backBorder)
             {
                 WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(backBorder, "PreviewMouseLeftButtonDown", TrackBackground_MouseDown);
@@ -153,47 +181,48 @@ namespace Rubyer
                     var isStart = slider.Orientation == Orientation.Horizontal ?
                                   position.X / slider.ActualWidth < slider.SelectionStart / slider.Maximum :
                                   (slider.ActualHeight - position.Y) / slider.ActualHeight < slider.SelectionStart / slider.Maximum;
-                    UpdateRangeSelection(slider, position, isStart);
+                    RangeButtonType buttonType = isStart ? RangeButtonType.Start : RangeButtonType.End;
+                    UpdateRangeSelection(slider, position, buttonType);
                 }
             }
         }
 
         private static void RangeButton_MouseEnter(object sender, MouseEventArgs e)
         {
-            var button = (Button)sender;
-            if (button.TemplatedParent is Slider slider)
+            var element = (FrameworkElement)sender;
+            if (element.TemplatedParent is Slider slider)
             {
-                UpdateToolTipOffset(button, slider);
+                UpdateToolTipOffset(element, slider);
             }
         }
 
         private static void RangeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var button = (Button)sender;
-            SetIsRangeButtonPressed(button, true);
+            var element = (FrameworkElement)sender;
+            SetIsRangeButtonPressed(element, true);
         }
 
         private static void RangeButton_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            var button = (Button)sender;
-            SetIsRangeButtonPressed(button, false);
+            var element = (FrameworkElement)sender;
+            SetIsRangeButtonPressed(element, false);
 
-            if (button.ToolTip is ToolTip toolTip)
+            if (element is Button button && button.ToolTip is ToolTip toolTip)
             {
                 toolTip.IsOpen = false;
             }
         }
 
         // 更新 ToolTip
-        private static void UpdateToolTipOffset(Button button, Slider slider)
+        private static void UpdateToolTipOffset(FrameworkElement element, Slider slider)
         {
             if (slider.AutoToolTipPlacement != AutoToolTipPlacement.None)
             {
-                if (button.ToolTip is ToolTip toolTip)
+                if (element.ToolTip is ToolTip toolTip)
                 {
                     toolTip.PlacementTarget ??= slider;
                     toolTip.IsOpen = true;
-                    var point = button.TranslatePoint(new Point(), slider);
+                    var point = element.TranslatePoint(new Point(), slider);
                     if (slider.Orientation == Orientation.Horizontal)
                     {
                         toolTip.HorizontalOffset = point.X;
@@ -208,39 +237,73 @@ namespace Rubyer
             }
         }
 
-
-        private static void UpdateRangeSelection(Slider slider, Point position, bool isStart)
+        /// <summary>
+        /// 保持 Thumb 在刻度上
+        /// </summary>
+        private static double GetTickValue(Slider slider, double value)
         {
-            var percent = slider.Orientation == Orientation.Horizontal ?
-                          position.X / slider.ActualWidth :
-                          (slider.ActualHeight - position.Y) / slider.ActualHeight;
-            percent = Math.Max(percent, 0);
-            percent = Math.Min(percent, 1);
-
-            var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
-
-            // 保持 Thumb 在刻度上
+            double tickValue = value;
             if (slider.IsSnapToTickEnabled && slider.TickFrequency > 0)
             {
                 var num = slider.Minimum + Math.Round((value - slider.Minimum) / slider.TickFrequency) * slider.TickFrequency;
                 var num2 = Math.Min(slider.Maximum, num + slider.TickFrequency);
 
-                value = value >= (num + num2) * 0.5 ? num2 : num;
+                tickValue = value >= (num + num2) * 0.5 ? num2 : num;
             }
 
+            return tickValue;
+        }
+
+        private static void UpdateRangeSelection(Slider slider, Point position, RangeButtonType buttonType)
+        {
+            var percent = slider.Orientation == Orientation.Horizontal ?
+                          position.X / slider.ActualWidth :
+                          (slider.ActualHeight - position.Y) / slider.ActualHeight;
+            percent = Math.Min(Math.Max(percent, 0), 1);
+
+            var value = percent * (slider.Maximum - slider.Minimum) + slider.Minimum;
+
+            value = GetTickValue(slider, value);
+
             // 更新 SelectionStart 和 SelectionEnd 值
-            bool hasChanged;
-            if (isStart)
+            bool hasChanged = false;
+            switch (buttonType)
             {
-                var newStart = Math.Min(value, slider.SelectionEnd);
-                hasChanged = slider.SelectionStart != newStart;
-                slider.SelectionStart = newStart;
-            }
-            else
-            {
-                var newEnd = Math.Max(value, slider.SelectionStart);
-                hasChanged = slider.SelectionEnd != newEnd;
-                slider.SelectionEnd = newEnd;
+                case RangeButtonType.Start:
+                    var newStart = Math.Min(value, slider.SelectionEnd);
+                    hasChanged = slider.SelectionStart != newStart;
+                    slider.SelectionStart = newStart;
+                    break;
+                case RangeButtonType.End:
+                    var newEnd = Math.Max(value, slider.SelectionStart);
+                    hasChanged = slider.SelectionEnd != newEnd;
+                    slider.SelectionEnd = newEnd;
+                    break;
+                case RangeButtonType.Selection:
+                    var range = slider.SelectionEnd - slider.SelectionStart;
+                    var halfRange = range / 2;
+                    value = (value - halfRange) >= slider.Minimum ? value : slider.Minimum + halfRange;
+                    value = (value + halfRange) <= slider.Maximum ? value : slider.Maximum - halfRange;
+                    var start = GetTickValue(slider, Math.Min(value - halfRange, slider.SelectionEnd));
+                    var end = GetTickValue(slider, Math.Max(value + halfRange, slider.SelectionStart));
+                    if (start >= slider.Minimum && end <= slider.Maximum)
+                    {
+                        if (start < slider.SelectionStart)
+                        {
+                            // 向起始位置偏移
+                            slider.SelectionStart = start;
+                            slider.SelectionEnd = start + range;
+                            hasChanged = true;
+                        }
+                        else if (end > slider.SelectionEnd)
+                        {
+                            // 向结束位置偏移
+                            slider.SelectionEnd = end;
+                            slider.SelectionStart = end - range;
+                            hasChanged = true;
+                        }
+                    }
+                    break;
             }
 
             if (hasChanged)
@@ -251,15 +314,33 @@ namespace Rubyer
 
         private static void RangeButton_MouseMove(object sender, MouseEventArgs e)
         {
-            var button = (Button)sender;
-            if (GetIsRangeButtonPressed(button))
+            var element = (FrameworkElement)sender;
+            if (GetIsRangeButtonPressed(element))
             {
-                var slider = button.TryGetParentFromVisualTree<Slider>();
+                var slider = element.TryGetParentFromVisualTree<Slider>();
                 var position = e.MouseDevice.GetPosition(slider);
 
-                UpdateRangeSelection(slider, position, button.Name.Contains("Start"));
+                RangeButtonType buttonType;
+                if (element.Name.Contains("Start"))
+                {
+                    buttonType = RangeButtonType.Start;
+                }
+                else if (element.Name.Contains("End"))
+                {
+                    buttonType = RangeButtonType.End;
+                }
+                else if (element.Name.Contains("Selection"))
+                {
+                    buttonType = RangeButtonType.Selection;
+                }
+                else
+                {
+                    return;
+                }
 
-                UpdateToolTipOffset(button, slider);
+                UpdateRangeSelection(slider, position, buttonType);
+
+                UpdateToolTipOffset(element, slider);
             }
         }
     }

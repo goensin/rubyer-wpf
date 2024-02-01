@@ -130,10 +130,10 @@
                         Background="{TemplateBinding Background}"
                         BorderThickness="0">
                     <Canvas>
-                        <Rectangle x:Name="PART_SelectionRange"
-                                   Height="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
-                                   Fill="{TemplateBinding Foreground}"
-                                   Visibility="Hidden" />
+                        <Button x:Name="PART_SelectionRange"
+                                Height="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Hidden" />
                         <Button x:Name="StartRangeButton"
                                 Canvas.Left="{Binding Path=(Canvas.Left), ElementName=PART_SelectionRange}"
                                 Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
@@ -379,10 +379,10 @@
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="0">
                     <Canvas Margin="0">
-                        <Rectangle x:Name="PART_SelectionRange"
-                                   Width="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
-                                   Fill="{TemplateBinding Foreground}"
-                                   Visibility="Hidden" />
+                        <Button x:Name="PART_SelectionRange"
+                                Width="{Binding Path=(rubyer:SliderHelper.TrackThickness), RelativeSource={RelativeSource AncestorType=Slider}}"
+                                Background="{TemplateBinding Foreground}"
+                                Visibility="Hidden" />
 
                         <Button x:Name="StartRangeButton"
                                 Height="{Binding Path=(rubyer:SliderHelper.GripDiameter), RelativeSource={RelativeSource AncestorType=Slider}}"
