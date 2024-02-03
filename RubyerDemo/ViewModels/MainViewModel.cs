@@ -62,6 +62,7 @@ namespace RubyerDemo.ViewModels
                 new ViewItem("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new ViewItem("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
                 new ViewItem("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
+                new ViewItem("CircularPanel", "圆形面板", new CircularPanelDemo(), IconType.CircleLine),
 
             };
 

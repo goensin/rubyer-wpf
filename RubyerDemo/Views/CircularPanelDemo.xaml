@@ -1,0 +1,97 @@
+﻿<UserControl x:Class="RubyerDemo.Views.CircularPanelDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="CircularPanelDemo">
+        <controls:ControlDisplay Title="Circular Panel"
+                                 Margin="10"
+                                 HorizontalContentAlignment="Stretch"
+                                 VerticalContentAlignment="Stretch">
+            <UniformGrid Rows="1">
+                <rubyer:CircularPanel Height="200"
+                                      BorderBrush="{StaticResource Border}"
+                                      BorderThickness="1"
+                                      IsStretchChildren="True">
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                    <Border Background="{StaticResource Primary}" CornerRadius="1000" />
+                </rubyer:CircularPanel>
+
+                <Grid>
+                    <rubyer:CircularPanel Height="200"
+                                          Padding="5"
+                                          Background="{StaticResource DefaultBackground}"
+                                          BorderBrush="{StaticResource DefaultForeground}"
+                                          BorderThickness="2"
+                                          Effect="{StaticResource AllDirectionEffect3}"
+                                          StartAngle="-60"
+                                          TextBlock.FontSize="24">
+                        <TextBlock Text="1" />
+                        <TextBlock Text="2" />
+                        <TextBlock Text="3" />
+                        <TextBlock Text="4" />
+                        <TextBlock Text="5" />
+                        <TextBlock Text="6" />
+                        <TextBlock Text="7" />
+                        <TextBlock Text="8" />
+                        <TextBlock Text="9" />
+                        <TextBlock Text="10" />
+                        <TextBlock Text="11" />
+                        <TextBlock Text="12" />
+                    </rubyer:CircularPanel>
+
+                    <!--  时针  -->
+                    <Rectangle Width="4"
+                               Height="60"
+                               Fill="{StaticResource DefaultForeground}"
+                               RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-30" />
+                                <RotateTransform x:Name="hour" Angle="0" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <!--  分针  -->
+                    <Rectangle Width="3"
+                               Height="80"
+                               Fill="{StaticResource DefaultForeground}"
+                               RenderTransformOrigin="0.5,0.5">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-40" />
+                                <RotateTransform x:Name="minutes" Angle="0" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+
+                    <!--  秒针  -->
+                    <Rectangle Width="2"
+                               Height="100"
+                               Fill="{StaticResource Accent}"
+                               RenderTransformOrigin="0,0.5">
+                        <Rectangle.RenderTransform>
+                            <TransformGroup>
+                                <TranslateTransform Y="-50" />
+                                <RotateTransform x:Name="second" Angle="0" />
+                            </TransformGroup>
+                        </Rectangle.RenderTransform>
+                    </Rectangle>
+                </Grid>
+            </UniformGrid>
+        </controls:ControlDisplay>
+    </smtx:XamlDisplay>
+</UserControl>
