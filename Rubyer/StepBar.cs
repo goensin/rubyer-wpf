@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -13,7 +14,7 @@ namespace Rubyer
     {
         #region fields
 
-        private int generatorIndex = 0;
+        private int generateIndex = 0;
 
         #endregion fields
 
@@ -79,6 +80,18 @@ namespace Rubyer
             set { SetValue(OrientationProperty, value); }
         }
 
+        public static readonly DependencyProperty WaitingBrushProperty =
+            DependencyProperty.Register("WaitingBrush", typeof(Brush), typeof(StepBar), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
+        /// 未处理颜色
+        /// </summary>
+        public Brush WaitingBrush
+        {
+            get => (Brush)GetValue(WaitingBrushProperty);
+            set => SetValue(WaitingBrushProperty, value);
+        }
+
         #endregion properties
 
         static StepBar()
@@ -97,14 +110,14 @@ namespace Rubyer
                 return true;
             }
 
-            generatorIndex = this.ItemContainerGenerator.Items.IndexOf(item) + 1;
+            generateIndex = this.ItemContainerGenerator.Items.IndexOf(item) + 1;
             return false;
         }
 
         /// <inheritdoc/>
         protected override DependencyObject GetContainerForItemOverride()
         {
-            var stepBarItem = new StepBarItem { Index = generatorIndex };
+            var stepBarItem = new StepBarItem { Index = generateIndex };
             SetFirstOrLast(stepBarItem);
             return stepBarItem;
         }

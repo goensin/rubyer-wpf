@@ -7,7 +7,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="HorizontalStepBarItem" TargetType="{x:Type rubyer:StepBarItem}">
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
@@ -16,6 +16,7 @@
         <Setter Property="Focusable" Value="False" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="WaitingBrush" Value="{Binding WaitingBrush, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
@@ -116,10 +117,10 @@
                             <Setter TargetName="descriptionText" Property="Grid.ColumnSpan" Value="2" />
                         </Trigger>
                         <Trigger Property="IsWaiting" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource SeconarydText}" />
+                            <Setter Property="Foreground" Value="{Binding WaitingBrush, RelativeSource={RelativeSource Mode=Self}}" />
                         </Trigger>
                         <Trigger Property="IsUnderway" Value="True">
-                            <Setter TargetName="rightLine" Property="Fill" Value="{DynamicResource SeconarydText}" />
+                            <Setter TargetName="rightLine" Property="Fill" Value="{Binding WaitingBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsCompleted" Value="True">
@@ -257,10 +258,10 @@
                             <Setter TargetName="contentPanel" Property="Grid.RowSpan" Value="1" />
                         </Trigger>
                         <Trigger Property="IsWaiting" Value="True">
-                            <Setter Property="Foreground" Value="{DynamicResource SeconarydText}" />
+                            <Setter Property="Foreground" Value="{Binding WaitingBrush, RelativeSource={RelativeSource Mode=Self}}" />
                         </Trigger>
                         <Trigger Property="IsUnderway" Value="True">
-                            <Setter TargetName="bottomLine" Property="Fill" Value="{DynamicResource SeconarydText}" />
+                            <Setter TargetName="bottomLine" Property="Fill" Value="{Binding WaitingBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Setter TargetName="indexText" Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsCompleted" Value="True">
@@ -308,6 +309,7 @@
         <Setter Property="ItemContainerStyle" Value="{StaticResource HorizontalStepBarItem}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="WaitingBrush" Value="{StaticResource SeconarydText}" />
         <Setter Property="FontSize" Value="16" />
         <Setter Property="ItemsPanel">
             <Setter.Value>

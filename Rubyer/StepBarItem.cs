@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Rubyer
 {
@@ -188,6 +189,18 @@ namespace Rubyer
         {
             get { return (IconType?)GetValue(IconTypeProperty); }
             set { SetValue(IconTypeProperty, value); }
+        }
+
+        public static readonly DependencyProperty WaitingBrushProperty =
+           DependencyProperty.Register("WaitingBrush", typeof(Brush), typeof(StepBarItem), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
+        /// 未处理颜色
+        /// </summary>
+        public Brush WaitingBrush
+        {
+            get => (Brush)GetValue(WaitingBrushProperty);
+            set => SetValue(WaitingBrushProperty, value);
         }
 
         #endregion properties

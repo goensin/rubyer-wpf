@@ -41,7 +41,11 @@
                                             DisplayMemberPath="Content"
                                             ItemsSource="{Binding Models}" />
 
-                            <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                            <rubyer:StepBar Margin="10"
+                                            rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
+                                            CurrentIndex="{Binding CurrentIndex}"
+                                            Foreground="{StaticResource Accent}"
+                                            WaitingBrush="{StaticResource DefaultForeground}">
                                 <rubyer:StepBarItem IconType="BikeFill">脚踏车</rubyer:StepBarItem>
                                 <rubyer:StepBarItem IconType="EBike2Fill">电动车</rubyer:StepBarItem>
                                 <rubyer:StepBarItem IconType="MotorbikeFill">摩托车</rubyer:StepBarItem>
@@ -73,9 +77,11 @@
                                         Orientation="Vertical" />
 
                         <rubyer:StepBar Margin="10"
-                                        rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                        rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
                                         CurrentIndex="{Binding CurrentIndex}"
-                                        Orientation="Vertical">
+                                        Foreground="{StaticResource Accent}"
+                                        Orientation="Vertical"
+                                        WaitingBrush="{StaticResource DefaultForeground}">
                             <rubyer:StepBarItem IconType="SunFill">晴</rubyer:StepBarItem>
                             <rubyer:StepBarItem IconType="CloudyFill">多云</rubyer:StepBarItem>
                             <rubyer:StepBarItem IconType="ThunderstormsFill">雷阵雨</rubyer:StepBarItem>
