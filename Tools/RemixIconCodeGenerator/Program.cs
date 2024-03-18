@@ -2,13 +2,18 @@
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows;
 
 namespace RemixIconCodeGenerator
 {
     internal class Program
     {
+        [STAThread]
         private static void Main(string[] args)
         {
+            // 创建一个 Application 实例
+            var app = new Application();
+
             Console.WriteLine("Hello, World!");
 
             var typeStringBuilder = new StringBuilder();
@@ -48,6 +53,14 @@ namespace RemixIconCodeGenerator
 
             var types = typeStringBuilder.ToString();
             var datas = dataStringBuilder.ToString();
+            Application.Current.Dispatcher.Invoke(new Action(() =>
+            {
+                Clipboard.SetText(types);
+                //Clipboard.SetText(datas);
+            }));
+
+
+            app.Run();
         }
     }
 }
