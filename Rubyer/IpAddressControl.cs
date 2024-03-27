@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,7 +55,7 @@ namespace Rubyer
         /// IP 地址
         /// </summary>
         public static readonly DependencyProperty AddressProperty =
-            DependencyProperty.Register("Address", typeof(string), typeof(IpAddressControl), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("Address", typeof(string), typeof(IpAddressControl), new FrameworkPropertyMetadata(string.Empty, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnAddressChanged));
 
         /// <summary>
         /// 1#字节
@@ -116,6 +117,8 @@ namespace Rubyer
             {
                 WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
                 WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
+                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, OnPasteIpAddress, null));
+                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Copy, OnCopyIpAddress, null));
             }
         }
 
@@ -190,7 +193,7 @@ namespace Rubyer
 
         private static void FocusOtherTextBox(IpAddressControl ip, int num)
         {
-            if (num < ip.allTextBoxs.Count)
+            if (ip.IsLoaded && num < ip.allTextBoxs.Count)
             {
                 var textBox = ip.allTextBoxs[num];
                 textBox.Focus();
@@ -198,6 +201,34 @@ namespace Rubyer
                 {
                     textBox.SelectAll();
                 }
+            }
+        }
+
+        private static void OnAddressChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var ip = (IpAddressControl)d;
+            var octets = ip.Address.Split('.');
+            if (octets.Length >= 4)
+            {
+                ip.Octet1 = octets[0];
+                ip.Octet2 = octets[1];
+                ip.Octet3 = octets[2];
+                ip.Octet4 = octets[3];
+            }
+        }
+
+        private void OnCopyIpAddress(object sender, ExecutedRoutedEventArgs e)
+        {
+            Clipboard.SetText(Address);
+        }
+
+        private void OnPasteIpAddress(object sender, ExecutedRoutedEventArgs e)
+        {
+            var text = Clipboard.GetText();
+            string pattern = @"^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+            if (Regex.IsMatch(text, pattern))
+            {
+                Address = text;
             }
         }
     }

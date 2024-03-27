@@ -14,10 +14,12 @@
             <Grid Margin="10"
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
-                <controls:ControlDisplay Title="Default TextBox">
+                <controls:ControlDisplay Title="IP Address Input">
                     <StackPanel rubyer:PanelHelper.Spacing="10">
-                        <rubyer:IpAddressControl x:Name="ip" Width="150" />
-                        <TextBlock Text="{Binding Address, ElementName=ip, Mode=OneWay, StringFormat='IP: {0}'}" />
+                        <rubyer:IpAddressControl x:Name="ip"
+                                                 Width="150"
+                                                 Address="{Binding Text, ElementName=text}" />
+                        <TextBox x:Name="text" Text="192.168.0.12" />
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>
