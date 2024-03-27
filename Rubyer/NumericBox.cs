@@ -56,33 +56,6 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(NumericBox), new FrameworkPropertyMetadata(typeof(NumericBox)));
         }
 
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            if (GetTemplateChild(TextBoxPartName) is TextBox textBox)
-            {
-                WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
-                WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
-                WeakEventManager<UIElement, RoutedEventArgs>.AddHandler(textBox, "LostFocus", TextBox_LostFocus);
-                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
-                this.textBox = textBox;
-            }
-
-            if (GetTemplateChild(ButtonIncreasePartName) is ButtonBase upButton)
-            {
-                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(upButton, "Click", IncreaseButton_Click);
-            }
-
-            if (GetTemplateChild(ButtonDecreasePartName) is ButtonBase downButton)
-            {
-                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(downButton, "Click", DecreaseButton_Click);
-            }
-
-            this.Loaded += NumericBox_Loaded;
-        }
-
         #region events
 
         /// <summary>
@@ -103,6 +76,21 @@ namespace Rubyer
         #endregion events
 
         #region propteries
+
+        /// <summary>
+        /// 文本内容
+        /// </summary>
+        public static readonly DependencyProperty TextProperty = DependencyProperty.Register(
+        "Text", typeof(string), typeof(NumericBox), new PropertyMetadata(default(string)));
+
+        /// <summary>
+        /// 文本内容
+        /// </summary>
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
 
         /// <summary>
         /// 文本格式
@@ -257,6 +245,33 @@ namespace Rubyer
         #endregion propteries
 
         #region methods
+
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (GetTemplateChild(TextBoxPartName) is TextBox textBox)
+            {
+                WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
+                WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
+                WeakEventManager<UIElement, RoutedEventArgs>.AddHandler(textBox, "LostFocus", TextBox_LostFocus);
+                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
+                this.textBox = textBox;
+            }
+
+            if (GetTemplateChild(ButtonIncreasePartName) is ButtonBase upButton)
+            {
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(upButton, "Click", IncreaseButton_Click);
+            }
+
+            if (GetTemplateChild(ButtonDecreasePartName) is ButtonBase downButton)
+            {
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(downButton, "Click", DecreaseButton_Click);
+            }
+
+            this.Loaded += NumericBox_Loaded;
+        }
 
         private static double GetCalculatedValue(NumericBox numberBox, double value)
         {

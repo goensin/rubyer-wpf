@@ -60,6 +60,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DropDownButton.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeDataGrid.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/IpAddressControl.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -126,4 +128,6 @@
     <Style BasedOn="{StaticResource RubyerTreeListViewItem}" TargetType="{x:Type rubyer:TreeListViewItem}" />
     <Style BasedOn="{StaticResource RubyerTreeListView}" TargetType="{x:Type rubyer:TreeListView}" />
     <Style BasedOn="{StaticResource RubyerTreeDataGrid}" TargetType="{x:Type rubyer:TreeDataGrid}" />
+    <Style BasedOn="{StaticResource RubyerIpAddressControl}" TargetType="{x:Type rubyer:IpAddressControl}" />
+
 </ResourceDictionary>

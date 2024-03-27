@@ -84,7 +84,7 @@
                                         WaitingBrush="{StaticResource DefaultForeground}">
                             <rubyer:StepBarItem IconType="SunFill">晴</rubyer:StepBarItem>
                             <rubyer:StepBarItem IconType="CloudyFill">多云</rubyer:StepBarItem>
-                            <rubyer:StepBarItem IconType="ThunderstormsFill">雷阵雨</rubyer:StepBarItem>
+                            <rubyer:StepBarItem IconType="ThunderstormsFill">雷雨</rubyer:StepBarItem>
                             <rubyer:StepBarItem IconType="HeavyShowersFill">大雨</rubyer:StepBarItem>
                             <rubyer:StepBarItem IconType="RainbowFill">彩虹</rubyer:StepBarItem>
                         </rubyer:StepBar>

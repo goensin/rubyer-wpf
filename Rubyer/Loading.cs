@@ -22,12 +22,6 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Loading), new FrameworkPropertyMetadata(typeof(Loading)));
         }
 
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-        }
-
         /// <summary>
         /// 边框厚度
         /// </summary>

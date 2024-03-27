@@ -19,57 +19,72 @@ namespace RubyerDemo.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
+        [ObservableProperty]
+        private string title;
+
+        [ObservableProperty]
+        private ObservableCollection<ViewItem> viewItems;
+
+        [ObservableProperty]
+        private ViewItem currentViewItem;
+
+        [ObservableProperty]
+        private ObservableCollection<ThemeColorInfo> themeColors;
+
+        [ObservableProperty]
+        private ObservableCollection<ViewItem> sampleItems;
+
         public MainViewModel()
         {
             Title = "Rubyer UI";
 
-            ViewItems = new ObservableCollection<ViewItem>
-            {
-                new ViewItem("Overview", "总览", new Overview(), IconType.Home2Line),
-                new ViewItem("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
-                new ViewItem("DropDownButton", "下拉按钮", new DropDownButtonDemo(), IconType.ArrowDownCircleLine),
-                new ViewItem("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
-                new ViewItem("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),
-                new ViewItem("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
-                new ViewItem("NumericBox", "数值框", new NumericBoxDemo(), IconType.AddBoxLine),
-                new ViewItem("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
-                new ViewItem("DateTimePicker", "日期时间选择", new DateTimePickerDemo(), IconType.TimeLine),
-                new ViewItem("Renamer", "重命名", new RenamerDemo(), IconType.Edit2Line),
-                new ViewItem("Slider", "滑动条", new SliderDemo(), IconType.GitCommitFill),
-                new ViewItem("ProgressBar", "进度条", new ProgressBarDemo(), IconType.Loader4Line),
-                new ViewItem("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
-                new ViewItem("Grid", "网格", new GridDemo(), IconType.GridLine),
-                new ViewItem("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
-                new ViewItem("Expander", "展开框", new ExpanderDemo(), IconType.LayoutTopLine),
-                new ViewItem("ListBox", "列表框", new ListBoxDemo(), IconType.ListUnordered),
-                new ViewItem("ListView", "列表视图", new ListViewDemo(), IconType.ListCheck2),
-                new ViewItem("TreeView", "树形视图", new TreeViewDemo(), IconType.NodeTree),
-                new ViewItem("TreeListView", "树形列表视图", new TreeListViewDemo(), IconType.NodeTree),
-                new ViewItem("DataGrid", "数据表格", new DataGridDemo(), IconType.Table2),
-                new ViewItem("TreeDataGrid", "树形数据表格", new TreeDataGridDemo(), IconType.Table2),
-                new ViewItem("TabControl", "选项卡", new TabControlDemo(), IconType.Layout4Line),
-                new ViewItem("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),
-                new ViewItem("TextBlock", "文本块", new TextBlockDemo(), IconType.Text),
-                new ViewItem("PageBar", "页码条", new PageBarDemo(), IconType.MoreLine),
-                new ViewItem("Message", "消息提示", new MessageDemo(), IconType.DiscussLine),
-                new ViewItem("MessageBox", "消息框", new MessageBoxDemo(), IconType.ChatCheckLine),
-                new ViewItem("Notification", "通知", new NotificationDemo(), IconType.QuestionAnswerLine),
-                new ViewItem("Dialog", "对话框", new DialogDemo(), IconType.PictureInPictureLine),
-                new ViewItem("Transition", "转换动画", new TransitionDemo(), IconType.ClockwiseLine),
-                new ViewItem("BadgeTag", "标记标签", new BadgeTagDemo(), IconType.NotificationBadgeLine),
-                new ViewItem("Loading", "加载中", new LoadingDemo(), IconType.Loader2Fill),
-                new ViewItem("StepBar", "步骤条", new StepBarDemo(), IconType.ListOrdered),
-                new ViewItem("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
-                new ViewItem("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
-                new ViewItem("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
-                new ViewItem("CircularPanel", "圆形面板", new CircularPanelDemo(), IconType.CircleLine),
-
-            };
+            ViewItems =
+            [
+                new("Overview", "总览", new Overview(), IconType.Home2Line),
+                new("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
+                new("DropDownButton", "下拉按钮", new DropDownButtonDemo(), IconType.ArrowDownCircleLine),
+                new("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
+                new("TextBox", "文本框", new TextBoxDemo(), IconType.TBoxLine),
+                new("Password", "密码框", new PasswordBoxDemo(), IconType.LockPasswordLine),
+                new("NumericBox", "数值框", new NumericBoxDemo(), IconType.AddBoxLine),
+                new("ComboBox", "下拉框", new ComboBoxDemo(), IconType.ArrowDownSLine),
+                new("IpAddressControl", "IP地址框", new IpAddressControlDemo(), IconType.LayoutLeft2Line),
+                new("DateTimePicker", "日期时间选择", new DateTimePickerDemo(), IconType.TimeLine),
+                new("Renamer", "重命名", new RenamerDemo(), IconType.Edit2Line),
+                new("Slider", "滑动条", new SliderDemo(), IconType.GitCommitFill),
+                new("ProgressBar", "进度条", new ProgressBarDemo(), IconType.Loader4Line),
+                new("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
+                new("Grid", "网格", new GridDemo(), IconType.GridLine),
+                new("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
+                new("Expander", "展开框", new ExpanderDemo(), IconType.LayoutTopLine),
+                new("ListBox", "列表框", new ListBoxDemo(), IconType.ListUnordered),
+                new("ListView", "列表视图", new ListViewDemo(), IconType.ListCheck2),
+                new("TreeView", "树形视图", new TreeViewDemo(), IconType.NodeTree),
+                new("TreeListView", "树形列表视图", new TreeListViewDemo(), IconType.TableView),
+                new("DataGrid", "数据表格", new DataGridDemo(), IconType.GridLine),
+                new("TreeDataGrid", "树形数据表格", new TreeDataGridDemo(), IconType.LayoutGrid2Line),
+                new("TabControl", "选项卡", new TabControlDemo(), IconType.Layout4Line),
+                new("MenuBar", "菜单栏", new MenuBarDemo(), IconType.MenuLine),
+                new("TextBlock", "文本块", new TextBlockDemo(), IconType.Text),
+                new("PageBar", "页码条", new PageBarDemo(), IconType.MoreLine),
+                new("Message", "消息提示", new MessageDemo(), IconType.DiscussLine),
+                new("MessageBox", "消息框", new MessageBoxDemo(), IconType.ChatCheckLine),
+                new("Notification", "通知", new NotificationDemo(), IconType.QuestionAnswerLine),
+                new("Dialog", "对话框", new DialogDemo(), IconType.PictureInPictureLine),
+                new("Transition", "转换动画", new TransitionDemo(), IconType.ClockwiseLine),
+                new("BadgeTag", "标记标签", new BadgeTagDemo(), IconType.NotificationBadgeLine),
+                new("Loading", "加载中", new LoadingDemo(), IconType.Loader2Fill),
+                new("StepBar", "步骤条", new StepBarDemo(), IconType.ListOrdered),
+                new("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
+                new("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
+                new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
+                new("CircularPanel", "圆形面板", new CircularPanelDemo(), IconType.CircleLine),
+            ];
 
             CurrentViewItem = ViewItems.First();
 
-            ThemeColors = new ObservableCollection<ThemeColorInfo>
-            {
+            ThemeColors =
+            [
                 new ThemeColorInfo
                 {
                     Name = "默认蓝",
@@ -105,29 +120,14 @@ namespace RubyerDemo.ViewModels
                     Url = @"pack://application:,,,/RubyerDemo;component/Themes/PinkColor.xaml",
                     IsSeleted =false
                 },
-            };
+            ];
 
-            SampleItems = new ObservableCollection<ViewItem>
-            {
+            SampleItems =
+            [
                 new ViewItem("微信", "微信", new Wechat(), IconType.WechatFill),
                 new ViewItem("网易云音乐", "网易云音乐", new NetEaseCloudMusic(), IconType.NeteaseCloudMusicLine),
-            };
+            ];
         }
-
-        [ObservableProperty]
-        private string title;
-
-        [ObservableProperty]
-        private ObservableCollection<ViewItem> viewItems;
-
-        [ObservableProperty]
-        private ViewItem currentViewItem;
-
-        [ObservableProperty]
-        private ObservableCollection<ThemeColorInfo> themeColors;
-
-        [ObservableProperty]
-        private ObservableCollection<ViewItem> sampleItems;
 
         [RelayCommand]
         private void ChangeThemeColor(ThemeColorInfo info)

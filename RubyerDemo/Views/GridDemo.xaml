@@ -133,9 +133,9 @@
                                     rubyer:PanelHelper.Spacing="100"
                                     Orientation="Horizontal">
                             <!--  WrapPanel Horizontal  -->
-                            <StackPanel rubyer:PanelHelper.Spacing="5">
+                            <StackPanel Width="150" rubyer:PanelHelper.Spacing="5">
                                 <TextBlock Text="WrapPanel Horizontal:" />
-                                <WrapPanel Width="150" rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
+                                <WrapPanel rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
                                     <WrapPanel.Resources>
                                         <Style TargetType="rubyer:Card">
                                             <Setter Property="Width" Value="30" />

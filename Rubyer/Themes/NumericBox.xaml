@@ -52,8 +52,10 @@
                              BorderBrush="{TemplateBinding BorderBrush}"
                              BorderThickness="{TemplateBinding BorderThickness}"
                              Foreground="{TemplateBinding Foreground}"
+                             InputMethod.InputScope="Digits"
                              IsReadOnly="{TemplateBinding IsReadOnly}"
-                             MaxLength="{TemplateBinding MaxLength}">
+                             MaxLength="{TemplateBinding MaxLength}"
+                             Text="{TemplateBinding Text}">
                         <rubyer:InputBoxHelper.PostContent>
                             <StackPanel Orientation="Horizontal">
                                 <ContentControl x:Name="PART_Content"
@@ -133,7 +135,7 @@
                                  BorderThickness="{TemplateBinding BorderThickness}"
                                  Focusable="{TemplateBinding Focusable}"
                                  Foreground="{TemplateBinding Foreground}"
-                                 InputMethod.IsInputMethodEnabled="False"
+                                 InputMethod.InputScope="Digits"
                                  IsReadOnly="{TemplateBinding IsReadOnly}"
                                  MaxLength="{TemplateBinding MaxLength}" />
                         <RepeatButton x:Name="PART_DecreaseButton"

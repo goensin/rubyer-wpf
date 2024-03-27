@@ -247,7 +247,7 @@ namespace Rubyer
                 {
                     type = SpacingType.End;
                 }
-                else if (wrapPanel.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth /*+ (GetSpacing(wrapPanel))*/)
+                else if (wrapPanel.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth)
                 {
                     type = SpacingType.Start;
                 }
@@ -271,7 +271,7 @@ namespace Rubyer
                 {
                     type = SpacingType.End;
                 }
-                else if (wrapPanel.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight /*+ (GetSpacing(wrapPanel))*/)
+                else if (wrapPanel.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight)
                 {
                     type = SpacingType.Start;
                 }
