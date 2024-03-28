@@ -142,6 +142,23 @@ namespace Rubyer
             return baseValue;
         }
 
+        private static void FocusOtherTextBox(IpAddressControl ip, int num, bool isSelectAll = true, bool isSelectionStart = true)
+        {
+            if (ip.IsLoaded && num >= 0 && num < ip.allTextBoxs.Count)
+            {
+                var textBox = ip.allTextBoxs[num];
+                textBox.Focus();
+                if (isSelectAll)
+                {
+                    textBox.SelectAll();
+                }
+                else
+                {
+                    textBox.SelectionStart = isSelectionStart ? 0 : textBox.Text.Length;
+                }
+            }
+        }
+
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var regex = new Regex("[0-9]");
@@ -149,7 +166,7 @@ namespace Rubyer
 
             var textBox = (TextBox)sender;
             var index = allTextBoxs.IndexOf(textBox);
-            if (e.Text == "." || (!e.Handled && textBox.Text.Length >= 3 && textBox.SelectedText.Length == 0))
+            if ((e.Text == "." || (!e.Handled && textBox.Text.Length >= 3)) && textBox.SelectedText.Length == 0)
             {
                 FocusOtherTextBox(this, ++index);
                 e.Handled = true;
@@ -159,18 +176,35 @@ namespace Rubyer
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             var textBox = (TextBox)sender;
-            if (e.Key == Key.Space)
+            if (e.Key == Key.Right && textBox.SelectedText.Length == 0) // ->
             {
-                // 下一个
-                e.Handled = true;
-
-                var index = allTextBoxs.IndexOf(textBox);
-                FocusOtherTextBox(this, ++index);
+                if (textBox.SelectionStart == textBox.Text.Length)
+                {
+                    var index = allTextBoxs.IndexOf(textBox);
+                    FocusOtherTextBox(this, ++index, isSelectAll: false);
+                    e.Handled = true;
+                }
             }
 
-            if (e.Key == Key.Back && string.IsNullOrEmpty(textBox.Text))
+            if (e.Key == Key.Space && textBox.SelectedText.Length == 0) // space
             {
-                // 上一个
+                var index = allTextBoxs.IndexOf(textBox);
+                FocusOtherTextBox(this, ++index);
+                e.Handled = true;
+            }
+
+            if (e.Key == Key.Left && textBox.SelectedText.Length == 0) // <-
+            {
+                if (textBox.SelectionStart == 0)
+                {
+                    var index = allTextBoxs.IndexOf(textBox);
+                    FocusOtherTextBox(this, --index, isSelectAll: false, isSelectionStart: false);
+                    e.Handled = true;
+                }
+            }
+
+            if (e.Key == Key.Back && string.IsNullOrEmpty(textBox.Text)) // back
+            {
                 var index = allTextBoxs.IndexOf(textBox);
                 FocusOtherTextBox(this, --index);
                 e.Handled = true;
@@ -188,19 +222,6 @@ namespace Rubyer
             if (e.NewValue.ToString().Length >= 3 && int.TryParse(e.Property.Name.Replace("Octet", ""), out int num))
             {
                 FocusOtherTextBox(ip, num);
-            }
-        }
-
-        private static void FocusOtherTextBox(IpAddressControl ip, int num)
-        {
-            if (ip.IsLoaded && num < ip.allTextBoxs.Count)
-            {
-                var textBox = ip.allTextBoxs[num];
-                textBox.Focus();
-                if (!string.IsNullOrEmpty(textBox.Text))
-                {
-                    textBox.SelectAll();
-                }
             }
         }
 
