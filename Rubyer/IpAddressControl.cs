@@ -216,6 +216,13 @@ namespace Rubyer
         private static void OnOctetChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var ip = (IpAddressControl)d;
+            var regex = new Regex("^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$");
+            if (!regex.IsMatch(e.NewValue.ToString()))
+            {
+                ip.SetValue(e.Property, e.OldValue);
+                return;
+            }
+
             ip.Address = $"{GetNumber(ip.Octet1)}.{GetNumber(ip.Octet2)}.{GetNumber(ip.Octet3)}.{GetNumber(ip.Octet4)}";
 
             // 当长度为 3 时，聚焦到下一个
