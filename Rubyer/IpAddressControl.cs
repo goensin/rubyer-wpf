@@ -166,7 +166,7 @@ namespace Rubyer
 
             var textBox = (TextBox)sender;
             var index = allTextBoxs.IndexOf(textBox);
-            if ((e.Text == "." || (!e.Handled && textBox.Text.Length >= 3)) && textBox.SelectedText.Length == 0)
+            if ((e.Text == "." || (!e.Handled && textBox.Text.Length >= 3 && textBox.SelectionStart == textBox.Text.Length)) && textBox.SelectedText.Length == 0)
             {
                 FocusOtherTextBox(this, ++index);
                 e.Handled = true;
@@ -226,7 +226,8 @@ namespace Rubyer
             ip.Address = $"{GetNumber(ip.Octet1)}.{GetNumber(ip.Octet2)}.{GetNumber(ip.Octet3)}.{GetNumber(ip.Octet4)}";
 
             // 当长度为 3 时，聚焦到下一个
-            if (e.NewValue.ToString().Length >= 3 && int.TryParse(e.Property.Name.Replace("Octet", ""), out int num))
+            if (e.NewValue.ToString().Length >= 3 &&
+                int.TryParse(e.Property.Name.Replace("Octet", ""), out int num))
             {
                 FocusOtherTextBox(ip, num);
             }
