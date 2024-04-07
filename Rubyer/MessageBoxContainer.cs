@@ -1,9 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
-using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -12,11 +10,14 @@ namespace Rubyer
     /// 消息框容器
     /// </summary>
     [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
+    [TemplatePart(Name = RootGridName, Type = typeof(Grid))]
     public class MessageBoxContainer : ContentControl
     {
         const string TransitionPartName = "Path_Transition";
+        const string RootGridName = "PART_RootGrid";
 
         private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
+        private Grid rootGrid;
 
         static MessageBoxContainer()
         {
@@ -34,7 +35,9 @@ namespace Rubyer
                 transition.Closed += (sender, e) => IsClosed = true;
             }
 
-            focusableElements = new List<FrameworkElement>();
+            rootGrid = (Grid)GetTemplateChild(RootGridName);
+
+            focusableElements = [];
         }
 
         /// <summary>
@@ -142,6 +145,35 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsClosedProperty); }
             set { SetValue(IsClosedProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 添加消息框卡片
+        /// </summary>
+        /// <param name="card">消息框卡片</param>
+        public void AddCard(MessageBoxCard card)
+        {
+            card.Closing += Card_Closing;
+            card.Closed += Card_Closed; ;
+            rootGrid.Children.Add(card);
+            IsShow = true;
+        }
+
+        private void Card_Closing(object sender, RoutedEventArgs e)
+        {
+            var card = (MessageBoxCard)sender;
+            card.Closing -= Card_Closing;
+            if (rootGrid.Children.Count <= 1)
+            {
+                IsShow = false;
+            }
+        }
+
+        private void Card_Closed(object sender, RoutedEventArgs e)
+        {
+            var card = (MessageBoxCard)sender;
+            card.Closed -= Card_Closed;
+            rootGrid.Children.Remove(card);
         }
     }
 }

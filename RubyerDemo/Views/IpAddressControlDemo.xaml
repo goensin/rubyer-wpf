@@ -19,7 +19,7 @@
                         <rubyer:IpAddressControl x:Name="ip"
                                                  Width="150"
                                                  Address="{Binding Text, ElementName=text}" />
-                        <TextBox x:Name="text" Text="192.168.0.12" />
+                        <TextBox x:Name="text" />
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>

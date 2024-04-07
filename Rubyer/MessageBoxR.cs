@@ -148,17 +148,14 @@ namespace Rubyer
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             card.ReturnResult += (a, b) =>
             {
-                container.IsShow = false;
-
                 card.Closed += (c, d) =>
                 {
-                    container.DialogContent = null;
                     taskCompletionSource.TrySetResult(b.Result);
                 };
             };
 
-            container.DialogContent = card;
-            container.IsShow = true;
+            container.AddCard(card);
+
             return await taskCompletionSource.Task;
         }
 

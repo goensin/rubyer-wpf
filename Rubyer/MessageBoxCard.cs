@@ -54,41 +54,6 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MessageBoxCard), new FrameworkPropertyMetadata(typeof(MessageBoxCard)));
         }
 
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
-            {
-                okButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.OK);
-            }
-
-            if (GetTemplateChild(CancelButtonPartName) is ButtonBase cancelButton)
-            {
-                cancelButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Cancel);
-            }
-
-            if (GetTemplateChild(YesButtonPartName) is ButtonBase yesButton)
-            {
-                yesButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Yes);
-            }
-
-            if (GetTemplateChild(NoButtonPartName) is ButtonBase noButton)
-            {
-                noButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.No);
-            }
-
-            if (GetTemplateChild(TransitionPartName) is Transition transition)
-            {
-                transition.Closed += (sender, e) =>
-                {
-                    RoutedEventArgs eventArgs = new RoutedEventArgs(ClosedEvent, this);
-                    this.RaiseEvent(eventArgs);
-                };
-            }
-        }
-
         #region 事件
 
         /// <summary>
@@ -108,12 +73,26 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 关闭消息事件
+        /// 关闭中消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Close", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
 
         /// <summary>
-        /// 关闭消息事件处理
+        /// 关闭中消息事件处理
+        /// </summary>
+        public event RoutedEventHandler Closing
+        {
+            add { AddHandler(ClosingEvent, value); }
+            remove { RemoveHandler(ClosingEvent, value); }
+        }
+
+        /// <summary>
+        /// 关闭后消息事件
+        /// </summary>
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+
+        /// <summary>
+        /// 关闭后消息事件处理
         /// </summary>
         public event RoutedEventHandler Closed
         {
@@ -262,10 +241,48 @@ namespace Rubyer
 
         #endregion 依赖属性
 
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
+            {
+                okButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.OK);
+            }
+
+            if (GetTemplateChild(CancelButtonPartName) is ButtonBase cancelButton)
+            {
+                cancelButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Cancel);
+            }
+
+            if (GetTemplateChild(YesButtonPartName) is ButtonBase yesButton)
+            {
+                yesButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Yes);
+            }
+
+            if (GetTemplateChild(NoButtonPartName) is ButtonBase noButton)
+            {
+                noButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.No);
+            }
+
+            if (GetTemplateChild(TransitionPartName) is Transition transition)
+            {
+                transition.Closed += (sender, e) =>
+                {
+                    RoutedEventArgs eventArgs = new RoutedEventArgs(ClosedEvent, this);
+                    RaiseEvent(eventArgs);
+                };
+            }
+        }
+
         private void InternalReturnResult(MessageBoxCard card, MessageBoxResult result)
         {
+            var args = new RoutedEventArgs(ClosingEvent, this);
+            RaiseEvent(args);
+
             IsShow = false;
-            MessageBoxResultRoutedEventArgs eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, result, card);
+            var eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, result, card);
             card.RaiseEvent(eventArgs);
         }
     }

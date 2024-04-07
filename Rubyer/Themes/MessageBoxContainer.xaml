@@ -28,16 +28,7 @@
                         <rubyer:Transition x:Name="Path_Transition"
                                            Panel.ZIndex="100"
                                            IsShow="{TemplateBinding IsShow}">
-                            <Border x:Name="PART_RootBorder" Background="{TemplateBinding MaskBackground}">
-                                <ContentPresenter x:Name="PART_DialogContentPresenter"
-                                                  Grid.Row="1"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Content="{TemplateBinding DialogContent}"
-                                                  ContentSource="DialogContent"
-                                                  Focusable="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </Border>
+                            <Grid x:Name="PART_RootGrid" Background="{TemplateBinding MaskBackground}" />
                         </rubyer:Transition>
                     </Grid>
                     <ControlTemplate.Triggers>
