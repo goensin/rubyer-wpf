@@ -75,7 +75,17 @@ namespace Rubyer
             return await taskCompletionSource.Task;
         }
 
-
+        /// <summary>
+        /// 显示对话框
+        /// </summary>
+        /// <param name="content">内容</param>
+        /// <param name="parameters">参数</param>
+        /// <param name="title">标题</param>
+        /// <param name="openHandler">打开时回调</param>
+        /// <param name="closeHandle">关闭时回调</param>
+        /// <param name="showCloseButton">显示关闭按钮</param>
+        /// <returns>返回数据</returns>
+        /// <exception cref="NullReferenceException">找不到对话框 ID</exception>
         public static async Task<object> Show(object content, object parameters = null, string title = null, Action<DialogCard> openHandler = null, Action<DialogCard, object> closeHandle = null, bool? showCloseButton = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
@@ -83,6 +93,18 @@ namespace Rubyer
             return await ShowInternal(container, content, parameters, title, openHandler, closeHandle, showCloseButton);
         }
 
+        /// <summary>
+        /// 显示对话框
+        /// </summary>
+        /// <param name="identifier">对话框 ID</param>
+        /// <param name="content">内容</param>
+        /// <param name="parameters">参数</param>
+        /// <param name="title">标题</param>
+        /// <param name="openHandler">打开时回调</param>
+        /// <param name="closeHandle">关闭时回调</param>
+        /// <param name="showCloseButton">显示关闭按钮</param>
+        /// <returns>返回数据</returns>
+        /// <exception cref="NullReferenceException">找不到对话框 ID</exception>
         public static async Task<object> Show(string identifier, object content, object parameters = null, string title = null, Action<DialogCard> openHandler = null, Action<DialogCard, object> closeHandle = null, bool? showCloseButton = null)
         {
             if (Containers.TryGetValue(identifier, out DialogContainer container))
