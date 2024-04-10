@@ -132,7 +132,7 @@
                                 <rubyer:NotificationContainer>
                                     <rubyer:MessageContainer>
                                         <rubyer:MessageBoxContainer>
-                                            <rubyer:DialogContainer x:Name="root">
+                                            <rubyer:DialogContainer >
                                                 <ContentPresenter x:Name="MainContentPresenter" KeyboardNavigation.TabNavigation="Cycle" />
                                             </rubyer:DialogContainer>
                                         </rubyer:MessageBoxContainer>

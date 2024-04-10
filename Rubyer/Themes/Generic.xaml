@@ -41,7 +41,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Window.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxContainer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/MessageBoxCard.xaml" />
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DateTimePicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Transition.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Badge.xaml" />
@@ -61,6 +60,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeListView.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TreeDataGrid.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/IpAddressControl.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogCard.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
@@ -103,7 +104,6 @@
     <Style BasedOn="{StaticResource RubyerCard}" TargetType="{x:Type rubyer:Card}" />
     <Style BasedOn="{StaticResource RubyerMessageCard}" TargetType="{x:Type rubyer:MessageCard}" />
     <Style BasedOn="{StaticResource RubyerMessageBoxCard}" TargetType="{x:Type rubyer:MessageBoxCard}" />
-    <Style BasedOn="{StaticResource RubyerDialogContainer}" TargetType="{x:Type rubyer:DialogContainer}" />
     <Style BasedOn="{StaticResource RubyerDateTimePicker}" TargetType="{x:Type rubyer:DateTimePicker}" />
     <Style BasedOn="{StaticResource RubyerTransition}" TargetType="{x:Type rubyer:Transition}" />
     <Style BasedOn="{StaticResource RubyerBadge}" TargetType="{x:Type rubyer:Badge}" />
@@ -129,5 +129,7 @@
     <Style BasedOn="{StaticResource RubyerTreeListView}" TargetType="{x:Type rubyer:TreeListView}" />
     <Style BasedOn="{StaticResource RubyerTreeDataGrid}" TargetType="{x:Type rubyer:TreeDataGrid}" />
     <Style BasedOn="{StaticResource RubyerIpAddressControl}" TargetType="{x:Type rubyer:IpAddressControl}" />
+    <Style BasedOn="{StaticResource RubyerDialogCard}" TargetType="{x:Type rubyer:DialogCard}" />
+    <Style BasedOn="{StaticResource RubyerDialogContainer2}" TargetType="{x:Type rubyer:DialogContainer}" />
 
 </ResourceDictionary>

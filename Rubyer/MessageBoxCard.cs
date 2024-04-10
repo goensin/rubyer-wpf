@@ -42,6 +42,8 @@ namespace Rubyer
         /// </summary>
         public const string NoButtonPartName = "PART_NoButton";
 
+        private MessageBoxResult messageBoxResult = MessageBoxResult.None;
+
         /// <summary>
         /// 消息框结果事件处理
         /// </summary>
@@ -55,22 +57,6 @@ namespace Rubyer
         }
 
         #region 事件
-
-        /// <summary>
-        /// 返回结果事件
-        /// </summary>
-        public static readonly RoutedEvent ReturnResultEvent = EventManager.RegisterRoutedEvent("ReturnResult", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
-
-        /// <summary>
-        ///  /// <summary>
-        /// 返回结果事件处理
-        /// </summary>
-        /// </summary>
-        public event MessageBoxResultRoutedEventHandler ReturnResult
-        {
-            add { AddHandler(ReturnResultEvent, value); }
-            remove { RemoveHandler(ReturnResultEvent, value); }
-        }
 
         /// <summary>
         /// 关闭中消息事件
@@ -89,12 +75,12 @@ namespace Rubyer
         /// <summary>
         /// 关闭后消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
 
         /// <summary>
         /// 关闭后消息事件处理
         /// </summary>
-        public event RoutedEventHandler Closed
+        public event MessageBoxResultRoutedEventHandler Closed
         {
             add { AddHandler(ClosedEvent, value); }
             remove { RemoveHandler(ClosedEvent, value); }
@@ -248,42 +234,41 @@ namespace Rubyer
 
             if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
             {
-                okButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.OK);
+                okButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.OK);
             }
 
             if (GetTemplateChild(CancelButtonPartName) is ButtonBase cancelButton)
             {
-                cancelButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Cancel);
+                cancelButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.Cancel);
             }
 
             if (GetTemplateChild(YesButtonPartName) is ButtonBase yesButton)
             {
-                yesButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.Yes);
+                yesButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.Yes);
             }
 
             if (GetTemplateChild(NoButtonPartName) is ButtonBase noButton)
             {
-                noButton.Click += (sender, args) => InternalReturnResult(this, MessageBoxResult.No);
+                noButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.No);
             }
 
             if (GetTemplateChild(TransitionPartName) is Transition transition)
             {
                 transition.Closed += (sender, e) =>
                 {
-                    RoutedEventArgs eventArgs = new RoutedEventArgs(ClosedEvent, this);
+                    var eventArgs = new MessageBoxResultRoutedEventArgs(ClosedEvent, messageBoxResult, this);
                     RaiseEvent(eventArgs);
                 };
             }
         }
 
-        private void InternalReturnResult(MessageBoxCard card, MessageBoxResult result)
+        private void InternalReturnResult(MessageBoxResult result)
         {
+            messageBoxResult = result;
+            IsShow = false;
+
             var args = new RoutedEventArgs(ClosingEvent, this);
             RaiseEvent(args);
-
-            IsShow = false;
-            var eventArgs = new MessageBoxResultRoutedEventArgs(ReturnResultEvent, result, card);
-            card.RaiseEvent(eventArgs);
         }
     }
 

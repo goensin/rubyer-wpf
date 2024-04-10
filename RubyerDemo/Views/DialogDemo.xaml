@@ -11,139 +11,57 @@
              mc:Ignorable="d">
     <smtx:XamlDisplay UniqueKey="DialogDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-            <Grid Margin="10"
-                  rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto"
-                  rubyer:PanelHelper.Spacing="10">
-                <GroupBox Grid.Column="0"
-                          Width="250"
+            <UniformGrid Margin="10" rubyer:PanelHelper.Spacing="10">
+                <GroupBox Width="250"
                           Height="250"
                           Header="1#对话框-DialogContainer">
-                    <rubyer:DialogContainer Title="1#对话框"
-                                            rubyer:HeaderHelper.FontSize="22"
-                                            rubyer:HeaderHelper.FontWeight="Bold"
-                                            BorderBrush="{StaticResource Error}"
-                                            BorderThickness="2"
-                                            IsEscKeyToClose="True"
-                                            IsShow="{Binding Dialog1IsShow}"
-                                            IsShowCloseButton="False">
-                        <rubyer:DialogContainer.DialogContent>
-                            <StackPanel>
-                                <TextBlock Text="对话框内容" />
-                                <Button Margin="10" Command="{Binding CloseDialog1Command}">关闭</Button>
-                            </StackPanel>
-                        </rubyer:DialogContainer.DialogContent>
+                    <rubyer:DialogContainer Identifier="Dialog1">
+                        <rubyer:DialogContainer.Resources>
+                            <Style BasedOn="{StaticResource RubyerDialogCard}" TargetType="rubyer:DialogCard">
+                                <Setter Property="BorderBrush" Value="{StaticResource Error}" />
+                                <Setter Property="BorderThickness" Value="2" />
+                                <Setter Property="IsEscKeyToClose" Value="True" />
+                                <Setter Property="IsShowCloseButton" Value="False" />
+                                <Setter Property="rubyer:HeaderHelper.FontSize" Value="22" />
+                                <Setter Property="rubyer:HeaderHelper.FontWeight" Value="Bold" />
+                                <Setter Property="rubyer:HeaderHelper.Background" Value="{DynamicResource Accent}" />
+                                <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource WhiteForeground}" />
+                            </Style>
+                        </rubyer:DialogContainer.Resources>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                            <TextBlock>
-                                修改标题字体大小<LineBreak />
-                                绑定 IsShow 控制开关对话框<LineBreak />
-                                点击背景关闭</TextBlock>
+                            <TextBlock TextWrapping="Wrap">
+                                设置 DialogCard 样式，
+                                点击背景或 Esc 关闭
+                            </TextBlock>
                             <Button Margin="10" Command="{Binding OpenDialog1Command}">打开</Button>
                         </StackPanel>
                     </rubyer:DialogContainer>
                 </GroupBox>
 
-                <GroupBox Grid.Column="1"
-                          Width="250"
+                <GroupBox Width="250"
                           Height="250"
                           Header="2#对话框-DialogContainer">
-                    <rubyer:DialogContainer x:Name="Dialog2"
-                                            Title="2#对话框"
-                                            rubyer:HeaderHelper.Background="{DynamicResource Accent}"
-                                            rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                                            Background="{DynamicResource Primary}"
-                                            Foreground="{DynamicResource WhiteForeground}">
-                        <rubyer:DialogContainer.DialogContent>
-                            <StackPanel>
-                                <TextBlock Text="对话框内容" />
-                                <Button Style="{StaticResource AccentButton}"
-                                        Margin="10"
-                                        Command="{x:Static rubyer:DialogContainer.CloseDialogCommand}">
-                                    关闭
-                                </Button>
-                            </StackPanel>
-                        </rubyer:DialogContainer.DialogContent>
+                    <rubyer:DialogContainer Background="{DynamicResource Primary}"
+                                            Foreground="{DynamicResource WhiteForeground}"
+                                            Identifier="Dialog2">
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     TextBlock.Foreground="{DynamicResource DefaultForeground}">
-                            <TextBlock TextWrapping="Wrap">
-                                修改弹窗背景色、前景色<LineBreak />
-                                通过 OpenDialogCommand 、CloseDialogCommand 开关对话框</TextBlock>
-                            <Button Margin="10" Command="{x:Static rubyer:DialogContainer.OpenDialogCommand}">
-                                打开
-                            </Button>
+                            <TextBlock Text="打开多个弹窗" TextWrapping="Wrap" />
+                            <Button Margin="10"
+                                    Command="{Binding OpenDialog2Command}"
+                                    Content="打开" />
                         </StackPanel>
                     </rubyer:DialogContainer>
                 </GroupBox>
 
-                <GroupBox Grid.Column="2"
-                          Width="250"
-                          Height="250"
-                          Header="3#对话框-DialogContainer">
-                    <rubyer:DialogContainer x:Name="Dialog3"
-                                            Title="添加用户"
-                                            rubyer:HeaderHelper.HorizontalAlignment="Center"
-                                            AfterClose="Dialog3_AfterClose"
-                                            AfterCloseCommand="{Binding AfterDialog3CloseCommand}"
-                                            BeforeOpen="Dialog3_BeforeOpen"
-                                            BeforeOpenCommand="{Binding BeforeDialog3OpenCommand}"
-                                            IsEscKeyToClose="False">
-                        <rubyer:DialogContainer.DialogContent>
-                            <Grid rubyer:GridHelper.ColumnDefinitions="Auto, *"
-                                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
-                                  rubyer:PanelHelper.Spacing="10">
-                                <TextBlock Margin="10 0">姓名</TextBlock>
-                                <TextBox Grid.Column="1"
-                                         Width="120"
-                                         Text="{Binding User.Name}" />
-                                <TextBlock Grid.Row="1" Margin="10 0">年龄</TextBlock>
-                                <TextBox Grid.Row="1"
-                                         Grid.Column="1"
-                                         Text="{Binding User.Age}" />
-                                <Button Grid.Row="2"
-                                        Grid.ColumnSpan="2"
-                                        Command="{x:Static rubyer:DialogContainer.CloseDialogCommand}"
-                                        CommandParameter="{Binding Paramters}"
-                                        IsDefault="True">
-                                    添加
-                                </Button>
-                            </Grid>
-                        </rubyer:DialogContainer.DialogContent>
-                        <DockPanel>
-                            <Button Command="{x:Static rubyer:DialogContainer.OpenDialogCommand}"
-                                    CommandTarget="{Binding ElementName=Dialog3}"
-                                    DockPanel.Dock="Bottom">
-                                添加信息
-                            </Button>
-                            <TextBlock Margin="10"
-                                       HorizontalAlignment="Center"
-                                       DockPanel.Dock="Bottom">
-                                标题居中, 单击背景不关闭弹窗<LineBreak />
-                                打开前事件,和接收关闭事件返回参数</TextBlock>
-                            <ListBox BorderThickness="1"
-                                     DockPanel.Dock="Top"
-                                     ItemsSource="{Binding Users}">
-                                <ListBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Margin="10 0" Text="{Binding Name}" />
-                                            <TextBlock Text="{Binding Age}" />
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ListBox.ItemTemplate>
-                            </ListBox>
-                        </DockPanel>
-                    </rubyer:DialogContainer>
-                </GroupBox>
-
-                <GroupBox Grid.Row="1"
-                          Width="250"
+                <GroupBox Width="250"
                           Height="250"
                           Header="4#对话框-DialogContainer">
                     <Grid>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                             <TextBlock TextWrapping="Wrap">
-                                通过 view model 代码设置对话框内容，弹出关闭
+                                对话框绑定 View Model，返回结果
                             </TextBlock>
                             <Button Margin="10" Command="{Binding OpenDialog4Command}">打开</Button>
                         </StackPanel>
@@ -164,7 +82,7 @@
                         </StackPanel>
                     </Grid>
                 </GroupBox>
-            </Grid>
+            </UniformGrid>
         </ScrollViewer>
     </smtx:XamlDisplay>
 </UserControl>

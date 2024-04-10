@@ -9,7 +9,7 @@ namespace RubyerDemo.ViewModels
 {
     public partial class DialogContentViewModel : ObservableObject, IDialogDataContext
     {
-        public string Title => "登录";
+        public string Title => "用户登录";
 
         [ObservableProperty]
         public User user;

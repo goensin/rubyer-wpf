@@ -1,102 +1,34 @@
 ﻿using Rubyer.Commons.KnownBoxes;
-using System;
 using System.Collections.Generic;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
+using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace Rubyer
 {
     /// <summary>
-    /// 对话框
+    /// 消息框容器
     /// </summary>
-    [TemplatePart(Name = TransitionName, Type = typeof(Transition))]
-    [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
-    [TemplatePart(Name = BackgroundBorderPartName, Type = typeof(Border))]
-    [TemplatePart(Name = ContentPresenterPartName, Type = typeof(ContentPresenter))]
+    [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
+    [TemplatePart(Name = RootGridName, Type = typeof(Grid))]
     public class DialogContainer : ContentControl
     {
-        /// <summary>
-        /// 转换动画名称
-        /// </summary>
-        public const string TransitionName = "Path_Transition";
+        const string TransitionPartName = "Path_BackgroundTransition";
+        const string RootGridName = "PART_RootGrid";
+
+        private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
+        private Grid rootGrid;
 
         /// <summary>
-        /// 关闭按钮名称
-        /// </summary>
-        public const string CloseButtonPartName = "PART_CloseButton";
-
-        /// <summary>
-        /// 背景 Border 名称
-        /// </summary>
-        public const string BackgroundBorderPartName = "PART_BackgroundBorder";
-
-        /// <summary>
-        /// Content 内容名称
-        /// </summary>
-        public const string ContentPresenterPartName = "PART_ContentPresenter";
-
-        /// <summary>
-        /// 对话框结果路由事件处理
+        /// 消息框结果事件处理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public delegate void DialogResultRoutedEventHandler(object sender, DialogResultRoutedEventArgs e);
 
-        /// <summary>
-        /// 打开对话框前事件处理
-        /// </summary>
-        public Action<DialogContainer> BeforeOpenHandler;
-
-        /// <summary>
-        /// 打开对话框后事件处理
-        /// </summary>
-        public Action<DialogContainer, object> AfterCloseHandler;
-
-        private Border rootBorder;
-        private object closeParameter;
-        private List<FrameworkElement> focusableElements; // Content 内 focusable 元素，用于打开弹窗使其失效
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DialogContainer"/> class.
-        /// </summary>
         static DialogContainer()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogContainer), new FrameworkPropertyMetadata(typeof(DialogContainer)));
-        }
-
-        /// <inheritdoc/>
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
-            CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
-
-            ButtonBase closeButton = GetTemplateChild(CloseButtonPartName) as ButtonBase;
-            closeButton.Click += (sender, args) =>
-            {
-                closeParameter = null;
-                IsShow = false;
-            };
-
-            rootBorder = GetTemplateChild(BackgroundBorderPartName) as Border;
-            rootBorder.MouseLeftButtonDown += RootBorder_MouseLeftButtonDown;
-
-            if (GetTemplateChild(TransitionName) is Transition transition)
-            {
-                transition.Showed += (sender, e) => IsClosed = false;
-                transition.Closed += Closed;
-            }
-
-            if (GetTemplateChild(ContentPresenterPartName) is ContentPresenter contentPresenter)
-            {
-                contentPresenter.PreviewKeyDown += ContentPresenter_PreviewKeyDown;
-            }
-
-            focusableElements = new List<FrameworkElement>();
         }
 
         #region 命令
@@ -148,8 +80,7 @@ namespace Rubyer
         /// <summary>
         /// 打开前事件
         /// </summary>
-        public static readonly RoutedEvent BeforeOpenEvent = EventManager.RegisterRoutedEvent(
-            "BeforeOpen", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(DialogContainer));
+        public static readonly RoutedEvent BeforeOpenEvent = EventManager.RegisterRoutedEvent("BeforeOpen", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(DialogContainer));
 
         /// <summary>
         /// 打开前事件
@@ -163,8 +94,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭后事件
         /// </summary>
-        public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent(
-            "AfterClose", RoutingStrategy.Direct, typeof(DialogResultRoutedEventHandler), typeof(DialogContainer));
+        public static readonly RoutedEvent AfterCloseEvent = EventManager.RegisterRoutedEvent("AfterClose", RoutingStrategy.Direct, typeof(DialogResultRoutedEventHandler), typeof(DialogContainer));
 
         /// <summary>
         /// 关闭后事件
@@ -175,22 +105,14 @@ namespace Rubyer
             remove { RemoveHandler(AfterCloseEvent, value); }
         }
 
-        #endregion 事件
+        #endregion
 
-        #region 依赖属性
+        #region 属性
 
         /// <summary>
         /// 标识
         /// </summary>
-        public static readonly DependencyProperty IdentifierProperty = DependencyProperty.Register(
-            "Identifier", typeof(string), typeof(DialogContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
-
-        private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            DialogContainer dialog = d as DialogContainer;
-            string identifier = e.NewValue.ToString();
-            Dialog.AddDialogContainer(identifier, dialog);
-        }
+        public static readonly DependencyProperty IdentifierProperty = DependencyProperty.Register("Identifier", typeof(string), typeof(DialogContainer), new PropertyMetadata(default(string), OnIdentifierChanged));
 
         /// <summary>
         /// 标识
@@ -202,134 +124,9 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 对话框内容
-        /// </summary>
-        public static readonly DependencyProperty DialogContentProperty = DependencyProperty.Register(
-            "DialogContent", typeof(object), typeof(DialogContainer), new PropertyMetadata(default(object)));
-
-        /// <summary>
-        /// 对话框内容
-        /// </summary>
-        public object DialogContent
-        {
-            get { return GetValue(DialogContentProperty); }
-            set { SetValue(DialogContentProperty, value); }
-        }
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public static readonly DependencyProperty TitleProperty = DependencyProperty.Register(
-            "Title", typeof(string), typeof(DialogContainer), new FrameworkPropertyMetadata(default(string), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        /// <summary>
-        /// 标题
-        /// </summary>
-        public string Title
-        {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
-        }
-
-        /// <summary>
-        /// 圆角半径
-        /// </summary>
-        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register(
-            "CornerRadius", typeof(CornerRadius), typeof(DialogContainer), new PropertyMetadata(default(CornerRadius)));
-
-        /// <summary>
-        /// 圆角半径
-        /// </summary>
-        public CornerRadius CornerRadius
-        {
-            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
-            set { SetValue(CornerRadiusProperty, value); }
-        }
-
-        /// <summary>
-        /// 是否显示关闭按钮
-        /// </summary>
-        public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(
-            "IsShowCloseButton", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
-
-        /// <summary>
-        /// 是否显示关闭按钮
-        /// </summary>
-        public bool IsShowCloseButton
-        {
-            get { return (bool)GetValue(IsShowCloseButtonProperty); }
-            set { SetValue(IsShowCloseButtonProperty, BooleanBoxes.Box(value)); }
-        }
-
-        /// <summary>
-        /// 是否 esc 键关闭弹窗 (点击空白关闭)
-        /// </summary>
-        public static readonly DependencyProperty IsEscKeyToCloseProperty = DependencyProperty.Register(
-            "IsEscKeyToClose", typeof(bool), typeof(DialogContainer), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsEscKeyToCloseChanged));
-
-        private static void OnIsEscKeyToCloseChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            if (d is DialogContainer dialog)
-            {
-                if (dialog.IsEscKeyToClose)
-                {
-                    var escKeyBinding = new KeyBinding(DialogContainer.CloseDialogCommand, Key.Escape, ModifierKeys.None);
-                    dialog.InputBindings.Add(escKeyBinding);
-                }
-                else
-                {
-                    foreach (var inputBinding in dialog.InputBindings)
-                    {
-                        if (inputBinding is KeyBinding keyBinding && keyBinding.Key == Key.Escape)
-                        {
-                            dialog.InputBindings.Remove(keyBinding);
-                        }
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// 是否 esc 键关闭弹窗 (点击空白关闭)
-        /// </summary>
-        public bool IsEscKeyToClose
-        {
-            get { return (bool)GetValue(IsEscKeyToCloseProperty); }
-            set { SetValue(IsEscKeyToCloseProperty, BooleanBoxes.Box(value)); }
-        }
-
-        /// <summary>
         /// 是否显示
         /// </summary>
-        public static readonly DependencyProperty IsShowProperty = DependencyProperty.Register(
-            "IsShow", typeof(bool), typeof(DialogContainer), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnIsShowChanged));
-
-        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            DialogContainer dialog = d as DialogContainer;
-
-            if (dialog.IsShow)
-            {
-                if (dialog.Content is FrameworkElement dialogContent)
-                {
-                    dialogContent.ForEachVisualChild(x =>
-                    {
-                        if (x is FrameworkElement element && element.Focusable)
-                        {
-                            element.Focusable = false;
-                            dialog.focusableElements.Add(element);
-                        }
-                    });
-
-                    dialog.OpenAnimiation(dialog);
-                }
-            }
-            else
-            {
-                dialog.focusableElements.ForEach(x => x.Focusable = true);
-                dialog.focusableElements.Clear();
-            }
-        }
+        public static readonly DependencyProperty IsShowProperty = DependencyProperty.Register("IsShow", typeof(bool), typeof(DialogContainer), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsShowChanged));
 
         /// <summary>
         /// 是否显示
@@ -340,52 +137,43 @@ namespace Rubyer
             set { SetValue(IsShowProperty, BooleanBoxes.Box(value)); }
         }
 
-        /// <summary>
-        /// 遮罩背景色
-        /// </summary>
-        public static readonly DependencyProperty MaskBackgroundProperty = DependencyProperty.Register(
-            "MaskBackground", typeof(Brush), typeof(DialogContainer), new PropertyMetadata(default(Brush)));
+        #endregion
 
-        /// <summary>
-        ///  遮罩背景色
-        /// </summary>
-        public Brush MaskBackground
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
         {
-            get { return (Brush)GetValue(MaskBackgroundProperty); }
-            set { SetValue(MaskBackgroundProperty, value); }
+            base.OnApplyTemplate();
+
+            CommandBindings.Add(new CommandBinding(CloseDialogCommand, CloseDialogHandler));
+            CommandBindings.Add(new CommandBinding(OpenDialogCommand, OpenDialogHandler));
+
+            rootGrid = (Grid)GetTemplateChild(RootGridName);
+
+            focusableElements = [];
+
+            KeyDown += DialogContainer_KeyDown;
         }
 
-        /// <summary>
-        /// 关闭完成
-        /// </summary>
-        public static readonly DependencyProperty IsClosedProperty = DependencyProperty.Register(
-            "IsClosed", typeof(bool), typeof(DialogContainer), new PropertyMetadata(BooleanBoxes.FalseBox));
-
-        /// <summary>
-        /// 关闭完成
-        /// </summary>
-        public bool IsClosed
+        private void DialogContainer_KeyDown(object sender, KeyEventArgs e)
         {
-            get { return (bool)GetValue(IsClosedProperty); }
-            set { SetValue(IsClosedProperty, BooleanBoxes.Box(value)); }
+            if (e.Key == Key.Escape)
+            {
+                e.Handled = true;
+                var dialogCard = GetLastDialogCard();
+                dialogCard?.PressedEscToClose();
+            }
         }
 
-        /// <summary>
-        /// 转换类型
-        /// </summary>
-        public static readonly DependencyProperty TransitionTypeProperty =
-            DependencyProperty.Register("TransitionType", typeof(TransitionType), typeof(DialogContainer), new PropertyMetadata(default(TransitionType)));
-
-        /// <summary>
-        /// 转换类型
-        /// </summary>
-        public TransitionType TransitionType
+        private DialogCard GetLastDialogCard()
         {
-            get { return (TransitionType)GetValue(IsShowProperty); }
-            set { SetValue(IsShowProperty, value); }
-        }
+            var count = rootGrid.Children.Count;
+            if (count > 0 && rootGrid.Children[count - 1] is DialogCard dialogCard)
+            {
+                return dialogCard;
+            }
 
-        #endregion 依赖属性
+            return null;
+        }
 
         private void OpenDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
@@ -394,93 +182,94 @@ namespace Rubyer
 
         private void CloseDialogHandler(object sender, ExecutedRoutedEventArgs e)
         {
-            closeParameter = e.Parameter;
-            IsShow = false;
+            var dialogCard = GetLastDialogCard();
+            dialogCard?.Close(e.Parameter);
         }
 
-        private void RootBorder_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            if (e.OriginalSource is Border border)
-            {
-                if (IsEscKeyToClose && sender.Equals(border))
-                {
-                    closeParameter = null;
-                    IsShow = false;
-                }
-            }
-        }
-
-        /// <summary>
-        /// 关闭对话框
-        /// </summary>
-        /// <param name="parameter">参数</param>
-        public void Close(object parameter = null)
-        {
-            CloseDialogCommand.Execute(parameter, this);
+            DialogContainer dialog = (DialogContainer)d;
+            Dialog.UpdateContainer(dialog, dialog.Identifier);
         }
 
         // 打开对话框动作
-        private void OpenAnimiation(DialogContainer dialog)
+        private void OpenAnimiation()
         {
-            RoutedEventArgs args = new RoutedEventArgs(BeforeOpenEvent);
-            dialog.RaiseEvent(args);
-            dialog.BeforeOpenCommand?.Execute(null);
-            dialog.BeforeOpenHandler?.Invoke(dialog);
-
-            _ = dialog.Focus();
+            var args = new RoutedEventArgs(BeforeOpenEvent);
+            RaiseEvent(args);
+            BeforeOpenCommand?.Execute(null);
+            Focus();
         }
 
-        private void Closed(object sender, RoutedEventArgs e)
+        private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            IsClosed = true;
+            var container = d as DialogContainer;
 
-            var args = new DialogResultRoutedEventArgs(AfterCloseEvent, this.closeParameter, this);
-            args.RoutedEvent = AfterCloseEvent;
-            this.RaiseEvent(args);
-            this.AfterCloseCommand?.Execute(this.closeParameter);
-            this.AfterCloseHandler?.Invoke(this, this.closeParameter);
-
-            this.closeParameter = null;
-            this.BeforeOpenHandler = null;
-            this.AfterCloseHandler = null;
-        }
-
-        private void ContentPresenter_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            Key key = e.Key == Key.System ? e.SystemKey : e.Key;
-            if (key == Key.Tab && IsShow)
+            if (container.IsShow)
             {
-                e.Handled = true;
+                var dialogContent = container.Content as FrameworkElement;
+                dialogContent.ForEachVisualChild(x =>
+                {
+                    if (x is FrameworkElement element && element.Focusable)
+                    {
+                        element.Focusable = false;
+                        container.focusableElements.Add(element);
+                    }
+                });
+
+                container.OpenAnimiation();
+            }
+            else
+            {
+                container.focusableElements.ForEach(x => x.Focusable = true);
+                container.focusableElements.Clear();
             }
         }
-    }
-
-    /// <summary>
-    /// 对话框结果路由参数
-    /// </summary>
-    public class DialogResultRoutedEventArgs : RoutedEventArgs
-    {
-        /// <summary>
-        /// 结果
-        /// </summary>
-        public object Result { get; set; }
 
         /// <summary>
-        /// 对话框
+        /// 添加消息框卡片
         /// </summary>
-        public DialogContainer Dialog { get; set; }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="DialogResultRoutedEventArgs"/> class.
-        /// </summary>
-        /// <param name="routedEvent">The routed event.</param>
-        /// <param name="result">The result.</param>
-        /// <param name="dialog">The dialog.</param>
-        public DialogResultRoutedEventArgs(RoutedEvent routedEvent, object result, DialogContainer dialog)
-            : base(routedEvent)
+        /// <param name="dialogCard">消息框卡片</param>
+        public void AddCard(DialogCard dialogCard)
         {
-            Result = result;
-            Dialog = dialog;
+            dialogCard.Closing += Card_Closing;
+            dialogCard.Closed += Card_Closed;
+            rootGrid.Children.Add(dialogCard);
+            IsShow = true;
+        }
+
+        private void Card_Closing(object sender, RoutedEventArgs e)
+        {
+            var dialogCard = (DialogCard)sender;
+            dialogCard.Closing -= Card_Closing;
+            if (rootGrid.Children.Count <= 1)
+            {
+                IsShow = false;
+            }
+        }
+
+        private void Card_Closed(object sender, DialogResultRoutedEventArgs e)
+        {
+            var dialogCard = (DialogCard)sender;
+            dialogCard.Closed -= Card_Closed;
+
+            var index = rootGrid.Children.IndexOf(dialogCard);
+            if (index >= 0)
+            {
+                rootGrid.Children.RemoveAt(index);
+            }
+
+            var count = rootGrid.Children.Count;
+            if (count > 0)
+            {
+                rootGrid.Children[count - 1].Focus();
+            }
+            else
+            {
+                AfterCloseCommand?.Execute(dialogCard.CloseParameter);
+                var args = new DialogResultRoutedEventArgs(AfterCloseEvent, dialogCard.CloseParameter, dialogCard);
+                RaiseEvent(args);
+            }
         }
     }
 }

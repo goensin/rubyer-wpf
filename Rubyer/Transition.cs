@@ -103,7 +103,7 @@ namespace Rubyer
         /// 关闭完事件
         /// </summary>
         public static readonly RoutedEvent ClosedEvent =
-          EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(Transition));
+          EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(Transition));
 
         /// <summary>
         /// 关闭完事件 handler

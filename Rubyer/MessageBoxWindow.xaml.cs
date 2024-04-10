@@ -27,18 +27,13 @@ namespace Rubyer
         /// <param name="card">消息框卡片</param>
         internal void AddMessageBoxCard(MessageBoxCard card)
         {
-            card.ReturnResult += Card_ReturnResult;
             card.Closed += Card_Close;
             messageBoxPanel.Child = card;
         }
 
-        private void Card_ReturnResult(object sender, MessageBoxResultRoutedEventArgs e)
+        private void Card_Close(object sender, MessageBoxResultRoutedEventArgs e)
         {
             MessageBoxResult = e.Result;
-        }
-
-        private void Card_Close(object sender, RoutedEventArgs e)
-        {
             messageBoxPanel.Child = null;
             DialogResult = true;
         }

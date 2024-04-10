@@ -55,21 +55,6 @@ namespace Rubyer
             set { SetValue(IdentifierProperty, value); }
         }
 
-        /// <summary>
-        /// 弹窗内容
-        /// </summary>
-        public static readonly DependencyProperty DialogContentProperty =
-            DependencyProperty.Register("DialogContent", typeof(object), typeof(MessageBoxContainer), new PropertyMetadata(default(object)));
-
-        /// <summary>
-        /// 弹窗内容
-        /// </summary>
-        public object DialogContent
-        {
-            get { return GetValue(DialogContentProperty); }
-            set { SetValue(DialogContentProperty, value); }
-        }
-
         private static void OnIdentifierChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             if (d is MessageBoxContainer container)

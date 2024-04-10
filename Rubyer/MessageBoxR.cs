@@ -146,12 +146,10 @@ namespace Rubyer
             TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
             container.Dispatcher.VerifyAccess();
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
-            card.ReturnResult += (a, b) =>
+
+            card.Closed += (sender, e) =>
             {
-                card.Closed += (c, d) =>
-                {
-                    taskCompletionSource.TrySetResult(b.Result);
-                };
+                taskCompletionSource.TrySetResult(e.Result);
             };
 
             container.AddCard(card);
