@@ -37,7 +37,7 @@ namespace Rubyer
 
         private static MessageBoxCard GetMessageBoxCard(string message, string title, MessageBoxButton button, MessageBoxType type)
         {
-            MessageBoxCard card = new MessageBoxCard
+            MessageBoxCard card = new()
             {
                 Type = type,
                 Message = message,
@@ -143,18 +143,11 @@ namespace Rubyer
 
         private static async Task<MessageBoxResult> ShowInternal(MessageBoxContainer container, string message, string title, MessageBoxButton button, MessageBoxType icon)
         {
-            TaskCompletionSource<MessageBoxResult> taskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
             container.Dispatcher.VerifyAccess();
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
-
-            card.Closed += (sender, e) =>
-            {
-                taskCompletionSource.TrySetResult(e.Result);
-            };
-
             container.AddCard(card);
 
-            return await taskCompletionSource.Task;
+            return await card.CloseTaskCompletionSource.Task;
         }
 
         /// <summary>

@@ -1,8 +1,10 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Rubyer
@@ -42,14 +44,14 @@ namespace Rubyer
         /// </summary>
         public const string NoButtonPartName = "PART_NoButton";
 
-        private MessageBoxResult messageBoxResult = MessageBoxResult.None;
-
         /// <summary>
         /// 消息框结果事件处理
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         public delegate void MessageBoxResultRoutedEventHandler(object sender, MessageBoxResultRoutedEventArgs e);
+
+        private MessageBoxResult messageBoxResult = MessageBoxResult.None;
 
         static MessageBoxCard()
         {
@@ -61,7 +63,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭中消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(MessageBoxCard));
+        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(MessageBoxCard));
 
         /// <summary>
         /// 关闭中消息事件处理
@@ -75,7 +77,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭后消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Direct, typeof(MessageBoxResultRoutedEventHandler), typeof(MessageBoxCard));
 
         /// <summary>
         /// 关闭后消息事件处理
@@ -225,7 +227,17 @@ namespace Rubyer
             set { SetValue(IsShowProperty, value); }
         }
 
-        #endregion 依赖属性
+        /// <summary>
+        /// 关闭完成 Task 源
+        /// </summary>
+        public TaskCompletionSource<MessageBoxResult> CloseTaskCompletionSource { get; private set; }
+
+        #endregion
+
+        public MessageBoxCard()
+        {
+            CloseTaskCompletionSource = new TaskCompletionSource<MessageBoxResult>();
+        }
 
         /// <inheritdoc/>
         public override void OnApplyTemplate()
@@ -234,32 +246,37 @@ namespace Rubyer
 
             if (GetTemplateChild(OkButtonPartName) is ButtonBase okButton)
             {
-                okButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.OK);
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(okButton, "Click", (sender, e) => InternalReturnResult(MessageBoxResult.OK));
             }
 
             if (GetTemplateChild(CancelButtonPartName) is ButtonBase cancelButton)
             {
-                cancelButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.Cancel);
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(cancelButton, "Click", (sender, e) => InternalReturnResult(MessageBoxResult.Cancel));
             }
 
             if (GetTemplateChild(YesButtonPartName) is ButtonBase yesButton)
             {
-                yesButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.Yes);
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(yesButton, "Click", (sender, e) => InternalReturnResult(MessageBoxResult.Yes));
             }
 
             if (GetTemplateChild(NoButtonPartName) is ButtonBase noButton)
             {
-                noButton.Click += (sender, args) => InternalReturnResult(MessageBoxResult.No);
+                WeakEventManager<ButtonBase, RoutedEventArgs>.AddHandler(noButton, "Click", (sender, e) => InternalReturnResult(MessageBoxResult.No));
             }
 
             if (GetTemplateChild(TransitionPartName) is Transition transition)
             {
-                transition.Closed += (sender, e) =>
-                {
-                    var eventArgs = new MessageBoxResultRoutedEventArgs(ClosedEvent, messageBoxResult, this);
-                    RaiseEvent(eventArgs);
-                };
+                transition.Closed += Transition_Closed;
             }
+        }
+
+        private void Transition_Closed(object sender, RoutedEventArgs e)
+        {
+            var transition = (Transition)sender;
+            transition.Closed -= Transition_Closed;
+            var eventArgs = new MessageBoxResultRoutedEventArgs(ClosedEvent, messageBoxResult, this);
+            RaiseEvent(eventArgs);
+            CloseTaskCompletionSource.SetResult(messageBoxResult);
         }
 
         private void InternalReturnResult(MessageBoxResult result)

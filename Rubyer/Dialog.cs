@@ -53,7 +53,6 @@ namespace Rubyer
 
         private static async Task<object> ShowInternal(DialogContainer container, object content, object parameters, string title, Action<DialogCard> openHandler, Action<DialogCard, object> closeHandle, bool? showCloseButton)
         {
-            TaskCompletionSource<object> taskCompletionSource = new();
             container.Dispatcher.VerifyAccess();
             DialogCard card = GetDialogCard(content, title, showCloseButton);
 
@@ -65,14 +64,9 @@ namespace Rubyer
             card.BeforeOpenHandler = openHandler;
             card.AfterCloseHandler = closeHandle;
 
-            WeakEventManager<DialogCard, DialogResultRoutedEventArgs>.AddHandler(card, "Closed", (sender, e) =>
-            {
-                taskCompletionSource.TrySetResult(e.Result);
-            });
-
             container.AddCard(card);
 
-            return await taskCompletionSource.Task;
+            return await card.CloseTaskCompletionSource.Task;
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using System.Windows;
 using System;
 using System.Windows.Media;
 using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace Rubyer
 {
@@ -63,7 +64,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭中消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(DialogCard));
+        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(DialogCard));
 
         /// <summary>
         /// 关闭中消息事件处理
@@ -77,7 +78,7 @@ namespace Rubyer
         /// <summary>
         /// 关闭后消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Bubble, typeof(DialogResultRoutedEventHandler), typeof(DialogCard));
+        public static readonly RoutedEvent ClosedEvent = EventManager.RegisterRoutedEvent("Closed", RoutingStrategy.Direct, typeof(DialogResultRoutedEventHandler), typeof(DialogCard));
 
         /// <summary>
         /// 关闭后消息事件处理
@@ -195,7 +196,17 @@ namespace Rubyer
             set { SetValue(IsEscKeyToCloseProperty, BooleanBoxes.Box(value)); }
         }
 
-        #endregion 依赖属性
+        /// <summary>
+        /// 关闭完成 Task 源
+        /// </summary>
+        public TaskCompletionSource<object> CloseTaskCompletionSource { get; private set; }
+
+        #endregion
+
+        public DialogCard()
+        {
+            CloseTaskCompletionSource = new TaskCompletionSource<object>();
+        }
 
         /// <inheritdoc/>
         public override void OnApplyTemplate()
@@ -231,6 +242,7 @@ namespace Rubyer
             transition.Closed -= Transition_Closed;
             var eventArgs = new DialogResultRoutedEventArgs(ClosedEvent, CloseParameter, this);
             RaiseEvent(eventArgs);
+            CloseTaskCompletionSource.TrySetResult(CloseParameter);
             AfterCloseHandler?.Invoke(this, CloseParameter);
             BeforeOpenHandler = null;
             AfterCloseHandler = null;
