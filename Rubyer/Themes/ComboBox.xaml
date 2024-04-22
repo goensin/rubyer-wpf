@@ -9,6 +9,16 @@
 
     <converter:ComboBoxPopupWidthConverter x:Key="ComboBoxPopupWidth" />
 
+    <Style x:Key="OnlyDisplayContentCheckBox" TargetType="CheckBox">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <ContentPresenter x:Name="content" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="RubyerComboBoxItem" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=ComboBox}}" />
@@ -37,13 +47,12 @@
                             <DockPanel>
                                 <CheckBox x:Name="selectCheckBox"
                                           Margin="0 0 5 0"
-                                          Content="{TemplateBinding Content}"
-                                          IsChecked="{Binding Path=(rubyer:ComboBoxHelper.IsSelected), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                          Visibility="Collapsed" />
-                                <ContentPresenter x:Name="content"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                          IsChecked="{Binding Path=(rubyer:ComboBoxHelper.IsSelected), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ContentPresenter x:Name="content"
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                </CheckBox>
                             </DockPanel>
                         </Border>
                     </Grid>
@@ -52,9 +61,11 @@
                             <Setter TargetName="Bd" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="True">
-                            <Setter TargetName="selectCheckBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="mask" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="content" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource AncestorType=ComboBox}}" Value="False">
+                            <Setter TargetName="selectCheckBox" Property="Style" Value="{StaticResource OnlyDisplayContentCheckBox}" />
+                            <Setter TargetName="selectCheckBox" Property="IsHitTestVisible" Value="False" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
