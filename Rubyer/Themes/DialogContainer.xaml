@@ -6,7 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="RubyerDialogContainer2" TargetType="rubyer:DialogContainer">
+    <Style x:Key="RubyerDialogContainer" TargetType="rubyer:DialogContainer">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />

@@ -130,6 +130,6 @@
     <Style BasedOn="{StaticResource RubyerTreeDataGrid}" TargetType="{x:Type rubyer:TreeDataGrid}" />
     <Style BasedOn="{StaticResource RubyerIpAddressControl}" TargetType="{x:Type rubyer:IpAddressControl}" />
     <Style BasedOn="{StaticResource RubyerDialogCard}" TargetType="{x:Type rubyer:DialogCard}" />
-    <Style BasedOn="{StaticResource RubyerDialogContainer2}" TargetType="{x:Type rubyer:DialogContainer}" />
+    <Style BasedOn="{StaticResource RubyerDialogContainer}" TargetType="{x:Type rubyer:DialogContainer}" />
 
 </ResourceDictionary>
