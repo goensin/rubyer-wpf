@@ -192,7 +192,6 @@
                     <StackPanel Margin="10" Orientation="Horizontal">
                         <ToggleButton Style="{DynamicResource SwitchToggleButton}"
                                       Margin="10 0"
-                                      Content="默认"
                                       IsChecked="True" />
                         <ToggleButton Style="{DynamicResource SwitchLightToggleButton}"
                                       Margin="10 0"
