@@ -1,4 +1,6 @@
-﻿using Rubyer;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Rubyer;
+using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,8 @@ namespace RubyerDemo.Views.Dialogs
         public Dialog2View()
         {
             InitializeComponent();
+
+            this.DataContext = App.Current.Services.GetRequiredService<Dialog2ViewModel>();
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
@@ -31,7 +35,7 @@ namespace RubyerDemo.Views.Dialogs
             var dialogCard = this.TryGetParentFromVisualTree<DialogCard>();
 
             var view = new Dialog2View();
-            await Dialog.Show("Dialog2", view, title: dialogCard.Title + "~");
+            await Dialog.Show("Dialog2", view, parameters: dialogCard.Title + "~");
         }
     }
 }

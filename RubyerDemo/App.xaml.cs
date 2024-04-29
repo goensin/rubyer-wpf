@@ -77,6 +77,7 @@ namespace RubyerDemo
             services.AddSingleton<TreeViewViewModel>();
             services.AddSingleton<FlipViewViewModel>();
             services.AddSingleton<TreeDataGridViewModel>();
+            services.AddTransient<Dialog2ViewModel>();
 
             services.AddSingleton<WechatViewModel>();
             services.AddSingleton<NetEaseCloudMusicViewModel>();

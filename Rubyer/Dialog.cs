@@ -61,8 +61,8 @@ namespace Rubyer
                 card.Title = title;
             }
 
-            card.BeforeOpenHandler = openHandler;
-            card.AfterCloseHandler = closeHandle;
+            card.BeforeOpenHandler += openHandler;
+            card.AfterCloseHandler += closeHandle;
 
             container.AddCard(card);
 

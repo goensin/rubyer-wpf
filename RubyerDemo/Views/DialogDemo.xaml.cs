@@ -33,19 +33,14 @@ namespace RubyerDemo.Views
             this.DataContext = App.Current.Services.GetService<DialogViewModel>();
         }
 
-        private void Dialog3_BeforeOpen(object sender, RoutedEventArgs e)
+        private void Dialog2_BeforeOpen(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine("打开 3# 对话框前事件");
+            Debug.WriteLine("打开 2# 对话框前事件");
         }
 
-        private void Dialog3_AfterClose(object sender, Rubyer.DialogResultRoutedEventArgs e)
+        private void Dialog2_AfterClose(object sender, Rubyer.DialogResultRoutedEventArgs e)
         {
-            var parameters = (IParameters)e.Result;
-            if (parameters != null)
-            {
-                var user = parameters.GetValue<User>("User");
-                Debug.WriteLine($"关闭 3# 对话框后事件，参数:{user.Name}:{user.Age}");
-            }
+            Debug.WriteLine($"关闭 2# 对话框后事件");
         }
     }
 }

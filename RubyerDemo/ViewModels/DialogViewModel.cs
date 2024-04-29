@@ -53,7 +53,7 @@ namespace RubyerDemo.ViewModels
         private async Task OpenDialog2()
         {
             var view = new Dialog2View();
-            await Dialog.Show("Dialog2", view, title: "2#对话框");
+            await Dialog.Show("Dialog2", view, parameters: "2#对话框");
         }
 
         //// 3# 对话框打开前

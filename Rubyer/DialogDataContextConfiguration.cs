@@ -1,5 +1,6 @@
 ﻿using System.Windows.Data;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -23,7 +24,7 @@ namespace Rubyer
                 dialogCard.SetBinding(DialogCard.TitleProperty, binding);
 
                 // 传参到对话框打开 viewmodel
-                container.BeforeOpen += (sender, e) =>
+                dialogCard.BeforeOpenHandler += dialogCard =>
                 {
                     dialogContext.OnDialogOpened(openParameter);
                 };

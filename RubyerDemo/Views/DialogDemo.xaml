@@ -41,8 +41,8 @@
                 <GroupBox Width="250"
                           Height="250"
                           Header="2#对话框-DialogContainer">
-                    <rubyer:DialogContainer Background="{DynamicResource Primary}"
-                                            Foreground="{DynamicResource WhiteForeground}"
+                    <rubyer:DialogContainer Background="{DynamicResource Primary}" BeforeOpen="Dialog2_BeforeOpen"
+                                            Foreground="{DynamicResource WhiteForeground}" AfterClose="Dialog2_AfterClose"
                                             Identifier="Dialog2">
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Center"

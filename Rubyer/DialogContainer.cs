@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows;
 using System.Windows.Input;
+using System;
 
 namespace Rubyer
 {
@@ -192,15 +193,6 @@ namespace Rubyer
             Dialog.UpdateContainer(dialog, dialog.Identifier);
         }
 
-        // 打开对话框动作
-        private void OpenAnimiation()
-        {
-            var args = new RoutedEventArgs(BeforeOpenEvent);
-            RaiseEvent(args);
-            BeforeOpenCommand?.Execute(null);
-            Focus();
-        }
-
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var container = d as DialogContainer;
@@ -216,8 +208,6 @@ namespace Rubyer
                         container.focusableElements.Add(element);
                     }
                 });
-
-                container.OpenAnimiation();
             }
             else
             {
@@ -232,10 +222,18 @@ namespace Rubyer
         /// <param name="dialogCard">消息框卡片</param>
         public void AddCard(DialogCard dialogCard)
         {
+            dialogCard.BeforeOpenHandler += Card_Opened;
             dialogCard.Closing += Card_Closing;
             dialogCard.Closed += Card_Closed;
             rootGrid.Children.Add(dialogCard);
             IsShow = true;
+        }
+
+        private void Card_Opened(DialogCard card)
+        {
+            card.BeforeOpenHandler -= Card_Opened;
+            RaiseEvent(new RoutedEventArgs(BeforeOpenEvent));
+            BeforeOpenCommand?.Execute(null);
         }
 
         private void Card_Closing(object sender, RoutedEventArgs e)
@@ -264,12 +262,9 @@ namespace Rubyer
             {
                 rootGrid.Children[count - 1].Focus();
             }
-            else
-            {
-                AfterCloseCommand?.Execute(dialogCard.CloseParameter);
-                var args = new DialogResultRoutedEventArgs(AfterCloseEvent, dialogCard.CloseParameter, dialogCard);
-                RaiseEvent(args);
-            }
+
+            AfterCloseCommand?.Execute(dialogCard.CloseParameter);
+            RaiseEvent(new DialogResultRoutedEventArgs(AfterCloseEvent, dialogCard.CloseParameter, dialogCard));
         }
     }
 }
