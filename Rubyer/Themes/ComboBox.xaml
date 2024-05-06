@@ -10,6 +10,7 @@
     <converter:ComboBoxPopupWidthConverter x:Key="ComboBoxPopupWidth" />
 
     <Style x:Key="OnlyDisplayContentCheckBox" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="CheckBox">
