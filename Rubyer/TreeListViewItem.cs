@@ -28,11 +28,5 @@ namespace Rubyer
         {
             return item is TreeListViewItem;
         }
-
-        /// <inheritdoc/>
-        protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
-        {
-            IsSelected = true;
-        }
     }
 }
