@@ -153,7 +153,7 @@ namespace Rubyer
                 var columnSpan = Grid.GetColumnSpan(element);
                 var gridColumns = grid.ColumnDefinitions.Count;
                 SpacingType type;
-                if (gridColumns == 0)
+                if (gridColumns == 0 || (column == 0 && column + columnSpan == gridColumns))
                 {
                     type = SpacingType.No;
                 }
@@ -178,7 +178,7 @@ namespace Rubyer
                 var rowSpan = Grid.GetRowSpan(element);
                 var gridRows = grid.RowDefinitions.Count;
 
-                if (gridRows == 0)
+                if (gridRows == 0 || (row == 0 && row + rowSpan == gridRows))
                 {
                     type = SpacingType.No;
                 }

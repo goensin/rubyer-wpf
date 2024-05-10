@@ -53,7 +53,7 @@
                             <Grid x:Name="spacingGrid"
                                   Height="100"
                                   rubyer:GridHelper.ColumnDefinitions="*, *"
-                                  rubyer:GridHelper.RowDefinitions="*, *"
+                                  rubyer:GridHelper.RowDefinitions="*, *, *"
                                   rubyer:PanelHelper.Spacing="{Binding Value, ElementName=spacingSlider}">
                                 <rubyer:Card Background="{DynamicResource Primary}" />
                                 <rubyer:Card Grid.Column="1" Background="{DynamicResource Accent}" />
@@ -61,6 +61,9 @@
                                 <rubyer:Card Grid.Row="1"
                                              Grid.Column="1"
                                              Background="{DynamicResource Warning}" />
+                                <rubyer:Card Grid.Row="2"
+                                             Grid.ColumnSpan="2"
+                                             Background="{DynamicResource Info}" />
                             </Grid>
                         </StackPanel>
 
