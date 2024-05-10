@@ -29,7 +29,7 @@ namespace RubyerDemo.Views
 
         private void NotificationBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.ShowGlobal("message");
+            Notification.ShowGlobal("message", isClearable: false);
         }
 
         private void InfoBtn_Click(object sender, RoutedEventArgs e)
@@ -54,7 +54,7 @@ namespace RubyerDemo.Views
 
         private void NotificationContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Show(content: "message");
+            Notification.Show(content: "message", isClearable: false);
         }
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)

@@ -77,7 +77,8 @@
                                                 VerticalAlignment="Top"
                                                 rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
                                                 DockPanel.Dock="Right"
-                                                Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Visibility="{TemplateBinding IsClearable, Converter={StaticResource BooleanToVisibleConverter}}">
                                             <rubyer:Icon Type="CloseLine" />
                                         </Button>
 
