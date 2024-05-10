@@ -112,5 +112,22 @@ namespace Rubyer
         {
             return (object)element.GetValue(LoadingContentProperty);
         }
+
+        /// <summary>
+        /// 图标类型
+        /// </summary>
+        public static readonly DependencyProperty IconTypeProperty = DependencyProperty.RegisterAttached(
+            "IconType", typeof(IconType?), typeof(ButtonHelper), new PropertyMetadata(null));
+
+        public static void SetIconType(DependencyObject element, IconType? value)
+        {
+            element.SetValue(IconTypeProperty, value);
+        }
+
+        public static IconType? GetIconType(DependencyObject element)
+        {
+            return (IconType?)element.GetValue(IconTypeProperty);
+        }
+
     }
 }

@@ -15,13 +15,14 @@
     <smtx:XamlDisplay UniqueKey="ButtonDemo">
         <ScrollViewer>
             <Grid Margin="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default Button">
                     <StackPanel Margin="5"
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
-                        <Button Content="默认按钮" x:Name="defaultButton"
+                        <Button x:Name="defaultButton"
+                                Content="默认按钮"
                                 IsDefault="True"
                                 ToolTip="hello rubyer" />
                         <Button Style="{DynamicResource SecondaryButton}" Content="次级按钮" />
@@ -127,13 +128,31 @@
                     </StackPanel>
                 </controls:ControlDisplay>
 
-                <controls:ControlDisplay Title="Loading Button"
+                <controls:ControlDisplay Title="Icon Button"
                                          Grid.Row="5"
+                                         Description="通过 ButtonHelper.IconType 设置图标">
+                    <StackPanel Margin="5"
+                                rubyer:PanelHelper.Spacing="20"
+                                Orientation="Horizontal">
+                        <Button Width="100"
+                                rubyer:ButtonHelper.IconType="EditLine"
+                                Content="编辑" />
+
+                        <Button Style="{StaticResource SuccessButton}"
+                                Width="100"
+                                rubyer:ButtonHelper.IconType="SaveLine"
+                                Content="保存" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Loading Button"
+                                         Grid.Row="6"
                                          Description="通过 ButtonHelper.Loading 控制加载中显示&#x000A;通过 ButtonHelper.LoadingContent 设置加载中显示内容">
                     <StackPanel Margin="5" Orientation="Horizontal">
                         <Button x:Name="loadingButton"
                                 Width="100"
                                 Margin="10 0"
+                                rubyer:ButtonHelper.IconType="Hand"
                                 rubyer:ButtonHelper.Loading="False"
                                 rubyer:ButtonHelper.LoadingContent="加载中"
                                 Click="Button_Click"
@@ -155,7 +174,7 @@
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="Shadow Button"
-                                         Grid.Row="6"
+                                         Grid.Row="7"
                                          Description="通过 ButtonHelper.ShowShadow 设置是否显示按钮阴影">
                     <Grid Margin="5"
                           rubyer:GridHelper.ColumnDefinitions="Auto, Auto, Auto, Auto"
