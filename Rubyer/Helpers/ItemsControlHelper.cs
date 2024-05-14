@@ -122,17 +122,15 @@ namespace Rubyer
             foreach (var path in paths)
             {
                 var index = path.IndexOf('[');
-                var p = index > 0 ? path.Substring(0, index): path;
+                var p = index > 0 ? path.Substring(0, index) : path;
                 var propertyInfo = dataType?.GetProperty(p);
                 if (propertyInfo == null)
                 {
                     return;
                 }
 
-                if (true)
-                {
-                    dataType = propertyInfo.PropertyType;
-                }
+                var types = propertyInfo.PropertyType.GetGenericArguments();
+                dataType = types.Length > 0 ? types[0] : propertyInfo.PropertyType;
             }
 
             if (!dataType.IsEnum)
