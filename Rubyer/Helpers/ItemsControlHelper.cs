@@ -121,13 +121,18 @@ namespace Rubyer
             var paths = binding.Path.Path.Split('.');
             foreach (var path in paths)
             {
-                var propertyInfo = dataType?.GetProperty(path);
+                var index = path.IndexOf('[');
+                var p = index > 0 ? path.Substring(0, index): path;
+                var propertyInfo = dataType?.GetProperty(p);
                 if (propertyInfo == null)
                 {
                     return;
                 }
 
-                dataType = propertyInfo.PropertyType;
+                if (true)
+                {
+                    dataType = propertyInfo.PropertyType;
+                }
             }
 
             if (!dataType.IsEnum)
