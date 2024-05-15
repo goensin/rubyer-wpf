@@ -40,7 +40,7 @@ namespace Rubyer.Commons
                 return definitions;
             }
 
-            throw new InvalidOperationException(string.Format("Cannot convert \"{0}\" into {1}", strValue, typeof(ColumnDefinitionCollection)));
+            return new ColumnDefinition[0];
         }
 
         /// <inheritdoc/>
