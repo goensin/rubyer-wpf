@@ -271,6 +271,10 @@ namespace Rubyer
             }
 
             this.Loaded += NumericBox_Loaded;
+            if (IsLoaded)
+            {
+                NumericBox_Loaded(this, null);
+            }
         }
 
         private static double GetCalculatedValue(NumericBox numberBox, double value)
