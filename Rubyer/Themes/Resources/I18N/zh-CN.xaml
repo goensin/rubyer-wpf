@@ -10,6 +10,8 @@
     <system:String x:Key="I18N_DataGrid_NoData">暂无数据</system:String>
     <system:String x:Key="I18N_DataGrid_LoadingContent">加载中</system:String>
 
+    <system:String x:Key="I18N_TabControl_NoItem">未选中项</system:String>
+
     <system:String x:Key="I18N_PageBar_Total">总</system:String>
     <system:String x:Key="I18N_PageBar_Piece">条</system:String>
     <system:String x:Key="I18N_PageBar_PageSize">条/页</system:String>

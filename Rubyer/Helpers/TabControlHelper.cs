@@ -92,6 +92,22 @@ namespace Rubyer
         #endregion
 
         /// <summary>
+        /// 未选中 item 时显示视图
+        /// </summary>
+        public static readonly DependencyProperty EmptyViewProperty = DependencyProperty.RegisterAttached(
+            "EmptyView", typeof(object), typeof(TabControlHelper), new PropertyMetadata(null));
+
+        public static void SetEmptyView(DependencyObject element, object value)
+        {
+            element.SetValue(EmptyViewProperty, value);
+        }
+
+        public static object GetEmptyView(DependencyObject element)
+        {
+            return (object)element.GetValue(EmptyViewProperty);
+        }
+
+        /// <summary>
         /// 是否显示清除按钮
         /// </summary>
         public static readonly DependencyProperty IsClearableProperty =

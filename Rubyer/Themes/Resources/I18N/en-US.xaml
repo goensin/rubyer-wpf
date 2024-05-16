@@ -10,6 +10,8 @@
     <system:String x:Key="I18N_DataGrid_NoData">No Data</system:String>
     <system:String x:Key="I18N_DataGrid_LoadingContent">Loading</system:String>
 
+    <system:String x:Key="I18N_TabControl_NoItem">Unselected item</system:String>
+    
     <system:String x:Key="I18N_PageBar_Total">Total</system:String>
     <system:String x:Key="I18N_PageBar_Piece">|</system:String>
     <system:String x:Key="I18N_PageBar_PageSize">/Page</system:String>
