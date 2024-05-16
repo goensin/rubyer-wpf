@@ -136,6 +136,9 @@
                             <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />
                             <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
                         </MultiDataTrigger>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter TargetName="icon" Property="Margin" Value="0" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
