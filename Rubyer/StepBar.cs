@@ -80,6 +80,24 @@ namespace Rubyer
             set { SetValue(OrientationProperty, value); }
         }
 
+        /// <summary>
+        /// 内容布局方向
+        /// </summary>
+        public static readonly DependencyProperty ContentOrientationProperty =
+            DependencyProperty.Register("ContentOrientation", typeof(Orientation), typeof(StepBar), new FrameworkPropertyMetadata(Orientation.Vertical));
+
+        /// <summary>
+        /// 内容布局方向
+        /// </summary>
+        public Orientation ContentOrientation
+        {
+            get { return (Orientation)GetValue(ContentOrientationProperty); }
+            set { SetValue(ContentOrientationProperty, value); }
+        }
+
+        /// <summary>
+        /// 未处理颜色
+        /// </summary>
         public static readonly DependencyProperty WaitingBrushProperty =
             DependencyProperty.Register("WaitingBrush", typeof(Brush), typeof(StepBar), new FrameworkPropertyMetadata(default(Brush), FrameworkPropertyMetadataOptions.AffectsMeasure));
 
@@ -90,6 +108,21 @@ namespace Rubyer
         {
             get => (Brush)GetValue(WaitingBrushProperty);
             set => SetValue(WaitingBrushProperty, value);
+        }
+
+        /// <summary>
+        /// 描述字体大小
+        /// </summary>
+        public static readonly DependencyProperty DescriptionFontSizeProperty =
+            DependencyProperty.Register("DescriptionFontSize", typeof(double), typeof(StepBar), new PropertyMetadata(12D));
+
+        /// <summary>
+        /// 描述字体大小
+        /// </summary>
+        public double DescriptionFontSize
+        {
+            get { return (double)GetValue(DescriptionFontSizeProperty); }
+            set { SetValue(DescriptionFontSizeProperty, value); }
         }
 
         #endregion properties

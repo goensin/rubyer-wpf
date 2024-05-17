@@ -59,7 +59,9 @@
                 <GroupBox Grid.Column="1" Header="垂直步骤条 - StepBar">
                     <StackPanel Orientation="Horizontal">
                         <rubyer:StepBar Margin="10"
+                                        ContentOrientation="Horizontal"
                                         CurrentIndex="{Binding CurrentIndex}"
+                                        DescriptionFontSize="14"
                                         Orientation="Vertical">
                             <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
                             <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
@@ -69,7 +71,6 @@
                         </rubyer:StepBar>
 
                         <rubyer:StepBar Margin="10"
-                                        VerticalContentAlignment="Bottom"
                                         CurrentIndex="{Binding CurrentIndex}"
                                         DisplayDescriptionPath="Description"
                                         DisplayMemberPath="Content"

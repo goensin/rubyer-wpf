@@ -87,6 +87,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 描述字体大小
+        /// </summary>
+        public static readonly DependencyProperty DescriptionFontSizeProperty =
+            DependencyProperty.Register("DescriptionFontSize", typeof(double), typeof(StepBarItem), new PropertyMetadata(12D));
+
+        /// <summary>
+        /// 描述字体大小
+        /// </summary>
+        public double DescriptionFontSize
+        {
+            get { return (double)GetValue(DescriptionFontSizeProperty); }
+            set { SetValue(DescriptionFontSizeProperty, value); }
+        }
+
+        /// <summary>
         /// 是否第一个
         /// </summary>
         public static readonly DependencyProperty IsFirstProperty =
@@ -201,6 +216,21 @@ namespace Rubyer
         {
             get => (Brush)GetValue(WaitingBrushProperty);
             set => SetValue(WaitingBrushProperty, value);
+        }
+
+        /// <summary>
+        /// 内容布局方向
+        /// </summary>
+        public static readonly DependencyProperty ContentOrientationProperty =
+            DependencyProperty.Register("ContentOrientation", typeof(Orientation), typeof(StepBarItem), new FrameworkPropertyMetadata(Orientation.Vertical));
+
+        /// <summary>
+        /// 内容布局方向
+        /// </summary>
+        public Orientation ContentOrientation
+        {
+            get { return (Orientation)GetValue(ContentOrientationProperty); }
+            set { SetValue(ContentOrientationProperty, value); }
         }
 
         #endregion properties

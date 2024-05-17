@@ -12,18 +12,20 @@
         <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="CurrentIndex" Value="{Binding CurrentIndex, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="DescriptionFontSize" Value="{Binding DescriptionFontSize, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="IconType" Value="{x:Null}" />
         <Setter Property="Focusable" Value="False" />
+        <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="WaitingBrush" Value="{Binding WaitingBrush, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
+        <Setter Property="ContentOrientation" Value="{Binding ContentOrientation, RelativeSource={RelativeSource AncestorType=rubyer:StepBar}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid x:Name="root">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35" />
-                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
@@ -59,25 +61,27 @@
                                    Margin="-1 0"
                                    Fill="{TemplateBinding Foreground}" />
 
-                        <ContentPresenter x:Name="contentPresenter"
-                                          Grid.Row="1"
-                                          Grid.ColumnSpan="3"
-                                          Margin="0 6 0 0"
-                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          Focusable="False"
-                                          RecognizesAccessKey="True"
-                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <StackPanel Grid.Row="1"
+                                    Grid.ColumnSpan="3"
+                                    Orientation="{TemplateBinding ContentOrientation}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                        <!--  description  -->
-                        <TextBlock x:Name="descriptionText"
-                                   Grid.Row="2"
-                                   Grid.ColumnSpan="3"
-                                   Margin="0 6 0 0"
-                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                   Focusable="False"
-                                   FontSize="12"
-                                   FontWeight="Normal"
-                                   Text="{TemplateBinding Description}" />
+                            <!--  description  -->
+                            <TextBlock x:Name="descriptionText"
+                                       Margin="{TemplateBinding Padding}"
+                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Focusable="False"
+                                       FontSize="{TemplateBinding DescriptionFontSize}"
+                                       FontWeight="Normal"
+                                       Text="{TemplateBinding Description}" />
+                        </StackPanel>
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ViewStates">
@@ -208,6 +212,28 @@
                                     Grid.Row="1"
                                     Grid.RowSpan="2"
                                     Grid.Column="1"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="Top"
+                                    Orientation="{TemplateBinding ContentOrientation}">
+                            <ContentPresenter x:Name="contentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                            <!--  description  -->
+                            <TextBlock x:Name="descriptionText"
+                                       Margin="{TemplateBinding Padding}"
+                                       Focusable="False"
+                                       FontSize="{TemplateBinding DescriptionFontSize}"
+                                       FontWeight="Normal"
+                                       Text="{TemplateBinding Description}" />
+                        </StackPanel>
+
+                        <!--<StackPanel x:Name="contentPanel"
+                                    Grid.Row="1"
+                                    Grid.RowSpan="2"
+                                    Grid.Column="1"
                                     Margin="6 0 0 0"
                                     VerticalAlignment="Top">
                             <ContentPresenter x:Name="contentPresenter"
@@ -215,14 +241,16 @@
                                               RecognizesAccessKey="True"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                            <!--  description  -->
+                        -->
+                        <!--  description  -->
+                        <!--
                             <TextBlock x:Name="descriptionText"
                                        Margin="0 6 0 0"
                                        Focusable="False"
                                        FontSize="12"
                                        FontWeight="Normal"
                                        Text="{TemplateBinding Description}" />
-                        </StackPanel>
+                        </StackPanel>-->
 
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ViewStates">
@@ -311,6 +339,9 @@
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource DefaultBackground}" />
         <Setter Property="WaitingBrush" Value="{StaticResource SeconarydText}" />
         <Setter Property="FontSize" Value="16" />
+        <Setter Property="DescriptionFontSize" Value="12" />
+        <Setter Property="ContentOrientation" Value="Vertical" />
+        <Setter Property="Padding" Value="3" />
         <Setter Property="ItemsPanel">
             <Setter.Value>
                 <ItemsPanelTemplate>
