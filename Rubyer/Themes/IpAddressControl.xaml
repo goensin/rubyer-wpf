@@ -39,7 +39,7 @@
                             <TextBox x:Name="PART_Octet1Box"
                                      Style="{StaticResource IpAddressTextBox}"
                                      Text="{Binding Octet1, RelativeSource={RelativeSource Mode=TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
-                            <TextBlock Grid.Column="1" Text="." />
+                            <TextBlock Grid.Column="1" Text="." Background="{TemplateBinding Background}"/>
                             <TextBox x:Name="PART_Octet2Box"
                                      Style="{StaticResource IpAddressTextBox}"
                                      Grid.Column="2"

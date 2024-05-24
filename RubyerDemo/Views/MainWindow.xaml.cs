@@ -37,14 +37,14 @@ namespace RubyerDemo
 
         private void OnThemeModeChanged(object sender, ThemeModeChangedArgs e)
         {
-            if (e.IsDarkMode)
-            {
-                this.TitleBackground = (Brush)Application.Current.Resources["Dark"];
-            }
-            else
-            {
-                this.TitleBackground = (Brush)Application.Current.Resources["Primary"];
-            }
+            //if (e.IsDarkMode)
+            //{
+            //    this.TitleBackground = (Brush)Application.Current.Resources["Dark"];
+            //}
+            //else
+            //{
+            //    this.TitleBackground = (Brush)Application.Current.Resources["Primary"];
+            //}
         }
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)

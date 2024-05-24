@@ -16,7 +16,7 @@
                      FontSize="13"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
-                     TitleHeight="32"
+                     TitleHeight="34"
                      WindowStartupLocation="CenterScreen"
                      mc:Ignorable="d">
     <rubyer:RubyerWindow.Resources>
@@ -37,16 +37,13 @@
             </StackPanel>
             <Menu Grid.Column="1"
                   HorizontalAlignment="Right"
-                  rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
                   rubyer:MenuHelper.IconWidth="30"
                   Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
                 <MenuItem ItemsSource="{Binding SampleItems}">
                     <MenuItem.Header>
-                        <StackPanel rubyer:PanelHelper.Spacing="8"
-                                    Orientation="Horizontal"
-                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <rubyer:Icon Type="Apps2Fill" />
+                        <StackPanel rubyer:PanelHelper.Spacing="8" Orientation="Horizontal">
+                            <rubyer:Icon Type="Apps2Line" />
                             <TextBlock Text="样例" />
                         </StackPanel>
                     </MenuItem.Header>
@@ -62,10 +59,8 @@
 
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel rubyer:PanelHelper.Spacing="8"
-                                    Orientation="Horizontal"
-                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <rubyer:Icon Type="Settings2Fill" />
+                        <StackPanel rubyer:PanelHelper.Spacing="8" Orientation="Horizontal">
+                            <rubyer:Icon Type="Settings2Line" />
                             <TextBlock Text="设置" />
                         </StackPanel>
                     </MenuItem.Header>
@@ -152,10 +147,8 @@
 
                 <MenuItem>
                     <MenuItem.Header>
-                        <StackPanel rubyer:PanelHelper.Spacing="8"
-                                    Orientation="Horizontal"
-                                    TextBlock.Foreground="{DynamicResource WhiteForeground}">
-                            <rubyer:Icon Type="QuestionFill" />
+                        <StackPanel rubyer:PanelHelper.Spacing="8" Orientation="Horizontal">
+                            <rubyer:Icon Type="QuestionLine" />
                             <TextBlock Text="帮助" />
                         </StackPanel>
                     </MenuItem.Header>
@@ -170,26 +163,27 @@
     </rubyer:RubyerWindow.TitleBarContent>
 
     <rubyer:HamburgerMenu rubyer:ControlHelper.CornerRadius="0"
-                          rubyer:ControlHelper.FocusedBrush="{DynamicResource DefaultBackground}"
+                          rubyer:ControlHelper.FocusedBrush="{DynamicResource Primary}"
+                          rubyer:ControlHelper.FocusedForegroundBrush="{DynamicResource WhiteForeground}"
+                          rubyer:ControlHelper.MaskOpacity="1"
                           rubyer:ControlHelper.SelectedBrush="{DynamicResource Accent}"
                           rubyer:HeaderHelper.FontSize="{Binding FontSize, RelativeSource={RelativeSource Self}}"
-                          rubyer:HeaderHelper.Foreground="{DynamicResource WhiteForeground}"
-                          rubyer:ItemsControlHelper.ItemMargin="0"
+                          rubyer:ItemsControlHelper.ItemMargin="0 2"
                           rubyer:ItemsControlHelper.ItemPadding="5 3"
-                          ExpandedWidth="170"
-                          Foreground="{DynamicResource WhiteForeground}"
+                          CollapsedWidth="40"
+                          ExpandedWidth="180"
                           Header="Controls"
                           ItemsSource="{Binding ViewItems}"
-                          PaneBackground="{Binding TitleBackground, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}"
                           SelectedItem="{Binding CurrentViewItem}"
                           TransitionDuration="0:0:0.7"
                           TransitionType="Fade">
         <rubyer:HamburgerMenu.Resources>
             <StackPanel x:Key="headContent"
                         x:Shared="False"
-                        Orientation="Vertical">
+                        Orientation="Vertical"
+                        TextBlock.FontSize="14">
                 <TextBlock Text="{Binding Name}" />
-                <TextBlock FontSize="12"
+                <TextBlock FontSize="11"
                            Opacity="0.6"
                            Text="{Binding Description}" />
             </StackPanel>

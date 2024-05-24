@@ -26,7 +26,7 @@
         </Grid>
         <Grid Grid.Row="1"
               Margin="0 10 0 0"
-              rubyer:GridHelper.RowDefinitions="*, *, *">
+              rubyer:GridHelper.RowDefinitions="*,*, *, *">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="反馈和建议" />
                 <Border Width="300"
@@ -35,16 +35,29 @@
                         BorderBrush="{StaticResource Border}"
                         BorderThickness="1" />
             </StackPanel>
-            <TextBlock Grid.Row="1" Margin="20 10 0 0">
+            <StackPanel Grid.Row="1"
+                        Margin="20 10 0 0"
+                        rubyer:PanelHelper.Spacing="5"
+                        Orientation="Horizontal">
+                <TextBlock Text="Q 群:" />
+                <TextBox BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="674115406" />
+            </StackPanel>
+            <TextBlock Grid.Row="2" Margin="20 10 0 0">
                 Gitee :<Hyperlink Click="Hyperlink_Click" NavigateUri="https://gitee.com/wuyanxin1028/rubyer-wpf/issues">
                     https://gitee.com/wuyanxin1028/rubyer-wpf/issues
                 </Hyperlink>
             </TextBlock>
-            <TextBlock Grid.Row="2" Margin="20 10 0 0">
-                E-mail:<Hyperlink NavigateUri="635831101@qq.com">
-                    635831101@qq.com
-                </Hyperlink>
-            </TextBlock>
+            <StackPanel Grid.Row="3"
+                        Margin="20 10 0 0"
+                        rubyer:PanelHelper.Spacing="5"
+                        Orientation="Horizontal">
+                <TextBlock Text="E-mail:" />
+                <TextBox BorderThickness="0"
+                         IsReadOnly="True"
+                         Text="635831101@qq.com" />
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="2"
               Margin="0 10 0 0"

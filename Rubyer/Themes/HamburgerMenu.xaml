@@ -278,7 +278,7 @@
         <Setter Property="IconWidth" Value="{Binding CollapsedWidth, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:MenuHelper.IconWidth" Value="{Binding IconWidth, RelativeSource={RelativeSource Self}}" />
         <Setter Property="MenuIcon" Value="{StaticResource HamburgerMenuIcon}" />
-        <Setter Property="PaneBackground" Value="{DynamicResource HeaderBackground}" />
+        <Setter Property="PaneBackground" Value="{DynamicResource PanelBackground}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenu}">

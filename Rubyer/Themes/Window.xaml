@@ -13,17 +13,14 @@
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="12 5" />
         <Setter Property="WindowChrome.IsHitTestVisibleInChrome" Value="True" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Window}}" />
     </Style>
 
     <Style x:Key="TitleBarCloseButtonStyle"
            BasedOn="{StaticResource TitleBarButtonStyle}"
            TargetType="{x:Type Button}">
-        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="Red" />
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource Error}" />
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Error}" />
+        <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
     </Style>
 
     <Style TargetType="{x:Type rubyer:RubyerWindow}">
@@ -40,9 +37,10 @@
         <Setter Property="TitleShadow" Value="False" />
         <Setter Property="TitleHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(WindowChrome.WindowChrome).CaptionHeight, Mode=TwoWay}" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />
-        <Setter Property="TitleForeground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="TitleBackground" Value="{DynamicResource Primary}" />
+        <Setter Property="TitleForeground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="TitleBackground" Value="{DynamicResource WindowTitleBackground}" />
         <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome CaptionHeight="24"

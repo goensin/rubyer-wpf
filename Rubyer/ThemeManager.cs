@@ -54,6 +54,9 @@ namespace Rubyer
             "ControlBackground",
             "ContainerBackground",
             "ScrollBarBrush",
+            "WindowTitleBackground",
+            "StatusBarBackground",
+            "PanelBackground",
         };
 
         private static bool themeApplying = false;

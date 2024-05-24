@@ -230,28 +230,6 @@
                                        Text="{TemplateBinding Description}" />
                         </StackPanel>
 
-                        <!--<StackPanel x:Name="contentPanel"
-                                    Grid.Row="1"
-                                    Grid.RowSpan="2"
-                                    Grid.Column="1"
-                                    Margin="6 0 0 0"
-                                    VerticalAlignment="Top">
-                            <ContentPresenter x:Name="contentPresenter"
-                                              Focusable="False"
-                                              RecognizesAccessKey="True"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-
-                        -->
-                        <!--  description  -->
-                        <!--
-                            <TextBlock x:Name="descriptionText"
-                                       Margin="0 6 0 0"
-                                       Focusable="False"
-                                       FontSize="12"
-                                       FontWeight="Normal"
-                                       Text="{TemplateBinding Description}" />
-                        </StackPanel>-->
-
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="ViewStates">
                                 <VisualState x:Name="Waiting" />

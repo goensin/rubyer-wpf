@@ -192,7 +192,7 @@
                 </TextBox>
 
                 <!--  StatusBar  -->
-                <StatusBar Grid.Row="3">
+                <StatusBar Grid.Row="3" Background="#0F000000">
                     <StatusBarItem HorizontalAlignment="Left">
                         <rubyer:Icon Type="TerminalBoxLine" />
                     </StatusBarItem>
