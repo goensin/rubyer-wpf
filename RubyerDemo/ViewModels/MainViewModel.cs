@@ -55,6 +55,7 @@ namespace RubyerDemo.ViewModels
                 new("ProgressBar", "进度条", new ProgressBarDemo(), IconType.Loader4Line),
                 new("Icon", "图标", new IconDemo(), IconType.RemixiconLine),
                 new("Grid", "网格", new GridDemo(), IconType.GridLine),
+                new("CircularPanel", "圆形面板", new CircularPanelDemo(), IconType.CircleLine),
                 new("GroupBox", "分组框", new GroupBoxDemo(), IconType.WindowFill),
                 new("Expander", "展开框", new ExpanderDemo(), IconType.LayoutTopLine),
                 new("ListBox", "列表框", new ListBoxDemo(), IconType.ListUnordered),
@@ -71,6 +72,7 @@ namespace RubyerDemo.ViewModels
                 new("MessageBox", "消息框", new MessageBoxDemo(), IconType.ChatCheckLine),
                 new("Notification", "通知", new NotificationDemo(), IconType.QuestionAnswerLine),
                 new("Dialog", "对话框", new DialogDemo(), IconType.PictureInPictureLine),
+                new("Popover", "弹出框", new PopoverDemo(), IconType.Chat2Line),
                 new("Transition", "转换动画", new TransitionDemo(), IconType.ClockwiseLine),
                 new("BadgeTag", "标记标签", new BadgeTagDemo(), IconType.NotificationBadgeLine),
                 new("Loading", "加载中", new LoadingDemo(), IconType.Loader2Fill),
@@ -78,7 +80,6 @@ namespace RubyerDemo.ViewModels
                 new("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
                 new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
-                new("CircularPanel", "圆形面板", new CircularPanelDemo(), IconType.CircleLine),
             ];
 
             CurrentViewItem = ViewItems.First();

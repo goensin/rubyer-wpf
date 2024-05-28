@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="RubyerDemo.Views.PopoverDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RubyerDemo.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="PopoverDemo">
+        <ScrollViewer>
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
+                <controls:ControlDisplay Title="Popover" Description="弹出框支持触发方式：Hover、Click、Focus 或 ContextMenu，也支持通过 IsShow 依赖属性控制">
+                    <StackPanel Margin="5"
+                                rubyer:PanelHelper.Spacing="10"
+                                Orientation="Horizontal">
+                        <rubyer:Popover x:Name="popover"
+                                        Title="Click"
+                                        Closed="popover_Closed"
+                                        Opened="popover_Opened"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Click">
+                            <Button Content="Click" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Hover"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Hover">
+                            <Button Content="Hover" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Title"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Focus">
+                            <Button Content="Focus" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Title"
+                                        Placement="Right"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="ContextMenu">
+                            <Button Content="ContextMenu" />
+                        </rubyer:Popover>
+
+                        <ToggleButton Style="{StaticResource SwitchAccentToggleButton}"
+                                      Content="显示 Popover"
+                                      IsChecked="{Binding IsShow, ElementName=manual}" />
+                        <rubyer:Popover x:Name="manual"
+                                        Title="Title"
+                                        IsShow="False"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="None">
+                            <Button Content="Manual" />
+                        </rubyer:Popover>
+                    </StackPanel>
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="Placement"
+                                         Grid.Row="1"
+                                         Description="通过 Placement 设置弹出位置">
+                    <DockPanel Height="150"
+                               Margin="5"
+                               rubyer:PanelHelper.Spacing="10">
+                        <rubyer:Popover Title="Top"
+                                        DockPanel.Dock="Top"
+                                        Placement="Top"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Hover">
+                            <Button Content="Top" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Bottom"
+                                        DockPanel.Dock="Bottom"
+                                        Placement="Bottom"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Hover">
+                            <Button Content="Hover" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Left"
+                                        DockPanel.Dock="Left"
+                                        Placement="Left"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Hover">
+                            <Button Content="Left" />
+                        </rubyer:Popover>
+
+                        <rubyer:Popover Title="Right"
+                                        DockPanel.Dock="Right"
+                                        Placement="Right"
+                                        PopoverContent="This is popover content"
+                                        TriggerMode="Hover">
+                            <Button Content="Right" />
+                        </rubyer:Popover>
+
+                        <Rectangle />
+                    </DockPanel>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

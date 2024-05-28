@@ -90,11 +90,6 @@
                             </Border>
                         </rubyer:Transition>
                     </Grid>
-                    <!--<rubyer:Transition x:Name="Path_BackgroundTransition"
-                                       Panel.ZIndex="100"
-                                       IsShow="{TemplateBinding IsShow}">
-                        <Grid x:Name="PART_RootGrid"  />
-                    </rubyer:Transition>-->
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

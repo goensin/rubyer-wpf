@@ -62,6 +62,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/IpAddressControl.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogCard.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Popover.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
@@ -131,5 +132,7 @@
     <Style BasedOn="{StaticResource RubyerIpAddressControl}" TargetType="{x:Type rubyer:IpAddressControl}" />
     <Style BasedOn="{StaticResource RubyerDialogCard}" TargetType="{x:Type rubyer:DialogCard}" />
     <Style BasedOn="{StaticResource RubyerDialogContainer}" TargetType="{x:Type rubyer:DialogContainer}" />
+    <Style BasedOn="{StaticResource RubyerPopover}" TargetType="{x:Type rubyer:Popover}" />
+
 
 </ResourceDictionary>
