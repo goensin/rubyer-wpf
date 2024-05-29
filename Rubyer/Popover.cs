@@ -37,6 +37,36 @@ namespace Rubyer
         public static RoutedCommand ClosePopoverCommand = new RoutedCommand();
 
         /// <summary>
+        /// 打开前命令
+        /// </summary>
+        public static readonly DependencyProperty BeforeOpenCommandProperty = DependencyProperty.Register(
+            "BeforeOpenCommand", typeof(ICommand), typeof(Popover));
+
+        /// <summary>
+        /// 打开前命令
+        /// </summary>
+        public ICommand BeforeOpenCommand
+        {
+            get { return (ICommand)GetValue(BeforeOpenCommandProperty); }
+            set { SetValue(BeforeOpenCommandProperty, value); }
+        }
+
+        /// <summary>
+        /// 关闭后命令
+        /// </summary>
+        public static readonly DependencyProperty AfterCloseCommandProperty = DependencyProperty.Register(
+            "AfterCloseCommand", typeof(ICommand), typeof(Popover));
+
+        /// <summary>
+        /// 关闭后命令
+        /// </summary>
+        public ICommand AfterCloseCommand
+        {
+            get { return (ICommand)GetValue(AfterCloseCommandProperty); }
+            set { SetValue(AfterCloseCommandProperty, value); }
+        }
+
+        /// <summary>
         /// 弹窗打开
         /// </summary>
         public static readonly RoutedEvent OpenedEvent =
@@ -189,18 +219,18 @@ namespace Rubyer
                 }
             }
 
-            var args = new RoutedEventArgs();
-            args.RoutedEvent = OpenedEvent;
-            RaiseEvent(args);
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = OpenedEvent });
+
+            BeforeOpenCommand?.Execute(null);
         }
 
         private void Popup_Closed(object sender, EventArgs e)
         {
             IsShow = false;
 
-            var args = new RoutedEventArgs();
-            args.RoutedEvent = ClosedEvent;
-            RaiseEvent(args);
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = ClosedEvent });
+
+            AfterCloseCommand?.Execute(null);
         }
 
         private async Task ShowPopup()
