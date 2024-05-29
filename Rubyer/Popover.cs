@@ -201,6 +201,8 @@ namespace Rubyer
 
             if (Content is FrameworkElement element && popup.Child is FrameworkElement popupElement)
             {
+                popup.PlacementTarget = element;
+
                 element.Focus();
 
                 switch (Placement)

@@ -36,7 +36,6 @@
                         <Popup x:Name="PART_Popup"
                                AllowsTransparency="True"
                                IsOpen="{TemplateBinding IsShow}"
-                               PlacementTarget="{Binding ElementName=PART_ContentPresenter}"
                                PopupAnimation="Fade">
                             <DockPanel>
                                 <Border x:Name="PART_CardBorder"
