@@ -32,6 +32,11 @@ namespace Rubyer
         private Popup popup;
 
         /// <summary>
+        /// 关闭弹窗命令
+        /// </summary>
+        public static RoutedCommand ClosePopoverCommand = new RoutedCommand();
+
+        /// <summary>
         /// 弹窗打开
         /// </summary>
         public static readonly RoutedEvent OpenedEvent =
@@ -143,12 +148,16 @@ namespace Rubyer
         {
             base.OnApplyTemplate();
 
+            CommandBindings.Add(new CommandBinding(ClosePopoverCommand, ClosePopupHandler));
+
             popup = GetTemplateChild(PopupPartName) as Popup;
             WeakEventManager<Popup, EventArgs>.AddHandler(popup, "Opened", Popup_Opened);
             WeakEventManager<Popup, EventArgs>.AddHandler(popup, "Closed", Popup_Closed);
 
             AddTriggerAction(TriggerMode);
         }
+
+        private void ClosePopupHandler(object sender, ExecutedRoutedEventArgs e) => ClosePopup();
 
         private void Popup_Opened(object sender, EventArgs e)
         {
@@ -200,15 +209,20 @@ namespace Rubyer
             IsShow = true;
         }
 
+        private void ClosePopup()
+        {
+            IsShow = false;
+        }
+
         private async void Popover_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => await ShowPopup();
 
         private async void Popover_MouseEnter(object sender, MouseEventArgs e) => await ShowPopup();
 
-        private void Popover_MouseLeave(object sender, MouseEventArgs e) => IsShow = false;
+        private void Popover_MouseLeave(object sender, MouseEventArgs e) => ClosePopup();
 
         private async void Popover_GotFocus(object sender, RoutedEventArgs e) => await ShowPopup();
 
-        private void Popover_LostFocus(object sender, RoutedEventArgs e) => IsShow = false;
+        private void Popover_LostFocus(object sender, RoutedEventArgs e) => ClosePopup();
 
         private async void Popover_MouseRightButtonDown(object sender, MouseButtonEventArgs e) => await ShowPopup();
 
