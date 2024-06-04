@@ -176,10 +176,13 @@ namespace Rubyer
                 for (int i = 0; i < this.ItemContainerGenerator.Items.Count; i++)
                 {
                     var stepBarItem = this.ItemContainerGenerator.ContainerFromIndex(i) as StepBarItem;
-                    stepBarItem.IsFirst = false;
-                    stepBarItem.IsLast = false;
-                    stepBarItem.Index = i + 1;
-                    SetFirstOrLast(stepBarItem);
+                    if (stepBarItem is { })
+                    {
+                        stepBarItem.IsFirst = false;
+                        stepBarItem.IsLast = false;
+                        stepBarItem.Index = i + 1;
+                        SetFirstOrLast(stepBarItem);
+                    }
                 }
             }
         }
@@ -226,21 +229,40 @@ namespace Rubyer
                     return;
                 }
 
-                var textBlock = item.TryGetChildPartFromVisualTree<TextBlock>("descriptionText");
-
-                if (textBlock != null)
+                if (item.IsLoaded)
                 {
-                    if (!string.IsNullOrEmpty(DisplayDescriptionPath) || !string.IsNullOrEmpty(DescriptionStringFormat))
-                    {
-                        var binding = new Binding();
-                        binding.Path = new PropertyPath(DisplayDescriptionPath);
-                        binding.StringFormat = DescriptionStringFormat;
-                        textBlock.SetBinding(TextBlock.TextProperty, binding);
-                    }
-                    else if (BindingOperations.GetBinding(textBlock, TextBlock.TextProperty) != null)
-                    {
-                        BindingOperations.ClearBinding(textBlock, TextBlock.TextProperty);
-                    }
+                    BindingDescription(item);
+                }
+                else
+                {
+                    item.Loaded += Item_Loaded;
+                }
+            }
+        }
+
+        private void Item_Loaded(object sender, RoutedEventArgs e)
+        {
+            var item = (StepBarItem)sender;
+            item.Loaded -= Item_Loaded;
+            BindingDescription(item);
+        }
+
+        private void BindingDescription(StepBarItem item)
+        {
+            var textBlock = item.TryGetChildPartFromVisualTree<TextBlock>("descriptionText");
+
+            if (textBlock != null)
+            {
+                if (!string.IsNullOrEmpty(DisplayDescriptionPath) || !string.IsNullOrEmpty(DescriptionStringFormat))
+                {
+                    var binding = new Binding();
+                    binding.Path = new PropertyPath(DisplayDescriptionPath);
+                    binding.StringFormat = DescriptionStringFormat;
+                    textBlock.SetBinding(TextBlock.TextProperty, binding);
+                }
+                else if (BindingOperations.GetBinding(textBlock, TextBlock.TextProperty) != null)
+                {
+                    BindingOperations.ClearBinding(textBlock, TextBlock.TextProperty);
                 }
             }
         }

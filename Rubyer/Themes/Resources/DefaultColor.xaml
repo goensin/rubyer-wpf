@@ -102,7 +102,7 @@
     <Color x:Key="LightPanelBackgroundColor">#F0F0F0</Color>
     <Color x:Key="DarkPanelBackgroundColor">#323232</Color>
     <SolidColorBrush x:Key="PanelBackground" Color="{DynamicResource LightStatusBarBackgroundColor}" />
-    
+
     <SolidColorBrush x:Key="Error" Color="#E63935" />
     <SolidColorBrush x:Key="Info" Color="#909399" />
     <SolidColorBrush x:Key="Warning" Color="#F57C00" />
