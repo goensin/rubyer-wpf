@@ -24,7 +24,9 @@
 
                     <GroupBox Header="水平步骤条 - StepBar">
                         <StackPanel>
-                            <rubyer:StepBar CurrentItemChanged="StepBar_CurrentItemChanged" Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                            <rubyer:StepBar Margin="10"
+                                            CurrentIndex="{Binding CurrentIndex}"
+                                            CurrentItemChanged="StepBar_CurrentItemChanged">
                                 <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
                                 <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
                                 <rubyer:StepBarItem Description="description 3">Step 3</rubyer:StepBarItem>
@@ -80,6 +82,7 @@
                         <rubyer:StepBar Margin="10"
                                         rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
                                         CurrentIndex="{Binding CurrentIndex}"
+                                        FontSize="13"
                                         Foreground="{StaticResource Accent}"
                                         Orientation="Vertical"
                                         WaitingBrush="{StaticResource DefaultForeground}">

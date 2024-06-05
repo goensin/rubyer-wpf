@@ -39,21 +39,18 @@
                                    Margin="-1 0"
                                    Fill="{TemplateBinding Foreground}" />
 
-                        <Viewbox Grid.Column="1" Focusable="False">
-                            <Grid>
-                                <rubyer:Icon x:Name="icon"
-                                             Width="35"
-                                             Height="35"
-                                             Type="{TemplateBinding IconType}" />
+                        <Grid Grid.Column="1" Focusable="False">
+                            <rubyer:Icon x:Name="icon"
+                                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                         Height="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=2.5}"
+                                         Type="{TemplateBinding IconType}" />
 
-                                <TextBlock x:Name="indexText"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="13"
-                                           Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                           Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                            </Grid>
-                        </Viewbox>
+                            <TextBlock x:Name="indexText"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                       Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Grid>
 
                         <Rectangle x:Name="rightLine"
                                    Grid.Column="2"
@@ -172,7 +169,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="35" />
+                            <ColumnDefinition Width="Auto" MinWidth="35" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
@@ -186,21 +183,18 @@
                                    Margin="0 -1"
                                    Fill="{TemplateBinding Foreground}" />
 
-                        <Viewbox Grid.Row="1" Focusable="False">
-                            <Grid>
-                                <rubyer:Icon x:Name="icon"
-                                             Width="35"
-                                             Height="35"
-                                             Type="{TemplateBinding IconType}" />
+                        <Grid Grid.Row="1" Focusable="False">
+                            <rubyer:Icon x:Name="icon"
+                                         Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                         Height="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=2.5}"
+                                         Type="{TemplateBinding IconType}" />
 
-                                <TextBlock x:Name="indexText"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"
-                                           FontSize="13"
-                                           Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                           Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                            </Grid>
-                        </Viewbox>
+                            <TextBlock x:Name="indexText"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                       Text="{Binding Index, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Grid>
 
                         <Rectangle x:Name="bottomLine"
                                    Grid.Row="2"
