@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -24,7 +25,7 @@ namespace Rubyer
         /// 当前索引
         /// </summary>
         public static readonly DependencyProperty CurrentIndexProperty =
-            DependencyProperty.Register("CurrentIndex", typeof(int), typeof(StepBar), new PropertyMetadata(-1));
+            DependencyProperty.Register("CurrentIndex", typeof(int), typeof(StepBar), new PropertyMetadata(-1, OnCurrentIndexChanged));
 
         /// <summary>
         ///  当前索引
@@ -127,9 +128,41 @@ namespace Rubyer
 
         #endregion properties
 
+        #region events
+
+        /// <summary>
+        /// 当前项改变事件
+        /// </summary>
+        public static readonly RoutedEvent CurrentItemChangedEvent =
+            EventManager.RegisterRoutedEvent("CurrentItemChanged", RoutingStrategy.Direct, typeof(RoutedPropertyChangedEventHandler<StepBarItem>), typeof(StepBar));
+
+        /// <summary>
+        /// 当前项改变事件
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<StepBarItem> CurrentItemChanged
+        {
+            add { AddHandler(CurrentItemChangedEvent, value); }
+            remove { RemoveHandler(CurrentItemChangedEvent, value); }
+        }
+
+        #endregion
+
         static StepBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(StepBar), new FrameworkPropertyMetadata(typeof(StepBar)));
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            Loaded += StepBar_Loaded;
+        }
+
+        private void StepBar_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= StepBar_Loaded;
+            OnCurrentIndexChanged(this, new DependencyPropertyChangedEventArgs(CurrentIndexProperty, -1, CurrentIndex));
         }
 
         /// <inheritdoc/>
@@ -153,6 +186,21 @@ namespace Rubyer
             var stepBarItem = new StepBarItem { Index = generateIndex };
             SetFirstOrLast(stepBarItem);
             return stepBarItem;
+        }
+
+        private static void OnCurrentIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var stepBar = (StepBar)d;
+            if (stepBar.IsLoaded)
+            {
+                var oldItem = (int)e.OldValue >= 0 ? stepBar.ItemContainerGenerator.ContainerFromIndex((int)e.OldValue) : null;
+                var newItem = (int)e.NewValue >= 0 ? stepBar.ItemContainerGenerator.ContainerFromIndex((int)e.NewValue) : null;
+                RoutedPropertyChangedEventArgs<StepBarItem> args = new(oldItem as StepBarItem, newItem as StepBarItem)
+                {
+                    RoutedEvent = CurrentItemChangedEvent
+                };
+                stepBar.RaiseEvent(args);
+            }
         }
 
         private void SetFirstOrLast(StepBarItem stepBarItem)

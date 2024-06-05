@@ -22,9 +22,9 @@
                             Command="{Binding NextStepCommand}"
                             Content="下一步" />
 
-                    <GroupBox Header="垂直步骤条 - StepBar">
+                    <GroupBox Header="水平步骤条 - StepBar">
                         <StackPanel>
-                            <rubyer:StepBar Margin="10" CurrentIndex="{Binding CurrentIndex}">
+                            <rubyer:StepBar CurrentItemChanged="StepBar_CurrentItemChanged" Margin="10" CurrentIndex="{Binding CurrentIndex}">
                                 <rubyer:StepBarItem Description="description 1">Step 1</rubyer:StepBarItem>
                                 <rubyer:StepBarItem Description="description 2">Step 2</rubyer:StepBarItem>
                                 <rubyer:StepBarItem Description="description 3">Step 3</rubyer:StepBarItem>

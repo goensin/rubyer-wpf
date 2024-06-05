@@ -2,6 +2,7 @@
 using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +28,11 @@ namespace RubyerDemo.Views
             InitializeComponent();
 
             this.DataContext = App.Current.Services.GetService<StepBarViewModel>();
+        }
+
+        private void StepBar_CurrentItemChanged(object sender, RoutedPropertyChangedEventArgs<Rubyer.StepBarItem> e)
+        {
+            Debug.WriteLine($"Old StepBarItem:{e.OldValue}, New StepBarItem:{e.NewValue}");
         }
     }
 }
