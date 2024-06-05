@@ -70,14 +70,14 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                             <!--  description  -->
-                            <TextBlock x:Name="descriptionText"
-                                       Margin="{TemplateBinding Padding}"
-                                       HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                       Focusable="False"
-                                       FontSize="{TemplateBinding DescriptionFontSize}"
-                                       FontWeight="Normal"
-                                       Text="{TemplateBinding Description}" />
+                            <ContentPresenter x:Name="description"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              ContentSource="Description"
+                                              Focusable="False"
+                                              TextBlock.FontSize="{TemplateBinding DescriptionFontSize}"
+                                              TextBlock.FontWeight="Normal" />
                         </StackPanel>
 
                         <VisualStateManager.VisualStateGroups>
@@ -90,8 +90,8 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=descriptionText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                            <Setter TargetName="descriptionText" Property="Visibility" Value="Collapsed" />
+                        <DataTrigger Binding="{Binding Content, ElementName=description}" Value="{x:Null}">
+                            <Setter TargetName="description" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <Trigger Property="IsFirst" Value="True">
                             <Setter TargetName="leftLine" Property="Visibility" Value="Collapsed" />
@@ -108,14 +108,14 @@
                         <Trigger Property="HorizontalContentAlignment" Value="Left">
                             <Setter TargetName="contentPresenter" Property="Grid.Column" Value="1" />
                             <Setter TargetName="contentPresenter" Property="Grid.ColumnSpan" Value="2" />
-                            <Setter TargetName="descriptionText" Property="Grid.Column" Value="1" />
-                            <Setter TargetName="descriptionText" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="description" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="description" Property="Grid.ColumnSpan" Value="2" />
                         </Trigger>
                         <Trigger Property="HorizontalContentAlignment" Value="Right">
                             <Setter TargetName="contentPresenter" Property="Grid.Column" Value="0" />
                             <Setter TargetName="contentPresenter" Property="Grid.ColumnSpan" Value="2" />
-                            <Setter TargetName="descriptionText" Property="Grid.Column" Value="0" />
-                            <Setter TargetName="descriptionText" Property="Grid.ColumnSpan" Value="2" />
+                            <Setter TargetName="description" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="description" Property="Grid.ColumnSpan" Value="2" />
                         </Trigger>
                         <Trigger Property="IsWaiting" Value="True">
                             <Setter Property="Foreground" Value="{Binding WaitingBrush, RelativeSource={RelativeSource Mode=Self}}" />
@@ -216,12 +216,12 @@
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
                             <!--  description  -->
-                            <TextBlock x:Name="descriptionText"
-                                       Margin="{TemplateBinding Padding}"
-                                       Focusable="False"
-                                       FontSize="{TemplateBinding DescriptionFontSize}"
-                                       FontWeight="Normal"
-                                       Text="{TemplateBinding Description}" />
+                            <ContentPresenter x:Name="description"
+                                              Margin="{TemplateBinding Padding}"
+                                              ContentSource="Description"
+                                              Focusable="False"
+                                              TextBlock.FontSize="{TemplateBinding DescriptionFontSize}"
+                                              TextBlock.FontWeight="Normal" />
                         </StackPanel>
 
                         <VisualStateManager.VisualStateGroups>
@@ -234,8 +234,8 @@
                         </VisualStateManager.VisualStateGroups>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding Text, ElementName=descriptionText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="True">
-                            <Setter TargetName="descriptionText" Property="Visibility" Value="Collapsed" />
+                        <DataTrigger Binding="{Binding Content, ElementName=description}" Value="{x:Null}">
+                            <Setter TargetName="description" Property="Visibility" Value="Collapsed" />
                         </DataTrigger>
                         <Trigger Property="IsFirst" Value="True">
                             <Setter TargetName="topLine" Property="Visibility" Value="Collapsed" />

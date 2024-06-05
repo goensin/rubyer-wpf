@@ -75,7 +75,7 @@ namespace Rubyer
         /// 描述
         /// </summary>
         public static readonly DependencyProperty DescriptionProperty =
-            DependencyProperty.Register("Description", typeof(object), typeof(StepBarItem), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
+            DependencyProperty.Register("Description", typeof(object), typeof(StepBarItem), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
         /// 描述

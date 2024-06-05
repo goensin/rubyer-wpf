@@ -297,20 +297,20 @@ namespace Rubyer
 
         private void BindingDescription(StepBarItem item)
         {
-            var textBlock = item.TryGetChildPartFromVisualTree<TextBlock>("descriptionText");
+            var contentPresenter = item.TryGetChildPartFromVisualTree<ContentPresenter>("description");
 
-            if (textBlock != null)
+            if (contentPresenter != null)
             {
                 if (!string.IsNullOrEmpty(DisplayDescriptionPath) || !string.IsNullOrEmpty(DescriptionStringFormat))
                 {
                     var binding = new Binding();
                     binding.Path = new PropertyPath(DisplayDescriptionPath);
                     binding.StringFormat = DescriptionStringFormat;
-                    textBlock.SetBinding(TextBlock.TextProperty, binding);
+                    contentPresenter.SetBinding(ContentPresenter.ContentProperty, binding);
                 }
-                else if (BindingOperations.GetBinding(textBlock, TextBlock.TextProperty) != null)
+                else if (BindingOperations.GetBinding(contentPresenter, ContentPresenter.ContentProperty) != null)
                 {
-                    BindingOperations.ClearBinding(textBlock, TextBlock.TextProperty);
+                    BindingOperations.ClearBinding(contentPresenter, ContentPresenter.ContentProperty);
                 }
             }
         }
