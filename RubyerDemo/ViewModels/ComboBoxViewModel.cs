@@ -14,54 +14,57 @@ namespace RubyerDemo.ViewModels
     /// </summary>
     public partial class ComboBoxViewModel : ObservableObject
     {
-        public ComboBoxViewModel()
-        {
-            this.PropertyChanged += ComboBoxViewModel_PropertyChanged;
-            SelectedItems = new ObservableCollection<FoodType>() { FoodType.BeefMeatballs};
-            SelectedItems.CollectionChanged += SelectedItems_CollectionChanged;
-        }
-
-        private void SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ComboBoxViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-
-        }
-
         [ObservableProperty]
         private List<string> items = new List<string>
         {
             "选项一", "选项二", "选项三", "选项四"
         };
 
-        [ObservableProperty]
-        private FoodType currentFood;
+        public List<Food> Foods { get; }
 
         [ObservableProperty]
-        private ObservableCollection<FoodType> selectedItems;
+        private Food currentFoodType;
+
+        [ObservableProperty]
+        private ObservableCollection<Food> selectedFoods;
+
+        public ComboBoxViewModel()
+        {
+            Foods = [new Food(1, FoodType.BeefMeatballs), new Food(2, FoodType.OysterOmelette), new Food(3, FoodType.KwayChap)];
+            SelectedFoods = [Foods.First()];
+        }
 
         [RelayCommand]
         private void ClearSelectedItems()
         {
-            SelectedItems?.Clear();
+            SelectedFoods?.Clear();
         }
 
         [RelayCommand]
         private void RemoveFirstItem()
         {
-            if (SelectedItems.Count > 0)
+            if (SelectedFoods.Count > 0)
             {
-                SelectedItems.RemoveAt(0);
+                SelectedFoods.RemoveAt(0);
             }
         }
 
         [RelayCommand]
         private void ReplaceSelectedItems()
         {
-            SelectedItems = new ObservableCollection<FoodType>() { FoodType.OysterOmelette };
+            SelectedFoods = new ObservableCollection<Food>() { SelectedFoods.Last() };
+        }
+    }
+
+    public class Food
+    {
+        public int Num { get; set; }
+        public FoodType FoodType { get; set; }
+
+        public Food(int num, FoodType foodType)
+        {
+            Num = num;
+            FoodType = foodType;
         }
     }
 }

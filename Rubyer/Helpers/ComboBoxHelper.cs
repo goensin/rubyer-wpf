@@ -48,42 +48,26 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 多选时显示文本
+        /// 多选项间隔大小
         /// </summary>
-        public static readonly DependencyProperty MultiSelectTextProperty = DependencyProperty.RegisterAttached(
-            "MultiSelectText", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(null));
+        public static readonly DependencyProperty MultiSelectSpacingProperty = DependencyProperty.RegisterAttached(
+            "MultiSelectSpacing", typeof(double), typeof(ComboBoxHelper), new FrameworkPropertyMetadata(5D, FrameworkPropertyMetadataOptions.AffectsMeasure));
 
-        public static void SetMultiSelectText(DependencyObject element, string value)
+        public static void SetMultiSelectSpacing(DependencyObject element, double value)
         {
-            element.SetValue(MultiSelectTextProperty, value);
+            element.SetValue(MultiSelectSpacingProperty,value);
         }
 
-        public static string GetMultiSelectText(DependencyObject element)
+        public static double GetMultiSelectSpacing(DependencyObject element)
         {
-            return (string)element.GetValue(MultiSelectTextProperty);
-        }
-
-        /// <summary>
-        /// 多选时文本分隔符
-        /// </summary>
-        public static readonly DependencyProperty MultiSelectSeparatorProperty = DependencyProperty.RegisterAttached(
-            "MultiSelectSeparator", typeof(string), typeof(ComboBoxHelper), new PropertyMetadata(", ", OnMultiSelectSeparatorChanged));
-
-        public static void SetMultiSelectSeparator(DependencyObject element, string value)
-        {
-            element.SetValue(MultiSelectSeparatorProperty, value);
-        }
-
-        public static string GetMultiSelectSeparator(DependencyObject element)
-        {
-            return (string)element.GetValue(MultiSelectSeparatorProperty);
+            return (double)element.GetValue(MultiSelectSpacingProperty);
         }
 
         /// <summary>
         /// 选中项集合
         /// </summary>
         public static readonly DependencyProperty SelectedItemsProperty = DependencyProperty.RegisterAttached(
-            "SelectedItems", typeof(IList), typeof(ComboBoxHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedItemsChanged));
+            "SelectedItems", typeof(IList), typeof(ComboBoxHelper), new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         public static void SetSelectedItems(DependencyObject element, IList value)
         {
@@ -131,49 +115,6 @@ namespace Rubyer
             }
         }
 
-        private static void OnSelectedItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var comboBox = d as ComboBox;
-
-            void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
-            {
-                UpdateMultiSelectText(comboBox);
-            }
-
-            if (e.NewValue is INotifyCollectionChanged newCollection)
-            {
-                newCollection.CollectionChanged += OnCollectionChanged;
-            }
-
-            UpdateMultiSelectText(comboBox);
-        }
-
-        private static void UpdateMultiSelectText(ComboBox comboBox)
-        {
-            var selectedItems = GetSelectedItems(comboBox);
-            if (selectedItems is null)
-            {
-                SetMultiSelectText(comboBox, string.Empty);
-                return;
-            }
-
-            var texts = new List<string>();
-            foreach (var item in selectedItems)
-            {
-                var typeConverter = TypeDescriptor.GetConverter(item.GetType());
-                var text = typeConverter.ConvertToString(item);
-                texts.Add(text);
-            }
-
-            var separator = GetMultiSelectSeparator(comboBox);
-            SetMultiSelectText(comboBox, string.Join(separator, texts));
-        }
-
-        private static void OnMultiSelectSeparatorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            UpdateMultiSelectText(d as ComboBox);
-        }
-
         private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var comboBoxItem = d as ComboBoxItem;
@@ -202,8 +143,6 @@ namespace Rubyer
                     selectedItems.Remove(itemData); // 移除
                 }
             }
-
-            // UpdateMultiSelectText(comboBox);
         }
     }
 }

@@ -418,12 +418,22 @@
                                                       IsHitTestVisible="False"
                                                       SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 
-                                    <TextBlock x:Name="multiSelectText"
-                                               Margin="{TemplateBinding Padding}"
-                                               VerticalAlignment="Center"
-                                               IsHitTestVisible="False"
-                                               Text="{Binding Path=(rubyer:ComboBoxHelper.MultiSelectText), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                               Visibility="Collapsed" />
+                                    <ItemsControl x:Name="itemsPresenter"
+                                                  Margin="{TemplateBinding Padding}"
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  DisplayMemberPath="{TemplateBinding DisplayMemberPath}"
+                                                  IsHitTestVisible="False"
+                                                  ItemTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                                  ItemsSource="{Binding Path=(rubyer:ComboBoxHelper.SelectedItems), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                  Visibility="Collapsed">
+                                        <ItemsControl.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <StackPanel rubyer:PanelHelper.Spacing="{Binding Path=(rubyer:ComboBoxHelper.MultiSelectSpacing), RelativeSource={RelativeSource AncestorType=ComboBox}}" Orientation="Horizontal" />
+                                            </ItemsPanelTemplate>
+                                        </ItemsControl.ItemsPanel>
+                                    </ItemsControl>
 
                                     <TextBlock x:Name="watermark"
                                                VerticalAlignment="Center"
@@ -494,13 +504,13 @@
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
                                 <Condition Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="True" />
-                                <Condition Binding="{Binding Path=Text, ElementName=multiSelectText, Converter={StaticResource IsNullOrEmptyConverter}}" Value="False" />
+                                <Condition Binding="{Binding Path=HasItems, ElementName=itemsPresenter}" Value="True" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="watermark" Property="Visibility" Value="Hidden" />
                         </MultiDataTrigger>
                         <DataTrigger Binding="{Binding Path=(rubyer:ComboBoxHelper.IsMultiSelect), RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="contentPresenter" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="multiSelectText" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="itemsPresenter" Property="Visibility" Value="Visible" />
                         </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
