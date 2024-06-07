@@ -436,6 +436,7 @@
                                     </ItemsControl>
 
                                     <TextBlock x:Name="watermark"
+                                               Margin="{TemplateBinding Padding}"
                                                VerticalAlignment="Center"
                                                Foreground="{DynamicResource WatermarkText}"
                                                IsHitTestVisible="False"

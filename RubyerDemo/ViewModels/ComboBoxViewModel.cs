@@ -23,7 +23,7 @@ namespace RubyerDemo.ViewModels
         public List<Food> Foods { get; }
 
         [ObservableProperty]
-        private Food currentFoodType;
+        private FoodType currentFoodType;
 
         [ObservableProperty]
         private ObservableCollection<Food> selectedFoods;

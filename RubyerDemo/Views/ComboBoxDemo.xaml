@@ -120,15 +120,7 @@
                                          Grid.Row="3"
                                          Description="通过 ComboBoxHelper.IsMultiSelect 设置是否启用多选">
                     <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
-                        <ComboBox Width="200"
-                                  Height="30"
-                                  rubyer:ComboBoxHelper.IsMultiSelect="True"
-                                  rubyer:ComboBoxHelper.MultiSelectSpacing="{Binding Value, ElementName=separator}"
-                                  rubyer:ComboBoxHelper.SelectedItems="{Binding SelectedFoods}"
-                                  rubyer:InputBoxHelper.IsClearable="True"
-                                  rubyer:InputBoxHelper.Watermark="多选框"
-                                  DisplayMemberPath="FoodType"
-                                  ItemsSource="{Binding Foods}" />
+
 
                         <StackPanel rubyer:PanelHelper.Spacing="10">
                             <TextBlock Text="根据 ComboBoxHelper.SelectedItems &#x000A;绑定选中项集合" />
@@ -143,6 +135,13 @@
                                         Command="{Binding ReplaceSelectedItemsCommand}"
                                         Content="替换源" />
                             </StackPanel>
+                            <ComboBox rubyer:ComboBoxHelper.IsMultiSelect="True"
+                                      rubyer:ComboBoxHelper.MultiSelectSpacing="{Binding Value, ElementName=separator}"
+                                      rubyer:ComboBoxHelper.SelectedItems="{Binding SelectedFoods}"
+                                      rubyer:InputBoxHelper.IsClearable="True"
+                                      rubyer:InputBoxHelper.Watermark="多选框"
+                                      DisplayMemberPath="FoodType"
+                                      ItemsSource="{Binding Foods}" />
                             <ListBox BorderThickness="1"
                                      DisplayMemberPath="FoodType"
                                      ItemsSource="{Binding SelectedFoods}" />
