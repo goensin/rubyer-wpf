@@ -188,7 +188,7 @@ namespace Rubyer
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
-          "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(default(DateTime), OnSelectTimeChanged));
+          "SelectedTime", typeof(DateTime?), typeof(Clock), new PropertyMetadata(null, OnSelectTimeChanged));
 
         private static void OnSelectTimeChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
