@@ -51,10 +51,12 @@ namespace Rubyer
 
             Hours = new ObservableCollection<int>(Enumerable.Range(0, 24));
             Minutes = new ObservableCollection<int>(Enumerable.Range(0, 60));
+            Seconds = new ObservableCollection<int>(Enumerable.Range(0, 60));
 
             CurrentTime = new DateTime(DateTime.Now.TimeOfDay.Ticks);
             Hour = CurrentTime.Value.Hour;
             Minute = CurrentTime.Value.Minute;
+            Second = CurrentTime.Value.Second;
         }
 
         #region 路由事件
@@ -153,6 +155,36 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 秒集合
+        /// </summary>
+        internal static readonly DependencyProperty SecondsProperty = DependencyProperty.Register(
+           "Seconds", typeof(ObservableCollection<int>), typeof(Clock), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 秒集合
+        /// </summary>
+        internal ObservableCollection<int> Seconds
+        {
+            get { return (ObservableCollection<int>)GetValue(SecondsProperty); }
+            set { SetValue(SecondsProperty, value); }
+        }
+
+        /// <summary>
+        /// 秒
+        /// </summary>
+        public static readonly DependencyProperty SecondProperty = DependencyProperty.Register(
+           "Second", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
+
+        /// <summary>
+        /// 秒
+        /// </summary>
+        public int Second
+        {
+            get { return (int)GetValue(SecondProperty); }
+            set { SetValue(SecondProperty, value); }
+        }
+        
+        /// <summary>
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SelectedTimeProperty = DependencyProperty.Register(
@@ -165,6 +197,7 @@ namespace Rubyer
             {
                 clock.Hour = clock.SelectedTime.Value.Hour;
                 clock.Minute = clock.SelectedTime.Value.Minute;
+                clock.Second = clock.SelectedTime.Value.Second;
             }
         }
 
@@ -207,6 +240,51 @@ namespace Rubyer
             set { SetValue(IsShowConfirmButtonProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 是否显示时
+        /// </summary>
+        public static readonly DependencyProperty IsShowHourProperty =
+            DependencyProperty.Register("IsShowHour", typeof(bool), typeof(Clock), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        /// <summary>
+        /// 是否显示时
+        /// </summary>
+        public bool IsShowHour
+        {
+            get { return (bool)GetValue(IsShowHourProperty); }
+            set { SetValue(IsShowHourProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 是否显示分
+        /// </summary>
+        public static readonly DependencyProperty IsShowMinuteProperty =
+            DependencyProperty.Register("IsShowMinute", typeof(bool), typeof(Clock), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        /// <summary>
+        /// 是否显示分
+        /// </summary>
+        public bool IsShowMinute
+        {
+            get { return (bool)GetValue(IsShowMinuteProperty); }
+            set { SetValue(IsShowMinuteProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 是否显示秒
+        /// </summary>
+        public static readonly DependencyProperty IsShowSecondProperty =
+            DependencyProperty.Register("IsShowSecond", typeof(bool), typeof(Clock), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 是否显示秒
+        /// </summary>
+        public bool IsShowSecond
+        {
+            get { return (bool)GetValue(IsShowSecondProperty); }
+            set { SetValue(IsShowSecondProperty, BooleanBoxes.Box(value)); }
+        }
+
         #endregion
 
         /// <summary>
@@ -221,7 +299,7 @@ namespace Rubyer
                 return;
             }
 
-            clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}");
+            clock.CurrentTime = Convert.ToDateTime($"{clock.Hour}:{clock.Minute}:{clock.Second}");
 
             if (e.NewValue != null)
             {

@@ -318,7 +318,7 @@ namespace Rubyer
 
         private void RestartTimer()
         {
-            timer.Stop();
+            timer?.Stop();
             if (IsAutoPlay)
             {
                 timer.Start();
@@ -330,7 +330,7 @@ namespace Rubyer
         {
             base.OnSelectionChanged(e);
 
-            if (IsLoaded && !sorting && SelectedIndex >= 0)
+            if (IsVisible && IsLoaded && !sorting && SelectedIndex >= 0)
             {
                 RestartTimer();
                 ScrollSelectedItemToCenter(this);
@@ -443,13 +443,12 @@ namespace Rubyer
         /// <param name="noAnimation">不使用动画</param>
         private static void ScrollSelectedItemToCenter(FlipView flipView, bool noAnimation = false)
         {
-            if (!flipView.IsLoaded || flipView.SelectedIndex < 0 || IsForbidSwitching(flipView))
+            if (!flipView.IsLoaded || flipView.SelectedIndex < 0 || IsForbidSwitching(flipView) || flipView.ItemContainerGenerator.ContainerFromIndex(flipView.SelectedIndex) is not FlipViewItem flipViewItem)
             {
                 return;
             }
 
-            var item = flipView.ItemContainerGenerator.ContainerFromIndex(flipView.SelectedIndex) as FlipViewItem;
-            var offset = GetCurrentOffset(item, flipView.Orientation, flipView.scrollViewer);
+            var offset = GetCurrentOffset(flipViewItem, flipView.Orientation, flipView.scrollViewer);
             if (noAnimation)
             {
                 ChangeOffset(flipView, offset);
@@ -766,8 +765,7 @@ namespace Rubyer
         /// </summary>
         private void ScrollViewer_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (SelectedIndex < 0 || IsForbidSwitching(this) ||
-                !(ItemContainerGenerator.ContainerFromIndex(SelectedIndex) is FlipViewItem item))
+            if (SelectedIndex < 0 || IsForbidSwitching(this) || ItemContainerGenerator.ContainerFromIndex(SelectedIndex) is not FlipViewItem item)
             {
                 return;
             }

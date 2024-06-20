@@ -55,28 +55,56 @@
                                 </Grid.RowDefinitions>
 
                                 <Border x:Name="content">
-                                    <Grid MinWidth="200">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
+                                    <UniformGrid Rows="1">
+                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowHour, Converter={StaticResource BooleanToVisibleConverter}}">
+                                            <Border BorderBrush="{DynamicResource BorderLighter}"
+                                                    BorderThickness="1 0 0 0"
+                                                    DockPanel.Dock="Right" />
 
-                                        <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
-                                                         Grid.Column="0"
-                                                         Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
-                                                         BorderBrush="{DynamicResource BorderLighter}"
-                                                         BorderThickness="0 0 1 0"
-                                                         ItemStringFormat="D2"
-                                                         ItemsSource="{TemplateBinding Hours}"
-                                                         SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                            <TextBlock Padding="5 6"
+                                                       DockPanel.Dock="Top"
+                                                       Foreground="{StaticResource WatermarkText}"
+                                                       Text="{StaticResource I18N_Clock_Hour}"
+                                                       TextAlignment="Center" />
 
-                                        <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
-                                                         Grid.Column="1"
-                                                         Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
-                                                         ItemStringFormat="D2"
-                                                         ItemsSource="{TemplateBinding Minutes}"
-                                                         SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                    </Grid>
+                                            <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
+                                                             Grid.Column="0"
+                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                                             ItemStringFormat="D2"
+                                                             ItemsSource="{TemplateBinding Hours}"
+                                                             SelectedItem="{TemplateBinding Hour}" />
+                                        </DockPanel>
+
+                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowMinute, Converter={StaticResource BooleanToVisibleConverter}}">
+                                            <Border BorderBrush="{DynamicResource BorderLighter}"
+                                                    BorderThickness="1 0 0 0"
+                                                    DockPanel.Dock="Right" />
+
+                                            <TextBlock Padding="5 6"
+                                                       DockPanel.Dock="Top"
+                                                       Foreground="{StaticResource WatermarkText}"
+                                                       Text="{StaticResource I18N_Clock_Minute}"
+                                                       TextAlignment="Center" />
+                                            <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
+                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                                             ItemStringFormat="D2"
+                                                             ItemsSource="{TemplateBinding Minutes}"
+                                                             SelectedItem="{TemplateBinding Minute}" />
+                                        </DockPanel>
+
+                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowSecond, Converter={StaticResource BooleanToVisibleConverter}}">
+                                            <TextBlock Padding="5 6"
+                                                       DockPanel.Dock="Top"
+                                                       Foreground="{StaticResource WatermarkText}"
+                                                       Text="{StaticResource I18N_Clock_Second}"
+                                                       TextAlignment="Center" />
+                                            <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
+                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
+                                                             ItemStringFormat="D2"
+                                                             ItemsSource="{TemplateBinding Seconds}"
+                                                             SelectedItem="{TemplateBinding Second}" />
+                                        </DockPanel>
+                                    </UniformGrid>
                                 </Border>
 
                                 <Button x:Name="PART_ConfirmButton"
@@ -113,10 +141,8 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                            <UniformGrid Margin="{TemplateBinding Padding}"
-                                         Columns="2"
-                                         Rows="1">
-                                <ComboBox Grid.Column="0"
+                            <UniformGrid Margin="{TemplateBinding Padding}" Rows="1">
+                                <ComboBox MinWidth="80"
                                           Margin="0 0 2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -124,8 +150,8 @@
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
                                           ItemsSource="{TemplateBinding Hours}"
-                                          SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                <ComboBox Grid.Column="1"
+                                          SelectedItem="{TemplateBinding Hour}" />
+                                <ComboBox MinWidth="80"
                                           Margin="2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                           rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -133,7 +159,16 @@
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
                                           ItemsSource="{TemplateBinding Minutes}"
-                                          SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                          SelectedItem="{TemplateBinding Minute}" />
+                                <ComboBox MinWidth="80"
+                                          Margin="2 0"
+                                          rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          rubyer:ControlHelper.MouseOverBrush="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                          rubyer:InputBoxHelper.PostContent="{DynamicResource I18N_Clock_Second}"
+                                          rubyer:ItemsControlHelper.ItemPadding="5 2"
+                                          ItemStringFormat="D2"
+                                          ItemsSource="{TemplateBinding Seconds}"
+                                          SelectedItem="{TemplateBinding Second}" />
                             </UniformGrid>
                         </Border>
                     </Grid>

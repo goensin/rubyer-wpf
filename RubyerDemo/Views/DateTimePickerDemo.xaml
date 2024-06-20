@@ -17,8 +17,10 @@
                 <controls:ControlDisplay Title="DateTime Control">
                     <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
                         <Calendar Margin="5" />
-                        <rubyer:Clock Width="200" SelectedTimeChanged="Clock_SelectedTimeChanged" />
-                        <rubyer:Clock Style="{StaticResource ComboBoxClock}" Width="150" />
+                        <rubyer:Clock IsShowSecond="True" SelectedTimeChanged="Clock_SelectedTimeChanged" />
+                        <rubyer:Clock Style="{StaticResource ComboBoxClock}"
+                                      IsShowSecond="True"
+                                      SelectedTimeChanged="Clock_SelectedTimeChanged" />
                     </StackPanel>
                 </controls:ControlDisplay>
 
