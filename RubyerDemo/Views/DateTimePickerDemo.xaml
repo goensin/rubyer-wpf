@@ -40,7 +40,6 @@
                                            Margin="10 0 0 0"
                                            rubyer:InputBoxHelper.IsClearable="True"
                                            rubyer:InputBoxHelper.Watermark="请选择时间"
-                                           SelectedTime="{Binding Time}"
                                            SelectedTimeChanged="TimePicker_SelectedTimeChanged" />
 
                         <rubyer:DateTimePicker Width="170"
@@ -60,8 +59,15 @@
                         <rubyer:TimePicker Width="150"
                                            Margin="10 0 0 0"
                                            rubyer:InputBoxHelper.Watermark="请选择时间"
+                                           SelectedTime="{Binding Time}"
                                            SelectedTimeChanged="TimePicker_SelectedTimeChanged"
-                                           SelectedTimeFormat="HH:mm:ss.fff" />
+                                           SelectedTimeFormat="HH:mm:ss">
+                            <rubyer:TimePicker.ClockStyle>
+                                <Style BasedOn="{StaticResource RubyerClock}" TargetType="rubyer:Clock">
+                                    <Setter Property="IsShowSecond" Value="True" />
+                                </Style>
+                            </rubyer:TimePicker.ClockStyle>
+                        </rubyer:TimePicker>
 
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"

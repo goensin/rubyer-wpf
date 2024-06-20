@@ -113,7 +113,7 @@ namespace Rubyer
         /// 时
         /// </summary>
         public static readonly DependencyProperty HourProperty = DependencyProperty.Register(
-           "Hour", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
+           "Hour", typeof(int), typeof(Clock), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnItemSeletedChanged));
 
         /// <summary>
         /// 时
@@ -143,7 +143,7 @@ namespace Rubyer
         /// 分
         /// </summary>
         public static readonly DependencyProperty MinuteProperty = DependencyProperty.Register(
-           "Minute", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
+           "Minute", typeof(int), typeof(Clock), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnItemSeletedChanged));
 
         /// <summary>
         /// 分
@@ -173,7 +173,7 @@ namespace Rubyer
         /// 秒
         /// </summary>
         public static readonly DependencyProperty SecondProperty = DependencyProperty.Register(
-           "Second", typeof(int), typeof(Clock), new PropertyMetadata(0, OnItemSeletedChanged));
+           "Second", typeof(int), typeof(Clock), new FrameworkPropertyMetadata(0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnItemSeletedChanged));
 
         /// <summary>
         /// 秒
@@ -183,7 +183,7 @@ namespace Rubyer
             get { return (int)GetValue(SecondProperty); }
             set { SetValue(SecondProperty, value); }
         }
-        
+
         /// <summary>
         /// 选中时间
         /// </summary>

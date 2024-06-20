@@ -14,7 +14,7 @@ namespace RubyerDemo.ViewModels
     public partial class DateTimePickerViewModel : ObservableObject
     {
         [ObservableProperty]
-        private DateTime? time;
+        private DateTime? time = new DateTime() + new TimeSpan(1, 2, 3);
 
         [ObservableProperty]
         private DateTime? date;
