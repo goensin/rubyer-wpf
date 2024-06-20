@@ -107,6 +107,36 @@ namespace Rubyer
         #region 依赖属性
 
         /// <summary>
+        /// 日历样式
+        /// </summary>
+        public static readonly DependencyProperty CalendarStyleProperty =
+           DependencyProperty.Register("CalendarStyle", typeof(Style), typeof(DateTimePicker));
+
+        /// <summary>
+        /// 日历样式
+        /// </summary>
+        public Style CalendarStyle
+        {
+            get => (Style)GetValue(CalendarStyleProperty);
+            set => SetValue(CalendarStyleProperty, value);
+        }
+
+        /// <summary>
+        /// 时钟样式
+        /// </summary>
+        public static readonly DependencyProperty ClockStyleProperty =
+           DependencyProperty.Register("ClockStyle", typeof(Style), typeof(DateTimePicker));
+
+        /// <summary>
+        /// 时钟样式
+        /// </summary>
+        public Style ClockStyle
+        {
+            get => (Style)GetValue(ClockStyleProperty);
+            set => SetValue(ClockStyleProperty, value);
+        }
+
+        /// <summary>
         /// 选择的日期时间
         /// </summary>
         public static readonly DependencyProperty SelectedDateTimeProperty = DependencyProperty.Register(

@@ -100,6 +100,21 @@ namespace Rubyer
         #region 依赖属性
 
         /// <summary>
+        /// 时钟样式
+        /// </summary>
+        public static readonly DependencyProperty ClockStyleProperty =
+           DependencyProperty.Register("ClockStyle", typeof(Style), typeof(TimePicker));
+
+        /// <summary>
+        /// 时钟样式
+        /// </summary>
+        public Style ClockStyle
+        {
+            get => (Style)GetValue(ClockStyleProperty);
+            set => SetValue(ClockStyleProperty, value);
+        }
+
+        /// <summary>
         /// 选中时间
         /// </summary>
         public static readonly DependencyProperty SeletedTimeProperty = DependencyProperty.Register(

@@ -4,6 +4,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/TextBox.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Clock.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerTimePicker" TargetType="{x:Type rubyer:TimePicker}">
@@ -15,6 +16,7 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="ClockStyle" Value="{StaticResource RubyerClock}" />
         <Setter Property="SelectedTimeFormat" Value="HH:mm" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
@@ -66,7 +68,7 @@
                                    PopupAnimation="Fade"
                                    StaysOpen="False"
                                    VerticalOffset="5">
-                                <rubyer:Clock x:Name="PART_Clock" />
+                                <rubyer:Clock x:Name="PART_Clock" Style="{TemplateBinding ClockStyle}" />
                             </Popup>
                         </Grid>
                     </Grid>
