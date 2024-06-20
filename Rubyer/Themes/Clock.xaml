@@ -72,7 +72,7 @@
                                                              Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Hours}"
-                                                             SelectedItem="{TemplateBinding Hour}" />
+                                                             SelectedItem="{Binding Hour, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                                         </DockPanel>
 
                                         <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowMinute, Converter={StaticResource BooleanToVisibleConverter}}">
@@ -89,7 +89,7 @@
                                                              Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Minutes}"
-                                                             SelectedItem="{TemplateBinding Minute}" />
+                                                             SelectedItem="{Binding Minute, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                                         </DockPanel>
 
                                         <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowSecond, Converter={StaticResource BooleanToVisibleConverter}}">
@@ -102,7 +102,7 @@
                                                              Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Seconds}"
-                                                             SelectedItem="{TemplateBinding Second}" />
+                                                             SelectedItem="{Binding Second, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                                         </DockPanel>
                                     </UniformGrid>
                                 </Border>
@@ -150,7 +150,7 @@
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
                                           ItemsSource="{TemplateBinding Hours}"
-                                          SelectedItem="{TemplateBinding Hour}" />
+                                          SelectedItem="{Binding Hour, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                                 <ComboBox MinWidth="80"
                                           Margin="2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -159,7 +159,7 @@
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
                                           ItemsSource="{TemplateBinding Minutes}"
-                                          SelectedItem="{TemplateBinding Minute}" />
+                                          SelectedItem="{Binding Minute, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                                 <ComboBox MinWidth="80"
                                           Margin="2 0"
                                           rubyer:ControlHelper.FocusBorderBrush="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -168,7 +168,7 @@
                                           rubyer:ItemsControlHelper.ItemPadding="5 2"
                                           ItemStringFormat="D2"
                                           ItemsSource="{TemplateBinding Seconds}"
-                                          SelectedItem="{TemplateBinding Second}" />
+                                          SelectedItem="{Binding Second, RelativeSource={RelativeSource AncestorType=rubyer:Clock}}" />
                             </UniformGrid>
                         </Border>
                     </Grid>
