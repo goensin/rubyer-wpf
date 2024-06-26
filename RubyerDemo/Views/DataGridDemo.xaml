@@ -28,6 +28,7 @@
                 <controls:ControlDisplay Title="Default DataGrid">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto" rubyer:PanelHelper.Spacing="10">
                         <DataGrid x:Name="DataGrid1"
+                                  rubyer:ControlHelper.FocusedForegroundBrush="{StaticResource Accent}"
                                   AutoGenerateColumns="False"
                                   BorderThickness="1"
                                   CanUserAddRows="False"
