@@ -89,6 +89,22 @@ namespace Rubyer
             obj.SetValue(AddCommandProperty, value);
         }
 
+        /// <summary>
+        /// 移除命令
+        /// </summary>
+        public static readonly DependencyProperty RemoveCommandProperty =
+            DependencyProperty.RegisterAttached("RemoveCommand", typeof(ICommand), typeof(TabControlHelper), new PropertyMetadata(null));
+
+        public static ICommand GetRemoveCommand(DependencyObject obj)
+        {
+            return (ICommand)obj.GetValue(RemoveCommandProperty);
+        }
+
+        public static void SetRemoveCommand(DependencyObject obj, ICommand value)
+        {
+            obj.SetValue(RemoveCommandProperty, value);
+        }
+
         #endregion
 
         /// <summary>
@@ -168,6 +184,14 @@ namespace Rubyer
                 void OnCloseButtonClicked(object sender, RoutedEventArgs args)
                 {
                     TabControl tabControl = FindTabControl(tabItem);
+
+                    var removeCommand = GetRemoveCommand(tabControl);
+                    if (removeCommand is { }) // 如果绑定 RemoveCommand，不执行自动移除
+                    {
+                        removeCommand.Execute(tabItem.DataContext);
+                        return;
+                    }
+
                     IEditableCollectionView items = tabControl.Items;
 
                     if (items.CanRemove)
@@ -289,7 +313,7 @@ namespace Rubyer
                 };
             }
         }
-    }   
+    }
 
     /// <summary>
     /// 关闭 tab 子项事件

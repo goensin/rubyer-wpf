@@ -1,9 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Rubyer;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -155,6 +157,18 @@ namespace RubyerDemo.ViewModels
             count++;
             Poetries.Add(poetry);
             SelectedPoetry = poetry;
+        }
+
+        /// <summary>
+        /// 移除命令
+        /// </summary>
+        [RelayCommand]
+        private async Task RemoveItem(Poetry poetry)
+        {
+            if (MessageBoxResult.Yes == await MessageBoxR.Confirm("是否删除？"))
+            {
+                Poetries.Remove(poetry);
+            }
         }
     }
 
