@@ -6,6 +6,23 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="DragThumb" TargetType="Thumb">
+        <Setter Property="Cursor" Value="SizeAll" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{DynamicResource AllContainerCornerRadius}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="RubyerDialogCard" TargetType="{x:Type rubyer:DialogCard}">
         <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
@@ -15,6 +32,7 @@
         <Setter Property="IsShow" Value="True" />
         <Setter Property="IsShowCloseButton" Value="True" />
         <Setter Property="IsEscKeyToClose" Value="False" />
+        <Setter Property="IsDraggable" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="TransitionType" Value="Zoom" />
@@ -55,9 +73,11 @@
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
+
                                     <Border x:Name="titleBar"
                                             Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                            CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            Cursor="ScrollAll">
                                         <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                             <Button x:Name="PART_CloseButton"
                                                     Style="{StaticResource TextButton}"
@@ -69,15 +89,19 @@
                                                     Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
                                                 <rubyer:Icon Type="CloseLine" />
                                             </Button>
-
-                                            <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                       Text="{TemplateBinding Title}" />
+                                            <Grid>
+                                                <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                           Text="{TemplateBinding Title}" />
+                                                <Thumb x:Name="PART_DragThumb"
+                                                       Style="{StaticResource DragThumb}"
+                                                       Visibility="{TemplateBinding IsDraggable, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                            </Grid>
                                         </DockPanel>
                                     </Border>
 

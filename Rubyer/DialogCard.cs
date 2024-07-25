@@ -15,9 +15,9 @@ namespace Rubyer
     [TemplatePart(Name = BackgroundBorderPartName, Type = typeof(Border))]
     [TemplatePart(Name = TransitionPartName, Type = typeof(Transition))]
     [TemplatePart(Name = CloseButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = DragThumbPartName, Type = typeof(Thumb))]
     public class DialogCard : ContentControl
     {
-
         /// <summary>
         /// 转换动画名称
         /// </summary>
@@ -33,9 +33,24 @@ namespace Rubyer
         /// </summary>
         public const string CloseButtonPartName = "PART_CloseButton";
 
+        /// <summary>
+        /// 拖多块
+        /// </summary>
+        public const string DragThumbPartName = "PART_DragThumb";
+
+        /// <summary>
+        /// 卡片背景
+        /// </summary>
+        public const string CardBorderPartName = "PART_CardBorder";
+
+        /// <summary>
+        /// 关闭参数
+        /// </summary>
         internal object CloseParameter { get; private set; }
 
         Transition transition;
+        Thumb dragThumb;
+        Border cardBorder;
 
         /// <summary>
         /// 消息框结果事件处理
@@ -197,6 +212,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 是否可拖动
+        /// </summary>
+        public static readonly DependencyProperty IsDraggableProperty = DependencyProperty.Register(
+            "IsDraggable", typeof(bool), typeof(DialogCard), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsDraggableChanged));
+
+        /// <summary>
+        /// 是否可拖动
+        /// </summary>
+        public bool IsDraggable
+        {
+            get { return (bool)GetValue(IsDraggableProperty); }
+            set { SetValue(IsDraggableProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
         /// 关闭完成 Task 源
         /// </summary>
         public TaskCompletionSource<object> CloseTaskCompletionSource { get; private set; }
@@ -225,6 +255,14 @@ namespace Rubyer
             {
                 WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(background, "PreviewMouseLeftButtonDown", Background_PreviewMouseDown);
             }
+
+            dragThumb = (Thumb)GetTemplateChild(DragThumbPartName);
+            if (IsDraggable)
+            {
+                dragThumb.DragDelta += DragThumb_DragDelta;
+            }
+
+            cardBorder = (Border)GetTemplateChild(CardBorderPartName);
 
             Loaded += DialogCard_Loaded;
         }
@@ -273,6 +311,58 @@ namespace Rubyer
             if (IsEscKeyToClose)
             {
                 Close();
+            }
+        }
+
+        private void DragThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            if (cardBorder.RenderTransform is not TranslateTransform)
+            {
+                cardBorder.RenderTransform = new TranslateTransform();
+            }
+
+            if (cardBorder.RenderTransform is TranslateTransform translateTransform)
+            {
+                var point = cardBorder.TranslatePoint(new Point(), this);
+                double x = e.HorizontalChange;
+                double y = e.VerticalChange;
+
+                if (x < 0 && x < -point.X)
+                {
+                    x = -point.X;
+                }
+                else if (x > 0 && x + point.X + cardBorder.ActualWidth > ActualWidth)
+                {
+                    x = ActualWidth - cardBorder.ActualWidth - point.X;
+                }
+
+                if (y < 0 && y < -point.Y)
+                {
+                    y = -point.Y;
+                }
+                else if (y > 0 && y + point.Y + cardBorder.ActualHeight > ActualHeight)
+                {
+                    y = ActualHeight - cardBorder.ActualHeight - point.Y;
+                }
+
+                translateTransform.X += x;
+                translateTransform.Y += y;
+            }
+        }
+
+        private static void OnIsDraggableChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var dialogCard = (DialogCard)d;
+            if (dialogCard.dragThumb is { })
+            {
+                if (dialogCard.IsDraggable)
+                {
+                    dialogCard.dragThumb.DragDelta += dialogCard.DragThumb_DragDelta;
+                }
+                else
+                {
+                    dialogCard.dragThumb.DragDelta -= dialogCard.DragThumb_DragDelta;
+                }
             }
         }
     }
