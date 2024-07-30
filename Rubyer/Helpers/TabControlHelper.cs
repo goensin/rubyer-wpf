@@ -1,13 +1,9 @@
 ﻿using Rubyer.Commons.KnownBoxes;
-using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -90,22 +86,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 添加命令参数
-        /// </summary>
-        public static readonly DependencyProperty AddCommandParameterProperty =
-            DependencyProperty.RegisterAttached("AddCommandParameter", typeof(object), typeof(TabControlHelper), new PropertyMetadata(null));
-
-        public static object GetAddCommandParameter(DependencyObject obj)
-        {
-            return (object)obj.GetValue(AddCommandParameterProperty);
-        }
-
-        public static void SetAddCommandParameter(DependencyObject obj, object value)
-        {
-            obj.SetValue(AddCommandParameterProperty, value);
-        }
-
-        /// <summary>
         /// 移除命令
         /// </summary>
         public static readonly DependencyProperty RemoveCommandProperty =
@@ -119,23 +99,6 @@ namespace Rubyer
         public static void SetRemoveCommand(DependencyObject obj, ICommand value)
         {
             obj.SetValue(RemoveCommandProperty, value);
-        }
-
-
-        /// <summary>
-        /// 移除命令参数
-        /// </summary>
-        public static readonly DependencyProperty RemoveCommandParameterProperty =
-            DependencyProperty.RegisterAttached("RemoveCommandParameter", typeof(object), typeof(TabControlHelper), new PropertyMetadata(null));
-
-        public static object GetRemoveCommandParameter(DependencyObject obj)
-        {
-            return (object)obj.GetValue(RemoveCommandParameterProperty);
-        }
-
-        public static void SetRemoveCommandParameter(DependencyObject obj, object value)
-        {
-            obj.SetValue(RemoveCommandParameterProperty, value);
         }
 
         #endregion
@@ -217,33 +180,22 @@ namespace Rubyer
                 void OnCloseButtonClicked(object sender, RoutedEventArgs args)
                 {
                     TabControl tabControl = FindTabControl(tabItem);
-
-                    var removeCommand = GetRemoveCommand(tabControl);
-                    if (removeCommand is { }) // 如果绑定 RemoveCommand，不执行自动移除
-                    {
-                        var parameter = GetRemoveCommandParameter(tabControl);
-                        removeCommand.Execute(parameter);
-                        return;
-                    }
-
                     IEditableCollectionView items = tabControl.Items;
 
-                    if (items.CanRemove)
+                    var removeCommand = GetRemoveCommand(tabControl);
+                    var item = items.CanRemove ? tabItem.DataContext : tabItem; // Binding 和 TabItem
+                    if (removeCommand is { }) // 如果绑定 RemoveCommand，不执行自动移除
                     {
-                        var eventArgs = new CloseTabItemRoutedEventArgs(tabItem.DataContext, CloseItemEvent, tabItem);
-                        tabControl.RaiseEvent(eventArgs); // 触发移除事件
-                        if (!eventArgs.Cancel)
-                        {
-                            items.Remove(tabItem.DataContext); // Binding 移除方式
-                        }
+                        removeCommand.Execute(item);
+                        return;
                     }
                     else
                     {
-                        var eventArgs = new CloseTabItemRoutedEventArgs(tabItem, CloseItemEvent, tabItem);
+                        var eventArgs = new CloseTabItemRoutedEventArgs(item, CloseItemEvent, tabItem);
                         tabControl.RaiseEvent(eventArgs); // 触发移除事件
                         if (!eventArgs.Cancel)
                         {
-                            tabControl.Items.Remove(tabItem); // TabItem 移除方式
+                            items.Remove(item); // Binding 移除方式
                         }
                     }
                 }
@@ -302,8 +254,7 @@ namespace Rubyer
                     tabControl.RaiseEvent(eventArgs);
 
                     var command = GetAddCommand(tabControl);
-                    var parmeter = GetAddCommandParameter(tabControl);
-                    command?.Execute(parmeter);
+                    command?.Execute(null);
                 }
 
                 if (tabControl.IsLoaded)
