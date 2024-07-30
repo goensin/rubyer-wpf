@@ -375,6 +375,7 @@
                                     MinWidth="100"
                                     rubyer:TabControlHelper.IsClearable="True"
                                     rubyer:TabControlHelper.RemoveCommand="{Binding RemoveItemCommand}"
+                                    rubyer:TabControlHelper.RemoveCommandParameter="{Binding SelectedPoetry}"
                                     ItemsSource="{Binding Poetries}"
                                     SelectedItem="{Binding SelectedPoetry}"
                                     TabStripPlacement="Top">

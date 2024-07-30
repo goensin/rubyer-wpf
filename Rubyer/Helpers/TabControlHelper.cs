@@ -90,6 +90,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 添加命令参数
+        /// </summary>
+        public static readonly DependencyProperty AddCommandParameterProperty =
+            DependencyProperty.RegisterAttached("AddCommandParameter", typeof(object), typeof(TabControlHelper), new PropertyMetadata(null));
+
+        public static object GetAddCommandParameter(DependencyObject obj)
+        {
+            return (object)obj.GetValue(AddCommandParameterProperty);
+        }
+
+        public static void SetAddCommandParameter(DependencyObject obj, object value)
+        {
+            obj.SetValue(AddCommandParameterProperty, value);
+        }
+
+        /// <summary>
         /// 移除命令
         /// </summary>
         public static readonly DependencyProperty RemoveCommandProperty =
@@ -103,6 +119,23 @@ namespace Rubyer
         public static void SetRemoveCommand(DependencyObject obj, ICommand value)
         {
             obj.SetValue(RemoveCommandProperty, value);
+        }
+
+
+        /// <summary>
+        /// 移除命令参数
+        /// </summary>
+        public static readonly DependencyProperty RemoveCommandParameterProperty =
+            DependencyProperty.RegisterAttached("RemoveCommandParameter", typeof(object), typeof(TabControlHelper), new PropertyMetadata(null));
+
+        public static object GetRemoveCommandParameter(DependencyObject obj)
+        {
+            return (object)obj.GetValue(RemoveCommandParameterProperty);
+        }
+
+        public static void SetRemoveCommandParameter(DependencyObject obj, object value)
+        {
+            obj.SetValue(RemoveCommandParameterProperty, value);
         }
 
         #endregion
@@ -188,7 +221,8 @@ namespace Rubyer
                     var removeCommand = GetRemoveCommand(tabControl);
                     if (removeCommand is { }) // 如果绑定 RemoveCommand，不执行自动移除
                     {
-                        removeCommand.Execute(tabItem.DataContext);
+                        var parameter = GetRemoveCommandParameter(tabControl);
+                        removeCommand.Execute(parameter);
                         return;
                     }
 
@@ -268,7 +302,8 @@ namespace Rubyer
                     tabControl.RaiseEvent(eventArgs);
 
                     var command = GetAddCommand(tabControl);
-                    command?.Execute(null);
+                    var parmeter = GetAddCommandParameter(tabControl);
+                    command?.Execute(parmeter);
                 }
 
                 if (tabControl.IsLoaded)

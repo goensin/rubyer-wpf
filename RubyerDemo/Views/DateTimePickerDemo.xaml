@@ -72,7 +72,13 @@
                         <rubyer:DateTimePicker Width="200"
                                                Margin="10 0 0 0"
                                                rubyer:InputBoxHelper.Watermark="请选择日期时间"
-                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" />
+                                               SelectedDateTimeFormat="yyyy~MM~dd HH~mm~ss" >
+                            <rubyer:DateTimePicker.ClockStyle>
+                                <Style BasedOn="{StaticResource RubyerClock}" TargetType="rubyer:Clock">
+                                    <Setter Property="IsShowSecond" Value="True" />
+                                </Style>
+                            </rubyer:DateTimePicker.ClockStyle>
+                        </rubyer:DateTimePicker>
                     </StackPanel>
                 </controls:ControlDisplay>
 
