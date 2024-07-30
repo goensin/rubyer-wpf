@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
@@ -126,6 +127,21 @@ namespace Rubyer
             set { SetValue(DescriptionFontSizeProperty, value); }
         }
 
+        /// <summary>
+        /// 点击选中
+        /// </summary>
+        public static readonly DependencyProperty CanClickSelectProperty =
+            DependencyProperty.Register("CanClickSelect", typeof(bool), typeof(StepBar), new PropertyMetadata(BooleanBoxes.FalseBox, OnCanClickSelectChanged));
+
+        /// <summary>
+        /// 点击选中
+        /// </summary>
+        public bool CanClickSelect
+        {
+            get { return (bool)GetValue(CanClickSelectProperty); }
+            set { SetValue(CanClickSelectProperty, BooleanBoxes.Box(value)); }
+        }
+
         #endregion properties
 
         #region events
@@ -152,6 +168,7 @@ namespace Rubyer
             DefaultStyleKeyProperty.OverrideMetadata(typeof(StepBar), new FrameworkPropertyMetadata(typeof(StepBar)));
         }
 
+        /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -172,6 +189,10 @@ namespace Rubyer
             {
                 var index = this.ItemContainerGenerator.Items.IndexOf(stepBarItem);
                 stepBarItem.Index = index + 1;
+                if (CanClickSelect)
+                {
+                    stepBarItem.MouseDown += StepBarItem_MouseDown;
+                }
                 SetFirstOrLast(stepBarItem);
                 return true;
             }
@@ -180,12 +201,44 @@ namespace Rubyer
             return false;
         }
 
+        private void StepBarItem_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var stepBarItem = (StepBarItem)sender;
+            CurrentIndex = stepBarItem.Index > 1 ? stepBarItem.Index - 1 : 0;
+        }
+
         /// <inheritdoc/>
         protected override DependencyObject GetContainerForItemOverride()
         {
             var stepBarItem = new StepBarItem { Index = generateIndex };
+
+            if (CanClickSelect)
+            {
+                stepBarItem.MouseDown += StepBarItem_MouseDown;
+            }
+
             SetFirstOrLast(stepBarItem);
             return stepBarItem;
+        }
+
+        private static void OnCanClickSelectChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var stepBar = (StepBar)d;
+            for (int i = 0; i < stepBar.ItemContainerGenerator.Items.Count; i++)
+            {
+                var stepBarItem = stepBar.ItemContainerGenerator.ContainerFromIndex(i) as StepBarItem;
+                if (stepBarItem is { })
+                {
+                    if (stepBar.CanClickSelect)
+                    {
+                        stepBarItem.MouseDown += stepBar.StepBarItem_MouseDown;
+                    }
+                    else
+                    {
+                        stepBarItem.MouseDown -= stepBar.StepBarItem_MouseDown;
+                    }
+                }
+            }
         }
 
         private static void OnCurrentIndexChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

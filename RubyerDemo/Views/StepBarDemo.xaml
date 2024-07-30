@@ -37,6 +37,7 @@
                             <rubyer:StepBar Margin="10"
                                             HorizontalContentAlignment="Left"
                                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Dark}"
+                                            CanClickSelect="True"
                                             CurrentIndex="{Binding CurrentIndex}"
                                             DescriptionStringFormat="时间: {0}"
                                             DisplayDescriptionPath="Description"
@@ -45,6 +46,7 @@
 
                             <rubyer:StepBar Margin="10"
                                             rubyer:ControlHelper.FocusedBrush="{DynamicResource Success}"
+                                            CanClickSelect="True"
                                             CurrentIndex="{Binding CurrentIndex}"
                                             Foreground="{StaticResource Accent}"
                                             WaitingBrush="{StaticResource DefaultForeground}">

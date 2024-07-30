@@ -23,7 +23,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
-                    <Grid x:Name="root">
+                    <Grid x:Name="root" Background="Transparent">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="35" />
                             <RowDefinition Height="Auto" />
@@ -167,7 +167,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:StepBarItem}">
-                    <Grid>
+                    <Grid Background="Transparent">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="35" />
                             <ColumnDefinition Width="Auto" />
