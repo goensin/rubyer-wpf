@@ -12,17 +12,18 @@ namespace Rubyer.Converters
         /// <inheritdoc/>
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values.Length < 3)
+            if (values.Length < 4)
             {
-                throw new ArgumentException("参数少于 3 个");
+                throw new ArgumentException("参数少于 4 个");
             }
 
             double value = System.Convert.ToDouble(values[0]);
             double min = System.Convert.ToDouble(values[1]);
             double max = System.Convert.ToDouble(values[2]);
+            string format = values[3].ToString();
             double percent = (value - min) / (max - min);
 
-            return $"{System.Convert.ToInt32(percent * 100)}%";
+            return string.Format(format, percent * 100);
         }
 
         /// <inheritdoc/>

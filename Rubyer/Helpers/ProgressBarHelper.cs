@@ -64,6 +64,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 百分比格式
+        /// </summary>
+        public static readonly DependencyProperty PercentFormatProperty =
+          DependencyProperty.RegisterAttached("PercentFormat", typeof(string), typeof(ProgressBarHelper), new PropertyMetadata(string.Empty));
+
+        public static string GetPercentFormat(DependencyObject obj)
+        {
+            return (string)obj.GetValue(PercentFormatProperty);
+        }
+
+        public static void SetPercentFormat(DependencyObject obj, string value)
+        {
+            obj.SetValue(PercentFormatProperty, value);
+        }
+
+        /// <summary>
         /// 不确定进度值
         /// </summary>
         public static readonly DependencyProperty IndeterminateValueProperty =

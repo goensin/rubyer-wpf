@@ -19,7 +19,7 @@
                     <TextBlock Margin="10 0" Text="Value:" />
                     <Slider x:Name="valueSlider"
                             Width="200"
-                              AutoToolTipPlacement="TopLeft"
+                            AutoToolTipPlacement="TopLeft"
                             Interval="10"
                             IsSnapToTickEnabled="True"
                             Maximum="100"
@@ -111,12 +111,11 @@
                                      Value="{Binding Value, ElementName=valueSlider}" />
                         <ProgressBar Width="100"
                                      Margin="10"
-                                     VerticalAlignment="Center"
+                                     rubyer:ProgressBarHelper.PercentFormat="{}{0:F2}%"
                                      rubyer:ProgressBarHelper.ShowPercent="True"
                                      Value="{Binding Value, ElementName=valueSlider}" />
 
                         <ProgressBar Height="100"
-                                     Margin="10"
                                      rubyer:ProgressBarHelper.ShowPercent="True"
                                      Orientation="Vertical"
                                      Value="{Binding Value, ElementName=valueSlider}" />
@@ -131,7 +130,7 @@
                             <TextBlock Margin="10 0" Text="Thickness:" />
                             <Slider x:Name="thicknessSlider"
                                     Width="200"
-                                 AutoToolTipPlacement="TopLeft"
+                                    AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="20"
                                     Minimum="1"
@@ -170,7 +169,7 @@
                             <TextBlock Margin="10 0" Text="Indeterminate Value:" />
                             <Slider x:Name="indeterminateSlider"
                                     Width="200"
-                                AutoToolTipPlacement="TopLeft"
+                                    AutoToolTipPlacement="TopLeft"
                                     IsSnapToTickEnabled="True"
                                     Maximum="50"
                                     Minimum="1"
