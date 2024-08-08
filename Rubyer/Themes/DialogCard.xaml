@@ -50,70 +50,80 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:DialogCard}">
-                    <Grid>
-                        <rubyer:Transition IsShow="{TemplateBinding IsShow}">
-                            <Border x:Name="PART_BackgroundBorder" Background="{TemplateBinding MaskBackground}" />
-                        </rubyer:Transition>
+                    <Grid x:Name="root">
+                        <rubyer:PopupEx AllowsTransparency="True"
+                                        IsOpen="True"
+                                        Placement="Center"
+                                        PlacementTarget="{Binding ElementName=root, Mode=OneWay}"
+                                        PopupAnimation="None"
+                                        StaysOpen="True">
+                            <Grid Width="{Binding PlacementTarget.ActualWidth, RelativeSource={RelativeSource AncestorType=rubyer:PopupEx}}" Height="{Binding PlacementTarget.ActualHeight, RelativeSource={RelativeSource AncestorType=rubyer:PopupEx}}">
+                                <rubyer:Transition IsShow="{TemplateBinding IsShow}">
+                                    <Border x:Name="PART_BackgroundBorder" Background="{TemplateBinding MaskBackground}" />
+                                </rubyer:Transition>
 
-                        <rubyer:Transition x:Name="Path_Transition"
-                                           InitialScale="0.5"
-                                           IsShow="{TemplateBinding IsShow}"
-                                           Type="{TemplateBinding TransitionType}">
-                            <Border x:Name="PART_CardBorder"
-                                    Margin="5"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{DynamicResource AllDirectionEffect3}">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="*" />
-                                    </Grid.RowDefinitions>
+                                <rubyer:Transition x:Name="Path_Transition"
+                                                   InitialScale="1.1"
+                                                   IsShow="{TemplateBinding IsShow}"
+                                                   Type="{TemplateBinding TransitionType}">
+                                    <Border x:Name="PART_CardBorder"
+                                            Margin="5"
+                                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                            Background="{TemplateBinding Background}"
+                                            BorderBrush="{TemplateBinding BorderBrush}"
+                                            BorderThickness="{TemplateBinding BorderThickness}"
+                                            CornerRadius="{TemplateBinding CornerRadius}"
+                                            Effect="{DynamicResource AllDirectionEffect3}">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
 
-                                    <Border x:Name="titleBar"
-                                            Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                            Cursor="ScrollAll">
-                                        <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                            <Button x:Name="PART_CloseButton"
-                                                    Style="{StaticResource TextButton}"
-                                                    Height="Auto"
-                                                    Padding="5"
-                                                    rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
-                                                    DockPanel.Dock="Right"
-                                                    Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                    Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
-                                                <rubyer:Icon Type="CloseLine" />
-                                            </Button>
-                                            <Grid>
-                                                <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                           Text="{TemplateBinding Title}" />
-                                                <Thumb x:Name="PART_DragThumb"
-                                                       Style="{StaticResource DragThumb}"
-                                                       Visibility="{TemplateBinding IsDraggable, Converter={StaticResource BooleanToVisibleConverter}}" />
-                                            </Grid>
-                                        </DockPanel>
+                                            <Border x:Name="titleBar"
+                                                    Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                    Cursor="ScrollAll">
+                                                <DockPanel Margin="{Binding Path=(rubyer:HeaderHelper.Margin), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                    <Button x:Name="PART_CloseButton"
+                                                            Style="{StaticResource TextButton}"
+                                                            Height="Auto"
+                                                            Padding="5"
+                                                            rubyer:ControlHelper.CornerRadius="{TemplateBinding CornerRadius}"
+                                                            DockPanel.Dock="Right"
+                                                            Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                            Visibility="{TemplateBinding IsShowCloseButton, Converter={StaticResource BooleanToVisibleConverter}}">
+                                                        <rubyer:Icon Type="CloseLine" />
+                                                    </Button>
+                                                    <Grid>
+                                                        <TextBlock Margin="{Binding Path=(rubyer:HeaderHelper.Padding), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   HorizontalAlignment="{Binding Path=(rubyer:HeaderHelper.HorizontalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   VerticalAlignment="{Binding Path=(rubyer:HeaderHelper.VerticalAlignment), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                                   Text="{TemplateBinding Title}" />
+                                                        <Thumb x:Name="PART_DragThumb"
+                                                               Style="{StaticResource DragThumb}"
+                                                               Visibility="{TemplateBinding IsDraggable, Converter={StaticResource BooleanToVisibleConverter}}" />
+                                                    </Grid>
+                                                </DockPanel>
+                                            </Border>
+
+                                            <Border x:Name="contentBorder" Grid.Row="1">
+                                                <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                                  Focusable="False"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Border>
+                                        </Grid>
                                     </Border>
-
-                                    <Border x:Name="contentBorder" Grid.Row="1">
-                                        <ContentPresenter Margin="{TemplateBinding Padding}"
-                                                          Focusable="False"
-                                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </rubyer:Transition>
+                                </rubyer:Transition>
+                            </Grid>
+                        </rubyer:PopupEx>
                     </Grid>
+
                     <ControlTemplate.Triggers>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>

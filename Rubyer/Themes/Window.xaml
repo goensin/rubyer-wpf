@@ -34,6 +34,7 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="TitleShadow" Value="False" />
         <Setter Property="TitleHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(WindowChrome.WindowChrome).CaptionHeight, Mode=TwoWay}" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />

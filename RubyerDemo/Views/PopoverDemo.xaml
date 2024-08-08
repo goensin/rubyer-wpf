@@ -76,7 +76,7 @@
                                         Placement="Bottom"
                                         PopoverContent="This is popover content"
                                         TriggerMode="Hover">
-                            <Button Content="Hover" />
+                            <Button Content="Bottom" />
                         </rubyer:Popover>
 
                         <rubyer:Popover Title="Left"
