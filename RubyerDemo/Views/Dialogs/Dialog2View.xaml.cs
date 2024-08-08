@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -32,10 +33,9 @@ namespace RubyerDemo.Views.Dialogs
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            var dialogCard = this.TryGetParentFromVisualTree<DialogCard>();
-
+            var viewModel = this.DataContext as Dialog2ViewModel;
             var view = new Dialog2View();
-            await Dialog.Show("Dialog2", view, parameters: dialogCard.Title + "~");
+            await Dialog.Show("Dialog2", view, parameters: viewModel.Title + "~");
         }
     }
 }
