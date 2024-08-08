@@ -33,10 +33,10 @@
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           Focusable="False"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        <Popup x:Name="PART_Popup"
-                               AllowsTransparency="True"
-                               IsOpen="{TemplateBinding IsShow}"
-                               PopupAnimation="Fade">
+                        <rubyer:PopupEx x:Name="PART_Popup"
+                                        AllowsTransparency="True"
+                                        IsOpen="{TemplateBinding IsShow}"
+                                        PopupAnimation="Fade">
                             <DockPanel>
                                 <Border x:Name="PART_CardBorder"
                                         Margin="5 5 5 0"
@@ -88,7 +88,7 @@
                                     </Polygon.Effect>
                                 </Polygon>
                             </DockPanel>
-                        </Popup>
+                        </rubyer:PopupEx>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Placement" Value="Bottom">
