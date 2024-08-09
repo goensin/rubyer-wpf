@@ -38,9 +38,9 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:NotificationCard}">
                     <rubyer:Transition x:Name="Path_Transition"
+                                       InitialScale="{TemplateBinding TransitionInitialScale}"
                                        IsShow="{TemplateBinding IsShow}"
                                        Type="{TemplateBinding TransitionType}"
-                                       InitialScale="{TemplateBinding TransitionInitialScale}"
                                        Duration="0:0:0.5">
                         <Border x:Name="rootBorder"
                                 Margin="{TemplateBinding Margin}"

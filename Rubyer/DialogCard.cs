@@ -251,6 +251,7 @@ namespace Rubyer
         public DialogCard()
         {
             CloseTaskCompletionSource = new TaskCompletionSource<object>();
+            Loaded += DialogCard_Loaded;
         }
 
         /// <inheritdoc/>
@@ -278,8 +279,6 @@ namespace Rubyer
             }
 
             cardBorder = (Border)GetTemplateChild(CardBorderPartName);
-
-            Loaded += DialogCard_Loaded;
         }
 
         private void Background_PreviewMouseDown(object sender, MouseButtonEventArgs e)
