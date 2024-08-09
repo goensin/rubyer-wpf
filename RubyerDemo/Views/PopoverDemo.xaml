@@ -18,6 +18,7 @@
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
                         <rubyer:Popover x:Name="popover"
+                                        Title="Click"
                                         Closed="popover_Closed"
                                         Opened="popover_Opened"
                                         PopoverContent="This is popover content"

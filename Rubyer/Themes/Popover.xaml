@@ -61,8 +61,7 @@
                                                    FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                    FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                    Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                   Text="{TemplateBinding Title}"
-                                                   Visibility="{TemplateBinding Title, Converter={StaticResource NullToCollapsedConverter}}" />
+                                                   Text="{TemplateBinding Title}" />
 
                                         <ContentPresenter Grid.Row="1"
                                                           Margin="{TemplateBinding Padding}"
