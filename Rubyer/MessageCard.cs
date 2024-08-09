@@ -167,6 +167,21 @@ namespace Rubyer
             set { SetValue(IsShowProperty, value); }
         }
 
+        /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public static readonly DependencyProperty TransitionInitialScaleProperty =
+            DependencyProperty.Register("TransitionInitialScale", typeof(double), typeof(MessageCard), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public double TransitionInitialScale
+        {
+            get { return (double)GetValue(TransitionInitialScaleProperty); }
+            set { SetValue(TransitionInitialScaleProperty, value); }
+        }
+
         #endregion 依赖属性
 
         private static void OnIsShowChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

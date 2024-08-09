@@ -182,6 +182,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public static readonly DependencyProperty TransitionInitialScaleProperty =
+            DependencyProperty.Register("TransitionInitialScale", typeof(double), typeof(DialogCard), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public double TransitionInitialScale
+        {
+            get { return (double)GetValue(TransitionInitialScaleProperty); }
+            set { SetValue(TransitionInitialScaleProperty, value); }
+        }
+
+        /// <summary>
         /// 是否显示关闭按钮
         /// </summary>
         public static readonly DependencyProperty IsShowCloseButtonProperty = DependencyProperty.Register(

@@ -36,6 +36,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="TransitionType" Value="Zoom" />
+        <Setter Property="TransitionInitialScale" Value="1.15" />
         <Setter Property="MaskBackground" Value="{DynamicResource DialogBackground}" />
         <Setter Property="CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
@@ -56,7 +57,7 @@
                         </rubyer:Transition>
 
                         <rubyer:Transition x:Name="Path_Transition"
-                                           InitialScale="0.5"
+                                           InitialScale="{TemplateBinding TransitionInitialScale}"
                                            IsShow="{TemplateBinding IsShow}"
                                            Type="{TemplateBinding TransitionType}">
                             <Border x:Name="PART_CardBorder"

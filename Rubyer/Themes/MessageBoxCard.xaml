@@ -28,6 +28,7 @@
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="TransitionType" Value="Zoom" />
+        <Setter Property="TransitionInitialScale" Value="1.15" />
         <Setter Property="rubyer:HeaderHelper.Background" Value="{Binding Background, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:HeaderHelper.Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="rubyer:HeaderHelper.FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource Self}}" />
@@ -40,7 +41,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageBoxCard}">
                     <rubyer:Transition x:Name="Path_Transition"
-                                       InitialScale="0.5"
+                                       InitialScale="{TemplateBinding TransitionInitialScale}"
                                        IsShow="{TemplateBinding IsShow}"
                                        Type="{TemplateBinding TransitionType}">
                         <Grid x:Name="root">

@@ -228,6 +228,21 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public static readonly DependencyProperty TransitionInitialScaleProperty =
+            DependencyProperty.Register("TransitionInitialScale", typeof(double), typeof(MessageBoxCard), new PropertyMetadata(default(double)));
+
+        /// <summary>
+        /// 动画初始缩放
+        /// </summary>
+        public double TransitionInitialScale
+        {
+            get { return (double)GetValue(TransitionInitialScaleProperty); }
+            set { SetValue(TransitionInitialScaleProperty, value); }
+        }
+
+        /// <summary>
         /// 关闭完成 Task 源
         /// </summary>
         public TaskCompletionSource<MessageBoxResult> CloseTaskCompletionSource { get; private set; }

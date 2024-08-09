@@ -25,10 +25,12 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="TransitionType" Value="Zoom" />
+        <Setter Property="TransitionInitialScale" Value="0.5" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:MessageCard}">
                     <rubyer:Transition x:Name="Path_Transition"
+                                       InitialScale="{TemplateBinding TransitionInitialScale}"
                                        IsShow="{TemplateBinding IsShow}"
                                        Type="{TemplateBinding TransitionType}">
                         <rubyer:Transition.CloseEasingFunction>
