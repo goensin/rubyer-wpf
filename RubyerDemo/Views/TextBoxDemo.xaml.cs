@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Rubyer;
 using RubyerDemo.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -34,11 +33,6 @@ namespace RubyerDemo.Views
         {
             errorTextBox.Text = "非数值";
             errorTextBox2.Text = "错误样式2";
-        }
-
-        private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-            await MessageBoxR.Show("点击按钮");
         }
     }
 }

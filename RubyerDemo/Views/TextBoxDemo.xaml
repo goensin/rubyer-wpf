@@ -129,7 +129,7 @@
                                  rubyer:InputBoxHelper.PreContent="http://" />
                         <TextBox Width="150">
                             <rubyer:InputBoxHelper.PostContent>
-                                <Button Style="{StaticResource TextButton}" Click="Button_Click" rubyer:ButtonHelper.Shape="Circle">
+                                <Button Style="{StaticResource TextButton}" rubyer:ButtonHelper.Shape="Circle">
                                     <rubyer:Icon Type="Search2Line" />
                                 </Button>
                             </rubyer:InputBoxHelper.PostContent>

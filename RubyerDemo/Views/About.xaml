@@ -79,8 +79,7 @@
                               MinWidth="100"
                               Margin="20 0"
                               Background="{DynamicResource Accent}"
-                              Foreground="{DynamicResource WhiteForeground}"
-                              IsChecked="True">
+                              Foreground="{DynamicResource WhiteForeground}">
                     <rubyer:ToggleButtonHelper.CheckedContent>
                         <rubyer:Icon Type="ArrowUpLine" />
                     </rubyer:ToggleButtonHelper.CheckedContent>
