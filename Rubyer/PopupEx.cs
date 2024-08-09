@@ -8,7 +8,6 @@ using System.Windows.Interop;
 using System.Windows;
 using System.Windows.Media;
 using System.Xml.Linq;
-using Rubyer.Commons.KnownBoxes;
 
 namespace Rubyer
 {
@@ -52,18 +51,6 @@ namespace Rubyer
         {
             get => (bool)GetValue(AllowTopMostProperty);
             set => SetValue(AllowTopMostProperty, value);
-        }
-
-        public static readonly DependencyProperty IsOpenWhenLoadedProperty =
-         DependencyProperty.Register("IsOpenWhenLoaded", typeof(bool), typeof(PopupEx), new PropertyMetadata(BooleanBoxes.FalseBox));
-
-        /// <summary>
-        /// 加载后打开
-        /// </summary>
-        public bool IsOpenWhenLoaded
-        {
-            get { return (bool)GetValue(IsOpenWhenLoadedProperty); }
-            set { SetValue(IsOpenWhenLoadedProperty, value); }
         }
 
         public PopupEx()
@@ -119,10 +106,7 @@ namespace Rubyer
                 element.SizeChanged += Element_SizeChanged;
             }
 
-            if (IsOpenWhenLoaded)
-            {
-                IsOpen = true;
-            }
+            IsOpen = true;
         }
 
         private void Element_SizeChanged(object sender, SizeChangedEventArgs e)

@@ -52,7 +52,7 @@
                 <ControlTemplate TargetType="{x:Type rubyer:DialogCard}">
                     <Grid x:Name="root">
                         <rubyer:PopupEx AllowsTransparency="True"
-                                        IsOpenWhenLoaded="True"
+                                        IsOpen="True"
                                         Placement="Center"
                                         PlacementTarget="{Binding ElementName=root, Mode=OneWay}"
                                         PopupAnimation="None"
