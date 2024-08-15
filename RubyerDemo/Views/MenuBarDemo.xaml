@@ -157,7 +157,7 @@
                          FontSize="{Binding SelectedItem, ElementName=fontSizeComboBox}"
                          Text="这是一段测试文字，右击调出菜单">
                     <TextBox.ContextMenu>
-                        <ContextMenu Background="{DynamicResource DefaultBackground}">
+                        <ContextMenu>
                             <MenuItem Command="Copy">
                                 <MenuItem.Icon>
                                     <rubyer:Icon Type="FileCopyLine" />

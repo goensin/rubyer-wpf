@@ -54,13 +54,13 @@
                     <Grid>
                         <Border Margin="5"
                                 Padding="0 5"
-                                Background="{DynamicResource FloatBackground}"
+                                Background="{TemplateBinding Background}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 Effect="{DynamicResource AllDirectionEffect}" />
                         <Border x:Name="SubmenuBorder"
                                 Margin="5"
                                 Padding="0 5"
-                                Background="{DynamicResource FloatBackground}"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -158,13 +158,13 @@
                         <Grid>
                             <Border Margin="5"
                                     Padding="0 5"
-                                    Background="{DynamicResource FloatBackground}"
+                                    Background="{TemplateBinding Background}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     Effect="{DynamicResource AllDirectionEffect}" />
                             <Border x:Name="SubmenuBorder"
                                     Margin="5"
                                     Padding="0 5"
-                                    Background="{DynamicResource FloatBackground}"
+                                    Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -251,7 +251,7 @@
 
     <!--  MenuItem Style  -->
     <Style x:Key="RubyerMenuItem" TargetType="{x:Type MenuItem}">
-        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=MenuBase}}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=MenuBase}}" />
@@ -280,7 +280,7 @@
     </Style>
 
     <Style x:Key="RubyerMenu" TargetType="{x:Type Menu}">
-        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
+        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="OverridesDefaultStyle" Value="True" />
