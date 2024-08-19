@@ -10,6 +10,9 @@ namespace RubyerDemo.Models
     public partial class City : ObservableObject, ICloneable
     {
         [ObservableProperty]
+        private bool isSelected;
+
+        [ObservableProperty]
         private string code;
 
         [ObservableProperty]

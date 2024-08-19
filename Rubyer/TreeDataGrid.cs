@@ -471,7 +471,11 @@ namespace Rubyer
             var items = GetItemsFromChildPath(model);
             foreach (var item in items)
             {
-                collection.Remove(item);
+                if (collection.Contains(item))
+                {
+                    collection.Remove(item);
+                }
+
                 RemoveChildren(item, collection);
             }
         }

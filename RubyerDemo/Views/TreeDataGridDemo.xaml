@@ -30,25 +30,28 @@
                             Content="更新数据源" />
                 </StackPanel>
 
+                <!--   Xaml -> Source 通知需要设置  UpdateSourceTrigger=PropertyChanged  -->
                 <rubyer:TreeDataGrid x:Name="TreeDataGrid"
+                                     rubyer:DataGridHelper.ClickToEdit="True"
                                      AutoGenerateColumns="False"
                                      BorderThickness="1"
                                      CanUserAddRows="False"
                                      ChildrenPath="Children"
                                      GridLinesVisibility="All"
                                      HierarchicalItemsSource="{Binding Cities}"
-                                     IsReadOnly="True">
+                                     IsReadOnly="False">
                     <rubyer:TreeDataGrid.RowStyle>
                         <Style BasedOn="{StaticResource RubyerTreeDataGridRow}" TargetType="{x:Type rubyer:TreeDataGridRow}">
                             <Setter Property="IsExpanded" Value="{Binding IsExpanded, UpdateSourceTrigger=PropertyChanged}" />
                         </Style>
                     </rubyer:TreeDataGrid.RowStyle>
                     <rubyer:TreeDataGrid.Columns>
+                        <DataGridCheckBoxColumn Binding="{Binding IsSelected, UpdateSourceTrigger=PropertyChanged}" Header="选择" />
                         <DataGridTextColumn Width="150"
-                                            Binding="{Binding Code}"
+                                            Binding="{Binding Code, UpdateSourceTrigger=PropertyChanged}"
                                             Header="编号" />
                         <DataGridTextColumn Width="200"
-                                            Binding="{Binding Name}"
+                                            Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
                                             Header="名称" />
                         <DataGridTemplateColumn Header="操作">
                             <DataGridTemplateColumn.CellTemplate>

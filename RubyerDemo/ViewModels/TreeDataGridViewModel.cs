@@ -67,9 +67,17 @@ namespace RubyerDemo.ViewModels
         [RelayCommand]
         private void Add(City city)
         {
-            city.IsExpanded = !city.IsExpanded;
+            if (!city.IsExpanded)
+            {
+                city.IsExpanded = true;
+            }
             city.Children ??= new ObservableCollection<City>();
-            city.Children.Add(new City() { Code = city.Code + " - ", Name = city.Name + " - " });
+            city.Children.Add(new City() { Code = city.Code + " - " + city.Children.Count, Name = city.Name + " - " + city.Children.Count });
+
+            foreach (var item in city.Children)
+            {
+                item.IsSelected = !item.IsSelected;
+            }
         }
 
         [RelayCommand]
@@ -106,6 +114,5 @@ namespace RubyerDemo.ViewModels
             Notification.Success("替换成功");
             DialogContainer.CloseDialogCommand.Execute(null, null);
         }
-
     }
 }
