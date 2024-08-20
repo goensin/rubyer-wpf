@@ -7,8 +7,9 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style x:Key="RubyerPopover" TargetType="{x:Type rubyer:Popover}">
-        <Setter Property="Background" Value="{DynamicResource FloatBackground}" />
-        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="PopoverBackground" Value="{DynamicResource FloatBackground}" />
+        <Setter Property="PopoverForeground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Padding" Value="5" />
         <Setter Property="IsShow" Value="False" />
@@ -29,20 +30,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:Popover}">
-                    <Grid Background="Transparent">
+                    <Grid Background="{TemplateBinding Background}">
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           Focusable="False"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        <Popup x:Name="PART_Popup"
+                        <Popup x:Name="PART_Popup" 
                                AllowsTransparency="True"
                                IsOpen="{TemplateBinding IsShow}"
-                               PopupAnimation="Fade">
+                               PopupAnimation="Fade"
+                               TextBlock.Foreground="{TemplateBinding PopoverForeground}">
                             <DockPanel>
                                 <Border x:Name="PART_CardBorder"
                                         Margin="5 5 5 0"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Background="{TemplateBinding Background}"
+                                        Background="{TemplateBinding PopoverBackground}"
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
@@ -76,7 +78,7 @@
                                          HorizontalAlignment="Center"
                                          VerticalAlignment="Center"
                                          DockPanel.Dock="Bottom"
-                                         Fill="{TemplateBinding Background}"
+                                         Fill="{TemplateBinding PopoverBackground}"
                                          Points="0,0 20,0 10,10"
                                          RenderTransformOrigin="0.5 0.5">
                                     <Polygon.Effect>

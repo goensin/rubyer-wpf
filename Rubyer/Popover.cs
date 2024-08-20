@@ -1,20 +1,11 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using Rubyer.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -99,6 +90,12 @@ namespace Rubyer
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Popover), new PropertyMetadata(default(CornerRadius)));
 
+        public static readonly DependencyProperty PopoverBackgroundProperty =
+            DependencyProperty.Register("PopoverBackground", typeof(Brush), typeof(Popover), new PropertyMetadata(null));
+
+        public static readonly DependencyProperty PopoverForegroundProperty =
+            DependencyProperty.Register("PopoverForeground", typeof(Brush), typeof(Popover), new PropertyMetadata(null));
+
         static Popover()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Popover), new FrameworkPropertyMetadata(typeof(Popover)));
@@ -173,6 +170,24 @@ namespace Rubyer
             set { SetValue(CornerRadiusProperty, value); }
         }
 
+        /// <summary>
+        /// 弹出框背景色
+        /// </summary>
+        public Brush PopoverBackground
+        {
+            get { return (Brush)GetValue(PopoverBackgroundProperty); }
+            set { SetValue(PopoverBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 弹出框前景色
+        /// </summary>
+        public Brush PopoverForeground
+        {
+            get { return (Brush)GetValue(PopoverForegroundProperty); }
+            set { SetValue(PopoverForegroundProperty, value); }
+        }
+
         /// <inheritdoc/>
         public override void OnApplyTemplate()
         {
@@ -183,6 +198,13 @@ namespace Rubyer
             popup = GetTemplateChild(PopupPartName) as Popup;
             WeakEventManager<Popup, EventArgs>.AddHandler(popup, "Opened", Popup_Opened);
             WeakEventManager<Popup, EventArgs>.AddHandler(popup, "Closed", Popup_Closed);
+
+            Loaded += Popover_Loaded;
+        }
+
+        private void Popover_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= Popover_Loaded;
 
             AddTriggerAction(TriggerMode);
         }
@@ -235,28 +257,36 @@ namespace Rubyer
             AfterCloseCommand?.Execute(null);
         }
 
-        private async Task ShowPopup()
+        /// <summary>
+        /// 显示
+        /// </summary>
+        private void ShowPopup()
         {
-            await Task.Delay(5);
-            IsShow = true;
+            if (!IsShow)
+            {
+                IsShow = true;
+            }
         }
 
+        /// <summary>
+        /// 关闭
+        /// </summary>
         private void ClosePopup()
         {
             IsShow = false;
         }
 
-        private async void Popover_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => await ShowPopup();
+        private void Popover_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => ShowPopup();
 
-        private async void Popover_MouseEnter(object sender, MouseEventArgs e) => await ShowPopup();
+        private void Popover_MouseEnter(object sender, MouseEventArgs e) => ShowPopup();
 
         private void Popover_MouseLeave(object sender, MouseEventArgs e) => ClosePopup();
 
-        private async void Popover_GotFocus(object sender, RoutedEventArgs e) => await ShowPopup();
+        private void Popover_GotFocus(object sender, RoutedEventArgs e) => ShowPopup();
 
         private void Popover_LostFocus(object sender, RoutedEventArgs e) => ClosePopup();
 
-        private async void Popover_MouseRightButtonDown(object sender, MouseButtonEventArgs e) => await ShowPopup();
+        private void Popover_MouseRightButtonDown(object sender, MouseButtonEventArgs e) => ShowPopup();
 
         private void AddTriggerAction(PopoverTriggerMode triggerMode)
         {
@@ -264,6 +294,12 @@ namespace Rubyer
             {
                 case PopoverTriggerMode.None:
                     popup.StaysOpen = true;
+                    PreviewMouseLeftButtonUp -= Popover_MouseLeftButtonDown;
+                    MouseEnter -= Popover_MouseEnter;
+                    MouseLeave -= Popover_MouseLeave;
+                    GotFocus -= Popover_GotFocus;
+                    LostFocus -= Popover_LostFocus;
+                    PreviewMouseRightButtonUp -= Popover_MouseRightButtonDown;
                     break;
                 case PopoverTriggerMode.Click:
                     popup.StaysOpen = false;

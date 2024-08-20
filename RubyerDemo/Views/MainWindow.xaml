@@ -173,26 +173,26 @@
                           CollapsedWidth="40"
                           ExpandedWidth="180"
                           Header="Controls"
+                          IsExpanded="True"
                           ItemsSource="{Binding ViewItems}"
                           SelectedItem="{Binding CurrentViewItem}"
                           TransitionDuration="0:0:0.7"
                           TransitionType="Fade">
-        <rubyer:HamburgerMenu.Resources>
-            <StackPanel x:Key="headContent"
-                        x:Shared="False"
-                        Orientation="Vertical"
-                        TextBlock.FontSize="14">
-                <TextBlock Text="{Binding Name}" />
-                <TextBlock FontSize="11"
-                           Opacity="0.6"
-                           Text="{Binding Description}" />
-            </StackPanel>
-        </rubyer:HamburgerMenu.Resources>
+        <rubyer:HamburgerMenu.ItemTemplate>
+            <DataTemplate>
+                <StackPanel Orientation="Vertical" TextBlock.FontSize="14">
+                    <TextBlock Text="{Binding Name}" />
+                    <TextBlock FontSize="11"
+                               Opacity="0.6"
+                               Text="{Binding Description}" />
+                </StackPanel>
+            </DataTemplate>
+        </rubyer:HamburgerMenu.ItemTemplate>
         <rubyer:HamburgerMenu.ItemContainerStyle>
             <Style TargetType="rubyer:HamburgerMenuItem">
                 <Setter Property="DataContext" Value="{Binding}" />
                 <Setter Property="IconType" Value="{Binding IconType}" />
-                <Setter Property="Header" Value="{StaticResource headContent}" />
+                <Setter Property="Header" Value="{Binding .}" />
             </Style>
         </rubyer:HamburgerMenu.ItemContainerStyle>
         <rubyer:HamburgerMenu.ContentTemplate>
