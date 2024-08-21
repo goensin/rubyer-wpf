@@ -46,8 +46,16 @@
         </Setter>
     </Style>
 
-    <Style x:Key="OutLineCard" TargetType="{x:Type rubyer:Card}">
+    <Style x:Key="OutLineCard"
+           BasedOn="{StaticResource RubyerCard}"
+           TargetType="{x:Type rubyer:Card}">
         <Setter Property="BorderEffect" Value="{x:Null}" />
         <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
+    </Style>
+
+    <Style x:Key="NoEffectCard"
+           BasedOn="{StaticResource RubyerCard}"
+           TargetType="rubyer:Card">
+        <Setter Property="BorderEffect" Value="{x:Null}" />
     </Style>
 </ResourceDictionary>
