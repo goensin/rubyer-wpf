@@ -302,50 +302,53 @@ namespace Rubyer
             }
         }
 
+        // UniformGrid
         private static void SetUniformGridSpacing(UniformGrid uniformGrid)
         {
             var children = uniformGrid.Children.OfType<FrameworkElement>().Where(x => x.Visibility != Visibility.Collapsed).ToList();
             var count = children.Count;
             var spacing = GetSpacing(uniformGrid);
+            var points = children.Select(x => x.TranslatePoint(new Point(), uniformGrid)).ToList();
+            int index = 0;
             foreach (FrameworkElement element in children)
             {
-                SpacingType type;
-                var point = element.TranslatePoint(new Point(), uniformGrid);
-                if (point.X < element.ActualWidth)
+                SpacingType type = SpacingType.No;
+                var point = points[index];
+                if (point.X < points.Max(p => p.X) && point.X > points.Min(p => p.X))
+                {
+                    type = SpacingType.All;
+                }
+                else if (point.X < points.Max(p => p.X))
                 {
                     type = SpacingType.End;
                 }
-                else if (uniformGrid.ActualWidth - (point.X + element.ActualWidth) < element.ActualWidth)
+                else if (point.X > points.Min(p => p.X))
                 {
                     type = SpacingType.Start;
-                }
-                else
-                {
-                    type = SpacingType.All;
                 }
 
                 SetHorizontalSpacing(type, element, spacing, new Thickness(0));
-            }
 
-            foreach (FrameworkElement element in children)
-            {
-                SpacingType type;
-                var point = element.TranslatePoint(new Point(), uniformGrid);
-
-                if (point.Y < element.ActualHeight)
+                if (point.Y < points.Max(p => p.Y) && point.Y > points.Min(p => p.Y))
+                {
+                    type = SpacingType.All;
+                }
+                else if (point.Y < points.Max(p => p.Y))
                 {
                     type = SpacingType.End;
                 }
-                else if (uniformGrid.ActualHeight - (point.Y + element.ActualHeight) < element.ActualHeight)
+                else if (point.Y > points.Min(p => p.Y))
                 {
                     type = SpacingType.Start;
                 }
                 else
                 {
-                    type = SpacingType.All;
+                    type = SpacingType.No;
                 }
 
                 SetVerticalSpacing(type, element, spacing, new Thickness(element.Margin.Left, 0, element.Margin.Right, 0));
+
+                index++;
             }
         }
     }
