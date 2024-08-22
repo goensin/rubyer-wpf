@@ -122,6 +122,22 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 动画时长
+        /// </summary>
+        public static readonly DependencyProperty AnimationDurationProperty =
+            DependencyProperty.RegisterAttached("AnimationDuration", typeof(TimeSpan), typeof(ProgressBarHelper), new PropertyMetadata(TimeSpan.FromSeconds(0.5)));
+
+        public static TimeSpan GetAnimationDuration(DependencyObject obj)
+        {
+            return (TimeSpan)obj.GetValue(AnimationDurationProperty);
+        }
+
+        public static void SetAnimationDuration(DependencyObject obj, TimeSpan value)
+        {
+            obj.SetValue(AnimationDurationProperty, value);
+        }
+
+        /// <summary>
         /// 是否进行动画中
         /// </summary>
         internal static readonly DependencyPropertyKey IsAnimatingPropertyKey =
@@ -165,7 +181,8 @@ namespace Rubyer
                 return;
             }
 
-            var doubleAnimation = new DoubleAnimation(e.OldValue, e.NewValue, new Duration(TimeSpan.FromSeconds(0.5)));
+            var duration = GetAnimationDuration(progressBar);
+            var doubleAnimation = new DoubleAnimation(e.OldValue, e.NewValue, new Duration(duration));
             doubleAnimation.EasingFunction = new CubicEase { EasingMode = EasingMode.EaseOut };
             doubleAnimation.Completed += (a, b) =>
             {
