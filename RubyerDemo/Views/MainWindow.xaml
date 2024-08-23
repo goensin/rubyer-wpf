@@ -192,7 +192,6 @@
             <Style TargetType="rubyer:HamburgerMenuItem">
                 <Setter Property="DataContext" Value="{Binding}" />
                 <Setter Property="IconType" Value="{Binding IconType}" />
-                <Setter Property="Header" Value="{Binding .}" />
             </Style>
         </rubyer:HamburgerMenu.ItemContainerStyle>
         <rubyer:HamburgerMenu.ContentTemplate>
