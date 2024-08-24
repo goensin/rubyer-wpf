@@ -34,7 +34,7 @@
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           Focusable="False"
                                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        <Popup x:Name="PART_Popup" 
+                        <Popup x:Name="PART_Popup"
                                AllowsTransparency="True"
                                IsOpen="{TemplateBinding IsShow}"
                                PopupAnimation="Fade"
