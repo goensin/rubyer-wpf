@@ -182,7 +182,7 @@
 
                         <Border x:Name="headBorder"
                                 Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource AncestorType=Calendar}}"
-                                CornerRadius="{DynamicResource TopContainerCornerRadius}"
+                                CornerRadius="{Binding Path=(rubyer:HeaderHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.FontFamily="{Binding Path=(rubyer:HeaderHelper.FontFamily), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.FontSize="{Binding Path=(rubyer:HeaderHelper.FontSize), RelativeSource={RelativeSource AncestorType=Calendar}}"
                                 TextBlock.FontWeight="{Binding Path=(rubyer:HeaderHelper.FontWeight), RelativeSource={RelativeSource AncestorType=Calendar}}"
@@ -305,6 +305,7 @@
         <Setter Property="rubyer:HeaderHelper.HorizontalAlignment" Value="Stretch" />
         <Setter Property="rubyer:HeaderHelper.VerticalAlignment" Value="Center" />
         <Setter Property="rubyer:HeaderHelper.Padding" Value="5" />
+        <Setter Property="rubyer:HeaderHelper.CornerRadius" Value="{DynamicResource TopContainerCornerRadius}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
