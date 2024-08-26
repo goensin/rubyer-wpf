@@ -28,14 +28,14 @@
                                 rubyer:ButtonHelper.ShowShadow="True"
                                 Content="阴影" />
                         <rubyer:DropDownButton Content="下拉按钮">
-                            <rubyer:DropDownButton.MenuItemsSource>
-                                <rubyer:MenuItemCollection>
+                            <rubyer:DropDownButton.DropDownMenu>
+                                <ContextMenu>
                                     <MenuItem Header="选项一" />
                                     <MenuItem Header="选项二" />
                                     <Separator />
                                     <MenuItem Header="选项三" />
-                                </rubyer:MenuItemCollection>
-                            </rubyer:DropDownButton.MenuItemsSource>
+                                </ContextMenu>
+                            </rubyer:DropDownButton.DropDownMenu>
                         </rubyer:DropDownButton>
                     </StackPanel>
                 </rubyer:Card>

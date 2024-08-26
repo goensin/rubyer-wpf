@@ -18,8 +18,8 @@
                                 rubyer:PanelHelper.Spacing="10"
                                 Orientation="Horizontal">
                         <rubyer:DropDownButton Content="下拉按钮">
-                            <rubyer:DropDownButton.MenuItemsSource>
-                                <rubyer:MenuItemCollection>
+                            <rubyer:DropDownButton.DropDownMenu>
+                                <ContextMenu>
                                     <MenuItem Header="菜单一">
                                         <MenuItem.Icon>
                                             <rubyer:Icon Type="AncientGateFill" />
@@ -36,16 +36,16 @@
                                             <rubyer:Icon Type="AncientPavilionFill" />
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                </rubyer:MenuItemCollection>
-                            </rubyer:DropDownButton.MenuItemsSource>
+                                </ContextMenu>
+                            </rubyer:DropDownButton.DropDownMenu>
                         </rubyer:DropDownButton>
 
                         <rubyer:DropDownButton rubyer:ButtonHelper.ShowShadow="True"
                                                Background="{DynamicResource Accent}"
                                                Content="无分隔"
                                                IsShowSeparator="False">
-                            <rubyer:DropDownButton.MenuItemsSource>
-                                <rubyer:MenuItemCollection>
+                            <rubyer:DropDownButton.DropDownMenu>
+                                <ContextMenu>
                                     <MenuItem Header="菜单一">
                                         <MenuItem.Icon>
                                             <rubyer:Icon Type="AncientGateFill" />
@@ -62,8 +62,8 @@
                                             <rubyer:Icon Type="AncientPavilionFill" />
                                         </MenuItem.Icon>
                                     </MenuItem>
-                                </rubyer:MenuItemCollection>
-                            </rubyer:DropDownButton.MenuItemsSource>
+                                </ContextMenu>
+                            </rubyer:DropDownButton.DropDownMenu>
                         </rubyer:DropDownButton>
                     </StackPanel>
                 </controls:ControlDisplay>
