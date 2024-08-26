@@ -7,6 +7,7 @@ using Microsoft.Win32;
 using Rubyer.Models;
 using System.Linq;
 using System.Windows.Media.Effects;
+using System.Collections.Generic;
 
 namespace Rubyer
 {
@@ -18,8 +19,8 @@ namespace Rubyer
         /// <summary>
         /// 所有颜色 key
         /// </summary>
-        public static string[] ColorKeys = new string[]
-        {
+        private static List<string> ColorKeys =
+        [
             "DefaultForeground",
             "DefaultBackground",
             "Primary",
@@ -57,7 +58,7 @@ namespace Rubyer
             "WindowTitleBackground",
             "StatusBarBackground",
             "PanelBackground",
-        };
+        ];
 
         private static bool themeApplying = false;
 
@@ -273,6 +274,18 @@ namespace Rubyer
 
             var args = new ThemeModeChangedArgs(currentThemeColor, isDarkMode);
             ThemeModeChanged?.Invoke(Application.Current, args);
+        }
+
+        /// <summary>
+        /// 添加颜色
+        /// </summary>
+        /// <param name="keys"></param>
+        public static void AddColorKeys(params string[] keys)
+        {
+            for (int i = 0; i < keys.Length; i++)
+            {
+                ColorKeys.Add(keys[i]);
+            }
         }
     }
 
