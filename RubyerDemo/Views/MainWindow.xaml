@@ -181,11 +181,19 @@
                           TransitionType="Fade">
         <rubyer:HamburgerMenu.ItemTemplate>
             <DataTemplate>
-                <StackPanel Orientation="Vertical" TextBlock.FontSize="14">
-                    <TextBlock Text="{Binding Name}" />
-                    <TextBlock FontSize="11"
-                               Opacity="0.6"
-                               Text="{Binding Description}" />
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" TextBlock.FontSize="14">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock FontSize="11"
+                                   Opacity="0.6"
+                                   Text="{Binding Description}" />
+                    </StackPanel>
+                    <Ellipse Width="10"
+                             Height="10"
+                             Margin="10 0"
+                             VerticalAlignment="Top"
+                             Fill="{StaticResource Error}"
+                             Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibleConverter}}" />
                 </StackPanel>
             </DataTemplate>
         </rubyer:HamburgerMenu.ItemTemplate>

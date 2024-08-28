@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using Rubyer;
+using System;
 
 namespace RubyerDemo.ViewModels
 {
@@ -33,12 +34,19 @@ namespace RubyerDemo.ViewModels
         [ObservableProperty]
         private object content;
 
-        public ViewItem(string name, string description, object content, IconType? iconType = null)
+        /// <summary>
+        /// 是否更新
+        /// </summary>
+        [ObservableProperty]
+        private bool isNew;
+
+        public ViewItem(string name, string description, object content, IconType? iconType = null, DateTime? updateTime = null)
         {
             Name = name;
             Description = description;
             Content = content;
             IconType = iconType;
+            IsNew = updateTime is { } && DateTime.Now - updateTime < TimeSpan.FromDays(30);
         }
     }
 }

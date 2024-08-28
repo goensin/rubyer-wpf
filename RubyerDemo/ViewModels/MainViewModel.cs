@@ -23,24 +23,23 @@ namespace RubyerDemo.ViewModels
         private string title;
 
         [ObservableProperty]
-        private ObservableCollection<ViewItem> viewItems;
+        private List<ViewItem> viewItems;
 
         [ObservableProperty]
         private ViewItem currentViewItem;
 
         [ObservableProperty]
-        private ObservableCollection<ThemeColorInfo> themeColors;
+        private IEnumerable<ThemeColorInfo> themeColors;
 
         [ObservableProperty]
-        private ObservableCollection<ViewItem> sampleItems;
+        private IEnumerable<ViewItem> sampleItems;
 
         public MainViewModel()
         {
             Title = "Rubyer UI";
 
-            ViewItems =
+            IEnumerable<ViewItem> views =
             [
-                new("Overview", "总览", new Overview(), IconType.Home2Line),
                 new("Button", "按钮", new ButtonDemo(), IconType.CheckboxBlankFill),
                 new("DropDownButton", "下拉按钮", new DropDownButtonDemo(), IconType.ArrowDownCircleLine),
                 new("ToggleButton", "切换按钮", new ToggleButtonDemo(), IconType.ToggleLine),
@@ -80,9 +79,11 @@ namespace RubyerDemo.ViewModels
                 new("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
                 new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
-                new("Avatar", "头像", new AvatarDemo(), IconType.AccountCircleLine),
+                new("Avatar", "头像", new AvatarDemo(), IconType.AccountCircleLine, DateTime.Parse("2024-8-28")),
             ];
 
+            ViewItems = [.. views.OrderBy(x => x.Name)];
+            ViewItems.Insert(0, new("Overview", "总览", new Overview(), IconType.Home2Line));
             CurrentViewItem = ViewItems.First();
 
             ThemeColors =
