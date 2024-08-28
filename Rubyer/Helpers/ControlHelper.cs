@@ -1,5 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Rubyer

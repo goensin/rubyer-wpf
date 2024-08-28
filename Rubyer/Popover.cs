@@ -88,7 +88,7 @@ namespace Rubyer
             DependencyProperty.Register("Placement", typeof(PopoverPlacementMode), typeof(Popover), new PropertyMetadata(PopoverPlacementMode.Top));
 
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(Popover), new PropertyMetadata(default(CornerRadius)));
+            Border.CornerRadiusProperty.AddOwner(typeof(Popover), new FrameworkPropertyMetadata(default(CornerRadius), FrameworkPropertyMetadataOptions.Inherits));
 
         public static readonly DependencyProperty PopoverBackgroundProperty =
             DependencyProperty.Register("PopoverBackground", typeof(Brush), typeof(Popover), new PropertyMetadata(null));

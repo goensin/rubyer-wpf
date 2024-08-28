@@ -63,7 +63,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogCard.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Popover.xaml" />
-
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Avatar.xaml" />
+        
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />
@@ -133,6 +134,5 @@
     <Style BasedOn="{StaticResource RubyerDialogCard}" TargetType="{x:Type rubyer:DialogCard}" />
     <Style BasedOn="{StaticResource RubyerDialogContainer}" TargetType="{x:Type rubyer:DialogContainer}" />
     <Style BasedOn="{StaticResource RubyerPopover}" TargetType="{x:Type rubyer:Popover}" />
-
-
+    <Style BasedOn="{StaticResource RubyerAvatar}" TargetType="{x:Type rubyer:Avatar}" />
 </ResourceDictionary>

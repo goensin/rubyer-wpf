@@ -80,7 +80,7 @@ namespace Rubyer
         /// 圆角半径
         /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty =
-          DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(NotificationCard), new PropertyMetadata(default(CornerRadius)));
+            Border.CornerRadiusProperty.AddOwner(typeof(NotificationCard), new FrameworkPropertyMetadata(default(CornerRadius), FrameworkPropertyMetadataOptions.Inherits));
 
         /// <summary>
         /// 圆角半径

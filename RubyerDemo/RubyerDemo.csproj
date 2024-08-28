@@ -19,6 +19,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\Avatars\1.png" />
+	  <None Remove="Assets\Avatars\2.png" />
+	  <None Remove="Assets\Avatars\3.png" />
+	  <None Remove="Assets\Avatars\4.png" />
 	  <None Remove="Assets\img1.jpg" />
 	  <None Remove="Assets\img2.jpg" />
 	  <None Remove="Assets\img3.jpg" />
@@ -55,6 +59,10 @@
 		<Resource Include="Assets\ali.jpg">
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Resource>
+		<Resource Include="Assets\Avatars\1.png" />
+		<Resource Include="Assets\Avatars\2.png" />
+		<Resource Include="Assets\Avatars\3.png" />
+		<Resource Include="Assets\Avatars\4.png" />
 		<Resource Include="Assets\img1.jpg" />
 		<Resource Include="Assets\img2.jpg" />
 		<Resource Include="Assets\img3.jpg" />

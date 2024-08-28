@@ -80,6 +80,7 @@ namespace RubyerDemo.ViewModels
                 new("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
                 new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
+                new("Avatar", "头像", new AvatarDemo(), IconType.AccountCircleLine),
             ];
 
             CurrentViewItem = ViewItems.First();
