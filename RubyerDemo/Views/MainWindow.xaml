@@ -41,6 +41,15 @@
                   rubyer:MenuHelper.IconWidth="30"
                   Foreground="{DynamicResource DefaultForeground}"
                   WindowChrome.IsHitTestVisibleInChrome="True">
+                <MenuItem Command="{Binding OpenDonateCommand}">
+                    <MenuItem.Header>
+                        <StackPanel rubyer:PanelHelper.Spacing="8" Orientation="Horizontal">
+                            <rubyer:Icon Foreground="{DynamicResource Accent}" Type="MoneyCnyCircleFill" />
+                            <TextBlock Text="打赏" />
+                        </StackPanel>
+                    </MenuItem.Header>
+                </MenuItem>
+
                 <MenuItem ItemsSource="{Binding SampleItems}">
                     <MenuItem.Header>
                         <StackPanel rubyer:PanelHelper.Spacing="8" Orientation="Horizontal">

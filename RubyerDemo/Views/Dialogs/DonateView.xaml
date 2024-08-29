@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="RubyerDemo.Views.Dialogs.DonateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             mc:Ignorable="d">
+    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+        <rubyer:Card Margin="10" Background="#07C160">
+            <StackPanel>
+                <TextBlock Margin="10"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Foreground="#FFFFFF">
+                    微信
+                </TextBlock>
+                <Image Width="150"
+                       Margin="10"
+                       Source="../../Assets/wechat.jpg" />
+            </StackPanel>
+        </rubyer:Card>
+        <rubyer:Card Margin="0 10 10 10" Background="#1677FF">
+            <StackPanel>
+                <TextBlock Margin="10"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Foreground="#FFFFFF">
+                    支付宝
+                </TextBlock>
+                <Image Width="150"
+                       Margin="10"
+                       Source="../../Assets/ali.jpg" />
+            </StackPanel>
+        </rubyer:Card>
+    </StackPanel>
+</UserControl>

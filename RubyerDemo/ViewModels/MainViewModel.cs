@@ -4,6 +4,7 @@ using Rubyer;
 using Rubyer.Models;
 using RubyerDemo.Consts;
 using RubyerDemo.Views;
+using RubyerDemo.Views.Dialogs;
 using RubyerDemo.Views.Samples;
 using System;
 using System.Collections.Generic;
@@ -163,6 +164,16 @@ namespace RubyerDemo.ViewModels
             var window = item.Content as Window;
             window.Show();
             window.Activate();
+        }
+
+        /// <summary>
+        /// 打开打赏弹窗
+        /// </summary>
+        /// <returns></returns>
+        [RelayCommand]
+        private async Task OpenDonate()
+        {
+            await Dialog.Show(new DonateView(), title: "如果使用了感觉还不错，请作者喝杯茶吧。");
         }
     }
 }
