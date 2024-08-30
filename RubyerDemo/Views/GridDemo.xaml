@@ -31,7 +31,7 @@
                 <controls:ControlDisplay Title="PanelHelper.Spacing"
                                          Grid.Row="1"
                                          HorizontalContentAlignment="Stretch"
-                                         Description="Grid 和 StackPanel 设置间隔, 实际设置 Child 的 Margin">
+                                         Description="Grid 和 StackPanel 设置间隔, 实际设置 Child 的 Margin（复杂布局不建议使用，会影响界面绘制性能）">
                     <Grid rubyer:GridHelper.RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" rubyer:PanelHelper.Spacing="10">
                         <StackPanel Margin="0 0 0 20"
                                     HorizontalAlignment="Center"

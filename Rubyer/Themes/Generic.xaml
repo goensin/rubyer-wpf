@@ -64,7 +64,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Popover.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Avatar.xaml" />
-        
+
     </ResourceDictionary.MergedDictionaries>
 
     <Style BasedOn="{StaticResource RubyerButton}" TargetType="{x:Type Button}" />

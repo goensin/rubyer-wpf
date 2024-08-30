@@ -103,6 +103,23 @@ namespace Rubyer
 
         #endregion
 
+
+        /// <summary>
+        /// TabItem 赋值给 RemoveCommandParamarter
+        /// </summary>
+        public static readonly DependencyProperty TabItemToRemoveCommandParamarterProperty =
+            DependencyProperty.RegisterAttached("TabItemToRemoveCommandParamarter", typeof(bool), typeof(TabControlHelper), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsClearbleChanged));
+
+        public static bool GetTabItemToRemoveCommandParamarter(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(TabItemToRemoveCommandParamarterProperty);
+        }
+
+        public static void SetTabItemToRemoveCommandParamarter(DependencyObject obj, bool value)
+        {
+            obj.SetValue(TabItemToRemoveCommandParamarterProperty, BooleanBoxes.Box(value));
+        }
+
         /// <summary>
         /// 未选中 item 时显示视图
         /// </summary>
@@ -183,7 +200,7 @@ namespace Rubyer
                     IEditableCollectionView items = tabControl.Items;
 
                     var removeCommand = GetRemoveCommand(tabControl);
-                    var item = items.CanRemove ? tabItem.DataContext : tabItem; // Binding 和 TabItem
+                    var item = items.CanRemove ? tabControl.ItemContainerGenerator.ItemFromContainer(tabItem) : tabItem; // Binding 和 TabItem
                     if (removeCommand is { }) // 如果绑定 RemoveCommand，不执行自动移除
                     {
                         removeCommand.Execute(item);
