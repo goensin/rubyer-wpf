@@ -14,6 +14,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="MaxLength" Value="3" />
         <Setter Property="InputMethod.InputScope" Value="Digits" />
+        <Setter Property="Padding" Value="0" />
     </Style>
 
     <Style x:Key="RubyerIpAddressControl" TargetType="{x:Type rubyer:IpAddressControl}">
@@ -24,7 +25,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="Padding" Value="0" />
+        <Setter Property="Padding" Value="5" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="Template">
@@ -35,7 +36,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <Grid rubyer:GridHelper.ColumnDefinitions="*,Auto,*,Auto,*,Auto,*">
+                        <Grid Margin="{TemplateBinding Padding}" rubyer:GridHelper.ColumnDefinitions="*,Auto,*,Auto,*,Auto,*">
                             <TextBox x:Name="PART_Octet1Box"
                                      Style="{StaticResource IpAddressTextBox}"
                                      Text="{Binding Octet1, RelativeSource={RelativeSource Mode=TemplatedParent}, UpdateSourceTrigger=PropertyChanged}" />
