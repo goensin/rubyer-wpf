@@ -25,7 +25,7 @@
 
     <Style TargetType="{x:Type rubyer:RubyerWindow}">
         <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="IsTabStop" Value="False" />
@@ -150,7 +150,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter Property="BorderBrush" Value="{Binding InactiveBorderBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{Binding InactiveBorderBrush, RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
