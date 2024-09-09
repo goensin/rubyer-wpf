@@ -32,16 +32,16 @@ namespace Rubyer
         /// 图标类型
         /// </summary>
         public static readonly DependencyProperty TypeProperty = DependencyProperty.Register(
-            "Type", typeof(IconType), typeof(Icon), new PropertyMetadata(default(IconType), TypePropertyChangedCallBack));
+            "Type", typeof(IconType?), typeof(Icon), new PropertyMetadata(null, TypePropertyChangedCallBack));
 
         private static void TypePropertyChangedCallBack(DependencyObject d, DependencyPropertyChangedEventArgs e) => ((Icon)d).UpdateIcon();
 
         /// <summary>
         /// 图标类型
         /// </summary>
-        public IconType Type
+        public IconType? Type
         {
-            get { return (IconType)GetValue(TypeProperty); }
+            get { return (IconType?)GetValue(TypeProperty); }
             set { SetValue(TypeProperty, value); }
         }
 
@@ -77,16 +77,15 @@ namespace Rubyer
 
         private void UpdateIcon()
         {
-            var icon = new IconInfo(string.Empty, string.Empty);
-            _codes.Value?.TryGetValue(Type, out icon);
-            if (icon != null)
+            if (Type is { })
             {
-                Group = icon.Group;
-                Code = icon.Data;
-            }
-            else
-            {
-
+                var icon = new IconInfo(string.Empty, string.Empty);
+                _codes.Value?.TryGetValue(Type.Value, out icon);
+                if (icon != null)
+                {
+                    Group = icon.Group;
+                    Code = icon.Data;
+                }
             }
         }
 
