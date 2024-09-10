@@ -39,7 +39,7 @@
         <Setter Property="TitleBarContent" Value="{x:Null}" />
         <Setter Property="TitleForeground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="TitleBackground" Value="{DynamicResource WindowTitleBackground}" />
-        <Setter Property="InactiveBorderBrush" Value="{DynamicResource Light}" />
+        <Setter Property="InactiveBorderBrush" Value="{DynamicResource Border}" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="0" />
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
@@ -150,7 +150,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsActive" Value="False">
-                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{Binding InactiveBorderBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter TargetName="WindowBorder" Property="BorderBrush" Value="{Binding InactiveBorderBrush, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="WindowState" Value="Maximized">
                             <Setter TargetName="LayoutRoot" Property="Margin" Value="7" />
