@@ -17,6 +17,7 @@
         <Setter Property="MinHeight" Value="25" />
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="Padding" Value="5 2" />
+        <Setter Property="Margin" Value="1" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
@@ -48,10 +49,11 @@
                               Margin="3"
                               HorizontalAlignment="Stretch"
                               VerticalAlignment="Stretch"
-                              Data="M8.1772461,11.029181 L10.433105,11.029181 L11.700684,12.801641 L12.973633, 11.029181 L15.191895,11.029181 L12.844727,                                 13.999395 L15.21875,17.060919 L12.962891,                                 17.060919 L11.673828,15.256231 L10.352539,                                 17.060919 L8.1396484,17.060919 L10.519043,                                 14.042364 z"
+                              Data="M8.1772461, 11.029181 L10.433105, 11.029181 L11.700684, 12.801641 L12.973633, 11.029181 L15.191895,11.029181 L12.844727, 13.999395 L15.21875, 17.060919 L12.962891, 17.060919 L11.673828,15.256231 L10.352539, 17.060919 L8.1396484, 17.060919 L10.519043,14.042364 z"
+                              Fill="{DynamicResource DefaultForeground}"
                               Opacity="0"
-                              RenderTransformOrigin="0.5,0.5"
                               Stretch="Fill" />
+
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup Name="CommonStates">
                                 <VisualStateGroup.Transitions>

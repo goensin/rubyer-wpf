@@ -16,7 +16,9 @@
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="DateTime Control">
                     <StackPanel rubyer:PanelHelper.Spacing="20" Orientation="Horizontal">
-                        <Calendar Margin="5" SelectionMode="SingleRange" />
+                        <Calendar x:Name="calendar"
+                                  Margin="5"
+                                  SelectionMode="MultipleRange" />
                         <rubyer:Clock Width="250"
                                       IsShowSecond="True"
                                       SelectedTimeChanged="Clock_SelectedTimeChanged" />

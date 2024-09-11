@@ -28,6 +28,9 @@ namespace RubyerDemo.Views
             InitializeComponent();
 
             this.DataContext = App.Current.Services.GetService<DateTimePickerViewModel>();
+
+            calendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Now));
+            calendar.BlackoutDates.Add(new CalendarDateRange(DateTime.Now.AddDays(2)));
         }
 
         private void Clock_SelectedTimeChanged(object sender, RoutedPropertyChangedEventArgs<DateTime?> e)
