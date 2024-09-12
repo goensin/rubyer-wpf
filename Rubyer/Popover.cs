@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using Rubyer.Enums;
 using System;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -211,7 +212,7 @@ namespace Rubyer
 
         private void ClosePopupHandler(object sender, ExecutedRoutedEventArgs e) => ClosePopup();
 
-        private void Popup_Opened(object sender, EventArgs e)
+        private async void Popup_Opened(object sender, EventArgs e)
         {
             popup.Placement = Placement switch
             {
@@ -276,7 +277,11 @@ namespace Rubyer
             IsShow = false;
         }
 
-        private void Popover_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) => ShowPopup();
+        private async void Popover_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            await Task.Delay(TimeSpan.FromMilliseconds(50));
+            ShowPopup();
+        }
 
         private void Popover_MouseEnter(object sender, MouseEventArgs e) => ShowPopup();
 
