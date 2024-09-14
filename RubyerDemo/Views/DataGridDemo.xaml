@@ -213,6 +213,7 @@
                               rubyer:HeaderHelper.HorizontalAlignment="Center"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
+                              HorizontalScrollBarVisibility="Disabled"
                               ItemsSource="{Binding Weathers}">
                         <DataGrid.Columns>
                             <rubyer:DataGridSelectCheckBoxColumn Width="85"

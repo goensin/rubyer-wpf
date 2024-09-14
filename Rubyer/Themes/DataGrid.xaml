@@ -434,7 +434,9 @@
                         <ScrollViewer x:Name="DG_ScrollViewer"
                                       Style="{StaticResource RubyerScrollViewer}"
                                       Background="Transparent"
-                                      Focusable="False">
+                                      Focusable="False"
+                                      HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+                                      VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}">
                             <ScrollViewer.Template>
                                 <ControlTemplate TargetType="{x:Type ScrollViewer}">
                                     <Grid x:Name="root">
