@@ -3,6 +3,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
@@ -427,6 +428,53 @@ namespace Rubyer
         private static void ScrollBar_PreviewTouchDown(object sender, System.Windows.Input.TouchEventArgs e)
         {
             e.Handled = true;
+        }
+
+        /// <summary>
+        /// 不能滚动时，释放鼠标滚动事件
+        /// </summary>
+        public static readonly DependencyProperty CannotScrollDisposeMouseWheelProperty =
+            DependencyProperty.RegisterAttached("CannotScrollDisposeMouseWheel", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(false, OnCannotScrollDisposeMouseWheelChanged));
+
+        public static bool GetCannotScrollDisposeMouseWheel(DependencyObject obj)
+        {
+            return (bool)obj.GetValue(CannotScrollDisposeMouseWheelProperty);
+        }
+
+        public static void SetCannotScrollDisposeMouseWheel(DependencyObject obj, bool value)
+        {
+            obj.SetValue(CannotScrollDisposeMouseWheelProperty, value);
+        }
+
+        private static void OnCannotScrollDisposeMouseWheelChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is ScrollViewer scrollViewer)
+            {
+                if (GetCannotScrollDisposeMouseWheel(scrollViewer))
+                {
+                    scrollViewer.PreviewMouseWheel += ScrollViewer_MouseWheel;
+                }
+                else
+                {
+                    scrollViewer.PreviewMouseWheel -= ScrollViewer_MouseWheel;
+                }
+            }
+        }
+
+        private static void ScrollViewer_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            var scrollViewer = (ScrollViewer)sender;
+
+            // 如果垂直滚动到达边界无法滚动时，向上抛出鼠标滚动事件
+            if (e.Delta > 0 && scrollViewer.VerticalOffset == 0 ||
+                e.Delta < 0 && scrollViewer.VerticalOffset >= scrollViewer.ExtentHeight - scrollViewer.ViewportHeight)
+            {
+                if (scrollViewer.Parent is { })
+                {
+                    var parentScrollViewer = scrollViewer.Parent.TryGetParentFromVisualTree<ScrollViewer>();
+                    parentScrollViewer?.ScrollToVerticalOffset(parentScrollViewer.VerticalOffset - e.Delta);
+                }
+            }
         }
     }
 }
