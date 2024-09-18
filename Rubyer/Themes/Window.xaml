@@ -186,6 +186,15 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="ResizeGrip" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="ResizeMode" Value="NoResize" />
+                                <Condition Property="WindowStyle" Value="None" />
+                                <Condition Property="WindowState" Value="Maximized" />
+                            </MultiTrigger.Conditions>
+                            <Setter Property="WindowChrome.WindowChrome" Value="{x:Null}" />
+                            <Setter TargetName="LayoutRoot" Property="Margin" Value="0" />
+                        </MultiTrigger>
                         <Trigger Property="TitleBarContent" Value="{x:Null}">
                             <Setter TargetName="defalutTitle" Property="Visibility" Value="Visible" />
                         </Trigger>
