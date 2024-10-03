@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace Rubyer.Commons
 {
@@ -14,9 +15,9 @@ namespace Rubyer.Commons
         /// <returns>当前 Window</returns>
         public static Window GetCurrentWindow()
         {
-            var window = Application.Current.Windows.OfType<Window>().FirstOrDefault(x => x.IsActive) ??
-                         Application.Current.MainWindow ??
-                         Application.Current.Windows.OfType<Window>().FirstOrDefault();
+            var windows = Application.Current.Windows.OfType<Window>().Where(w => !w.GetType().Name.Contains("AdornerWindow"));
+            var window = windows.FirstOrDefault(x => x.IsActive) ??
+                         windows.OfType<Window>().FirstOrDefault();
             return window;
         }
     }
