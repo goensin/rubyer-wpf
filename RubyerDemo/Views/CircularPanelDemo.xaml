@@ -17,7 +17,7 @@
                 <rubyer:CircularPanel Height="200"
                                       BorderBrush="{StaticResource Border}"
                                       BorderThickness="1"
-                                      IsStretchChildren="True">
+                                      IsStretchItems="True">
                     <Border Background="{StaticResource Primary}" CornerRadius="1000" />
                     <Border Background="{StaticResource Primary}" CornerRadius="1000" />
                     <Border Background="{StaticResource Primary}" CornerRadius="1000" />

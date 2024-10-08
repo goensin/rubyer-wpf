@@ -29,6 +29,9 @@ namespace Rubyer
         internal static readonly DependencyPropertyKey ItemSizePropertyKey =
             DependencyProperty.RegisterReadOnly("ItemSize", typeof(Size), typeof(Description), new PropertyMetadata(new Size()));
 
+        public static readonly DependencyProperty IsItemRotateProperty =
+            DependencyProperty.Register("IsItemRotate", typeof(bool), typeof(CircularPanel), new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsArrange));
+
         /// <summary>
         /// 子项大小
         /// </summary>
@@ -74,7 +77,7 @@ namespace Rubyer
         /// 是否拉伸子项控件
         /// 使子项大小拉伸为等分扇形内切圆的直径
         /// </summary>
-        public bool IsStretchChildren
+        public bool IsStretchItems
         {
             get => (bool)GetValue(IsStretchItemsProperty);
             set => SetValue(IsStretchItemsProperty, BooleanBoxes.Box(value));
@@ -87,6 +90,15 @@ namespace Rubyer
         {
             get { return (Size)GetValue(ItemSizeProperty); }
             private set { SetValue(ItemSizePropertyKey, value); }
+        }
+
+        /// <summary>
+        /// 是否旋转子项角度
+        /// </summary>
+        public bool IsItemRotate
+        {
+            get => (bool)GetValue(IsItemRotateProperty);
+            set => SetValue(IsItemRotateProperty, BooleanBoxes.Box(value));
         }
 
         /// <inheritdoc/>
@@ -118,7 +130,7 @@ namespace Rubyer
                     {
                         UIElement child = Children[i];
 
-                        ItemSize = IsStretchChildren ? new(diameter, diameter) : child.DesiredSize; // 实际子项大小
+                        ItemSize = IsStretchItems ? new(diameter, diameter) : child.DesiredSize; // 实际子项大小
 
                         // 计算每个子项所在位置
                         double angle = i * angleIncrement + StartAngle;
@@ -126,6 +138,13 @@ namespace Rubyer
                         double x = (finalSize.Width - ItemSize.Width) / 2 + ((bigCircleRadius - ItemSize.Width / 2) * Math.Cos(radians));
                         double y = (finalSize.Height - ItemSize.Height) / 2 + ((bigCircleRadius - ItemSize.Height / 2) * Math.Sin(radians));
 
+                        // 子项旋转角度
+                        if (IsItemRotate)
+                        {
+                            child.RenderTransformOrigin = new(0.5, 0.5);
+                            child.RenderTransform = new RotateTransform { Angle = angle }; 
+                        }
+                       
                         child.Arrange(new Rect(new Point(x, y), ItemSize));
                     }
                 }
