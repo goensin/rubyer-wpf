@@ -212,7 +212,7 @@ namespace Rubyer
 
         private void ClosePopupHandler(object sender, ExecutedRoutedEventArgs e) => ClosePopup();
 
-        private async void Popup_Opened(object sender, EventArgs e)
+        private void Popup_Opened(object sender, EventArgs e)
         {
             popup.Placement = Placement switch
             {
