@@ -20,6 +20,9 @@ namespace RubyerDemo.ViewModels
             "选项一", "选项二", "选项三", "选项四"
         };
 
+        [ObservableProperty]
+        private string selectedItem;
+
         public List<Food> Foods { get; }
 
         [ObservableProperty]

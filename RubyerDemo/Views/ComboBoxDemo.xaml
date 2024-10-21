@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:rules="clr-namespace:RubyerDemo.ValidationRules"
              xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
              xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
              d:DataContext="{d:DesignInstance Type=viewmodels:ComboBoxViewModel}"
@@ -63,7 +64,15 @@
                             <ComboBox Width="150"
                                       rubyer:InputBoxHelper.IsClearable="True"
                                       rubyer:InputBoxHelper.Watermark="可清除"
-                                      ItemsSource="{Binding Items}" />
+                                      ItemsSource="{Binding Items}">
+                                <ComboBox.SelectedItem>
+                                    <Binding Path="SelectedItem">
+                                        <Binding.ValidationRules>
+                                            <rules:RequiredRule ValidatesOnTargetUpdated="True" />
+                                        </Binding.ValidationRules>
+                                    </Binding>
+                                </ComboBox.SelectedItem>
+                            </ComboBox>
 
                             <ComboBox Width="150"
                                       rubyer:InputBoxHelper.IsRound="True"
