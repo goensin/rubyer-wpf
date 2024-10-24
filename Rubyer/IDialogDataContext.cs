@@ -14,11 +14,6 @@ namespace Rubyer
         string Title { get; }
 
         /// <summary>
-        /// 对话框关闭参数
-        /// </summary>
-        object CloseParameter { get; set; }
-
-        /// <summary>
         /// 请求关闭委托
         /// </summary>
         event Action<object> RequestClose;
@@ -33,6 +28,6 @@ namespace Rubyer
         /// 关闭中
         /// </summary>
         /// <param name="e"></param>
-        void OnDialogClosing(RoutedEventArgs e);
+        void OnDialogClosing(DialogClosingRoutedEventArgs e);
     }
 }

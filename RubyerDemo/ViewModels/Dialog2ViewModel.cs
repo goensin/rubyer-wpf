@@ -35,7 +35,7 @@ namespace RubyerDemo.ViewModels
             Title = parameters?.ToString();
         }
 
-        public void OnDialogClosing(RoutedEventArgs e)
+        public void OnDialogClosing(DialogClosingRoutedEventArgs e)
         {
 
         }

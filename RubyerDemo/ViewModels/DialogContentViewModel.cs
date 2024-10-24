@@ -33,9 +33,9 @@ namespace RubyerDemo.ViewModels
             RequestClose?.Invoke(parameters);
         }
 
-        public void OnDialogClosing(RoutedEventArgs e)
+        public void OnDialogClosing(DialogClosingRoutedEventArgs e)
         {
-            CloseParameter = "hello";
+            //e.Parameter = "hello";
         }
     }
 }

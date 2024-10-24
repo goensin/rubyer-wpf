@@ -32,11 +32,6 @@ namespace Rubyer
                 dialogCard.Closing += (sender,e)=>
                 {
                     dialogContext.OnDialogClosing(e);
-
-                    if (dialogContext.CloseParameter is { })
-                    {
-                        e.Parameter = dialogContext.CloseParameter;
-                    }
                 };
 
                 // 设置关闭对话框委托

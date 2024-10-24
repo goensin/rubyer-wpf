@@ -323,7 +323,7 @@ namespace Rubyer
             var args = new DialogClosingRoutedEventArgs(ClosingEvent, parameter, this);
             RaiseEvent(args);
 
-            CloseParameter = parameter is null ? args.Parameter : parameter;
+            CloseParameter = args.Parameter;
             IsShow = false;
         }
 
