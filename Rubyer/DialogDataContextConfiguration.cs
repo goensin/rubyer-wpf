@@ -1,6 +1,5 @@
 ﻿using System.Windows.Data;
 using System.Windows;
-using System.Windows.Input;
 
 namespace Rubyer
 {
@@ -27,6 +26,17 @@ namespace Rubyer
                 dialogCard.BeforeOpenHandler += dialogCard =>
                 {
                     dialogContext.OnDialogOpened(openParameter);
+                };
+
+                // 对话框关闭中
+                dialogCard.Closing += (sender,e)=>
+                {
+                    dialogContext.OnDialogClosing(e);
+
+                    if (dialogContext.CloseParameter is { })
+                    {
+                        e.Parameter = dialogContext.CloseParameter;
+                    }
                 };
 
                 // 设置关闭对话框委托

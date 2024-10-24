@@ -4,12 +4,15 @@ using Rubyer;
 using Rubyer.Commons;
 using Rubyer.Models;
 using System;
+using System.Windows;
 
 namespace RubyerDemo.ViewModels
 {
     public partial class DialogContentViewModel : ObservableObject, IDialogDataContext
     {
         public string Title => "用户登录";
+
+        public object CloseParameter { get; set; }
 
         [ObservableProperty]
         public User user;
@@ -28,6 +31,11 @@ namespace RubyerDemo.ViewModels
             var parameters = new Parameters();
             parameters.Add("User", User.Clone());
             RequestClose?.Invoke(parameters);
+        }
+
+        public void OnDialogClosing(RoutedEventArgs e)
+        {
+            CloseParameter = "hello";
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace RubyerDemo.ViewModels
 {
@@ -19,6 +20,9 @@ namespace RubyerDemo.ViewModels
             set => SetProperty(ref title, value);
         }
 
+        /// <inheritdoc/>
+        public object CloseParameter { get; set; }
+
         public event Action<object> RequestClose;
 
         public Dialog2ViewModel()
@@ -29,6 +33,11 @@ namespace RubyerDemo.ViewModels
         public void OnDialogOpened(object parameters)
         {
             Title = parameters?.ToString();
+        }
+
+        public void OnDialogClosing(RoutedEventArgs e)
+        {
+
         }
     }
 }

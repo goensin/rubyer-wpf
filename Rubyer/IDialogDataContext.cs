@@ -1,5 +1,5 @@
-﻿using Rubyer.Commons;
-using System;
+﻿using System;
+using System.Windows;
 
 namespace Rubyer
 {
@@ -14,6 +14,11 @@ namespace Rubyer
         string Title { get; }
 
         /// <summary>
+        /// 对话框关闭参数
+        /// </summary>
+        object CloseParameter { get; set; }
+
+        /// <summary>
         /// 请求关闭委托
         /// </summary>
         event Action<object> RequestClose;
@@ -23,5 +28,11 @@ namespace Rubyer
         /// </summary>
         /// <param name="parameters">参数</param>
         void OnDialogOpened(object parameters);
+
+        /// <summary>
+        /// 关闭中
+        /// </summary>
+        /// <param name="e"></param>
+        void OnDialogClosing(RoutedEventArgs e);
     }
 }

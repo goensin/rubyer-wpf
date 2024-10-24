@@ -59,6 +59,13 @@ namespace Rubyer
         /// <param name="e"></param>
         public delegate void DialogResultRoutedEventHandler(object sender, DialogResultRoutedEventArgs e);
 
+        /// <summary>
+        /// 消息框关闭中事件处理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public delegate void DialogClosingRoutedEventHandler(object sender, DialogClosingRoutedEventArgs e);
+
         static DialogCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(DialogCard), new FrameworkPropertyMetadata(typeof(DialogCard)));
@@ -79,12 +86,12 @@ namespace Rubyer
         /// <summary>
         /// 关闭中消息事件
         /// </summary>
-        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Direct, typeof(RoutedEventHandler), typeof(DialogCard));
+        public static readonly RoutedEvent ClosingEvent = EventManager.RegisterRoutedEvent("Closing", RoutingStrategy.Direct, typeof(DialogClosingRoutedEventHandler), typeof(DialogCard));
 
         /// <summary>
         /// 关闭中消息事件处理
         /// </summary>
-        public event RoutedEventHandler Closing
+        public event DialogClosingRoutedEventHandler Closing
         {
             add { AddHandler(ClosingEvent, value); }
             remove { RemoveHandler(ClosingEvent, value); }
@@ -313,10 +320,10 @@ namespace Rubyer
         /// <param name="parameter">参数</param>
         public void Close(object parameter = null)
         {
-            var args = new RoutedEventArgs(ClosingEvent, this);
+            var args = new DialogClosingRoutedEventArgs(ClosingEvent, parameter, this);
             RaiseEvent(args);
 
-            CloseParameter = parameter;
+            CloseParameter = parameter is null ? args.Parameter : parameter;
             IsShow = false;
         }
 
@@ -396,6 +403,28 @@ namespace Rubyer
         /// 结果
         /// </summary>
         public object Result { get; set; } = result;
+
+        /// <summary>
+        /// 对话框
+        /// </summary>
+        public DialogCard Dialog { get; set; } = dialog;
+    }
+
+    /// <summary>
+    /// 对话框关闭中路由参数
+    /// </summary>
+    /// <remarks>
+    /// Initializes a new instance of the <see cref="DialogResultRoutedEventArgs"/> class.
+    /// </remarks>
+    /// <param name="routedEvent">路由事件</param>
+    /// <param name="parameter">关闭参数</param>
+    /// <param name="dialog">对话框</param>
+    public class DialogClosingRoutedEventArgs(RoutedEvent routedEvent, object parameter, DialogCard dialog) : RoutedEventArgs(routedEvent)
+    {
+        /// <summary>
+        /// 结果
+        /// </summary>
+        public object Parameter { get; set; } = parameter;
 
         /// <summary>
         /// 对话框

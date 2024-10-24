@@ -236,7 +236,7 @@ namespace Rubyer
             BeforeOpenCommand?.Execute(null);
         }
 
-        private void Card_Closing(object sender, RoutedEventArgs e)
+        private void Card_Closing(object sender, DialogClosingRoutedEventArgs e)
         {
             var dialogCard = (DialogCard)sender;
             dialogCard.Closing -= Card_Closing;
