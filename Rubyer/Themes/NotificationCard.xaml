@@ -139,22 +139,22 @@
                         <Trigger Property="Type" Value="Info">
                             <Setter TargetName="icon" Property="Type" Value="InformationFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Info}" />
-                            <Setter Property="Title" Value="{StaticResource I18N_Info}" />
+                            <Setter Property="Title" Value="{DynamicResource I18N_Info}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Warning">
                             <Setter TargetName="icon" Property="Type" Value="ErrorWarningFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Warning}" />
-                            <Setter Property="Title" Value="{StaticResource I18N_Warning}" />
+                            <Setter Property="Title" Value="{DynamicResource I18N_Warning}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Success">
                             <Setter TargetName="icon" Property="Type" Value="CheckboxCircleFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Success}" />
-                            <Setter Property="Title" Value="{StaticResource I18N_Success}" />
+                            <Setter Property="Title" Value="{DynamicResource I18N_Success}" />
                         </Trigger>
                         <Trigger Property="Type" Value="Error">
                             <Setter TargetName="icon" Property="Type" Value="CloseCircleFill" />
                             <Setter Property="ThemeColorBrush" Value="{DynamicResource Error}" />
-                            <Setter Property="Title" Value="{StaticResource I18N_Error}" />
+                            <Setter Property="Title" Value="{DynamicResource I18N_Error}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

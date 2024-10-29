@@ -27,7 +27,7 @@
 
     <system:String x:Key="I18N_Info">Info</system:String>
     <system:String x:Key="I18N_Question">Confirm</system:String>
-    <system:String x:Key="I18N_Warning">Warning"</system:String>
+    <system:String x:Key="I18N_Warning">Warning</system:String>
     <system:String x:Key="I18N_Success">Success</system:String>
     <system:String x:Key="I18N_Error">Error</system:String>
 </ResourceDictionary>
