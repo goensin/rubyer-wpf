@@ -91,15 +91,17 @@ namespace Rubyer
 
             if (container.IsShow)
             {
-                var dialogContent = container.Content as FrameworkElement;
-                dialogContent.ForEachVisualChild(x =>
+                if (container.Content is FrameworkElement dialogContent)
                 {
-                    if (x is FrameworkElement element && element.Focusable)
+                    dialogContent.ForEachVisualChild(x =>
                     {
-                        element.Focusable = false;
-                        container.focusableElements.Add(element);
-                    }
-                });
+                        if (x is FrameworkElement element && element.Focusable)
+                        {
+                            element.Focusable = false;
+                            container.focusableElements.Add(element);
+                        }
+                    });
+                }
             }
             else
             {
