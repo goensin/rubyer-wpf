@@ -7,6 +7,7 @@
         VerticalAlignment="Bottom"
         AllowsTransparency="True"
         Background="Transparent"
+        FontSize="{DynamicResource DefaultFontSize}"
         ShowInTaskbar="False"
         Topmost="True"
         WindowStartupLocation="CenterOwner"

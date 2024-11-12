@@ -11,13 +11,14 @@
         VerticalContentAlignment="Center"
         AllowsTransparency="True"
         Background="Transparent"
+        FontSize="{DynamicResource DefaultFontSize}"
         LostKeyboardFocus="Window_LostKeyboardFocus"
         PreviewLostKeyboardFocus="Window_PreviewLostKeyboardFocus"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         WindowStyle="None"
         mc:Ignorable="d">
-    
+
     <Border x:Name="messageBoxPanel"
             HorizontalAlignment="Center"
             VerticalAlignment="Center" />

@@ -15,7 +15,6 @@
                      d:DataContext="{d:DesignInstance Type={x:Type vm:MainViewModel}}"
                      BorderBrush="{DynamicResource Primary}"
                      BorderThickness="1"
-                     FontSize="13"
                      Foreground="{DynamicResource DefaultForeground}"
                      Icon="pack://application:,,,/RubyerDemo;component/rubyer.ico"
                      TextOptions.TextFormattingMode="Ideal"

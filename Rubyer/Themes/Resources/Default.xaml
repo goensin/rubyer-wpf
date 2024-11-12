@@ -7,6 +7,10 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/I18N/zh-CN.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <!--  FontSize  -->
+    <system:Double x:Key="DefaultFontSize">13</system:Double>
+    <system:Double x:Key="TitleFontSize">15</system:Double>
+
     <!--  BorderThickness  -->
     <Thickness x:Key="DefaultBorderThickness">1</Thickness>
 
