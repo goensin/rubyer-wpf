@@ -20,7 +20,7 @@
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="1" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
-        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Mask}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="rubyer:ToggleButtonHelper.CheckedContent" Value="{x:Null}" />
         <Setter Property="Template">
@@ -34,7 +34,7 @@
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                         <Grid>
                             <rubyer:ControlMask x:Name="mask"
-                                                Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                Background="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 IsActive="{TemplateBinding IsChecked}"
                                                 MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
@@ -66,7 +66,7 @@
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource Self}}" />
-                            <!--<Setter TargetName="border" Property="Background" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ToggleButton}}" />-->
+                            <Setter TargetName="mask" Property="Background" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
                             <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Mask}" />
