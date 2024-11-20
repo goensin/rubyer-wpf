@@ -1,7 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
-using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace Rubyer
 {
@@ -147,6 +147,89 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 获取焦点时全选文本
+        /// </summary>
+        public static readonly DependencyProperty SelectAllOnFocusProperty =
+            DependencyProperty.RegisterAttached("SelectAllOnFocus", typeof(bool), typeof(InputBoxHelper), new PropertyMetadata(false, OnSelectAllOnFocusChanged));
+
+        public static void SetSelectAllOnFocus(UIElement element, bool value)
+        {
+            element.SetValue(SelectAllOnFocusProperty, value);
+        }
+
+        public static bool GetSelectAllOnFocus(UIElement element)
+        {
+            return (bool)element.GetValue(SelectAllOnFocusProperty);
+        }
+
+        private static void OnSelectAllOnFocusChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is FrameworkElement element)
+            {
+                if (element is TextBox || element is PasswordBox)
+                {
+                    if ((bool)e.NewValue)
+                    {
+                        element.GotFocus += UIElement_GotFocus;
+                        element.LostFocus += UIElement_LostFocus;
+                        element.PreviewMouseDown += TextBox_PreviewMouseDown;
+                    }
+                    else
+                    {
+                        element.GotFocus -= UIElement_GotFocus;
+                        element.LostFocus -= UIElement_LostFocus;
+                        element.PreviewMouseDown -= TextBox_PreviewMouseDown;
+                    }
+                }
+            }
+        }
+
+        private static void TextBox_PreviewMouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is TextBox textBox && !textBox.IsFocused)
+            {
+                textBox.Focus();
+
+                if (e.OriginalSource is UIElement element && element.TryGetParentFromVisualTree<ButtonBase>() is null)
+                {
+                    e.Handled = true;
+                }
+            }
+            else if (sender is PasswordBox passwordBox && !passwordBox.IsFocused)
+            {
+                passwordBox.Focus();
+
+                if (e.OriginalSource is UIElement element && element.TryGetParentFromVisualTree<ButtonBase>() is null)
+                {
+                    e.Handled = true;
+                }
+            }
+        }
+
+        private static void UIElement_GotFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.SelectAll();
+            }
+            else if (sender is PasswordBox passwordBox)
+            {
+                passwordBox.SelectAll();
+            }
+        }
+
+        private static void UIElement_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (sender is TextBox textBox)
+            {
+                textBox.SelectionLength = 0;
+            }
+            else if (sender is PasswordBox passwordBox)
+            {
+            }
+        }
+
+        /// <summary>
         /// Ons the is clearble changed.
         /// </summary>
         /// <param name="d">The d.</param>
@@ -220,8 +303,7 @@ namespace Rubyer
             }
         }
 
-        private static Button GetClearButton(Control control)
-            => control.Template.FindName("clearButton", control) as Button;
+        private static Button GetClearButton(Control control) => control.Template.FindName("clearButton", control) as Button;
 
         private static void SetClickToClear(Control control, RoutedEventHandler handle, Button clearButton)
         {

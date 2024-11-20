@@ -129,6 +129,7 @@
                             <ComboBox Width="140"
                                       rubyer:InputBoxHelper.IsClearable="True"
                                       rubyer:InputBoxHelper.Watermark="默认"
+                                      IsEditable="True"
                                       SelectedIndex="0">
                                 <ComboBoxItem>选项一</ComboBoxItem>
                                 <ComboBoxItem>选项二</ComboBoxItem>
