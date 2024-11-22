@@ -1,4 +1,5 @@
 ﻿using Rubyer.Commons.KnownBoxes;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -166,20 +167,17 @@ namespace Rubyer
         {
             if (d is FrameworkElement element)
             {
-                if (element is TextBox || element is PasswordBox)
+                if ((bool)e.NewValue)
                 {
-                    if ((bool)e.NewValue)
-                    {
-                        element.GotFocus += UIElement_GotFocus;
-                        element.LostFocus += UIElement_LostFocus;
-                        element.PreviewMouseDown += TextBox_PreviewMouseDown;
-                    }
-                    else
-                    {
-                        element.GotFocus -= UIElement_GotFocus;
-                        element.LostFocus -= UIElement_LostFocus;
-                        element.PreviewMouseDown -= TextBox_PreviewMouseDown;
-                    }
+                    element.GotFocus += UIElement_GotFocus;
+                    element.LostFocus += UIElement_LostFocus;
+                    element.PreviewMouseDown += TextBox_PreviewMouseDown;
+                }
+                else
+                {
+                    element.GotFocus -= UIElement_GotFocus;
+                    element.LostFocus -= UIElement_LostFocus;
+                    element.PreviewMouseDown -= TextBox_PreviewMouseDown;
                 }
             }
         }
@@ -215,6 +213,11 @@ namespace Rubyer
             else if (sender is PasswordBox passwordBox)
             {
                 passwordBox.SelectAll();
+            }
+            else if (e.OriginalSource is FrameworkElement frameworkElement &&
+                     frameworkElement.TryGetChildFromVisualTree<TextBox>(e => e is TextBox) is TextBox textBox2)
+            {
+                textBox2.Focus();
             }
         }
 
