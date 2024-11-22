@@ -56,52 +56,85 @@
 
                                 <Border x:Name="content">
                                     <UniformGrid Rows="1">
-                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowHour, Converter={StaticResource BooleanToVisibleConverter}}">
+                                        <DockPanel x:Name="HourPanel"
+                                                   MinWidth="80"
+                                                   Visibility="{TemplateBinding IsShowHour, Converter={StaticResource BooleanToVisibleConverter}}">
                                             <Border BorderBrush="{DynamicResource BorderLighter}"
                                                     BorderThickness="1 0 0 0"
                                                     DockPanel.Dock="Right" />
 
-                                            <TextBlock Padding="5 6"
+                                            <TextBlock x:Name="HourTextBlock"
+                                                       Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
                                                        Text="{StaticResource I18N_Clock_Hour}"
                                                        TextAlignment="Center" />
 
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
-                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Hours}"
-                                                             SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                             SelectedItem="{Binding Hour, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                <rubyer:FlipView.Height>
+                                                    <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding ElementName="HourPanel" Path="ActualHeight" />
+                                                            <Binding ElementName="HourTextBlock" Path="ActualHeight" />
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </rubyer:FlipView.Height>
+                                            </rubyer:FlipView>
                                         </DockPanel>
 
-                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowMinute, Converter={StaticResource BooleanToVisibleConverter}}">
+                                        <DockPanel x:Name="MinuteDockPanel"
+                                                   MinWidth="80"
+                                                   Visibility="{TemplateBinding IsShowMinute, Converter={StaticResource BooleanToVisibleConverter}}">
                                             <Border BorderBrush="{DynamicResource BorderLighter}"
                                                     BorderThickness="1 0 0 0"
                                                     DockPanel.Dock="Right" />
 
-                                            <TextBlock Padding="5 6"
+                                            <TextBlock x:Name="MinuteDockTextBlock"
+                                                       Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
                                                        Text="{StaticResource I18N_Clock_Minute}"
                                                        TextAlignment="Center" />
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
-                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Minutes}"
-                                                             SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                             SelectedItem="{Binding Minute, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                <rubyer:FlipView.Height>
+                                                    <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding ElementName="MinuteDockPanel" Path="ActualHeight" />
+                                                            <Binding ElementName="MinuteDockTextBlock" Path="ActualHeight" />
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </rubyer:FlipView.Height>
+                                            </rubyer:FlipView>
                                         </DockPanel>
 
-                                        <DockPanel MinWidth="80" Visibility="{TemplateBinding IsShowSecond, Converter={StaticResource BooleanToVisibleConverter}}">
-                                            <TextBlock Padding="5 6"
+                                        <DockPanel x:Name="SecondDockPanel"
+                                                   MinWidth="80"
+                                                   Visibility="{TemplateBinding IsShowSecond, Converter={StaticResource BooleanToVisibleConverter}}">
+                                            <TextBlock x:Name="SecondDockTextBlock"
+                                                       Padding="5 6"
                                                        DockPanel.Dock="Top"
                                                        Foreground="{StaticResource WatermarkText}"
                                                        Text="{StaticResource I18N_Clock_Second}"
                                                        TextAlignment="Center" />
                                             <rubyer:FlipView Style="{StaticResource SelecterFlipView}"
-                                                             Height="{Binding ActualHeight, RelativeSource={RelativeSource AncestorType=Grid}}"
                                                              ItemStringFormat="D2"
                                                              ItemsSource="{TemplateBinding Seconds}"
-                                                             SelectedItem="{Binding Second, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                                             SelectedItem="{Binding Second, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                                <rubyer:FlipView.Height>
+                                                    <MultiBinding Converter="{StaticResource MathSubtractConverter}">
+                                                        <MultiBinding.Bindings>
+                                                            <Binding ElementName="SecondDockPanel" Path="ActualHeight" />
+                                                            <Binding ElementName="SecondDockTextBlock" Path="ActualHeight" />
+                                                        </MultiBinding.Bindings>
+                                                    </MultiBinding>
+                                                </rubyer:FlipView.Height>
+                                            </rubyer:FlipView>
                                         </DockPanel>
                                     </UniformGrid>
                                 </Border>
