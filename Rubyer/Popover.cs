@@ -97,6 +97,20 @@ namespace Rubyer
         public static readonly DependencyProperty PopoverForegroundProperty =
             DependencyProperty.Register("PopoverForeground", typeof(Brush), typeof(Popover), new PropertyMetadata(null));
 
+
+
+        public DataTemplate PopoverContentTemplate
+        {
+            get { return (DataTemplate)GetValue(PopoverContentTemplateProperty); }
+            set { SetValue(PopoverContentTemplateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for PopoverContentTemplate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PopoverContentTemplateProperty =
+            DependencyProperty.Register("PopoverContentTemplate", typeof(DataTemplate), typeof(Popover), new PropertyMetadata(null));
+
+
+
         static Popover()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(Popover), new FrameworkPropertyMetadata(typeof(Popover)));
