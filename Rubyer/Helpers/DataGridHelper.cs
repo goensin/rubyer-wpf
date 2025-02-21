@@ -516,19 +516,19 @@ namespace Rubyer
             {
                 foreach (var column in dataGrid.Columns)
                 {
-                    if (column is DataGridTextColumn textColumn)
+                    if (column is DataGridTextColumn textColumn && textColumn.EditingElementStyle is null)
                     {
-                        textColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
+                        textColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
                     }
                     else if (column is DataGridComboBoxColumn comboBoxColumn)
                     {
-                        //comboBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
-                        comboBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
+                        //comboBoxColumn.ElementStyle ??= Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
+                        comboBoxColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
                     }
                     else if (column is DataGridCheckBoxColumn checkBoxColumn)
                     {
-                        checkBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
-                        checkBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
+                        checkBoxColumn.ElementStyle ??= Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
+                        checkBoxColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
                     }
                 }
             }

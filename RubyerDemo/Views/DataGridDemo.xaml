@@ -33,7 +33,7 @@
                                   BorderThickness="1"
                                   CanUserAddRows="False"
                                   GridLinesVisibility="All"
-                                  IsReadOnly="True"
+                                  IsReadOnly="False"
                                   ItemsSource="{Binding Weathers}"
                                   SelectionMode="Single">
                             <DataGrid.Columns>
@@ -43,9 +43,20 @@
                                 <DataGridTextColumn Width="100"
                                                     Binding="{Binding Day}"
                                                     Header="日期" />
-                                <DataGridTextColumn Width="80"
-                                                    Binding="{Binding Week}"
-                                                    Header="星期" />
+                                <DataGridComboBoxColumn Width="80"
+                                                        Header="星期"
+                                                        SelectedItemBinding="{Binding Week}">
+                                    <DataGridComboBoxColumn.ElementStyle>
+                                        <Style TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding DataContext.Weeks, RelativeSource={RelativeSource AncestorType=controls:ControlDisplay}}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.ElementStyle>
+                                    <DataGridComboBoxColumn.EditingElementStyle>
+                                        <Style BasedOn="{StaticResource RubyerDataGridComboBoxColumnEditting}" TargetType="ComboBox">
+                                            <Setter Property="ItemsSource" Value="{Binding DataContext.Weeks, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+                                        </Style>
+                                    </DataGridComboBoxColumn.EditingElementStyle>
+                                </DataGridComboBoxColumn>
                                 <DataGridTextColumn Width="120"
                                                     Binding="{Binding Temperature}"
                                                     Header="温度" />

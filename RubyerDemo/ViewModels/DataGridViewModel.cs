@@ -43,6 +43,11 @@ namespace RubyerDemo.ViewModels
         private ObservableCollection<WeatherInfo> weathers;
 
         /// <summary>
+        /// 星期
+        /// </summary>
+        public IEnumerable<string> Weeks => ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"];
+
+        /// <summary>
         /// 省份城市
         /// </summary>
         public List<City> Cities { get; }
