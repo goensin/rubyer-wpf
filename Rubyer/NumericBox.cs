@@ -256,7 +256,7 @@ namespace Rubyer
                 WeakEventManager<UIElement, TextCompositionEventArgs>.AddHandler(textBox, "PreviewTextInput", TextBox_PreviewTextInput);
                 WeakEventManager<UIElement, KeyEventArgs>.AddHandler(textBox, "PreviewKeyDown", TextBox_PreviewKeyDown);
                 WeakEventManager<UIElement, RoutedEventArgs>.AddHandler(textBox, "LostFocus", TextBox_LostFocus);
-                textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
+                //textBox.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, null, new CanExecuteRoutedEventHandler(TextBox_CanExecutePaste)));
                 this.textBox = textBox;
             }
 
