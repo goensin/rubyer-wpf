@@ -518,17 +518,30 @@ namespace Rubyer
                 {
                     if (column is DataGridTextColumn textColumn && textColumn.EditingElementStyle is null)
                     {
-                        textColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
+                        if (DataGridTextColumn.DefaultEditingElementStyle == textColumn.EditingElementStyle)
+                        {
+                            textColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridTextColumn"] as Style;
+                        }
                     }
                     else if (column is DataGridComboBoxColumn comboBoxColumn)
                     {
                         //comboBoxColumn.ElementStyle ??= Application.Current.Resources["RubyerDataGridComboBoxColumn"] as Style;
-                        comboBoxColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
+                        if (DataGridComboBoxColumn.DefaultEditingElementStyle == comboBoxColumn.EditingElementStyle)
+                        {
+                            comboBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridComboBoxColumnEditting"] as Style;
+                        }
                     }
                     else if (column is DataGridCheckBoxColumn checkBoxColumn)
                     {
-                        checkBoxColumn.ElementStyle ??= Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
-                        checkBoxColumn.EditingElementStyle ??= Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
+                        if (DataGridCheckBoxColumn.DefaultElementStyle == checkBoxColumn.ElementStyle)
+                        {
+                            checkBoxColumn.ElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumn"] as Style;
+                        }
+
+                        if (DataGridCheckBoxColumn.DefaultEditingElementStyle == checkBoxColumn.EditingElementStyle)
+                        {
+                            checkBoxColumn.EditingElementStyle = Application.Current.Resources["RubyerDataGridCheckBoxColumnEditting"] as Style;
+                        }
                     }
                 }
             }
