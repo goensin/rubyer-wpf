@@ -18,12 +18,16 @@
                     <DockPanel rubyer:PanelHelper.Spacing="30">
                         <rubyer:Description Style="{StaticResource BorderDescription}"
                                             VerticalAlignment="Center"
-                                            DockPanel.Dock="Right">
+                                            DockPanel.Dock="Right"
+                                            HorizontalDescriptionAlignment="Right">
                             <rubyer:DescriptionItem Description="IsAlphaEnabled">
                                 <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsAlphaEnabled, ElementName=colorPalette}" />
                             </rubyer:DescriptionItem>
                             <rubyer:DescriptionItem Description="IsShowHsl">
                                 <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsShowHsl, ElementName=colorPalette}" />
+                            </rubyer:DescriptionItem>
+                            <rubyer:DescriptionItem Description="IsEyedropperEnabled">
+                                <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsEyedropperEnabled, ElementName=colorPalette}" />
                             </rubyer:DescriptionItem>
                         </rubyer:Description>
 

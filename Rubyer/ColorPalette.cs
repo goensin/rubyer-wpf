@@ -1,9 +1,11 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -17,6 +19,7 @@ namespace Rubyer
     [TemplatePart(Name = DragThumbPartName, Type = typeof(Thumb))]
     [TemplatePart(Name = SlGridPartName, Type = typeof(Grid))]
     [TemplatePart(Name = RgbTextBoxPartName, Type = typeof(TextBox))]
+    [TemplatePart(Name = EyedropperButtonPartName, Type = typeof(Button))]
     public class ColorPalette : Control
     {
         /// <summary>
@@ -43,6 +46,11 @@ namespace Rubyer
         /// RGB 文本框
         /// </summary>
         public const string RgbTextBoxPartName = "PART_RgbTextBox";
+
+        /// <summary>
+        /// 吸管按钮
+        /// </summary>
+        public const string EyedropperButtonPartName = "PART_EyedropperButton";
 
         private Slider colorSlider; // 颜色度滑块
         private Slider opacitySlider; // 透明度滑
@@ -293,6 +301,41 @@ namespace Rubyer
             set { SetValue(IsShowHslProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 是否启用吸管工具
+        /// </summary>
+        public static readonly DependencyProperty IsEyedropperEnabledProperty =
+            DependencyProperty.Register("IsEyedropperEnabled", typeof(bool), typeof(ColorPalette), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        /// <summary>
+        /// 是否启用吸管工具
+        /// </summary>
+        public bool IsEyedropperEnabled
+        {
+            get { return (bool)GetValue(IsEyedropperEnabledProperty); }
+            set { SetValue(IsEyedropperEnabledProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 提取颜色中
+        /// </summary>
+        internal static readonly DependencyPropertyKey IsPickingPropertyKey =
+            DependencyProperty.RegisterReadOnly("IsPicking", typeof(bool), typeof(ColorPalette), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 提取颜色中
+        /// </summary>
+        public static readonly DependencyProperty IsPickingProperty = IsPickingPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// 提取颜色中
+        /// </summary>
+        public bool IsPicking
+        {
+            get { return (bool)GetValue(IsPickingProperty); }
+            private set { SetValue(IsPickingPropertyKey, BooleanBoxes.Box(value)); }
+        }
+
         public ColorPalette()
         {
             Color = Color.FromArgb(Alpha, Red, Green, Blue);
@@ -321,6 +364,9 @@ namespace Rubyer
             rgbTextBox = (TextBox)GetTemplateChild(RgbTextBoxPartName);
             rgbTextBox.PreviewKeyDown += RgbTextBox_PreviewKeyDown;
             rgbTextBox.LostFocus += RgbTextBox_LostFocus;
+
+            var eyedropperButton = (Button)GetTemplateChild(EyedropperButtonPartName);
+            eyedropperButton.Click += EyedropperButton_Click;
 
             this.Loaded += ColorPalette_Loaded;
         }
@@ -731,6 +777,92 @@ namespace Rubyer
         {
             var colorPalette = (ColorPalette)d;
             colorPalette.Alpha = 255;
+        }
+
+        /// <summary>
+        /// 吸管按钮点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void EyedropperButton_Click(object sender, RoutedEventArgs e)
+        {
+            IsPicking = true;
+            Application.Current.MainWindow.Visibility = Visibility.Hidden;
+
+            var colorPixelPreview = new ColorPixelPreview();
+            if (colorPixelPreview.ShowDialog() == true)
+            {
+                Color = colorPixelPreview.SelectedColor;
+                UpdateHslFromColor();
+            }
+
+            IsPicking = false;
+            Application.Current.MainWindow.Visibility = Visibility.Visible;
+        }
+    }
+
+    /// <summary>
+    /// 屏幕取色器
+    /// </summary>
+    public class ScreenColorPicker
+    {
+        [DllImport("user32.dll")]
+        public static extern IntPtr GetDC(IntPtr hwnd);
+
+        [DllImport("user32.dll")]
+        public static extern int ReleaseDC(IntPtr hwnd, IntPtr hdc);
+
+        [DllImport("gdi32.dll")]
+        public static extern uint GetPixel(IntPtr hdc, int x, int y);
+
+        /// <summary>
+        /// 获取颜色
+        /// </summary>
+        /// <param name="point">点</param>
+        /// <returns>颜色</returns>
+        public static Color GetColorAt(Point point)
+        {
+            IntPtr hdc = GetDC(IntPtr.Zero);
+            uint pixel = GetPixel(hdc, (int)point.X, (int)point.Y);
+            ReleaseDC(IntPtr.Zero, hdc);
+
+            return Color.FromRgb(
+                (byte)(pixel & 0x000000FF),
+                (byte)((pixel & 0x0000FF00) >> 8),
+                (byte)((pixel & 0x00FF0000) >> 16));
+        }
+
+        /// <summary>
+        /// 获取颜色数组
+        /// </summary>
+        /// <param name="point">左上点</param>
+        /// <param name="rows">行数</param>
+        /// <param name="columns">列数</param>
+        /// <returns>颜色数组</returns>
+        public static Color[] GetColorsAt(Point point, int rows, int columns)
+        {
+            var count = rows * columns;
+            Color[] colors = new Color[count];
+
+            IntPtr hdc = GetDC(IntPtr.Zero);
+
+            int index = 0;
+            for (int c = 0; c < columns; c++)
+            {
+                for (int r = 0; r < rows; r++)
+                {
+                    uint pixel = GetPixel(hdc, (int)point.X + r, (int)point.Y + c);
+                    colors[index++] = Color.FromRgb(
+                                        (byte)(pixel & 0x000000FF),
+                                        (byte)((pixel & 0x0000FF00) >> 8),
+                                        (byte)((pixel & 0x00FF0000) >> 16));
+                }
+            }
+
+            ReleaseDC(IntPtr.Zero, hdc);
+
+            return colors;
         }
     }
 }

@@ -188,12 +188,12 @@
                                     </Border.Background>
                                 </Border>
 
-                                <Button Style="{DynamicResource OutlineButton}"
-                                        Padding="3"
+                                <Button x:Name="PART_EyedropperButton"
+                                        Style="{DynamicResource OutlineButton}"
+                                        Padding="5"
                                         rubyer:ButtonHelper.IconType="SipLine"
                                         BorderBrush="{StaticResource Border}"
                                         DockPanel.Dock="Right"
-                                        FontSize="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.3}"
                                         Foreground="{DynamicResource DefaultForeground}" />
 
                                 <TextBox x:Name="PART_RgbTextBox" Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -310,6 +310,9 @@
                             <Setter TargetName="hBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="sBox" Property="Visibility" Value="Visible" />
                             <Setter TargetName="lBox" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEyedropperEnabled" Value="False">
+                            <Setter TargetName="PART_EyedropperButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
