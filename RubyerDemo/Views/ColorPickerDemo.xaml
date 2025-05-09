@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="RubyerDemo.Views.ColorPickerDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             xmlns:viewmodels="clr-namespace:RubyerDemo.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:DateTimePickerViewModel}"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="ColorPickerDemo">
+        <ScrollViewer>
+            <Grid Margin="10"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
+                  rubyer:PanelHelper.Spacing="10">
+                <controls:ControlDisplay Title="ColorPalette">
+                    <rubyer:ColorPalette />
+                </controls:ControlDisplay>
+
+                <controls:ControlDisplay Title="ColorPicker" Grid.Row="1">
+                    <StackPanel Orientation="Horizontal">
+                        <rubyer:ColorPicker Width="130"
+                                            Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
+                                            Color="SkyBlue" />
+                    </StackPanel>
+                </controls:ControlDisplay>
+            </Grid>
+        </ScrollViewer>
+    </smtx:XamlDisplay>
+</UserControl>

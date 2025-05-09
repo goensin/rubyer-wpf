@@ -64,6 +64,8 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/DialogContainer.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Popover.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Avatar.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ColorPicker.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ColorPalette.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
@@ -135,4 +137,6 @@
     <Style BasedOn="{StaticResource RubyerDialogContainer}" TargetType="{x:Type rubyer:DialogContainer}" />
     <Style BasedOn="{StaticResource RubyerPopover}" TargetType="{x:Type rubyer:Popover}" />
     <Style BasedOn="{StaticResource RubyerAvatar}" TargetType="{x:Type rubyer:Avatar}" />
+    <Style BasedOn="{StaticResource RubyerColorPicker}" TargetType="{x:Type rubyer:ColorPicker}" />
+    <Style BasedOn="{StaticResource RubyerColorPalette}" TargetType="{x:Type rubyer:ColorPalette}" />
 </ResourceDictionary>

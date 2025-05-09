@@ -1,0 +1,601 @@
+﻿using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Input;
+using System.Windows.Media;
+
+namespace Rubyer
+{
+    /// <summary>
+    /// 调色板
+    /// </summary>
+    [TemplatePart(Name = ColorSliderPartName, Type = typeof(Slider))]
+    [TemplatePart(Name = OpacitySliderPartName, Type = typeof(Slider))]
+    [TemplatePart(Name = DragThumbPartName, Type = typeof(Thumb))]
+    [TemplatePart(Name = SlGridPartName, Type = typeof(Grid))]
+    [TemplatePart(Name = RgbTextBoxPartName, Type = typeof(TextBox))]
+    public class ColorPalette : Control
+    {
+        /// <summary>
+        /// 颜色度滑块
+        /// </summary>
+        public const string ColorSliderPartName = "PART_ColorSlider";
+
+        /// <summary>
+        /// 透明度滑块
+        /// </summary>
+        public const string OpacitySliderPartName = "PART_OpacitySlider";
+
+        /// <summary>
+        /// SL 图拖多块
+        /// </summary>
+        public const string DragThumbPartName = "PART_DragSLThumb";
+
+        /// <summary>
+        /// SL 图面板
+        /// </summary>
+        public const string SlGridPartName = "PART_SlGrid";
+
+        /// <summary>
+        /// RGB 文本框
+        /// </summary>
+        public const string RgbTextBoxPartName = "PART_RgbTextBox";
+
+        private Slider colorSlider; // 颜色度滑块
+        private Slider opacitySlider; // 透明度滑
+        private Thumb dragSLThumb; // SL 图拖多块
+        private Grid slGrid; // SL 图面板
+        private TextBox rgbTextBox; // RGB 文本框
+
+        static ColorPalette()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPalette), new FrameworkPropertyMetadata(typeof(ColorPalette)));
+        }
+
+        private bool isUpdating;
+        private bool isHueUpdating;
+
+        /// <summary>
+        /// 颜色改变
+        /// </summary>
+        public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent(
+            "ColorChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<Color>), typeof(ColorPalette));
+
+        /// <summary>
+        /// 颜色改变
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<Color> ColorChanged
+        {
+            add { AddHandler(ColorChangedEvent, value); }
+            remove { RemoveHandler(ColorChangedEvent, value); }
+        }
+
+        /// <summary>
+        /// 显示文本
+        /// </summary>
+        public static readonly DependencyProperty TextProperty =
+            DependencyProperty.Register("Text", typeof(string), typeof(ColorPalette), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 显示文本
+        /// </summary>
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        /// <summary>
+        /// 红
+        /// </summary>
+        public static readonly DependencyProperty RedProperty =
+            DependencyProperty.Register("Red", typeof(byte), typeof(ColorPalette), new PropertyMetadata((byte)0, OnRgbaChanged));
+
+        /// <summary>
+        /// 红
+        /// </summary>
+        public byte Red
+        {
+            get { return (byte)GetValue(RedProperty); }
+            set { SetValue(RedProperty, value); }
+        }
+
+        /// <summary>
+        /// 绿
+        /// </summary>
+        public static readonly DependencyProperty GreenProperty =
+            DependencyProperty.Register("Green", typeof(byte), typeof(ColorPalette), new PropertyMetadata((byte)0, OnRgbaChanged));
+
+        /// <summary>
+        /// 绿
+        /// </summary>
+        public byte Green
+        {
+            get { return (byte)GetValue(GreenProperty); }
+            set { SetValue(GreenProperty, value); }
+        }
+
+        /// <summary>
+        /// 蓝
+        /// </summary>
+        public static readonly DependencyProperty BlueProperty =
+            DependencyProperty.Register("Blue", typeof(byte), typeof(ColorPalette), new PropertyMetadata((byte)0, OnRgbaChanged));
+
+        /// <summary>
+        /// 蓝
+        /// </summary>
+        public byte Blue
+        {
+            get { return (byte)GetValue(BlueProperty); }
+            set { SetValue(BlueProperty, value); }
+        }
+
+        /// <summary>
+        /// 透明度 
+        /// </summary>
+        public static readonly DependencyProperty AlphaProperty =
+            DependencyProperty.Register("Alpha", typeof(byte), typeof(ColorPalette), new PropertyMetadata((byte)255, OnRgbaChanged));
+
+        /// <summary>
+        /// 透明度 
+        /// </summary>
+        public byte Alpha
+        {
+            get { return (byte)GetValue(AlphaProperty); }
+            set { SetValue(AlphaProperty, value); }
+        }
+
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        public static readonly DependencyProperty ColorProperty =
+            DependencyProperty.Register("Color", typeof(Color), typeof(ColorPalette), new PropertyMetadata(Colors.Red, OnColorChanged));
+
+        /// <summary>
+        /// 颜色
+        /// </summary>
+        public Color Color
+        {
+            get { return (Color)GetValue(ColorProperty); }
+            set { SetValue(ColorProperty, value); }
+        }
+
+        /// <summary>
+        /// 颜色 - 没有透明度
+        /// </summary>
+        internal static readonly DependencyPropertyKey NoAlphaColorPropertyKey =
+            DependencyProperty.RegisterReadOnly("NoAlphaColor", typeof(Color), typeof(ColorPalette), new PropertyMetadata(default(Color)));
+
+        /// <summary>
+        /// 颜色 - 没有透明度
+        /// </summary>
+        public static readonly DependencyProperty NoAlphaColorProperty = NoAlphaColorPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// 颜色 - 没有透明度
+        /// </summary>
+        public Color NoAlphaColor
+        {
+            get { return (Color)GetValue(NoAlphaColorProperty); }
+            private set { SetValue(NoAlphaColorPropertyKey, value); }
+        }
+
+        /// <summary>
+        /// 颜色 - 没有饱和度和亮度
+        /// </summary>
+        internal static readonly DependencyPropertyKey NoSlColorPropertyKey =
+            DependencyProperty.RegisterReadOnly("NoSlColor", typeof(Color), typeof(ColorPalette), new PropertyMetadata(default(Color)));
+
+        /// <summary>
+        /// 颜色 - 没有饱和度和亮度
+        /// </summary>
+        public static readonly DependencyProperty NoSlColorProperty = NoSlColorPropertyKey.DependencyProperty;
+
+        /// <summary>
+        /// 颜色 - 没有饱和度和亮度
+        /// </summary>
+        public Color NoSlColor
+        {
+            get { return (Color)GetValue(NoSlColorProperty); }
+            private set { SetValue(NoSlColorPropertyKey, value); }
+        }
+
+        public ColorPalette()
+        {
+            Color = Color.FromArgb(Alpha, Red, Green, Blue);
+        }
+
+        /// <inheritdoc/> 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            colorSlider = (Slider)GetTemplateChild(ColorSliderPartName);
+            colorSlider.PreviewMouseDown += ColorSlider_PreviewMouseDown;
+            colorSlider.ValueChanged += ColorSlider_ValueChanged;
+            ColorToHsl(Color, out double hue, out _, out _);
+            colorSlider.Value = hue;
+
+            opacitySlider = (Slider)GetTemplateChild(OpacitySliderPartName);
+            opacitySlider.PreviewMouseDown += OpacitySlider_PreviewMouseDown;
+
+            dragSLThumb = (Thumb)GetTemplateChild(DragThumbPartName);
+            dragSLThumb.DragDelta += DragThumb_DragDelta;
+
+            slGrid = (Grid)GetTemplateChild(SlGridPartName);
+            slGrid.PreviewMouseDown += SlGrid_PreviewMouseDown;
+
+            rgbTextBox = (TextBox)GetTemplateChild(RgbTextBoxPartName);
+            rgbTextBox.PreviewKeyDown += RgbTextBox_PreviewKeyDown;
+            rgbTextBox.LostFocus += RgbTextBox_LostFocus;
+
+            this.Loaded += ColorPalette_Loaded;
+        }
+
+        private void RgbTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                var binding = rgbTextBox.GetBindingExpression(TextBox.TextProperty);
+                binding?.UpdateSource();
+
+                UpdateHslFromColor();
+            }
+        }
+
+        private void RgbTextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            UpdateHslFromColor();
+        }
+
+        private void ColorPalette_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Loaded -= ColorPalette_Loaded;
+
+            UpdateColor(Color);
+            NoSlColor = HslToColor(colorSlider.Value);
+        }
+
+        private void ColorSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            NoSlColor = HslToColor(colorSlider.Value);
+
+            if (!isHueUpdating)
+            {
+                UpdateColorFromHsl();
+            }
+        }
+
+        /// <summary>
+        /// 根据 HSL 更新颜色
+        /// </summary>
+        private void UpdateColorFromHsl()
+        {
+            if (dragSLThumb is { } && slGrid is { })
+            {
+                double hue = colorSlider.Value;
+                var thumbPoint = new Point(dragSLThumb.ActualWidth / 2, dragSLThumb.ActualHeight / 2);
+                Point point = dragSLThumb.TranslatePoint(thumbPoint, slGrid);
+                double saturation = point.X / slGrid.ActualWidth;
+                double topL = 1.0 - 0.5 * saturation;
+                double lightness = topL * (1.0 - (point.Y / slGrid.ActualHeight));
+                var color = HslToColor(hue, saturation, lightness, Color.A);
+                Color = color;
+            }
+        }
+
+        /// <summary>
+        /// 更新 HSL 滑块位置
+        /// </summary>
+        private void UpdateHslFromColor()
+        {
+            if (dragSLThumb is { } && slGrid is { })
+            {
+                var thumbPoint = new Point(dragSLThumb.ActualWidth / 2, dragSLThumb.ActualHeight / 2);
+                Point point = dragSLThumb.TranslatePoint(thumbPoint, slGrid);
+
+                ColorToHsl(Color, out double hue, out double saturation, out double lightness);
+                double topL = 1.0 - 0.5 * saturation;
+                double x = slGrid.ActualWidth * saturation;
+                double y = (1.0 - lightness / topL) * slGrid.ActualHeight;
+                UpdateDragThumkPosition(x - point.X, y - point.Y);
+
+                isHueUpdating = true;
+                colorSlider.Value = hue;
+                isHueUpdating = false;
+            }
+        }
+
+        private async void ColorSlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var point = e.GetPosition(colorSlider);
+            colorSlider.Value = (point.X / colorSlider.ActualWidth) * 360;
+            if (colorSlider.Template.FindName("PART_Track", colorSlider) is Track track)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(50));
+                if (!track.Thumb.IsDragging)
+                {
+                    var mouseDownEvent = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = Mouse.MouseDownEvent,
+                        Source = e.Source
+                    };
+
+                    track.Thumb.RaiseEvent(mouseDownEvent);
+                    this.Focus();
+                }
+            }
+        }
+
+        private async void OpacitySlider_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            var point = e.GetPosition(opacitySlider);
+            opacitySlider.Value = (point.X / opacitySlider.ActualWidth) * 255;
+            if (opacitySlider.Template.FindName("PART_Track", opacitySlider) is Track track)
+            {
+                await Task.Delay(TimeSpan.FromMilliseconds(50));
+
+                if (!track.Thumb.IsDragging)
+                {
+                    var mouseDownEvent = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = Mouse.MouseDownEvent,
+                        Source = e.Source
+                    };
+
+                    track.Thumb.RaiseEvent(mouseDownEvent);
+                    this.Focus();
+                }
+            }
+        }
+
+        private void SlGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (dragSLThumb is { } && slGrid is { })
+            {
+                var currentPoint = e.GetPosition(slGrid);
+                var thumbPoint = new Point(dragSLThumb.ActualWidth / 2, dragSLThumb.ActualHeight / 2);
+                Point point = dragSLThumb.TranslatePoint(thumbPoint, slGrid);
+                UpdateDragThumkPosition(currentPoint.X - point.X, currentPoint.Y - point.Y);
+                UpdateColorFromHsl();
+
+                if (!dragSLThumb.IsDragging)
+                {
+                    var mouseDownEvent = new MouseButtonEventArgs(e.MouseDevice, e.Timestamp, e.ChangedButton)
+                    {
+                        RoutedEvent = Mouse.MouseDownEvent,
+                        Source = e.Source
+                    };
+
+                    dragSLThumb.RaiseEvent(mouseDownEvent);
+                    this.Focus();
+                }
+
+                e.Handled = true;
+            }
+        }
+
+        private static void OnRgbaChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPalette = (ColorPalette)d;
+            if (!colorPalette.isUpdating)
+            {
+                colorPalette.Color = Color.FromArgb(colorPalette.Alpha, colorPalette.Red, colorPalette.Green, colorPalette.Blue);
+
+                colorPalette.isHueUpdating = true;
+                ColorToHsl(colorPalette.Color, out double h, out double s, out double l);
+                colorPalette.UpdateHslFromColor();
+                colorPalette.isHueUpdating = false;
+            }
+        }
+
+        private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPalette = (ColorPalette)d;
+            colorPalette.NoAlphaColor = Color.FromRgb(colorPalette.Color.R, colorPalette.Color.G, colorPalette.Color.B);
+
+            colorPalette.isUpdating = true;
+
+            colorPalette.Alpha = colorPalette.Color.A;
+            colorPalette.Red = colorPalette.Color.R;
+            colorPalette.Green = colorPalette.Color.G;
+            colorPalette.Blue = colorPalette.Color.B;
+            colorPalette.RaiseEvent(new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue)
+            {
+                RoutedEvent = ColorChangedEvent
+            });
+
+            // colorPalette.UpdateHslFromColor();
+
+            colorPalette.isUpdating = false;
+        }
+
+        private void DragThumb_DragDelta(object sender, DragDeltaEventArgs e)
+        {
+            UpdateDragThumkPosition(e.HorizontalChange, e.VerticalChange);
+
+            UpdateColorFromHsl();
+        }
+
+        /// <summary>
+        /// 更新 SL 滑块位置
+        /// </summary>
+        /// <param name="x">X 坐标更新</param>
+        /// <param name="y">Y 坐标更新</param>
+        private void UpdateDragThumkPosition(double x, double y)
+        {
+            if (dragSLThumb.RenderTransform is not TranslateTransform)
+            {
+                dragSLThumb.RenderTransform = new TranslateTransform();
+            }
+
+            if (dragSLThumb.RenderTransform is TranslateTransform translateTransform)
+            {
+                var point = dragSLThumb.TranslatePoint(new Point(), slGrid);
+                var halfW = dragSLThumb.ActualWidth / 2;
+                var halfH = dragSLThumb.ActualHeight / 2;
+
+                if (x < 0 && x < -(point.X + halfW))
+                {
+                    x = -(point.X + halfW);
+                }
+                else if (x > 0 && x + point.X + halfW > slGrid.ActualWidth)
+                {
+                    x = slGrid.ActualWidth - halfW - point.X;
+                }
+
+                if (y < 0 && y < -(point.Y + halfH))
+                {
+                    y = -(point.Y + halfH);
+                }
+                else if (y > 0 && y + point.Y + halfH > slGrid.ActualHeight)
+                {
+                    y = slGrid.ActualHeight - halfH - point.Y;
+                }
+
+                translateTransform.X += x;
+                translateTransform.Y += y;
+            }
+        }
+
+        /// <summary>
+        /// 通过 HSL 获取 Color
+        /// </summary>
+        /// <param name="hue">色相</param>
+        /// <param name="saturation">饱和度</param>
+        /// <param name="lightness">亮度</param>
+        /// <param name="alpha">透明度</param>
+        /// <returns>Color</returns>
+        public static Color HslToColor(double hue, double saturation = 1, double lightness = 0.5, byte alpha = 255)
+        {
+            // 规范化输入值（使用Math.Clamp确保范围正确）
+            hue = Math.Min(Math.Max(hue % 360, 0), 360); // 色相0-360度
+            if (hue < 0) hue += 360;
+
+            saturation = Math.Min(Math.Max(saturation, 0), 1); // 饱和度0-1
+            lightness = Math.Min(Math.Max(lightness, 0), 1);   // 亮度0-1
+
+            // 无颜色情况（饱和度为0）
+            if (saturation == 0)
+            {
+                byte l = (byte)(lightness * 255);
+                return Color.FromArgb(alpha, l, l, l);
+            }
+
+            // 计算临时值q
+            double q = lightness < 0.5
+                ? lightness * (1 + saturation)
+                : lightness + saturation - (lightness * saturation);
+
+            double p = 2 * lightness - q;
+            double hk = hue / 360.0;
+
+            // 计算三个颜色通道
+            double[] tc = { hk + 1.0 / 3, hk, hk - 1.0 / 3 };
+            double[] colors = new double[3];
+
+            for (int i = 0; i < 3; i++)
+            {
+                // 调整色相值到0-1范围
+                if (tc[i] < 0) tc[i] += 1;
+                if (tc[i] > 1) tc[i] -= 1;
+
+                // 计算各通道颜色值
+                if (tc[i] < 1.0 / 6)
+                {
+                    colors[i] = p + ((q - p) * 6 * tc[i]);
+                }
+                else if (tc[i] < 1.0 / 2)
+                {
+                    colors[i] = q;
+                }
+                else if (tc[i] < 2.0 / 3)
+                {
+                    colors[i] = p + ((q - p) * 6 * (2.0 / 3 - tc[i]));
+                }
+                else
+                {
+                    colors[i] = p;
+                }
+
+                // 确保最终值在0-1范围内（二次保护）
+                colors[i] = Math.Min(Math.Max(colors[i], 0), 1);
+            }
+
+            // 转换为RGB并四舍五入
+            return Color.FromArgb(
+                alpha,
+                (byte)(colors[0] * 255 + 0.5),
+                (byte)(colors[1] * 255 + 0.5),
+                (byte)(colors[2] * 255 + 0.5));
+        }
+
+        /// <summary>
+        /// 通过 Color 获取 HSL
+        /// </summary>
+        /// <param name="color">颜色</param>
+        /// <param name="hue">色相</param>
+        /// <param name="saturation">饱和度</param>
+        /// <param name="lightness">亮度</param>
+        public static void ColorToHsl(Color color, out double hue, out double saturation, out double lightness)
+        {
+            // 归一化RGB值到0-1范围
+            double r = color.R / 255.0;
+            double g = color.G / 255.0;
+            double b = color.B / 255.0;
+
+            // 计算最大值和最小值
+            double max = Math.Max(r, Math.Max(g, b));
+            double min = Math.Min(r, Math.Min(g, b));
+            double delta = max - min;
+
+            // 计算亮度(L)
+            lightness = (max + min) / 2;
+
+            // 灰色情况（无饱和度）
+            if (delta == 0)
+            {
+                hue = 0;
+                saturation = 0;
+                return;
+            }
+
+            // 计算饱和度(S)
+            saturation = lightness > 0.5
+                ? delta / (2 - max - min)
+                : delta / (max + min);
+
+            // 计算色相(H)
+            if (r == max)
+            {
+                hue = (g - b) / delta;
+            }
+            else if (g == max)
+            {
+                hue = 2 + (b - r) / delta;
+            }
+            else // b == max
+            {
+                hue = 4 + (r - g) / delta;
+            }
+
+            hue *= 60; // 转换为度数
+
+            // 规范化色相到0-360范围
+            if (hue < 0) hue += 360;
+        }
+
+        /// <summary>
+        /// 更新颜色
+        /// </summary>
+        /// <param name="color">颜色</param>
+        internal void UpdateColor(Color color)
+        {
+            Color = color;
+            UpdateHslFromColor();
+        }
+    }
+}

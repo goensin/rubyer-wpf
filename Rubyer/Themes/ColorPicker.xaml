@@ -1,0 +1,142 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:rubyer="clr-namespace:Rubyer">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="RubyerColorPickerToggleButton" TargetType="{x:Type ToggleButton}">
+        <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="BorderThickness" Value="{Binding BorderThickness, RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="BorderBrush" Value="{Binding BorderBrush, RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="Padding" Value="{Binding Padding, RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource AncestorType=rubyer:ColorPicker}}" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ToggleButton}">
+                    <Grid>
+                        <Border x:Name="effectBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                Opacity="0">
+                            <Border.Effect>
+                                <DropShadowEffect x:Name="shadowEffect"
+                                                  BlurRadius="2"
+                                                  Direction="0"
+                                                  ShadowDepth="0"
+                                                  Color="{Binding BorderBrush.Color, ElementName=effectBorder}" />
+                            </Border.Effect>
+                        </Border>
+                        <Border x:Name="templateRoot"
+                                Padding="{TemplateBinding Padding}"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ContentPresenter Focusable="False" SnapsToDevicePixels="True" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.MouseOverBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="templateRoot" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                        </Trigger>
+                        <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True">
+                            <Setter TargetName="templateRoot" Property="BorderBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusBorderBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                            <DataTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1"
+                                                         Duration="0:0:0.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.EnterActions>
+                            <DataTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="effectBorder"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         Duration="0:0:0.25" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </DataTrigger.ExitActions>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="RubyerColorPicker" TargetType="{x:Type rubyer:ColorPicker}">
+        <Setter Property="Background" Value="{DynamicResource ControlBackground}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Border}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
+        <Setter Property="BorderThickness" Value="{DynamicResource DefaultBorderThickness}" />
+        <Setter Property="Padding" Value="5" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllControlCornerRadius}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.MouseOverBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="rubyer:ControlHelper.FocusBorderBrush" Value="{DynamicResource Primary}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type rubyer:ColorPicker}">
+                    <ToggleButton x:Name="PART_ColorToggle"
+                                  Style="{StaticResource RubyerColorPickerToggleButton}"
+                                  Padding="{TemplateBinding Padding}"
+                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                        <Grid x:Name="PART_Root" rubyer:PanelHelper.Spacing="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                    rubyer:ControlHelper.FocusedBrush="{Binding Background, RelativeSource={RelativeSource Self}}"
+                                    rubyer:ControlHelper.MouseOverBrush="{DynamicResource Mask}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <Border.Background>
+                                    <SolidColorBrush x:Name="PART_ColorBrush" Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                </Border.Background>
+                            </Border>
+
+                            <TextBlock Grid.Column="2" Text="{TemplateBinding Text}" />
+
+                            <Popup x:Name="PART_Popup"
+                                   AllowsTransparency="True"
+                                   HorizontalOffset="0"
+                                   IsHitTestVisible="False"
+                                   Placement="Bottom"
+                                   PlacementTarget="{Binding ElementName=PART_ColorToggle}"
+                                   PopupAnimation="Fade"
+                                   StaysOpen="False"
+                                   VerticalOffset="5">
+                                <rubyer:ColorPalette x:Name="PART_ColorPalette" />
+                            </Popup>
+                        </Grid>
+                    </ToggleButton>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="rubyer:InputBoxHelper.IsRound" Value="True">
+                            <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

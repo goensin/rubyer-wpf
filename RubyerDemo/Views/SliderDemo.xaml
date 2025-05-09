@@ -14,7 +14,8 @@
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="Default Slider">
                     <StackPanel Width="500">
-                        <Slider Margin="0 10"
+                        <Slider Style="{x:Null}"
+                                Margin="0 10" IsMoveToPointEnabled="True"
                                 IsSnapToTickEnabled="True"
                                 Maximum="100"
                                 Minimum="0"
