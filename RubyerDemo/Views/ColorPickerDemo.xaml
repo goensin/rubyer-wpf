@@ -22,6 +22,9 @@
                             <rubyer:DescriptionItem Description="IsAlphaEnabled">
                                 <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsAlphaEnabled, ElementName=colorPalette}" />
                             </rubyer:DescriptionItem>
+                            <rubyer:DescriptionItem Description="IsShowHsl">
+                                <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsShowHsl, ElementName=colorPalette}" />
+                            </rubyer:DescriptionItem>
                         </rubyer:Description>
 
                         <rubyer:ColorPalette x:Name="colorPalette"

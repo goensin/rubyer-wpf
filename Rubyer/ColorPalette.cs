@@ -149,6 +149,51 @@ namespace Rubyer
         }
 
         /// <summary>
+        /// 色相
+        /// </summary>
+        public static readonly DependencyProperty HueProperty =
+            DependencyProperty.Register("Hue", typeof(double), typeof(ColorPalette), new PropertyMetadata(0.0, OnHslChanged));
+
+        /// <summary>
+        /// 色相
+        /// </summary>
+        public double Hue
+        {
+            get { return (double)GetValue(HueProperty); }
+            set { SetValue(HueProperty, value); }
+        }
+
+        /// <summary>
+        /// 色相
+        /// </summary>
+        public static readonly DependencyProperty StaturationProperty =
+            DependencyProperty.Register("Staturation", typeof(double), typeof(ColorPalette), new PropertyMetadata(0.0, OnHslChanged));
+
+        /// <summary>
+        /// 饱和度
+        /// </summary>
+        public double Staturation
+        {
+            get { return (double)GetValue(StaturationProperty); }
+            set { SetValue(StaturationProperty, value); }
+        }
+
+        /// <summary>
+        /// 饱和度
+        /// </summary>
+        public static readonly DependencyProperty LightnessProperty =
+            DependencyProperty.Register("Lightness", typeof(double), typeof(ColorPalette), new PropertyMetadata(0.0, OnHslChanged));
+
+        /// <summary>
+        /// 亮度
+        /// </summary>
+        public double Lightness
+        {
+            get { return (double)GetValue(LightnessProperty); }
+            set { SetValue(LightnessProperty, value); }
+        }
+
+        /// <summary>
         /// 颜色
         /// </summary>
         public static readonly DependencyProperty ColorProperty =
@@ -231,6 +276,21 @@ namespace Rubyer
         {
             get { return (bool)GetValue(IsAlphaEnabledProperty); }
             set { SetValue(IsAlphaEnabledProperty, BooleanBoxes.Box(value)); }
+        }
+
+        /// <summary>
+        /// 显示 HSL
+        /// </summary>
+        public static readonly DependencyProperty IsShowHslProperty =
+            DependencyProperty.Register("IsShowHsl", typeof(bool), typeof(ColorPalette), new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        /// <summary>
+        /// 显示 HSL
+        /// </summary>
+        public bool IsShowHsl
+        {
+            get { return (bool)GetValue(IsShowHslProperty); }
+            set { SetValue(IsShowHslProperty, BooleanBoxes.Box(value)); }
         }
 
         public ColorPalette()
@@ -416,11 +476,25 @@ namespace Rubyer
                 colorPalette.Color = Color.FromArgb(colorPalette.Alpha, colorPalette.Red, colorPalette.Green, colorPalette.Blue);
 
                 colorPalette.isHueUpdating = true;
-                ColorToHsl(colorPalette.Color, out double h, out double s, out double l);
                 colorPalette.UpdateHslFromColor();
                 colorPalette.isHueUpdating = false;
             }
         }
+
+
+        private static void OnHslChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPalette = (ColorPalette)d;
+            if (!colorPalette.isUpdating)
+            {
+                colorPalette.Color = HslToColor(colorPalette.Hue, colorPalette.Staturation, colorPalette.Lightness, colorPalette.Alpha);
+
+                colorPalette.isHueUpdating = true;
+                colorPalette.UpdateHslFromColor();
+                colorPalette.isHueUpdating = false;
+            }
+        }
+
 
         private static void OnColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -434,6 +508,12 @@ namespace Rubyer
             colorPalette.Red = colorPalette.Color.R;
             colorPalette.Green = colorPalette.Color.G;
             colorPalette.Blue = colorPalette.Color.B;
+
+            ColorToHsl(colorPalette.Color, out double h, out double s, out double l);
+            colorPalette.Hue = h;
+            colorPalette.Staturation = s;
+            colorPalette.Lightness = l;
+
             colorPalette.RaiseEvent(new RoutedPropertyChangedEventArgs<Color>((Color)e.OldValue, (Color)e.NewValue)
             {
                 RoutedEvent = ColorChangedEvent

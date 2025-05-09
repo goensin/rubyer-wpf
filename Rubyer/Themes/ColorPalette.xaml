@@ -79,6 +79,7 @@
 
                             <Grid x:Name="PART_SlGrid"
                                   Height="150"
+                                  MinWidth="300"
                                   Background="Transparent">
                                 <Rectangle>
                                     <Rectangle.Fill>
@@ -195,9 +196,7 @@
                                         FontSize="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.3}"
                                         Foreground="{DynamicResource DefaultForeground}" />
 
-                                <TextBox x:Name="PART_RgbTextBox"
-                                         MinWidth="180"
-                                         Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <TextBox x:Name="PART_RgbTextBox" Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <rubyer:InputBoxHelper.PostContent>
                                         <ToggleButton Padding="5"
                                                       rubyer:ControlHelper.FocusedBrush="Transparent"
@@ -228,7 +227,10 @@
                                                    MinValue="0"
                                                    ShowButton="False"
                                                    Value="{Binding Alpha, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                <rubyer:NumericBox MinWidth="55"
+
+                                <!--  RGB  -->
+                                <rubyer:NumericBox x:Name="rBox"
+                                                   MinWidth="55"
                                                    Margin="0 0 5 0"
                                                    rubyer:InputBoxHelper.PreContent="R:"
                                                    MaxLength="3"
@@ -236,7 +238,8 @@
                                                    MinValue="0"
                                                    ShowButton="False"
                                                    Value="{Binding Red, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                <rubyer:NumericBox MinWidth="55"
+                                <rubyer:NumericBox x:Name="gBox"
+                                                   MinWidth="55"
                                                    Margin="0 0 5 0"
                                                    rubyer:InputBoxHelper.PreContent="G:"
                                                    MaxLength="3"
@@ -244,13 +247,52 @@
                                                    MinValue="0"
                                                    ShowButton="False"
                                                    Value="{Binding Green, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                <rubyer:NumericBox MinWidth="55"
+                                <rubyer:NumericBox x:Name="bBox"
+                                                   MinWidth="55"
                                                    rubyer:InputBoxHelper.PreContent="B:"
                                                    MaxLength="3"
                                                    MaxValue="255"
                                                    MinValue="0"
                                                    ShowButton="False"
                                                    Value="{Binding Blue, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                <!--  HSL  -->
+                                <rubyer:NumericBox x:Name="hBox"
+                                                   MinWidth="55"
+                                                   Margin="0 0 5 0"
+                                                   rubyer:InputBoxHelper.PreContent="H:"
+                                                   Interval="0.1"
+                                                   MaxValue="360"
+                                                   MinValue="0"
+                                                   NumericType="Double"
+                                                   ShowButton="False"
+                                                   TextFormat="F1"
+                                                   Visibility="Collapsed"
+                                                   Value="{Binding Hue, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                                <rubyer:NumericBox x:Name="sBox"
+                                                   MinWidth="55"
+                                                   Margin="0 0 5 0"
+                                                   rubyer:InputBoxHelper.PreContent="S:"
+                                                   Interval="0.01"
+                                                   MaxValue="1"
+                                                   MinValue="0"
+                                                   NumericType="Double"
+                                                   ShowButton="False"
+                                                   TextFormat="F2"
+                                                   Visibility="Collapsed"
+                                                   Value="{Binding Staturation, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+                                <rubyer:NumericBox x:Name="lBox"
+                                                   MinWidth="55"
+                                                   rubyer:InputBoxHelper.PreContent="L:"
+                                                   Interval="0.01"
+                                                   MaxValue="1"
+                                                   MinValue="0"
+                                                   NumericType="Double"
+                                                   ShowButton="False"
+                                                   TextFormat="F2"
+                                                   Visibility="Collapsed"
+                                                   Value="{Binding Lightness, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </UniformGrid>
                         </Grid>
                     </rubyer:Card>
@@ -260,6 +302,14 @@
                             <Setter TargetName="opacityBorder" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="alphaNumericBox" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_RgbTextBox" Property="Text" Value="{Binding Color, Converter={StaticResource ColorToStringConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IsShowHsl" Value="True">
+                            <Setter TargetName="rBox" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="gBox" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="bBox" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="hBox" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="sBox" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="lBox" Property="Visibility" Value="Visible" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
