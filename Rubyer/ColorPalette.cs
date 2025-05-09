@@ -1,5 +1,5 @@
-﻿using System;
-using System.Diagnostics;
+﻿using Rubyer.Commons.KnownBoxes;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -203,6 +203,21 @@ namespace Rubyer
             private set { SetValue(NoSlColorPropertyKey, value); }
         }
 
+        /// <summary>
+        /// 已复制颜色
+        /// </summary>
+        public static readonly DependencyProperty IsCopiedProperty =
+            DependencyProperty.Register("IsCopied", typeof(bool), typeof(ColorPalette), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsCopiedChanged));
+
+        /// <summary>
+        /// 已复制颜色
+        /// </summary>
+        public bool IsCopied
+        {
+            get { return (bool)GetValue(IsCopiedProperty); }
+            set { SetValue(IsCopiedProperty, BooleanBoxes.Box(value)); }
+        }
+
         public ColorPalette()
         {
             Color = Color.FromArgb(Alpha, Red, Green, Blue);
@@ -396,6 +411,7 @@ namespace Rubyer
         {
             var colorPalette = (ColorPalette)d;
             colorPalette.NoAlphaColor = Color.FromRgb(colorPalette.Color.R, colorPalette.Color.G, colorPalette.Color.B);
+            colorPalette.IsCopied = false;
 
             colorPalette.isUpdating = true;
 
@@ -407,8 +423,6 @@ namespace Rubyer
             {
                 RoutedEvent = ColorChangedEvent
             });
-
-            // colorPalette.UpdateHslFromColor();
 
             colorPalette.isUpdating = false;
         }
@@ -594,8 +608,18 @@ namespace Rubyer
         /// <param name="color">颜色</param>
         internal void UpdateColor(Color color)
         {
+            IsCopied = false;
             Color = color;
             UpdateHslFromColor();
+        }
+
+        private static void OnIsCopiedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPalette = (ColorPalette)d;
+            if (colorPalette.IsCopied)
+            {
+                ApplicationCommands.Copy.Execute(colorPalette.rgbTextBox.Text, colorPalette.rgbTextBox);
+            }
         }
     }
 }

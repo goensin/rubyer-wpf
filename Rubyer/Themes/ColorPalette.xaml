@@ -191,7 +191,23 @@
                             <TextBox x:Name="PART_RgbTextBox"
                                      Grid.Row="2"
                                      Grid.Column="1"
-                                     Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                     Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <rubyer:InputBoxHelper.PostContent>
+                                    <ToggleButton Padding="5"
+                                                  rubyer:ControlHelper.FocusedBrush="Transparent"
+                                                  rubyer:ControlHelper.MouseOverBrush="Transparent"
+                                                  Background="Transparent"
+                                                  Cursor="Hand"
+                                                  Foreground="{DynamicResource SecondaryForeground}"
+                                                  IsChecked="{Binding IsCopied, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                  IsHitTestVisible="{TemplateBinding IsCopied, Converter={StaticResource BooleanToInverseConverter}}">
+                                        <rubyer:ToggleButtonHelper.CheckedContent>
+                                            <rubyer:Icon Type="CheckLine" />
+                                        </rubyer:ToggleButtonHelper.CheckedContent>
+                                        <rubyer:Icon Type="FileCopyLine" />
+                                    </ToggleButton>
+                                </rubyer:InputBoxHelper.PostContent>
+                            </TextBox>
 
                             <Button Style="{DynamicResource OutlineButton}"
                                     Grid.Row="2"
