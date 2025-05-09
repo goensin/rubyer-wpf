@@ -15,14 +15,32 @@
                   rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
                 <controls:ControlDisplay Title="ColorPalette">
-                    <rubyer:ColorPalette />
+                    <DockPanel rubyer:PanelHelper.Spacing="30">
+                        <rubyer:Description Style="{StaticResource BorderDescription}"
+                                            VerticalAlignment="Center"
+                                            DockPanel.Dock="Right">
+                            <rubyer:DescriptionItem Description="IsAlphaEnabled">
+                                <ToggleButton Style="{StaticResource SwitchToggleButton}" IsChecked="{Binding IsAlphaEnabled, ElementName=colorPalette}" />
+                            </rubyer:DescriptionItem>
+                        </rubyer:Description>
+
+                        <rubyer:ColorPalette x:Name="colorPalette"
+                                             ColorChanged="colorPalette_ColorChanged"
+                                             IsAlphaEnabled="True" />
+                    </DockPanel>
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="ColorPicker" Grid.Row="1">
                     <StackPanel Orientation="Horizontal">
                         <rubyer:ColorPicker Width="130"
                                             Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
-                                            Color="SkyBlue" />
+                                            Color="SkyBlue">
+                            <rubyer:ColorPicker.Resources>
+                                <Style BasedOn="{StaticResource RubyerColorPalette}" TargetType="rubyer:ColorPalette">
+                                    <Setter Property="IsAlphaEnabled" Value="True" />
+                                </Style>
+                            </rubyer:ColorPicker.Resources>
+                        </rubyer:ColorPicker>
                     </StackPanel>
                 </controls:ControlDisplay>
             </Grid>

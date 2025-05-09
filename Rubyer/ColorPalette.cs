@@ -218,6 +218,21 @@ namespace Rubyer
             set { SetValue(IsCopiedProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 是否启用透明度
+        /// </summary>
+        public static readonly DependencyProperty IsAlphaEnabledProperty =
+            DependencyProperty.Register("IsAlphaEnabled", typeof(bool), typeof(ColorPalette), new PropertyMetadata(BooleanBoxes.FalseBox, OnIsAlphaEnabledChanged));
+
+        /// <summary>
+        /// 是否启用透明度
+        /// </summary>
+        public bool IsAlphaEnabled
+        {
+            get { return (bool)GetValue(IsAlphaEnabledProperty); }
+            set { SetValue(IsAlphaEnabledProperty, BooleanBoxes.Box(value)); }
+        }
+
         public ColorPalette()
         {
             Color = Color.FromArgb(Alpha, Red, Green, Blue);
@@ -613,6 +628,11 @@ namespace Rubyer
             UpdateHslFromColor();
         }
 
+        /// <summary>
+        /// 复制颜色到剪切板
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
         private static void OnIsCopiedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var colorPalette = (ColorPalette)d;
@@ -620,6 +640,17 @@ namespace Rubyer
             {
                 ApplicationCommands.Copy.Execute(colorPalette.rgbTextBox.Text, colorPalette.rgbTextBox);
             }
+        }
+
+        /// <summary>
+        /// 启用 Alpha 
+        /// </summary>
+        /// <param name="d"></param>
+        /// <param name="e"></param>
+        private static void OnIsAlphaEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var colorPalette = (ColorPalette)d;
+            colorPalette.Alpha = 255;
         }
     }
 }

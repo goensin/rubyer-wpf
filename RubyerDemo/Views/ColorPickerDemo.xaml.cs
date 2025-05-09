@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,11 @@ namespace RubyerDemo.Views
         public ColorPickerDemo()
         {
             InitializeComponent();
+        }
+
+        private void colorPalette_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
+        {
+            Debug.WriteLine($"color: {e.NewValue}");
         }
     }
 }

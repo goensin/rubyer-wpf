@@ -6,7 +6,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <converters:ColorToHueConverter x:Key="ColorToHueConverter" />
+    <converters:ColorToStringConverter x:Key="ColorToStringConverter" />
 
     <ControlTemplate x:Key="ColorPaletteSliderThumb" TargetType="{x:Type Thumb}">
         <Border Margin="-1"
@@ -67,22 +67,17 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:ColorPalette}">
                     <rubyer:Card>
-                        <Grid Margin="{TemplateBinding Padding}" rubyer:PanelHelper.Spacing="10">
+                        <Grid Margin="{TemplateBinding Padding}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
 
                             <Grid x:Name="PART_SlGrid"
-                                  Grid.ColumnSpan="3"
                                   Height="150"
                                   Background="Transparent">
                                 <Rectangle>
@@ -114,115 +109,119 @@
                                 </Thumb>
                             </Grid>
 
-                            <StackPanel Grid.Row="1"
-                                        Grid.ColumnSpan="3"
-                                        rubyer:PanelHelper.Spacing="10">
-                                <Slider x:Name="PART_ColorSlider"
+                            <Slider x:Name="PART_ColorSlider"
+                                    Grid.Row="1"
+                                    Margin="0 15 0 0"
+                                    rubyer:SliderHelper.TrackThickness="10"
+                                    Maximum="359.9"
+                                    Minimum="0"
+                                    Template="{StaticResource ColorPaletteSlider}">
+                                <Slider.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Offset="0.0" Color="Red" />
+                                        <GradientStop Offset="0.17" Color="Yellow" />
+                                        <GradientStop Offset="0.33" Color="Lime" />
+                                        <GradientStop Offset="0.5" Color="Cyan" />
+                                        <GradientStop Offset="0.67" Color="Blue" />
+                                        <GradientStop Offset="0.83" Color="Magenta" />
+                                        <GradientStop Offset="1.0" Color="Red" />
+                                    </LinearGradientBrush>
+                                </Slider.Background>
+                            </Slider>
+
+                            <Border x:Name="opacityBorder"
+                                    Grid.Row="2"
+                                    Margin="0 10 0 0"
+                                    CornerRadius="{Binding ActualHeight, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource Self}}">
+                                <Border.Background>
+                                    <DrawingBrush TileMode="Tile"
+                                                  Viewbox="0,0,8,8"
+                                                  ViewboxUnits="Absolute"
+                                                  Viewport="0,0,8,8"
+                                                  ViewportUnits="Absolute">
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <GeometryDrawing Brush="White">
+                                                    <GeometryDrawing.Geometry>
+                                                        <RectangleGeometry Rect="0,0,8,8" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                                <GeometryDrawing Brush="#FFD0D0D0">
+                                                    <GeometryDrawing.Geometry>
+                                                        <GeometryGroup>
+                                                            <RectangleGeometry Rect="0,0,4,4" />
+                                                            <RectangleGeometry Rect="4,4,4,4" />
+                                                        </GeometryGroup>
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                                <Slider x:Name="PART_OpacitySlider"
                                         rubyer:SliderHelper.TrackThickness="10"
-                                        Maximum="359.9"
+                                        Maximum="255"
                                         Minimum="0"
-                                        Template="{StaticResource ColorPaletteSlider}">
+                                        Template="{StaticResource ColorPaletteSlider}"
+                                        Value="{Binding Alpha, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <Slider.Background>
                                         <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                            <GradientStop Offset="0.0" Color="Red" />
-                                            <GradientStop Offset="0.17" Color="Yellow" />
-                                            <GradientStop Offset="0.33" Color="Lime" />
-                                            <GradientStop Offset="0.5" Color="Cyan" />
-                                            <GradientStop Offset="0.67" Color="Blue" />
-                                            <GradientStop Offset="0.83" Color="Magenta" />
-                                            <GradientStop Offset="1.0" Color="Red" />
+                                            <GradientStop Offset="0.0" Color="Transparent" />
+                                            <GradientStop Offset="1.0" Color="{Binding NoAlphaColor, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                         </LinearGradientBrush>
                                     </Slider.Background>
                                 </Slider>
-
-                                <Border CornerRadius="{Binding ActualHeight, Converter={StaticResource HalfOfDoubleConverter}, RelativeSource={RelativeSource Self}}">
-                                    <Border.Background>
-                                        <DrawingBrush TileMode="Tile"
-                                                      Viewbox="0,0,8,8"
-                                                      ViewboxUnits="Absolute"
-                                                      Viewport="0,0,8,8"
-                                                      ViewportUnits="Absolute">
-                                            <DrawingBrush.Drawing>
-                                                <DrawingGroup>
-                                                    <GeometryDrawing Brush="White">
-                                                        <GeometryDrawing.Geometry>
-                                                            <RectangleGeometry Rect="0,0,8,8" />
-                                                        </GeometryDrawing.Geometry>
-                                                    </GeometryDrawing>
-                                                    <GeometryDrawing Brush="#FFD0D0D0">
-                                                        <GeometryDrawing.Geometry>
-                                                            <GeometryGroup>
-                                                                <RectangleGeometry Rect="0,0,4,4" />
-                                                                <RectangleGeometry Rect="4,4,4,4" />
-                                                            </GeometryGroup>
-                                                        </GeometryDrawing.Geometry>
-                                                    </GeometryDrawing>
-                                                </DrawingGroup>
-                                            </DrawingBrush.Drawing>
-                                        </DrawingBrush>
-                                    </Border.Background>
-                                    <Slider x:Name="PART_OpacitySlider"
-                                            rubyer:SliderHelper.TrackThickness="10"
-                                            Maximum="255"
-                                            Minimum="0"
-                                            Template="{StaticResource ColorPaletteSlider}"
-                                            Value="{Binding Alpha, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                        <Slider.Background>
-                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-                                                <GradientStop Offset="0.0" Color="Transparent" />
-                                                <GradientStop Offset="1.0" Color="{Binding NoAlphaColor, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                            </LinearGradientBrush>
-                                        </Slider.Background>
-                                    </Slider>
-                                </Border>
-                            </StackPanel>
-
-                            <Border Grid.Row="2"
-                                    Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
-                                    MinHeight="30"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                <Border.Background>
-                                    <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                </Border.Background>
                             </Border>
 
-                            <TextBox x:Name="PART_RgbTextBox"
-                                     Grid.Row="2"
-                                     Grid.Column="1"
-                                     Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                <rubyer:InputBoxHelper.PostContent>
-                                    <ToggleButton Padding="5"
-                                                  rubyer:ControlHelper.FocusedBrush="Transparent"
-                                                  rubyer:ControlHelper.MouseOverBrush="Transparent"
-                                                  Background="Transparent"
-                                                  Cursor="Hand"
-                                                  Foreground="{DynamicResource SecondaryForeground}"
-                                                  IsChecked="{Binding IsCopied, RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                  IsHitTestVisible="{TemplateBinding IsCopied, Converter={StaticResource BooleanToInverseConverter}}">
-                                        <rubyer:ToggleButtonHelper.CheckedContent>
-                                            <rubyer:Icon Type="CheckLine" />
-                                        </rubyer:ToggleButtonHelper.CheckedContent>
-                                        <rubyer:Icon Type="FileCopyLine" />
-                                    </ToggleButton>
-                                </rubyer:InputBoxHelper.PostContent>
-                            </TextBox>
+                            <DockPanel Grid.Row="3"
+                                       Margin="0 10 0 0"
+                                       rubyer:PanelHelper.Spacing="5">
+                                <Border Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
+                                        MinHeight="30"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                        DockPanel.Dock="Left">
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    </Border.Background>
+                                </Border>
 
-                            <Button Style="{DynamicResource OutlineButton}"
-                                    Grid.Row="2"
-                                    Grid.Column="2"
-                                    Padding="3"
-                                    rubyer:ButtonHelper.IconType="SipLine"
-                                    BorderBrush="{StaticResource Border}"
-                                    FontSize="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.3}"
-                                    Foreground="{DynamicResource DefaultForeground}" />
+                                <Button Style="{DynamicResource OutlineButton}"
+                                        Padding="3"
+                                        rubyer:ButtonHelper.IconType="SipLine"
+                                        BorderBrush="{StaticResource Border}"
+                                        DockPanel.Dock="Right"
+                                        FontSize="{TemplateBinding FontSize, Converter={StaticResource MultiplyConverter}, ConverterParameter=1.3}"
+                                        Foreground="{DynamicResource DefaultForeground}" />
 
-                            <StackPanel Grid.Row="3"
-                                        Grid.ColumnSpan="3"
-                                        rubyer:PanelHelper.Spacing="5"
-                                        Orientation="Horizontal">
-                                <rubyer:NumericBox MinWidth="55"
+                                <TextBox x:Name="PART_RgbTextBox"
+                                         MinWidth="180"
+                                         Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <rubyer:InputBoxHelper.PostContent>
+                                        <ToggleButton Padding="5"
+                                                      rubyer:ControlHelper.FocusedBrush="Transparent"
+                                                      rubyer:ControlHelper.MouseOverBrush="Transparent"
+                                                      Background="Transparent"
+                                                      Cursor="Hand"
+                                                      Foreground="{DynamicResource SecondaryForeground}"
+                                                      IsChecked="{Binding IsCopied, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                      IsHitTestVisible="{TemplateBinding IsCopied, Converter={StaticResource BooleanToInverseConverter}}">
+                                            <rubyer:ToggleButtonHelper.CheckedContent>
+                                                <rubyer:Icon Type="CheckLine" />
+                                            </rubyer:ToggleButtonHelper.CheckedContent>
+                                            <rubyer:Icon Type="FileCopyLine" />
+                                        </ToggleButton>
+                                    </rubyer:InputBoxHelper.PostContent>
+                                </TextBox>
+                            </DockPanel>
+
+                            <UniformGrid Grid.Row="4"
+                                         Margin="0 10 0 0"
+                                         Rows="1">
+                                <rubyer:NumericBox x:Name="alphaNumericBox"
+                                                   MinWidth="55"
+                                                   Margin="0 0 5 0"
                                                    rubyer:InputBoxHelper.PreContent="A:"
                                                    MaxLength="3"
                                                    MaxValue="255"
@@ -230,6 +229,7 @@
                                                    ShowButton="False"
                                                    Value="{Binding Alpha, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <rubyer:NumericBox MinWidth="55"
+                                                   Margin="0 0 5 0"
                                                    rubyer:InputBoxHelper.PreContent="R:"
                                                    MaxLength="3"
                                                    MaxValue="255"
@@ -237,6 +237,7 @@
                                                    ShowButton="False"
                                                    Value="{Binding Red, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 <rubyer:NumericBox MinWidth="55"
+                                                   Margin="0 0 5 0"
                                                    rubyer:InputBoxHelper.PreContent="G:"
                                                    MaxLength="3"
                                                    MaxValue="255"
@@ -250,10 +251,17 @@
                                                    MinValue="0"
                                                    ShowButton="False"
                                                    Value="{Binding Blue, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                            </StackPanel>
+                            </UniformGrid>
                         </Grid>
-
                     </rubyer:Card>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsAlphaEnabled" Value="False">
+                            <Setter TargetName="opacityBorder" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="alphaNumericBox" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_RgbTextBox" Property="Text" Value="{Binding Color, Converter={StaticResource ColorToStringConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
