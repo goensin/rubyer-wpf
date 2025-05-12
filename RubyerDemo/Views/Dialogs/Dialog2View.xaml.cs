@@ -37,5 +37,10 @@ namespace RubyerDemo.Views.Dialogs
             var view = new Dialog2View();
             await Dialog.Show("Dialog2", view, parameters: dialogCard.Title + "~");
         }
+
+        private void OnClear(object sender, RoutedEventArgs e)
+        {
+            Dialog.Clear("Dialog2");
+        }
     }
 }

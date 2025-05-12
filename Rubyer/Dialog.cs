@@ -144,7 +144,7 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 关闭
+        /// 根据标题关闭
         /// </summary>
         /// <param name="parameter">参数</param>
         /// <exception cref="NullReferenceException">找不到对话框</exception>
@@ -153,6 +153,67 @@ namespace Rubyer
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
             Close(container, parameter);
+        }
+
+
+        /// <summary>
+        /// 根据标题关闭
+        /// </summary>
+        /// <param name="dialog">对话框</param>
+        /// <param name="title">标题</param>
+        /// <param name="parameter">参数</param>
+        /// <exception cref="NullReferenceException">找不到对话框</exception>
+        public static void CloseFromTitle(DialogContainer dialog, string title, object parameter = null)
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            dialog.ForEachVisualChild(x =>
+            {
+                if (x is DialogCard dialogCard && dialogCard.Title.Contains(title))
+                {
+                    dialogCard.Close(parameter);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 根据标题关闭
+        /// </summary>
+        /// <param name="title">标题</param>
+        /// <param name="parameter">参数</param>
+        /// <exception cref="NullReferenceException">找不到对话框</exception>
+        public static void CloseFromTitle(string title, object parameter = null)
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            CloseFromTitle(container, title, parameter);
+        }
+
+        /// <summary>
+        /// 移除所有对话框
+        /// </summary>
+        /// <param name="dialog">对话框</param>
+        /// <param name="parameter">参数</param>
+        public static void Clear(DialogContainer dialog, object parameter = null)
+        {
+            dialog.ForEachVisualChild(x =>
+            {
+                if (x is DialogCard dialogCard)
+                {
+                    dialogCard.Close(parameter);
+                }
+            });
+        }
+
+        /// <summary>
+        /// 移除所有对话框
+        /// </summary>
+        /// <param name="parameter">参数</param>
+        public static void Clear(object parameter = null)
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            Clear(container, parameter);
         }
     }
 }

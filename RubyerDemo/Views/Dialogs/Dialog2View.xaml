@@ -7,11 +7,11 @@
              d:DesignHeight="450"
              d:DesignWidth="800"
              mc:Ignorable="d">
-    <StackPanel>
+    <StackPanel rubyer:PanelHelper.Spacing="6">
         <TextBlock Text="对话框内容" />
+        <Button Click="Button_Click" Content="新对话框" />
         <Button Style="{StaticResource AccentButton}"
-                Margin="10"
-                Click="Button_Click"
-                Content="新对话框" />
+                Click="OnClear"
+                Content="关闭所有" />
     </StackPanel>
 </UserControl>

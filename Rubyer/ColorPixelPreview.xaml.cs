@@ -94,9 +94,14 @@ namespace Rubyer
                         new Rect(x + w * size, y + h * size, size, size));
 
                     if (i % 5 == 4)
+                    {
                         h++;
+                        w = 0;
+                    }
                     else
                         w++;
+
+                    visualHost.AddVisual(visual);
                 }
                 //for (int i = 0; i < 5; i++)
                 //{
