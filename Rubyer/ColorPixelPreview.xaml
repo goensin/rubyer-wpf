@@ -6,7 +6,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         AllowsTransparency="True"
         Background="#01000000"
-        Cursor="None"
         Topmost="True"
         WindowStartupLocation="CenterScreen"
         WindowState="Maximized"

@@ -1,11 +1,12 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -20,6 +21,7 @@ namespace Rubyer
     [TemplatePart(Name = SlGridPartName, Type = typeof(Grid))]
     [TemplatePart(Name = RgbTextBoxPartName, Type = typeof(TextBox))]
     [TemplatePart(Name = EyedropperButtonPartName, Type = typeof(Button))]
+    [TemplatePart(Name = OptionalColorItemsControlPartName, Type = typeof(ItemsControl))]
     public class ColorPalette : Control
     {
         /// <summary>
@@ -48,6 +50,11 @@ namespace Rubyer
         public const string RgbTextBoxPartName = "PART_RgbTextBox";
 
         /// <summary>
+        /// RGB 文本框
+        /// </summary>
+        public const string OptionalColorItemsControlPartName = "PART_OptionalColorItemsControl";
+
+        /// <summary>
         /// 吸管按钮
         /// </summary>
         public const string EyedropperButtonPartName = "PART_EyedropperButton";
@@ -57,6 +64,7 @@ namespace Rubyer
         private Thumb dragSLThumb; // SL 图拖多块
         private Grid slGrid; // SL 图面板
         private TextBox rgbTextBox; // RGB 文本框
+        private ItemsControl optionalColorItemsControl; // RGB 文本框
 
         static ColorPalette()
         {
@@ -336,6 +344,21 @@ namespace Rubyer
             private set { SetValue(IsPickingPropertyKey, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 可选颜色集合
+        /// </summary>
+        public static readonly DependencyProperty OptionalColorsProperty =
+            DependencyProperty.Register("OptionalColors", typeof(IEnumerable<Color>), typeof(ColorPalette), new PropertyMetadata(Enumerable.Empty<Color>()));
+
+        /// <summary>
+        /// 可选颜色集合
+        /// </summary>
+        public IEnumerable<Color> OptionalColors
+        {
+            get { return (IEnumerable<Color>)GetValue(OptionalColorsProperty); }
+            set { SetValue(OptionalColorsProperty, value); }
+        }
+
         public ColorPalette()
         {
             Color = Color.FromArgb(Alpha, Red, Green, Blue);
@@ -368,7 +391,36 @@ namespace Rubyer
             var eyedropperButton = (Button)GetTemplateChild(EyedropperButtonPartName);
             eyedropperButton.Click += EyedropperButton_Click;
 
-            this.Loaded += ColorPalette_Loaded;
+            Loaded += ColorPalette_Loaded;
+
+            optionalColorItemsControl = (ItemsControl)GetTemplateChild(OptionalColorItemsControlPartName);
+
+            optionalColorItemsControl.AddHandler(ToggleButton.CheckedEvent, new RoutedEventHandler(CheckBox_Checked));
+        }
+
+        private void ColorPalette_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= ColorPalette_Loaded;
+
+            optionalColorItemsControl.ForEachVisualChild(x =>
+            {
+                if (x is CheckBox checkBox)
+                {
+                    checkBox.Checked += CheckBox_Checked;
+                }
+            });
+
+            UpdateColor(Color);
+            NoSlColor = HslToColor(colorSlider.Value);
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox checkBox && checkBox.DataContext is Color color)
+            {
+                Color = color;
+                UpdateHslFromColor();
+            }
         }
 
         private void RgbTextBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -385,14 +437,6 @@ namespace Rubyer
         private void RgbTextBox_LostFocus(object sender, RoutedEventArgs e)
         {
             UpdateHslFromColor();
-        }
-
-        private void ColorPalette_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.Loaded -= ColorPalette_Loaded;
-
-            UpdateColor(Color);
-            NoSlColor = HslToColor(colorSlider.Value);
         }
 
         private void ColorSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -507,7 +551,7 @@ namespace Rubyer
                     };
 
                     dragSLThumb.RaiseEvent(mouseDownEvent);
-                    this.Focus();
+                    Focus();
                 }
 
                 e.Handled = true;
@@ -788,7 +832,7 @@ namespace Rubyer
         private void EyedropperButton_Click(object sender, RoutedEventArgs e)
         {
             IsPicking = true;
-            Application.Current.MainWindow.Visibility = Visibility.Hidden;
+            //Application.Current.MainWindow.Visibility = Visibility.Hidden;
 
             var colorPixelPreview = new ColorPixelPreview();
             if (colorPixelPreview.ShowDialog() == true)
@@ -798,7 +842,7 @@ namespace Rubyer
             }
 
             IsPicking = false;
-            Application.Current.MainWindow.Visibility = Visibility.Visible;
+            //Application.Current.MainWindow.Visibility = Visibility.Visible;
         }
     }
 

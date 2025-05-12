@@ -26,6 +26,59 @@
         </Border>
     </ControlTemplate>
 
+    <ControlTemplate x:Key="ColorCheckBox" TargetType="{x:Type CheckBox}">
+        <Grid x:Name="checkBoxGrid">
+            <Border CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                <Border.Background>
+                    <DrawingBrush TileMode="Tile"
+                                  Viewbox="0,0,8,8"
+                                  ViewboxUnits="Absolute"
+                                  Viewport="0,0,8,8"
+                                  ViewportUnits="Absolute">
+                        <DrawingBrush.Drawing>
+                            <DrawingGroup>
+                                <GeometryDrawing Brush="White">
+                                    <GeometryDrawing.Geometry>
+                                        <RectangleGeometry Rect="0,0,8,8" />
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                                <GeometryDrawing Brush="#FFD0D0D0">
+                                    <GeometryDrawing.Geometry>
+                                        <GeometryGroup>
+                                            <RectangleGeometry Rect="0,0,4,4" />
+                                            <RectangleGeometry Rect="4,4,4,4" />
+                                        </GeometryGroup>
+                                    </GeometryDrawing.Geometry>
+                                </GeometryDrawing>
+                            </DrawingGroup>
+                        </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                </Border.Background>
+            </Border>
+
+            <Border x:Name="checkBoxBorder"
+                    Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+
+            <Path x:Name="checked"
+                  Data="M9.9997 15.1709L19.1921 5.97852L20.6063 7.39273L9.9997 17.9993L3.63574 11.6354L5.04996 10.2212L9.9997 15.1709Z"
+                  Fill="{DynamicResource DefaultBackground}"
+                  Stroke="{DynamicResource Border}"
+                  StrokeThickness="1"
+                  Visibility="Collapsed" />
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="checkBoxBorder" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+            </Trigger>
+            <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="checked" Property="Visibility" Value="Visible" />
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
     <ControlTemplate x:Key="ColorPaletteSlider" TargetType="{x:Type Slider}">
         <Border x:Name="border"
                 Background="Transparent"
@@ -60,6 +113,7 @@
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="Margin" Value="5" />
         <Setter Property="Padding" Value="10" />
+        <Setter Property="MaxWidth" Value="350" />
         <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{DynamicResource AllContainerCornerRadius}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{DynamicResource Primary}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{DynamicResource WhiteForeground}" />
@@ -69,6 +123,7 @@
                     <rubyer:Card>
                         <Grid Margin="{TemplateBinding Padding}">
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
@@ -294,6 +349,41 @@
                                                    Visibility="Collapsed"
                                                    Value="{Binding Lightness, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             </UniformGrid>
+
+                            <Border x:Name="optionalColorBorder"
+                                    Grid.Row="5"
+                                    Margin="0 10 0 0"
+                                    Padding="0 10 0 0"
+                                    BorderBrush="{DynamicResource Border}"
+                                    BorderThickness="0 1 0 0">
+                                <ItemsControl x:Name="PART_OptionalColorItemsControl" ItemsSource="{Binding OptionalColors, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Width="24"
+                                                      Height="24"
+                                                      Margin="0 0 5 5"
+                                                      BorderThickness="1"
+                                                      Cursor="Hand"
+                                                      Template="{StaticResource ColorCheckBox}">
+                                                <CheckBox.Background>
+                                                    <SolidColorBrush Color="{Binding}" />
+                                                </CheckBox.Background>
+                                                <CheckBox.IsChecked>
+                                                    <MultiBinding Converter="{StaticResource IsEqualConverter}" Mode="OneWay">
+                                                        <Binding Path="." />
+                                                        <Binding Path="Color" RelativeSource="{RelativeSource AncestorType=rubyer:ColorPalette}" />
+                                                    </MultiBinding>
+                                                </CheckBox.IsChecked>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Border>
                         </Grid>
                     </rubyer:Card>
 
@@ -314,6 +404,9 @@
                         <Trigger Property="IsEyedropperEnabled" Value="False">
                             <Setter TargetName="PART_EyedropperButton" Property="Visibility" Value="Collapsed" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding OptionalColors.Count, RelativeSource={RelativeSource Mode=Self}}" Value="0">
+                            <Setter TargetName="optionalColorBorder" Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
