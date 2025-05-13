@@ -160,7 +160,7 @@
                                 </TranslateTransform>
                             </Button.RenderTransform>
                             <Button.ToolTip>
-                                <ToolTip x:Name="StartToolTip" IsOpen="False">
+                                <ToolTip x:Name="StartToolTip">
                                     <ToolTip.Placement>
                                         <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
                                             <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
@@ -206,7 +206,7 @@
                                 </MultiBinding>
                             </Canvas.Left>
                             <Button.ToolTip>
-                                <ToolTip x:Name="EndToolTip" IsOpen="False">
+                                <ToolTip x:Name="EndToolTip">
                                     <ToolTip.Placement>
                                         <MultiBinding Converter="{StaticResource AutoToolTipPlacementToPlacementModeConverter}">
                                             <Binding Path="AutoToolTipPlacement" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
@@ -273,6 +273,10 @@
             </Trigger>
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
+            </Trigger>
+            <Trigger SourceName="PART_SelectionRange" Property="IsPressed" Value="True">
+                <Setter TargetName="StartToolTip"  Property="IsOpen" Value="True" />
+                <Setter TargetName="EndToolTip"  Property="IsOpen" Value="True" />
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>

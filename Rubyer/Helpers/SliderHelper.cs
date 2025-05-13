@@ -147,6 +147,7 @@ namespace Rubyer
                 WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(startButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
                 WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "PreviewMouseMove", RangeButton_MouseMove);
                 WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "MouseEnter", RangeButton_MouseEnter);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(startButton, "MouseLeave", RangeButton_MouseLeave);
             }
 
             if (slider.Template.FindName("EndRangeButton", slider) is Button endButton)
@@ -155,6 +156,7 @@ namespace Rubyer
                 WeakEventManager<UIElement, MouseButtonEventArgs>.AddHandler(endButton, "PreviewMouseLeftButtonUp", RangeButton_MouseUp);
                 WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "PreviewMouseMove", RangeButton_MouseMove);
                 WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "MouseEnter", RangeButton_MouseEnter);
+                WeakEventManager<UIElement, MouseEventArgs>.AddHandler(endButton, "MouseLeave", RangeButton_MouseLeave);
             }
 
             if (slider.Template.FindName("PART_SelectionRange", slider) is Button rangeButton)
@@ -196,10 +198,29 @@ namespace Rubyer
             }
         }
 
+        private static void RangeButton_MouseLeave(object sender, MouseEventArgs e)
+        {
+            if (sender is Button button && button.ToolTip is ToolTip toolTip)
+            {
+                toolTip.IsOpen = false;
+            }
+        }
+
         private static void RangeButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             var element = (FrameworkElement)sender;
             SetIsRangeButtonPressed(element, true);
+
+            var slider = element.TryGetParentFromVisualTree<Slider>();
+            if (slider.Template.FindName("StartRangeButton", slider) is Button startButton && startButton.ToolTip is ToolTip startToolTip)
+            {
+                startToolTip.IsOpen = true;
+            }
+
+            if (slider.Template.FindName("EndRangeButton", slider) is Button endButton && endButton.ToolTip is ToolTip endToolTip)
+            {
+                endToolTip.IsOpen = true;
+            }
         }
 
         private static void RangeButton_MouseUp(object sender, MouseButtonEventArgs e)
@@ -210,6 +231,17 @@ namespace Rubyer
             if (element is Button button && button.ToolTip is ToolTip toolTip)
             {
                 toolTip.IsOpen = false;
+            }
+
+            var slider = element.TryGetParentFromVisualTree<Slider>();
+            if (slider.Template.FindName("StartRangeButton", slider) is Button startButton && startButton.ToolTip is ToolTip startToolTip)
+            {
+                startToolTip.IsOpen = false;
+            }
+
+            if (slider.Template.FindName("EndRangeButton", slider) is Button endButton && endButton.ToolTip is ToolTip endToolTip)
+            {
+                endToolTip.IsOpen = false;
             }
         }
 
@@ -340,7 +372,16 @@ namespace Rubyer
 
                 UpdateRangeSelection(slider, position, buttonType);
 
-                UpdateToolTipOffset(element, slider);
+
+                if (slider.Template.FindName("StartRangeButton", slider) is Button startButton)
+                {
+                    UpdateToolTipOffset(startButton, slider);
+                }
+
+                if (slider.Template.FindName("EndRangeButton", slider) is Button endButton)
+                {
+                    UpdateToolTipOffset(endButton, slider);
+                }
             }
         }
     }

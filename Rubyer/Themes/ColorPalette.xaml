@@ -396,6 +396,7 @@
                                                       Margin="0 0 5 5"
                                                       BorderThickness="1"
                                                       Cursor="Hand"
+                                                      IsHitTestVisible="{Binding IsChecked, Converter={StaticResource BooleanToInverseConverter}, RelativeSource={RelativeSource Self}}"
                                                       Template="{StaticResource ColorCheckBox}">
                                                 <CheckBox.Background>
                                                     <SolidColorBrush Color="{Binding}" />
