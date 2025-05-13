@@ -34,7 +34,19 @@
 
                         <rubyer:ColorPalette x:Name="colorPalette"
                                              ColorChanged="colorPalette_ColorChanged"
-                                             IsAlphaEnabled="True" />
+                                             IsAlphaEnabled="True">
+                            <rubyer:ColorPalette.OptionalColors>
+                                <Color>#000</Color>
+                                <Color>#FFFFFF</Color>
+                                <Color>Red</Color>
+                                <Color>#00FF00</Color>
+                                <Color>#0000FF</Color>
+                                <Color>#AAFF0000</Color>
+                                <Color>#8800FF00</Color>
+                                <Color>#550000FF</Color>
+                                <Color>#22000000</Color>
+                            </rubyer:ColorPalette.OptionalColors>
+                        </rubyer:ColorPalette>
                     </DockPanel>
                 </controls:ControlDisplay>
 
@@ -43,6 +55,13 @@
                         <rubyer:ColorPicker Width="130"
                                             Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
                                             Color="SkyBlue">
+                            <rubyer:ColorPicker.OptionalColors>
+                                <Color>#000</Color>
+                                <Color>#FFFFFF</Color>
+                                <Color>Red</Color>
+                                <Color>#00FF00</Color>
+                                <Color>#0000FF</Color>
+                            </rubyer:ColorPicker.OptionalColors>
                             <rubyer:ColorPicker.Resources>
                                 <Style BasedOn="{StaticResource RubyerColorPalette}" TargetType="rubyer:ColorPalette">
                                     <Setter Property="IsAlphaEnabled" Value="True" />

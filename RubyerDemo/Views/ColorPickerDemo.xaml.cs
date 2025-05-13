@@ -24,21 +24,6 @@ namespace RubyerDemo.Views
         public ColorPickerDemo()
         {
             InitializeComponent();
-
-            colorPalette.OptionalColors = [
-                Colors.White,
-                Colors.Black,
-                Colors.Red,
-                Colors.Blue,
-                Colors.Green,
-                Colors.Purple,
-                Colors.Orange,
-                Colors.Pink,
-                Color.FromArgb(200, 255, 0, 0),
-                Color.FromArgb(160, 0, 255, 100),
-                Color.FromArgb(120, 100, 50, 0),
-                Color.FromArgb(80, 0, 50, 100),
-                Color.FromArgb(40, 50, 50, 50)];
         }
 
         private void colorPalette_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)

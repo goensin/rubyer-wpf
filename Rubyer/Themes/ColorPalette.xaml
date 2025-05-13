@@ -239,8 +239,35 @@
                                         CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                         DockPanel.Dock="Left">
                                     <Border.Background>
-                                        <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                        <DrawingBrush TileMode="Tile"
+                                                      Viewbox="0,0,8,8"
+                                                      ViewboxUnits="Absolute"
+                                                      Viewport="0,0,8,8"
+                                                      ViewportUnits="Absolute">
+                                            <DrawingBrush.Drawing>
+                                                <DrawingGroup>
+                                                    <GeometryDrawing Brush="White">
+                                                        <GeometryDrawing.Geometry>
+                                                            <RectangleGeometry Rect="0,0,8,8" />
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                    <GeometryDrawing Brush="#FFD0D0D0">
+                                                        <GeometryDrawing.Geometry>
+                                                            <GeometryGroup>
+                                                                <RectangleGeometry Rect="0,0,4,4" />
+                                                                <RectangleGeometry Rect="4,4,4,4" />
+                                                            </GeometryGroup>
+                                                        </GeometryDrawing.Geometry>
+                                                    </GeometryDrawing>
+                                                </DrawingGroup>
+                                            </DrawingBrush.Drawing>
+                                        </DrawingBrush>
                                     </Border.Background>
+                                    <Border CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                        </Border.Background>
+                                    </Border>
                                 </Border>
 
                                 <Button x:Name="PART_EyedropperButton"

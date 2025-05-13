@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -348,14 +349,14 @@ namespace Rubyer
         /// 可选颜色集合
         /// </summary>
         public static readonly DependencyProperty OptionalColorsProperty =
-            DependencyProperty.Register("OptionalColors", typeof(IEnumerable<Color>), typeof(ColorPalette), new PropertyMetadata(Enumerable.Empty<Color>()));
+            DependencyProperty.Register("OptionalColors", typeof(ObservableCollection<Color>), typeof(ColorPalette), new PropertyMetadata(new ObservableCollection<Color>()));
 
         /// <summary>
         /// 可选颜色集合
         /// </summary>
-        public IEnumerable<Color> OptionalColors
+        public ObservableCollection<Color> OptionalColors
         {
-            get { return (IEnumerable<Color>)GetValue(OptionalColorsProperty); }
+            get { return (ObservableCollection<Color>)GetValue(OptionalColorsProperty); }
             set { SetValue(OptionalColorsProperty, value); }
         }
 
@@ -416,7 +417,7 @@ namespace Rubyer
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            if (sender is CheckBox checkBox && checkBox.DataContext is Color color)
+            if (e.OriginalSource is CheckBox checkBox && checkBox.DataContext is Color color)
             {
                 Color = color;
                 UpdateHslFromColor();

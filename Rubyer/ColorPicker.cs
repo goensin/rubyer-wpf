@@ -1,5 +1,8 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -78,6 +81,26 @@ namespace Rubyer
             set { SetValue(IsDropDownOpenProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 可选颜色集合
+        /// </summary>
+        public static readonly DependencyProperty OptionalColorsProperty =
+            DependencyProperty.Register("OptionalColors", typeof(ObservableCollection<Color>), typeof(ColorPicker), new PropertyMetadata(new ObservableCollection<Color>(), null, CoerceOptionalColors));
+
+        private static object CoerceOptionalColors(DependencyObject d, object baseValue)
+        {
+            return baseValue is ObservableCollection<Color> ? baseValue : new ObservableCollection<Color>();
+        }
+
+        /// <summary>
+        /// 可选颜色集合
+        /// </summary>
+        public ObservableCollection<Color> OptionalColors
+        {
+            get { return (ObservableCollection<Color>)GetValue(OptionalColorsProperty); }
+            set { SetValue(OptionalColorsProperty, value); }
+        }
+
         /// <inheritdoc/> 
         public override void OnApplyTemplate()
         {
@@ -120,6 +143,7 @@ namespace Rubyer
         private void Popup_Opened(object sender, EventArgs e)
         {
             colorPalette.UpdateColor(Color);
+            colorPalette.OptionalColors = OptionalColors;
         }
 
         /// <summary>
