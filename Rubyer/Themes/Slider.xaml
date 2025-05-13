@@ -274,10 +274,6 @@
             <Trigger Property="IsEnabled" Value="false">
                 <Setter TargetName="border" Property="Opacity" Value="{StaticResource UnenableOpcity}" />
             </Trigger>
-            <Trigger SourceName="PART_SelectionRange" Property="IsPressed" Value="True">
-                <Setter TargetName="StartToolTip"  Property="IsOpen" Value="True" />
-                <Setter TargetName="EndToolTip"  Property="IsOpen" Value="True" />
-            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 

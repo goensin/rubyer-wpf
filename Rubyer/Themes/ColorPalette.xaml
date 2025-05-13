@@ -399,7 +399,7 @@
                                                       IsHitTestVisible="{Binding IsChecked, Converter={StaticResource BooleanToInverseConverter}, RelativeSource={RelativeSource Self}}"
                                                       Template="{StaticResource ColorCheckBox}">
                                                 <CheckBox.Background>
-                                                    <SolidColorBrush Color="{Binding}" />
+                                                    <SolidColorBrush Color="{Binding .}" />
                                                 </CheckBox.Background>
                                                 <CheckBox.IsChecked>
                                                     <MultiBinding Converter="{StaticResource IsEqualConverter}" Mode="OneWay">

@@ -187,6 +187,7 @@ namespace Rubyer
             if (Containers.TryGetValue(identifier, out DialogContainer container))
             {
                 CloseFromTitle(container, title, parameter);
+                return;
             }
 
             throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
@@ -231,6 +232,7 @@ namespace Rubyer
             if (Containers.TryGetValue(identifier, out DialogContainer container))
             {
                 Clear(container, parameter);
+                return;
             }
 
             throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
