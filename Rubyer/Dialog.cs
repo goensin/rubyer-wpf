@@ -162,7 +162,7 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="parameter">参数</param>
         /// <exception cref="NullReferenceException">找不到对话框</exception>
-        public static void CloseFromTitle(DialogContainer dialogContainer, string title, object parameter = null)
+        internal static void CloseFromTitle(DialogContainer dialogContainer, string title, object parameter = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
@@ -173,6 +173,23 @@ namespace Rubyer
                     dialogCard.Close(parameter);
                 }
             });
+        }
+
+        /// <summary>
+        /// 根据标题关闭
+        /// </summary>
+        /// <param name="identifier">对话框容器标识</param>
+        /// <param name="title">标题</param>
+        /// <param name="parameter">参数</param>
+        /// <exception cref="NullReferenceException">找不到对话框</exception>
+        public static void CloseFromTitle(string identifier, string title, object parameter = null)
+        {
+            if (Containers.TryGetValue(identifier, out DialogContainer container))
+            {
+                CloseFromTitle(container, title, parameter);
+            }
+
+            throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
         }
 
         /// <summary>
@@ -193,7 +210,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="dialogContainer">对话框容器</param>
         /// <param name="parameter">参数</param>
-        public static void Clear(DialogContainer dialogContainer, object parameter = null)
+        internal static void Clear(DialogContainer dialogContainer, object parameter = null)
         {
             dialogContainer.ForEachVisualChild(x =>
             {
@@ -202,6 +219,21 @@ namespace Rubyer
                     dialogCard.Close(parameter);
                 }
             });
+        }
+
+        /// <summary>
+        /// 移除所有对话框
+        /// </summary>
+        /// <param name="identifier">对话框容器标识</param>
+        /// <param name="parameter">参数</param>
+        public static void Clear(string identifier, object parameter = null)
+        {
+            if (Containers.TryGetValue(identifier, out DialogContainer container))
+            {
+                Clear(container, parameter);
+            }
+
+            throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
         }
 
         /// <summary>
@@ -221,9 +253,25 @@ namespace Rubyer
         /// <param name="dialogContainer">对话框容器</param>
         /// <param name="title">对话框标题</param>
         /// <returns>是否存在</returns>
-        public static bool IsExist(DialogContainer dialogContainer, string title)
+        internal static bool IsExist(DialogContainer dialogContainer, string title)
         {
             return dialogContainer.TryGetChildFromVisualTree<DialogCard>(x => x is DialogCard dialogCard && dialogCard.Title == title) is { };
+        }
+
+        /// <summary>
+        /// 是否存在对话框
+        /// </summary>
+        /// <param name="identifier">对话框容器标识</param>
+        /// <param name="title">对话框标题</param>
+        /// <returns>是否存在</returns>
+        public static bool IsExist(string identifier, string title)
+        {
+            if (Containers.TryGetValue(identifier, out DialogContainer container))
+            {
+                return IsExist(container, title);
+            }
+
+            throw new NullReferenceException($"The dialog container Identifier '{identifier}' could not be found");
         }
 
         /// <summary>
