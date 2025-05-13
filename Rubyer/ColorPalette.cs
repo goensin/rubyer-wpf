@@ -1,8 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows;
@@ -75,6 +73,8 @@ namespace Rubyer
         private bool isUpdating;
         private bool isHueUpdating;
 
+        #region 事件
+
         /// <summary>
         /// 颜色改变
         /// </summary>
@@ -89,6 +89,39 @@ namespace Rubyer
             add { AddHandler(ColorChangedEvent, value); }
             remove { RemoveHandler(ColorChangedEvent, value); }
         }
+
+        /// <summary>
+        /// 开始提取颜色
+        /// </summary>
+        public static readonly RoutedEvent StartPickingEvent = EventManager.RegisterRoutedEvent(
+            "StartPicking", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorPalette));
+
+        /// <summary>
+        /// 开始提取颜色
+        /// </summary>
+        public event RoutedEventHandler StartPicking
+        {
+            add { AddHandler(StartPickingEvent, value); }
+            remove { RemoveHandler(StartPickingEvent, value); }
+        }
+
+        /// <summary>
+        /// 完成颜色提取
+        /// </summary>
+        public static readonly RoutedEvent CompletedPickedEvent = EventManager.RegisterRoutedEvent(
+            "CompletedPicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorPalette));
+
+        /// <summary>
+        /// 完成颜色提取
+        /// </summary>
+        public event RoutedEventHandler CompletedPicked
+        {
+            add { AddHandler(CompletedPickedEvent, value); }
+            remove { RemoveHandler(CompletedPickedEvent, value); }
+        }
+
+        #endregion
+
 
         /// <summary>
         /// 显示文本
@@ -833,7 +866,7 @@ namespace Rubyer
         private void EyedropperButton_Click(object sender, RoutedEventArgs e)
         {
             IsPicking = true;
-            //Application.Current.MainWindow.Visibility = Visibility.Hidden;
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = StartPickingEvent });
 
             var colorPixelPreview = new ColorPixelPreview();
             if (colorPixelPreview.ShowDialog() == true)
@@ -843,7 +876,7 @@ namespace Rubyer
             }
 
             IsPicking = false;
-            //Application.Current.MainWindow.Visibility = Visibility.Visible;
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = CompletedPickedEvent });
         }
     }
 
@@ -876,38 +909,6 @@ namespace Rubyer
                 (byte)(pixel & 0x000000FF),
                 (byte)((pixel & 0x0000FF00) >> 8),
                 (byte)((pixel & 0x00FF0000) >> 16));
-        }
-
-        /// <summary>
-        /// 获取颜色数组
-        /// </summary>
-        /// <param name="point">左上点</param>
-        /// <param name="rows">行数</param>
-        /// <param name="columns">列数</param>
-        /// <returns>颜色数组</returns>
-        public static Color[] GetColorsAt(Point point, int rows, int columns)
-        {
-            var count = rows * columns;
-            Color[] colors = new Color[count];
-
-            IntPtr hdc = GetDC(IntPtr.Zero);
-
-            int index = 0;
-            for (int c = 0; c < columns; c++)
-            {
-                for (int r = 0; r < rows; r++)
-                {
-                    uint pixel = GetPixel(hdc, (int)point.X + r, (int)point.Y + c);
-                    colors[index++] = Color.FromRgb(
-                                        (byte)(pixel & 0x000000FF),
-                                        (byte)((pixel & 0x0000FF00) >> 8),
-                                        (byte)((pixel & 0x00FF0000) >> 16));
-                }
-            }
-
-            ReleaseDC(IntPtr.Zero, hdc);
-
-            return colors;
         }
     }
 }

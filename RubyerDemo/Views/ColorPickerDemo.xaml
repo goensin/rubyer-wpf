@@ -34,7 +34,9 @@
 
                         <rubyer:ColorPalette x:Name="colorPalette"
                                              ColorChanged="colorPalette_ColorChanged"
-                                             IsAlphaEnabled="True">
+                                             CompletedPicked="OnCompletedPicked"
+                                             IsAlphaEnabled="True"
+                                             StartPicking="OnStartPicking">
                             <rubyer:ColorPalette.OptionalColors>
                                 <Color>#000</Color>
                                 <Color>#FFFFFF</Color>

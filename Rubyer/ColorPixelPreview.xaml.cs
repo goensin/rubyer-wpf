@@ -44,20 +44,18 @@ namespace Rubyer
         {
             InitializeComponent();
 
-            MouseMove += OnMouseMove;
-            MouseDown += OnMouseDown;
+            PreviewMouseMove += OnMouseMove;
+            PreviewMouseDown += OnMouseDown;
             KeyDown += OnKeyDown;
         }
 
         /// <inheritdoc/> 
         protected override void OnClosing(CancelEventArgs e)
         {
-            MouseMove -= OnMouseMove;
-            MouseDown -= OnMouseDown;
+            PreviewMouseMove -= OnMouseMove;
+            PreviewMouseDown -= OnMouseDown;
             KeyDown -= OnKeyDown;
         }
-
-        private bool isUpdating = false;
 
         /// <summary>
         /// 鼠标移动
@@ -66,100 +64,23 @@ namespace Rubyer
         /// <param name="e"></param>
         private void OnMouseMove(object sender, MouseEventArgs e)
         {
-            visualHost.ClearVisuals();
-
             var position = e.GetPosition(this);
             var screenPoint = PointToScreen(position);
 
-            var count = 7;
-            var left = screenPoint.X - count / 2;
-            var top = screenPoint.Y - count / 2;
-            double x = screenPoint.X - count * 2;
-            double y = screenPoint.Y - count * 2;
+            visualHost.ClearVisuals();
 
-            RenderTargetBitmap rtb = new RenderTargetBitmap(
-                (int)this.ActualWidth,
-                (int)this.ActualHeight,
-                96, 96, PixelFormats.Pbgra32);
+            SelectedColor = ScreenColorPicker.GetColorAt(new Point(screenPoint.X, screenPoint.Y));
 
-            rtb.Render(this);
-
-            var cb = new CroppedBitmap(rtb, new Int32Rect((int)x, (int)y, 1, 1));
-            byte[] pixels = new byte[4];
-            cb.CopyPixels(pixels, 4, 0);
-
-            Color color = Color.FromArgb(pixels[3], pixels[2], pixels[1], pixels[0]);
-
-            //var rect = new System.Drawing.Rectangle((int)left, (int)top, count, count);
-            //using var bmp = new System.Drawing.Bitmap(rect.Width, rect.Height);
-            //using (System.Drawing.Graphics g = System.Drawing.Graphics.FromImage(bmp))
-            //{
-            //    g.CopyFromScreen(rect.Location, System.Drawing.Point.Empty, rect.Size);
-            //}
+            double size = 50;
 
             var visual = new DrawingVisual();
             using DrawingContext dc = visual.RenderOpen();
-            //for (int i = 0; i < count; i++)
-            //{
-            //    for (int j = 0; j < count; j++)
-            //    {
-            //        var size = 10;
-            //        System.Drawing.Color color = bmp.GetPixel(j, i);
-            //        dc.DrawRectangle(
-            //               new SolidColorBrush(Color.FromRgb(color.R, color.G, color.B)),
-            //               new Pen((Brush)Application.Current.FindResource("Border"), 1),
-            //               new Rect(x + j * size, y + i * size, size, size));
-            //    }
-            //}
+            dc.DrawRectangle(
+                new SolidColorBrush(SelectedColor),
+                new Pen((Brush)Application.Current.FindResource("Border"), 1),
+                new Rect(position.X + 3, position.Y + 3, size, size));
 
-            //visualHost.AddVisual(visual);
-
-            dc.DrawImage(cb, new Rect(x, y, count * 10, count * 10));
             visualHost.AddVisual(visual);
-
-            //colorRect.Fill = new System.Windows.Media.SolidColorBrush(
-            //    System.Windows.Media.Color.FromArgb(centerColor.A, centerColor.R, centerColor.G, centerColor.B)
-            //);
-
-            //var colors = ScreenColorPicker.GetColorsAt(new Point(left, top), 5, 5);
-
-            //int w = 0;
-            //int h = 0;
-            //for (int i = 0; i < colors.Length; i++)
-            //{
-            //    var visual = new DrawingVisual();
-            //    using DrawingContext dc = visual.RenderOpen();
-            //    dc.DrawRectangle(
-            //        new SolidColorBrush(colors[1]),
-            //        new Pen((Brush)Application.Current.FindResource("Border"), 1),
-            //        new Rect(x + w * size, y + h * size, size, size));
-
-            //    if (i % 5 == 4)
-            //    {
-            //        h++;
-            //        w = 0;
-            //    }
-            //    else
-            //        w++;
-
-            //    visualHost.AddVisual(visual);
-            //}
-            //for (int i = 0; i < 5; i++)
-            //{
-            //    for (int j = 0; j < 5; j++)
-            //    {
-            //        Stopwatch stopwatch = new Stopwatch();
-            //        stopwatch.Start();
-
-
-            //        Debug.WriteLine("1:" + stopwatch.ElapsedMilliseconds);
-
-
-
-            //        //visualHost.AddVisual(visual);
-            //        Debug.WriteLine("2:" + stopwatch.ElapsedMilliseconds);
-            //    }
-            //}
         }
 
         /// <summary>
@@ -169,6 +90,7 @@ namespace Rubyer
         /// <param name="e"></param>
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
+            e.Handled = true;
             Close(true);
         }
 

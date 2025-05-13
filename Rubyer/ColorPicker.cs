@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -35,6 +36,55 @@ namespace Rubyer
 
         private ColorPalette colorPalette; // 调色板
         private Popup popup; // 弹出框
+
+        #region 事件
+
+        /// <summary>
+        /// 颜色改变
+        /// </summary>
+        public static readonly RoutedEvent ColorChangedEvent = EventManager.RegisterRoutedEvent(
+            "ColorChanged", RoutingStrategy.Bubble, typeof(RoutedPropertyChangedEventHandler<Color>), typeof(ColorPicker));
+
+        /// <summary>
+        /// 颜色改变
+        /// </summary>
+        public event RoutedPropertyChangedEventHandler<Color> ColorChanged
+        {
+            add { AddHandler(ColorChangedEvent, value); }
+            remove { RemoveHandler(ColorChangedEvent, value); }
+        }
+
+        /// <summary>
+        /// 开始提取颜色
+        /// </summary>
+        public static readonly RoutedEvent StartPickingEvent = EventManager.RegisterRoutedEvent(
+            "StartPicking", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorPicker));
+
+        /// <summary>
+        /// 开始提取颜色
+        /// </summary>
+        public event RoutedEventHandler StartPicking
+        {
+            add { AddHandler(StartPickingEvent, value); }
+            remove { RemoveHandler(StartPickingEvent, value); }
+        }
+
+        /// <summary>
+        /// 完成颜色提取
+        /// </summary>
+        public static readonly RoutedEvent CompletedPickedEvent = EventManager.RegisterRoutedEvent(
+            "CompletedPicked", RoutingStrategy.Bubble, typeof(RoutedEventHandler), typeof(ColorPicker));
+
+        /// <summary>
+        /// 完成颜色提取
+        /// </summary>
+        public event RoutedEventHandler CompletedPicked
+        {
+            add { AddHandler(CompletedPickedEvent, value); }
+            remove { RemoveHandler(CompletedPickedEvent, value); }
+        }
+
+        #endregion
 
         /// <summary>
         /// 显示文本
@@ -108,6 +158,8 @@ namespace Rubyer
 
             colorPalette = (ColorPalette)GetTemplateChild(ColorPalettePartName);
             colorPalette.ColorChanged += ColorPalette_ColorChanged;
+            colorPalette.StartPicking += ColorPalette_StartPicking;
+            colorPalette.CompletedPicked += ColorPalette_CompletedPicked;
 
             popup = (Popup)GetTemplateChild(PopupPartName);
             popup.Opened += Popup_Opened;
@@ -121,6 +173,19 @@ namespace Rubyer
         private void ColorPalette_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
             Color = e.NewValue;
+        }
+
+        private void ColorPalette_StartPicking(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = StartPickingEvent, Source = e.Source });
+        }
+
+        private async void ColorPalette_CompletedPicked(object sender, RoutedEventArgs e)
+        {
+            RaiseEvent(new RoutedEventArgs() { RoutedEvent = CompletedPickedEvent, Source = e.Source });
+
+            await Task.Delay(TimeSpan.FromSeconds(0.1));
+            IsDropDownOpen = true;
         }
 
         private static void OnIsDropDownOpenChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

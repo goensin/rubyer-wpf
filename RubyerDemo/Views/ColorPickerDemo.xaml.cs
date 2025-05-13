@@ -30,5 +30,15 @@ namespace RubyerDemo.Views
         {
             Debug.WriteLine($"color: {e.NewValue}");
         }
+
+        private void OnStartPicking(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Hide();
+        }
+
+        private void OnCompletedPicked(object sender, RoutedEventArgs e)
+        {
+            Application.Current.MainWindow.Show();
+        }
     }
 }
