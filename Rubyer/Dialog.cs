@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Rubyer
 {
@@ -136,11 +135,11 @@ namespace Rubyer
         /// <summary>
         /// 关闭对话框
         /// </summary>
-        /// <param name="dialog">对话框</param>
+        /// <param name="dialogContainer">对话框容器</param>
         /// <param name="parameter">参数</param>
-        public static void Close(DialogContainer dialog, object parameter = null)
+        public static void Close(DialogContainer dialogContainer, object parameter = null)
         {
-            DialogContainer.CloseDialogCommand.Execute(parameter, dialog);
+            DialogContainer.CloseDialogCommand.Execute(parameter, dialogContainer);
         }
 
         /// <summary>
@@ -159,17 +158,17 @@ namespace Rubyer
         /// <summary>
         /// 根据标题关闭
         /// </summary>
-        /// <param name="dialog">对话框</param>
+        /// <param name="dialogContainer">对话框容器</param>
         /// <param name="title">标题</param>
         /// <param name="parameter">参数</param>
         /// <exception cref="NullReferenceException">找不到对话框</exception>
-        public static void CloseFromTitle(DialogContainer dialog, string title, object parameter = null)
+        public static void CloseFromTitle(DialogContainer dialogContainer, string title, object parameter = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
-            dialog.ForEachVisualChild(x =>
+            dialogContainer.ForEachVisualChild(x =>
             {
-                if (x is DialogCard dialogCard && dialogCard.Title.Contains(title))
+                if (x is DialogCard dialogCard && dialogCard.Title.Equals(title))
                 {
                     dialogCard.Close(parameter);
                 }
@@ -192,11 +191,11 @@ namespace Rubyer
         /// <summary>
         /// 移除所有对话框
         /// </summary>
-        /// <param name="dialog">对话框</param>
+        /// <param name="dialogContainer">对话框容器</param>
         /// <param name="parameter">参数</param>
-        public static void Clear(DialogContainer dialog, object parameter = null)
+        public static void Clear(DialogContainer dialogContainer, object parameter = null)
         {
-            dialog.ForEachVisualChild(x =>
+            dialogContainer.ForEachVisualChild(x =>
             {
                 if (x is DialogCard dialogCard)
                 {
@@ -214,6 +213,29 @@ namespace Rubyer
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
             Clear(container, parameter);
+        }
+
+        /// <summary>
+        /// 是否存在对话框
+        /// </summary>
+        /// <param name="dialogContainer">对话框容器</param>
+        /// <param name="title">对话框标题</param>
+        /// <returns>是否存在</returns>
+        public static bool IsExist(DialogContainer dialogContainer, string title)
+        {
+            return dialogContainer.TryGetChildFromVisualTree<DialogCard>(x => x is DialogCard dialogCard && dialogCard.Title == title) is { };
+        }
+
+        /// <summary>
+        /// 是否存在对话框
+        /// </summary>
+        /// <param name="title">对话框标题</param>
+        /// <returns>是否存在</returns>
+        public static bool IsExist(string title)
+        {
+            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
+            DialogContainer container = activedWindow.TryGetChildFromVisualTree<DialogContainer>(null) ?? throw new NullReferenceException("Can't Find the DialogContainer");
+            return IsExist(container, title);
         }
     }
 }
