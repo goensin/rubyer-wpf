@@ -57,6 +57,14 @@ namespace Rubyer
             KeyDown -= OnKeyDown;
         }
 
+        /// <inheritdoc/> 
+        protected override void OnClosed(EventArgs e)
+        {
+            SelectedColor = ScreenColorPicker.GetColorAt(new Point(x, y));
+
+            base.OnClosed(e);
+        }
+
         /// <summary>
         /// 鼠标移动
         /// </summary>
@@ -83,6 +91,9 @@ namespace Rubyer
             visualHost.AddVisual(visual);
         }
 
+        double x;
+        double y;
+
         /// <summary>
         /// 鼠标按下
         /// </summary>
@@ -90,8 +101,13 @@ namespace Rubyer
         /// <param name="e"></param>
         private void OnMouseDown(object sender, MouseButtonEventArgs e)
         {
-            e.Handled = true;
+            var position = e.GetPosition(this);
+            var screenPoint = PointToScreen(position);
+            x = screenPoint.X;
+            y = screenPoint.Y;
+
             Close(true);
+            e.Handled = true;
         }
 
         /// <summary>
