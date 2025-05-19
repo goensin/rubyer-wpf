@@ -318,6 +318,21 @@ namespace Rubyer
             var newTime = CurrentTime;
             SelectedTime = CurrentTime;
 
+            if (SelectedTime is { } && !IsShowHour)
+            {
+                SelectedTime = SelectedTime.Value - TimeSpan.FromHours(SelectedTime.Value.Hour);
+            }
+
+            if (SelectedTime is { } && !IsShowMinute)
+            {
+                SelectedTime = SelectedTime.Value - TimeSpan.FromMinutes(SelectedTime.Value.Minute);
+            }
+
+            if (SelectedTime is { } && !IsShowSecond)
+            {
+                SelectedTime = SelectedTime.Value -  TimeSpan.FromSeconds(SelectedTime.Value.Second);
+            }
+
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(oldTime, newTime);
             args.RoutedEvent = SelectedTimeChangedEvent;
             RaiseEvent(args);

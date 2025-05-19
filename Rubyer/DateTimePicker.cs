@@ -376,7 +376,23 @@ namespace Rubyer
         /// </summary>
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
         {
-            SelectedDateTime = currentDateTime - TimeSpan.FromSeconds(currentDateTime.Second);
+            SelectedDateTime = currentDateTime;
+
+            if (SelectedDateTime is { } && !_clock.IsShowHour)
+            {
+                SelectedDateTime = SelectedDateTime.Value - TimeSpan.FromHours(SelectedDateTime.Value.Hour);
+            }
+
+            if (SelectedDateTime is { } && !_clock.IsShowMinute)
+            {
+                SelectedDateTime = SelectedDateTime.Value - TimeSpan.FromMinutes(SelectedDateTime.Value.Minute);
+            }
+
+            if (SelectedDateTime is { } && !_clock.IsShowSecond)
+            {
+                SelectedDateTime = SelectedDateTime.Value - TimeSpan.FromSeconds(SelectedDateTime.Value.Second);
+            }
+
             IsDropDownOpen = false;
 
             var args = new RoutedPropertyChangedEventArgs<DateTime?>(SelectedDateTime, SelectedDateTime);
