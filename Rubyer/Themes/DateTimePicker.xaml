@@ -18,7 +18,6 @@
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="SelectedDateTimeFormat" Value="yyyy-MM-dd HH:mm" />
         <Setter Property="CalendarStyle" Value="{StaticResource RubyerCalendar}" />
         <Setter Property="ClockStyle" Value="{StaticResource RubyerClock}" />
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource RubyerValidationErrorTemplate}" />
