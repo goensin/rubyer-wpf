@@ -198,12 +198,19 @@
                                    Opacity="0.6"
                                    Text="{Binding Description}" />
                     </StackPanel>
-                    <Ellipse Width="10"
-                             Height="10"
-                             Margin="10 0"
-                             VerticalAlignment="Top"
-                             Fill="{StaticResource Error}"
-                             Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibleConverter}}" />
+                    <Border Width="30"
+                            Height="20"
+                            Margin="10 0"
+                            VerticalAlignment="Top"
+                            Background="{StaticResource Error}"
+                            CornerRadius="10"
+                            Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibleConverter}}">
+                        <TextBlock HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   FontSize="11"
+                                   Foreground="{DynamicResource WhiteForeground}"
+                                   Text="new" />
+                    </Border>
                 </StackPanel>
             </DataTemplate>
         </rubyer:HamburgerMenu.ItemTemplate>
