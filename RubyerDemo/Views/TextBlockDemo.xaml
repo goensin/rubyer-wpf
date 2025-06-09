@@ -12,6 +12,12 @@
                 <GroupBox Margin="0 0 0 10" Header="文本块-TextBlock">
                     <StackPanel Margin="10">
                         <TextBlock x:Name="textBlock" Style="{StaticResource Head1TextBlock}">
+                            <TextBlock.Foreground>
+                                <LinearGradientBrush StartPoint="0 0" EndPoint="1 1">
+                                    <GradientStop Offset="0" Color="#4C82EF" />
+                                    <GradientStop Offset="1.0" Color="#FFD7798B" />
+                                </LinearGradientBrush>
+                            </TextBlock.Foreground>
                             标题一标题一标题一标题一标题一标题一标题一标题一
                         </TextBlock>
                         <TextBlock Style="{StaticResource Head2TextBlock}">

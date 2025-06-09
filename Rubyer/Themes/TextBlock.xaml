@@ -16,14 +16,14 @@
     <Style x:Key="MiniTextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="9" />
+        <Setter Property="FontSize" Value="10" />
     </Style>
 
     <!--  小  -->
     <Style x:Key="SmallTextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="12" />
     </Style>
 
     <!--  默认字体大小  -->
@@ -35,8 +35,8 @@
     <Style x:Key="Head5TextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="17" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
         <Setter Property="Margin" Value="2 4" />
     </Style>
 
@@ -44,8 +44,8 @@
     <Style x:Key="Head4TextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="15" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="19" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
         <Setter Property="Margin" Value="2 5" />
     </Style>
 
@@ -53,8 +53,8 @@
     <Style x:Key="Head3TextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="22" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
         <Setter Property="Margin" Value="3 6" />
     </Style>
 
@@ -62,8 +62,8 @@
     <Style x:Key="Head2TextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="17" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="26" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
         <Setter Property="Margin" Value="2 7" />
     </Style>
 
@@ -71,8 +71,8 @@
     <Style x:Key="Head1TextBlock"
            BasedOn="{StaticResource RuyberTextBlock}"
            TargetType="{x:Type TextBlock}">
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="FontSize" Value="32" />
+        <!--<Setter Property="FontWeight" Value="Bold" />-->
         <Setter Property="Margin" Value="2 8" />
     </Style>
 
