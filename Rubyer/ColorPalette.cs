@@ -436,14 +436,6 @@ namespace Rubyer
         {
             Loaded -= ColorPalette_Loaded;
 
-            optionalColorItemsControl.ForEachVisualChild(x =>
-            {
-                if (x is CheckBox checkBox)
-                {
-                    checkBox.Checked += CheckBox_Checked;
-                }
-            });
-
             UpdateColor(Color);
             NoSlColor = HslToColor(colorSlider.Value);
         }

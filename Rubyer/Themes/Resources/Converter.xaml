@@ -71,4 +71,6 @@
     <converter:CloneConverter x:Key="CloneConverter" />
     <converter:TreeViewItemOffsetConverter x:Key="TreeViewItemOffsetConverter" />
     <converter:GetPrecisionValueConverter x:Key="GetPrecisionValueConverter" />
+
+    <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 </ResourceDictionary>

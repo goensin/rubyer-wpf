@@ -157,12 +157,9 @@
                                 <Thumb x:Name="PART_DragSLThumb"
                                        Width="16"
                                        Height="16"
+                                       Background="{Binding NoAlphaColor, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ColorToBrushConverter}}"
                                        Cursor="Hand"
-                                       Template="{StaticResource ColorPaletteSliderThumb}">
-                                    <Thumb.Background>
-                                        <SolidColorBrush Color="{Binding NoAlphaColor, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                    </Thumb.Background>
-                                </Thumb>
+                                       Template="{StaticResource ColorPaletteSliderThumb}" />
                             </Grid>
 
                             <Slider x:Name="PART_ColorSlider"
@@ -263,11 +260,7 @@
                                             </DrawingBrush.Drawing>
                                         </DrawingBrush>
                                     </Border.Background>
-                                    <Border CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                        <Border.Background>
-                                            <SolidColorBrush Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                        </Border.Background>
-                                    </Border>
+                                    <Border Background="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ColorToBrushConverter}}" CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Border>
 
                                 <Button x:Name="PART_EyedropperButton"
@@ -390,17 +383,15 @@
                                         </ItemsPanelTemplate>
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
-                                        <DataTemplate>
+                                        <DataTemplate DataType="Color">
                                             <CheckBox Width="24"
                                                       Height="24"
                                                       Margin="0 0 5 5"
+                                                      Background="{Binding ., Converter={StaticResource ColorToBrushConverter}}"
                                                       BorderThickness="1"
                                                       Cursor="Hand"
                                                       IsHitTestVisible="{Binding IsChecked, Converter={StaticResource BooleanToInverseConverter}, RelativeSource={RelativeSource Self}}"
                                                       Template="{StaticResource ColorCheckBox}">
-                                                <CheckBox.Background>
-                                                    <SolidColorBrush Color="{Binding .}" />
-                                                </CheckBox.Background>
                                                 <CheckBox.IsChecked>
                                                     <MultiBinding Converter="{StaticResource IsEqualConverter}" Mode="OneWay">
                                                         <Binding Path="." />
