@@ -509,9 +509,12 @@ namespace Rubyer
                 double y = (1.0 - lightness / topL) * slGrid.ActualHeight;
                 UpdateDragThumkPosition(x - point.X, y - point.Y);
 
-                isHueUpdating = true;
-                colorSlider.Value = hue;
-                isHueUpdating = false;
+                if (Color != Colors.White && Color != Colors.Black)
+                {
+                    isHueUpdating = true;
+                    colorSlider.Value = hue;
+                    isHueUpdating = false;
+                }
             }
         }
 
