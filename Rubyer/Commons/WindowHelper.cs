@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.Windows;
-using System.Windows.Documents;
 
 namespace Rubyer.Commons
 {
@@ -10,7 +9,7 @@ namespace Rubyer.Commons
     public class WindowHelper
     {
         /// <summary>
-        /// 获取当前 Window, 找不到 Active Window 时返回 MainWindow，再找不到返回第一个 Window
+        /// 获取当前 Window, 找不到 Active Window 时返回第一个 Window
         /// </summary>
         /// <returns>当前 Window</returns>
         public static Window GetCurrentWindow()

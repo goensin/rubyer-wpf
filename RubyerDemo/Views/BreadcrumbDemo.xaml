@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="RubyerDemo.Views.BreadcrumbDemo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="clr-namespace:RubyerDemo.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:RubyerDemo.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
+             xmlns:smtx="clr-namespace:ShowMeTheXAML;assembly=ShowMeTheXAML"
+             mc:Ignorable="d">
+    <smtx:XamlDisplay UniqueKey="BreadcrumbDemo">
+        <StackPanel rubyer:PanelHelper.Spacing="10">
+            <controls:ControlDisplay Title="Breadcrumb" Margin="10">
+                <rubyer:Breadcrumb Navigate="Breadcrumb_Navigate">
+                    <rubyer:BreadcrumbItem Content="Home" Href="home" />
+                    <rubyer:BreadcrumbItem Content="Link1" Href="link1" />
+                    <rubyer:BreadcrumbItem Content="Link2" />
+                </rubyer:Breadcrumb>
+            </controls:ControlDisplay>
+
+            <controls:ControlDisplay Title="Binding" Margin="10">
+                <rubyer:Breadcrumb rubyer:ControlHelper.MouseOverBrush="{DynamicResource Accent}"
+                                   FontSize="16"
+                                   ItemsSource="{Binding Infos}"
+                                   Navigate="Breadcrumb_Navigate"
+                                   SeparatorIcon="ArrowRightLine">
+                    <rubyer:Breadcrumb.ItemContainerStyle>
+                        <Style TargetType="rubyer:BreadcrumbItem">
+                            <Setter Property="Content" Value="{Binding Text}" />
+                            <Setter Property="Href" Value="{Binding Href}" />
+                        </Style>
+                    </rubyer:Breadcrumb.ItemContainerStyle>
+                </rubyer:Breadcrumb>
+            </controls:ControlDisplay>
+        </StackPanel>
+    </smtx:XamlDisplay>
+</UserControl>

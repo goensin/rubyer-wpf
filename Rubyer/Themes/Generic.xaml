@@ -66,6 +66,7 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Avatar.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ColorPicker.xaml" />
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ColorPalette.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Breadcrumb.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 
@@ -139,4 +140,6 @@
     <Style BasedOn="{StaticResource RubyerAvatar}" TargetType="{x:Type rubyer:Avatar}" />
     <Style BasedOn="{StaticResource RubyerColorPicker}" TargetType="{x:Type rubyer:ColorPicker}" />
     <Style BasedOn="{StaticResource RubyerColorPalette}" TargetType="{x:Type rubyer:ColorPalette}" />
+    <Style BasedOn="{StaticResource RubyerBreadcrumbItem}" TargetType="{x:Type rubyer:BreadcrumbItem}" />
+    <Style BasedOn="{StaticResource RubyerBreadcrumb}" TargetType="{x:Type rubyer:Breadcrumb}" />
 </ResourceDictionary>

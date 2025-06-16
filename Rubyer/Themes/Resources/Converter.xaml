@@ -73,4 +73,5 @@
     <converter:GetPrecisionValueConverter x:Key="GetPrecisionValueConverter" />
 
     <converter:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+    <converter:IsLastItemConverter x:Key="IsLastItemConverter" />
 </ResourceDictionary>

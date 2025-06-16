@@ -82,6 +82,7 @@ namespace RubyerDemo.ViewModels
                 new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
                 new("Avatar", "头像", new AvatarDemo(), IconType.AccountCircleLine, DateTime.Parse("2024-8-28")),
                 new("ColorPicker", "颜色选择", new ColorPickerDemo(), IconType.PaletteLine, DateTime.Parse("2025-5-13")),
+                new("Breadcrumb", "面包屑", new BreadcrumbDemo(), IconType.PaletteLine, DateTime.Parse("2025-6-11")),
             ];
 
             ViewItems = [.. views.OrderBy(x => x.Name)];

@@ -46,7 +46,7 @@ namespace RubyerDemo.ViewModels
             Description = description;
             Content = content;
             IconType = iconType;
-            IsNew = updateTime is { } && DateTime.Now - updateTime < TimeSpan.FromDays(30);
+            IsNew = updateTime is { } && DateTime.Now - updateTime < TimeSpan.FromDays(60);
         }
     }
 }
