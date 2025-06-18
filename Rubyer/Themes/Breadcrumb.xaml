@@ -40,8 +40,7 @@
                                          Margin="{TemplateBinding Padding}"
                                          Foreground="{TemplateBinding SeparatorBrush}"
                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                         Type="{Binding SeparatorIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                            </rubyer:Icon>
+                                         Type="{Binding SeparatorIcon, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         </StackPanel>
                     </Border>
                     <ControlTemplate.Triggers>

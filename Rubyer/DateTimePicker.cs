@@ -299,7 +299,7 @@ namespace Rubyer
             {
                 DateTime dateTime = (DateTime)SelectedDateTime;
                 DateTime newDate = (DateTime)e.NewValue;
-                currentDateTime = new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
+                currentDateTime = new DateTime(currentDateTime.Year, currentDateTime.Month, currentDateTime.Day, newDate.Hour, newDate.Minute, newDate.Second);
             }
             else
             {
