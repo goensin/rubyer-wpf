@@ -24,11 +24,11 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ContextMenu}">
                     <Grid>
-                        <Border Margin="{TemplateBinding Margin}"
+                        <Border x:Name="effectBorder"
+                                Margin="{TemplateBinding Margin}"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{DynamicResource AllDirectionEffect2}" />
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                         <Border x:Name="Border"
                                 Margin="{TemplateBinding Margin}"
@@ -43,6 +43,11 @@
                                         SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -50,7 +50,6 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{DynamicResource AllDirectionEffect3}"
                                     Visibility="{TemplateBinding ShowShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
                             <Border Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
@@ -129,6 +128,9 @@
                         </Grid>
                     </rubyer:Transition>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsShow" Value="True">
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
+                        </Trigger>
                         <Trigger Property="MessageBoxButton" Value="OK">
                             <Setter TargetName="PART_OkButton" Property="Visibility" Value="Visible" />
                             <Setter TargetName="PART_YesButton" Property="Visibility" Value="Collapsed" />

@@ -48,8 +48,7 @@
                                         BorderBrush="{TemplateBinding BorderBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
                                         CornerRadius="{TemplateBinding CornerRadius}"
-                                        DockPanel.Dock="Top"
-                                        Effect="{StaticResource AllDirectionEffect3}">
+                                        DockPanel.Dock="Top">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="Auto" />
@@ -86,6 +85,9 @@
                         </Trigger>
                         <Trigger Property="Placement" Value="Right">
                             <Setter TargetName="PART_CardBorder" Property="DockPanel.Dock" Value="Right" />
+                        </Trigger>
+                        <Trigger Property="IsShow" Value="True">
+                            <Setter TargetName="PART_CardBorder" Property="Effect" Value="{StaticResource AllDirectionEffect3}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

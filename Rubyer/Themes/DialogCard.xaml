@@ -67,8 +67,7 @@
                                     Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{TemplateBinding CornerRadius}"
-                                    Effect="{DynamicResource AllDirectionEffect3}">
+                                    CornerRadius="{TemplateBinding CornerRadius}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
@@ -116,6 +115,9 @@
                         </rubyer:Transition>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsShow" Value="True">
+                            <Setter TargetName="PART_CardBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect3}" />
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Title" Value="{x:Null}" />

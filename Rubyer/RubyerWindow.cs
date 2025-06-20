@@ -95,21 +95,6 @@ namespace Rubyer
         }
 
         /// <summary>
-        /// 是否显示标题栏阴影
-        /// </summary>
-        public static readonly DependencyProperty TitleShadowProperty =
-            DependencyProperty.Register("TitleShadow", typeof(bool), typeof(RubyerWindow), new PropertyMetadata(default(bool)));
-
-        /// <summary>
-        /// 是否显示标题栏阴影
-        /// </summary>
-        public bool TitleShadow
-        {
-            get { return (bool)GetValue(TitleShadowProperty); }
-            set { SetValue(TitleShadowProperty, value); }
-        }
-
-        /// <summary>
         /// 标题栏高度
         /// </summary>
         public static readonly DependencyProperty TitleHeightProperty =

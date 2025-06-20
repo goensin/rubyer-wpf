@@ -73,7 +73,7 @@ namespace Rubyer
         /// </summary>
         /// <param name="content">内容</param>
         /// <param name="parameters">参数</param>
-        /// <param name="title">标题</param>
+        /// <param name="title">标题（当绑定了 ViewModel 设置 Title，优先使用 ViewModel 的 Title）</param>
         /// <param name="openHandler">打开时回调</param>
         /// <param name="closeHandle">关闭时回调</param>
         /// <param name="showCloseButton">显示关闭按钮</param>
@@ -92,7 +92,7 @@ namespace Rubyer
         /// <param name="identifier">对话框 ID</param>
         /// <param name="content">内容</param>
         /// <param name="parameters">参数</param>
-        /// <param name="title">标题</param>
+        /// <param name="title">标题（当绑定了 ViewModel 设置 Title，优先使用 ViewModel 的 Title）</param>
         /// <param name="openHandler">打开时回调</param>
         /// <param name="closeHandle">关闭时回调</param>
         /// <param name="showCloseButton">显示关闭按钮</param>

@@ -56,13 +56,13 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.ColumnSpan="3"
+                                <Border x:Name="effectBorder"
+                                        Grid.ColumnSpan="3"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
                                         BorderBrush="{TemplateBinding ThemeColorBrush}"
                                         BorderThickness="{TemplateBinding BorderThickness}"
-                                        CornerRadius="{TemplateBinding CornerRadius}"
-                                        Effect="{DynamicResource AllDirectionEffect2}" />
+                                        CornerRadius="{TemplateBinding CornerRadius}" />
 
                                 <rubyer:Icon x:Name="icon"
                                              Grid.Column="0"
@@ -104,6 +104,9 @@
                         </Border>
                     </rubyer:Transition>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsShow" Value="True">
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+                        </Trigger>
                         <Trigger Property="Type" Value="None">
                             <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />
                         </Trigger>

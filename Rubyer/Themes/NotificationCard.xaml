@@ -61,11 +61,11 @@
                                     <RowDefinition Height="Auto" />
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Border Grid.RowSpan="2"
+                                <Border x:Name="effectBorder"
+                                        Grid.RowSpan="2"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
-                                        CornerRadius="{TemplateBinding CornerRadius}"
-                                        Effect="{DynamicResource AllDirectionEffect2}" />
+                                        CornerRadius="{TemplateBinding CornerRadius}"/>
 
                                 <Border x:Name="titleBorder"
                                         Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -132,6 +132,9 @@
                         </Border>
                     </rubyer:Transition>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsShow" Value="True">
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+                        </Trigger>
                         <Trigger Property="Type" Value="None">
                             <Setter TargetName="iconColumn" Property="Width" Value="0" />
                             <Setter TargetName="icon" Property="Visibility" Value="Collapsed" />

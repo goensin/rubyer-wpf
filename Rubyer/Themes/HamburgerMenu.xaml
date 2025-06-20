@@ -175,11 +175,11 @@
                                        Placement="Right"
                                        PopupAnimation="Fade">
                                     <Grid>
-                                        <Border Margin="5"
+                                        <Border x:Name="effectBorder"
+                                                Margin="5"
                                                 Padding="5"
                                                 Background="{Binding PaneBackground, RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
-                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
-                                                Effect="{DynamicResource AllDirectionEffect}" />
+                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}" />
                                         <Border x:Name="SubmenuBorder"
                                                 Margin="5"
                                                 Padding="5"
@@ -207,6 +207,9 @@
                         </rubyer:Popover>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsSubmenuOpen" Value="True">
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="root" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>

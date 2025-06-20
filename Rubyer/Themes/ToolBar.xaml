@@ -168,9 +168,9 @@
                                        PopupAnimation="Fade"
                                        StaysOpen="False">
                                     <Grid Margin="5">
-                                        <Border Background="{DynamicResource FloatBackground}"
-                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                Effect="{DynamicResource AllDirectionEffect}" />
+                                        <Border x:Name="effectBorder"
+                                                Background="{DynamicResource FloatBackground}"
+                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                                         <Border x:Name="DropDownBorder"
                                                 Background="{DynamicResource FloatBackground}"
@@ -197,6 +197,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsOverflowOpen" Value="True">
                             <Setter TargetName="ToolBarThumb" Property="IsEnabled" Value="False" />
+                            <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect}" />
                         </Trigger>
                         <Trigger Property="ToolBarTray.IsLocked" Value="True">
                             <Setter TargetName="ToolBarThumb" Property="Visibility" Value="Collapsed" />

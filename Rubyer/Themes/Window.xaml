@@ -35,7 +35,6 @@
         <Setter Property="WindowStyle" Value="SingleBorderWindow" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{DynamicResource DefaultFontSize}" />
-        <Setter Property="TitleShadow" Value="False" />
         <Setter Property="TitleHeight" Value="{Binding RelativeSource={RelativeSource Mode=Self}, Path=(WindowChrome.WindowChrome).CaptionHeight, Mode=TwoWay}" />
         <Setter Property="TitleBarContent" Value="{x:Null}" />
         <Setter Property="TitleForeground" Value="{DynamicResource DefaultForeground}" />
@@ -72,10 +71,7 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Border Grid.ColumnSpan="2"
-                                        Background="{TemplateBinding BorderBrush}"
-                                        Effect="{DynamicResource BottomEffect}"
-                                        Visibility="{TemplateBinding TitleShadow, Converter={StaticResource BooleanToVisibleConverter}}" />
+
                                 <!--  默认 window 的左边内容：图标 + 标题  -->
                                 <Grid Grid.Column="0" TextBlock.Foreground="{TemplateBinding TitleForeground}">
                                     <StackPanel x:Name="defalutTitle"

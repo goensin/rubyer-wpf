@@ -1,6 +1,7 @@
 ﻿using Rubyer.Commons;
 using System;
 using System.Globalization;
+using System.Windows;
 using System.Windows.Data;
 using static Rubyer.Converters.MathMultipleConverter;
 
@@ -22,24 +23,25 @@ namespace Rubyer.Converters
             ValidateArgument.NotNull(value, nameof(value));
             ValidateArgument.NotNull(parameter, nameof(parameter));
 
+            if (value is Thickness thickness)
+            {
+                value = thickness.Left;
+            }
+            else if (value is CornerRadius cornerRadius)
+            {
+                value = cornerRadius.TopLeft;
+            }
+
             if (!double.TryParse(value.ToString(), out double num1) || !double.TryParse(parameter.ToString(), out double num2))
                 return 0;
 
-            switch (Operation)
+            return Operation switch
             {
-                case MathOperation.Add:
-                default:
-                    return num1 + num2;
-
-                case MathOperation.Divide:
-                    return num1 / num2;
-
-                case MathOperation.Multiply:
-                    return num1 * num2;
-
-                case MathOperation.Subtract:
-                    return num1 - num2;
-            }
+                MathOperation.Divide => num1 / num2,
+                MathOperation.Multiply => num1 * num2,
+                MathOperation.Subtract => num1 - num2,
+                _ => num1 + num2,
+            };
         }
 
         /// <inheritdoc/>

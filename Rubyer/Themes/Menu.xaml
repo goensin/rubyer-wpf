@@ -52,11 +52,11 @@
                        Placement="Bottom"
                        PopupAnimation="Fade">
                     <Grid>
-                        <Border Margin="5"
+                        <Border x:Name="effectBorder"
+                                Margin="5"
                                 Padding="0 5"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                Effect="{DynamicResource AllDirectionEffect}" />
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         <Border x:Name="SubmenuBorder"
                                 Margin="5"
                                 Padding="0 5"
@@ -74,6 +74,9 @@
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+            </Trigger>
             <Trigger Property="IsSuspendingPopupAnimation" Value="True">
                 <Setter TargetName="Popup" Property="PopupAnimation" Value="None" />
             </Trigger>
@@ -156,11 +159,11 @@
                            Placement="Right"
                            PopupAnimation="Fade">
                         <Grid>
-                            <Border Margin="5"
+                            <Border x:Name="effectBorder"
+                                    Margin="5"
                                     Padding="0 5"
                                     Background="{TemplateBinding Background}"
-                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    Effect="{DynamicResource AllDirectionEffect}" />
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                             <Border x:Name="SubmenuBorder"
                                     Margin="5"
                                     Padding="0 5"
@@ -168,7 +171,6 @@
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    Effect="{DynamicResource AllDirectionEffect}"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                 <ScrollViewer Style="{StaticResource MenuScrollViewer}" CanContentScroll="True">
                                     <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" />
@@ -181,6 +183,9 @@
         </Grid>
 
         <ControlTemplate.Triggers>
+            <Trigger Property="IsSubmenuOpen" Value="True">
+                <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />
+            </Trigger>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />
             </Trigger>

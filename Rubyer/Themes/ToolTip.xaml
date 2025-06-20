@@ -22,8 +22,7 @@
                                 Height="{TemplateBinding Height}"
                                 Background="{TemplateBinding Background}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{DynamicResource AllContainerCornerRadius}"
-                                Effect="{DynamicResource AllDirectionEffect2}" />
+                                CornerRadius="{DynamicResource AllContainerCornerRadius}" />
                         <Border Name="Border"
                                 Width="{TemplateBinding Width}"
                                 Height="{TemplateBinding Height}"
@@ -39,6 +38,9 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="HasDropShadow" Value="true">
                             <Setter TargetName="Border" Property="SnapsToDevicePixels" Value="true" />
+                        </Trigger>
+                        <Trigger Property="IsOpen" Value="True">
+                            <Setter TargetName="Effect" Property="Effect" Value="{DynamicResource AllDirectionEffect}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
