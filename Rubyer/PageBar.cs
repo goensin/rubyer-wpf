@@ -344,12 +344,14 @@ namespace Rubyer
         // 刷新页码条
         private void ReFreshPageBar()
         {
+            foreach (var itemModel in Items.OfType<PageItemModel>())
+            {
+                itemModel.Command = null;
+            }
             Items.Clear();
 
             if (PageSize == 0 || Total == 0)
             {
-                //Items.Clear();
-                //this.ItemsSource = models;
                 return;
             }
 
@@ -442,8 +444,6 @@ namespace Rubyer
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
                 Command = new RubyerCommand(PageNumberChanged)
             });
-
-            //this.ItemsSource = models;
         }
 
         private void PageNumberChanged(object index)
