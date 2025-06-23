@@ -344,17 +344,18 @@ namespace Rubyer
         // 刷新页码条
         private void ReFreshPageBar()
         {
-            List<PageItemModel> models = new List<PageItemModel>();
+            Items.Clear();
 
             if (PageSize == 0 || Total == 0)
             {
-                this.ItemsSource = models;
+                //Items.Clear();
+                //this.ItemsSource = models;
                 return;
             }
 
             int pageCount = (int)Math.Ceiling(Total / (PageSize * 1.0));    // 总共多少页
 
-            models.Add(new PageItemModel
+            Items.Add(new PageItemModel
             {
                 Content = "<",
                 ToolTip = Application.Current.Resources["I18N_PageBar_PreviousPage"].ToString(),
@@ -363,7 +364,7 @@ namespace Rubyer
                 Command = new RubyerCommand(PageNumberChanged)
             });
 
-            models.Add(new PageItemModel
+            Items.Add(new PageItemModel
             {
                 Content = 1,
                 Value = 1,
@@ -417,13 +418,13 @@ namespace Rubyer
                     }
                 }
 
-                models.Add(model);
+                Items.Add(model);
             }
 
             // 最后一页
             if (pageCount > 1)
             {
-                models.Add(new PageItemModel
+                Items.Add(new PageItemModel
                 {
                     Content = pageCount,
                     Value = pageCount,
@@ -433,7 +434,7 @@ namespace Rubyer
             }
 
             // 下一页
-            models.Add(new PageItemModel
+            Items.Add(new PageItemModel
             {
                 Content = ">",
                 ToolTip = Application.Current.Resources["I18N_PageBar_NextPage"].ToString(),
@@ -442,7 +443,7 @@ namespace Rubyer
                 Command = new RubyerCommand(PageNumberChanged)
             });
 
-            this.ItemsSource = models;
+            //this.ItemsSource = models;
         }
 
         private void PageNumberChanged(object index)

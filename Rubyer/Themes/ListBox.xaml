@@ -20,7 +20,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                    <Grid x:Name="root">
+                    <rubyer:OverlayPanel x:Name="root">
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                             IsActive="{TemplateBinding IsSelected}"
@@ -46,7 +46,7 @@
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                               SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                         </Border>
-                    </Grid>
+                    </rubyer:OverlayPanel>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

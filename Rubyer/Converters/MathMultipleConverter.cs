@@ -52,21 +52,13 @@ namespace Rubyer.Converters
             if (!double.TryParse(value[0].ToString(), out double value1) || !double.TryParse(value[1].ToString(), out double value2))
                 return 0;
 
-            switch (Operation)
+            return Operation switch
             {
-                case MathOperation.Add:
-                default:
-                    return value1 + value2;
-
-                case MathOperation.Divide:
-                    return value1 / value2;
-
-                case MathOperation.Multiply:
-                    return value1 * value2;
-
-                case MathOperation.Subtract:
-                    return value1 - value2;
-            }
+                MathOperation.Divide => value1 / value2,
+                MathOperation.Multiply => value1 * value2,
+                MathOperation.Subtract => value1 - value2,
+                _ => (object)(value1 + value2),
+            };
         }
 
         /// <inheritdoc/>

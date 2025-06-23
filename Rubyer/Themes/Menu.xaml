@@ -33,7 +33,7 @@
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-            <Grid>
+            <rubyer:OverlayPanel>
                 <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     IsActive="{TemplateBinding IsHighlighted}"
@@ -71,7 +71,7 @@
                         </Border>
                     </Grid>
                 </Popup>
-            </Grid>
+            </rubyer:OverlayPanel>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsSubmenuOpen" Value="True">
@@ -92,7 +92,7 @@
                 BorderBrush="{TemplateBinding BorderBrush}"
                 BorderThickness="{TemplateBinding BorderThickness}"
                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-            <Grid>
+            <rubyer:OverlayPanel>
                 <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     IsActive="{TemplateBinding IsHighlighted}"
@@ -101,7 +101,7 @@
                                   ContentSource="Header"
                                   RecognizesAccessKey="True"
                                   TextBlock.Foreground="{Binding Path=(rubyer:HeaderHelper.Foreground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-            </Grid>
+            </rubyer:OverlayPanel>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="IsEnabled" Value="False">
@@ -112,7 +112,7 @@
 
     <!--  SubmenuHeade  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuHeaderTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Grid Background="Transparent">
+        <rubyer:OverlayPanel Background="Transparent">
             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsActive="{TemplateBinding IsHighlighted}"
@@ -180,7 +180,7 @@
                     </Popup>
                 </Grid>
             </Border>
-        </Grid>
+        </rubyer:OverlayPanel>
 
         <ControlTemplate.Triggers>
             <Trigger Property="IsSubmenuOpen" Value="True">
@@ -197,7 +197,7 @@
 
     <!--  SubmenuItem  -->
     <ControlTemplate x:Key="{x:Static MenuItem.SubmenuItemTemplateKey}" TargetType="{x:Type MenuItem}">
-        <Grid Background="Transparent">
+        <rubyer:OverlayPanel Background="Transparent">
             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 IsActive="{TemplateBinding IsHighlighted}"
@@ -237,7 +237,7 @@
                                Text="{TemplateBinding InputGestureText}" />
                 </Grid>
             </Border>
-        </Grid>
+        </rubyer:OverlayPanel>
         <ControlTemplate.Triggers>
             <Trigger Property="Icon" Value="{x:Null}">
                 <Setter TargetName="Icon" Property="Visibility" Value="Hidden" />

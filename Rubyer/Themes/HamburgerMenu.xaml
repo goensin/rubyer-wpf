@@ -28,7 +28,7 @@
                             <ContentControl Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
                         </rubyer:Popover.PopoverContent>
                         <Grid x:Name="root">
-                            <Grid Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TabControl}}">
+                            <rubyer:OverlayPanel Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=TabControl}}">
                                 <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                     CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ItemsControl}}"
                                                     IsActive="{TemplateBinding IsSelected}"
@@ -44,7 +44,7 @@
                                                Height="{Binding ActualHeight, ElementName=header}"
                                                Fill="{Binding Path=(rubyer:ControlHelper.SelectedBrush), RelativeSource={RelativeSource AncestorType=ItemsControl}}" />
                                 </rubyer:Transition>
-                            </Grid>
+                            </rubyer:OverlayPanel>
 
                             <Border x:Name="Bd" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
                                 <Grid>
@@ -121,7 +121,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:HamburgerMenuOptionsItem}">
-                    <Grid x:Name="root" Background="{TemplateBinding Background}">
+                    <rubyer:OverlayPanel x:Name="root" Background="{TemplateBinding Background}">
                         <rubyer:ControlMask Margin="{Binding Path=(rubyer:ItemsControlHelper.ItemMargin), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=rubyer:HamburgerMenu}}"
@@ -205,7 +205,7 @@
                                 <ContentControl Content="{TemplateBinding Header}" ContentTemplate="{TemplateBinding HeaderTemplate}" />
                             </rubyer:Popover.PopoverContent>
                         </rubyer:Popover>
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSubmenuOpen" Value="True">
                             <Setter TargetName="effectBorder" Property="Effect" Value="{DynamicResource AllDirectionEffect2}" />

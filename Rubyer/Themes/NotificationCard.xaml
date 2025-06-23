@@ -65,7 +65,7 @@
                                         Grid.RowSpan="2"
                                         Padding="{TemplateBinding Padding}"
                                         Background="{TemplateBinding Background}"
-                                        CornerRadius="{TemplateBinding CornerRadius}"/>
+                                        CornerRadius="{TemplateBinding CornerRadius}" />
 
                                 <Border x:Name="titleBorder"
                                         Background="{Binding Path=(rubyer:HeaderHelper.Background), RelativeSource={RelativeSource Mode=TemplatedParent}}"

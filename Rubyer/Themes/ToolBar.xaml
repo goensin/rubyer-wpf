@@ -114,7 +114,7 @@
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <Grid>
+                        <rubyer:OverlayPanel>
                             <rubyer:ControlMask x:Name="mask"
                                                 Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -124,7 +124,7 @@
                                          VerticalAlignment="Bottom"
                                          Type="ArrowDownSFill" />
                             <ContentPresenter />
-                        </Grid>
+                        </rubyer:OverlayPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsEnabled" Value="False">

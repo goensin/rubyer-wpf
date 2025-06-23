@@ -15,12 +15,13 @@
     <Style x:Key="RubyerDataGridCell" TargetType="{x:Type DataGridCell}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Padding" Value="{Binding Path=(rubyer:ItemsControlHelper.ItemPadding), RelativeSource={RelativeSource AncestorType=DataGrid}}" />
         <Setter Property="rubyer:ControlHelper.FocusedForegroundBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedForegroundBrush), RelativeSource={RelativeSource AncestorType=DataGridRow}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridCell}">
-                    <Grid Background="{TemplateBinding Background}">
+                    <rubyer:OverlayPanel Background="{TemplateBinding Background}">
                         <rubyer:ControlMask x:Name="mask"
                                             Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
@@ -28,18 +29,11 @@
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                             Visibility="Visible" />
 
-                        <Border x:Name="border"
-                                Background="Transparent"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                            <ContentPresenter Margin="{TemplateBinding Padding}"
-                                              HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </Border>
-                    </Grid>
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          VerticalAlignment="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </rubyer:OverlayPanel>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -134,7 +128,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="True">
-                        <Grid>
+                        <rubyer:OverlayPanel>
                             <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                 IsActive="{TemplateBinding IsSelected}"
@@ -166,7 +160,7 @@
                                 </rubyer:Transition>
 
                             </SelectiveScrollingGrid>
-                        </Grid>
+                        </rubyer:OverlayPanel>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">

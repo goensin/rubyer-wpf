@@ -27,50 +27,50 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <Border x:Name="border"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <Grid>
-                            <Border x:Name="effectBorder"
-                                    Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                    Visibility="Collapsed" />
+                    <rubyer:OverlayPanel>
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        
+                        <Border x:Name="effectBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                Visibility="Collapsed" />
 
-                            <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                                                IsActive="{TemplateBinding IsPressed}"
-                                                MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                            IsActive="{TemplateBinding IsPressed}"
+                                            MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                            <StackPanel Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Orientation="Horizontal">
-                                <rubyer:Icon x:Name="icon"
-                                             Margin="0 0 5 0"
-                                             Type="{Binding Path=(rubyer:ButtonHelper.IconType), TargetNullValue={x:Static rubyer:IconType.RemixiconLine}, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                        <StackPanel Margin="{TemplateBinding Padding}"
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    Orientation="Horizontal">
+                            <rubyer:Icon x:Name="icon"
+                                         Margin="0 0 5 0"
+                                         Type="{Binding Path=(rubyer:ButtonHelper.IconType), TargetNullValue={x:Static rubyer:IconType.RemixiconLine}, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
-                                <rubyer:Loading x:Name="loading"
-                                                Margin="0 0 5 0"
-                                                Background="Transparent"
-                                                Diameter="16"
-                                                FocusedBrush="{TemplateBinding Foreground}"
-                                                StrokeThickness="2"
-                                                Visibility="Collapsed" />
+                            <rubyer:Loading x:Name="loading"
+                                            Margin="0 0 5 0"
+                                            Background="Transparent"
+                                            Diameter="16"
+                                            FocusedBrush="{TemplateBinding Foreground}"
+                                            StrokeThickness="2"
+                                            Visibility="Collapsed" />
 
-                                <ContentPresenter x:Name="contentPresenter"
-                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                  Focusable="False"
-                                                  RecognizesAccessKey="True"
-                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                            </StackPanel>
-                        </Grid>
-                    </Border>
+                            <ContentPresenter x:Name="contentPresenter"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Focusable="False"
+                                              RecognizesAccessKey="True"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </StackPanel>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="rubyer:ButtonHelper.ShowShadow" Value="True">
                             <Setter TargetName="effectBorder" Property="Visibility" Value="Visible" />

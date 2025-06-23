@@ -11,7 +11,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
+                    <rubyer:OverlayPanel>
                         <Border x:Name="border"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}">
@@ -47,7 +47,7 @@
                                             CornerRadius="{Binding CornerRadius, ElementName=border}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -88,7 +88,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
+                    <rubyer:OverlayPanel>
                         <Border x:Name="border"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}">
@@ -124,7 +124,7 @@
                                             CornerRadius="{Binding CornerRadius, ElementName=border}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -165,7 +165,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
+                    <rubyer:OverlayPanel>
                         <Border x:Name="border"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}">
@@ -200,7 +200,7 @@
                                             CornerRadius="{Binding CornerRadius, ElementName=border}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
@@ -241,7 +241,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Grid>
+                    <rubyer:OverlayPanel>
                         <Border x:Name="border"
                                 Padding="{TemplateBinding Padding}"
                                 Background="{TemplateBinding Background}">
@@ -276,7 +276,7 @@
                                             CornerRadius="{Binding CornerRadius, ElementName=border}"
                                             IsActive="{TemplateBinding IsPressed}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=Expander}}" />
-                    </Grid>
+                    </rubyer:OverlayPanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="true">
                             <Trigger.EnterActions>
