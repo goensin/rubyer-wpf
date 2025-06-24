@@ -1,8 +1,6 @@
 ﻿using Rubyer.Commons.KnownBoxes;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -29,13 +27,13 @@ namespace Rubyer
         /// </summary>
         public const string PopupPartName = "PART_Popup";
 
+        private ColorPalette colorPalette; // 调色板
+        private Popup popup; // 弹出框
+
         static ColorPicker()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ColorPicker), new FrameworkPropertyMetadata(typeof(ColorPicker)));
         }
-
-        private ColorPalette colorPalette; // 调色板
-        private Popup popup; // 弹出框
 
         #region 事件
 
@@ -105,7 +103,7 @@ namespace Rubyer
         /// 颜色
         /// </summary>
         public static readonly DependencyProperty ColorProperty =
-            DependencyProperty.Register("Color", typeof(Color), typeof(ColorPicker), new PropertyMetadata(default(Color)));
+            DependencyProperty.Register("Color", typeof(Color), typeof(ColorPicker), new FrameworkPropertyMetadata(default(Color), FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
         /// <summary>
         /// 颜色
@@ -170,16 +168,33 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// 颜色改变
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColorPalette_ColorChanged(object sender, RoutedPropertyChangedEventArgs<Color> e)
         {
             Color = e.NewValue;
+
+            RaiseEvent(new RoutedPropertyChangedEventArgs<Color>(e.OldValue, e.NewValue) { RoutedEvent = ColorChangedEvent });
         }
 
+        /// <summary>
+        /// 开始颜色拾取
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ColorPalette_StartPicking(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs() { RoutedEvent = StartPickingEvent, Source = e.Source });
         }
 
+        /// <summary>
+        /// 完成颜色拾取
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void ColorPalette_CompletedPicked(object sender, RoutedEventArgs e)
         {
             RaiseEvent(new RoutedEventArgs() { RoutedEvent = CompletedPickedEvent, Source = e.Source });
@@ -205,6 +220,9 @@ namespace Rubyer
             }
         }
 
+        /// <summary>
+        /// popup 打开
+        /// </summary>
         private void Popup_Opened(object sender, EventArgs e)
         {
             colorPalette.UpdateColor(Color);

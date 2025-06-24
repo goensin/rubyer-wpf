@@ -108,13 +108,10 @@
                             <Border Width="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"
                                     rubyer:ControlHelper.FocusedBrush="{Binding Background, RelativeSource={RelativeSource Self}}"
                                     rubyer:ControlHelper.MouseOverBrush="{DynamicResource Mask}"
+                                    Background="{Binding Color, Mode=OneWay, Converter={StaticResource ColorToBrushConverter}, RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
-                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}">
-                                <Border.Background>
-                                    <SolidColorBrush x:Name="PART_ColorBrush" Color="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
-                                </Border.Background>
-                            </Border>
+                                    CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
 
                             <TextBlock Grid.Column="2" Text="{TemplateBinding Text}" />
 
