@@ -20,33 +20,25 @@ namespace RubyerDemo.ViewModels
         {
             Total = 100;
             PageSize = 10;
-            SelectedForeground = AllBrushes[8];
-            SelectedBrush = AllBrushes[2];
-            UnselectedBrush = AllBrushes[0];
+            SelectedForegroundColor = Colors.White;
+            SelectedColor = (Color)Application.Current.TryFindResource("LightDarkColor");
+            UnselectedColor = (Color)Application.Current.TryFindResource("LightPrimaryColor");
+
+            this.PropertyChanged += PageBarViewModel_PropertyChanged;
         }
 
-        public List<Brush> AllBrushes => new List<Brush>
+        private void PageBarViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            Application.Current.Resources["Primary"] as Brush,
-            Application.Current.Resources["Light"] as Brush,
-            Application.Current.Resources["Dark"] as Brush,
-            Application.Current.Resources["Accent"] as Brush,
-            Application.Current.Resources["Success"] as Brush,
-            Application.Current.Resources["Warning"] as Brush,
-            Application.Current.Resources["Info"] as Brush,
-            Application.Current.Resources["Error"] as Brush,
-            Application.Current.Resources["WhiteForeground"] as Brush,
-            Application.Current.Resources["BlackForeground"] as Brush,
-        };
+        }
 
         [ObservableProperty]
-        private Brush selectedForeground;
+        private Color selectedForegroundColor;
 
         [ObservableProperty]
-        private Brush selectedBrush;
+        private Color selectedColor;
 
         [ObservableProperty]
-        private Brush unselectedBrush;
+        private Color unselectedColor;
 
         [ObservableProperty]
         private int total;

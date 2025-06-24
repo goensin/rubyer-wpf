@@ -260,7 +260,7 @@
                                             </DrawingBrush.Drawing>
                                         </DrawingBrush>
                                     </Border.Background>
-                                    <Border Background="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ColorToBrushConverter}}" CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                                    <Border Background="{Binding Color, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource ColorToBrushConverter}}" CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                                 </Border>
 
                                 <Button x:Name="PART_EyedropperButton"
@@ -271,7 +271,7 @@
                                         DockPanel.Dock="Right"
                                         Foreground="{DynamicResource DefaultForeground}" />
 
-                                <TextBox x:Name="PART_RgbTextBox" Text="{Binding Color, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                <TextBox x:Name="PART_RgbTextBox" Text="{Binding Color, Mode=OneWay, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                                     <rubyer:InputBoxHelper.PostContent>
                                         <ToggleButton Padding="5"
                                                       rubyer:ControlHelper.FocusedBrush="Transparent"

@@ -28,45 +28,19 @@
                                           Content="显示每页数量"
                                           IsChecked="True" />
                                 <TextBlock Text="选中前景色:" />
-                                <ComboBox Width="100"
-                                          Margin="5 0 0 0"
-                                          ItemsSource="{Binding AllBrushes}"
-                                          SelectedItem="{Binding SelectedForeground}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Rectangle Width="60"
-                                                       Height="20"
-                                                       Fill="{Binding}"
-                                                       Stroke="{StaticResource Border}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                <rubyer:ColorPicker Width="110" 
+                                                    Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
+                                                    Color="{Binding SelectedForegroundColor}" />
+
                                 <TextBlock Text="选中色:" />
-                                <ComboBox Width="100"
-                                          ItemsSource="{Binding AllBrushes}"
-                                          SelectedItem="{Binding SelectedBrush}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Rectangle Width="60"
-                                                       Height="20"
-                                                       Fill="{Binding}"
-                                                       Stroke="{StaticResource Border}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                <rubyer:ColorPicker Width="110"
+                                                    Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
+                                                    Color="{Binding SelectedColor}" />
+
                                 <TextBlock Text="未选中色:" />
-                                <ComboBox Width="100"
-                                          ItemsSource="{Binding AllBrushes}"
-                                          SelectedItem="{Binding UnselectedBrush}">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <Rectangle Width="60"
-                                                       Height="20"
-                                                       Fill="{Binding}"
-                                                       Stroke="{StaticResource Border}" />
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
+                                <rubyer:ColorPicker Width="110"
+                                                    Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
+                                                    Color="{Binding UnselectedColor}" />
                             </StackPanel>
 
                             <StackPanel HorizontalAlignment="Left"
@@ -108,10 +82,10 @@
                                             PageSize="{Binding PageSize}"
                                             PageSizeChanged="PageBar_PageSizeChanged"
                                             PageSizeChangedCommand="{Binding PageSizeChangedCommand}"
-                                            SelectedBrush="{Binding SelectedBrush}"
-                                            SelectedForeground="{Binding SelectedForeground}"
+                                            SelectedBrush="{Binding SelectedColor, Converter={StaticResource ColorToBrushConverter}}"
+                                            SelectedForeground="{Binding SelectedForegroundColor, Converter={StaticResource ColorToBrushConverter}}"
                                             Total="{Binding Total}"
-                                            UnselectedBrush="{Binding UnselectedBrush}" />
+                                            UnselectedBrush="{Binding UnselectedColor, Converter={StaticResource ColorToBrushConverter}}" />
 
                             <rubyer:PageBar Style="{StaticResource TextPageBar}"
                                             Margin="0 20 0 0"
@@ -125,7 +99,7 @@
                                             PageSizeChanged="PageBar_PageSizeChanged"
                                             PageSizeChangedCommand="{Binding PageSizeChangedCommand}"
                                             PageSizeCollection="2, 5, 10, 20, 30"
-                                            SelectedBrush="{Binding SelectedBrush}"
+                                            SelectedBrush="{Binding SelectedColor, Converter={StaticResource ColorToBrushConverter}}"
                                             Total="1000" />
                         </StackPanel>
                     </StackPanel>

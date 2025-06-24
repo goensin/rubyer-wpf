@@ -3,94 +3,55 @@
                     xmlns:rubyer="clr-namespace:Rubyer">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Resources/Default.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/Button.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="RubyerPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
-        <Setter Property="Background" Value="Transparent" />
+    <Style x:Key="RubyerPageBarButton"
+           BasedOn="{StaticResource RubyerButton}"
+           TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="{Binding UnselectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
         <Setter Property="Foreground" Value="{DynamicResource WhiteForeground}" />
-        <Setter Property="MinWidth" Value="30" />
+        <Setter Property="MinWidth" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Padding" Value="{Binding ItemsPadding, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:PageBarItem}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Button x:Name="pageButton"
-                                MinWidth="{TemplateBinding MinWidth}"
-                                Margin="{TemplateBinding Padding}"
-                                Background="{Binding UnselectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
-                                Command="{Binding Command}"
-                                CommandParameter="{Binding Value}"
-                                Content="{Binding Content}"
-                                Foreground="{TemplateBinding Foreground}"
-                                IsEnabled="{Binding IsEnabled}"
-                                ToolTip="{Binding ToolTip}" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Value="True">
-                            <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
-                                    <Binding Path="Value" />
-                                    <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
-                                </MultiBinding>
-                            </DataTrigger.Binding>
-                            <Setter TargetName="pageButton" Property="Background" Value="{Binding SelectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-                            <Setter TargetName="pageButton" Property="Foreground" Value="{Binding SelectedForeground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsRound, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" Value="True">
-                            <Setter TargetName="pageButton" Property="rubyer:ButtonHelper.Shape" Value="Round" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{StaticResource IsEqualConverter}">
+                        <Binding Path="Value" />
+                        <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
+                    </MultiBinding>
+                </DataTrigger.Binding>
+                <Setter Property="Background" Value="{Binding SelectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+                <Setter Property="Foreground" Value="{Binding SelectedForeground, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsRound, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" Value="True">
+                <Setter Property="rubyer:ButtonHelper.Shape" Value="Round" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
-    <Style x:Key="TextPageBarItem" TargetType="{x:Type rubyer:PageBarItem}">
+    <Style x:Key="PageBarItemTextButton"
+           BasedOn="{StaticResource TextButton}"
+           TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
-        <Setter Property="MinWidth" Value="30" />
+        <Setter Property="MinWidth" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="Padding" Value="{Binding ItemsPadding, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type rubyer:PageBarItem}">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                        <Button x:Name="pageButton"
-                                MinWidth="{TemplateBinding MinWidth}"
-                                Margin="{TemplateBinding Padding}"
-                                Background="Transparent"
-                                Command="{Binding Command}"
-                                CommandParameter="{Binding Value}"
-                                Content="{Binding Content}"
-                                FontSize="{TemplateBinding FontSize}"
-                                Foreground="{TemplateBinding Foreground}"
-                                IsEnabled="{Binding IsEnabled}"
-                                ToolTip="{Binding ToolTip}" />
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <DataTrigger Value="True">
-                            <DataTrigger.Binding>
-                                <MultiBinding Converter="{StaticResource IsEqualConverter}">
-                                    <Binding Path="Value" />
-                                    <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
-                                </MultiBinding>
-                            </DataTrigger.Binding>
-                            <Setter Property="Foreground" Value="{Binding SelectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
-                            <Setter Property="FontWeight" Value="Bold" />
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsRound, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" Value="True">
-                            <Setter TargetName="pageButton" Property="rubyer:ButtonHelper.Shape" Value="Round" />
-                        </DataTrigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Style.Triggers>
+            <DataTrigger Value="True">
+                <DataTrigger.Binding>
+                    <MultiBinding Converter="{StaticResource IsEqualConverter}">
+                        <Binding Path="Value" />
+                        <Binding Path="PageIndex" RelativeSource="{RelativeSource AncestorType=rubyer:PageBar}" />
+                    </MultiBinding>
+                </DataTrigger.Binding>
+                <Setter Property="Foreground" Value="{Binding SelectedBrush, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" />
+                <Setter Property="FontWeight" Value="Bold" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsRound, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}" Value="True">
+                <Setter Property="rubyer:ButtonHelper.Shape" Value="Round" />
+            </DataTrigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="RubyerPageBar" TargetType="{x:Type rubyer:PageBar}">
@@ -101,28 +62,36 @@
         <Setter Property="SelectedForeground" Value="{DynamicResource WhiteForeground}" />
         <Setter Property="Foreground" Value="{DynamicResource DefaultForeground}" />
         <Setter Property="IsTabStop" Value="False" />
-        <Setter Property="ItemContainerStyle" Value="{StaticResource RubyerPageBarItem}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="IsShowPageSize" Value="True" />
         <Setter Property="IsShowTotal" Value="True" />
         <Setter Property="ItemsDock" Value="Right" />
         <Setter Property="ItemsPadding" Value="3 0" />
-        <Setter Property="ItemsPanel">
-            <Setter.Value>
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="PageButtonStyle" Value="{StaticResource RubyerPageBarButton}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type rubyer:PageBar}">
                     <DockPanel Margin="{TemplateBinding Padding}" Background="{TemplateBinding Background}">
-                        <ItemsPresenter x:Name="items"
-                                        Margin="5 0"
-                                        DockPanel.Dock="{TemplateBinding ItemsDock}"
-                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        <ItemsControl Margin="5 0"
+                                      DockPanel.Dock="{TemplateBinding ItemsDock}"
+                                      ItemsSource="{Binding PageItemInfos, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate DataType="{x:Type rubyer:PageItemInfo}">
+                                    <Button Style="{Binding PageButtonStyle, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
+                                            Margin="{Binding ItemsPadding, RelativeSource={RelativeSource AncestorType=rubyer:PageBar}}"
+                                            Content="{Binding Text}"
+                                            IsEnabled="{Binding IsEnabled}"
+                                            ToolTip="{Binding ToolTip}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
 
                         <StackPanel x:Name="pageInfo"
                                     VerticalAlignment="Center"
@@ -165,7 +134,7 @@
     </Style>
 
     <Style x:Key="TextPageBar" TargetType="{x:Type rubyer:PageBar}">
-        <Setter Property="ItemContainerStyle" Value="{StaticResource TextPageBarItem}" />
+        <Setter Property="PageButtonStyle" Value="{StaticResource PageBarItemTextButton}" />
     </Style>
 
 </ResourceDictionary>

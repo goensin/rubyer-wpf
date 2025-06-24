@@ -105,6 +105,7 @@
     <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}" />
     <Style BasedOn="{StaticResource RubyerDataGridColumnHeader}" TargetType="{x:Type DataGridColumnHeader}" />
     <Style BasedOn="{StaticResource RubyerDataGrid}" TargetType="{x:Type DataGrid}" />
+    <!--<Style BasedOn="{StaticResource RubyerPageBarItem}" TargetType="{x:Type rubyer:PageBarItem}" />-->
     <Style BasedOn="{StaticResource RubyerPageBar}" TargetType="{x:Type rubyer:PageBar}" />
     <Style BasedOn="{StaticResource RubyerCard}" TargetType="{x:Type rubyer:Card}" />
     <Style BasedOn="{StaticResource RubyerMessageCard}" TargetType="{x:Type rubyer:MessageCard}" />

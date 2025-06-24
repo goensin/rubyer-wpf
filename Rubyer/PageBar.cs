@@ -1,12 +1,13 @@
 ﻿using Rubyer.Commons;
 using Rubyer.Commons.KnownBoxes;
-using Rubyer.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -15,24 +16,11 @@ namespace Rubyer
     /// <summary>
     /// 页码条
     /// </summary>
-    [StyleTypedProperty(Property = "ItemContainerStyle", StyleTargetType = typeof(PageBarItem))]
-    public class PageBar : ItemsControl
+    public class PageBar : Control
     {
         static PageBar()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PageBar), new FrameworkPropertyMetadata(typeof(PageBar)));
-        }
-
-        /// <inheritdoc/>
-        protected override bool IsItemItsOwnContainerOverride(object item)
-        {
-            return item is PageBarItem;
-        }
-
-        /// <inheritdoc/>
-        protected override DependencyObject GetContainerForItemOverride()
-        {
-            return new PageBarItem();
         }
 
         #region 命令
@@ -148,6 +136,21 @@ namespace Rubyer
         {
             get { return (Brush)GetValue(SelectedForegroundProperty); }
             set { SetValue(SelectedForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 页码信息
+        /// </summary>
+        internal static readonly DependencyProperty PageItemInfosProperty =
+            DependencyProperty.Register("PageItemInfos", typeof(ObservableCollection<PageItemInfo>), typeof(PageBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 页码信息
+        /// </summary>
+        internal ObservableCollection<PageItemInfo> PageItemInfos
+        {
+            get { return (ObservableCollection<PageItemInfo>)GetValue(PageItemInfosProperty); }
+            set { SetValue(PageItemInfosProperty, value); }
         }
 
         /// <summary>
@@ -337,18 +340,50 @@ namespace Rubyer
             set { SetValue(IsRoundProperty, BooleanBoxes.Box(value)); }
         }
 
+        /// <summary>
+        /// 页码按钮样式
+        /// </summary>
+        public static readonly DependencyProperty PageButtonStyleProperty = DependencyProperty.Register(
+            nameof(PageButtonStyle), typeof(Style), typeof(PageBar), new PropertyMetadata(null));
+
+        /// <summary>
+        /// 页码按钮样式
+        /// </summary>
+        public Style PageButtonStyle
+        {
+            get => (Style)this.GetValue(PageButtonStyleProperty);
+            set => this.SetValue(PageButtonStyleProperty, value);
+        }
+
         #endregion 依赖属性
 
         #region 方法
 
+        public PageBar()
+        {
+            PageItemInfos = [];
+        }
+
+        /// <inheritdoc/>
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnItemClick));
+        }
+
+        private void OnItemClick(object sender, RoutedEventArgs e)
+        {
+            if (sender.Equals(this) && e.OriginalSource is FrameworkElement element && element.DataContext is PageItemInfo info)
+            {
+                PageIndex = info.Value;
+            }
+        }
+
         // 刷新页码条
         private void ReFreshPageBar()
         {
-            foreach (var itemModel in Items.OfType<PageItemModel>())
-            {
-                itemModel.Command = null;
-            }
-            Items.Clear();
+            PageItemInfos.Clear();
 
             if (PageSize == 0 || Total == 0)
             {
@@ -357,27 +392,23 @@ namespace Rubyer
 
             int pageCount = (int)Math.Ceiling(Total / (PageSize * 1.0));    // 总共多少页
 
-            Items.Add(new PageItemModel
+            PageItemInfos.Add(new PageItemInfo
             {
-                Content = "<",
+                Text = "<",
                 ToolTip = Application.Current.Resources["I18N_PageBar_PreviousPage"].ToString(),
                 Value = PageIndex - 1,
                 IsEnabled = PageIndex != 1 && pageCount != 1,
-                Command = new RubyerCommand(PageNumberChanged)
             });
 
-            Items.Add(new PageItemModel
+            PageItemInfos.Add(new PageItemInfo
             {
-                Content = 1,
+                Text = "1",
                 Value = 1,
                 IsEnabled = true,
-                Command = new RubyerCommand(PageNumberChanged)
             });
 
-            int begin;
-            int end;
-            begin = PageIndex >= 6 ? PageIndex - 3 : 2;                         // index 大于等于 6 页就从 index-3 开始，否则 2 开始
-            end = PageIndex + 3 >= pageCount ? pageCount - 1 : PageIndex + 3;   // index+3 大于 total 就 total-1 结束，否则 index + 3
+            int begin = PageIndex >= 6 ? PageIndex - 3 : 2;                         // index 大于等于 6 页就从 index-3 开始，否则 2 开始
+            int end = PageIndex + 3 >= pageCount ? pageCount - 1 : PageIndex + 3;   // index+3 大于 total 就 total-1 结束，否则 index + 3
 
             // 补够按键数量
             if (end - begin < 6)
@@ -396,12 +427,11 @@ namespace Rubyer
 
             for (int i = begin; i <= end; i++)
             {
-                var model = new PageItemModel
+                var model = new PageItemInfo
                 {
                     Value = i,
-                    Content = i,
+                    Text = i.ToString(),
                     IsEnabled = true,
-                    Command = new RubyerCommand(PageNumberChanged)
                 };
 
                 if (pageCount > 9)
@@ -409,48 +439,67 @@ namespace Rubyer
                     if (i == begin && PageIndex - begin >= 3 && PageIndex > 5)
                     {
                         model.Value = PageIndex - 5;
-                        model.Content = "...";
+                        model.Text = "...";
                         model.ToolTip = Application.Current.Resources["I18N_PageBar_Forward5Pages"].ToString();
                     }
                     else if (i == end && end - PageIndex >= 3 && pageCount - PageIndex >= 5)
                     {
                         model.Value = PageIndex + 5;
-                        model.Content = "...";
+                        model.Text = "...";
                         model.ToolTip = Application.Current.Resources["I18N_PageBar_Backwards5Pages"].ToString();
                     }
                 }
 
-                Items.Add(model);
+                PageItemInfos.Add(model);
             }
 
             // 最后一页
             if (pageCount > 1)
             {
-                Items.Add(new PageItemModel
+                PageItemInfos.Add(new PageItemInfo
                 {
-                    Content = pageCount,
+                    Text = pageCount.ToString(),
                     Value = pageCount,
                     IsEnabled = true,
-                    Command = new RubyerCommand(PageNumberChanged)
                 });
             }
 
             // 下一页
-            Items.Add(new PageItemModel
+            PageItemInfos.Add(new PageItemInfo
             {
-                Content = ">",
+                Text = ">",
                 ToolTip = Application.Current.Resources["I18N_PageBar_NextPage"].ToString(),
                 Value = PageIndex + 1,
                 IsEnabled = PageIndex != pageCount && pageCount != 1,
-                Command = new RubyerCommand(PageNumberChanged)
             });
         }
 
-        private void PageNumberChanged(object index)
-        {
-            PageIndex = (int)index;
-        }
-
         #endregion 方法
+    }
+
+    /// <summary>
+    /// 页码项
+    /// </summary>
+    internal class PageItemInfo
+    {
+        /// <summary>
+        /// 页码值
+        /// </summary>
+        public int Value { get; set; }
+
+        /// <summary>
+        /// 显示文本
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
+        /// 提示
+        /// </summary>
+        public string ToolTip { get; set; }
+
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool IsEnabled { get; set; }
     }
 }
