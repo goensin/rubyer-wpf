@@ -27,14 +27,14 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ButtonBase}">
-                    <rubyer:OverlayPanel>
+                    <rubyer:OverlayPanel x:Name="root">
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                 SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        
+
                         <Border x:Name="effectBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
@@ -110,7 +110,7 @@
                             </MultiTrigger.ExitActions>
                         </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="border" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
+                            <Setter TargetName="root" Property="Opacity" Value="{DynamicResource UnenableOpcity}" />
                         </Trigger>
                         <Trigger Property="rubyer:ButtonHelper.Shape" Value="Round">
                             <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}, Converter={StaticResource HalfOfDoubleConverter}}" />
