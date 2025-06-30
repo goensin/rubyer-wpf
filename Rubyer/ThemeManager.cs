@@ -174,9 +174,9 @@ namespace Rubyer
         /// 切换主题模式
         /// </summary>
         /// <param name="mode">模式</param>
-        public static void SwitchThemeMode(ThemeMode mode)
+        public static void SwitchThemeMode(Rubyer.Enums.ThemeMode mode)
         {
-            if (mode != ThemeMode.System)
+            if (mode != Rubyer.Enums.ThemeMode.System)
             {
                 SystemEvents.UserPreferenceChanged -= SystemEvents_UserPreferenceChanged;
             }
@@ -184,15 +184,15 @@ namespace Rubyer
             bool isDark = false;
             switch (mode)
             {
-                case ThemeMode.Light:
+                case Rubyer.Enums.ThemeMode.Light:
                 default:
                     break;
 
-                case ThemeMode.Dark:
+                case Rubyer.Enums.ThemeMode.Dark:
                     isDark = true;
                     break;
 
-                case ThemeMode.System:
+                case Rubyer.Enums.ThemeMode.System:
                     isDark = GetIsAppDarkMode();
                     SystemEvents.UserPreferenceChanged += SystemEvents_UserPreferenceChanged;
                     break;

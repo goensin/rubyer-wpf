@@ -51,7 +51,7 @@ namespace RubyerDemo
         {
             controlSlider.Value = ((CornerRadius)App.Current.Resources["AllControlCornerRadius"]).TopLeft;
             contrainerSlider.Value = ((CornerRadius)App.Current.Resources["AllContainerCornerRadius"]).TopLeft;
-            ThemeManager.SwitchThemeMode(ThemeMode.System);
+            ThemeManager.SwitchThemeMode(Rubyer.Enums.ThemeMode.System);
             darkMode.IsChecked = ThemeManager.GetIsAppDarkMode();
         }
 
@@ -67,7 +67,7 @@ namespace RubyerDemo
 
         private void BlackSwitch_Click(object sender, RoutedEventArgs e)
         {
-            ThemeManager.SwitchThemeMode(darkMode.IsChecked ? ThemeMode.Dark : ThemeMode.Light);
+            ThemeManager.SwitchThemeMode(darkMode.IsChecked ? Rubyer.Enums.ThemeMode.Dark : Rubyer.Enums.ThemeMode.Light);
         }
 
         protected override void OnClosed(EventArgs e)
