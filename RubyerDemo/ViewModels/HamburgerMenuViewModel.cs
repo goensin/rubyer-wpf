@@ -1,14 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Rubyer;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RubyerDemo.ViewModels
 {
@@ -40,24 +34,24 @@ namespace RubyerDemo.ViewModels
         {
             Models = new ObservableCollection<HamburgerMenuModel>
             {
-                new HamburgerMenuModel("用户",IconType.UserLine),
-                new HamburgerMenuModel("文档",IconType.FileLine),
-                new HamburgerMenuModel("图片",IconType.ImageLine),
-                new HamburgerMenuModel("设置",IconType.Settings2Line),
-                new HamburgerMenuModel("不可用",IconType.EmotionUnhappyLine,false),
+                new HamburgerMenuModel("用户", IconType.UserLine, group: "组一"),
+                new HamburgerMenuModel("文档", IconType.FileLine, group: "组一"),
+                new HamburgerMenuModel("图片", IconType.ImageLine, group: "组一"),
+                new HamburgerMenuModel("设置", IconType.Settings2Line, group: "组二"),
+                new HamburgerMenuModel("睡眠", IconType.MoonFill, group: "组二"),
+                new HamburgerMenuModel("不可用", IconType.EmotionUnhappyLine, false, group: "组二"),
             };
 
             OptionsModels = new ObservableCollection<HamburgerMenuModel>
             {
-                new HamburgerMenuModel("睡眠",IconType.MoonFill),
-                new HamburgerMenuModel("关机",IconType.ShutDownLine),
-                new HamburgerMenuModel("重启",IconType.RestartLine),
-                new HamburgerMenuModel("更多",IconType.More2Line)
+                new HamburgerMenuModel("关机", IconType.ShutDownLine),
+                new HamburgerMenuModel("重启", IconType.RestartLine),
+                new HamburgerMenuModel("更多", IconType.More2Line)
                 {
                     Childs = new ObservableCollection<HamburgerMenuModel>
                     {
-                        new HamburgerMenuModel("WiFi",IconType.WifiLine),
-                        new HamburgerMenuModel("蓝牙",IconType.BluetoothLine),
+                        new HamburgerMenuModel("WiFi", IconType.WifiLine),
+                        new HamburgerMenuModel("蓝牙", IconType.BluetoothLine),
                     }
                 },
             };
@@ -76,6 +70,12 @@ namespace RubyerDemo.ViewModels
         private string name;
 
         /// <summary>
+        /// 组
+        /// </summary>
+        [ObservableProperty]
+        private string group;
+
+        /// <summary>
         /// 图标
         /// </summary>
         [ObservableProperty]
@@ -90,9 +90,10 @@ namespace RubyerDemo.ViewModels
         [ObservableProperty]
         private ObservableCollection<HamburgerMenuModel> childs;
 
-        public HamburgerMenuModel(string name, IconType? icon, bool isEnable = true)
+        public HamburgerMenuModel(string name, IconType? icon, bool isEnable = true, string group = "")
         {
             Name = name;
+            Group = group;
             Icon = icon;
             IsEnable = isEnable;
         }

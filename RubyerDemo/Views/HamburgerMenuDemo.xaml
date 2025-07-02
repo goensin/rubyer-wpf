@@ -19,11 +19,13 @@
             </rubyer:BooleanToObjectConverter.FalseValue>
         </rubyer:BooleanToObjectConverter>
     </UserControl.Resources>
-    <smtx:XamlDisplay HorizontalContentAlignment="Stretch" UniqueKey="HamburgerMenuDemo">
+    <smtx:XamlDisplay HorizontalContentAlignment="Stretch"
+                      VerticalContentAlignment="Stretch"
+                      UniqueKey="HamburgerMenuDemo">
         <GroupBox Margin="10" Header="汉堡包菜单 - HamburgerMenu">
             <Grid rubyer:GridHelper.ColumnDefinitions="*,*" rubyer:PanelHelper.Spacing="10">
                 <DockPanel rubyer:PanelHelper.Spacing="10">
-                    <TextBlock DockPanel.Dock="Top" Text="items 方式" />
+                    <TextBlock DockPanel.Dock="Top" Text="items 方式，分组显示" />
 
                     <rubyer:HamburgerMenu BorderThickness="1"
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
@@ -125,6 +127,14 @@
                 </DockPanel>
 
                 <DockPanel Grid.Column="1" rubyer:PanelHelper.Spacing="10">
+                    <DockPanel.Resources>
+                        <CollectionViewSource x:Key="HamburgerModels" Source="{Binding Models}">
+                            <CollectionViewSource.GroupDescriptions>
+                                <PropertyGroupDescription PropertyName="Group" />
+                            </CollectionViewSource.GroupDescriptions>
+                        </CollectionViewSource>
+                    </DockPanel.Resources>
+
                     <TextBlock DockPanel.Dock="Top" Text="binding 方式" />
 
                     <rubyer:HamburgerMenu x:Name="menu2"
@@ -141,12 +151,12 @@
                                           Background="{DynamicResource Primary}"
                                           CollapsedWidth="56"
                                           CornerRadius="15"
-                                          ExpandedWidth="250"
+                                          ExpandedWidth="250" IsShowHamburgerButton="False"
                                           FontSize="16"
                                           Foreground="{StaticResource WhiteForeground}"
                                           HamburgerButtonClick="HamburgerMenu_HamburgerButtonClick"
                                           IsShowLittleBar="False"
-                                          ItemsSource="{Binding Models}"
+                                          ItemsSource="{Binding Source={StaticResource HamburgerModels}}"
                                           MenuIcon="{Binding IsExpanded, RelativeSource={RelativeSource Self}, Converter={StaticResource BoolToMenuIconConverter}}"
                                           OptionsItemsSource="{Binding OptionsModels}"
                                           PaneBackground="{StaticResource Dark}"
@@ -154,6 +164,38 @@
                                           SelectedIndex="0"
                                           TransitionDuration="0:0:0.5"
                                           TransitionType="FadeLeft">
+                        <rubyer:HamburgerMenu.GroupStyle>
+                            <GroupStyle>
+                                <GroupStyle.ContainerStyle>
+                                    <Style TargetType="{x:Type GroupItem}">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                                    <Expander rubyer:ControlHelper.CornerRadius="15"
+                                                              rubyer:ControlHelper.FocusedBrush="{DynamicResource Accent}"
+                                                              rubyer:ControlHelper.MaskOpacity="1"
+                                                              rubyer:HeaderHelper.Background="Transparent"
+                                                              rubyer:HeaderHelper.FontSize="18"
+                                                              rubyer:HeaderHelper.Foreground="{StaticResource WhiteForeground}"
+                                                              rubyer:HeaderHelper.Padding="10"
+                                                              Background="Transparent"
+                                                              BorderThickness="0"
+                                                              Foreground="{StaticResource WhiteForeground}"
+                                                              Header="{Binding Name}">
+                                                        <ItemsPresenter />
+                                                    </Expander>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </GroupStyle.ContainerStyle>
+                            </GroupStyle>
+                        </rubyer:HamburgerMenu.GroupStyle>
+                        <rubyer:HamburgerMenu.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel />
+                            </ItemsPanelTemplate>
+                        </rubyer:HamburgerMenu.ItemsPanel>
                         <rubyer:HamburgerMenu.ItemContainerStyle>
                             <Style TargetType="rubyer:HamburgerMenuItem">
                                 <Setter Property="IconType" Value="{Binding Icon}" />
