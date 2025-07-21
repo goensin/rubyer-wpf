@@ -110,9 +110,11 @@ namespace Rubyer
                 if (IsMouseLeftButtonDown(editingEventArgs))
                 {
                     toggleButton.IsChecked = !isChecked.GetValueOrDefault();
-                    var dataGridCell = editingElement.GetVisualAncestry().OfType<DataGridCell>().FirstOrDefault();
-                    dataGridCell.IsEditing = false;
                 }
+
+                // 取消 Editing 状态，确保下次点击可以马上执行
+                var dataGridCell = editingElement.GetVisualAncestry().OfType<DataGridCell>().FirstOrDefault();
+                dataGridCell.IsEditing = false;
 
                 return isChecked;
             }
