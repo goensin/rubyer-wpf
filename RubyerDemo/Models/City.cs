@@ -22,7 +22,7 @@ namespace RubyerDemo.Models
         private ObservableCollection<City> children = new ObservableCollection<City>();
 
         [ObservableProperty]
-        private bool isExpanded;
+        private bool isExpanded = false;
 
         public object Clone()
         {

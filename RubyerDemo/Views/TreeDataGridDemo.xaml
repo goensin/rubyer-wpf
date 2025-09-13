@@ -30,13 +30,15 @@
                             Content="更新数据源" />
                 </StackPanel>
 
-                <!--   Xaml -> Source 通知需要设置  UpdateSourceTrigger=PropertyChanged  -->
+                <!--  Xaml -> Source 通知需要设置  UpdateSourceTrigger=PropertyChanged  -->
                 <rubyer:TreeDataGrid x:Name="TreeDataGrid"
                                      rubyer:DataGridHelper.ClickToEdit="True"
                                      AutoGenerateColumns="False"
                                      BorderThickness="1"
                                      CanUserAddRows="False"
                                      ChildrenPath="Children"
+                                     EnableColumnVirtualization="False"
+                                     EnableRowVirtualization="False"
                                      GridLinesVisibility="All"
                                      HierarchicalItemsSource="{Binding Cities}"
                                      IsReadOnly="False">

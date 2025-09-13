@@ -61,7 +61,7 @@
                     <StackPanel Orientation="Horizontal">
                         <rubyer:ColorPicker Width="130"
                                             Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
-                                            Color="SkyBlue">
+                                            Color="#0d6efd">
                             <rubyer:ColorPicker.OptionalColors>
                                 <Color>#000</Color>
                                 <Color>#FFFFFF</Color>
