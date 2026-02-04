@@ -65,5 +65,10 @@ namespace RubyerDemo
         {
             Application.Current.Shutdown();
         }
+
+        private void OnFontSizeChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            ThemeManager.SwitchDefaultFontSize(e.NewValue);
+        }
     }
 }

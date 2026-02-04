@@ -114,7 +114,8 @@
                                 Maximum="24"
                                 Minimum="10"
                                 Orientation="Vertical"
-                                Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=rubyer:RubyerWindow}}" />
+                                ValueChanged="OnFontSizeChanged"
+                                Value="14" />
                     </MenuItem>
 
                     <MenuItem Header="圆角半径">
