@@ -480,7 +480,7 @@ namespace Rubyer
     /// <summary>
     /// 页码项
     /// </summary>
-    internal class PageItemInfo
+    public class PageItemInfo
     {
         /// <summary>
         /// 页码值

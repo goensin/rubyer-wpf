@@ -28,7 +28,7 @@
                                           Content="显示每页数量"
                                           IsChecked="True" />
                                 <TextBlock Text="选中前景色:" />
-                                <rubyer:ColorPicker Width="110" 
+                                <rubyer:ColorPicker Width="110"
                                                     Text="{Binding Color, RelativeSource={RelativeSource Mode=Self}}"
                                                     Color="{Binding SelectedForegroundColor}" />
 
