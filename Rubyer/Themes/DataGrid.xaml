@@ -109,6 +109,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                <Setter Property="Background" Value="{Binding RowBackground, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+            </Trigger>
+            <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                <Setter Property="Background" Value="{Binding AlternatingRowBackground, RelativeSource={RelativeSource AncestorType=DataGrid}}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <!--  Style and template for the DataGridRow.  -->

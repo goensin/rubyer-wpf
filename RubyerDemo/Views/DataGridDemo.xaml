@@ -150,23 +150,13 @@
 
                 <controls:ControlDisplay Title="隔行变色" Grid.Row="3">
                     <DataGrid x:Name="DataGrid4"
+                              AlternatingRowBackground="{StaticResource Light}"
                               AlternationCount="2"
                               AutoGenerateColumns="True"
                               CanUserAddRows="False"
                               IsReadOnly="True"
-                              ItemsSource="{Binding Weathers}">
-                        <DataGrid.RowStyle>
-                            <Style BasedOn="{StaticResource RubyerDataGridRow}" TargetType="{x:Type DataGridRow}">
-                                <Style.Triggers>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="0">
-                                        <Setter Property="Background" Value="{DynamicResource DefaultBackground}" />
-                                    </Trigger>
-                                    <Trigger Property="ItemsControl.AlternationIndex" Value="1">
-                                        <Setter Property="Background" Value="{DynamicResource Light}" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </DataGrid.RowStyle>
+                              ItemsSource="{Binding Weathers}"
+                              RowBackground="{StaticResource DefaultBackground}">
                     </DataGrid>
                 </controls:ControlDisplay>
 
