@@ -64,11 +64,11 @@ namespace Rubyer
         /// <returns>结果</returns>
         public static MessageBoxResult ShowGlobal(string message, string title = "", MessageBoxButton button = MessageBoxButton.OK, MessageBoxType icon = MessageBoxType.None)
         {
-            var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             MessageBoxCard card = GetMessageBoxCard(message, title, button, icon);
             MessageBoxWindow window = new MessageBoxWindow();
             window.AddMessageBoxCard(card);
-            window.Owner = activedWindow;
+            window.Owner = WindowHelper.GetCurrentWindow();
+
             return window.ShowDialog().GetValueOrDefault() ? window.MessageBoxResult : MessageBoxResult.Cancel;
         }
 

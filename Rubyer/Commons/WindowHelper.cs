@@ -14,6 +14,9 @@ namespace Rubyer.Commons
         /// <returns>当前 Window</returns>
         public static Window GetCurrentWindow()
         {
+            if (Application.Current == null)
+                return null;
+
             var windows = Application.Current.Windows.OfType<Window>().Where(w => !w.GetType().Name.Contains("AdornerWindow"));
             var window = windows.FirstOrDefault(x => x.IsActive) ??
                          windows.OfType<Window>().FirstOrDefault();
