@@ -19,7 +19,6 @@
         <Setter Property="FontSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ControlHelper.FocusedBrush" Value="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
     </Style>
@@ -51,9 +50,9 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="0"
-                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollBar}}" />
+                                CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                         <rubyer:ControlMask Background="{Binding Path=(rubyer:ControlHelper.FocusedBrush), RelativeSource={RelativeSource AncestorType=ScrollBar}}"
-                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource AncestorType=ScrollBar}}"
+                                            CornerRadius="{Binding Path=(rubyer:ControlHelper.CornerRadius), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                             IsActive="{TemplateBinding IsDragging}"
                                             MaskOpacity="{Binding Path=(rubyer:ControlHelper.MaskOpacity), RelativeSource={RelativeSource AncestorType=ScrollBar}}" />
                     </rubyer:OverlayPanel>
@@ -69,15 +68,6 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Grid.Tag>
-                <system:Double>0.5</system:Double>
-            </Grid.Tag>
-            <Grid.Width>
-                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                    <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
-                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                </MultiBinding>
-            </Grid.Width>
 
             <Border Grid.RowSpan="3"
                     Background="{TemplateBinding Background}"
@@ -101,7 +91,10 @@
                     <RepeatButton Style="{StaticResource RubyerScrollBarPageButton}" Command="ScrollBar.PageUpCommand" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource RubyerScrollBarThumb}" Background="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarForeground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                    <Thumb x:Name="PART_Track_Thumb"
+                           Style="{StaticResource RubyerScrollBarThumb}"
+                           rubyer:ControlHelper.CornerRadius="{Binding Width, Converter={StaticResource DivideConverter}, ConverterParameter=2, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                           Background="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarForeground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource RubyerScrollBarPageButton}" Command="ScrollBar.PageDownCommand" />
@@ -120,6 +113,12 @@
             </RepeatButton>
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner" Value="False">
+                <Setter TargetName="PART_Track_Thumb" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+                <Setter TargetName="upButton" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+                <Setter TargetName="downButton" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+            </Trigger>
+
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
@@ -141,15 +140,14 @@
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Vertical" />
-                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsMouseOver" Value="False" />
                     <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="root"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="1"
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                             To="0.5"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -161,9 +159,8 @@
                 <MultiTrigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="root"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="0.5"
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
+                                             To="1"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -172,10 +169,9 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </MultiTrigger.ExitActions>
+
+                <Setter TargetName="PART_Track_Thumb" Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Width, Converter={StaticResource DivideConverter}, ConverterParameter=4, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </MultiTrigger>
-            <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False">
-                <Setter TargetName="root" Property="Tag" Value="1" />
-            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -186,15 +182,6 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid.Tag>
-                <system:Double>0.5</system:Double>
-            </Grid.Tag>
-            <Grid.Height>
-                <MultiBinding Converter="{StaticResource MathMultiplyConverter}">
-                    <Binding Path="(rubyer:ScrollViewerHelper.ScrollBarSize)" RelativeSource="{RelativeSource Mode=TemplatedParent}" />
-                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
-                </MultiBinding>
-            </Grid.Height>
 
             <Border Grid.ColumnSpan="3"
                     Background="{TemplateBinding Background}"
@@ -218,7 +205,10 @@
                     <RepeatButton Style="{StaticResource RubyerScrollBarPageButton}" Command="ScrollBar.PageLeftCommand" />
                 </Track.DecreaseRepeatButton>
                 <Track.Thumb>
-                    <Thumb Style="{StaticResource RubyerScrollBarThumb}" Background="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarForeground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
+                    <Thumb x:Name="PART_Track_Thumb"
+                           Style="{StaticResource RubyerScrollBarThumb}"
+                           rubyer:ControlHelper.CornerRadius="{Binding Height, Converter={StaticResource DivideConverter}, ConverterParameter=2, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                           Background="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarForeground), RelativeSource={RelativeSource Mode=TemplatedParent}}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource RubyerScrollBarPageButton}" Command="ScrollBar.PageRightCommand" />
@@ -238,6 +228,12 @@
             </RepeatButton>
         </Grid>
         <ControlTemplate.Triggers>
+            <Trigger Property="rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner" Value="False">
+                <Setter TargetName="PART_Track_Thumb" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+                <Setter TargetName="leftButton" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+                <Setter TargetName="rightButton" Property="rubyer:ControlHelper.CornerRadius" Value="0" />
+            </Trigger>
+
             <MultiDataTrigger>
                 <MultiDataTrigger.Conditions>
                     <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Self}}" Value="True" />
@@ -259,15 +255,14 @@
             <MultiTrigger>
                 <MultiTrigger.Conditions>
                     <Condition Property="Orientation" Value="Horizontal" />
-                    <Condition Property="IsMouseOver" Value="True" />
+                    <Condition Property="IsMouseOver" Value="False" />
                     <Condition Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
                 </MultiTrigger.Conditions>
                 <MultiTrigger.EnterActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="root"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="1"
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                             To="0.5"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -279,9 +274,8 @@
                 <MultiTrigger.ExitActions>
                     <BeginStoryboard>
                         <Storyboard>
-                            <DoubleAnimation Storyboard.TargetName="root"
-                                             Storyboard.TargetProperty="Tag"
-                                             To="0.5"
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
+                                             To="1"
                                              Duration="0:0:0.3">
                                 <DoubleAnimation.EasingFunction>
                                     <CubicEase EasingMode="EaseOut" />
@@ -290,10 +284,9 @@
                         </Storyboard>
                     </BeginStoryboard>
                 </MultiTrigger.ExitActions>
+
+                <Setter TargetName="PART_Track_Thumb" Property="rubyer:ControlHelper.CornerRadius" Value="{Binding Height, Converter={StaticResource DivideConverter}, ConverterParameter=4, RelativeSource={RelativeSource Mode=TemplatedParent}}" />
             </MultiTrigger>
-            <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False">
-                <Setter TargetName="root" Property="Tag" Value="1" />
-            </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
 
@@ -309,14 +302,27 @@
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Path=(rubyer:ScrollViewerHelper.ArrowIconBrush), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="{Binding Path=(rubyer:ScrollViewerHelper.IsDynamicBarSize), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner" Value="{Binding Path=(rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner), RelativeSource={RelativeSource AncestorType=ScrollViewer}}" />
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Horizontal">
                 <Setter Property="Template" Value="{StaticResource RubyerHorizontalScrollBar}" />
                 <Setter Property="Width" Value="Auto" />
+                <Setter Property="RenderTransformOrigin" Value="0,1" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleY="1" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="Height" Value="Auto" />
                 <Setter Property="Template" Value="{StaticResource RubyerVerticalScrollBar}" />
+                <Setter Property="RenderTransformOrigin" Value="1,0" />
+                <Setter Property="RenderTransform">
+                    <Setter.Value>
+                        <ScaleTransform ScaleX="1" />
+                    </Setter.Value>
+                </Setter>
             </Trigger>
         </Style.Triggers>
     </Style>

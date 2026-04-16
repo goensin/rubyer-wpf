@@ -213,7 +213,7 @@
                             <Setter TargetName="ToolBarThumb" Property="Width" Value="Auto" />
                             <Setter TargetName="ToolBarThumb" Property="Height" Value="10" />
                             <Setter TargetName="ToolBarOverflowButton" Property="DockPanel.Dock" Value="Bottom" />
-                            <Setter TargetName="OverflowPopup"  Property="Placement" Value="Right" />
+                            <Setter TargetName="OverflowPopup" Property="Placement" Value="Right" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

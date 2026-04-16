@@ -476,5 +476,37 @@ namespace Rubyer
                 }
             }
         }
+
+        /// <summary>
+        /// 是否滚动条覆盖内容
+        /// </summary>
+        public static readonly DependencyProperty IsOverlayScrollBarProperty = DependencyProperty.RegisterAttached(
+            "IsOverlayScrollBar", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        public static void SetIsOverlayScrollBar(DependencyObject element, bool value)
+        {
+            element.SetValue(IsOverlayScrollBarProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetIsOverlayScrollBar(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsOverlayScrollBarProperty);
+        }
+
+        /// <summary>
+        /// 是否滚动条圆角显示
+        /// </summary>
+        public static readonly DependencyProperty IsScrollBarRoundedCornerProperty = DependencyProperty.RegisterAttached(
+            "IsScrollBarRoundedCorner", typeof(bool), typeof(ScrollViewerHelper), new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        public static void SetIsScrollBarRoundedCorner(DependencyObject element, bool value)
+        {
+            element.SetValue(IsScrollBarRoundedCornerProperty, BooleanBoxes.Box(value));
+        }
+
+        public static bool GetIsScrollBarRoundedCorner(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsScrollBarRoundedCornerProperty);
+        }
     }
 }

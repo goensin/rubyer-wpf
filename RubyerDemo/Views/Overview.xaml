@@ -7,7 +7,7 @@
              xmlns:rubyer="http://rubyer.io/winfx/xaml/toolkit"
              Foreground="{DynamicResource DefaultForeground}"
              mc:Ignorable="d">
-    <ScrollViewer>
+    <ScrollViewer x:Name="rootScrollViewer">
         <StackPanel Margin="20"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -70,14 +70,18 @@
                     <StackPanel rubyer:PanelHelper.Spacing="12" Orientation="Horizontal">
                         <ToggleButton Content="默认" IsChecked="True" />
                         <ToggleButton Style="{StaticResource AccentToggleButton}" Content="强调" />
-                        <ToggleButton Style="{StaticResource SwitchToggleButton}" Content="开关一" />
+                        <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                      Content="滚动条圆角"
+                                      IsChecked="{Binding Path=(rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner), ElementName=rootScrollViewer}"
+                                      IsThreeState="False" />
+                        <ToggleButton Style="{StaticResource SwitchToggleButton}"
+                                      Content="动态大小"
+                                      IsChecked="{Binding Path=(rubyer:ScrollViewerHelper.IsDynamicBarSize), ElementName=rootScrollViewer}"
+                                      IsThreeState="False" />
                         <ToggleButton Style="{StaticResource SwitchAccentToggleButton}"
-                                      Content="开关二"
-                                      IsChecked="True" />
-                        <ToggleButton x:Name="enableToggle"
-                                      Style="{StaticResource SwitchToggleButton}"
-                                      Content="IsEnabled"
-                                      IsChecked="True" />
+                                      Content="覆盖内容"
+                                      IsChecked="{Binding Path=(rubyer:ScrollViewerHelper.IsOverlayScrollBar), ElementName=rootScrollViewer}"
+                                      IsThreeState="False" />
                     </StackPanel>
                 </rubyer:Card>
                 <rubyer:Card Padding="10">

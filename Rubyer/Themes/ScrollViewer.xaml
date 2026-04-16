@@ -21,6 +21,8 @@
         <Setter Property="rubyer:ScrollViewerHelper.ShowArrowButton" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.ArrowIconBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsOverlayScrollBar" Value="True" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsScrollBarRoundedCorner" Value="True" />
         <Setter Property="rubyer:ScrollViewerHelper.CannotScrollDisposeMouseWheel" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -51,6 +53,7 @@
                                    Style="{StaticResource RubyerScrollBar}"
                                    Grid.Row="1"
                                    Grid.Column="0"
+                                   Height="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                    Panel.ZIndex="100"
                                    AutomationProperties.AutomationId="HorizontalScrollBar"
                                    Cursor="Arrow"
@@ -65,6 +68,7 @@
                                    Style="{StaticResource RubyerScrollBar}"
                                    Grid.Row="0"
                                    Grid.Column="1"
+                                   Width="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                    Panel.ZIndex="100"
                                    AutomationProperties.AutomationId="VerticalScrollBar"
                                    Cursor="Arrow"
@@ -75,7 +79,7 @@
                                    Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True">
+                        <Trigger Property="rubyer:ScrollViewerHelper.IsOverlayScrollBar" Value="True">
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.RowSpan" Value="2" />
                             <Setter TargetName="PART_ScrollContentPresenter" Property="Grid.ColumnSpan" Value="2" />
                         </Trigger>
