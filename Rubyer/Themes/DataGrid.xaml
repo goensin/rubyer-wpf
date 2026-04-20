@@ -426,8 +426,8 @@
         <Setter Property="rubyer:DataGridHelper.EmptyView" Value="{StaticResource DataGridEmptyView}" />
         <Setter Property="rubyer:DataGridHelper.RowHeaderTitle" Value="{StaticResource DataGridRowHeaderTitleIcon}" />
         <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
-        <Setter Property="rubyer:ScrollViewerHelper.IsOverlayScrollBar" Value="False" />
-        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="False" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsOverlayScrollBar" Value="True" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGrid}">
@@ -439,8 +439,8 @@
                             SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="DG_ScrollViewer"
                                       Style="{StaticResource RubyerScrollViewer}"
-                                      rubyer:ScrollViewerHelper.IsOverlayScrollBar="{Binding Path=(rubyer:ScrollViewerHelper.IsOverlayScrollBar), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       rubyer:ScrollViewerHelper.IsDynamicBarSize="{Binding Path=(rubyer:ScrollViewerHelper.IsDynamicBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      rubyer:ScrollViewerHelper.IsOverlayScrollBar="{Binding Path=(rubyer:ScrollViewerHelper.IsOverlayScrollBar), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                                       Background="Transparent"
                                       Focusable="False"
                                       HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
