@@ -60,7 +60,7 @@
                     <ControlTemplate.Triggers>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
-                                <Condition Binding="{Binding Description, RelativeSource={RelativeSource Mode=TemplatedParent}}" Value="{x:Null}" />
+                                <Condition Binding="{Binding Description, RelativeSource={RelativeSource AncestorType=rubyer:DescriptionItem}}" Value="{x:Null}" />
                                 <Condition Binding="{Binding DisplayDescriptionPath, Converter={StaticResource IsNullOrEmptyConverter}, RelativeSource={RelativeSource AncestorType=rubyer:Description}}" Value="False" />
                             </MultiDataTrigger.Conditions>
                             <Setter TargetName="descriptionContent" Property="Content" Value="{Binding DataContext, ElementName=descriptionBorder}" />
