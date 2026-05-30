@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,10 @@ namespace RubyerDemo.ViewModels
 
         [ObservableProperty]
         private int currentColumn;
+
+        [ObservableProperty]
+        private LoginInfo loginInfo = new LoginInfo { Username = "张三", Password = 123456, Email = "zhang@example.com", Birthday = DateTime.Now, IsRememberMe = true };
+
     }
 
     /// <summary>
@@ -50,5 +55,27 @@ namespace RubyerDemo.ViewModels
         /// </summary>
         [ObservableProperty]
         private string content;
+    }
+
+    /// <summary>
+    /// 登录信息
+    /// </summary>
+    public class LoginInfo : ObservableObject
+    {
+        [DisplayName("用户名")]
+        public string Username { get; set; }
+
+        [DisplayName("密码")]
+        public int Password { get; set; }
+
+        [DisplayName("邮箱")]
+        public string Email { get; set; }
+
+        [DisplayName("生日")]
+        public DateTime? Birthday { get; set; }
+
+        [DisplayName("记住我")]
+        public bool IsRememberMe { get; set; }
+
     }
 }

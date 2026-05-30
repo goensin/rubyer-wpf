@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Rubyer
 {
@@ -21,6 +14,11 @@ namespace Rubyer
     /// </summary>
     public class DescriptionItem : ContentControl
     {
+        static DescriptionItem()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(DescriptionItem), new FrameworkPropertyMetadata(typeof(DescriptionItem)));
+        }
+
         #region properties
 
         /// <summary>
@@ -173,11 +171,47 @@ namespace Rubyer
             internal set { SetValue(ContentBorderThicknessProperty, value); }
         }
 
+        /// <summary>
+        /// 显示 Description 的字段
+        /// </summary>
+        public static readonly DependencyProperty DescriptionFieldProperty =
+            DependencyProperty.Register(nameof(DescriptionField), typeof(object), typeof(DescriptionItem), new PropertyMetadata(null, OnDescriptionFieldChanged));
+
+        /// <summary>
+        /// 显示 Description 的字段，用来获取 DisplayName 显示dao Description 中
+        /// </summary>
+        public object DescriptionField
+        {
+            get { return (object)GetValue(DescriptionFieldProperty); }
+            set { SetValue(DescriptionFieldProperty, value); }
+        }
+
         #endregion properties
 
-        static DescriptionItem()
+        private static void OnDescriptionFieldChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(DescriptionItem), new FrameworkPropertyMetadata(typeof(DescriptionItem)));
+            if (d is DescriptionItem descriptionItem)
+            {
+                var binding = BindingOperations.GetBinding(descriptionItem, DescriptionFieldProperty);
+                descriptionItem.LoadDisplayName(binding?.Path?.Path);
+            }
+        }
+
+        private void LoadDisplayName(string propertyName)
+        {
+            if (DataContext == null || string.IsNullOrWhiteSpace(propertyName))
+                return;
+
+            var property = DataContext.GetType().GetProperty(propertyName);
+
+            if (property?.GetCustomAttribute<DisplayNameAttribute>() is DisplayNameAttribute displayNameAttribute)
+            {
+                Description = displayNameAttribute?.DisplayName;
+            }
+            else if (property?.GetCustomAttribute<DisplayAttribute>() is DisplayAttribute displayAttribute)
+            {
+                Description = displayAttribute?.Name;
+            }
         }
     }
 }

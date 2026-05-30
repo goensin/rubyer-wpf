@@ -11,9 +11,10 @@
     <smtx:XamlDisplay UniqueKey="DescriptionDemo">
         <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
             <Grid Margin="10"
-                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto"
+                  rubyer:GridHelper.RowDefinitions="Auto, Auto, Auto, Auto"
                   rubyer:PanelHelper.Spacing="10">
-                <rubyer:NumericBox Width="120"
+                <rubyer:NumericBox x:Name="numBox"
+                                   Width="120"
                                    HorizontalAlignment="Center"
                                    rubyer:InputBoxHelper.PreContent="显示列数:"
                                    MaxValue="3"
@@ -107,8 +108,29 @@
                                             ItemsSource="{Binding Models}" />
                     </Grid>
                 </GroupBox>
-            </Grid>
 
+                <GroupBox Grid.Row="3" Header="获取 DisplayName 填入 Description">
+                    <rubyer:Description Columns="{Binding Value, ElementName=numBox}"
+                                        DataContext="{Binding LoginInfo}"
+                                        HorizontalDescriptionAlignment="Right">
+                        <rubyer:DescriptionItem Content="{Binding Username}" DescriptionField="{Binding Username}" />
+                        <rubyer:DescriptionItem Content="{Binding Password}" DescriptionField="{Binding Password}" />
+                        <rubyer:DescriptionItem DescriptionField="{Binding Email}">
+                            <TextBox Text="{Binding Email}">
+                                <rubyer:InputBoxHelper.PostContent>
+                                    <rubyer:Icon Type="MailLine" />
+                                </rubyer:InputBoxHelper.PostContent>
+                            </TextBox>
+                        </rubyer:DescriptionItem>
+                        <rubyer:DescriptionItem DescriptionField="{Binding Birthday}">
+                            <DatePicker SelectedDate="{Binding Birthday}" />
+                        </rubyer:DescriptionItem>
+                        <rubyer:DescriptionItem DescriptionField="{Binding IsRememberMe}">
+                            <CheckBox IsChecked="{Binding IsRememberMe}" />
+                        </rubyer:DescriptionItem>
+                    </rubyer:Description>
+                </GroupBox>
+            </Grid>
         </ScrollViewer>
     </smtx:XamlDisplay>
 </UserControl>
