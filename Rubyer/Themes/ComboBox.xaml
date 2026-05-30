@@ -84,8 +84,7 @@
         <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
         <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Padding" Value="0" />
     </Style>
 
     <Style x:Key="RubyerComboBoxToggleButton" TargetType="{x:Type ToggleButton}">
@@ -264,13 +263,13 @@
                     <TextBox x:Name="PART_EditableTextBox"
                              Style="{StaticResource RubyerComboBoxEditableTextBox}"
                              Margin="{TemplateBinding Padding}"
-                             Padding="0"
                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                              rubyer:InputBoxHelper.InternalSpacing="{Binding Path=(rubyer:InputBoxHelper.InternalSpacing), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                              rubyer:InputBoxHelper.PostContent="{Binding Path=(rubyer:InputBoxHelper.PostContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                              rubyer:InputBoxHelper.PreContent="{Binding Path=(rubyer:InputBoxHelper.PreContent), RelativeSource={RelativeSource Mode=TemplatedParent}}"
                              rubyer:InputBoxHelper.Watermark="{Binding Path=(rubyer:InputBoxHelper.Watermark), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                             Background="{TemplateBinding Background}"
                              IsReadOnly="{Binding IsReadOnly, RelativeSource={RelativeSource TemplatedParent}}" />
 
                     <Button x:Name="clearButton"
