@@ -8,72 +8,6 @@
         <ResourceDictionary Source="pack://application:,,,/Rubyer;component/Themes/ListBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="{x:Static GridView.GridViewScrollViewerStyleKey}"
-           BasedOn="{StaticResource RubyerScrollViewer}"
-           TargetType="ScrollViewer">
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ScrollViewer">
-                    <Grid Background="{TemplateBinding Background}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <ScrollViewer Grid.ColumnSpan="2"
-                                      Margin="{TemplateBinding Padding}"
-                                      DockPanel.Dock="Top"
-                                      Focusable="False"
-                                      HorizontalScrollBarVisibility="Hidden"
-                                      VerticalScrollBarVisibility="Hidden">
-                            <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
-                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                        </ScrollViewer>
-
-
-                        <ScrollContentPresenter Name="PART_ScrollContentPresenter"
-                                                Grid.Row="1"
-                                                Grid.RowSpan="2"
-                                                Grid.ColumnSpan="2"
-                                                CanContentScroll="True"
-                                                CanHorizontallyScroll="False"
-                                                CanVerticallyScroll="False"
-                                                KeyboardNavigation.DirectionalNavigation="Local" />
-
-                        <ScrollBar Name="PART_HorizontalScrollBar"
-                                   Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="2"
-                                   Maximum="{TemplateBinding ScrollableWidth}"
-                                   Orientation="Horizontal"
-                                   ViewportSize="{TemplateBinding ViewportWidth}"
-                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
-                                   Value="{TemplateBinding HorizontalOffset}" />
-
-                        <ScrollBar Name="PART_VerticalScrollBar"
-                                   Style="{StaticResource RubyerScrollBar}"
-                                   Grid.Row="1"
-                                   Grid.Column="1"
-                                   Maximum="{TemplateBinding ScrollableHeight}"
-                                   ViewportSize="{TemplateBinding ViewportHeight}"
-                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
-                                   Value="{TemplateBinding VerticalOffset}" />
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-
     <Style x:Key="GridViewColumnHeaderGripper" TargetType="{x:Type Thumb}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Cursor" Value="SizeWE" />
@@ -189,6 +123,9 @@
         <Setter Property="rubyer:ControlHelper.MaskOpacity" Value="0.6" />
         <Setter Property="rubyer:ItemsControlHelper.ItemMargin" Value="0 1" />
         <Setter Property="rubyer:ItemsControlHelper.ItemPadding" Value="0 5" />
+        <Setter Property="rubyer:ScrollViewerHelper.ScrollBarSize" Value="14" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsOverlayScrollBar" Value="True" />
+        <Setter Property="rubyer:ScrollViewerHelper.IsDynamicBarSize" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListView">
@@ -197,7 +134,72 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <ScrollViewer Style="{DynamicResource {x:Static GridView.GridViewScrollViewerStyleKey}}">
+                        <ScrollViewer Style="{StaticResource RubyerScrollViewer}"
+                                      rubyer:ScrollViewerHelper.IsDynamicBarSize="{Binding Path=(rubyer:ScrollViewerHelper.IsDynamicBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      rubyer:ScrollViewerHelper.IsOverlayScrollBar="{Binding Path=(rubyer:ScrollViewerHelper.IsOverlayScrollBar), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                      Background="Transparent"
+                                      Focusable="False">
+                            <ScrollViewer.Template>
+                                <ControlTemplate TargetType="{x:Type ScrollViewer}">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+
+                                        <ScrollViewer Grid.ColumnSpan="2"
+                                                      Margin="{TemplateBinding Padding}"
+                                                      DockPanel.Dock="Top"
+                                                      Focusable="False"
+                                                      HorizontalScrollBarVisibility="Hidden"
+                                                      VerticalScrollBarVisibility="Hidden">
+                                            <GridViewHeaderRowPresenter AllowsColumnReorder="{Binding Path=TemplatedParent.View.AllowsColumnReorder, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderContainerStyle="{Binding Path=TemplatedParent.View.ColumnHeaderContainerStyle, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderContextMenu="{Binding Path=TemplatedParent.View.ColumnHeaderContextMenu, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderTemplate="{Binding Path=TemplatedParent.View.ColumnHeaderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderTemplateSelector="{Binding Path=TemplatedParent.View.ColumnHeaderTemplateSelector, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        ColumnHeaderToolTip="{Binding Path=TemplatedParent.View.ColumnHeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        Columns="{Binding Path=TemplatedParent.View.Columns, RelativeSource={RelativeSource TemplatedParent}}"
+                                                                        SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                        </ScrollViewer>
+
+
+                                        <ScrollContentPresenter Name="PART_ScrollContentPresenter"
+                                                                Grid.Row="1"
+                                                                Grid.RowSpan="2"
+                                                                Grid.ColumnSpan="2"
+                                                                CanContentScroll="True"
+                                                                CanHorizontallyScroll="False"
+                                                                CanVerticallyScroll="False"
+                                                                KeyboardNavigation.DirectionalNavigation="Local" />
+
+                                        <ScrollBar Name="PART_HorizontalScrollBar"
+                                                   Style="{StaticResource RubyerScrollBar}"
+                                                   Grid.Row="2"
+                                                   Height="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   Maximum="{TemplateBinding ScrollableWidth}"
+                                                   Orientation="Horizontal"
+                                                   ViewportSize="{TemplateBinding ViewportWidth}"
+                                                   Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                   Value="{TemplateBinding HorizontalOffset}" />
+
+                                        <ScrollBar Name="PART_VerticalScrollBar"
+                                                   Style="{StaticResource RubyerScrollBar}"
+                                                   Grid.Row="1"
+                                                   Grid.Column="1"
+                                                   Width="{Binding Path=(rubyer:ScrollViewerHelper.ScrollBarSize), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                                   Maximum="{TemplateBinding ScrollableHeight}"
+                                                   ViewportSize="{TemplateBinding ViewportHeight}"
+                                                   Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                   Value="{TemplateBinding VerticalOffset}" />
+                                    </Grid>
+                                </ControlTemplate>
+                            </ScrollViewer.Template>
                             <ItemsPresenter />
                         </ScrollViewer>
                     </Border>
