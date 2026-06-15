@@ -79,7 +79,7 @@ namespace RubyerDemo.ViewModels
                 new("StepBar", "步骤条", new StepBarDemo(), IconType.ListOrdered),
                 new("Description", "描述列表", new DescriptionDemo(), IconType.ListCheck2),
                 new("HamburgerMenu", "汉堡包", new HamburgerMenuDemo(), IconType.MenuUnfoldLine),
-                new("FlipView", "滑动视图", new FlipViewDemo(), IconType.ImageLine),
+                new("FlipView", "滑动视图", new FlipViewDemo(), IconType.CarouselView),
                 new("Avatar", "头像", new AvatarDemo(), IconType.AccountCircleLine, DateTime.Parse("2024-8-28")),
                 new("ColorPicker", "颜色选择", new ColorPickerDemo(), IconType.PaletteLine, DateTime.Parse("2025-5-13")),
                 new("Breadcrumb", "面包屑", new BreadcrumbDemo(), IconType.PaletteLine, DateTime.Parse("2025-6-11")),

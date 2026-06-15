@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -18,7 +19,7 @@ namespace RemixIconCodeGenerator
 
             var typeStringBuilder = new StringBuilder();
             var dataStringBuilder = new StringBuilder();
-            var directories = Directory.GetDirectories("icons");
+            var directories =  Directory.GetDirectories(GetProjectDir() + "\\icons");
             foreach (var directory in directories)
             {
                 var files = Directory.GetFiles(directory);
@@ -61,6 +62,11 @@ namespace RemixIconCodeGenerator
 
 
             app.Run();
+        }
+
+        public static string GetProjectDir([CallerFilePath] string filePath = "")
+        {
+            return Path.GetDirectoryName(filePath)!;
         }
     }
 }
