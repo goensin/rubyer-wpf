@@ -92,14 +92,20 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(NotificationType type, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void ShowGlobal(NotificationType type, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
             NotificationWindow notificationWindow = NotificationWindow.GetInstance();
             notificationWindow.Dispatcher.VerifyAccess();
             NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            notificationCard.Close += (sender, e) => notificationWindow.Remove(notificationCard);
+            notificationCard.Close += (sender, e) => 
+            {
+                notificationWindow.Remove(notificationCard);
+                onClose?.Invoke();
+            };
+
             notificationCard.MouseEnter += (sender, e) => cts.Cancel();
             notificationCard.MouseLeave += (sender, e) =>
             {
@@ -119,9 +125,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ShowGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void ShowGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            ShowGlobal(NotificationType.None, content, title, millisecondTimeOut, isClearable);
+            ShowGlobal(NotificationType.None, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -131,9 +138,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void InfoGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void InfoGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            ShowGlobal(NotificationType.Info, content, title, millisecondTimeOut, isClearable);
+            ShowGlobal(NotificationType.Info, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -143,9 +151,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void SuccessGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void SuccessGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            ShowGlobal(NotificationType.Success, content, title, millisecondTimeOut, isClearable);
+            ShowGlobal(NotificationType.Success, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -155,9 +164,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void WarningGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void WarningGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            ShowGlobal(NotificationType.Warning, content, title, millisecondTimeOut, isClearable);
+            ShowGlobal(NotificationType.Warning, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -167,9 +177,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void ErrorGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void ErrorGlobal(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            ShowGlobal(NotificationType.Error, content, title, millisecondTimeOut, isClearable);
+            ShowGlobal(NotificationType.Error, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -193,13 +204,17 @@ namespace Rubyer
             return container;
         }
 
-        private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable)
+        private static void ShowInternal(NotificationContainer container, NotificationType type, object content, string title, int millisecondTimeOut, bool isClearable, Action onClose)
         {
             container.Dispatcher.VerifyAccess();
             NotificationCard notificationCard = GetNotificationCard(type, content, title, millisecondTimeOut, isClearable);
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            notificationCard.Close += (sender, e) => container.RemoveCard(notificationCard);
+            notificationCard.Close += (sender, e) =>
+            {
+                container.RemoveCard(notificationCard);
+                onClose?.Invoke();
+            };
             notificationCard.MouseEnter += (sender, e) => cts.Cancel();
             notificationCard.MouseLeave += (sender, e) =>
             {
@@ -220,7 +235,8 @@ namespace Rubyer
         /// <param name="content">内容</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, NotificationType type, object content, string title = "", int millisecondTimeOut = 5000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Show(string containerIdentifier, NotificationType type, object content, string title = "", int millisecondTimeOut = 5000, bool isClearable = true, Action onClose = null)
         {
             if (!Containers.ContainsKey(containerIdentifier))
             {
@@ -228,7 +244,7 @@ namespace Rubyer
             }
 
             NotificationContainer container = Containers[containerIdentifier];
-            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable);
+            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -240,11 +256,12 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(NotificationType type, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Show(NotificationType type, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
             var activedWindow = WindowHelper.GetCurrentWindow() ?? throw new NullReferenceException("Can't find the actived window");
             NotificationContainer container = activedWindow.TryGetChildFromVisualTree<NotificationContainer>(null) ?? throw new NullReferenceException("Can't Find the NotificationContainer");
-            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable);
+            ShowInternal(container, type, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -255,9 +272,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Show(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(containerIdentifier, NotificationType.None, content, title, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, NotificationType.None, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -267,9 +285,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Show(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Show(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(NotificationType.None, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.None, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -280,9 +299,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Info(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(containerIdentifier, NotificationType.Info, content, title, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, NotificationType.Info, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -293,9 +313,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Info(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Info(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(NotificationType.Info, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.Info, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -306,9 +327,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Success(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(containerIdentifier, NotificationType.Success, content, title, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, NotificationType.Success, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -319,9 +341,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Success(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Success(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(NotificationType.Success, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.Success, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -332,9 +355,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Warning(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(containerIdentifier, NotificationType.Warning, content, title, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, NotificationType.Warning, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -345,9 +369,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Warning(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Warning(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(NotificationType.Warning, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.Warning, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -358,9 +383,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Error(string containerIdentifier, object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(containerIdentifier, NotificationType.Error, content, title, millisecondTimeOut, isClearable);
+            Show(containerIdentifier, NotificationType.Error, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>
@@ -371,9 +397,10 @@ namespace Rubyer
         /// <param name="title">标题</param>
         /// <param name="millisecondTimeOut">关闭延时，为 0 时不自动关闭</param>
         /// <param name="isClearable">是否显示关闭按钮</param>
-        public static void Error(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true)
+        /// <param name="onClose">关闭时的回调函数</param>
+        public static void Error(object content, string title = "", int millisecondTimeOut = 3000, bool isClearable = true, Action onClose = null)
         {
-            Show(NotificationType.Error, content, title, millisecondTimeOut, isClearable);
+            Show(NotificationType.Error, content, title, millisecondTimeOut, isClearable, onClose);
         }
 
         /// <summary>

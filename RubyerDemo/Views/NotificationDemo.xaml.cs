@@ -2,6 +2,7 @@
 using RubyerDemo.Consts;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -59,7 +60,10 @@ namespace RubyerDemo.Views
 
         private void InfoContainerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Notification.Info(content: "info");
+            Notification.Info(content: "info", onClose: () =>
+            {
+                Debug.WriteLine("Notification close callback");
+            });
         }
 
         private void WaringContainerBtn_Click(object sender, RoutedEventArgs e)
