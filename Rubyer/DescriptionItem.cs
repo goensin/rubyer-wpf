@@ -210,7 +210,7 @@ namespace Rubyer
             }
             else if (property?.GetCustomAttribute<DisplayAttribute>() is DisplayAttribute displayAttribute)
             {
-                Description = displayAttribute?.Name;
+                Description = displayAttribute?.GetName();
             }
         }
     }
