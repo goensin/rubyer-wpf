@@ -156,8 +156,7 @@
                               CanUserAddRows="False"
                               IsReadOnly="True"
                               ItemsSource="{Binding Weathers}"
-                              RowBackground="{StaticResource DefaultBackground}">
-                    </DataGrid>
+                              RowBackground="{StaticResource DefaultBackground}" />
                 </controls:ControlDisplay>
 
                 <controls:ControlDisplay Title="表格行头显示，自动序号" Grid.Row="4">
