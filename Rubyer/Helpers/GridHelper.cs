@@ -107,8 +107,15 @@ namespace Rubyer
             if (d is Grid grid)
             {
                 grid.ColumnDefinitions.Clear();
+
+                var defs = GetColumnDefinitions(grid);
+                if (string.IsNullOrEmpty(defs))
+                {
+                    return;
+                }
+
                 var converter = new ColumnDefinitionCollectionTypeConverter();
-                var columnDefinitions = converter.ConvertFromString(GetColumnDefinitions(grid)) as ColumnDefinition[];
+                var columnDefinitions = converter.ConvertFromString(defs) as ColumnDefinition[];
                 for (int i = 0; i < columnDefinitions.Length; i++)
                 {
                     grid.ColumnDefinitions.Add(columnDefinitions[i]);
@@ -147,8 +154,15 @@ namespace Rubyer
             if (d is Grid grid)
             {
                 grid.RowDefinitions.Clear();
+
+                var defs = GetRowDefinitions(grid);
+                if (string.IsNullOrEmpty(defs))
+                {
+                    return;
+                }
+
                 var converter = new RowDefinitionCollectionTypeConverter();
-                var rowDefinitions = converter.ConvertFromString(GetRowDefinitions(grid)) as RowDefinition[];
+                var rowDefinitions = converter.ConvertFromString(defs) as RowDefinition[];
                 for (int i = 0; i < rowDefinitions.Length; i++)
                 {
                     grid.RowDefinitions.Add(rowDefinitions[i]);
